@@ -1,0 +1,362 @@
+[
+  {
+    "task_id": "2607.08208v1-pdf-download",
+    "paper_id": "2607.08208v1",
+    "task": "pdf_download",
+    "priority": 17,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08208v1-github-search",
+    "paper_id": "2607.08208v1",
+    "task": "github_search",
+    "priority": 17,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08771v1-pdf-download",
+    "paper_id": "2607.08771v1",
+    "task": "pdf_download",
+    "priority": 16,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08771v1-github-search",
+    "paper_id": "2607.08771v1",
+    "task": "github_search",
+    "priority": 16,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08725v1-pdf-download",
+    "paper_id": "2607.08725v1",
+    "task": "pdf_download",
+    "priority": 16,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08725v1-github-search",
+    "paper_id": "2607.08725v1",
+    "task": "github_search",
+    "priority": 16,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08503v1-pdf-download",
+    "paper_id": "2607.08503v1",
+    "task": "pdf_download",
+    "priority": 16,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08503v1-github-search",
+    "paper_id": "2607.08503v1",
+    "task": "github_search",
+    "priority": 16,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08321v1-pdf-download",
+    "paper_id": "2607.08321v1",
+    "task": "pdf_download",
+    "priority": 16,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08321v1-github-search",
+    "paper_id": "2607.08321v1",
+    "task": "github_search",
+    "priority": 16,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.06224v1-pdf-download",
+    "paper_id": "2607.06224v1",
+    "task": "pdf_download",
+    "priority": 16,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.06224v1-github-search",
+    "paper_id": "2607.06224v1",
+    "task": "github_search",
+    "priority": 16,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08073v1-pdf-download",
+    "paper_id": "2607.08073v1",
+    "task": "pdf_download",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08073v1-github-search",
+    "paper_id": "2607.08073v1",
+    "task": "github_search",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.07240v1-pdf-download",
+    "paper_id": "2607.07240v1",
+    "task": "pdf_download",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.07240v1-github-search",
+    "paper_id": "2607.07240v1",
+    "task": "github_search",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.07219v1-pdf-download",
+    "paper_id": "2607.07219v1",
+    "task": "pdf_download",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.07219v1-github-search",
+    "paper_id": "2607.07219v1",
+    "task": "github_search",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.07177v1-pdf-download",
+    "paper_id": "2607.07177v1",
+    "task": "pdf_download",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.07177v1-github-search",
+    "paper_id": "2607.07177v1",
+    "task": "github_search",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08750v1-pdf-download",
+    "paper_id": "2607.08750v1",
+    "task": "pdf_download",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08750v1-github-search",
+    "paper_id": "2607.08750v1",
+    "task": "github_search",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08657v1-pdf-download",
+    "paper_id": "2607.08657v1",
+    "task": "pdf_download",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08657v1-github-search",
+    "paper_id": "2607.08657v1",
+    "task": "github_search",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08465v1-pdf-download",
+    "paper_id": "2607.08465v1",
+    "task": "pdf_download",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08465v1-github-search",
+    "paper_id": "2607.08465v1",
+    "task": "github_search",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08186v1-pdf-download",
+    "paper_id": "2607.08186v1",
+    "task": "pdf_download",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08186v1-github-search",
+    "paper_id": "2607.08186v1",
+    "task": "github_search",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08713v1-pdf-download",
+    "paper_id": "2607.08713v1",
+    "task": "pdf_download",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08713v1-github-search",
+    "paper_id": "2607.08713v1",
+    "task": "github_search",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08029v1-pdf-download",
+    "paper_id": "2607.08029v1",
+    "task": "pdf_download",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08029v1-github-search",
+    "paper_id": "2607.08029v1",
+    "task": "github_search",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08286v1-pdf-download",
+    "paper_id": "2607.08286v1",
+    "task": "pdf_download",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.08286v1-github-search",
+    "paper_id": "2607.08286v1",
+    "task": "github_search",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.07625v1-pdf-download",
+    "paper_id": "2607.07625v1",
+    "task": "pdf_download",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.07625v1-github-search",
+    "paper_id": "2607.07625v1",
+    "task": "github_search",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.07418v1-pdf-download",
+    "paper_id": "2607.07418v1",
+    "task": "pdf_download",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.07418v1-github-search",
+    "paper_id": "2607.07418v1",
+    "task": "github_search",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.07233v1-pdf-download",
+    "paper_id": "2607.07233v1",
+    "task": "pdf_download",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  },
+  {
+    "task_id": "2607.07233v1-github-search",
+    "paper_id": "2607.07233v1",
+    "task": "github_search",
+    "priority": 15,
+    "created_at": "2026-07-11T14:53:45.137420+00:00",
+    "status": "done",
+    "retries": 0
+  }
+]
