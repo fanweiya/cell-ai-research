@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic-J Wiki — architecture</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / Agentic-J Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>imagentj</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/skills.html">skills</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/user_guide.html">user_guide</a></li>
+<li><a href="modules/docs.html">docs</a></li>
+<li><a href="modules/config.html">config</a></li>
+<li><a href="modules/scripts.html">scripts</a></li>
+<li><a href="modules/qdrant_data.html">qdrant_data</a></li>
+<li><a href="modules/patch_stardist.html">patch_stardist</a></li>
+<li><a href="modules/data.html">data</a></li>
+<li><a href="modules/imagentj.html">imagentj</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Architecture</h1>
+<br>
+<p><strong>Type:</strong> client-server</p>
+<br>
+<p>Agentic-J采用客户端-服务器架构，其中Docker容器作为服务器运行ImageJ/Fiji和AI代理，用户通过Web浏览器中的noVNC界面与系统交互。系统利用LLM驱动的智能体来规划分析、编写和执行Groovy宏，并通过RAG系统检索插件文档。</p>
+<br>
+<h2>Component Diagram</h2>
+<br>
+<pre class="code-block"><code class="language-mermaid">graph TD
+  用户界面层 --&gt; AI代理核心
+  AI代理核心 --&gt; ImageJ/Fiji环境
+  AI代理核心 --&gt; RAG知识库
+  AI代理核心 --&gt; 数据管理
+  ImageJ/Fiji环境 --&gt; 数据管理</code></pre>
+<br>
+<h2>Components</h2>
+<br>
+<h3>用户界面层</h3>
+<br>
+<p>提供noVNC虚拟桌面和聊天面板，让用户与AI代理交互</p>
+<br>
+<p>Files: <code class="inline-code">gui_runner.py</code>, <code class="inline-code">docs/index.html</code>, <code class="inline-code">docs/js/main.js</code>, <code class="inline-code">docs/css/styles.css</code></p>
+<br>
+<h3>AI代理核心</h3>
+<br>
+<p>处理用户请求、规划分析步骤、生成和执行Groovy脚本</p>
+<br>
+<p>Files: <code class="inline-code">src/imagentj/agents.py</code>, <code class="inline-code">run.py</code>, <code class="inline-code">gui_runner.py</code></p>
+<br>
+<h3>ImageJ/Fiji环境</h3>
+<br>
+<p>在容器中运行ImageJ/Fiji，提供图像分析功能</p>
+<br>
+<p>Files: <code class="inline-code">Dockerfile</code>, <code class="inline-code">docker-compose.yml</code>, <code class="inline-code">docker-entrypoint.sh</code></p>
+<br>
+<h3>RAG知识库</h3>
+<br>
+<p>存储和检索插件文档，支持智能体查询</p>
+<br>
+<p>Files: <code class="inline-code">skills/</code>, <code class="inline-code">qdrant_data/</code></p>
+<br>
+<h3>数据管理</h3>
+<br>
+<p>处理图像数据输入和输出</p>
+<br>
+<p>Files: <code class="inline-code">data/</code>, <code class="inline-code">setup_wizard.py</code></p>
+<br>
+<h2>Sequence Diagram</h2>
+<br>
+<pre class="code-block"><code class="language-mermaid">sequenceDiagram
+  用户-&gt;&gt;用户界面层: 发送分析请求
+  用户界面层-&gt;&gt;AI代理核心: 传递用户请求
+  AI代理核心-&gt;&gt;RAG知识库: 查询相关文档
+  RAG知识库--&gt;&gt;AI代理核心: 返回文档信息
+  AI代理核心-&gt;&gt;AI代理核心: 规划分析步骤
+  AI代理核心-&gt;&gt;ImageJ/Fiji环境: 执行Groovy宏
+  ImageJ/Fiji环境--&gt;&gt;AI代理核心: 返回分析结果
+  AI代理核心-&gt;&gt;用户界面层: 展示结果
+  用户界面层--&gt;&gt;用户: 显示最终报告</code></pre>
+<br>
+<h2>Data Flow</h2>
+<br>
+<p>用户通过noVNC界面发送图像分析请求，AI代理接收请求后查询RAG知识库获取相关插件文档，然后规划分析步骤并生成Groovy宏。生成的宏在容器内的ImageJ/Fiji环境中执行，处理用户提供的图像数据，最终将分析结果和可视化返回给用户界面。</p>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

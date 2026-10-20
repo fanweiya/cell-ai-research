@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VitaminP Wiki — dataset</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / VitaminP Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>VitaminP</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/vitaminp.html">vitaminp</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/dataset.html">dataset</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/metrics.html">metrics</a></li>
+<li><a href="../modules/postprocessing.html">postprocessing</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>dataset</h1>
+<br>
+<p>&gt; 提供基于Zarr格式的多模态病理细胞分割数据集加载、增强及HV图生成模块</p>
+<br>
+<p>该模块封装了CRC（结直肠癌）及多种癌症类型（如Xenium, PanNuke, Lizard等）的病理图像数据。核心功能包括从Zarr文件中加载H&amp;E和MIF双模态图像、实例分割掩码，使用PanNuke方法生成水平-垂直梯度图（HV maps），以及应用针对医学影像的几何和光度增强。模块支持内存缓存加速、多数据集混合训练及数据完整性验证。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">dataset/config.py</code></h3>
+<br>
+<p>配置加载与验证器，负责读取YAML配置文件并应用类型检查和参数覆盖</p>
+<br>
+<ul>
+<li><code class="inline-code">Config</code> (class) - 配置管理类。通过__init__加载YAML文件，支持__overrides__动态覆盖参数（如batch_size, augment_prob），执行_required_sections__验证，确保split比例总和为1.0，并检查zarr路径有效性。</li>
+</ul>
+<br>
+<h3><code class="inline-code">dataset/__init__.py</code></h3>
+<br>
+<p>模块入口，定义公共API并导出所有核心组件</p>
+<br>
+<ul>
+<li><code class="inline-code">__all__</code> (list) - 定义模块对外暴露的符号列表，包括Config, CRCZarrDataset, MedicalImageAugmentation及各类工具函数。</li>
+</ul>
+<br>
+<h3><code class="inline-code">dataset/augmentation.py</code></h3>
+<br>
+<p>医学影像数据增强管道，确保多模态数据（H&amp;E, MIF）及其掩码/HV图的一致性变换</p>
+<br>
+<ul>
+<li><code class="inline-code">MedicalImageAugmentation</code> (class) - 增强类。初始化时从配置加载几何（翻转、旋转、缩放、随机resize）、光度（亮度、对比度）、染色（H&amp;E专用）、噪声模糊及Cutout参数。__call__方法对输入的所有张量（图像、掩码、HV图）应用统一的随机变换，保持空间对齐。</li>
+</ul>
+<br>
+<h3><code class="inline-code">dataset/dataset.py</code></h3>
+<br>
+<p>核心数据集类，处理多模态Zarr数据的加载、索引构建及样本检索</p>
+<br>
+<ul>
+<li><code class="inline-code">CRCZarrDataset</code> (class) - 继承自torch.utils.data.Dataset。__init__构建patch索引，根据样本名（如CRC01, pannuke_train）映射到对应的Zarr基路径。__getitem__加载H&amp;E（3通道）和MIF（2通道）图像、4种掩码（核/细胞）及生成的HV图，若为训练模式则应用增强。</li>
+<li><code class="inline-code">_get_zarr_path</code> (method) - 根据样本名前缀（如'tissuenet', 'pannuke', 'crc'）动态返回对应的Zarr数据基路径，支持多数据集混合。</li>
+</ul>
+<br>
+<h3><code class="inline-code">dataset/hv_generator.py</code></h3>
+<br>
+<p>HV图生成器，使用PanNuke算法将实例分割掩码转换为水平-垂直梯度图</p>
+<br>
+<ul>
+<li><code class="inline-code">generate_hv_map_pannuke</code> (function) - 核心HV图生成函数。对每个实例计算质心，在边界框内创建坐标网格，并分别对正负方向进行归一化（-1到1），生成(2, H, W)的梯度图，比简单的质心法更精确。</li>
+<li><code class="inline-code">batch_generate_hv_maps</code> (function) - 批量生成HV图，优化多实例处理效率。</li>
+</ul>
+<br>
+<h3><code class="inline-code">dataset/utils.py</code></h3>
+<br>
+<p>辅助工具函数，用于内存检查、Zarr结构验证、批次统计及可视化</p>
+<br>
+<ul>
+<li><code class="inline-code">validate_zarr_structure</code> (function) - 验证指定目录下所有样本的Zarr文件结构是否完整（包含he/mif的images, nuclei_masks, cell_masks），返回有效和无效样本列表。</li>
+<li><code class="inline-code">print_batch_statistics</code> (function) - 打印批次张量的形状、数据类型及统计信息，用于调试。</li>
+<li><code class="inline-code">check_memory_available</code> (function) - 检查系统可用内存是否满足指定GB数，防止加载大数据集时内存溢出。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>Zarr多模态存储</strong>: 数据以Zarr格式存储，分离H&amp;E和MIF模态，每个模态包含图像和两种掩码（核、细胞），支持高效分块读取。</li>
+<li><strong>HV图 (水平-垂直梯度图)</strong>: 一种将实例分割掩码转换为连续梯度场的表示方法，用于替代传统的距离变换，能更精确地指导分割网络定位实例边界。</li>
+<li><strong>多数据集混合索引</strong>: 通过样本名前缀（如pannuke_train, crc01）自动映射到不同的Zarr基路径，实现多个癌症数据集的无缝混合训练。</li>
+<li><strong>一致性增强</strong>: 对H&amp;E图像、MIF图像、所有掩码及HV图应用相同的几何变换（旋转、翻转、缩放），确保多模态数据在空间上严格对齐。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">dataset/dataset.py</code> → <code class="inline-code">dataset/config.py</code>: CRCZarrDataset依赖Config对象获取数据路径、增强参数及缓存设置。</li>
+<li><code class="inline-code">dataset/dataset.py</code> → <code class="inline-code">dataset/hv_generator.py</code>: 在__getitem__中调用batch_generate_hv_maps实时生成HV图，或加载预生成的HV图。</li>
+<li><code class="inline-code">dataset/dataset.py</code> → <code class="inline-code">dataset/augmentation.py</code>: 当training=True且启用增强时，实例化MedicalImageAugmentation对样本进行变换。</li>
+<li><code class="inline-code">dataset/__init__.py</code> → <code class="inline-code">dataset/dataset.py</code>: __init__导入并公开CRCZarrDataset及create_dataloaders等核心类。</li>
+<li><code class="inline-code">dataset/utils.py</code> → <code class="inline-code">dataset/dataset.py</code>: 提供validate_zarr_structure用于在构建Dataset前验证数据完整性。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

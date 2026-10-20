@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HistoBIT3D_VirtualStaining Wiki — combined_report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / HistoBIT3D_VirtualStaining Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>HistoBIT3D_VirtualStaining</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/HistoBIT3D_Code.html">HistoBIT3D_Code</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>HistoBIT3D_VirtualStaining — 综合分析报告</h1>
+<br>
+<ul>
+<li><strong>GitHub</strong>: aasong113/HistoBIT3D_VirtualStaining</li>
+<li><strong>评分</strong>: ?/10</li>
+<li><strong>分析时间</strong>: 2026-07-15T18:27:47.776802</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2>CodeGraph 知识图谱分析</h2>
+<br>
+<br>
+<h2>RepoWiki 文档生成</h2>
+<br>
+<ul>
+<li>✅ 扫描成功</li>
+<li>📁 Wiki 目录: <code class="inline-code">/mnt/c/workspace/cell-ai-research/reports/HistoBIT3D_VirtualStaining_wiki</code></li>
+<li>📄 生成文件:</li>
+<li>architecture.md</li>
+<li>index.md</li>
+<li>reading-guide.md</li>
+<li>_sidebar.md</li>
+<li>modules/.codegraph.md</li>
+<li>modules/HistoBIT3D_Code.md</li>
+<li>modules/root.md</li>
+<li>输出: Project: HistoBIT3D_VirtualStaining</li>
+</ul>
+<p>Files:   111</p>
+<p>Lines:   19,405</p>
+<p>Languages</p>
+<p>┏━━━━━━━━━━┳━━━━━━━┓</p>
+<p>┃ Language ┃ Files ┃</p>
+<p>┡━━━━━━━━━━╇━━━━━━━┩</p>
+<p>│ python   │    90 │</p>
+<p>│ shell    │    11 │</p>
+<p>│ unknown  │     7 │</p>
+<p>│ text     │     1 │</p>
+<p>│ markdown │     1 │</p>
+<p>│ yaml     │     1 │</p>
+<p>└──────────┴───────┘</p>
+<p>HistoBIT3D_VirtualStaining/</p>
+<p>├── 📁 HistoBIT3D_Code/</p>
+<p>│   ├── ⚙️ requirements.txt (text)</p>
+<p>│   ├── ⚙️ setup.py (python)</p>
+<p>│   ├── ⚙️ uvcgan2/config/config.py (python)</p>
+<p>│   ├── 📄 scripts/downsize_right.py (python)</p>
+<p>│   ├── 📄 scripts/eval_all_epochs_A2B_metrics.py (python)</p>
+<p>│   ├── 📄 scripts/eval_all_epochs_A2B_metrics_style.py (python)</p>
+<p>│   ├── 📄 scripts/eval_fid.py (python)</p>
+<p>│   ├── 📄 scripts/eval_il2_scores.py (python)</p>
+<p>│   ├── 📄 scripts/finetune_from_checkpoint_3D.py (python)</p>
+<p>│   ├── 📄 scripts/fix_double_tif_suffix.py (python)</p>
+<p>│   ├── 📄 scripts/pretrain_BIT2HE.py (python)</p>
+<p>│   ├── 📄 scripts/print_model.py (python)</p>
+<p>│   ├── 📄 scripts/reconstruct_bit_vhe_from_metadata.py (python)</p>
+<p>│   ├── 📄 scripts/resume_train</p>
+<br>
+<h2>原有子代理分析报告</h2>
+<br>
+<p>暂无原有分析报告</p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

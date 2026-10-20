@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VitaminP Wiki — scripts</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / VitaminP Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>VitaminP</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/vitaminp.html">vitaminp</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/dataset.html">dataset</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/metrics.html">metrics</a></li>
+<li><a href="../modules/postprocessing.html">postprocessing</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>scripts</h1>
+<br>
+<p>&gt; 提供病理图像数据集的预处理、模型训练和推理的命令行工具</p>
+<br>
+<p>该模块包含用于将公共病理数据集转换为Zarr格式、训练VitaminP模型、训练GAN生成合成MIF图像以及运行WSI推理的脚本。所有脚本都遵循严格的分割策略以防止数据泄漏，并支持多种数据集格式。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">data_preprocessing/README.md</code></h3>
+<br>
+<p>文档说明数据预处理脚本的用法、输出布局和各数据集的具体处理方式</p>
+<br>
+<h3><code class="inline-code">data_preprocessing/_common.py</code></h3>
+<br>
+<p>为所有数据预处理脚本提供共享的辅助函数和常量</p>
+<br>
+<ul>
+<li><code class="inline-code">base_parser</code> (function) - 创建包含输入/输出目录和随机种子的通用参数解析器</li>
+<li><code class="inline-code">read_rgb</code> (function) - 使用OpenCV读取RGB图像并转换为正确颜色空间</li>
+<li><code class="inline-code">read_mat_instance</code> (function) - 从MATLAB文件中读取实例分割掩码</li>
+<li><code class="inline-code">tile_pair</code> (function) - 将图像和掩码分割成512x512的图块</li>
+<li><code class="inline-code">write_image_mask_zarr</code> (function) - 将图像和掩码堆叠并保存为Zarr格式</li>
+<li><code class="inline-code">write_he_sample</code> (function) - 为单个样本写入H&amp;E图像的Zarr数据</li>
+<li><code class="inline-code">write_mif_sample</code> (function) - 为单个样本写入MIF图像的Zarr数据</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_preprocessing/preprocess_bc.py</code></h3>
+<br>
+<p>将BC/DeepLIIF数据集转换为Zarr格式</p>
+<br>
+<ul>
+<li><code class="inline-code">semantic_panel_to_instances</code> (function) - 将语义标签面板转换为实例分割掩码</li>
+<li><code class="inline-code">convert_files</code> (function) - 处理一批文件并写入Zarr数据</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_preprocessing/preprocess_consep.py</code></h3>
+<br>
+<p>将CoNSeP数据集转换为Zarr格式</p>
+<br>
+<ul>
+<li><code class="inline-code">convert_split</code> (function) - 处理一个分割集（训练/验证/测试）</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_preprocessing/preprocess_cpm15.py</code></h3>
+<br>
+<p>将CPM-15数据集转换为Zarr格式（无预定义分割）</p>
+<br>
+<h3><code class="inline-code">data_preprocessing/preprocess_cpm17.py</code></h3>
+<br>
+<p>将CPM-17数据集转换为Zarr格式</p>
+<br>
+<ul>
+<li><code class="inline-code">convert_split</code> (function) - 处理一个分割集</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_preprocessing/preprocess_cryonuseg.py</code></h3>
+<br>
+<p>将CryoNuSeg数据集转换为Zarr格式</p>
+<br>
+<ul>
+<li><code class="inline-code">collect_pairs</code> (function) - 收集图像-掩码对</li>
+<li><code class="inline-code">convert_split</code> (function) - 处理一个分割集</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_preprocessing/preprocess_dsb2018.py</code></h3>
+<br>
+<p>将DSB2018数据集的RLE掩码解码并转换为Zarr格式</p>
+<br>
+<ul>
+<li><code class="inline-code">rle_decode</code> (function) - 解码RLE编码的像素掩码</li>
+<li><code class="inline-code">classify</code> (function) - 自动分类图像模态（H&amp;E或荧光）</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_preprocessing/preprocess_kumar.py</code></h3>
+<br>
+<p>将Kumar数据集转换为Zarr格式</p>
+<br>
+<ul>
+<li><code class="inline-code">convert_source</code> (function) - 处理一个源目录（train/val/test）</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_preprocessing/preprocess_lizard.py</code></h3>
+<br>
+<p>将Lizard数据集转换为Zarr格式</p>
+<br>
+<ul>
+<li><code class="inline-code">collect_pairs</code> (function) - 收集图像-掩码对</li>
+<li><code class="inline-code">convert_split</code> (function) - 处理一个分割集</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_preprocessing/preprocess_monusac.py</code></h3>
+<br>
+<p>将MoNuSAC数据集的XML标注转换为Zarr格式</p>
+<br>
+<ul>
+<li><code class="inline-code">xml_to_mask</code> (function) - 将XML标注转换为实例分割掩码</li>
+<li><code class="inline-code">convert_split</code> (function) - 处理一个分割集</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_preprocessing/preprocess_monuseg.py</code></h3>
+<br>
+<p>将MoNuSeg数据集的XML标注转换为Zarr格式</p>
+<br>
+<ul>
+<li><code class="inline-code">xml_to_mask</code> (function) - 将XML标注转换为实例分割掩码</li>
+<li><code class="inline-code">collect_pairs</code> (function) - 收集图像-XML对</li>
+<li><code class="inline-code">convert_split</code> (function) - 处理一个分割集</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_preprocessing/preprocess_nuinsseg.py</code></h3>
+<br>
+<p>将NuInsSeg数据集转换为Zarr格式</p>
+<br>
+<ul>
+<li><code class="inline-code">collect_pairs</code> (function) - 收集图像-掩码对</li>
+<li><code class="inline-code">convert_split</code> (function) - 处理一个分割集</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_preprocessing/preprocess_pannuke.py</code></h3>
+<br>
+<p>将PanNuke数据集转换为Zarr格式（创建2x2马赛克）</p>
+<br>
+<ul>
+<li><code class="inline-code">load_folds</code> (function) - 加载PanNuke的folds数据</li>
+<li><code class="inline-code">make_mosaic</code> (function) - 将4个256x256图块合并为512x512马赛克</li>
+<li><code class="inline-code">convert_tasks</code> (function) - 处理一批马赛克任务</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_preprocessing/preprocess_panoptils.py</code></h3>
+<br>
+<p>将PanopTILs数据集的CSV多边形标注转换为Zarr格式</p>
+<br>
+<ul>
+<li><code class="inline-code">polygon_mask</code> (function) - 将CSV中的多边形转换为实例分割掩码</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_preprocessing/preprocess_tissuenet.py</code></h3>
+<br>
+<p>将TissueNet数据集转换为Zarr格式（支持MIF模态）</p>
+<br>
+<ul>
+<li><code class="inline-code">normalize_uint16</code> (function) - 将图像通道归一化到uint16</li>
+<li><code class="inline-code">offset_instances</code> (function) - 为马赛克中的实例ID添加偏移</li>
+<li><code class="inline-code">write_direct</code> (function) - 直接写入512x512样本</li>
+<li><code class="inline-code">write_mosaics</code> (function) - 写入4个256x256图块组成的马赛克</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_preprocessing/preprocess_tnbc.py</code></h3>
+<br>
+<p>将TNBC数据集转换为Zarr格式（患者级别分割）</p>
+<br>
+<ul>
+<li><code class="inline-code">convert_slide</code> (function) - 处理单个患者的幻灯片</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_preprocessing/preprocess_xenium_crc.py</code></h3>
+<br>
+<p>同步Xenium/ORION-CRC数据的H&amp;E和MIF掩码</p>
+<br>
+<h3><code class="inline-code">run_wsi_inference.py</code></h3>
+<br>
+<p>提供Whole Slide Image (WSI) 推理的命令行接口</p>
+<br>
+<ul>
+<li><code class="inline-code">parse_args</code> (function) - 解析命令行参数</li>
+<li><code class="inline-code">main</code> (function) - 执行WSI推理的主流程</li>
+</ul>
+<br>
+<h3><code class="inline-code">train.py</code></h3>
+<br>
+<p>训练VitaminP模型的主脚本</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 解析参数、设置训练环境并启动训练</li>
+</ul>
+<br>
+<h3><code class="inline-code">train_gan.py</code></h3>
+<br>
+<p>训练Pix2Pix GAN以生成合成MIF图像</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 解析参数、设置GAN训练环境并启动训练</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>Zarr格式</strong>: 所有预处理脚本都将数据转换为Zarr v2格式存储，使用Blosc压缩，支持高效的大数组读写</li>
+<li><strong>数据分割策略</strong>: 所有分割（训练/验证/测试）都在图块化之前完成，确保同一来源的样本不会泄漏到不同集合中</li>
+<li><strong>512x512图块</strong>: 大多数数据集被分割成512x512的图块，部分数据集（如PanNuke、TissueNet）会将4个256x256图块合并为512x512马赛克</li>
+<li><strong>实例分割</strong>: 所有脚本都处理实例分割掩码，每个细胞/核有一个唯一的整数ID</li>
+<li><strong>多模态支持</strong>: 脚本支持H&amp;E和MIF两种模态，部分数据集（如DSB2018、TissueNet）可以自动或手动区分模态</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">data_preprocessing/preprocess_*.py</code> → <code class="inline-code">data_preprocessing/_common.py</code>: 所有预处理脚本都导入_common中的辅助函数，如base_parser、read_rgb、tile_pair等</li>
+<li><code class="inline-code">train.py</code> → <code class="inline-code">dataset.py</code>: 训练脚本导入Config和create_dataloaders来加载预处理后的数据</li>
+<li><code class="inline-code">train.py</code> → <code class="inline-code">vitaminp/*.py</code>: 训练脚本导入各种VitaminP模型类和VitaminPTrainer</li>
+<li><code class="inline-code">run_wsi_inference.py</code> → <code class="inline-code">vitaminp/inference/*.py</code>: 推理脚本导入WSIPredictor、ChannelConfig等推理相关组件</li>
+<li><code class="inline-code">train_gan.py</code> → <code class="inline-code">vitaminp/gan.py</code>: GAN训练脚本导入Pix2PixTrainer</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

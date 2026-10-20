@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic-J Wiki — user_guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / Agentic-J Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>imagentj</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/skills.html">skills</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/user_guide.html">user_guide</a></li>
+<li><a href="../modules/docs.html">docs</a></li>
+<li><a href="../modules/config.html">config</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/qdrant_data.html">qdrant_data</a></li>
+<li><a href="../modules/patch_stardist.html">patch_stardist</a></li>
+<li><a href="../modules/data.html">data</a></li>
+<li><a href="../modules/imagentj.html">imagentj</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>user_guide</h1>
+<br>
+<p>&gt; 提供Agentic-J项目的完整用户文档，涵盖安装、界面操作、提示工程、数据管理及安全规范。</p>
+<br>
+<p>该模块包含一系列Markdown文档，旨在指导用户从环境搭建到高级工作流使用的全部流程。文档详细解释了基于Docker的容器化部署、noVNC浏览器界面操作、多智能体架构（Supervisor与Specialist）、提示词编写技巧、项目数据持久化机制以及安全隔离策略。所有文档均为静态文本，无代码逻辑，但共同构成了系统的核心使用手册。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">user_guide/README.md</code></h3>
+<br>
+<p>作为模块入口，提供导航索引和联系方式。</p>
+<br>
+<h3><code class="inline-code">user_guide/01_getting_started.md</code></h3>
+<br>
+<p>指导用户完成前置条件检查、环境变量配置、镜像启动及更新流程。</p>
+<br>
+<h3><code class="inline-code">user_guide/02_interface_and_agents.md</code></h3>
+<br>
+<p>详解浏览器界面功能、剪贴板交互、智能体架构（Supervisor/Plugin Manager/Coder/Debugger/Python Analyst/QA Reporter）及工具能力。</p>
+<br>
+<h3><code class="inline-code">user_guide/03_prompting.md</code></h3>
+<br>
+<p>提供提示词工程最佳实践，包括上下文要素、示例及常见错误避免。</p>
+<br>
+<h3><code class="inline-code">user_guide/04_data_history_and_reports.md</code></h3>
+<br>
+<p>说明项目目录结构、聊天历史存储机制、使用报告导出及问题报告流程。</p>
+<br>
+<h3><code class="inline-code">user_guide/05_security.md</code></h3>
+<br>
+<p>阐述容器安全模型、权限控制、API密钥管理及数据隐私保护策略。</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>Supervisor + Specialist 架构</strong>: 系统采用主从智能体模式，Supervisor负责规划工作流和调用工具，Specialist（如Plugin Manager、ImageJ Coder、Debugger等）负责执行具体任务，用户不直接与Specialist交互。</li>
+<li><strong>noVNC 浏览器界面</strong>: 通过浏览器访问localhost:6080/vnc.html，无需安装本地软件即可在虚拟桌面中运行Fiji/ImageJ，并集成聊天面板。</li>
+<li><strong>Docker 持久化</strong>: 利用Docker命名卷和挂载的./data目录，确保脚本、模型、聊天记录和图像数据在容器重启或更新后不丢失。</li>
+<li><strong>安全隔离</strong>: 容器以非root用户运行，仅开放localhost端口，限制资源使用，且Agent只能访问./data目录，防止系统级风险。</li>
+<li><strong>QA Reporter</strong>: 可选的智能体，在 workflow 结束后对项目和图像发布标准进行审计，生成QA_Checklist_Report.md。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">user_guide/README.md</code> → <code class="inline-code">user_guide/01_getting_started.md</code>: README作为索引链接到01_getting_started.md，引导新用户开始。</li>
+<li><code class="inline-code">user_guide/01_getting_started.md</code> → <code class="inline-code">user_guide/02_interface_and_agents.md</code>: 启动容器后，用户需参考02_interface_and_agents.md了解界面操作和智能体架构。</li>
+<li><code class="inline-code">user_guide/02_interface_and_agents.md</code> → <code class="inline-code">user_guide/03_prompting.md</code>: 了解智能体架构后，用户需学习03_prompting.md以编写有效指令。</li>
+<li><code class="inline-code">user_guide/03_prompting.md</code> → <code class="inline-code">user_guide/04_data_history_and_reports.md</code>: 执行分析任务后，用户需参考04_data_history_and_reports.md管理输出数据和历史记录。</li>
+<li><code class="inline-code">user_guide/04_data_history_and_reports.md</code> → <code class="inline-code">user_guide/05_security.md</code>: 在涉及数据管理和报告发送时，需遵循05_security.md中的安全规范。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

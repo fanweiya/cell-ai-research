@@ -1,0 +1,49 @@
+{
+ "id": "2608.06240",
+ "chars": 60000,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": true,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": true,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 5
+ },
+ "key_claims": [
+  "we take k k euler steps ( k = 4 k{=}4 in training, k = 16 k{=}16 at inference, with quality broadly stable across moderate k k , though additional steps do not consistently improve fid).",
+  "the gate is therefore not merely regressed onto the dd τ \\tau target but also shaped by the end task, learning to open (low τ \\tau ) only where translating actually improves target realism and to stay",
+  "g ξ g_{\\xi} is a small zero-initialized convolutional network, so training starts from the known-valid base ( ϵ ⋆ = ϵ struct \\boldsymbol{\\epsilon}^{\\star}{=}\\boldsymbol{\\epsilon}_{\\text{struct}} ) and"
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "Cell Detection with Star-Convex Polygons",
+   "doi": "10.1007/978-3-030-00934-2_30"
+  },
+  {
+   "title": "DINOv2: Learning Robust Visual Features without Supervision",
+   "doi": null
+  },
+  {
+   "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+   "doi": null
+  }
+ ],
+ "citation_results": [
+  {
+   "title": "Cell Detection with Star-Convex Polygons",
+   "doi": "10.1007/978-3-030-00934-2_30",
+   "verdict": "PASS",
+   "confirmed_n": 3
+  }
+ ]
+}

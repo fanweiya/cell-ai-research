@@ -1,0 +1,12 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 7,
+    "caption": "组织病理学图像上四种图结构构建方法的对比可视化（不同图连接方式对比）"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法流程图：从病理图像patch提取、核检测生成节点特征，经Gumbel-Sigmoid图结构学习构建细胞图，再用GCN+全局均值池化分类"
+  }
+}

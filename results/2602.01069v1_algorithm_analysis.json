@@ -1,0 +1,53 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2602.01069v1",
+  "status": "done",
+  "design_motivation": "传统深度学习的经验风险最小化（ERM）在医学图像分割中面临病态逆问题挑战，易受噪声、弱边界和标注数据稀缺影响，导致模型不稳定且泛化能力差。本设计将分割重构为PDE约束的优化问题，通过变分正则化将物理先验（反应-扩散方程和相场界面能）嵌入损失函数，而非显式求解PDE。相比纯数据驱动方法，该设计利用物理规律作为归纳偏置，在低样本和分布外（OOD）场景下提供结构稳定性；相比传统数值方法，该设计将PDE残差作为可微损失，实现了与梯度下降优化的无缝集成。",
+  "loss_formula": "\\mathcal{L}_{total} = \\mathcal{L}_{data} + \\lambda_{RD}\\mathcal{L}_{RD} + \\lambda_{PF}\\mathcal{L}_{PF}",
+  "math_principle": "1. 反应-扩散（RD）先验：基于稳态反应-扩散方程 $D\\nabla^2 u - f(u) = 0$，通过惩罚拉普拉斯算子残差来抑制噪声并维持膜状平滑性。\n2. 相场（PF）先验：基于范德华-卡恩-希利亚德理论，定义界面能量泛函 $\\int (\\frac{\\epsilon}{2}|\\nabla u|^2 + \\frac{1}{\\epsilon}W(u))dx$，用于正则化分割区域的几何形状，确保边界清晰且拓扑结构完整。\n3. 弱约束形式：不显式求解PDE，而是将上述方程的残差作为可微的损失项加入总目标函数，利用自动微分技术计算梯度，实现物理约束与神经网络参数更新的联合优化。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "unet_encoder",
+      "shape": "[B, 512, H/16, W/16]"
+    },
+    {
+      "layer": "unet_decoder",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "pde_residual",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, 1, H, W]"
+    }
+  ],
+  "training_pipeline": [
+    "Step 1: 数据加载与预处理，对输入图像进行对称填充以处理边界效应",
+    "Step 2: UNet前向传播生成连续分割场 u",
+    "Step 3: 计算数据保真项损失（Dice + BCE）",
+    "Step 4: 通过有限差分近似计算RD和PF的PDE残差并计算正则化损失",
+    "Step 5: 组合总损失并通过Adam优化器反向传播更新网络参数",
+    "Step 6: 两阶段训练策略，先预训练数据项，再微调物理正则项"
+  ],
+  "baselines_compared": [
+    "UNet (Baseline)",
+    "Pure Data-Driven ERM"
+  ],
+  "key_results": {
+    "OOD_IoU_improvement": "75%数据量下提升5.42%",
+    "OOD_Boundary_F1_improvement": "75%数据量下提升2.85%",
+    "Low_sample_Dice_gain": "10%数据量下提升113.23%",
+    "Full_sample_IoU_gain": "100%数据量下提升1.58%"
+  },
+  "confidence": 0.92,
+  "task_id": "2602.01069v1-algorithm_analysis-v1",
+  "run_at": "2026-07-24T09:13:55.846331",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

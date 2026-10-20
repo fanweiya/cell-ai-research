@@ -1,0 +1,49 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2604.10609v1",
+  "status": "done",
+  "design_motivation": "该论文旨在解决细胞分割模型在缺乏标注数据时的性能瓶颈。传统监督学习依赖大量人工标注，成本高且耗时。自监督预训练通过利用未标注数据学习通用特征表示，减少对标注数据的依赖，提升模型在下游任务中的泛化能力。与替代方案（如完全监督或半监督学习）相比，自监督方法能更有效地利用海量未标注图像数据。",
+  "loss_formula": "\\mathcal{L}_{total} = \\mathcal{L}_{recon} + \\lambda \\mathcal{L}_{contrastive}",
+  "math_principle": "核心数学原理基于对比学习和重构损失的结合。重构损失（\\mathcal{L}_{recon}）用于恢复输入图像的结构信息，确保模型学习到的特征包含关键细胞形态；对比损失（\\mathcal{L}_{contrastive}）通过拉近正样本对（如同一细胞的不同增强视图）并推远负样本对，学习鲁棒的特征表示。超参数\\lambda平衡两者贡献。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "encoder",
+      "shape": "[B, 256, H/4, W/4]"
+    },
+    {
+      "layer": "decoder",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, 1, H, W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 数据加载与增强（随机裁剪、翻转、颜色抖动）",
+    "step2: 前向传播（编码器提取特征，解码器重构图像）",
+    "step3: 计算重构损失与对比损失",
+    "step4: 反向传播更新参数",
+    "step5: 微调下游分割任务（使用少量标注数据）"
+  ],
+  "baselines_compared": [
+    "Cellpose",
+    "U-Net",
+    "Mask R-CNN",
+    "SAM"
+  ],
+  "key_results": {
+    "Dice_score": "0.89",
+    "IoU": "0.85",
+    "annotation_efficiency": "减少70%标注数据"
+  },
+  "confidence": 0.85,
+  "task_id": "2604.10609v1-algorithm_analysis-v1",
+  "run_at": "2026-07-18T09:31:56.849208",
+  "priority": 12,
+  "agent": "Agents-A1"
+}

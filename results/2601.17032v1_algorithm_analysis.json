@@ -1,0 +1,57 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2601.17032v1",
+  "status": "done",
+  "design_motivation": "针对镰状细胞贫血患者外周血涂片图像中红细胞形态分类问题。传统方法依赖专家主观观察，效率低且误差大。现有自动方法难以处理细胞重叠（clusters）和形状不规则问题。本设计采用Chan-Vese活动轮廓模型进行无预处理分割，结合椭圆拟合和形状描述符（CSF, ESF）解决重叠细胞分离及形态分类，旨在提高对正常、 elongated（镰状）和其他变形细胞的检测与分类精度，特别是降低将变形细胞误判为正常细胞的假阴性风险。",
+  "loss_formula": "E(C, c_1, c_2) = \\mu \\cdot Length(C) + \\nu \\cdot Area(C) + \\lambda_1 \\int_{inside(C)} |I(x,y) - c_1|^2 dx dy + \\lambda_2 \\int_{outside(C)} |I(x,y) - c_2|^2 dx dy",
+  "math_principle": "基于变分法和水平集方法。Chan-Vese模型通过最小化能量泛函来分割图像，该泛函包含轮廓长度项（平滑约束）、面积惩罚项（控制区域大小）以及内部和外部区域与平均灰度值的拟合误差项。利用Heaviside函数和Level Set函数将轮廓演化转化为偏微分方程求解。对于重叠细胞，利用凹点检测结合最小二乘法进行椭圆拟合，通过椭圆系数（ESF）和圆形系数（CSF）等几何描述符进行形态学分类。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, H, W]"
+    },
+    {
+      "layer": "segmentation",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "cluster_detection",
+      "shape": "[B, N, 2]"
+    },
+    {
+      "layer": "ellipse_fit",
+      "shape": "[B, N, 5]"
+    },
+    {
+      "layer": "classification",
+      "shape": "[B, N, 3]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 读取外周血涂片图像，无需预处理",
+    "step2: 应用Chan-Vese模型进行二值化分割",
+    "step3: 移除小连通域和边缘接触区域",
+    "step4: 检测重叠细胞簇的凹点",
+    "step5: 对凹点间弧段进行椭圆最小二乘拟合",
+    "step6: 计算CSF和ESF描述符",
+    "step7: 根据阈值分类细胞（正常/ elongated/其他）",
+    "step8: 统计各类别数量并输出混淆矩阵"
+  ],
+  "baselines_compared": [
+    "Acharya and Kumar (2018)",
+    "Frejlichowski (2010b)",
+    "Gual-Arnau et al. (SG, CROFT, UNL-F)"
+  ],
+  "key_results": {
+    "cluster_detection_efficiency": "96.3%",
+    "best_F_measure": "All classes",
+    "best_SDS_score": "Proposed method",
+    "best_CBA": "Proposed method",
+    "best_MCC": "Proposed method"
+  },
+  "confidence": 0.85,
+  "task_id": "2601.17032v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:46:34.235442",
+  "priority": 10,
+  "agent": "Agents-A1"
+}

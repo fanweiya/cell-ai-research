@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CBVCC Wiki — reading-guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / CBVCC Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>CBVCC</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/metrics.html">metrics</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Reading Guide</h1>
+<br>
+<p>本代码库是一个用于CBVCC挑战赛的视频分类评估工具包。建议按从宏观配置到核心逻辑，再到具体指标实现的顺序阅读，以快速理解整体架构和关键功能。</p>
+<br>
+<h2>Step 1: 理解项目概览与依赖 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">README.md</code>, <code class="inline-code">environment.yml</code></p>
+<br>
+<p>首先阅读README.md了解项目背景、主要功能和使用方法；接着查看environment.yml确认Python依赖包和版本，确保开发环境一致。</p>
+<br>
+<h2>Step 2: 掌握核心评估流程 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">run_analysis.py</code>, <code class="inline-code">eval_code.php</code></p>
+<br>
+<p>run_analysis.py是Python主入口，展示如何调用指标模块；eval_code.php是PHP接口，可能用于外部调用或集成。重点关注函数调用链和参数传递方式。</p>
+<br>
+<h2>Step 3: 学习指标计算核心 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">metrics/overall_metrics.py</code>, <code class="inline-code">metrics/compute_quality_metrics.py</code></p>
+<br>
+<p>overall_metrics.py可能汇总所有指标，compute_quality_metrics.py实现具体质量指标计算。寻找指标定义、计算逻辑和输出格式。</p>
+<br>
+<h2>Step 4: 理解统计描述与可视化 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">metrics/descriptives.py</code>, <code class="inline-code">metrics/roc_curves.py</code>, <code class="inline-code">metrics/snr_curves.py</code>, <code class="inline-code">metrics/ncell_curves.py</code></p>
+<br>
+<p>这些文件负责生成统计描述和可视化图表。关注数据预处理、绘图库选择（如matplotlib）和图表生成逻辑。</p>
+<br>
+<h2>Step 5: 探索辅助工具与数据生成 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">metrics/generate_gt.py</code>, <code class="inline-code">metrics/upload_files.py</code></p>
+<br>
+<p>generate_gt.py可能用于生成真实值数据，upload_files.py处理文件上传。了解数据准备流程和外部数据交互方式。</p>
+<br>
+<h2>Step 6: 检查代码图缓存机制 (~5 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">.codegraph/.gitignore</code></p>
+<br>
+<p>虽然文件较小，但需理解.codegraph目录的用途，它管理代码图数据的本地缓存和通信，可能影响代码分析工具的性能。</p>
+<br>
+<h2>Tips</h2>
+<br>
+<ul>
+<li>先运行run_analysis.py了解完整流程，再深入具体指标实现</li>
+<li>注意metrics目录中各文件的依赖关系，避免孤立阅读</li>
+<li>关注数据流向：从输入视频到最终可视化报告的完整路径</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

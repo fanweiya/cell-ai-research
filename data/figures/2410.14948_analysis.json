@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "论文核心方法图，对比传统孤立图像问答与MultiViewDx病例级证据关联临床诊断流程，展示多模态数据输入和证据链诊断工作流"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "展示MultiViewDx中不同医学影像模态及其占比的环形图"
+  },
+  "2": {
+    "relevant": true,
+    "score": 10,
+    "caption": "MultiViewDx论文的方法框架图，展示临床案例、多模态医学库、三阶段训练与评估目标。"
+  }
+}

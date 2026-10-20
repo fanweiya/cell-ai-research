@@ -1,0 +1,17 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2604.12318v1",
+  "status": "done",
+  "task_family": "cell_segmentation",
+  "input": "microscopic cell images",
+  "output": "cell instance masks and reverse distance maps",
+  "notable": "Uses Schrödinger Bridge for distribution-based image-to-image generation without post-processing",
+  "task_type": [
+    "segmentation"
+  ],
+  "confidence": 0.95,
+  "task_id": "2604.12318v1-task_analysis-v1",
+  "run_at": "2026-07-24T09:13:18.659902",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

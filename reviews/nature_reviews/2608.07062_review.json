@@ -1,0 +1,56 @@
+{
+  "paper_id": "2608.07062",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一个新颖的Explanation Stability Index (ESI)，用于评估测试时自适应(TTA)方法在组织病理学图像分析中的解释稳定性。研究覆盖了多种模型架构和TTA方法，方法论严谨，实验设计全面。然而，论文在统计分析的透明度和引用真实性方面存在一些问题，可能影响结论的可信度。",
+  "strengths": [
+    "提出了一种新的解释稳定性度量ESI，并在多个模型和TTA方法上进行了系统评估。",
+    "实验设计全面，涵盖了真实域偏移数据集和多种模型架构，增强了研究的实用性。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "Continual TTA方法是解释最不稳定的",
+      "concern": "论文声称continual TTA方法导致最大的解释变化，但未提供足够的机制分析来解释这种变化的具体原因。",
+      "why_it_matters": "缺乏机制分析可能限制读者对方法行为的理解，并影响结论的可信度。",
+      "resolution_test": "需要补充对continual TTA方法如何影响模型特征提取路径的详细分析，例如通过可视化或特征重要性分析。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "statistics",
+      "claim_pointer": "Friedman检验显示方法间存在显著差异",
+      "concern": "论文使用Friedman检验得出方法间存在显著差异，但未报告效应大小或多重比较校正的具体细节。",
+      "why_it_matters": "缺乏效应大小和校正细节可能影响统计结论的严谨性。",
+      "resolution_test": "应补充效应大小（如Kendall's W）以及Nemenyi检验的详细结果，以增强统计分析的透明度。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "ESI在不同架构间表现一致",
+      "concern": "论文声称ESI在不同架构间表现一致，但仅在两个数据集上进行了验证，泛化性存疑。",
+      "why_it_matters": "有限的数据集可能导致过拟合，影响ESI在其他数据集上的适用性。",
+      "resolution_test": "需要在更多组织病理学数据集上验证ESI的稳定性，以增强其泛化能力。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "citation",
+      "claim_pointer": "T3A方法在文献中被正确引用",
+      "concern": "论文引用了T3A方法，但对其机制的描述与原始文献存在偏差，可能误导读者。",
+      "why_it_matters": "错误引用可能影响读者对方法的理解，并损害论文的学术诚信。",
+      "resolution_test": "需对照原始文献重新校对T3A方法的描述，并在必要时进行澄清或修正。"
+    }
+  ],
+  "assessment_boundaries": [
+    "无法评估该方法在非组织病理学领域的适用性"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

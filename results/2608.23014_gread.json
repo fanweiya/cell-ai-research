@@ -1,0 +1,46 @@
+{
+  "source": "gread",
+  "analysis_depth": "multi_pass_static",
+  "repository": "phai-lab/AnaDiffusion",
+  "repository_url": "https://github.com/phai-lab/AnaDiffusion",
+  "collected_at": "2026-08-26T01:22:46.153755+00:00",
+  "coverage": {
+    "repository_kind": "placeholder_or_docs_only",
+    "has_implementation": false,
+    "code_file_count_in_tree": 0,
+    "selected_file_count": 1,
+    "selected_code_file_count": 0,
+    "languages_by_extension": {},
+    "tests_present": false,
+    "test_files": [],
+    "manifest_files": [
+      "README.md"
+    ],
+    "read_errors": [],
+    "limitations": [
+      "Static remote inspection only; files were not executed.",
+      "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+    ],
+    "search_errors": []
+  },
+  "overview": "# phai-lab/AnaDiffusion\n**Stars**: 0 | **Language**: \n**Description**: The AnaDiffusion repository is currently under development and its exact purpose is not yet detailed. The README indicates that it is &#x27;Coming soon&#x27;.\n\n\n## Directory Tree\n```\nREADME.md\n```",
+  "tree": "## Directory Tree\n```\nREADME.md\n```",
+  "key_files": [
+    "README.md"
+  ],
+  "source_files": "## README.md\n```\n# AnaDiffusion\nComing soon\n\n```",
+  "search_queries": [
+    "class |def |function |interface |struct |fn |func ",
+    "main\\(|train\\(|forward\\(|fit\\(|predict\\(|infer|generate",
+    "TODO|FIXME|NotImplemented|raise |throw ",
+    "pytest|unittest|test_|describe\\(|@Test",
+    "import |from |require\\(|use |#include"
+  ],
+  "search_results": [
+    "## Search inside phai-lab/AnaDiffusion for \"class |def |function |interface |struct |fn |func \"\n```\nNo matches found.\n```",
+    "## Search inside phai-lab/AnaDiffusion for \"main\\(|train\\(|forward\\(|fit\\(|predict\\(|infer|generate\"\n```\nNo matches found.\n```",
+    "## Search inside phai-lab/AnaDiffusion for \"TODO|FIXME|NotImplemented|raise |throw \"\n```\nNo matches found.\n```",
+    "## Search inside phai-lab/AnaDiffusion for \"pytest|unittest|test_|describe\\(|@Test\"\n```\nNo matches found.\n```",
+    "## Search inside phai-lab/AnaDiffusion for \"import |from |require\\(|use |#include\"\n```\nNo matches found.\n```"
+  ]
+}

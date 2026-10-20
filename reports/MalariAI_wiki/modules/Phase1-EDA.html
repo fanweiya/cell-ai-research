@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MalariAI Wiki — Phase1-EDA</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / MalariAI Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>MalariAI</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/Phase3-PipelineB.html">Phase3-PipelineB</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/Phase4-WebApp.html">Phase4-WebApp</a></li>
+<li><a href="../modules/Phase2-BaselineA.html">Phase2-BaselineA</a></li>
+<li><a href="../modules/results.html">results</a></li>
+<li><a href="../modules/Phase1-EDA.html">Phase1-EDA</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/data.html">data</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Phase1-EDA</h1>
+<br>
+<p>&gt; 执行疟疾血涂片数据的探索性分析，为后续模型架构决策提供数据支撑。</p>
+<br>
+<p>该模块负责解析原始JSON标注文件，统计类别分布、图像尺寸、边界框大小及标注密度，并生成可视化图表。其核心目的是在编写任何模型代码前，通过数据洞察确定处理策略（如数据增强、类别不平衡处理），确保后续Phase 2（Faster R-CNN）和Phase 3（EfficientNet）的架构设计基于实际数据特征。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">dataset.py</code></h3>
+<br>
+<p>定义PyTorch Dataset类，直接解析JSON文件以支持检测和分类任务，无需中间CSV文件。</p>
+<br>
+<ul>
+<li><code class="inline-code">MalariaDataset</code> (class) - 用于目标检测（Faster R-CNN）的整图数据集类，返回图像张量和包含边界框、标签的目标字典。</li>
+<li><code class="inline-code">MalariaCropDataset</code> (class) - 用于细胞分类（EfficientNet）的裁剪数据集类，返回单个细胞的裁剪图像张量和类别索引。</li>
+<li><code class="inline-code">get_detection_transform</code> (function) - 为Faster R-CNN返回仅包含PIL到Tensor转换的变换，避免重复归一化。</li>
+<li><code class="inline-code">get_classification_transform</code> (function) - 为EfficientNet返回分类变换，训练时包含随机翻转、旋转和颜色抖动以模拟染色变化，验证时仅包含缩放和归一化。</li>
+</ul>
+<br>
+<h3><code class="inline-code">eda.py</code></h3>
+<br>
+<p>执行探索性数据分析脚本，统计并可视化数据集特征，输出设计决策摘要。</p>
+<br>
+<ul>
+<li><code class="inline-code">parse_annotations</code> (function) - 解析单个JSON标注文件，提取图像名称、类别、边界框坐标及图像尺寸，过滤无效和困难标注。</li>
+<li><code class="inline-code">plot_class_distribution</code> (function) - 绘制类别分布柱状图，展示各类别样本数量及不平衡比率。</li>
+<li><code class="inline-code">visualize_samples</code> (function) - 加载8张样本图像并在其上绘制真实边界框，保存至输出目录。</li>
+<li><code class="inline-code">generate_design_summary</code> (function) - 基于分析结果打印关键设计决策摘要，用于论文或文档记录。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>直接JSON解析</strong>: 数据集类和EDA脚本均直接从原始JSON文件读取数据，避免维护中间CSV文件，减少系统复杂度和数据同步问题。</li>
+<li><strong>染色不变性增强</strong>: 在分类任务的变换中引入ColorJitter（亮度、对比度、饱和度抖动），强制模型学习细胞形态特征而非依赖染色颜色，以解决实验室间的域偏移问题。</li>
+<li><strong>困难样本过滤</strong>: 通过SKIP_LABELS忽略标注为'difficult'的样本，确保模型训练和评估仅关注清晰可辨的目标。</li>
+<li><strong>数据驱动决策</strong>: EDA模块通过量化分析（如类别不平衡比、边界框尺寸分布）为后续模型选择、损失函数设计及数据增强策略提供实证依据。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">dataset.py</code> → <code class="inline-code">shared/label_map.py</code>: dataset.py 导入 label_map 以获取类别标签到整数索引的映射（LABEL_TO_INT, INT_TO_LABEL）及类别常量。</li>
+<li><code class="inline-code">eda.py</code> → <code class="inline-code">shared/label_map.py</code>: eda.py 导入 label_map 以获取标签映射、前景名称及颜色定义，用于统计和可视化。</li>
+<li><code class="inline-code">dataset.py</code> → <code class="inline-code">eda.py</code>: 两者共享相同的JSON解析逻辑和标签过滤规则（SKIP_LABELS），但dataset.py侧重于构建数据加载器，eda.py侧重于统计分析。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

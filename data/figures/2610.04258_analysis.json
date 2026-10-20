@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "FloVMos医学视频拼接方法的整体流程图，展示从读取新视频帧、光流估计、图像配准与变形到图割拼接的核心流程。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "FloVMos 方法整体架构图，包含数据生成、光流估计网络训练和推理拼接三部分。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 10,
+    "caption": "多模态医学影像视频马赛克拼接结果展示"
+  }
+}

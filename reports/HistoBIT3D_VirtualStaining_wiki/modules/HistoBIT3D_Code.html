@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HistoBIT3D_VirtualStaining Wiki — HistoBIT3D_Code</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / HistoBIT3D_VirtualStaining Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>HistoBIT3D_VirtualStaining</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/HistoBIT3D_Code.html">HistoBIT3D_Code</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>HistoBIT3D_Code</h1>
+<br>
+<p>&gt; 基于GAN的3D组织虚拟H&amp;E染色框架</p>
+<br>
+<p>这是一个用于3D组织图像虚拟染色的深度学习框架，核心基于UVCGANv2实现。项目包含完整的训练、评估、推理脚本，支持CycleGAN、Pix2Pix、Autoencoder等多种模型架构，并针对3D病理切片（如BIT到HE染色）进行了专门优化，包括相邻切片一致性损失、风格融合等高级功能。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">HistoBIT3D_Code/uvcgan2/__init__.py</code></h3>
+<br>
+<p>模块入口，导出核心训练函数和自定义数据集</p>
+<br>
+<ul>
+<li><code class="inline-code">train</code> (function) - 启动模型训练的主函数</li>
+<li><code class="inline-code">AdjacentZPairDataset</code> (class) - 3D相邻切片对数据集类</li>
+</ul>
+<br>
+<h3><code class="inline-code">HistoBIT3D_Code/uvcgan2/config/config.py</code></h3>
+<br>
+<p>配置管理核心，解析和验证训练参数</p>
+<br>
+<ul>
+<li><code class="inline-code">Config</code> (class) - 主配置类，包含所有训练超参数和数据设置</li>
+<li><code class="inline-code">parse_data_config</code> (function) - 解析数据集配置</li>
+<li><code class="inline-code">ModelConfig</code> (class) - 模型架构配置类</li>
+</ul>
+<br>
+<h3><code class="inline-code">HistoBIT3D_Code/uvcgan2/cgan/__init__.py</code></h3>
+<br>
+<p>模型选择工厂，注册所有GAN模型变体</p>
+<br>
+<ul>
+<li><code class="inline-code">CGAN_MODELS</code> (dict) - 模型名称到类的映射字典</li>
+<li><code class="inline-code">construct_model</code> (function) - 根据配置创建模型实例</li>
+</ul>
+<br>
+<h3><code class="inline-code">HistoBIT3D_Code/uvcgan2/cgan/uvcgan2_3D_emb_sub_stylefusion.py</code></h3>
+<br>
+<p>3D风格融合模型实现，核心创新模块</p>
+<br>
+<ul>
+<li><code class="inline-code">UVCGAN2_3D_stylefusion</code> (class) - 支持3D流一致性和风格融合的GAN模型</li>
+<li><code class="inline-code">STYLE_FUSION_STATE_NAME</code> (constant) - 风格状态持久化文件名</li>
+</ul>
+<br>
+<h3><code class="inline-code">HistoBIT3D_Code/uvcgan2/data/adjacent_pair_dataset.py</code></h3>
+<br>
+<p>3D相邻切片数据集实现</p>
+<br>
+<ul>
+<li><code class="inline-code">AdjacentZPairDataset</code> (class) - 从3D组织切片中提取相邻Z轴对的数据集</li>
+</ul>
+<br>
+<h3><code class="inline-code">HistoBIT3D_Code/scripts/train_3D_embedding_style_loss_WSL.py</code></h3>
+<br>
+<p>3D模型训练脚本入口</p>
+<br>
+<ul>
+<li><code class="inline-code">parse_cmdargs</code> (function) - 解析训练命令行参数</li>
+<li><code class="inline-code">train</code> (function) - 调用核心训练流程</li>
+</ul>
+<br>
+<h3><code class="inline-code">HistoBIT3D_Code/scripts/eval_all_epochs_A2B_metrics_style.py</code></h3>
+<br>
+<p>全周期评估脚本，支持风格融合模型</p>
+<br>
+<ul>
+<li><code class="inline-code">parse_args</code> (function) - 解析评估参数</li>
+<li><code class="inline-code">main</code> (function) - 执行全周期评估流程</li>
+</ul>
+<br>
+<h3><code class="inline-code">HistoBIT3D_Code/uvcgan2/models/generator/vitmodnet.py</code></h3>
+<br>
+<p>ViT+ModNet混合生成器实现</p>
+<br>
+<ul>
+<li><code class="inline-code">ViTModNetGenerator</code> (class) - 结合Vision Transformer和ModNet的生成器</li>
+</ul>
+<br>
+<h3><code class="inline-code">HistoBIT3D_Code/uvcgan2/torch/layers/transformer.py</code></h3>
+<br>
+<p>Transformer层实现，支持像素级注意力</p>
+<br>
+<ul>
+<li><code class="inline-code">TransformerEncoder</code> (class) - Transformer编码器</li>
+<li><code class="inline-code">img_to_tokens</code> (function) - 图像转token转换</li>
+</ul>
+<br>
+<h3><code class="inline-code">HistoBIT3D_Code/uvcgan2/torch/layers/modnet.py</code></h3>
+<br>
+<p>ModNet实现，支持风格调制卷积</p>
+<br>
+<ul>
+<li><code class="inline-code">ModulatedConv2d</code> (class) - 调制卷积层</li>
+<li><code class="inline-code">StyleBlock</code> (class) - 风格调制块</li>
+</ul>
+<br>
+<h3><code class="inline-code">HistoBIT3D_Code/uvcgan2/train/train.py</code></h3>
+<br>
+<p>训练循环主逻辑</p>
+<br>
+<ul>
+<li><code class="inline-code">training_epoch</code> (function) - 单轮训练循环</li>
+<li><code class="inline-code">train</code> (function) - 完整训练流程控制</li>
+</ul>
+<br>
+<h3><code class="inline-code">HistoBIT3D_Code/uvcgan2/cgan/model_base.py</code></h3>
+<br>
+<p>所有GAN模型的基类</p>
+<br>
+<ul>
+<li><code class="inline-code">ModelBase</code> (class) - 定义模型生命周期和通用接口</li>
+</ul>
+<br>
+<h3><code class="inline-code">HistoBIT3D_Code/uvcgan2/base/networks.py</code></h3>
+<br>
+<p>基础网络架构（ResNet, U-Net等）</p>
+<br>
+<ul>
+<li><code class="inline-code">ResnetGenerator</code> (class) - ResNet生成器</li>
+<li><code class="inline-code">UnetGenerator</code> (class) - U-Net生成器</li>
+</ul>
+<br>
+<h3><code class="inline-code">HistoBIT3D_Code/scripts/finetune_from_checkpoint_3D.py</code></h3>
+<br>
+<p>从检查点微调脚本</p>
+<br>
+<ul>
+<li><code class="inline-code">_load_base_weights_into_model</code> (function) - 加载基础模型权重</li>
+</ul>
+<br>
+<h3><code class="inline-code">HistoBIT3D_Code/scripts/reconstruct_bit_vhe_from_metadata.py</code></h3>
+<br>
+<p>从补丁重建完整3D图像</p>
+<br>
+<ul>
+<li><code class="inline-code">reconstruct_image_from_patches_JUST_BIT</code> (function) - 基于元数据重建图像</li>
+</ul>
+<br>
+<h3><code class="inline-code">HistoBIT3D_Code/uvcgan2/torch/queue.py</code></h3>
+<br>
+<p>高效队列实现，用于一致性损失</p>
+<br>
+<ul>
+<li><code class="inline-code">FastQueue</code> (class) - 高性能张量队列</li>
+</ul>
+<br>
+<h3><code class="inline-code">HistoBIT3D_Code/uvcgan2/torch/gradient_penalty.py</code></h3>
+<br>
+<p>WGAN-GP梯度惩罚实现</p>
+<br>
+<ul>
+<li><code class="inline-code">GradientPenalty</code> (class) - 梯度惩罚计算类</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>3D流一致性</strong>: 通过相邻Z轴切片对训练，确保3D体积内组织结构的连续性和一致性</li>
+<li><strong>风格融合</strong>: 将源域的风格特征注入到目标域生成过程中，实现更自然的染色效果</li>
+<li><strong>ViT-ModNet混合架构</strong>: 结合Vision Transformer的全局注意力和ModNet的局部风格调制能力</li>
+<li><strong>批量头部（Batch Head）</strong>: 在判别器中引入批量统计信息，增强对生成质量的判别能力</li>
+<li><strong>EMA平均模型</strong>: 使用指数移动平均的生成器权重进行推理，提高生成稳定性</li>
+<li><strong>梯度惩罚</strong>: WGAN-GP技术，通过梯度惩罚项稳定训练过程</li>
+<li><strong>图像补丁重建</strong>: 支持大尺寸3D图像的补丁式处理和重建</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">scripts/train_3D_embedding_style_loss_WSL.py</code> → <code class="inline-code">uvcgan2/__init__.py</code>: 训练脚本导入train函数和AdjacentZPairDataset</li>
+<li><code class="inline-code">uvcgan2/cgan/__init__.py</code> → <code class="inline-code">uvcgan2/cgan/uvcgan2_3D_emb_sub_stylefusion.py</code>: 模型工厂注册3D风格融合模型</li>
+<li><code class="inline-code">uvcgan2/cgan/uvcgan2_3D_emb_sub_stylefusion.py</code> → <code class="inline-code">uvcgan2/models/generator/vitmodnet.py</code>: 风格融合模型使用ViTModNet作为生成器</li>
+<li><code class="inline-code">uvcgan2/data/data.py</code> → <code class="inline-code">uvcgan2/data/adjacent_pair_dataset.py</code>: 数据集构建器选择相邻切片数据集</li>
+<li><code class="inline-code">uvcgan2/train/train.py</code> → <code class="inline-code">uvcgan2/cgan/model_base.py</code>: 训练循环调用模型基类的方法</li>
+<li><code class="inline-code">uvcgan2/cgan/uvcgan2.py</code> → <code class="inline-code">uvcgan2/torch/queue.py</code>: UVCGAN2模型使用队列存储历史特征用于一致性损失</li>
+<li><code class="inline-code">scripts/eval_all_epochs_A2B_metrics_style.py</code> → <code class="inline-code">uvcgan2/cgan/uvcgan2_3D_emb_sub_stylefusion.py</code>: 评估脚本专门处理风格融合模型的状态加载</li>
+<li><code class="inline-code">uvcgan2/models/generator/vitmodnet.py</code> → <code class="inline-code">uvcgan2/torch/layers/modnet.py</code>: ViTModNet生成器使用ModNet作为骨干网络</li>
+<li><code class="inline-code">uvcgan2/models/generator/vitmodnet.py</code> → <code class="inline-code">uvcgan2/torch/layers/transformer.py</code>: ViTModNet在ModNet瓶颈处嵌入Transformer编码器</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2607.13601",
+  "status": "done",
+  "task_family": "virtual_imaging",
+  "input": "Video frames from microscopic urinalysis",
+  "output": "All-in-focus image",
+  "notable": "Focus stacking / depth from defocus for automated urinalysis",
+  "task_type": [
+    "virtual_staining",
+    "virtual_imaging"
+  ],
+  "confidence": 0.85,
+  "task_id": "2607.13601-task_analysis-v1",
+  "run_at": "2026-07-18T09:31:14.381818",
+  "priority": 9,
+  "agent": "Agents-A1"
+}

@@ -1,0 +1,20 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2604.23481v1",
+  "status": "done",
+  "task_family": "cell_segmentation / cell_detection / multimodal / spatial_biology",
+  "input": "Histopathology images (WSI patches) and Spatial Transcriptomics data (gene expression profiles, nuclear masks)",
+  "output": "Nuclei segmentation masks and cell-type classification labels",
+  "notable": "Uses spatial transcriptomics as weak supervision to replace manual pixel-level annotations; introduces cross-modal learning between molecular data and image data; includes explicit 'Unknown' class handling for ambiguous cells",
+  "task_type": [
+    "segmentation",
+    "detection",
+    "multimodal",
+    "spatial"
+  ],
+  "confidence": 0.85,
+  "task_id": "2604.23481v1-task_analysis-v1",
+  "run_at": "2026-07-24T09:12:33.951221",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

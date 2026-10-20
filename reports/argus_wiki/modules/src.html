@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>argus Wiki — src</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / argus Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>argus</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/src.html">src</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>src</h1>
+<br>
+<p>&gt; 提供时间分辨显微图像细胞追踪的核心算法、数据处理、结果格式化和可视化功能。</p>
+<br>
+<p>该模块实现了从原始图像读取、预处理（重缩放、裁剪、配准）、单细胞检测（基于单色信号和形态学滤波）、光流追踪到CTC格式输出及性能评估的完整流水线。包含参数扫描工具用于优化检测阈值和细胞尺寸，以及用于生成出版级图表的可视化函数。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">algo_funcs.py</code></h3>
+<br>
+<p>核心算法库，包含图像I/O、预处理、配准和追踪的基础函数。</p>
+<br>
+<ul>
+<li><code class="inline-code">read_images</code> (function) - 读取目录下的图像序列，支持灰度或彩色模式，返回numpy数组列表。</li>
+<li><code class="inline-code">save_images</code> (function) - 将图像数组列表保存为TIF文件，支持通配符文件名模式。</li>
+<li><code class="inline-code">rescale_rgb_to_255</code> (function) - 将指定通道的图像数据线性重缩放至0-255范围，用于标准化显示。</li>
+<li><code class="inline-code">clip_images</code> (function) - 基于百分位数裁剪图像亮度，抑制异常高亮值并重新归一化。</li>
+<li><code class="inline-code">image_registration</code> (function) - 使用ITK将移动图像配准到固定图像，支持单通道或全图配准。</li>
+</ul>
+<br>
+<h3><code class="inline-code">algo_funcs_old.py</code></h3>
+<br>
+<p>包含较旧的或备选的图像处理算法，如单色信号滤波和细胞检测。</p>
+<br>
+<ul>
+<li><code class="inline-code">create_monogenic_filters_log_gabor</code> (function) - 构建基于对数高斯滤波器的单色信号分析滤波器组。</li>
+<li><code class="inline-code">monogenic_signal</code> (function) - 计算图像的单色信号分量（偶分量、Riesz变换奇分量）。</li>
+<li><code class="inline-code">local_energy</code> (function) - 计算单色信号局部能量，用于细胞边缘或核检测。</li>
+<li><code class="inline-code">monogenic_filter_single_image</code> (function) - 对单张图像应用单色滤波和形态学处理，输出增强后的图像。</li>
+<li><code class="inline-code">monogenic_filter_images</code> (function) - 并行处理图像列表，应用单色滤波。</li>
+</ul>
+<br>
+<h3><code class="inline-code">ctc_reformat.py</code></h3>
+<br>
+<p>负责将追踪结果转换为CTC标准格式并生成可视化掩膜。</p>
+<br>
+<ul>
+<li><code class="inline-code">save_track_images</code> (function) - 根据追踪路径生成每帧的彩色掩膜图像，用于可视化。</li>
+<li><code class="inline-code">generate_mask</code> (function) - 合并多个对象的分割掩膜和追踪路径，生成时间序列标签图。</li>
+<li><code class="inline-code">save_ctc_format</code> (function) - 将追踪数据保存为CTC标准格式，包括每帧标签图像和res_track.txt文件。</li>
+</ul>
+<br>
+<h3><code class="inline-code">display_funcs.py</code></h3>
+<br>
+<p>提供数据可视化工具，特别是均方位移(MSD)分析图表。</p>
+<br>
+<ul>
+<li><code class="inline-code">calculate_mean_square_displacement</code> (function) - 计算细胞追踪路径的均方位移(MSD)曲线。</li>
+<li><code class="inline-code">plot_mean_square_displacement_filtered</code> (function) - 绘制包含所有细胞和筛选后细胞的MSD曲线及均值±标准误，用于发表级图表。</li>
+</ul>
+<br>
+<h3><code class="inline-code">parameter_scan.py</code></h3>
+<br>
+<p>执行参数扫描并可视化不同参数组合下的追踪性能指标。</p>
+<br>
+<ul>
+<li><code class="inline-code">plot_parameter_surfaces</code> (function) - 生成3D曲面图，展示检测率(DET)和追踪率(TRA)随细胞尺寸和裁剪阈值的变化。</li>
+<li><code class="inline-code">plot_parameter_metrics</code> (function) - 生成参数指标的热力图或等高线图（代码截断，功能推断）。</li>
+</ul>
+<br>
+<h3><code class="inline-code">utils.py</code></h3>
+<br>
+<p>主执行脚本，整合各模块完成端到端的细胞追踪流程。</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 读取图像和掩膜，执行细胞检测、光流追踪，保存CTC格式结果，并计算评估指标(DET, TRA, SEG)。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>单色信号分析 (Monogenic Signal Analysis)</strong>: 利用对数高斯滤波器和Riesz变换提取图像的局部能量和相位信息，用于在低对比度显微图像中检测细胞核或边缘。</li>
+<li><strong>光流追踪 (Optical Flow Tracking)</strong>: 基于图像序列的像素运动估计，将单帧检测到的细胞中心点连接成时间轨迹。</li>
+<li><strong>CTC格式 (CTC Format)</strong>: 细胞追踪竞赛标准格式，包含每帧的标签图像和res_track.txt文件，用于评估检测率和追踪率。</li>
+<li><strong>均方位移 (MSD)</strong>: 衡量细胞运动性的指标，通过计算位移平方的平均值随时间的变化来量化细胞的迁移模式。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">utils.py</code> → <code class="inline-code">algo_funcs.py</code>: utils.py 导入 algo_funcs 用于读取图像、执行光流追踪和保存结果。</li>
+<li><code class="inline-code">utils.py</code> → <code class="inline-code">ctc_reformat.py</code>: utils.py 导入 ctc_reformat 用于将追踪数据保存为CTC标准格式。</li>
+<li><code class="inline-code">parameter_scan.py</code> → <code class="inline-code">algo_funcs.py</code>: parameter_scan.py 导入 algo_funcs 进行图像预处理和追踪操作。</li>
+<li><code class="inline-code">parameter_scan.py</code> → <code class="inline-code">ctc_reformat.py</code>: parameter_scan.py 导入 ctc_reformat 用于格式化输出。</li>
+<li><code class="inline-code">algo_funcs_old.py</code> → <code class="inline-code">algo_funcs.py</code>: algo_funcs_old.py 与 algo_funcs.py 功能重叠，可能作为旧版本或特定算法的补充。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "实验对比图：不同低/高分辨率比值下，X/Y方向线扫描输入与Base-DualUNet、Attn-DualUNet融合结果及真值的可视化对比"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心架构图：展示CondLFormer模型的整体结构、条件化DA块和自适应RLFA细节"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "实验结果对比图：不同 slit 数与 slit 宽度配置下各模型的 PSNR 性能曲线对比"
+  }
+}

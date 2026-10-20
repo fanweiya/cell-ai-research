@@ -1,0 +1,12 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "H&E切片与两种MIL方法（DirectJoint/State-Aware MIL）注意力热图的对比可视化"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "展示原始H&E与DirectJoint、State-Aware MIL方法在组织切片上的注意力热图对比"
+  }
+}

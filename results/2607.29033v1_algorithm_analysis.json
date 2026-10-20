@@ -1,0 +1,58 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2607.29033v1",
+  "status": "done",
+  "design_motivation": "现有方法将2D基础模型（如SAM）适配到3D体积数据时，要么独立处理切片而忽略切片间上下文，要么需要大幅修改架构并重新训练。SAM+D旨在通过两个轻量级模块（DRLoRA和DSM）将冻结的SAM模型在空间维度上提升一维，实现参数高效的3D体积分割，同时保持大部分预训练参数冻结。",
+  "loss_formula": "DiceCE Loss (per-frame)",
+  "math_principle": "1. Depth-Routed LoRA (DRLoRA): 为每个Transformer块维护E个LoRA专家，根据归一化的深度位置z对专家进行路由，实现基于空间上下文的低秩更新混合。2. Depth Shift Module (DSM): 在自注意力之前，将特征张量沿深度维度进行移位，使查询、键和值投影已包含相邻切片信息，实现零参数、零计算量的跨切片交互。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, D, C, H, W]"
+    },
+    {
+      "layer": "dr_lora",
+      "shape": "[B, D, C, H, W]"
+    },
+    {
+      "layer": "dsm",
+      "shape": "[B, D, C, H, W]"
+    },
+    {
+      "layer": "encoder",
+      "shape": "[B, D, C, H, W]"
+    },
+    {
+      "layer": "decoder",
+      "shape": "[B, D, C, H, W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, D, C, H, W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载预训练SAM/SAM2模型并冻结主干",
+    "step2: 插入DRLoRA和DSM模块",
+    "step3: 使用DiceCE Loss进行端到端训练",
+    "step4: 推理时通过单点提示生成掩码并组装为3D体积"
+  ],
+  "baselines_compared": [
+    "nnU-Net",
+    "3DSAM-adapter",
+    "SAM2 (slice-based)",
+    "Cellpose",
+    "TransBTS",
+    "Swin-UNETR"
+  ],
+  "key_results": {
+    "LiTS_Dice": "63.33%",
+    "LiTS_NSD": "73.52%",
+    "Cell_Tracking_IoU": "Competitive with GT linking"
+  },
+  "confidence": 0.85,
+  "task_id": "2607.29033v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:48:03.878599",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

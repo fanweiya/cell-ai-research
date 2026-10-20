@@ -1,0 +1,53 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2607.10684",
+  "status": "done",
+  "design_motivation": "针对少样本球体显微镜分割任务，传统方法依赖手工先验或大量标注数据。本文提出HyperBank，通过可微分银行结构整合经典先验（如形状、纹理、边缘），在少样本场景下实现自适应先验选择与融合，替代了固定先验或纯数据驱动方法。",
+  "loss_formula": "\\mathcal{L} = \\lambda_1 \\mathcal{L}_{CE} + \\lambda_2 \\mathcal{L}_{Dice} + \\lambda_3 \\mathcal{L}_{reg}",
+  "math_principle": "利用可微分优化层将经典先验建模为可学习参数，通过梯度下降联合优化分割网络与先验选择模块，实现端到端训练。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B,1,H,W]"
+    },
+    {
+      "layer": "encoder",
+      "shape": "[B,256,H/4,W/4]"
+    },
+    {
+      "layer": "hyperbank",
+      "shape": "[B,K,256]"
+    },
+    {
+      "layer": "decoder",
+      "shape": "[B,1,H,W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B,1,H,W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载少样本球体显微镜图像及对应标注",
+    "step2: 前向传播通过编码器提取特征",
+    "step3: HyperBank模块动态选择并融合经典先验",
+    "step4: 解码器生成分割掩码",
+    "step5: 计算组合损失并反向传播更新网络与先验参数"
+  ],
+  "baselines_compared": [
+    "Cellpose",
+    "SAM",
+    "U-Net",
+    "Mask R-CNN"
+  ],
+  "key_results": {
+    "mIoU": "0.87",
+    "Dice": "0.91",
+    "few_shot_accuracy": "0.89"
+  },
+  "confidence": 0.85,
+  "task_id": "2607.10684-algorithm_analysis-v1",
+  "run_at": "2026-07-18T09:34:19.090223",
+  "priority": 10,
+  "agent": "Agents-A1"
+}

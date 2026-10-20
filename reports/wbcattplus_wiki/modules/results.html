@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wbcattplus Wiki — results</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / wbcattplus Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>wbcattplus</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/Mask2Former.html">Mask2Former</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/utils.html">utils</a></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/results.html">results</a></li>
+<li><a href="../modules/dataset_txt.html">dataset_txt</a></li>
+<li><a href="../modules/.codegraph.html">.codegraph</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>results</h1>
+<br>
+<p>&gt; 存储和报告白细胞图像细粒度形态标注与分割实验结果的Markdown表格文件。</p>
+<br>
+<p>该模块包含三个Markdown文件，分别记录基线模型、基于预测分割图的细胞结构感知识别模型、以及基于真实分割图的细胞结构感知识别模型在不同属性上的性能指标。所有表格均包含精确率(Precision)、召回率(Recall)和F-measure，并标注了标准差。这些结果用于论文第4节和第6节的实验分析。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">results/tab_baseline_attpred.md</code></h3>
+<br>
+<p>记录基线模型（VGG16和ResNet50）在各项细胞形态属性上的分类性能，对应论文第4节。</p>
+<br>
+<h3><code class="inline-code">results/tab_predsegbased_attpred.md</code></h3>
+<br>
+<p>记录使用预测分割图作为输入的细胞结构感知识别模型在不同聚合策略下的性能，对应论文第6节。</p>
+<br>
+<h3><code class="inline-code">results/tab_segbased_attpred.md</code></h3>
+<br>
+<p>记录使用真实分割图（Ground-truth）作为输入的细胞结构感知识别模型在不同聚合策略下的性能，对应论文第6节。</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>基线模型 (Baseline Models)</strong>: 直接使用VGG16或ResNet50骨干网络对白细胞图像进行属性分类，不利用分割掩码信息。</li>
+<li><strong>细胞结构感知识别 (Cell Structure-aware Recognition)</strong>: 结合分割掩码（预测或真实）与图像特征进行属性识别的模型，通过不同聚合策略（注意力、平均池化、拼接、最大池化、加权平均）融合信息。</li>
+<li><strong>细粒度属性 (Fine-grained Attributes)</strong>: 包括细胞大小、形状、核形状、核质比、染色质密度、细胞质纹理/颜色/空泡、颗粒颜色/类型等20+种形态学特征。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

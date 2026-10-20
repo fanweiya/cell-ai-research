@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MorphoHELM Wiki — data_installation</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / MorphoHELM Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>MorphoHELM</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/feature-extraction.html">feature-extraction</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/data_installation.html">data_installation</a></li>
+<li><a href="../modules/data-preprocessing.html">data-preprocessing</a></li>
+<li><a href="../modules/huggingface_loader.html">huggingface_loader</a></li>
+<li><a href="../modules/raw_to_huggingface.html">raw_to_huggingface</a></li>
+<li><a href="../modules/data.html">data</a></li>
+<li><a href="../modules/benchmarks.html">benchmarks</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>data_installation</h1>
+<br>
+<p>&gt; 提供公共Cell Painting数据集的下载、去光照校正及元数据管理功能</p>
+<br>
+<p>该模块负责从S3、HTTP等来源下载Cell Painting原始图像数据，应用特定的光照校正算法将其转换为uint8格式的PNG图像，并管理相关元数据。它支持BBBC036和CPG0016两个主要数据集，处理多通道图像，并包含重试机制和原子写入操作以确保下载可靠性。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">data_installation/cellpainting_io.py</code></h3>
+<br>
+<p>提供通用的IO辅助函数，用于处理S3对象存储、URL下载、压缩包提取及字节流操作</p>
+<br>
+<ul>
+<li><code class="inline-code">unsigned_s3_client</code> (function) - 创建一个无需签名的S3客户端，用于访问公开S3桶</li>
+<li><code class="inline-code">parse_s3_uri</code> (function) - 解析s3:// URI字符串，返回桶名和键名</li>
+<li><code class="inline-code">retry</code> (function) - 带指数退避的重试装饰器，用于处理网络波动导致的操作失败</li>
+<li><code class="inline-code">read_s3_bytes</code> (function) - 从S3 URI读取二进制数据，自动处理重试</li>
+<li><code class="inline-code">download_url</code> (function) - 通过原子临时文件方式下载URL内容，防止损坏</li>
+<li><code class="inline-code">extract_tar_members</code> (function) - 解压tar文件，支持按名称过滤成员</li>
+<li><code class="inline-code">read_zip_member</code> (function) - 读取zip文件中的指定成员内容</li>
+<li><code class="inline-code">list_zip_files</code> (function) - 列出zip文件中符合后缀要求的文件列表</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_installation/illumination.py</code></h3>
+<br>
+<p>提供图像去光照校正的核心算法和工具函数</p>
+<br>
+<ul>
+<li><code class="inline-code">image_bytes_to_array</code> (function) - 将图像字节流解码为NumPy数组</li>
+<li><code class="inline-code">to_uint8</code> (function) - 将任意数值类型的图像数组转换为uint8格式，处理归一化和截断</li>
+<li><code class="inline-code">_divide_by_illumination</code> (function) - 执行基础的光照校正除法操作，避免除零</li>
+<li><code class="inline-code">correct_cpg0016_to_uint8</code> (function) - 应用CPG0016数据集特定的光照校正和对比度拉伸</li>
+<li><code class="inline-code">correct_bbbc036_to_uint8</code> (function) - 应用BBBC036数据集特定的光照校正和对比度拉伸</li>
+<li><code class="inline-code">save_uint8_png</code> (function) - 将uint8数组保存为PNG图像文件</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_installation/manifests.py</code></h3>
+<br>
+<p>定义数据集的源配置、通道映射和URL模板</p>
+<br>
+<ul>
+<li><code class="inline-code">CPG_METADATA_REPO_URL</code> (constant) - CPG0016元数据仓库的Git URL</li>
+<li><code class="inline-code">CPG_LOAD_DATA_TEMPLATE</code> (constant) - CPG0016数据集加载数据的S3路径模板</li>
+<li><code class="inline-code">CpgChannel</code> (class) - 数据类，定义CPG0016通道名称、输出索引及原始/光照URL列名</li>
+<li><code class="inline-code">CPG_CHANNELS</code> (constant) - CPG0016的5个通道配置元组</li>
+<li><code class="inline-code">Bbbc036Channel</code> (class) - 数据类，定义BBBC036通道名称及对应的光照图像名称</li>
+<li><code class="inline-code">BBBC036_CHANNELS</code> (constant) - BBBC036的5个通道配置元组</li>
+<li><code class="inline-code">BBBC036_IMAGE_URL_TEMPLATE</code> (constant) - BBBC036图像ZIP文件的HTTP URL模板</li>
+<li><code class="inline-code">BBBC036_ILLUM_URL_TEMPLATE</code> (constant) - BBBC036光照校正tar.gz文件的URL模板</li>
+<li><code class="inline-code">BBBC036_PLATES</code> (constant) - BBBC036数据集所有板卡编号列表</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_installation/download_illum_corrected.py</code></h3>
+<br>
+<p>主脚本，协调下载流程，处理元数据并生成去光照校正后的PNG图像</p>
+<br>
+<ul>
+<li><code class="inline-code">_ensure_cpg_metadata_repo</code> (function) - 确保CPG元数据仓库已克隆到本地缓存</li>
+<li><code class="inline-code">_cache_cpg_benchmark_metadata</code> (function) - 将公共JUMP元数据文件复制到本地安装缓存</li>
+<li><code class="inline-code">_select_cpg_plates</code> (function) - 根据命令行参数或文件选择要处理的板卡列表</li>
+<li><code class="inline-code">_load_cpg_plate_table</code> (function) - 加载特定板卡的元数据表格，包含光照校正数据路径</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>原子下载</strong>: 使用临时文件下载，完成后再重命名，避免部分下载导致文件损坏</li>
+<li><strong>光照校正</strong>: 将原始图像除以光照图以消除照明不均匀，不同数据集采用不同的后处理策略</li>
+<li><strong>元数据缓存</strong>: 将远程元数据克隆并缓存到本地，减少重复下载和网络依赖</li>
+<li><strong>重试机制</strong>: 对网络操作实施指数退避重试，提高在弱网环境下的成功率</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">download_illum_corrected.py</code> → <code class="inline-code">cellpainting_io.py</code>: 导入下载、解压和S3读取等IO工具函数</li>
+<li><code class="inline-code">download_illum_corrected.py</code> → <code class="inline-code">illumination.py</code>: 导入光照校正算法和图像保存函数</li>
+<li><code class="inline-code">download_illum_corrected.py</code> → <code class="inline-code">manifests.py</code>: 导入数据集配置、URL模板和通道定义</li>
+<li><code class="inline-code">cellpainting_io.py</code> → <code class="inline-code">illumination.py</code>: 无直接导入，但通过字节流处理间接协作</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>count-anything Wiki — root</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / count-anything Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>count-anything</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/data.html">data</a></li>
+<li><a href="../modules/count_anything.html">count_anything</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/config.html">config</a></li>
+<li><a href="../modules/sam3.html">sam3</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>root</h1>
+<br>
+<p>&gt; Count Anything 项目的根目录，提供跨域文本引导目标计数模型的完整代码、配置和文档。</p>
+<br>
+<p>该目录包含项目的核心入口脚本、依赖管理、文档和启动脚本。README.md 和 README_CN.md 分别提供英文和中文的项目介绍、快速开始指南及数据集说明。requirements.txt 列出了所有 Python 依赖。test.sh、train.sh 和 val.sh 是用于在单节点或多 GPU 环境下启动测试、训练和验证流程的 Shell 脚本，它们均调用 count_anything.train.train 模块并加载对应的 YAML 配置文件。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">README.md</code></h3>
+<br>
+<p>项目英文主文档，介绍模型功能、核心特性、主要结果及快速开始步骤。</p>
+<br>
+<h3><code class="inline-code">README_CN.md</code></h3>
+<br>
+<p>项目中文主文档，功能与 README.md 相同，面向中文用户。</p>
+<br>
+<h3><code class="inline-code">requirements.txt</code></h3>
+<br>
+<p>定义项目运行所需的所有 Python 包及其版本约束。</p>
+<br>
+<h3><code class="inline-code">.gitignore</code></h3>
+<br>
+<p>指定 Git 版本控制中应忽略的文件和目录，如编译产物、虚拟环境、模型权重和日志文件。</p>
+<br>
+<h3><code class="inline-code">LICENSE</code></h3>
+<br>
+<p>声明项目采用 Apache License 2.0 开源协议。</p>
+<br>
+<h3><code class="inline-code">test.sh</code></h3>
+<br>
+<p>执行测试脚本，加载 count_anything_test_cloc.yaml 配置对模型进行测试。</p>
+<br>
+<h3><code class="inline-code">train.sh</code></h3>
+<br>
+<p>执行训练脚本，加载 count_anything_train_cloc.yaml 配置启动模型训练。</p>
+<br>
+<h3><code class="inline-code">val.sh</code></h3>
+<br>
+<p>执行验证脚本，加载 count_anything_val_cloc.yaml 配置对模型进行验证。</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>Count Anything</strong>: 一种通用的跨域文本引导目标计数模型，通过实例级点集输出实现可解释的计数。</li>
+<li><strong>CLOC 数据集</strong>: 跨域大规模目标计数数据集，包含约 22 万张图像、619 个类别和 1500 万个实例。</li>
+<li><strong>双粒度实例枚举</strong>: 结合区域级稀疏计数器 (RSC) 和像素级密集计数器 (PDC) 以处理不同尺度和密度的目标。</li>
+<li><strong>点中心监督</strong>: 将异构标注转换为计数点，每个有效实例由一个点监督，边界框仅作为辅助。</li>
+<li><strong>互补计数融合 (CCF)</strong>: 无参数融合 RSC 和 PDC 结果，抑制重复计数并保留互补性。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">test.sh</code> → <code class="inline-code">train.py</code>: test.sh 通过 python -m count_anything.train.train 调用训练模块，但传入测试配置。</li>
+<li><code class="inline-code">train.sh</code> → <code class="inline-code">train.py</code>: train.sh 通过 python -m count_anything.train.train 调用训练模块，并传入训练配置。</li>
+<li><code class="inline-code">val.sh</code> → <code class="inline-code">train.py</code>: val.sh 通过 python -m count_anything.train.train 调用训练模块，并传入验证配置。</li>
+<li><code class="inline-code">test.sh</code> → <code class="inline-code">config/count_anything_test_cloc.yaml</code>: test.sh 默认加载测试配置文件。</li>
+<li><code class="inline-code">train.sh</code> → <code class="inline-code">config/count_anything_train_cloc.yaml</code>: train.sh 默认加载训练配置文件。</li>
+<li><code class="inline-code">val.sh</code> → <code class="inline-code">config/count_anything_val_cloc.yaml</code>: val.sh 默认加载验证配置文件。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chain-of-Prompts Wiki — reading-guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / Chain-of-Prompts Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>Chain-of-Prompts</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/examples.html">examples</a></li>
+<li><a href="modules/core.html">core</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Reading Guide</h1>
+<br>
+<p>本代码库是一个基于 SAM (Segment Anything Model) 的实例分割演示与评估项目。建议按以下顺序阅读：先理解项目配置与依赖，再掌握核心模型架构，最后深入具体实现逻辑。</p>
+<br>
+<h2>Step 1: 了解项目概览与依赖 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">README.md</code>, <code class="inline-code">requirements.txt</code>, <code class="inline-code">DATASETS.md</code></p>
+<br>
+<p>首先阅读 README.md 了解项目目标、快速开始指南及整体架构；通过 requirements.txt 掌握依赖库版本；DATASETS.md 说明数据集格式与加载方式，为后续实验做准备。</p>
+<br>
+<h2>Step 2: 理解核心入口与配置 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">core/cop.py</code></p>
+<br>
+<p>cop.py 是项目的核心入口文件，包含主逻辑流程。重点关注其如何初始化模型、加载数据、执行推理及保存结果，这是理解整个系统运作的关键。</p>
+<br>
+<h2>Step 3: 掌握 SAM 模型初始化 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">core/sam/__init__.py</code>, <code class="inline-code">core/sam/build_sam.py</code></p>
+<br>
+<p>在 __init__.py 中查看 SAM 模块的导出接口；build_sam.py 负责根据配置文件构建模型，注意其如何加载预训练权重及选择不同规模的模型架构。</p>
+<br>
+<h2>Step 4: 研究模型配置文件 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">core/sam/configs/sam2.1_hiera_b+.yaml</code>, <code class="inline-code">core/sam/configs/sam2_hiera_b+.yaml</code></p>
+<br>
+<p>这些 YAML 文件定义了模型的具体参数，如 backbone 类型、输入尺寸、训练/推理超参数。对比不同配置文件可理解模型变体的差异。</p>
+<br>
+<h2>Step 5: 深入自动掩码生成器 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">core/sam/automatic_mask_generator.py</code></p>
+<br>
+<p>该文件实现了自动掩码生成的核心算法，包括提示点处理、掩码后处理等。重点关注其如何从原始预测生成最终分割结果，这是 SAM 功能的关键实现。</p>
+<br>
+<h2>Step 6: 查看基线实现 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">core/sam/build_sam_baseline.py</code></p>
+<br>
+<p>基线实现通常包含更简洁的模型构建逻辑，可用于对比理解标准 SAM 与当前项目变体的区别，有助于把握核心改进点。</p>
+<br>
+<h2>Tips</h2>
+<br>
+<ul>
+<li>先运行示例代码再阅读对应文件，建立直观理解</li>
+<li>遇到复杂逻辑时，结合调试器逐步跟踪执行流程</li>
+<li>关注配置文件与代码的对应关系，理解参数如何影响行为</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

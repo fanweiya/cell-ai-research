@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "VOICE模型整体架构图：包含视觉-组学对齐训练、基因监督空间预测和检索融合推理三阶段的完整方法流程"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "方法流程图：展示细胞中心H&E图像经UNI/vision编码器提取patch tokens，并通过cell-mask池化（分数重叠加权平均）生成细胞形态表征的过程"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "VOICE与基线方法（DeepSpot-M、GHIST、DeepSpot2Cell等）在H&E切片上预测MYH11基因空间表达的可视化对比及单切片per-gene PCC箱线图，是核心实验结果图"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2605.08276v1",
+  "status": "done",
+  "design_motivation": "针对细胞级密集预测任务，现有ViT-based模型因Patch Tokenization破坏空间连续性和局部形态细节。CMD采用ConvNeXt-UNet作为骨干以保留局部性和多尺度结构，并使用Masked-Diffusion作为自监督预训练目标，替代传统的Masked Image Modeling (MIM) 或纯生成式重建，以学习对组织纹理、核边界和空间结构更敏感的表示。相比ViT，ConvNeXt更适合细粒度病理结构；相比VAE潜空间建模，像素空间建模能保留更多细胞级细节。",
+  "loss_formula": "\\mathcal{L} = \\mathbb{E}_{t, \\epsilon, x_0, m} \\left[ \\| x_0 - \\hat{x}_0(m, x_{t}, \\text{cond}) \\|^2 \\right]",
+  "math_principle": "基于去噪扩散概率模型 (DDPM) 的掩码扩散框架。在训练过程中，对输入图像 $x_0$ 进行结构导向的掩码操作，并在时间步 $t$ 添加噪声得到 $x_t$。模型（ConvNeXt-UNet）接收带掩码的噪声图像 $x_t$、时间嵌入 $t$ 以及冻结的病理基础模型特征作为条件 $c$，预测原始图像 $x_0$ 或噪声 $\theta$。损失函数为预测值与真实值之间的均方误差，通过重建缺失的病理区域来学习形态感知表示。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 3, 512, 512]"
+    },
+    {
+      "layer": "masking",
+      "shape": "[B, 3, 512, 512]"
+    },
+    {
+      "layer": "diffusion_noising",
+      "shape": "[B, 3, 512, 512]"
+    },
+    {
+      "layer": "conditioning",
+      "shape": "[B, 1024]"
+    },
+    {
+      "layer": "convnext_unet_encoder",
+      "shape": "[B, C, H/16, W/16]"
+    },
+    {
+      "layer": "convnext_unet_decoder",
+      "shape": "[B, C, H, W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, 3, 512, 512]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 从HistAI等公开数据集中加载约100万张无标签病理图像补丁 (512x512)",
+    "step2: 对图像进行结构导向的掩码操作，并加入高斯噪声",
+    "step3: 提取冻结的UNI病理基础模型特征作为条件",
+    "step4: 将掩码噪声图像、时间嵌入和条件特征输入ConvNeXt-UNet",
+    "step5: 计算重建损失 (MSE) 并优化AdamW",
+    "step6: 预训练完成后冻结骨干网络，提取多尺度解码器特征",
+    "step7: 在下游任务上仅训练轻量级分割头 (Linear Probe)"
+  ],
+  "baselines_compared": [
+    "ViT-based Pathology Foundation Models (e.g., PathOrchestra, H-Optimus, UNI)",
+    "End-to-End Segmentation Models (e.g., ViT-Adapter, SAM)",
+    "Purely Convolutional Models (e.g., Attention U-Net)",
+    "Test-Time Training (TTT)"
+  ],
+  "key_results": {
+    "CPM-17_1-Shot_Dice": "0.78",
+    "TNBC_1-Shot_Dice": "0.72",
+    "Linear_Probe_Performance": "优于ViT-based PFMs和端到端分割基线",
+    "Few_Shot_Efficiency": "仅需7M可训练参数即可达到竞争性能",
+    "Scaling_Behavior": "随预训练步数和模型容量增加性能持续提升"
+  },
+  "confidence": 0.85,
+  "task_id": "2605.08276v1-algorithm_analysis-v1",
+  "run_at": "2026-07-24T09:11:46.384700",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

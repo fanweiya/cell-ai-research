@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "PP-Net整体系统与网络架构图，包含系统概览、算法流程、DFN-net、ASAP先验和GF-net融合网络。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "不同窗口大小下有无物理先验的散光去除效果对比图"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "不同3×3局部窗口内中心像素（红色）与周围像素状态的示意图，可能用于说明方法中的邻域先验或采样策略"
+  }
+}

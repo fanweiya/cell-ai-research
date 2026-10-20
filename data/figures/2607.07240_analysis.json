@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 7,
+    "caption": "论文方法架构示意图：展示基于SAM的超声图像分割框架，包含图像编码器、提示编码器、掩码解码器及边缘感知提示模块（Edge Aware Prompt Module）的演进流程"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文整体方法架构图，包含边缘感知模块、提示增强模块、图像编码器与掩码解码器"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "泛化性能对比折线图：多种分割方法在三个未见超声数据集（DDTI、UDIAT、HMC-QU）上的Dice对比，突出本文方法（Ours）性能最优"
+  }
+}

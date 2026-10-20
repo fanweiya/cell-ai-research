@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法流程图：扩散模型超分辨率训练框架，展示前向扩散、去噪损失、VGG感知损失与总损失的流程"
+  },
+  "1": {
+    "relevant": true,
+    "score": 7,
+    "caption": "训练过程中SSIM随epoch变化的曲线对比图，比较L(2)_VGG正则化方法与SR3基线的收敛表现"
+  },
+  "2": {
+    "relevant": true,
+    "score": 7,
+    "caption": "训练过程中PSNR随epoch变化的折线图，对比VGG感知正则化方法与SR3基线的收敛表现"
+  }
+}

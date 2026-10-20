@@ -1,0 +1,36 @@
+:root { color-scheme: light; --text-primary:var(--text); --text-secondary:var(--text2); --blue:#2563eb; }
+:root[data-theme="dark"] {
+  color-scheme:dark;
+  --bg:#0f1724; --surface:#182334; --surface-alt:#202e41;
+  --border:#344258; --border-h:#52637c;
+  --text:#e6edf7; --text2:#bac7da; --text3:#9aabc2;
+  --accent:#6366d9; --accent-l:#2d3158; --accent-d:#b4bcff;
+  --green:#4adea0; --green-l:#173d32; --green-d:#8de7b4;
+  --orange-l:#48301f; --orange-d:#ffc38f;
+  --red-l:#472833; --red-d:#ffacb6;
+  --purple-l:#352b52; --purple-d:#d1baff; --blue:#93c5fd;
+  --shadow:0 1px 4px #0003; --shadow-h:0 8px 24px #0004;
+}
+#themeToggle { white-space:nowrap; min-width:78px; }
+.chat-input, .filter-dialog-header button { color:var(--text); }
+.chat-input:focus, .search-input:focus, .repo-body, .abs-body, .fig-grid,
+#mobileFilters, #mobileFilterButton { background:var(--surface); }
+.picker-toolbar select { background:var(--surface); color:var(--text); }
+#emptyResults { color:var(--text2); }
+:root[data-theme="dark"] .kp { background:var(--green-l); }
+:root[data-theme="dark"] .card .tag:not(.tb) { background:#352b52; color:#ddc9ff; border-color:#594572; }
+:root[data-theme="dark"] .card a.al,
+:root[data-theme="dark"] .card a.al:visited { color:#93c5fd; text-decoration-color:#5d86b5; }
+:root[data-theme="dark"] .card a.al:hover { color:#bfdbfe; }
+:root[data-theme="dark"] .ai-read-btn { color:#a5e7bd; background:#203c30; border-color:#416a52; }
+:root[data-theme="dark"] .ai-read-btn:hover { background:#2c4d3c; }
+:root[data-theme="dark"] .scope-tabs button[aria-pressed="true"],
+:root[data-theme="dark"] .evidence-details a,
+:root[data-theme="dark"] .welcome-kicker { color:#a5e7bd; }
+:root[data-theme="dark"] .cs span.sn { color:var(--text3); }
+:root[data-theme="dark"] .msg-bubble a { color:#93c5fd; }
+:root[data-theme="dark"] .chat-send:hover { background:#4f46b8; }
+/* Original paper figures retain their scientific colors. */
+.latex-smallcaps { font-variant:small-caps; }
+.abs-body .katex { font-size:1.05em; color:inherit; }
+.abs-body .katex-display { overflow-x:auto; overflow-y:hidden; padding:4px 0; }

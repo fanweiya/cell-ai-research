@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "方法流程图：多模态显微图像输入冻结的视觉基础模型编码器，生成结构先验图（Structure Prior Map）"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法架构图：基于视觉基础模型(VFM)的高效细胞分割框架，包含VFM编码器、 Neck Layer、FCS编码器与SM解码器，输出实例掩码"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "方法结果可视化：展示Structure Prior、模型预测与Ground Truth在白细胞、酵母、血浆细胞、血小板等细胞图像上的分割对比"
+  }
+}

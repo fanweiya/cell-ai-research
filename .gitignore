@@ -1,0 +1,30 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Cloudflare Pages build artifacts & local Wrangler cache
+.cf-pages-site/
+.wrangler/
+
+# Large figure originals cache (>1GB, fetched incrementally from arXiv HTML)
+data/figures/originals/
+
+# Log files and run logs
+logs/
+*.log
+
+# Temporary runtime states and caches
+tmp/
+.site-update-pending.json
+*.tmp
+
+# Environment variables and secrets
+.env
+.env.*
+
+# OS generated files
+.DS_Store
+Thumbs.db

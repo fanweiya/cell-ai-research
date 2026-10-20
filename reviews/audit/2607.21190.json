@@ -1,0 +1,26 @@
+{
+ "id": "2607.21190",
+ "chars": 48630,
+ "statistics": {
+  "checks": {
+   "has_p_value": true,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": true,
+   "has_significance_test": true,
+   "has_fdr": true,
+   "mentions_ablation": false,
+   "mentions_dataset_split": false,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [],
+  "score": 10
+ },
+ "key_claims": [
+  "psf-guided models improved structural fidelity, reduced local deviations, and achieved closer agreement with sted references than non-psf baselines, particularly in frequency-domain analyses.",
+  "these results demonstrate that optical priors can improve the structural fidelity and physical plausibility of generative microscopy models for cross-modality super- resolution imaging.",
+  "incorporating psf knowledge into the learning process, therefore, provides a principled route to constrain reconstruction, preserve physically meaningful detail, and improve robustness (15,17,30,35)."
+ ],
+ "ref_spotcheck_targets": [],
+ "citation_results": []
+}

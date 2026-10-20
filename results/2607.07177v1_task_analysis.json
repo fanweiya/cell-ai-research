@@ -1,0 +1,17 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2607.07177v1",
+  "status": "done",
+  "task_family": "cell_segmentation",
+  "input": "Multi-source CT images",
+  "output": "Hierarchical segmentation masks for clinical body composition",
+  "notable": "Resource-efficient hierarchical segmentation framework for medical imaging",
+  "task_type": [
+    "segmentation"
+  ],
+  "confidence": 0.85,
+  "task_id": "2607.07177v1-task_analysis-v1",
+  "run_at": "2026-07-12T09:04:53.723089",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

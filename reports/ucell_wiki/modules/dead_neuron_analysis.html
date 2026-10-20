@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ucell Wiki — dead_neuron_analysis</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / ucell Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>ucell</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/ucell.html">ucell</a></li>
+<li><a href="../modules/dead_neuron_analysis.html">dead_neuron_analysis</a></li>
+<li><a href="../modules/tests.html">tests</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>dead_neuron_analysis</h1>
+<br>
+<p>&gt; 提供一套完整的工具，用于在推理阶段检测和分析FRM模型中的死亡神经元。</p>
+<br>
+<p>该模块通过注册前向钩子（forward hooks）收集模型特定层（如SwiGLU）的激活数据，计算每个神经元的统计指标（均值、标准差、最大值、最小值、零激活比例等），并据此识别在推理过程中持续保持零或接近零激活状态的神经元。这些死亡神经元通常指示模型存在初始化不良、梯度流动问题、架构不匹配或过度正则化等隐患。模块支持快速层级分析和详细的神经元级分析，并自动集成项目现有的数据加载流程。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">dead_neuron_analysis/detect_dead_neurons.py</code></h3>
+<br>
+<p>执行快速的层级层面死亡神经元检测，输出汇总报告和统计摘要。</p>
+<br>
+<ul>
+<li><code class="inline-code">DeadNeuronDetector</code> (class) - 核心检测器类，负责注册钩子、收集激活统计信息并生成报告。</li>
+<li><code class="inline-code">register_hooks</code> (method) - 遍历模型模块，为匹配指定类（如SwiGLU）的层注册前向钩子。</li>
+<li><code class="inline-code">_make_hook</code> (method) - 工厂函数，为每个目标层创建捕获激活值并计算统计量（均值、标准差、零激活比例等）的钩子函数。</li>
+</ul>
+<br>
+<h3><code class="inline-code">dead_neuron_analysis/analyze_neurons_advanced.py</code></h3>
+<br>
+<p>执行详细的神经元级分析，输出每个神经元的激活直方图、重要性排名及详细统计CSV。</p>
+<br>
+<ul>
+<li><code class="inline-code">AdvancedNeuronAnalyzer</code> (class) - 高级分析器类，在DeadNeuronDetector基础上进一步计算每个神经元的详细统计指标。</li>
+<li><code class="inline-code">_make_detailed_hook</code> (method) - 创建钩子函数，不仅收集统计量，还保存原始激活张量以便后续进行神经元级别的详细分析。</li>
+<li><code class="inline-code">get_neuron_stats</code> (method) - 计算并返回每个神经元的详细统计信息，包括均值、标准差、最大/最小值、活跃样本比例等。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>死亡神经元 (Dead Neurons)</strong>: 在推理过程中，激活值持续为零或接近零（低于设定阈值，默认1e-5）的神经元。这通常意味着该神经元未参与有效计算，可能由初始化不当、梯度消失或架构问题导致。</li>
+<li><strong>前向钩子 (Forward Hooks)</strong>: PyTorch机制，用于在模型前向传播过程中拦截并记录特定层的输出张量，是本模块收集激活数据的核心手段。</li>
+<li><strong>数据依赖性 (Data Dependency)</strong>: 死亡神经元的检测结果高度依赖于输入数据。模块强制使用真实数据（SCS数据集）而非随机噪声，以确保结果反映模型在实际生产环境中的表现。</li>
+<li><strong>层级统计 vs 神经元统计</strong>: detect_dead_neurons.py提供层级的汇总统计（如该层死亡神经元比例），而analyze_neurons_advanced.py提供每个神经元的独立统计，支持更深入的故障诊断。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">detect_dead_neurons.py</code> → <code class="inline-code">analyze_neurons_advanced.py</code>: 两者结构相似，analyze_neurons_advanced.py可视为detect_dead_neurons.py的增强版，提供了更细粒度的神经元级分析。</li>
+<li><code class="inline-code">detect_dead_neurons.py</code> → <code class="inline-code">data.py</code>: 通过导入data.scs函数，自动使用项目现有的数据加载流程和真实数据集进行分析。</li>
+<li><code class="inline-code">analyze_neurons_advanced.py</code> → <code class="inline-code">data.py</code>: 同样依赖data.scs进行数据加载，确保分析基于真实推理数据。</li>
+<li><code class="inline-code">detect_dead_neurons.py</code> → <code class="inline-code">ucell.layers</code>: 导入并筛选需要监控的层类型（如SwiGLU）。</li>
+<li><code class="inline-code">analyze_neurons_advanced.py</code> → <code class="inline-code">ucell.layers</code>: 导入并筛选需要监控的层类型（如SwiGLU）。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

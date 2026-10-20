@@ -1,0 +1,60 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2601.11645v1",
+  "status": "done",
+  "design_motivation": "针对荧光显微镜下神经元细胞分割中存在的密度异质性（密集簇与稀疏低对比度区域共存）、形态复杂重叠及类别不平衡问题。传统模型难以保留精细拓扑细节和准确分割边界。IMSAHLO通过多尺度密集块（MSDB）捕捉不同感受野特征以应对密度变化，利用分层注意力（HA）机制自适应聚焦显著形态特征以保留ROI边界细节。替代方案如标准U-Net缺乏多尺度特征融合与注意力机制，单一损失函数（如Dice）无法同时优化区域重叠、边界精度、类别平衡和拓扑连续性。",
+  "loss_formula": "\\mathcal{L}_{total} = \\lambda_1 \\mathcal{L}_{Tversky} + \\lambda_2 \\mathcal{L}_{Focal} + \\lambda_3 \\mathcal{L}_{Contour} + \\lambda_4 \\mathcal{L}_{clDice}",
+  "math_principle": "混合损失函数通过加权组合四个互补项：Tversky Loss 调整假阴性/假阳性权重以增强召回率；Focal Loss 解决类别不平衡，聚焦难分样本；Contour-Weighted Boundary Loss 显式惩罚边界偏差，提升分割边缘精度；Centerline Dice (clDice) Loss 通过软骨架化算子确保管状结构的拓扑连续性和连通性，防止断裂。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "encoder_MSDB",
+      "shape": "[B, C, H/4, W/4]"
+    },
+    {
+      "layer": "bottleneck_HA",
+      "shape": "[B, C, H/8, W/8]"
+    },
+    {
+      "layer": "decoder",
+      "shape": "[B, C, H, W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, 1, H, W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 数据加载与增强（几何变换、光度变换、CLAHE对比度增强）",
+    "step2: 前向传播通过MSDB编码器和HA瓶颈模块",
+    "step3: 计算混合损失（Tversky + Focal + Contour + clDice）",
+    "step4: 反向传播优化（AdamW, 学习率调度, 早停）",
+    "step5: 测试时增强（TTA）与形态学后处理"
+  ],
+  "baselines_compared": [
+    "U-Net",
+    "U-Net++",
+    "Attention U-Net",
+    "DeepLabV3+",
+    "TransUNet",
+    "MobileViT",
+    "UNeXt",
+    "DTASUNet"
+  ],
+  "key_results": {
+    "Precision": "81.4%",
+    "Macro F1": "82.7%",
+    "Micro F1": "83.3%",
+    "Balanced Accuracy": "99.5%",
+    "DSC": "0.801",
+    "IoU": "0.784"
+  },
+  "confidence": 0.92,
+  "task_id": "2601.11645v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:44:29.782030",
+  "priority": 11,
+  "agent": "Agents-A1"
+}

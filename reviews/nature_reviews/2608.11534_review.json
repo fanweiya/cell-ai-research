@@ -1,0 +1,58 @@
+{
+  "paper_id": "2608.11534",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了DeltaMed，一个用于纵向CT差异报告的双分支视觉-语言框架，并引入了CT-ΔBench这一新的基准。论文在方法论上具有创新性，特别是在事件级别的评估指标设计方面，弥补了传统文本生成指标在临床准确性上的不足。然而，论文在统计报告的严谨性、泛化能力验证以及引用真实性方面存在明显问题，需要进一步澄清和补充。",
+  "strengths": [
+    "提出了一种新颖的事件级评估方法，能够更准确地衡量模型在临床变化检测中的表现。",
+    "DeltaMed框架设计合理，通过共享视觉编码器和差分分支建模时间变化，具有良好的可解释性和工程可行性。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "使用Qwen2.5-14B-Instruct提取事件",
+      "concern": "论文未说明为何选择Qwen2.5-14B-Instruct作为事件提取工具，也未提供其在医学事件提取任务上的验证结果。",
+      "why_it_matters": "事件提取模块的性能直接影响后续评估指标的有效性，若Qwen2.5-14B-Instruct本身存在提取偏差，将导致整个评估体系不可靠。",
+      "resolution_test": "需要补充Qwen2.5-14B-Instruct在独立医学事件提取任务上的准确率、召回率等指标，或提供人工验证结果。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "statistics",
+      "claim_pointer": "DeltaMed在Change-F1上显著优于基线",
+      "concern": "论文未提供统计显著性检验结果，无法判断性能提升是否具有统计意义。",
+      "why_it_matters": "仅报告数值提升不足以证明模型优越性，需通过t检验或bootstrap方法验证提升是否显著。",
+      "resolution_test": "应补充DeltaMed与基线模型在Change-F1等指标上的p值或置信区间分析。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "DeltaMed在低数据量设置下表现良好",
+      "concern": "论文仅在CT-ΔBench上进行实验，缺乏跨数据集泛化能力验证。",
+      "why_it_matters": "医学模型需具备跨机构、跨设备泛化能力，仅在一个数据集上验证无法证明其实际部署潜力。",
+      "resolution_test": "应在至少一个外部CT数据集（如NIH或MIMIC-CT）上测试DeltaMed的迁移性能。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "citation",
+      "claim_pointer": "引用RadGraph F1和RadCliQ与人类判断相关性",
+      "concern": "引用文献28（Yu et al.）时未准确反映其研究范围，该研究主要针对胸部X光报告，而非CT。",
+      "why_it_matters": "错误引用可能误导读者对方法适用性的判断，影响论文的学术严谨性。",
+      "resolution_test": "应补充CT领域相关文献或明确说明为何引用X光领域的研究作为依据。"
+    }
+  ],
+  "assessment_boundaries": [
+    "未提供代码或训练细节，无法复现实验结果。",
+    "未说明CT-ΔBench的具体数据来源、伦理审批情况及患者隐私保护措施。",
+    "未讨论模型在真实临床环境中的潜在偏差（如种族、性别、设备差异）及其影响。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

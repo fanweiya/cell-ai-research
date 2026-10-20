@@ -1,0 +1,35 @@
+{
+  "task": "reproduction",
+  "paper_id": "2606.12286v1",
+  "status": "done",
+  "level": "B",
+  "level_description": "A=一键运行, B=需要数据, C=需要修改, D=不可复现",
+  "gpu_requirements": {
+    "min_vram_gb": 24,
+    "gpu_count": 1,
+    "gpu_type": "A100/RTX4090"
+  },
+  "training_time_hours": null,
+  "data_public": true,
+  "data_source": "LiveCell",
+  "dependencies": [
+    "pytorch",
+    "cuda11.8",
+    "opencv-python",
+    "numpy",
+    "pandas",
+    "scikit-learn"
+  ],
+  "pretrained_weights_available": true,
+  "reproduction_steps": [
+    "1. 克隆代码仓库",
+    "2. 安装依赖 (pip install -e .)",
+    "3. 下载LiveCell数据集并配置路径",
+    "4. 运行 python train.py --config cellnet.yml"
+  ],
+  "confidence": 0.85,
+  "task_id": "2606.12286v1-reproduction-v1",
+  "run_at": "2026-07-21T09:48:39.940132",
+  "priority": 12,
+  "agent": "Agents-A1"
+}

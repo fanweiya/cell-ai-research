@@ -1,0 +1,34 @@
+{
+  "task": "reproduction",
+  "paper_id": "2606.29463v1",
+  "status": "done",
+  "level": "B",
+  "level_description": "B=需要数据",
+  "gpu_requirements": {
+    "min_vram_gb": 24,
+    "gpu_count": 1,
+    "gpu_type": "A100/RTX4090"
+  },
+  "training_time_hours": null,
+  "data_public": true,
+  "data_source": "PanNuke, Xenium",
+  "dependencies": [
+    "pytorch",
+    "cuda11.8",
+    "torchvision",
+    "opencv-python"
+  ],
+  "pretrained_weights_available": true,
+  "reproduction_steps": [
+    "1. 克隆代码仓库 CellDETR",
+    "2. 安装依赖 (pip install -r requirements.txt)",
+    "3. 下载 PanNuke 和 Xenium 公开数据集并配置路径",
+    "4. 运行 train.py 进行训练",
+    "5. 运行 evaluate.py 进行验证"
+  ],
+  "confidence": 0.85,
+  "task_id": "2606.29463v1-reproduction-v1",
+  "run_at": "2026-07-28T11:00:56.837157",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

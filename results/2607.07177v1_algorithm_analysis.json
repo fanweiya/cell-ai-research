@@ -1,0 +1,47 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2607.07177v1",
+  "status": "done",
+  "design_motivation": "针对多源CT数据中解剖结构差异大、标注成本高及推理速度要求高的问题，提出分层分割框架。相比端到端模型，该设计通过粗粒度到细粒度的级联策略，在保持高精度的同时显著降低计算资源消耗，解决了单一模型难以兼顾跨设备泛化性与实时性的痛点。",
+  "loss_formula": "\\mathcal{L} = \\lambda_1 \\mathcal{L}_{Dice} + \\lambda_2 \\mathcal{L}_{CE} + \\lambda_3 \\mathcal{L}_{Hierarchical}",
+  "math_principle": "采用多任务损失函数，结合Dice Loss处理类别不平衡，交叉熵Loss优化像素级分类，并引入层级一致性约束Loss，确保粗分割掩码与细分割掩码在拓扑结构上保持一致，利用层级先验知识引导网络学习更鲁棒的特征表示。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 1, H, W, D]"
+    },
+    {
+      "layer": "coarse_encoder",
+      "shape": "[B, 64, H/4, W/4, D/4]"
+    },
+    {
+      "layer": "fine_decoder",
+      "shape": "[B, 1, H, W, D]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, 1, H, W, D]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 多源CT数据预处理与层级标注对齐",
+    "step2: 粗分割网络前向推理生成初始掩码",
+    "step3: 基于粗掩码裁剪感兴趣区域进行细分割",
+    "step4: 计算层级联合损失并反向传播更新参数",
+    "step5: 多尺度测试集成提升推理稳定性"
+  ],
+  "baselines_compared": [
+    "U-Net",
+    "nnU-Net",
+    "V-Net"
+  ],
+  "key_results": {
+    "Dice_Score": "0.94",
+    "Inference_Time": "0.8s"
+  },
+  "confidence": 0.85,
+  "task_id": "2607.07177v1-algorithm_analysis-v1",
+  "run_at": "2026-07-12T09:07:21.859827",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

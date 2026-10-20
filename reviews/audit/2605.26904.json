@@ -1,0 +1,29 @@
+{
+ "id": "2605.26904",
+ "chars": 60000,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": false,
+   "has_std": true,
+   "has_seeds_or_repeats": true,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": true,
+   "mentions_dataset_split": false,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 5
+ },
+ "key_claims": [
+  "built on this shared latent space, the classification branch predicts cell-type probabilities, whereas the reconstruction branch decodes 𝐇 st \\mathbf{h}_{\\mathrm{st}} to generate reconstruction-aware ",
+  "659, exceeding cell2location and slightly outperforming spatialscope and spatial-id, which reached 0.",
+  "figure 7: spcast reconstruction improves concordance between marker expression and cell-type spatial organization in lung cancer cosmx smi data."
+ ],
+ "ref_spotcheck_targets": [],
+ "citation_results": []
+}

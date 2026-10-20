@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CBVCC Wiki — root</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / CBVCC Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>CBVCC</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/metrics.html">metrics</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>root</h1>
+<br>
+<p>&gt; CBVCC挑战赛的评估与分析工具包，用于处理细胞行为视频分类任务的指标计算、结果评估及可视化。</p>
+<br>
+<p>该项目旨在为细胞行为视频分类挑战赛（CBVCC）提供完整的分析流水线。主要功能包括：基于文件夹结构生成标签CSV、计算视频质量指标（信噪比SNR、跟踪细胞数N.TRACKS）、评估参赛队伍的预测结果（Phase 1验证集和Phase 2测试集），并生成ROC曲线、分数与细胞数量/信噪比关系图等可视化报告。核心流程由run_analysis.py编排，依赖metrics子模块进行数据处理和绘图。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">run_analysis.py</code></h3>
+<br>
+<p>主入口脚本，负责加载数据、调用评估函数并生成所有可视化图表。</p>
+<br>
+<ul>
+<li><code class="inline-code">load_analysis</code> (function) - 加载特定阶段（Phase 1或2）的数据，包括跟踪计数、真实标签和提交预测，执行模型评估并将结果保存为CSV。</li>
+<li><code class="inline-code">main</code> (function) - 解析命令行参数，按顺序处理Phase 2和Phase 1数据，调用metrics子模块绘制ROC曲线、分数-细胞数曲线、分数-SNR曲线及分布直方图。</li>
+</ul>
+<br>
+<h3><code class="inline-code">metrics/generate_gt.py</code></h3>
+<br>
+<p>根据数据集文件夹结构自动生成包含视频文件名和类别标签（0或1）的CSV文件。</p>
+<br>
+<h3><code class="inline-code">metrics/compute_quality_metrics.py</code></h3>
+<br>
+<p>计算视频质量指标，包括信噪比（SNR）和跟踪到的细胞数量（N.TRACKS）。</p>
+<br>
+<h3><code class="inline-code">metrics/upload_files.py</code></h3>
+<br>
+<p>提供数据加载和预处理工具函数，用于读取跟踪文件、真实标签和提交预测。</p>
+<br>
+<ul>
+<li><code class="inline-code">load_track_counts</code> (function) - 加载跟踪CSV文件并提取细胞数量信息。</li>
+<li><code class="inline-code">load_gt</code> (function) - 加载真实标签CSV文件。</li>
+<li><code class="inline-code">preprocess_submission</code> (function) - 预处理参赛队伍的提交预测文件。</li>
+<li><code class="inline-code">build_file_timestamp_dict</code> (function) - 根据时间戳模式匹配提交文件。</li>
+<li><code class="inline-code">build_all_data</code> (function) - 整合提交数据、时间戳和真实标签，构建完整的分析数据集。</li>
+</ul>
+<br>
+<h3><code class="inline-code">metrics/roc_curves.py</code></h3>
+<br>
+<p>负责绘制ROC曲线。</p>
+<br>
+<ul>
+<li><code class="inline-code">plot_roc_curves</code> (function) - 根据评估数据绘制ROC曲线并保存图像。</li>
+<li><code class="inline-code">clean_model_name</code> (function) - 清理模型名称以便在图表中显示。</li>
+</ul>
+<br>
+<h3><code class="inline-code">metrics/overall_metrics.py</code></h3>
+<br>
+<p>计算模型的整体性能指标（如准确率、精确率、召回率、AUC等）。</p>
+<br>
+<ul>
+<li><code class="inline-code">evaluate_models</code> (function) - 对整合后的数据进行批量评估，返回包含各项指标的DataFrame。</li>
+</ul>
+<br>
+<h3><code class="inline-code">metrics/ncell_curves.py</code></h3>
+<br>
+<p>绘制模型分数与跟踪细胞数量（N.TRACKS）关系的散点图。</p>
+<br>
+<ul>
+<li><code class="inline-code">plot_score_vs_cells</code> (function) - 生成分数随细胞数量变化的可视化图表。</li>
+</ul>
+<br>
+<h3><code class="inline-code">metrics/snr_curves.py</code></h3>
+<br>
+<p>绘制模型分数与信噪比（SNR）关系的散点图。</p>
+<br>
+<ul>
+<li><code class="inline-code">plot_score_vs_snr</code> (function) - 生成分数随信噪比变化的可视化图表。</li>
+</ul>
+<br>
+<h3><code class="inline-code">metrics/descriptives.py</code></h3>
+<br>
+<p>生成描述性统计图表，包括类别分布和指标分布。</p>
+<br>
+<ul>
+<li><code class="inline-code">plot_class_distribution</code> (function) - 绘制训练、验证和测试集的类别分布直方图。</li>
+<li><code class="inline-code">plot_metric_distributions</code> (function) - 绘制质量指标（如SNR、N.TRACKS）的分布直方图。</li>
+</ul>
+<br>
+<h3><code class="inline-code">eval_code.php</code></h3>
+<br>
+<p>独立的PHP脚本，用于计算分类指标（TP, FP, FN, TN, AUC等），非Python流水线的一部分。</p>
+<br>
+<ul>
+<li><code class="inline-code">calculate_metrics</code> (function) - 计算混淆矩阵各项指标、AUC及平衡准确率。</li>
+<li><code class="inline-code">parse_csv</code> (function) - 解析CSV文件为关联数组。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>CBVCC挑战</strong>: 细胞行为视频分类挑战赛，目标是区分细胞运动模式突变与线性运动、静止或纯背景的视频。</li>
+<li><strong>Phase 1 &amp; Phase 2</strong>: 挑战赛的验证阶段（Phase 1）和测试阶段（Phase 2），分别对应不同的数据集和评估标准。</li>
+<li><strong>质量指标</strong>: SNR（信噪比）和N.TRACKS（跟踪细胞数），用于分析模型性能与视频质量的相关性。</li>
+<li><strong>ROC与AUC</strong>: 受试者工作特征曲线（ROC）和曲线下面积（AUC），用于评估分类器在不同阈值下的性能。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">run_analysis.py</code> → <code class="inline-code">metrics/upload_files.py</code>: 导入数据加载和预处理函数。</li>
+<li><code class="inline-code">run_analysis.py</code> → <code class="inline-code">metrics/roc_curves.py</code>: 导入绘图函数以生成ROC曲线。</li>
+<li><code class="inline-code">run_analysis.py</code> → <code class="inline-code">metrics/overall_metrics.py</code>: 导入模型评估函数以计算性能指标。</li>
+<li><code class="inline-code">run_analysis.py</code> → <code class="inline-code">metrics/ncell_curves.py</code>: 导入函数以绘制分数与细胞数的关系图。</li>
+<li><code class="inline-code">run_analysis.py</code> → <code class="inline-code">metrics/snr_curves.py</code>: 导入函数以绘制分数与SNR的关系图。</li>
+<li><code class="inline-code">run_analysis.py</code> → <code class="inline-code">metrics/descriptives.py</code>: 导入函数以生成类别和指标分布图。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

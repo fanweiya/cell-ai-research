@@ -1,0 +1,54 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2606.11286v1",
+  "status": "done",
+  "design_motivation": "现有生成模型仅优化分布级目标以匹配控制与扰动群体，但端点一致性无法确定中间演化过程，导致生成的轨迹可能穿越未观测到的细胞形态区域。FreeBridge 旨在解决这一欠定问题，通过引入基于单细胞形态流形的状态成本（State Cost），将随机传输锚定在经验支持的细胞状态空间内，从而确保中间轨迹的形态学一致性，区别于仅关注端点匹配的扩散模型或传统Schrödinger Bridge。",
+  "loss_formula": "\\mathcal{L} = \\mathcal{L}_{\\text{endpoint}} + \\lambda \\mathcal{L}_{\\text{support}}",
+  "math_principle": "基于广义Schrödinger Bridge框架，在固定边界边缘分布的前提下，通过最小化随机控制目标来寻找最优漂移场。核心创新在于引入任务特定的状态成本V(z)，该成本基于潜在空间中的最近邻统计量，惩罚中间状态偏离经验细胞形态流形（Latent Support Bank）的程度，从而在熵正则化的随机传输中嵌入几何约束。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 3, H, W]"
+    },
+    {
+      "layer": "cellpose_segmentation",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "encoder",
+      "shape": "[B, 256]"
+    },
+    {
+      "layer": "latent_support_bank",
+      "shape": "[N, 256]"
+    },
+    {
+      "layer": "drift_network",
+      "shape": "[B, 256]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, 256]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 使用Cellpose提取单细胞分割掩码并裁剪图像，通过编码器提取潜在特征构建支持库",
+    "step2: 前向传播计算漂移场，采样中间轨迹并计算端点损失与支持成本损失",
+    "step3: 联合优化漂移网络参数以最小化广义Schrödinger Bridge目标函数",
+    "step4: 迭代更新直至边界边缘分布收敛且中间状态符合形态流形约束"
+  ],
+  "baselines_compared": [
+    "Diffusion Models",
+    "Schrödinger Bridge (Standard)",
+    "Optimal Transport"
+  ],
+  "key_results": {
+    "endpoint_fidelity": "Improved across benchmarks",
+    "intermediate_support_violations": "Reduced on BBBC021"
+  },
+  "confidence": 0.85,
+  "task_id": "2606.11286v1-algorithm_analysis-v1",
+  "run_at": "2026-07-19T09:04:15.007290",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

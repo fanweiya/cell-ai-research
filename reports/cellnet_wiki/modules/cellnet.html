@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>cellnet Wiki — cellnet</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / cellnet Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>cellnet</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/bin.html">bin</a></li>
+<li><a href="../modules/cellnet.html">cellnet</a></li>
+<li><a href="../modules/baselines.html">baselines</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>cellnet</h1>
+<br>
+<p>&gt; 稀疏噪声点标注定位相差显微镜图像中的细胞</p>
+<br>
+<p>cellnet 是一个用于在相差显微镜图像中定位细胞的深度学习模块。它通过加载预训练模型，处理图像数据，将稀疏噪声点标注转换为细胞位置预测。模块支持模型自动下载与版本管理、数据增强、训练评估、结果可视化以及与 GitHub API 的交互。核心流程包括：初始化模型、加载和预处理图像、执行前向推理、将预测的 heatmap 转换为点坐标，并计算评估指标。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">cellnet/__init__.py</code></h3>
+<br>
+<p>模块入口，导出公共 API 并定义版本信息。</p>
+<br>
+<ul>
+<li><code class="inline-code">init_model</code> (function) - 初始化并返回预训练模型，支持从 GitHub 自动下载指定版本或最新兼容版本。</li>
+<li><code class="inline-code">count</code> (function) - 对输入图像进行细胞计数和定位的主函数。</li>
+<li><code class="inline-code">__model_api_version__</code> (constant) - 当前模块兼容的模型 API 版本号。</li>
+<li><code class="inline-code">__version__</code> (constant) - cellnet 软件版本号。</li>
+</ul>
+<br>
+<h3><code class="inline-code">cellnet/data.py</code></h3>
+<br>
+<p>提供数据加载、预处理、增强及格式转换的工具函数。</p>
+<br>
+<ul>
+<li><code class="inline-code">label2int</code> (dictionary) - 标签文本到整数类别的映射。</li>
+<li><code class="inline-code">gpu</code> (function) - 将 numpy 数组转换为张量并移动到指定设备。</li>
+<li><code class="inline-code">cpu</code> (function) - 将张量或列表转换回 numpy 数组。</li>
+<li><code class="inline-code">imgid</code> (function) - 从文件路径提取图像 ID（文件名茎）。</li>
+<li><code class="inline-code">batched</code> (function) - 装饰器，将函数应用于批次中的每个样本。</li>
+<li><code class="inline-code">wrap_padded</code> (function) - 装饰器，对输入进行填充以满足模型对尺寸的要求，并裁剪输出。</li>
+<li><code class="inline-code">ls</code> (function) - 列出目录中符合扩展名的文件。</li>
+<li><code class="inline-code">_try_load</code> (function) - 尝试加载文件，失败时返回默认值或抛出异常。</li>
+<li><code class="inline-code">load_image</code> (function) - 加载图像文件为 numpy 数组。</li>
+</ul>
+<br>
+<h3><code class="inline-code">cellnet/debug.py</code></h3>
+<br>
+<p>提供执行时间统计和调试工具。</p>
+<br>
+<ul>
+<li><code class="inline-code">timeit</code> (decorator) - 装饰器，记录函数的执行时间并存储到全局字典。</li>
+<li><code class="inline-code">print_times</code> (function) - 打印所有被装饰函数的平均和总执行时间。</li>
+</ul>
+<br>
+<h3><code class="inline-code">cellnet/evaluate.py</code></h3>
+<br>
+<p>提供细胞定位任务的评估指标计算函数。</p>
+<br>
+<ul>
+<li><code class="inline-code">sMAPE_MAE_counts</code> (function) - 计算预测计数与真实计数的对称平均绝对百分比误差 (sMAPE) 和平均绝对误差 (MAE)。</li>
+<li><code class="inline-code">sMAPE_MAE</code> (function) - 基于预测点和真实点列表计算 sMAPE 和 MAE。</li>
+<li><code class="inline-code">prec_rec_f1</code> (function) - 基于点到点的匹配计算精确率、召回率和 F1 分数。</li>
+</ul>
+<br>
+<h3><code class="inline-code">cellnet/internet.py</code></h3>
+<br>
+<p>封装 GitHub API 调用和文件下载功能。</p>
+<br>
+<ul>
+<li><code class="inline-code">GHAPI</code> (class) - GitHub API 客户端类，支持请求封装和分页处理。</li>
+<li><code class="inline-code">get_latest_release</code> (method) - 获取仓库最新发布的标签名。</li>
+<li><code class="inline-code">get_all_releases</code> (method) - 获取所有发布版本并按日期排序。</li>
+<li><code class="inline-code">download</code> (function) - 带进度条的文件下载函数，支持断点续传和异常处理。</li>
+</ul>
+<br>
+<h3><code class="inline-code">cellnet/plot.py</code></h3>
+<br>
+<p>提供图像和热力图的可视化函数。</p>
+<br>
+<ul>
+<li><code class="inline-code">heatmap</code> (function) - 将热力图叠加到图像上，支持透明度和颜色映射。</li>
+<li><code class="inline-code">points</code> (function) - 在轴上绘制点坐标，支持自定义颜色和标记。</li>
+<li><code class="inline-code">image</code> (function) - 显示图像，自动处理通道顺序和归一化。</li>
+<li><code class="inline-code">overlay</code> (function) - 叠加图像、热力图、点坐标等多层信息。</li>
+<li><code class="inline-code">diff</code> (function) - 显示目标热力图与预测热力图的差异。</li>
+</ul>
+<br>
+<h3><code class="inline-code">cellnet/release.py</code></h3>
+<br>
+<p>管理模型版本、下载、初始化和图像加载逻辑。</p>
+<br>
+<ul>
+<li><code class="inline-code">is_compatible</code> (function) - 检查模型版本是否与当前 API 版本兼容。</li>
+<li><code class="inline-code">get_newest_compatible_model_version</code> (function) - 从 GitHub 获取最新兼容的模型版本。</li>
+<li><code class="inline-code">init_model</code> (function) - 下载、缓存并加载预训练模型，返回模型实例。</li>
+<li><code class="inline-code">load_image</code> (function) - 从文件或路径加载图像，支持多种格式。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>模型版本管理</strong>: 通过 GitHub Releases 管理预训练模型，支持自动下载、缓存和版本兼容性检查，确保软件与模型的协同工作。</li>
+<li><strong>稀疏噪声点标注</strong>: 使用稀疏的噪声点作为标注信号，通过深度学习模型学习将噪声点转换为准确的细胞位置，适用于标注成本高的场景。</li>
+<li><strong>数据增强与预处理</strong>: 利用 albumentations 库进行图像增强，自动处理 BHWC 与 BCHW 格式转换，确保输入符合模型要求。</li>
+<li><strong>评估指标</strong>: 提供 sMAPE、MAE 用于计数误差评估，精确率、召回率、F1 分数用于点定位精度评估，支持全面性能分析。</li>
+<li><strong>可视化</strong>: 提供热力图叠加、点坐标绘制、差异比较等可视化功能，便于直观理解模型预测结果。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">cellnet/__init__.py</code> → <code class="inline-code">cellnet/release.py</code>: __init__.py 从 release.py 导入 init_model 和 count 作为公共 API。</li>
+<li><code class="inline-code">cellnet/release.py</code> → <code class="inline-code">cellnet/data.py</code>: release.py 导入 data 模块用于图像加载和数据预处理。</li>
+<li><code class="inline-code">cellnet/release.py</code> → <code class="inline-code">cellnet/internet.py</code>: release.py 使用 internet.py 中的 GHAPI 和 download 函数管理模型下载。</li>
+<li><code class="inline-code">cellnet/release.py</code> → <code class="inline-code">cellnet/plot.py</code>: release.py 导入 plotting 模块用于结果可视化。</li>
+<li><code class="inline-code">cellnet/evaluate.py</code> → <code class="inline-code">cellnet/data.py</code>: evaluate.py 可能使用 data.py 中的点坐标处理逻辑进行指标计算。</li>
+<li><code class="inline-code">cellnet/plot.py</code> → <code class="inline-code">cellnet/data.py</code>: plot.py 可能依赖 data.py 中的图像 ID 提取和点坐标格式。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

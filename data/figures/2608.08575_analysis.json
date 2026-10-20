@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "CDGC-Net整体网络架构图，展示双尺度自注意力与分组通道建模的完整流程及CDSA/GHCA模块细节"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "分割结果对比可视化：nnFormer、UNETR++、CDGC-Net 与 Ground Truth 在腹部多器官（脾、肾、肝等）和心脏腔室/心肌分割上的定性对比图"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "分割结果可视化对比图：展示Image、UNETR++、CDGC-Net与Ground Truth在心脏MRI和脑肿瘤MRI上的分割效果对比"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "TCSA-UDA方法核心示意图：对比特征空间与TCSA-UDA域对齐策略，展示源域心脏MRI与目标域心脏CT的视觉和文本特征如何对齐到域无关空间"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文整体方法架构图，展示基于文本驱动跨语义对齐的医学图像分割UDA框架，包含Encoder、文本编码器、原型对齐损失、判别器等模块"
+  },
+  "2": {
+    "relevant": true,
+    "score": 10,
+    "caption": "该图展示了不同方法在CT到MRI和MRI到CT跨模态分割任务中的可视化对比结果，是论文的核心实验结果图。"
+  }
+}

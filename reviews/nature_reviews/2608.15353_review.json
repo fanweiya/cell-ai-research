@@ -1,0 +1,57 @@
+{
+  "paper_id": "2608.15353",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种基于图约束的多实例学习（MIL）框架，用于组织病理学全切片图像（WSI）的报告生成。方法将视觉预测、器官条件化工作流组装和语言模型结合，提升了报告生成的结构化推理能力。实验设计合理，评估指标全面，包括链级Jaccard相似度、官方REG2026评分以及外部TCGA数据集验证，展示了模型在多个器官类型上的泛化能力。然而，方法论中存在一些关键假设未充分验证，统计报告中缺乏显著性检验，泛化性受限于训练数据来源，引用部分存在部分文献缺失，影响了研究的可信度。",
+  "strengths": [
+    "提出了结构化推理链（reasoning chain）与图引导的诊断流程，增强了模型的可解释性。",
+    "在多个评估指标（如Workflow-A、链级Jaccard、外部TCGA验证）上表现优异，展示了方法的实用性。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "论文声称其提出的图引导推理链优于所有消融模型，包括Canonical和Shuffled控制模型。",
+      "concern": "图结构的构建完全依赖于REG2026的CoT注释，但未讨论这些注释是否具有代表性或是否存在标注偏差。此外，图结构是确定性的，缺乏对异常或非典型病例的适应能力。",
+      "why_it_matters": "如果图结构本身存在偏差或无法覆盖真实世界中的变异，模型的推理链可能在临床实践中失效，影响其实际部署。",
+      "resolution_test": "应提供图结构构建的详细描述，包括节点和边的来源、是否经过专家验证，以及在不同数据集上的鲁棒性分析。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "statistics",
+      "claim_pointer": "论文声称Full模型在链级Jaccard上显著优于Canonical模板（0.702 vs 0.572）。",
+      "concern": "虽然报告了平均性能提升，但未提供统计显著性检验（如bootstrap检验的p值），无法判断提升是否具有统计意义。",
+      "why_it_matters": "缺乏显著性检验可能导致对模型改进的误判，影响结果的可信度。",
+      "resolution_test": "应补充统计显著性检验的结果，如p值或置信区间，以确认性能提升的可靠性。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "论文声称模型在TCGA外部数据集上表现良好，尤其是在提供正确器官图后诊断一致性显著提升。",
+      "concern": "TCGA数据缺乏REG风格的CoT注释，仅依赖GDC的粗粒度诊断标签进行评估，无法全面反映模型在结构化推理链上的泛化能力。",
+      "why_it_matters": "仅使用粗粒度标签评估可能导致对模型泛化能力的高估，无法反映其在真实临床场景中的表现。",
+      "resolution_test": "应引入更多具有结构化注释的外部数据集进行验证，或提供更细粒度的评估指标以支持泛化性主张。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "citation",
+      "claim_pointer": "论文引用了Qwen2.5-1.5B-Instruct和PubMedBERT，但未引用原始模型的论文。",
+      "concern": "未提供Qwen2.5和PubMedBERT的原始文献引用，影响了方法可复现性和学术严谨性。",
+      "why_it_matters": "缺少关键模型的原始文献引用，可能影响读者对方法背景的理解和后续研究的开展。",
+      "resolution_test": "补充Qwen2.5和PubMedBERT的原始论文引用，确保引用完整性。"
+    }
+  ],
+  "assessment_boundaries": [
+    "无法评估模型在未见器官类型或非REG兼容工作流上的表现，因为论文未提供相关实验。",
+    "无法验证模型在临床实际部署中的表现，因为论文仅使用了训练和测试数据集进行评估。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

@@ -1,0 +1,12 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "TCellAlign多智能体工作流程图，展示搜索、信息提取、映射、判定Agent及数据集规模与应用"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "T细胞亚群聚类相关性热图、UMAP可视化及Cell Ontology命名对齐结果，展示TCellAlign跨研究对齐的核心输出"
+  }
+}

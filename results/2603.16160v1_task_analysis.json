@@ -1,0 +1,22 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2603.16160v1",
+  "status": "done",
+  "task_family": "virtual_imaging / cell_segmentation / spatial_biology",
+  "input": "Brightfield IHC RGB patches concatenated with continuous cell probability map from pretrained nuclei segmentation model",
+  "output": "Synthesized multiplex immunofluorescence (mIF) channels",
+  "notable": "Supervision-free architecture-agnostic conditioning using soft prior from Cellpose; variance-preserving regularization for intensity heterogeneity; improves structural fidelity for downstream quantification (Ki67)",
+  "task_type": [
+    "virtual_staining",
+    "segmentation",
+    "multimodal",
+    "spatial",
+    "benchmark",
+    "foundation_model"
+  ],
+  "confidence": 0.85,
+  "task_id": "2603.16160v1-task_analysis-v1",
+  "run_at": "2026-07-24T09:13:34.095463",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

@@ -1,0 +1,57 @@
+{
+  "paper_id": "2608.09636",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种基于多智能体协作的神经元分割优化框架NeuroRefiner，结合了全局形态分析与局部拓扑修正，方法具有创新性。实验设计全面，涵盖了多个数据集和对比实验，结果表明其在分割精度和拓扑一致性方面优于现有方法。然而，方法论中存在一些关键细节缺失，统计报告不够严谨，引用部分也存在不准确之处，影响了论文的科学性和可复现性。",
+  "strengths": [
+    "提出了一种新颖的多智能体协同优化框架，结合拓扑先验进行迭代修正，提升了神经元分割的拓扑一致性和形态完整性。",
+    "实验设计全面，涵盖了多个具有挑战性的数据集，并与多种SOTA方法进行了对比，验证了方法的有效性。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "TopoRefineNet通过跨注意力机制实现指令引导的编辑",
+      "concern": "论文中描述TopoRefineNet使用跨注意力机制融合图像和指令特征，但未提供足够的消融实验或可视化结果来验证该机制是否真正提升了编辑能力。",
+      "why_it_matters": "跨注意力机制是模型实现指令引导编辑的核心组件，缺乏验证将导致无法确认其有效性，影响方法的可信度。",
+      "resolution_test": "应补充跨注意力机制的可视化分析或对比实验，例如对比有无跨注意力机制的性能差异。"
+    },
+    {
+      "id": "S-M2",
+      "severity": "major",
+      "blocking": true,
+      "axis": "statistics",
+      "claim_pointer": "NeuroRefiner在多个数据集上显著优于现有方法",
+      "concern": "论文中未提供统计显著性检验（如t检验或bootstrap方法）来验证性能提升是否具有统计学意义。",
+      "why_it_matters": "仅报告平均性能提升不足以证明方法的优越性，缺乏统计显著性检验可能导致结论不可靠。",
+      "resolution_test": "应在主要实验结果中补充统计显著性检验，以验证性能提升的可靠性。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "generalizability",
+      "claim_pointer": "NeuroRefiner适用于不同成像条件和物种的神经元分割",
+      "concern": "论文仅在三个特定神经元数据集上进行了验证，缺乏在非神经元结构（如血管、细胞核）上的泛化性实验。",
+      "why_it_matters": "限制在神经元数据上验证可能掩盖模型在更广泛生物医学图像分割中的适用性。",
+      "resolution_test": "应补充在非神经元结构上的实验，以验证方法的通用性。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "citation",
+      "claim_pointer": "Qwen3-VL用于生成结构化指令",
+      "concern": "论文引用了Qwen3-VL和Qwen3 Embedding模型，但未提供可访问的链接或公开的模型版本信息，无法验证其可用性。",
+      "why_it_matters": "缺乏模型引用的可验证性会阻碍方法的复现和推广。",
+      "resolution_test": "应补充Qwen3系列模型的官方发布链接或开源仓库地址，确保引用的真实性。"
+    }
+  ],
+  "assessment_boundaries": [
+    "无法评估TopoRefineNet在大规模部署中的计算效率和内存消耗",
+    "无法验证作者是否在未提及的实验条件下进行了调参优化"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

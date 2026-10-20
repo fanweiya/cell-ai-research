@@ -1,0 +1,12 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 7,
+    "caption": "三组盆腔超声图像示例（Distance 0/14/16），用于展示数据样本或检索距离对比"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "Grad-CAM可解释性热力图，展示模型在PCOS超声和骨盆骨折X光图像上的注意力区域，预测与真值一致"
+  }
+}

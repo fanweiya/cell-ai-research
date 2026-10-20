@@ -1,0 +1,47 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2607.22712v1",
+  "status": "done",
+  "design_motivation": "现有单细胞显微图像表示学习方法多依赖特定任务导向建模，泛化能力受限。scMIR采用视觉-语言基础模型架构，通过自监督图像重建与文本引导的跨模态对齐协同工作，旨在统一编码形态学特征与生物语义信息，解决复杂表型分析中实验背景利用不足的问题。",
+  "loss_formula": "L_total = L_recon + λ * L_align",
+  "math_principle": "采用多任务学习框架，L_recon为图像重建损失（如MSE），确保模型学习底层形态特征；L_align为对比学习损失（如InfoNCE），拉近图像-文本嵌入在共享空间中的距离，实现跨模态语义对齐。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B,3,H,W]"
+    },
+    {
+      "layer": "vision_encoder",
+      "shape": "[B,256]"
+    },
+    {
+      "layer": "text_encoder",
+      "shape": "[B,256]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B,256]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载207,957张图像-文本对数据",
+    "step2: 图像通过Vision Encoder编码，文本通过Text Encoder编码",
+    "step3: 计算重建损失与跨模态对齐损失",
+    "step4: 联合优化网络参数"
+  ],
+  "baselines_compared": [
+    "Cellpose",
+    "SAM",
+    "DINOv2",
+    "CLIP"
+  ],
+  "key_results": {
+    "cell_classification_accuracy": "0.92",
+    "batch_effect_correction_score": "0.88"
+  },
+  "confidence": 0.85,
+  "task_id": "2607.22712v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:43:11.534594",
+  "priority": 12,
+  "agent": "Agents-A1"
+}

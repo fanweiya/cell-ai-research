@@ -1,0 +1,18 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2605.08566v1",
+  "status": "done",
+  "task_family": "virtual_imaging",
+  "input": "低分辨率、含噪声的3D化学成像体积数据 (3D chemical imaging volumes)",
+  "output": "高分辨率、去噪的3D生物结构体积数据 (High-resolution, denoised 3D biological volumes)",
+  "notable": "MicroDiffuse3D是一个基于大规模预训练的3D扩散Transformer基础模型，旨在解决化学成像中分辨率、视场和采集速度之间的权衡问题。它通过联合恢复体积而非逐层处理，实现了16倍体积分超分辨率、极低信噪比下的3D去噪以及联合退化下的图像恢复。",
+  "task_type": [
+    "virtual_imaging",
+    "foundation_model"
+  ],
+  "confidence": 0.95,
+  "task_id": "2605.08566v1-task_analysis-v1",
+  "run_at": "2026-07-24T09:11:55.611148",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

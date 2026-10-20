@@ -1,0 +1,43 @@
+{
+ "id": "2608.03664",
+ "chars": 40428,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": false,
+   "has_std": false,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": true,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 0
+ },
+ "key_claims": [
+  "results and discussion quantitative analysis of sr : table 1 shows that morph-isr achieves the best lpips and st-lpips across all three tcga cohorts, with the largest margins on tcga-luad: reductions ",
+  "1724, surpassing the second-best upsr by 0.",
+  "it also achieves the best psnr across the three tcga cohorts, the best ssim on tcga-luad and tcga-kirc, and the second-best ssim on tcga-lihc, while ranking second in both metrics on surgen."
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "Cellpose: a generalist algorithm for cellular segmentation",
+   "doi": "10.1038/s41592-020-01018-x"
+  }
+ ],
+ "citation_results": [
+  {
+   "title": "Cellpose: a generalist algorithm for cellular segmentation",
+   "doi": "10.1038/s41592-020-01018-x",
+   "verdict": "PASS",
+   "confirmed_n": 2
+  }
+ ]
+}

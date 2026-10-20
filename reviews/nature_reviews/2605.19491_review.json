@@ -1,0 +1,58 @@
+{
+  "paper_id": "2605.19491",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种新颖的动态推理框架PathCTM，用于全切片图像（WSI）分析，在方法设计上具有创新性，特别是在多尺度推理、注意力引导的区域剪枝和置信度感知的提前终止机制方面。实验设计全面，与现有方法的对比显示PathCTM在效率和准确性方面具有显著优势。然而，论文在统计报告的严谨性、泛化性的验证以及引用真实性方面存在一些问题，需要进一步澄清和补充。",
+  "strengths": [
+    "PathCTM框架在动态推理和多尺度融合方面具有显著创新性，能够有效减少计算开销并保持诊断准确性。",
+    "实验设计全面，与多个SOTA方法进行了对比，并在多个数据集上展示了显著的效率提升和性能优势。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "PathCTM通过动态推理最小化诊断不确定性",
+      "concern": "论文中对动态推理过程的数学建模较为抽象，缺乏对模型如何具体实现‘最小化诊断不确定性’的详细解释。",
+      "why_it_matters": "动态推理是PathCTM的核心机制，缺乏具体实现细节会影响方法的可复现性和理论可信度。",
+      "resolution_test": "需要补充对动态推理模块的详细数学推导或伪代码，并提供消融实验验证其有效性。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "statistics",
+      "claim_pointer": "PathCTM在7/8实验设置中优于基线方法",
+      "concern": "论文未报告统计显著性检验结果，如p值，无法判断性能提升是否具有统计显著性。",
+      "why_it_matters": "缺乏统计显著性检验可能影响对模型性能提升是否真实有效的判断。",
+      "resolution_test": "应补充对主要性能指标的统计检验结果，如t检验或bootstrap方法验证结果的显著性。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "PathCTM适用于不同任务和数据集",
+      "concern": "论文仅在三个公开数据集上进行了评估，缺乏对模型在不同机构、染色方式或组织类型上的泛化能力的验证。",
+      "why_it_matters": "病理图像分析模型的泛化能力至关重要，仅依赖公开数据集可能无法反映真实临床场景下的表现。",
+      "resolution_test": "应补充在多个机构或不同组织类型上的实验结果，以验证模型的跨域泛化能力。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "citation",
+      "claim_pointer": "PathCTM与现有MIL方法进行了公平比较",
+      "concern": "论文中引用的部分SOTA方法（如CLAM、TransMIL）未明确是否使用相同预训练特征提取器，可能影响比较的公平性。",
+      "why_it_matters": "如果不同方法使用的特征提取器不同，可能影响性能比较的公平性，导致结论不可靠。",
+      "resolution_test": "应明确所有对比方法使用的特征提取器，并确保在相同条件下进行比较。"
+    }
+  ],
+  "assessment_boundaries": [
+    "由于论文截断，无法评估完整实验细节和附录内容。",
+    "无法验证模型在未公开数据集上的表现。",
+    "无法评估模型在临床实践中的实际部署效果。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

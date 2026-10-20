@@ -1,0 +1,48 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2607.23371v1",
+  "status": "done",
+  "design_motivation": "该研究旨在解耦并量化CNN在血管分割任务中对纹理、形状和感受野的依赖。设计动机在于现有模型虽精度高但缺乏可解释性，且临床转化需要理解模型决策依据。与替代方案（如仅关注性能提升的架构创新）不同，本研究采用控制变量法：1) 通过像素打乱和归一化隔离纹理与强度；2) 仅使用轮廓和中心线测试形状外推能力；3) 系统改变理论感受野和有效感受野以量化空间上下文需求。",
+  "loss_formula": "未明确给出单一核心Loss公式，实验基于标准分割损失（如Dice Loss或Cross Entropy）和分类任务中的标准交叉熵损失。",
+  "math_principle": "基于感受野理论（Theoretical vs Effective Receptive Field）和特征解耦原理。通过计算输出像素相对于输入像素的梯度来定义理论感受野（TRF），并通过特定方法（Luo et al.）测量有效感受野（ERF）。实验通过统计性能下降程度来量化不同视觉线索（强度、纹理、形状）的重要性。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 1, H, W] (单通道灰度图)"
+    },
+    {
+      "layer": "patch_classification_encoder",
+      "shape": "[B, 64, 9, 9] (残差块处理)"
+    },
+    {
+      "layer": "segmentation_decoder",
+      "shape": "[B, 1, H, W] (U-Net架构)"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, 1, H, W] (分割掩码)"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 数据预处理与增强（随机resize, 旋转, 翻转, 归一化, 像素打乱）",
+    "step2: 构建特定实验数据集（纹理/强度扰动集、轮廓/中心线集、不同感受野配置集）",
+    "step3: 模型训练（U-Net或简单分类器，使用标准分割/分类损失）",
+    "step4: 感受野测量（计算TRF和ERF）",
+    "step5: 性能评估与消融分析（对比不同扰动下的mIoU/Accuracy）"
+  ],
+  "baselines_compared": [
+    "标准U-Net",
+    "不同核大小/膨胀率的变体"
+  ],
+  "key_results": {
+    "ERF_saturation": "约20像素",
+    "texture_vs_intensity": "像素强度比局部纹理更关键",
+    "shape_sufficiency": "仅靠形状线索（轮廓/中心线）无法可靠恢复完整血管几何",
+    "border_importance": "包含血管边缘信息显著提升分类准确率"
+  },
+  "confidence": 0.85,
+  "task_id": "2607.23371v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:45:02.699852",
+  "priority": 11,
+  "agent": "Agents-A1"
+}

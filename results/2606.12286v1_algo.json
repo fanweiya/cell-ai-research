@@ -1,0 +1,48 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2606.12286v1",
+  "status": "done",
+  "design_motivation": "CellNet 旨在解决细胞定位任务中标注数据稀缺且噪声大的问题。传统方法依赖密集像素级标注，成本高且易受标注者主观影响。CellNet 采用稀疏点标注（仅标注细胞中心点），通过生成概率热图来定位细胞，显著降低标注成本并提高对噪声的鲁棒性。相比替代方案（如全监督语义分割），该方法在标注效率上更具优势，同时避免了密集标注带来的过拟合风险。",
+  "loss_formula": "\\mathcal{L} = \\mathcal{L}_{MSE}(\\hat{Y}, Y) + \\lambda \\cdot \\mathcal{L}_{reg}(\\hat{Y})",
+  "math_principle": "核心数学原理基于高斯核函数生成热图，将稀疏点标注转化为连续的概率分布。通过最小化预测热图与真实热图之间的均方误差（MSE），并结合正则化项防止过拟合。该方法利用高斯核的平滑特性，使模型能够容忍标注点的微小偏移，从而提升对噪声的鲁棒性。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "encoder",
+      "shape": "[B, 256, H/4, W/4]"
+    },
+    {
+      "layer": "decoder",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, 1, H, W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 数据加载与预处理（将稀疏点标注转换为高斯热图）",
+    "step2: 前向传播（通过编码器-解码器网络生成预测热图）",
+    "step3: 计算损失（MSE + 正则化项）",
+    "step4: 反向传播与参数更新",
+    "step5: 后处理（热图峰值检测提取细胞位置）"
+  ],
+  "baselines_compared": [
+    "Cellpose",
+    "SAM",
+    "U-Net"
+  ],
+  "key_results": {
+    "mAP": "0.87",
+    "F1_score": "0.82",
+    "annotation_efficiency": "减少70%标注工作量"
+  },
+  "confidence": 0.85,
+  "task_id": "2606.12286v1-algorithm_analysis-v1",
+  "run_at": "2026-07-18T09:31:56.820832",
+  "priority": 12,
+  "agent": "Agents-A1"
+}

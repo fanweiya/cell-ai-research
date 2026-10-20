@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "论文整体方法架构图：视觉编码器、文本编码器、Router多模态路由、Region Bridge区域精炼与Mask Decoder的完整流程示意"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "论文方法总体架构图，展示文本与视觉特征的多模态路由及区域细化流程。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "医学图像分割结果对比图，展示胸部X光与CT图像的分割预测可视化。"
+  }
+}

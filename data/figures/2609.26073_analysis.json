@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "论文核心方法架构图：双学生蒸馏管道与三种耦合方案"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "展示不同知识蒸馏变体（Dual-branch KD、Visual-branch KD、无KD）的热力图对比、性能曲线及病理图像中细胞微环境检测结果的核心实验图"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "该图展示了图蒸馏与视觉偏好之间的门控值分布、不同偏好下的patch示例、各病理基础模型对微环境细胞类型的注意力热图，以及GATv2注意力分数随最近基质/免疫细胞距离变化的趋势。"
+  }
+}

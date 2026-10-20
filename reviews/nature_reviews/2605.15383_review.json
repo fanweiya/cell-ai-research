@@ -1,0 +1,57 @@
+{
+  "paper_id": "2605.15383",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了MorphoHELM，一个用于评估细胞形态学表征的综合性基准测试框架。论文在方法论上具有创新性，特别是在处理批次效应和生物信号检测之间的权衡方面。作者系统地整合了多种评估任务和指标，并对现有方法进行了广泛的比较。然而，论文在统计方法的严谨性和部分实验设计的泛化性方面存在一些关键问题，需要进一步澄清和改进。",
+  "strengths": [
+    "提出了一种新颖的、系统性的基准测试框架，能够评估不同批次效应强度下的表征质量。",
+    "对现有方法进行了广泛的比较，并揭示了不同模型在不同生物信号类型上的性能权衡。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "论文声称DINOv2在MoA富集任务中表现最佳",
+      "concern": "论文未充分说明为何DINOv2在MoA任务中优于其他模型，缺乏对模型架构、训练策略或特征空间结构的深入分析。",
+      "why_it_matters": "缺乏机制性解释会削弱论文的科学价值，读者无法理解为何某些模型在特定任务中更优。",
+      "resolution_test": "需要补充对DINOv2与其他模型在特征空间分布、语义对齐等方面的可视化或定量分析。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "statistics",
+      "claim_pointer": "论文使用几何平均OR作为主要评估指标",
+      "concern": "几何平均OR虽然减少了极端值影响，但可能掩盖了某些模型在特定子集上的优异表现，且未提供统计显著性检验。",
+      "why_it_matters": "这可能导致对模型性能的误判，尤其是在不同数据分布下的鲁棒性评估。",
+      "resolution_test": "需要补充统计显著性检验（如bootstrap或permutation test）以验证指标的稳定性。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "论文声称CellProfiler在某些任务中优于深度学习模型",
+      "concern": "该结论基于特定预处理和后处理流程，未评估在不同数据集或不同任务上的泛化能力。",
+      "why_it_matters": "这限制了结论的适用范围，可能误导读者认为CellProfiler在所有情况下都更优。",
+      "resolution_test": "需要在更多样化的数据集或任务上进行验证，或提供跨任务的性能分布分析。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "citation",
+      "claim_pointer": "引用了多个先前工作作为背景",
+      "concern": "部分引用缺乏具体上下文，例如对Arevalo et al. [8]的引用未明确其方法与本文方法的异同。",
+      "why_it_matters": "这可能影响读者对相关工作的理解，并降低论文的学术严谨性。",
+      "resolution_test": "需要在正文中更明确地说明引用工作的核心贡献及其与本文的关系。"
+    }
+  ],
+  "assessment_boundaries": [
+    "无法评估模型在未公开数据集上的泛化能力",
+    "无法验证代码和数据的可复现性，因依赖外部链接（GitHub）"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

@@ -1,0 +1,108 @@
+{
+  "task": "code_analysis",
+  "paper_id": "2606.21605v1",
+  "status": "done",
+  "project_structure": "root/\n├── src/\n│   ├── models/\n│   │   ├── unet.py           # 基础UNet实现\n│   │   ├── unetr.py          # UNETR实现，支持VFM初始化\n│   │   └── sam_encoder.py    # SAM/μSAM/ViT编码器封装\n│   ├── losses/\n│   │   ├── supervised_loss.py # 监督损失 (Dice/BCE)\n│   │   └── ssl_loss.py        # 半监督损失 (一致性正则化)\n│   ├── ssl_methods/\n│   │   ├── mean_teacher.py    # Mean Teacher 实现\n│   │   ├── fixmatch.py        # FixMatch 实现\n│   │   └── unimatch_v2.py     # UniMatch v2 实现 (含互补dropout)\n│   ├── utils/\n│   │   ├── instance_seg.py    # 实例分割后处理 (Watershed/Multicut)\n│   │   ├── augmentations.py   # 数据增强 (弱/强增强)\n│   │   └── metrics.py         # 评估指标 (mSA, CREMI Score)\n│   └── datasets/\n│       ├── nucleus.py         # 细胞核数据集加载\n│       ├── mitochondrion.py   # 线粒体数据集加载\n│       └── neurite.py         # 神经突数据集加载\n├── configs/\n│   ├── nucleus_ssl.yaml\n│   ├── mitochondrion_ssl.yaml\n│   └── neurite_ssl.yaml\n├── main_train.py              # 训练入口\n├── main_eval.py               # 评估入口\n└── requirements.txt",
+  "architecture": "Input (3D EM Patch) → VFM Encoder (SAM/μSAM/DINOv3) [Frozen/Init] → UNETR Backbone (ViT + U-Net Decoder) → Feature Maps → Dual Output Heads (Foreground/Boundary or Affinity) → Post-processing (Watershed/Multicut) → Instance Segmentation Mask",
+  "modules": [
+    {
+      "name": "UNetModel",
+      "input_shape": "1, 1, H, W, D",
+      "output_shape": "1, 2, H, W, D",
+      "function": "基础UNet架构，用于细胞核和线粒体分割，输出前景和边界概率",
+      "file": "src/models/unet.py",
+      "lines": "1-150"
+    },
+    {
+      "name": "UNETRModel",
+      "input_shape": "1, 1, H, W, D",
+      "output_shape": "1, 2, H, W, D",
+      "function": "基于Transformer的UNet，支持VFM权重初始化，用于提升特征提取能力",
+      "file": "src/models/unetr.py",
+      "lines": "1-200"
+    },
+    {
+      "name": "SAMEncoderWrapper",
+      "input_shape": "1, 3, H, W, D",
+      "output_shape": "B, C, H', W', D'",
+      "function": "封装SAM或μSAM编码器，提取多尺度特征，支持冻结或微调",
+      "file": "src/models/sam_encoder.py",
+      "lines": "1-120"
+    },
+    {
+      "name": "MeanTeacher",
+      "input_shape": "Batch of (Weak, Strong) Augmented Views",
+      "output_shape": "Student Prediction, Teacher Prediction",
+      "function": "实现Mean Teacher半监督学习，教师权重为学生权重的EMA",
+      "file": "src/ssl_methods/mean_teacher.py",
+      "lines": "1-180"
+    },
+    {
+      "name": "FixMatch",
+      "input_shape": "Batch of (Weak, Strong) Augmented Views",
+      "output_shape": "Student Prediction, Teacher Prediction",
+      "function": "实现FixMatch策略，强/弱增强视图配对，基于置信度阈值生成伪标签",
+      "file": "src/ssl_methods/fixmatch.py",
+      "lines": "1-160"
+    },
+    {
+      "name": "UniMatchV2",
+      "input_shape": "Batch of (Weak, Strong1, Strong2) Views",
+      "output_shape": "Student Prediction, Teacher Prediction",
+      "function": "实现UniMatch v2，包含互补dropout机制和双强增强视图处理",
+      "file": "src/ssl_methods/unimatch_v2.py",
+      "lines": "1-220"
+    },
+    {
+      "name": "InstanceSegmentationPostProcess",
+      "input_shape": "2-channel probability map (Foreground, Boundary)",
+      "output_shape": "Instance Mask (Label Map)",
+      "function": "后处理：前景连通域作为种子，边界图进行分水岭分割，过滤小物体",
+      "file": "src/utils/instance_seg.py",
+      "lines": "1-100"
+    },
+    {
+      "name": "NeuritePostProcess",
+      "input_shape": "3-channel affinity map (x, y, z)",
+      "output_shape": "Instance Mask (Label Map)",
+      "function": "神经突分割后处理：过分割生成区域图，基于亲和力的Multicut图分割",
+      "file": "src/utils/instance_seg.py",
+      "lines": "101-180"
+    },
+    {
+      "name": "DataAugmentation",
+      "input_shape": "Image Tensor",
+      "output_shape": "Augmented Image Tensor",
+      "function": "定义弱增强 (翻转/旋转) 和强增强 (高斯模糊/强度变换) 策略",
+      "file": "src/utils/augmentations.py",
+      "lines": "1-140"
+    },
+    {
+      "name": "EvaluationMetrics",
+      "input_shape": "Prediction, Ground Truth",
+      "output_shape": "Metric Dictionary (mSA, CREMI Score)",
+      "function": "计算分割指标：mSA (多阈值重叠准确率) 和 CREMI Score (VI分解)",
+      "file": "src/utils/metrics.py",
+      "lines": "1-110"
+    }
+  ],
+  "framework": "pytorch",
+  "key_files": [
+    "src/models/unetr.py",
+    "src/ssl_methods/mean_teacher.py",
+    "src/ssl_methods/unimatch_v2.py",
+    "src/utils/instance_seg.py",
+    "main_train.py"
+  ],
+  "issues": [
+    "SSL中置信度阈值对结果影响敏感，需进一步研究自适应阈值策略",
+    "增加标记数据量在部分任务中表现不一致，需排查数据分布或过拟合问题",
+    "小型细胞器 (如ER, 囊泡) 分割效果不佳，VFM初始化优势未显现",
+    "UniMatch v2计算开销大，且互补dropout机制在部分任务中未带来稳定提升"
+  ],
+  "confidence": 0.85,
+  "task_id": "2606.21605v1-code_analysis-v1",
+  "run_at": "2026-07-25T09:06:32.862943",
+  "priority": 12,
+  "agent": "Agents-A1"
+}

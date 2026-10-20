@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "该图展示了论文提出的核心方法框架（Uni-Light），详细描绘了基于不确定性感知知识蒸馏的脑肿瘤分割流程，包括教师模型、学生模型、动态权重计算（CDW）以及多种损失函数（KD Loss, Task Loss, Boundary Loss）的组合方式。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "该图展示了Uni-Light框架的整体网络架构，包括编码器-解码器结构、跳跃连接、辅助头以及PCM模块的详细设计，是论文的核心方法图示。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "该图展示了不同模型（S2CANet, SwinV2, Uni-Light）在脑肿瘤分割任务上的可视化结果对比，并与真实标签（GT）进行了比较，直观体现了所提方法的有效性。"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2607.13508",
+  "status": "done",
+  "task_family": "spatial_biology / virtual_imaging / benchmark",
+  "input": "Spatial Graph / Spatial Transcriptomics Data",
+  "output": "Counterfactual Directionality Score / Intervention Analysis",
+  "notable": "Proposes CDS metric for evaluating causal interventions in spatial graphs, focusing on spatial biology and graph-based analysis rather than direct image processing.",
+  "task_type": [
+    "spatial",
+    "benchmark",
+    "multimodal"
+  ],
+  "confidence": 0.85,
+  "task_id": "2607.13508-task_analysis-v1",
+  "run_at": "2026-07-18T09:31:14.314637",
+  "priority": 9,
+  "agent": "Agents-A1"
+}

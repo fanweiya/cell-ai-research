@@ -1,0 +1,58 @@
+{
+  "paper_id": "2606.18523",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了DART范式，通过设计感知的微流控芯片与图像分析相结合，实现了实时的活细胞成像分析。方法创新性强，结合了CAD蓝图与深度学习标记检测，解决了传统方法在高通量实验中ROI定位和图像处理的瓶颈问题。实验设计严谨，验证充分，包括在具有多种ROI结构的SAK芯片上的应用。然而，论文在统计报告和泛化性方面存在一些关键问题，需要进一步澄清和补充。",
+  "strengths": [
+    "提出了一种新颖的设计感知图像分析方法，结合CAD蓝图和深度学习，显著提高了微流控芯片图像分析的自动化水平和实时能力。",
+    "实验设计全面，包括SAK芯片的开发和真实活细胞实验的验证，展示了方法在多种ROI结构下的有效性。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "论文声称DART能够实现throughput-independent的ROI定位，并在多种微流控芯片设计中泛化。",
+      "concern": "论文未明确说明DART在不同芯片设计中的泛化机制，尤其是如何处理未在训练中出现的新结构。虽然提到使用CAD蓝图进行对齐，但缺乏对算法如何适应不同几何结构的详细解释。",
+      "why_it_matters": "泛化能力是该方法的核心优势之一，但缺乏机制解释会削弱其科学可信度，并影响其他研究人员的复现和扩展。",
+      "resolution_test": "需要补充对DART如何处理未见过的ROI结构的详细描述，包括是否需要重新训练、微调，或仅依赖CAD蓝图进行几何对齐即可实现泛化。"
+    },
+    {
+      "id": "S-M2",
+      "severity": "major",
+      "blocking": true,
+      "axis": "statistics",
+      "claim_pointer": "论文声称DART的定位误差中位数为10.46 µm，90百分位为18.39 µm。",
+      "concern": "论文未提供统计显著性检验或置信区间，也未说明样本量和重复实验次数，无法判断误差估计的可靠性。",
+      "why_it_matters": "误差估计是评估方法精度的关键指标，缺乏统计严谨性会削弱结果的可信度。",
+      "resolution_test": "需要补充误差估计的置信区间、样本量、重复实验次数，以及是否进行了统计显著性检验（如t检验或非参数检验）。"
+    },
+    {
+      "id": "S-M3",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "generalizability",
+      "claim_pointer": "论文声称DART适用于当前微生物MLCI中使用的主要ROI架构。",
+      "concern": "虽然在SAK芯片上验证了8种不同的ROI设计，但这些设计是否具有足够的代表性，以及是否适用于其他非微生物细胞类型或更高分辨率的成像系统，未进行讨论。",
+      "why_it_matters": "泛化性是该方法推广到其他应用场景的关键，缺乏讨论可能限制其适用范围。",
+      "resolution_test": "需要补充对DART在其他细胞类型（如哺乳动物细胞）或更高分辨率成像系统中的潜在适用性的讨论，或提出未来验证的方向。"
+    },
+    {
+      "id": "S-M4",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "citation",
+      "claim_pointer": "论文引用了DeLTA等现有方法作为对比。",
+      "concern": "部分引用缺乏具体对比数据，例如DeLTA的实时性能或泛化能力未进行定量比较。",
+      "why_it_matters": "引用应支持论文提出的创新点，缺乏定量对比可能削弱DART相对于现有方法的优势。",
+      "resolution_test": "建议补充与DeLTA等方法在关键指标（如处理时间、定位误差、泛化能力）上的定量对比，以增强论文的说服力。"
+    }
+  ],
+  "assessment_boundaries": [
+    "未提供代码或数据集链接，无法评估方法的可复现性。",
+    "未明确说明YOLO模型在不同硬件平台上的性能变化，无法评估其跨平台泛化性。",
+    "未提供与现有方法在相同实验条件下的直接对比数据，无法全面评估DART的相对优势。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

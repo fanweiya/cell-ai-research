@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreeBridge Wiki — reading-guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / FreeBridge Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>FreeBridge</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/data_prep.html">data_prep</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/configs.html">configs</a></li>
+<li><a href="modules/scripts.html">scripts</a></li>
+<li><a href="modules/freebridge.html">freebridge</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Reading Guide</h1>
+<br>
+<p>本指南旨在帮助开发者快速理解 FreeBridge 项目。建议按照从宏观配置到微观实现的顺序阅读，先了解项目结构和数据流，再深入核心算法逻辑。</p>
+<br>
+<h2>Step 1: 项目概览与环境配置 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">README.md</code>, <code class="inline-code">setup.py</code>, <code class="inline-code">configs/train.yaml</code>, <code class="inline-code">configs/experiment/bbbc021.yaml</code></p>
+<br>
+<p>首先阅读 README.md 了解项目目标和整体架构。接着查看 setup.py 确认依赖项。然后深入 configs/train.yaml 和 bbbc021.yaml，重点关注 Hydra 配置结构、数据路径设置、模型超参数以及实验划分逻辑，这是理解项目如何运行的关键。</p>
+<br>
+<h2>Step 2: 数据预处理流程 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">data_prep/build_bbbc021_endpoints.py</code>, <code class="inline-code">data_prep/crop_bbbc021_singlecell.py</code>, <code class="inline-code">data_prep/make_split.py</code></p>
+<br>
+<p>关注数据如何从原始图像转化为模型输入。build_bbbc021_endpoints.py 展示端点构建逻辑，crop_bbbc021_singlecell.py 涉及图像切分细节，make_split.py 定义训练/验证/测试集划分。理解数据流向是后续理解模型的基础。</p>
+<br>
+<h2>Step 3: VAE 模型训练与潜变量提取 (~25 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">data_prep/train_vae_full.py</code>, <code class="inline-code">data_prep/export_latents_from_vae.py</code>, <code class="inline-code">data_prep/export_latents_mu.py</code></p>
+<br>
+<p>学习变分自编码器 (VAE) 的训练过程。train_vae_full.py 包含模型定义和训练循环，export_latents_from_vae.py 和 export_latents_mu.py 展示如何从训练好的模型中提取潜变量表示。注意模型架构和损失函数的设计。</p>
+<br>
+<h2>Step 4: 自由桥接核心逻辑 (~30 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">freebridge/__init__.py</code>, <code class="inline-code">freebridge/models.py</code>, <code class="inline-code">freebridge/training.py</code></p>
+<br>
+<p>深入核心模块 freebridge。查看 __init__.py 了解模块导出，models.py 研究 FreeBridge 模型架构，training.py 掌握训练循环和扰动响应建模的具体实现。这是项目最核心的部分。</p>
+<br>
+<h2>Step 5: 实验脚本与自动化 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">scripts/train.sh</code>, <code class="inline-code">data_prep/run_week.sh</code></p>
+<br>
+<p>查看训练脚本如何调用配置和模块。train.sh 是主要入口，run_week.sh 可能涉及长时间运行的批处理任务。理解脚本如何组合各个组件以完成端到端实验。</p>
+<br>
+<h2>Step 6: 辅助工具与适配器 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">data_prep/cellvae_adapter.py</code>, <code class="inline-code">data_prep/finetune_decoder_lpips.py</code>, <code class="inline-code">data_prep/gen_cells.py</code></p>
+<br>
+<p>了解项目中的工具函数。cellvae_adapter.py 可能处理 VAE 与其他模型的接口，finetune_decoder_lpips.py 涉及解码器微调，gen_cells.py 可能用于生成细胞图像。这些文件展示了项目的扩展性和灵活性。</p>
+<br>
+<h2>Tips</h2>
+<br>
+<ul>
+<li>重点关注配置文件中的路径设置，确保理解数据如何被加载和处理。</li>
+<li>在阅读核心模型代码时，尝试绘制数据流向图，帮助理解张量变换过程。</li>
+<li>利用 .codegraph 目录了解代码依赖关系，辅助理解模块间交互。</li>
+<li>遇到不熟悉的术语时，先查看相关文档或注释，避免陷入过深的细节。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

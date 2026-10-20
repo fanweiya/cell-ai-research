@@ -1,0 +1,24 @@
+{
+  "task": "critic_analysis",
+  "paper_id": "2607.04740v1",
+  "status": "done",
+  "claimed_contribution": "提出DriftST框架，实现从H&E组织学图像到空间转录组表达的单步生成式推理；引入细胞漂移场（Cellular Drifting Field）范式，通过STransformer结合共表达注意力与基因残差门机制，在斑点级和细胞级分辨率下均达到SOTA性能；声称能保留基因异质性和空间方差，优于回归方法的过平滑问题。",
+  "actual_contribution": "确实构建了一个基于生成式扩散思想的单步推理模型，在四个数据集（Xenium Breast Cancer, Xenium COAD, Kidney Visium等）上实现了优于现有基线（如ST-Net, BLEEP, M2ORT等）的PCC指标；通过基因嵌入和残差门机制在一定程度上缓解了基因同质化问题；提供了详细的超参数敏感性分析和消融实验。",
+  "weakness": [
+    "弱点1：方法缺陷 - 漂移场（Drifting Field）的数学推导与物理意义不够清晰，特别是‘停止梯度’操作防止表示坍塌的机制缺乏理论证明，存在黑盒风险。",
+    "弱点2：实验不足 - 跨患者泛化能力在Kidney Visium数据集上表现不佳，且未提供跨中心、跨批次效应的鲁棒性验证；仅评估了训练面板内的基因，未验证全转录组预测能力。",
+    "弱点3：对比不充分 - 缺乏与最新生成式模型（如基于Flow Matching或Score-based SDE的单步方法）的对比；未包含计算效率（推理速度、显存占用）的详细对比，难以证明‘单步’的实际优势。"
+  ],
+  "missing_experiments": [
+    "缺少跨患者/跨中心泛化实验（Cross-patient/Cross-center generalization）",
+    "缺少与全转录组预测方法的对比或外推实验",
+    "缺少推理速度与资源消耗的基准测试",
+    "缺少对生成结果生物学可解释性的深入验证（如细胞类型注释的准确性）"
+  ],
+  "overclaim": "是。论文声称‘单步生成推理’达到SOTA且‘忠实恢复空间方差’，但未充分证明其生成分布与真实分布的统计一致性，且对‘单步’相对于多步采样的效率优势缺乏量化对比。",
+  "confidence": 0.8,
+  "task_id": "2607.04740v1-critic_analysis-v1",
+  "run_at": "2026-07-22T11:11:26.145407",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

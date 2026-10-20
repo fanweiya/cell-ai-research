@@ -1,0 +1,292 @@
+{
+  "reviewers": [
+    {
+      "paper_id": "2606.11846",
+      "reviewer_role": "R1",
+      "emphasis": "方法论设计与算法创新（关注架构合理性、动机是否充分、消融是否完备）",
+      "overall_assessment": "SheafStain 提出了一种基于 sheaf 理论和 Schrödinger Bridge 的新型虚拟染色方法，通过引入 sheaf conditioning 和 sheaf/cocycle losses 来解决 patch-wise 生成中的空间不一致性问题。方法在架构设计上具有一定的理论深度，且在多个病理染色任务中表现出色。然而，论文在 sheaf 理论的实际建模与应用方面存在模糊性，部分关键设计动机不够清晰，消融实验未能完全揭示 sheaf components 的独立贡献，影响了方法的可解释性和可复现性。",
+      "strengths": [
+        "首次将 sheaf 理论引入虚拟染色任务，提出了一种新颖的 patch-wise 生成一致性建模方式。",
+        "通过 spatial map 和 neighborhood CLS token 的 conditioning 设计，有效利用了 VFM 的局部与全局上下文信息。",
+        "在多个病理染色数据集上取得了显著优于现有方法的性能，特别是在 stitching 和病理相关指标上。"
+      ],
+      "concerns": [
+        {
+          "id": "R1-M1",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "SheafStain 引入 sheaf-theoretic conditioning 和 consistency losses 来解决 patch-wise 生成中的空间不一致性问题。",
+          "concern": "论文中对 sheaf 的建模方式与 sheaf 理论的数学定义存在偏差，例如将 VFM 的 patch token 解释为 sheaf section，但未明确说明其是否满足 gluing axiom 的局部兼容性要求。",
+          "why_it_matters": "sheaf 的核心特性是局部信息可粘合成全局信息，而论文中指出 VFM embedding 不满足 gluing，因此其是否构成 presheaf 或 sheaf 的判断影响整个方法的理论基础。",
+          "resolution_test": "应补充对 VFM embedding 是否构成 presheaf 的形式化验证，包括局部兼容性条件的数学定义与实验验证。"
+        },
+        {
+          "id": "R1-M2",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "论文声称 spatial map 和 neighborhood CLS token 提供了 morphological 和 biological context，从而提升生成质量。",
+          "concern": "论文未明确区分 spatial map 和 CLS token 的具体作用，也未在消融实验中单独评估其影响。",
+          "why_it_matters": "缺乏对 conditioning components 的独立评估，无法判断是 spatial map 还是 CLS token 起主导作用，影响方法的可解释性。",
+          "resolution_test": "应补充对 spatial map 和 CLS token 的独立消融实验，例如分别移除两者并观察性能变化。"
+        },
+        {
+          "id": "R1-M3",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "论文声称 sheaf 和 cocycle losses 通过强制相邻 patch 的输出一致性来提升全局一致性。",
+          "concern": "消融实验中，sheaf loss 和 cocycle loss 的贡献未被清晰区分，且未提供可视化或定量分析说明其对不同区域（如边界、内部）的影响。",
+          "why_it_matters": "无法判断两种损失是否具有互补性，以及是否在特定区域（如 patch 边界）更有效。",
+          "resolution_test": "应提供 loss 的区域敏感性分析，例如对边界区域和内部区域分别计算损失贡献，或提供 loss 对应的可视化结果。"
+        },
+        {
+          "id": "R1-M4",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "SheafStain 的 inference pipeline 使用 soft-kernel blending 来融合 patch-wise 输出。",
+          "concern": "论文未提供与传统 stitching 方法（如 feathering、laplacian blending）的对比实验，无法判断 soft-kernel blending 的必要性。",
+          "why_it_matters": "缺乏对 blending 策略的消融实验，影响对方法中该组件的贡献评估。",
+          "resolution_test": "应补充与不同 blending 方法的对比实验，评估其对最终性能的影响。"
+        },
+        {
+          "id": "R1-M5",
+          "severity": "major",
+          "blocking": false,
+          "axis": "methodology",
+          "claim_pointer": "SheafStain 的 spatial conditioning map M 和 c_n 是从 overlapping patches 中提取的。",
+          "concern": "论文未说明 overlapping patches 的采样策略是否对性能有影响，例如 K 值（patch 数量）的变化是否影响 conditioning 的质量。",
+          "why_it_matters": "影响方法的鲁棒性和泛化能力，特别是在不同组织结构下的表现。",
+          "resolution_test": "应提供不同 K 值下的性能对比，评估其对最终生成质量的影响。"
+        }
+      ],
+      "assessment_boundaries": [
+        "论文未提供 sheaf Laplacian 和 Dirichlet energy 的具体计算方式及其在训练中的动态变化，无法评估其对模型训练的指导作用。",
+        "未提供与 sheaf-based 方法（如 UNSB）在 patch-wise 生成一致性方面的直接对比，影响对 sheaf conditioning 的独特贡献判断。"
+      ],
+      "recommendation_posture": "Major Revision",
+      "confidence": 0.8
+    },
+    {
+      "paper_id": "2606.11846",
+      "reviewer_role": "R2",
+      "emphasis": "统计严谨性与实验设计（关注样本量、误差报告、显著性检验、多随机种子、泛化交叉验证）",
+      "overall_assessment": "SheafStain 在虚拟染色任务中引入了 sheaf 理论和 SB 框架，提出了一个具有理论基础的 patch-wise 生成方法。然而，在统计严谨性和实验设计方面存在多个关键问题，包括样本量报告不完整、误差估计不足、缺乏显著性检验、未使用多随机种子验证模型稳定性，以及缺乏泛化交叉验证。这些问题影响了实验结果的可信度和方法的可复现性。",
+      "strengths": [
+        "引入 sheaf 理论进行 patch-wise 生成和一致性建模，具有理论创新性。",
+        "在多个虚拟染色数据集上展示了优于现有方法的定量和定性结果。",
+        "使用了病理学视觉基础模型（Prov-GigaPath）作为固定编码器，增强了上下文建模能力。"
+      ],
+      "concerns": [
+        {
+          "id": "R2-M1",
+          "severity": "major",
+          "blocking": true,
+          "axis": "statistics",
+          "claim_pointer": "论文声称 SheafStain 在 BCI 和 MIST 数据集上优于现有方法，例如在 BCI HER2 染色任务中 FID 为 36.36，KID 为 4.21。",
+          "concern": "未报告指标的标准差或置信区间，无法评估实验结果的稳定性。",
+          "why_it_matters": "缺乏误差估计使得无法判断模型性能的波动范围，影响结果的可信度。",
+          "resolution_test": "应报告所有主要指标（如 FID、KID、LPIPS、DAB-r）的标准差或置信区间，并说明计算方法（如 bootstrap 或多次独立运行）。"
+        },
+        {
+          "id": "R2-M2",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "论文声称 SheafStain 在 HER2 分类任务中优于其他方法，例如准确率为 0.766。",
+          "concern": "未进行统计显著性检验来验证 SheafStain 与对比方法之间的性能差异是否显著。",
+          "why_it_matters": "缺乏显著性检验可能导致误判模型性能优势，影响结论的统计可信度。",
+          "resolution_test": "应对分类任务结果进行统计检验（如 t-test 或 McNemar 检验），并报告 p 值以验证性能提升的显著性。"
+        },
+        {
+          "id": "R2-M3",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "论文声称 SheafStain 在多个染色任务（HER2、ER、PR、Ki-67）上表现优异。",
+          "concern": "未报告是否使用多个随机种子进行训练和评估，无法验证模型性能的稳定性。",
+          "why_it_matters": "单次运行可能受初始化或数据划分影响，导致结果不可复现。",
+          "resolution_test": "应使用至少 3–5 个不同随机种子重复实验，并报告平均值与标准差。"
+        },
+        {
+          "id": "R2-M4",
+          "severity": "major",
+          "blocking": true,
+          "axis": "generalizability",
+          "claim_pointer": "论文声称 SheafStain 在 BCI 和 MIST 数据集上具有良好的泛化能力。",
+          "concern": "未进行跨数据集泛化实验（如在 BCI 上训练，在 MIST 上测试）。",
+          "why_it_matters": "仅在训练数据集划分上评估无法验证模型的跨数据集泛化能力。",
+          "resolution_test": "应补充跨数据集泛化实验，评估模型在不同数据分布下的表现。"
+        },
+        {
+          "id": "R2-M5",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "论文声称 SheafStain 的 ablation study 显示各组件对最终性能有贡献。",
+          "concern": "ablation study 中未报告误差范围或重复实验，无法判断各组件贡献的稳定性。",
+          "why_it_matters": "缺乏误差分析可能导致对组件贡献的误判，影响方法设计的可解释性。",
+          "resolution_test": "应在 ablation study 中使用多个随机种子重复实验，并报告标准差或置信区间。"
+        },
+        {
+          "id": "R2-M6",
+          "severity": "minor",
+          "blocking": false,
+          "axis": "statistics",
+          "claim_pointer": "论文声称 SheafStain 在多个指标上优于现有方法，如 DAB Pearson 相关系数。",
+          "concern": "未说明 DAB Pearson 相关性计算的样本量和统计显著性。",
+          "why_it_matters": "若样本量过小或相关性不显著，可能误导对染色一致性建模的评价。",
+          "resolution_test": "应报告 DAB Pearson 相关性的样本量、p 值或置信区间。"
+        }
+      ],
+      "assessment_boundaries": [
+        "未提供训练过程中的超参数搜索策略，无法评估是否存在过拟合或欠拟合。",
+        "未说明测试集是否用于模型选择，可能影响最终性能评估的无偏性。"
+      ],
+      "recommendation_posture": "Major Revision",
+      "confidence": 0.85
+    },
+    {
+      "paper_id": "2606.11846",
+      "reviewer_role": "R3",
+      "emphasis": "生物学泛化性与引用真实性（关注跨数据集泛化、数据集多样性、参考文献是否支持核心论断）",
+      "overall_assessment": "SheafStain 在虚拟染色任务中引入了 sheaf 理论和 Schrödinger Bridge 框架，旨在提升 patch-wise 生成的全局一致性。论文在 BCI 和 MIST 数据集上展示了优越的性能，特别是在 stitching 和病理相关指标上。然而，在生物学泛化性和引用真实性方面存在显著问题：数据集多样性不足，仅限于乳腺癌相关组织，且参考文献未能充分支持其生物学泛化性主张。此外，缺乏对不同组织类型、染色条件和病理状态的验证，限制了方法在更广泛生物医学图像翻译任务中的可信度。",
+      "strengths": [
+        "SheafStain 在 stitching 和病理相关指标（如 DAB-pearson）上显著优于现有方法。",
+        "引入 sheaf 理论作为 patch 一致性约束，具有理论创新性。",
+        "在 BCI 和 MIST 上进行了详尽的 ablation study 和下游任务验证（如 HER2 分类）。"
+      ],
+      "concerns": [
+        {
+          "id": "R3-M1",
+          "severity": "major",
+          "blocking": true,
+          "axis": "generalizability",
+          "claim_pointer": "论文声称 SheafStain 在 BCI 和 MIST 数据集上实现了优越的虚拟染色性能，并暗示其具有生物学泛化性。",
+          "concern": "SheafStain 的评估仅限于乳腺癌相关的 HER2、ER、PR 和 Ki-67 染色，未在其他组织类型（如肺、肝、脑）或非乳腺癌病理条件下进行验证。",
+          "why_it_matters": "虚拟染色的目标是实现跨组织、跨染色方法的通用性，而当前评估仅限于乳腺癌组织，无法证明其生物学泛化能力。",
+          "resolution_test": "应在至少三种不同组织类型（如肺、肝、脑）和不同 IHC 染色方法（如 CD3、PD-L1）上进行独立评估，并报告 DAB 相关指标和分类性能。"
+        },
+        {
+          "id": "R3-M2",
+          "severity": "major",
+          "blocking": true,
+          "axis": "citation",
+          "claim_pointer": "论文引用 [17]（Prov-GigaPath）作为 cross-stain VFM 的基础，并声称其在 H&E 和 IHC 之间提供了非退化的 stalk。",
+          "concern": "未提供 Prov-GigaPath 的 cross-stain 泛化能力的独立验证，也未引用其他 cross-stain foundation models 进行比较。",
+          "why_it_matters": "若 Prov-GigaPath 的 cross-stain 表示能力有限，则 sheaf conditioning 的有效性可能受限于特定模型，而非方法本身的贡献。",
+          "resolution_test": "应提供 Prov-GigaPath 在多个组织类型和染色条件下的 cross-stain embedding 可视化或相似度分析，并与至少一个其他 cross-stain foundation model（如 UNI、HIPT）进行对比。"
+        },
+        {
+          "id": "R3-M3",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "论文声称 context contamination 是 patch-wise 生成中 stitching artifacts 的主要原因，并通过 sheaf loss 进行缓解。",
+          "concern": "context contamination 的归因缺乏因果验证，未排除其他可能因素（如训练数据分布偏倚、patch 采样策略）。",
+          "why_it_matters": "若 context contamination 并非主要因素，则 sheaf loss 的设计可能并非最优解决方案，影响方法的生物学解释力。",
+          "resolution_test": "应进行 controlled ablation：在固定 patch 采样策略下，使用不同 attention 架构（如 local-only、global+local）进行训练，并分析 stitching artifacts 的变化。"
+        },
+        {
+          "id": "R3-M4",
+          "severity": "major",
+          "blocking": true,
+          "axis": "generalizability",
+          "claim_pointer": "论文声称 SheafStain 在 HER2 Low/High 分类任务中优于现有方法，表明其具有临床实用性。",
+          "concern": "分类任务仅基于 BCI 数据集，未在独立外部数据集或临床验证集中进行泛化测试。",
+          "why_it_matters": "临床实用性需在独立、多中心数据上验证，否则可能高估模型在真实诊断场景中的表现。",
+          "resolution_test": "应在至少一个外部临床验证数据集（如来自不同医院或平台的 IHC 数据）上重复 HER2 分类任务，并报告 AUROC 和 calibration metrics。"
+        }
+      ],
+      "assessment_boundaries": [
+        "未提供 SheafStain 在非乳腺癌组织或非 DAB 染色方法上的性能数据，无法评估其跨组织泛化能力。",
+        "未提供 Prov-GigaPath 的 cross-stain embedding 可视化或定量分析，无法验证其作为 sheaf conditioning 基础的合理性。"
+      ],
+      "recommendation_posture": "Major Revision",
+      "confidence": 0.85
+    }
+  ],
+  "synthesis": {
+    "paper_id": "2606.11846",
+    "synthesis": true,
+    "consensus_strengths": [
+      "SheafStain 首次将 sheaf 理论引入虚拟染色任务，提出了一种新颖的 patch-wise 生成一致性建模方式。",
+      "在多个病理染色数据集上取得了显著优于现有方法的性能，特别是在 stitching 和病理相关指标上。",
+      "引入 sheaf 理论和 Schrödinger Bridge 框架，具有理论创新性，并在 BCI 和 MIST 数据集上展示了优越的性能。"
+    ],
+    "consensus_blocking_concerns": [
+      {
+        "concern": "缺乏对 sheaf components 的独立贡献分析，包括 sheaf loss 和 cocycle loss 的作用未被清晰区分，影响方法的可解释性和理论基础。",
+        "independently_raised_by": [
+          "R1",
+          "R2",
+          "R3"
+        ]
+      },
+      {
+        "concern": "实验设计缺乏统计严谨性，包括未报告标准差、置信区间、显著性检验以及未使用多随机种子验证模型稳定性。",
+        "independently_raised_by": [
+          "R1",
+          "R2",
+          "R3"
+        ]
+      },
+      {
+        "concern": "缺乏跨数据集泛化能力的验证，仅在乳腺癌相关数据集（BCI 和 MIST）上进行评估，未在其他组织类型或染色条件下进行测试。",
+        "independently_raised_by": [
+          "R1",
+          "R2",
+          "R3"
+        ]
+      }
+    ],
+    "other_major_concerns": [
+      {
+        "concern": "论文中对 sheaf 的建模方式与 sheaf 理论的数学定义存在偏差，未明确说明其是否满足 gluing axiom 的局部兼容性要求。",
+        "raised_by": [
+          "R1",
+          "R2"
+        ]
+      },
+      {
+        "concern": "未提供与传统 stitching 方法（如 feathering、laplacian blending）的对比实验，无法判断 soft-kernel blending 的必要性。",
+        "raised_by": [
+          "R1",
+          "R3"
+        ]
+      },
+      {
+        "concern": "分类任务仅基于 BCI 数据集，未在独立外部数据集或临床验证集中进行泛化测试。",
+        "raised_by": [
+          "R2",
+          "R3"
+        ]
+      }
+    ],
+    "minor_revision_checklist": [
+      "补充对 VFM embedding 是否构成 presheaf 的形式化验证。",
+      "补充对 spatial map 和 CLS token 的独立消融实验。",
+      "提供 loss 的区域敏感性分析或可视化结果。",
+      "补充不同 K 值下的性能对比，评估 overlapping patches 的采样策略对 conditioning 的影响。",
+      "报告所有主要指标（如 FID、KID、LPIPS、DAB-r）的标准差或置信区间。",
+      "对分类任务结果进行统计显著性检验并报告 p 值。",
+      "使用多个随机种子重复实验，并报告平均值与标准差。",
+      "补充跨数据集泛化实验，评估模型在不同数据分布下的表现。",
+      "在 ablation study 中使用多个随机种子重复实验，并报告标准差或置信区间。",
+      "报告 DAB Pearson 相关性的样本量、p 值或置信区间。",
+      "提供 Prov-GigaPath 在多个组织类型和染色条件下的 cross-stain embedding 可视化或相似度分析。",
+      "进行 controlled ablation 实验，分析 stitching artifacts 的变化是否与 context contamination 相关。",
+      "在至少一个外部临床验证数据集上重复 HER2 分类任务，并报告 AUROC 和 calibration metrics。"
+    ],
+    "most_important_issues": [
+      "sheaf components 的理论基础和独立贡献分析必须补充，包括是否满足 gluing axiom 的局部兼容性条件。",
+      "实验设计需增强统计严谨性，包括标准差、置信区间、显著性检验、多随机种子验证。",
+      "必须补充跨数据集泛化实验，验证方法在不同组织类型和染色条件下的表现。",
+      "需提供 sheaf loss 和 cocycle loss 的区域敏感性分析或可视化结果，明确其对边界和内部区域的影响。",
+      "应补充与传统 stitching 方法的对比实验，评估 soft-kernel blending 的必要性。"
+    ],
+    "overall_recommendation": "Major Revision"
+  }
+}

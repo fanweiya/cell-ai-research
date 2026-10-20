@@ -1,0 +1,65 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2608.03508v1",
+  "status": "done",
+  "design_motivation": "现有ViT模型多基于单分辨率WSI预训练，难以泛化到任意分辨率。病理诊断本质上是多尺度的（从细胞形态到组织结构）。MRPT设计为多分辨率金字塔Transformer，通过Consecutive Cross-Resolution Attention (CCRA) 机制模拟病理学家由低倍到高倍逐级观察的推理过程，实现跨分辨率的语义对齐和层级特征聚合，从而构建更鲁棒、可解释的WSI表示。",
+  "loss_formula": "Stage 1 (Patch): \\mathcal{L}_{SSL} = -\\sum_{i} \\log \\frac{\\exp(\\text{sim}(z_i, t_i)/\\tau)}{\\sum_{j} \\exp(\\text{sim}(z_i, t_j)/\\tau)} \\quad \\text{(SimCLR-style contrastive loss)}\\nStage 2 (Region): \\mathcal{L}_{align} = \\sum_{s} \\| \\mathbf{E}_{s} - \\mathbf{E}_{s+1} \\|_2^2 \\quad \\text{(Cross-resolution alignment loss)}\\nStage 3 (WSI): \\mathcal{L}_{cls} = \\text{CrossEntropy}(\\mathbf{y}, \\text{MLP}([mCLS]))",
+  "math_principle": "利用对比学习（Contrastive Learning）在Patch级学习多分辨率特征；通过最小化相邻分辨率嵌入间的欧氏距离（或余弦相似度最大化）实现跨分辨率语义一致性；采用层级聚合（Hierarchical Aggregation）将细胞级Token逐步融合为WSI级表示，CCRA机制通过交叉注意力在相邻分辨率间传递信息，确保特征流形上的连续性。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 3, H, W] (Multi-resolution patches at 10x, 20x, 40x)"
+    },
+    {
+      "layer": "mViT_encoder",
+      "shape": "[B, N, D] (N: number of patches, D: embedding dim)"
+    },
+    {
+      "layer": "CCRA_fusion",
+      "shape": "[B, N, D] (Cross-resolution attended features)"
+    },
+    {
+      "layer": "hierarchical_aggregation",
+      "shape": "[B, D] (Region-level [mCLS])"
+    },
+    {
+      "layer": "WSI_aggregation",
+      "shape": "[B, D] (WSI-level [mCLS])"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, C] (Classification logits or VQA response)"
+    }
+  ],
+  "training_pipeline": [
+    "Step 1: Data Preparation - Extract patches/regions/WSIs at 10x, 20x, 40x resolutions from 36K WSIs (624M patches, 2.4M regions).",
+    "Step 2: Stage 1 Pre-training - Train multi-resolution patch-level ViT (mViT) using self-supervised contrastive loss on patches.",
+    "Step 3: Stage 2 Pre-training - Train region-level aggregation with CCRA mechanism to align region embeddings across consecutive resolutions.",
+    "Step 4: Stage 3 Pre-training - Train WSI-level representation using class token fusion and cross-resolution attention on full WSIs.",
+    "Step 5: Fine-tuning - Linear probing or full fine-tuning on downstream tasks (classification, VQA, captioning).",
+    "Step 6: MRPT-LLaVA Training - Align MRPT encoder with LLM via three-stage pipeline (caption alignment, word-visual alignment, VQA fine-tuning)."
+  ],
+  "baselines_compared": [
+    "HIPT",
+    "CONCH",
+    "UNI",
+    "QuiltNet",
+    "GigaPath",
+    "Virchow",
+    "RudolfV",
+    "Quilt-LLaVA",
+    "SlideChat",
+    "WSI-LLaVA"
+  ],
+  "key_results": {
+    "PANDA_BA": "5.2 min per WSI (linear probe), surpasses SOTA in Balanced Accuracy",
+    "VQA_Score_Qwen2": "62.20% (SlideBench), 68.80%, 97.70% on other benchmarks",
+    "Datasets_Coverage": "34 diverse datasets",
+    "Zero_Shot": "Superior patch-level zero-shot classification compared to single-resolution models"
+  },
+  "confidence": 0.92,
+  "task_id": "2608.03508v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:49:20.108726",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

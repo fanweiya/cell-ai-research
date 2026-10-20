@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "SAM3在不同领域（通用图像、病理）预测与GT的对比可视化，展示其在病理分割中的失败案例"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法框架图：展示SAM3在zero-shot、few-shot和全监督病理分割三种模式下的适配器架构与流程"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "不同提示方式（点网格、随机点、框）下SAM1/2/3在病理图像分割上的定性对比图"
+  }
+}

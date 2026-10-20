@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>micro-sam Wiki — examples</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / micro-sam Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>micro-sam</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/doc.html">doc</a></li>
+<li><a href="../modules/test.html">test</a></li>
+<li><a href="../modules/finetuning.html">finetuning</a></li>
+<li><a href="../modules/workshops.html">workshops</a></li>
+<li><a href="../modules/examples.html">examples</a></li>
+<li><a href="../modules/development.html">development</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/deployment.html">deployment</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/micro_sam.html">micro_sam</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>examples</h1>
+<br>
+<p>&gt; 提供 micro_sam 库的交互式标注、自动分割、跟踪及模型微调的示例脚本。</p>
+<br>
+<p>该模块包含一系列 Python 脚本和文档，用于演示如何使用 micro_sam 进行显微镜图像的交互式标注（2D、3D、跟踪、图像序列）、自动分割与跟踪、模型微调以及将 micro_sam 作为库集成到自定义流程中。所有脚本均利用预下载的示例数据，并支持使用微调后的 SAM 模型。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">examples/README.md</code></h3>
+<br>
+<p>概述 examples 模块的结构和主要功能。</p>
+<br>
+<h3><code class="inline-code">examples/finetuning/README.md</code></h3>
+<br>
+<p>介绍模型微调文件夹中的脚本用途。</p>
+<br>
+<h3><code class="inline-code">examples/annotator_2d.py</code></h3>
+<br>
+<p>运行交互式 2D 标注工具，支持 LIVEcell、HeLa 2D 和全切片图像。</p>
+<br>
+<ul>
+<li><code class="inline-code">livecell_annotator</code> (function) - 为 LIVEcell 数据集示例图像运行 2D 标注器。</li>
+<li><code class="inline-code">hela_2d_annotator</code> (function) - 为 Cell Tracking Challenge HeLa 2D 数据集示例图像运行 2D 标注器。</li>
+<li><code class="inline-code">wholeslide_annotator</code> (function) - 为全切片图像运行带分块（tiling）的 2D 标注器。</li>
+</ul>
+<br>
+<h3><code class="inline-code">examples/annotator_3d.py</code></h3>
+<br>
+<p>运行交互式 3D 标注工具，用于电子显微镜体积数据。</p>
+<br>
+<ul>
+<li><code class="inline-code">em_3d_annotator</code> (function) - 为示例 EM 体积运行 3D 标注器。</li>
+</ul>
+<br>
+<h3><code class="inline-code">examples/annotator_tracking.py</code></h3>
+<br>
+<p>运行交互式跟踪标注工具，用于时间序列图像。</p>
+<br>
+<ul>
+<li><code class="inline-code">track_ctc_data</code> (function) - 为细胞跟踪挑战（CTC）数据运行交互式跟踪。</li>
+</ul>
+<br>
+<h3><code class="inline-code">examples/automatic_segmentation.py</code></h3>
+<br>
+<p>运行 2D 图像的自动分割，支持 AMG、AIS 和 APG 模式。</p>
+<br>
+<ul>
+<li><code class="inline-code">livecell_automatic_segmentation</code> (function) - 对 LIVEcell 示例图像运行自动分割。</li>
+<li><code class="inline-code">hela_automatic_segmentation</code> (function) - 对 HeLa 2D 示例图像运行自动分割。</li>
+<li><code class="inline-code">wholeslide_automatic_segmentation</code> (function) - 对全切片图像运行带分块的自动分割。</li>
+</ul>
+<br>
+<h3><code class="inline-code">examples/automatic_tracking.py</code></h3>
+<br>
+<p>运行 2D 时间序列图像的自动跟踪。</p>
+<br>
+<ul>
+<li><code class="inline-code">example_automatic_tracking</code> (function) - 对 CTC 数据运行自动跟踪。</li>
+</ul>
+<br>
+<h3><code class="inline-code">examples/bioimageio/export_model_for_bioengine.py</code></h3>
+<br>
+<p>将模型导出为 Bioengine 格式。</p>
+<br>
+<ul>
+<li><code class="inline-code">export_bioengine_model</code> (function) - 导出模型供 Bioengine 使用。</li>
+</ul>
+<br>
+<h3><code class="inline-code">examples/bioimageio/export_model_for_bioimageio.py</code></h3>
+<br>
+<p>将模型导出为 bioimage.io 格式。</p>
+<br>
+<ul>
+<li><code class="inline-code">export_sam_model</code> (function) - 导出 SAM 模型供 bioimage.io 使用。</li>
+</ul>
+<br>
+<h3><code class="inline-code">examples/finetuning/annotator_with_finetuned_model.py</code></h3>
+<br>
+<p>在 2D 标注器中使用微调后的模型。</p>
+<br>
+<ul>
+<li><code class="inline-code">run_annotator_with_finetuned_model</code> (function) - 使用微调后的模型运行 2D 标注器。</li>
+</ul>
+<br>
+<h3><code class="inline-code">examples/finetuning/finetune_hela.py</code></h3>
+<br>
+<p>在自定义数据上微调 SAM 模型，包括交互式分割和实例分割解码器。</p>
+<br>
+<ul>
+<li><code class="inline-code">get_dataloader</code> (function) - 为微调 SAM 返回训练或验证数据加载器。</li>
+<li><code class="inline-code">run_training</code> (function) - 运行实际的模型训练。</li>
+<li><code class="inline-code">export_model</code> (function) - 导出训练好的模型。</li>
+</ul>
+<br>
+<h3><code class="inline-code">examples/finetuning/finetune_hela_instance_segmentation.py</code></h3>
+<br>
+<p>仅训练实例分割解码器（UNETR），不更新交互式分割组件。</p>
+<br>
+<ul>
+<li><code class="inline-code">get_dataloader</code> (function) - 为训练实例分割解码器返回数据加载器。</li>
+<li><code class="inline-code">run_training</code> (function) - 运行 UNETR 实例分割解码器的训练。</li>
+<li><code class="inline-code">export_model</code> (function) - 导出训练好的实例分割模型。</li>
+</ul>
+<br>
+<h3><code class="inline-code">examples/image_series_annotator.py</code></h3>
+<br>
+<p>运行图像序列的标注工具。</p>
+<br>
+<ul>
+<li><code class="inline-code">series_annotation</code> (function) - 标注一系列图像。</li>
+</ul>
+<br>
+<h3><code class="inline-code">examples/object_classifier.py</code></h3>
+<br>
+<p>演示对象分类器功能，用于对分割结果进行分类。</p>
+<br>
+<ul>
+<li><code class="inline-code">livecell_annotator</code> (function) - 对 LIVEcell 数据运行对象分类。</li>
+<li><code class="inline-code">wholeslide_annotator</code> (function) - 对全切片数据运行对象分类。</li>
+<li><code class="inline-code">lucchi_annotator</code> (function) - 对 3D EM 数据运行对象分类。</li>
+</ul>
+<br>
+<h3><code class="inline-code">examples/quick_start.py</code></h3>
+<br>
+<p>快速开始示例，演示如何使用 micro_sam 的自动实例分割功能。</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 加载示例图像，运行自动实例分割并可视化。</li>
+</ul>
+<br>
+<h3><code class="inline-code">examples/use_as_library/instance_segmentation.py</code></h3>
+<br>
+<p>展示如何将 micro_sam 作为库集成到自定义脚本中，进行实例分割。</p>
+<br>
+<ul>
+<li><code class="inline-code">cell_segmentation</code> (function) - 对 HeLa 细胞运行实例分割。</li>
+<li><code class="inline-code">cell_segmentation_with_tiling</code> (function) - 对大图像运行带分块的实例分割。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>交互式标注 (Interactive Annotation)</strong>: 通过点击或拖动提示（points, boxes, masks）来指导 SAM 模型生成分割掩码，支持 2D、3D 和时序数据。</li>
+<li><strong>自动分割 (Automatic Segmentation)</strong>: 无需用户交互，模型自动预测实例分割。支持三种模式：AMG（自动掩码生成）、AIS（自动实例分割，micro_sam 特有）、APG（自动提示生成）。</li>
+<li><strong>模型微调 (Model Finetuning)</strong>: 在自定义显微镜图像数据集上微调 SAM 模型，包括整体微调（更新图像编码器、提示编码器、掩码解码器）和仅微调实例分割解码器（UNETR）。</li>
+<li><strong>嵌入缓存 (Embedding Cache)</strong>: 为加速交互式标注和自动分割，图像特征嵌入被预计算并缓存为 .zarr 文件，避免重复推理。</li>
+<li><strong>分块处理 (Tiling)</strong>: 处理大图像（如全切片）时，将图像分割成小块进行预测，再拼接结果，以节省内存并避免显存溢出。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">examples/annotator_2d.py</code> → <code class="inline-code">micro_sam.sam_annotator.annotator_2d</code>: 导入 annotator_2d 函数以启动交互式 2D 标注界面。</li>
+<li><code class="inline-code">examples/automatic_segmentation.py</code> → <code class="inline-code">micro_sam.automatic_segmentation.get_predictor_and_segmenter</code>: 导入函数以获取预测器和分割器，用于自动分割。</li>
+<li><code class="inline-code">examples/finetuning/finetune_hela.py</code> → <code class="inline-code">micro_sam.training.train_sam</code>: 调用训练函数以微调 SAM 模型。</li>
+<li><code class="inline-code">examples/finetuning/finetune_hela_instance_segmentation.py</code> → <code class="inline-code">micro_sam.training.train_instance_segmentation</code>: 调用函数以仅训练实例分割解码器。</li>
+<li><code class="inline-code">examples/quick_start.py</code> → <code class="inline-code">examples/automatic_segmentation.py</code>: 两者都使用 get_predictor_and_segmenter 和 automatic_instance_segmentation，但 quick_start 更简化。</li>
+<li><code class="inline-code">examples/use_as_library/instance_segmentation.py</code> → <code class="inline-code">examples/automatic_segmentation.py</code>: 展示了如何在自定义脚本中复用自动分割的核心逻辑。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

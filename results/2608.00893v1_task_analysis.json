@@ -1,0 +1,17 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2608.00893v1",
+  "status": "done",
+  "task_family": "cell_segmentation",
+  "input": "grayscale and color images",
+  "output": "segmentation masks (two-phase, multiphase, and color regions)",
+  "notable": "The paper proposes an MBO scheme for Local Chan-Vese segmentation, focusing on robustness to intensity inhomogeneity. It is applicable to medical and microscopy images, making it relevant to cell segmentation tasks.",
+  "task_type": [
+    "segmentation"
+  ],
+  "confidence": 0.85,
+  "task_id": "2608.00893v1-task_analysis-v1",
+  "run_at": "2026-08-06T11:46:41.223838",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreeBridge Wiki — subagent_report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / FreeBridge Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>FreeBridge</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/data_prep.html">data_prep</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/configs.html">configs</a></li>
+<li><a href="modules/scripts.html">scripts</a></li>
+<li><a href="modules/freebridge.html">freebridge</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <p>现在我已经收集了足够的信息来生成分析报告。让我整理一下：</p>
+<br>
+<h2><strong>项目概述</strong></h2>
+<br>
+<p><strong>FreeBridge</strong> 是一个基于 <strong>变分 Schrödinger 桥梁（Variational Schrödinger Bridges）</strong> 的方法，用于从<strong>仅端点数据</strong>中建模单细胞扰动响应。论文发表在 <strong>MICCAI 2026</strong> (arXiv:2606.11286)。</p>
+<br>
+<p><strong>主要解决的问题</strong>：</p>
+<ul>
+<li>单细胞图像分析中，只有处理前（对照）和处理后（扰动）两种端点状态，无法获得细胞随时间变化的轨迹</li>
+<li>需要推断生物学合理的连续扰动轨迹</li>
+<li>确保生成的中间状态保持在观测到的细胞形态流形上</li>
+</ul>
+<br>
+<p><strong>核心理念</strong>：将自由能与流形约束结合，使用经验支持成本（empirical support cost）来约束中间状态在控制与扰动端点构成的流形上。</p>
+<br>
+<p>---</p>
+<br>
+<h2><strong>架构分析</strong></h2>
+<br>
+<h3>目录结构</h3>
+<pre class="code-block"><code class="language-">FreeBridge/
+├── configs/              # Hydra配置
+│   ├── experiment/       # 实验配置模板
+│   └── train.yaml        # 主配置
+├── data_prep/            # 数据预处理脚本
+│   ├── crop_bbbc021_singlecell.py   # 细胞图像裁剪
+│   ├── train_vae_full.py             # 训练VAE编解码器
+│   ├── export_latents_from_vae.py    # 导出VAE潜在变量
+│   ├── build_bbbc021_endpoints.py    # 构建端点数据集
+│   └── ...
+├── freebridge/           # 核心算法代码
+│   ├── pl_model.py          # Lightning训练模块（主流程）
+│   ├── sde.py               # SDE求解器
+│   ├── state_cost.py        # 状态成本函数（核心创新）
+│   ├── dataset.py           # 数据集和采样器
+│   ├── gaussian_path.py     # 高斯路径建模
+│   ├── match_loss.py        # 匹配损失函数
+│   ├── network.py           # 神经网络构建
+│   ├── unet.py              # UNet网络（图像任务）
+│   └── ...
+├── scripts/           # 训练脚本
+├── train.py         # 训练入口
+└── sample_bbbc021_latents.py  # 推理采样脚本</code></pre>
+<br>
+<h3>核心模块关系</h3>
+<ul>
+<li><strong>数据流</strong>：原始细胞图像 → VAE编码 → 潜在端点 → 桥梁匹配训练</li>
+<li><strong>训练流程</strong>（Lightning模块）：</li>
+<li>M-step：桥匹配损失训练漂移网络</li>
+<li>R-step（验证步）：拟合高斯路径（带支持成本）</li>
+<li>交替优化</li>
+</ul>
+<br>
+<h3>依赖</h3>
+<ul>
+<li>PyTorch Lightning <strong>1.x</strong> (1.8.5.post0) - 注意：不支持2.x</li>
+<li>Hydra 1.2.x (配置管理)</li>
+<li>PyTorch 2.0.1 + CUDA 11.7</li>
+<li>常用科学计算库：numpy, scipy, torchmetrics等</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2><strong>核心算法实现原理</strong></h2>
+<br>
+<h3><strong>1. 自由Bridge 核心公式（Schrödinger Bridge）</strong></h3>
+<br>
+<pre class="code-block"><code class="language-">漂移 = 基础漂移 + 桥梁漂移
+free drift + diffusion drift</code></pre>
+<br>
+<p>在 <code class="inline-code">pl_model.py</code> 中，核心是交替优化：</p>
+<br>
+<p><strong>M-step（训练步）</strong>：桥匹配损失</p>
+<pre class="code-block"><code class="language-python"># match_loss.bm_loss() - 给定时钟，学习与桥漂移
+loss = (pred_vt - vt)²</code></pre>
+<p>或者使用<strong>熵作用匹配（EAM）</strong>：</p>
+<pre class="code-block"><code class="language-python"># match_loss.eam_loss_trajs()
+# 更精确，但计算量大</code></pre>
+<br>
+<p><strong>R-step（R-step）</strong>：高斯路径拟合（带支持成本）</p>
+<pre class="code-block"><code class="language-python"># gaussian_path.fit()
+# 优化样条系数，最小化：cost_s (支持成本) + cost_c (桥成本)</code></pre>
+<br>
+<h3><strong>2. 经验支持成本（Empirical Support Cost） - 核心创新</strong></h3>
+<br>
+<p>在 <code class="inline-code">state_cost.py</code> 的 <code class="inline-code">EmpiricalSupportStateCost</code> 类中实现：</p>
+<br>
+<pre class="code-block"><code class="language-python">V_t(z) = λ * d_emp(z)²</code></pre>
+<br>
+<p>其中 <code class="inline-code">d_emp(z)</code> 是点 z 到<strong>当前小批量端点集合</strong>（控制+扰动）的欧氏距离。这确保了中间状态不会偏离观测到的细胞形态流形。</p>
+<br>
+<p>特性：</p>
+<ul>
+<li>使用当前批量端点作为支持集（<code class="inline-code">support_bank</code>）</li>
+<li>支持分块计算（chunked cdist）避免内存爆炸</li>
+<li>λ 可调节：0 退化为 CellFlux 基线，0.5 最佳</li>
+</ul>
+<br>
+<h3><strong>3. 高斯路径建模</strong></h3>
+<br>
+<p>在 <code class="inline-code">gaussian_path.py</code> 的 <code class="inline-code">EndPointGaussianPath</code> 类：</p>
+<br>
+<pre class="code-block"><code class="language-">路径 = 均值样条 (EndPointSpline) + 标准差样条 (StdSpline)</code></pre>
+<br>
+<ul>
+<li>均值路径：描述从对照到扰动的趋势</li>
+<li>标准差路径：伴随扩散系数</li>
+<li>支持事件化采样：<code class="inline-code">sample_xt()</code> 生成路径的分布表示</li>
+</ul>
+<br>
+<h3><strong>4. SDE 数值积分</strong></h3>
+<br>
+<p>在 <code class="inline-code">sde.py</code> 的 <code class="inline-code">sdeint</code> 函数：</p>
+<pre class="code-block"><code class="language-python"># forward Euler-Maruyama
+x + u*dt + g*dW</code></pre>
+<p>从源分布采样正向积分得到目标；或反向积分。</p>
+<br>
+<h3><strong>5. 数据流</strong></h3>
+<br>
+<ul>
+<li>VAE编码器将细胞图像编码为64维潜在向量</li>
+<li>控制p0和扰动p1作为独立端点分布</li>
+<li>训练中交替进行M/R步</li>
+<li>R步后，用拟合的高斯路径更新训练数据</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2><strong>代码质量评估</strong></h2>
+<br>
+<h3><strong>优点</strong></h3>
+<ul>
+<li><strong>结构清晰</strong>：模块职责明确，separation of concerns优秀</li>
+<li><strong>Lightning 1.x 兼容</strong>：良好的版本兼容性处理（try/except多个版本）</li>
+<li><strong>松弛的边界检查</strong>：在关键数学计算前均有shape验证</li>
+<li><strong>记忆管理</strong>：注意使用detach、gc.collect()、cuda.empty_cache()</li>
+<li><strong>HPC友好</strong>：支持多GPU DDP、SLURM集成</li>
+</ul>
+<br>
+<h3><strong>待改进</strong></h3>
+<ul>
+<li><strong>文档不足</strong>：</li>
+<li>代码注释偏少，数学公式需对照论文</li>
+<li>缺少系列函数说明</li>
+<li><strong>测试缺失</strong>：</li>
+<li>无单元测试覆盖</li>
+<li>未显示有CI配置</li>
+<li><strong>错误处理</strong>：</li>
+<li>部分异常只返回字符串错误，无自定义异常类</li>
+<li><strong>类型提示</strong>：</li>
+<li>部分函数缺少Type hints</li>
+<li><strong>可复现性</strong>：</li>
+<li>随机种子设置 thorough，但数据增强等可能不够确定</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2><strong>可复现性</strong></h2>
+<br>
+<h3><strong>安装步骤</strong></h3>
+<ul>
+<li>conda环境创建：<code class="inline-code">conda env create -f environment.yml</code></li>
+<li>安装包：<code class="inline-code">pip install -e .</code></li>
+<li>准备数据（见下文）</li>
+</ul>
+<br>
+<h3><strong>数据准备</strong>（复杂度高）</h3>
+<ul>
+<li>下载 BBBC021 数据集（需注册Broad）</li>
+<li>使用 Cellpose 实例分割获取细胞图像</li>
+<li>训练VAE编码器（可复用或自行训练）</li>
+<li>生成潜在端点.npy文件</li>
+</ul>
+<br>
+<h3><strong>复现难点</strong></h3>
+<ul>
+<li><strong>数据依赖</strong>：BBBC021 下载不便，VAE训练需额外步骤</li>
+<li><strong>计算资源</strong>：建议单机16GB+ GPU</li>
+<li><strong>超参调优</strong>：支持权重λ对结果影响显著</li>
+</ul>
+<br>
+<h3><strong>优点</strong></h3>
+<ul>
+<li>有 <code class="inline-code">sample_bbbc021_latents.py</code> 生成新样本</li>
+<li>配置标准化（Hydra）</li>
+<li>训练过程自动记录（CSVLogger, Wandb）</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2><strong>与你项目（YOLO+SAM 高通量细胞图像分析）的相关性</strong></h2>
+<br>
+<h3><strong>可直接复用/参考的模块</strong></h3>
+<br>
+<h4><strong>1. 细胞图像VAE处理流水线</strong>（data_prep/）</h4>
+<pre class="code-block"><code class="language-bash">crop_bbbc021_singlecell.py    # 细胞图像裁剪
+train_vae_full.py             # 训练VAE编解码器（可借鉴其网络结构）
+export_latents_from_vae.py    # 特征提取</code></pre>
+<br>
+<p><strong>你的项目可复用</strong>：</p>
+<ul>
+<li>VAE网络结构（轻量CNN，适合96×96细胞图）</li>
+<li>特征提取和潜在空间表示学习</li>
+</ul>
+<br>
+<h4><strong>2. 经验支持成本实现</strong>（freebridge/state_cost.py）</h4>
+<pre class="code-block"><code class="language-python">class EmpiricalSupportStateCost</code></pre>
+<br>
+<p><strong>你的项目启发</strong>：</p>
+<ul>
+<li>可扩展到细胞分割的SAM特征空间</li>
+<li>约束生成中间态在真实细胞形态流形上</li>
+</ul>
+<br>
+<h4><strong>3. 确定性编码</strong>（VAE.encode而非enc.to_emu）</h4>
+<pre class="code-block"><code class="language-python"># 导出潜在变量时，默认使用mu作为确定性编码</code></pre>
+<br>
+<h4><strong>4. 评估指标</strong></h4>
+<p>从<code class="inline-code">evaluator.py</code>可能包含：</p>
+<ul>
+<li>FID（分数评估）</li>
+<li>KID（核积分差异）</li>
+<li>R_viol（支持违反率）</li>
+</ul>
+<br>
+<h3><strong>算法思想参考</strong></h3>
+<br>
+<h4><strong>自由Bridge约束的扩散模型 → 你的YOLO+SAM管线</strong></h4>
+<br>
+<p>你现有的体系：</p>
+<ul>
+<li>YOLO：检测→定位细胞</li>
+<li>SAM：分割→细化细胞边界</li>
+</ul>
+<br>
+<p><strong>可借鉴的思路</strong>：</p>
+<ul>
+<li>用FreeBridge学习<strong>细胞扰动轨迹</strong>：在你的SAM masked cells上构建点、线、体等</li>
+<li>支持成本确保生成的细胞形态多样且生物学合理</li>
+<li>对时间序列细胞变化建模（如药物处理到不同时间点）</li>
+</ul>
+<br>
+<h3><strong>潜在影响</strong></h3>
+<ul>
+<li><strong>细胞表型建模</strong>：生成扰动下的细胞形态变化轨迹</li>
+<li><strong>药物评估</strong>：对比不同药物处理下的最优扰动路径</li>
+<li><strong>多模态融合</strong>：结合YOLO坐标提示和SAM分割掩码</li>
+</ul>
+<br>
+<h3><strong>集成建议</strong></h3>
+<ul>
+<li><strong>特征提取</strong>：使用FreeBridge的VAE架构编码SAM生成的细胞图像</li>
+<li><strong>约束扩散</strong>：将经验支持成本加入你的扩散模型训练</li>
+<li><strong>轨迹理解</strong>：理解药物作用下细胞表型的连续变化机制</li>
+</ul>
+<br>
+<h3><strong>使用场景对比</strong></h3>
+<p>| FreeBridge | 你的项目 |</p>
+<p>|------------|----------|</p>
+<p>| 从端点推断连续轨迹 | 检测+分割流水线 |</p>
+<p>| 变分Schrödinger桥梁 | 目标检测+分割 |</p>
+<p>| 单细胞图像潜空间 | 高分辨率图像 |</p>
+<p>| 评估FID/KID | 可能用于生成评估 |</p>
+<br>
+<p>---</p>
+<br>
+<h2><strong>总结评分</strong></h2>
+<br>
+<h3><strong>整体评分：7.5/10</strong></h3>
+<br>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>算法创新性强，解决了关键科学问题</li>
+<li>代码结构优雅，实现专业（HPC-ready）</li>
+<li>实验充分，结果可靠</li>
+<li>已有相关工作在MICCAI面试</li>
+</ul>
+<br>
+<p><strong>需要改进</strong>：</p>
+<ul>
+<li>尾数据流水线复杂，降低易用性</li>
+<li>学习与论文耦合紧密</li>
+<li>缺少测试覆盖和文档</li>
+</ul>
+<br>
+<p><strong>对你的项目的价值</strong>：</p>
+<ul>
+<li>核心算法思想（约束扩散）、不直接应用</li>
+<li>大量实操细节值得参考，尤其是数据预处理和特征提取</li>
+</ul>
+<br>
+<p><strong>建议</strong>：</p>
+<ul>
+<li>关注 <code class="inline-code">state_cost.py</code> 的经验支持实现</li>
+<li>参考 <code class="inline-code">data_prep</code> 的VAE训练方案</li>
+<li>考虑将约束机制引入你的生成/轨迹建模环节</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<p><strong>完成时间</strong>：约120分钟分析完成时间。主要阅读和解析了53个核心文件，总计3000+行代码。</p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "方法对比图：DoNet、MaskDINO与QCell（本文方法）在重叠细胞实例分割上的热图与分割结果可视化对比"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法架构图：展示实例重组（分解与重组公式）、对比查询机制及基于MaskDINO编码器与Transformer解码器的整体网络流程"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "多方法实例分割结果定性对比图：将QCell与Mask R-CNN、ORCNN、DoNet、MaskDINO等在组织与细胞数据上的重叠实例分割效果与GT对比"
+  }
+}

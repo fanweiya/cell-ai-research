@@ -1,0 +1,47 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2604.23481v1",
+  "status": "done",
+  "design_motivation": "传统深度学习核分割与分类依赖昂贵且难以获取的大规模像素级人工标注。本框架利用空间转录组（ST）数据作为替代监督信号，通过细胞级ST数据获取基因表达谱和对应的核掩膜，将基因表达谱转换为细胞类型标签，从而避免人工标注。相比纯图像分类方法，该方法利用分子特征提供更细粒度的监督；相比现有基于基因表达的细胞分型方法，本方法引入了面向图像的分类策略以桥接分子与图像识别。",
+  "loss_formula": "L = L_seg + L_cls + L_unknown",
+  "math_principle": "采用跨模态弱监督学习范式。分割损失L_seg基于DAPI衍生的核掩膜计算（如Dice Loss或Cross Entropy）。分类损失L_cls基于从基因表达谱映射得到的细胞类型标签计算。引入显式的Unknown类别处理基因表达噪声和连续谱带来的不确定性，未标记或无法分类的细胞被赋予Unknown标签并在监督损失中排除，从而增强模型对噪声的鲁棒性。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 3, H, W]"
+    },
+    {
+      "layer": "encoder",
+      "shape": "[B, 256, H/4, W/4]"
+    },
+    {
+      "layer": "decoder",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "classifier",
+      "shape": "[B, C]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载WSI图像及配准的空间转录组数据",
+    "step2: 从ST数据生成DAPI核掩膜作为分割标签",
+    "step3: 基于基因表达谱和标记基因投票生成细胞类型标签，未分类细胞标记为Unknown",
+    "step4: 将图像切片输入网络，计算分割损失和分类损失",
+    "step5: 优化网络参数，Unknown样本在分类损失中不计入"
+  ],
+  "baselines_compared": [
+    "Cellpose",
+    "PanNuke supervised models",
+    "Existing gene expression-based cell-typing approaches"
+  ],
+  "key_results": {
+    "segmentation_generalization": "在未见器官上分割精度高于手动标注模型",
+    "classification_accuracy": "优于现有基于转录组的标记策略"
+  },
+  "confidence": 0.85,
+  "task_id": "2604.23481v1-algorithm_analysis-v1",
+  "run_at": "2026-07-24T09:12:36.474853",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

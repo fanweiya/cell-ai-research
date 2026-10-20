@@ -1,0 +1,66 @@
+{
+  "task": "code_analysis",
+  "paper_id": "2605.15383v1",
+  "status": "done",
+  "project_structure": "MorphoHELM 是一个生物医学图像分析基准框架。根目录包含文档、许可证和依赖文件。核心代码位于 benchmarks/ 目录下，包含多个子模块：configs/ 存放 YAML 配置文件；enrichment/ 包含富集分析脚本，进一步分为 bbbc036_moa/ 和 cpg_moa/ 子目录，处理特定数据集的 MOA 分析；crispr/ 处理 CRISPR 富集分析；qc/ 提供质量控制脚本；replicate_analysis/ 包含重复性分析脚本。整体结构以脚本驱动为主，缺乏统一的模型定义文件。",
+  "architecture": "数据加载 (benchmarks/enrichment/...) → 特征提取 (依赖外部库) → 统计分析 (scipy/sklearn) → 可视化 (matplotlib/seaborn) → 结果输出",
+  "modules": [
+    {
+      "name": "BBBC036 MOA 分析",
+      "input_shape": "N/A (图像路径列表)",
+      "output_shape": "N/A (统计结果)",
+      "function": "运行 BBBC036 数据集的 MOA 富集分析",
+      "file": "benchmarks/enrichment/bbbc036_moa/run_bbbc036_moa.py",
+      "lines": "1-200"
+    },
+    {
+      "name": "CPG MOA 分析",
+      "input_shape": "N/A (图像路径列表)",
+      "output_shape": "N/A (统计结果)",
+      "function": "运行 CPG 数据集的 MOA 富集分析",
+      "file": "benchmarks/enrichment/cpg_moa/run_cpg_moa.py",
+      "lines": "1-150"
+    },
+    {
+      "name": "CRISPR 富集分析",
+      "input_shape": "N/A (CRISPR 筛选数据)",
+      "output_shape": "N/A (热图数据)",
+      "function": "执行 CRISPR 筛选数据的富集分析",
+      "file": "benchmarks/enrichment/crispr/run_crispr_enrichment.py",
+      "lines": "1-180"
+    },
+    {
+      "name": "基准测试 sweeps",
+      "input_shape": "N/A (配置参数)",
+      "output_shape": "N/A (结果汇总)",
+      "function": "运行不同参数组合的基准测试",
+      "file": "benchmarks/run_benchmark_sweep.py",
+      "lines": "1-120"
+    },
+    {
+      "name": "重复性分析",
+      "input_shape": "N/A (重复实验数据)",
+      "output_shape": "N/A (一致性指标)",
+      "function": "评估实验结果的重复性",
+      "file": "benchmarks/replicate_analysis/run_replicate_analysis_sweep.py",
+      "lines": "1-160"
+    }
+  ],
+  "framework": "pytorch",
+  "key_files": [
+    "benchmarks/enrichment/bbbc036_moa/run_bbbc036_moa.py",
+    "benchmarks/enrichment/cpg_moa/run_cpg_moa.py",
+    "benchmarks/run_benchmark_sweep.py"
+  ],
+  "issues": [
+    "代码仓库缺少核心模型定义文件，模型可能位于外部依赖中",
+    "缺乏统一的训练循环或推理入口点",
+    "模块间耦合度低，主要依赖脚本调用",
+    "缺少单元测试和集成测试"
+  ],
+  "confidence": 0.85,
+  "task_id": "2605.15383v1-code_analysis-v1",
+  "run_at": "2026-07-18T09:56:33.893442",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAISeg Wiki — root</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / BAISeg Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>BAISeg</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/models.html">models</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>root</h1>
+<br>
+<p>&gt; 实现基于符号距离函数（SDF）和边界感知损失显微镜图像细胞实例分割的完整训练与推理框架。</p>
+<br>
+<p>该项目是一个基于PyTorch Lightning的模块化实现，用于在显微镜图像中分割单个细胞。核心思想是预测符号距离函数（SDF）而非二值掩码，通过可学习的Sigmoid映射将SDF转换为概率图和软边界，并使用改进的Hausdorff距离（MHD）损失来优化边界对齐和相邻细胞的分离。框架支持2D、2.5D和3D数据，通过YAML配置文件管理实验，并集成Wandb进行日志记录。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">README.md</code></h3>
+<br>
+<p>项目文档，包含概述、安装、使用指南和引用信息。</p>
+<br>
+<h3><code class="inline-code">requirements.txt</code></h3>
+<br>
+<p>定义项目依赖包及其版本。</p>
+<br>
+<h3><code class="inline-code">LICENSE</code></h3>
+<br>
+<p>项目的MIT开源许可证。</p>
+<br>
+<h3><code class="inline-code">dataset.py</code></h3>
+<br>
+<p>定义数据加载模块，处理显微镜图像和分割掩码的读取、增强及预处理。</p>
+<br>
+<ul>
+<li><code class="inline-code">CropWithVoxelThreshold</code> (class) - 自定义Transform，尝试随机裁剪直到分割掩码中有效体素超过阈值，确保裁剪区域包含足够细胞。</li>
+<li><code class="inline-code">SliceWiseNorm</code> (class) - 对3D图像的每个切片进行独立的均值-方差归一化。</li>
+<li><code class="inline-code">CELL3DDataModule</code> (class) - PyTorch Lightning DataModule，管理训练、验证和测试数据集的加载、批处理及数据增强流程。</li>
+</ul>
+<br>
+<h3><code class="inline-code">train_unet.py</code></h3>
+<br>
+<p>主训练脚本，负责解析配置、初始化模型、启动训练循环或执行推理。</p>
+<br>
+<ul>
+<li><code class="inline-code">ModelCheckpointSaveLast</code> (class) - 自定义Callback，在训练结束时保存最后一个检查点，支持版本控制。</li>
+<li><code class="inline-code">init_logger</code> (function) - 初始化Wandb日志记录器，将配置参数同步到实验元数据。</li>
+<li><code class="inline-code">get_criterion</code> (function) - 根据配置文件动态实例化损失函数列表，支持自定义损失。</li>
+</ul>
+<br>
+<h3><code class="inline-code">unet2d.yml</code></h3>
+<br>
+<p>YAML配置文件，定义数据路径、模型架构、损失权重、优化器及训练超参数。</p>
+<br>
+<h3><code class="inline-code">utils.py</code></h3>
+<br>
+<p>提供通用工具函数，包括自定义损失、张量转换、形态学操作及后处理。</p>
+<br>
+<ul>
+<li><code class="inline-code">FocalBCEWithLogits</code> (class) - 实现Focal Loss与BCE的组合，用于解决类别不平衡问题。</li>
+<li><code class="inline-code">convert_3d_to_2_5d</code> (function) - 将3D体积数据转换为2.5D表示（当前切片+前后邻域），以便在2D网络上处理3D数据。</li>
+<li><code class="inline-code">convert_2_5d_to_3d</code> (function) - 将2.5D处理后的结果重组回3D张量。</li>
+<li><code class="inline-code">erode</code> (function) - 使用深度卷积实现张量的腐蚀操作。</li>
+<li><code class="inline-code">dilate</code> (function) - 使用深度卷积实现张量的膨胀操作。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>符号距离函数 (SDF)</strong>: 用连续函数表示细胞轮廓，正值表示外部，负值表示内部，零值表示边界。相比二值掩码，SDF能提供更平滑的几何表示，利于优化边界。</li>
+<li><strong>边界感知 MHD 损失</strong>: 改进的Hausdorff距离损失，包含左向（LMHD）和右向（RMHD）项，直接优化预测边界与真实边界之间的对齐，特别有助于分离接触或重叠的细胞。</li>
+<li><strong>2.5D 处理</strong>: 一种在2D网络上处理3D数据的技术，将当前切片与其上下邻域切片组合成3通道输入，在保持计算效率的同时利用部分上下文信息。</li>
+<li><strong>PyTorch Lightning 模块化</strong>: 使用LightningDataModule管理数据，Callback管理训练逻辑（如检查点），实现训练流程与业务逻辑解耦。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">train_unet.py</code> → <code class="inline-code">dataset.py</code>: train_unet.py 导入 CELL2DDataModule 和 CELL3DDataModule 以构建数据加载器。</li>
+<li><code class="inline-code">train_unet.py</code> → <code class="inline-code">utils.py</code>: train_unet.py 导入 FocalBCEWithLogits 作为自定义损失，并可能使用其他工具函数。</li>
+<li><code class="inline-code">train_unet.py</code> → <code class="inline-code">models/unet.py</code>: train_unet.py 导入 Unet2dWrap, Unet2_5dWrap, Unet3dWrap 以实例化分割模型。</li>
+<li><code class="inline-code">dataset.py</code> → <code class="inline-code">utils.py</code>: dataset.py 可能依赖 utils.py 中的形态学或转换函数进行数据预处理。</li>
+<li><code class="inline-code">train_unet.py</code> → <code class="inline-code">unet2d.yml</code>: train_unet.py 读取 unet2d.yml 获取所有超参数和配置信息。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EffiCell-Seg Wiki — reading-guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / EffiCell-Seg Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>EffiCell-Seg</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/segment_anything.html">segment_anything</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/.zread.html">.zread</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Reading Guide</h1>
+<br>
+<p>本代码库是一个基于 DINOv3 骨干网络和 SAM 风格解码器的细胞实例分割框架。建议按‘配置与概览 -&gt; 核心模型 -&gt; 数据与评估 -&gt; 工具与细节’的顺序阅读，以快速建立整体认知并深入关键逻辑。</p>
+<br>
+<h2>Step 1: 理解项目概览与配置 (~5 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">README.md</code>, <code class="inline-code">.zread/wiki/drafts/wiki.json</code></p>
+<br>
+<p>首先阅读 README.md 了解项目目标、依赖和运行方式；接着查看 wiki.json 获取项目文档结构和关键概念索引，建立对 EffiCell-Seg 的整体认知。</p>
+<br>
+<h2>Step 2: 掌握核心模型架构 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">model.py</code>, <code class="inline-code">segment_anything/modeling/sam.py</code>, <code class="inline-code">segment_anything/modeling/image_encoder.py</code></p>
+<br>
+<p>model.py 是项目主模型入口，sam.py 实现 SAM 风格解码器，image_encoder.py 封装 DINOv3 骨干网络。重点查看模型如何组合骨干与解码器，以及提示引导机制的实现。</p>
+<br>
+<h2>Step 3: 学习数据加载与预处理 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">dataloader.py</code>, <code class="inline-code">extract_features.py</code></p>
+<br>
+<p>dataloader.py 定义数据加载逻辑，extract_features.py 负责特征提取。关注数据如何输入模型、特征如何被冻结骨干网络处理，以及预处理流程。</p>
+<br>
+<h2>Step 4: 理解评估与指标计算 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">eval.py</code>, <code class="inline-code">metrics.py</code></p>
+<br>
+<p>eval.py 实现模型评估流程，metrics.py 定义分割质量指标。查看评估如何调用模型、输出结果，以及指标如何量化分割性能。</p>
+<br>
+<h2>Step 5: 深入 SAM 风格解码器细节 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">segment_anything/modeling/mask_decoder.py</code>, <code class="inline-code">segment_anything/modeling/prompt_encoder.py</code>, <code class="inline-code">segment_anything/modeling/transformer.py</code></p>
+<br>
+<p>mask_decoder.py 生成掩码，prompt_encoder.py 编码提示，transformer.py 处理特征交互。重点理解提示如何影响掩码生成，以及 Transformer 在其中的作用。</p>
+<br>
+<h2>Step 6: 探索自动掩码生成与预测接口 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">segment_anything/automatic_mask_generator.py</code>, <code class="inline-code">segment_anything/predictor.py</code></p>
+<br>
+<p>automatic_mask_generator.py 实现自动掩码生成策略，predictor.py 提供预测接口。了解如何从提示到最终分割结果的完整推理流程。</p>
+<br>
+<h2>Step 7: 熟悉项目工具与缓存机制 (~5 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">.codegraph/.gitignore</code>, <code class="inline-code">segment_anything/__init__.py</code></p>
+<br>
+<p>.gitignore 了解忽略规则，__init__.py 查看模块导出。虽然文件较小，但有助于理解项目结构和依赖管理。</p>
+<br>
+<h2>Tips</h2>
+<br>
+<ul>
+<li>先通读 README 和 wiki.json 建立宏观认知，再深入代码细节。</li>
+<li>重点关注 model.py 和 sam.py 的交互，这是理解提示引导分割的关键。</li>
+<li>遇到复杂模块时，先查看调用链，再深入函数内部。</li>
+<li>结合数据加载和评估流程，理解模型如何被训练和验证。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "方法流程图：从全切片图像（WSI）选取代表性patch，经特征提取与降采样后输入WSi模型，生成预测分割结果"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "定性对比结果图：展示40x、Bilinear、STAR-RL等方法在低倍病理图像上的分割预测与Ground Truth的可视化对比"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "不同方法（Bilinear、STAR-RL等）在40x与10x→40x放大倍数下的语义分割预测结果与Ground Truth的对比可视化"
+  }
+}

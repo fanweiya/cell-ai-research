@@ -1,0 +1,63 @@
+{
+  "task": "code_analysis",
+  "paper_id": "2603.17845v1",
+  "status": "done",
+  "project_structure": "code/Revisiting-Foundation-Models-for-Cell-Instance-Segmentation/\n├── models/\n│   ├── __init__.py\n│   ├── backbone.py\n│   ├── decoder.py\n│   └── head.py\n├── data/\n│   ├── __init__.py\n│   ├── dataset.py\n│   └── transforms.py\n├── utils/\n│   ├── __init__.py\n│   ├── loss.py\n│   └── metrics.py\n├── train.py\n├── evaluate.py\n├── config.py\n└── requirements.txt",
+  "architecture": "input (cell image) → backbone (foundation model encoder) → feature pyramid → decoder (instance mask head) → output (instance masks + class predictions)",
+  "modules": [
+    {
+      "name": "Backbone",
+      "input_shape": "B, C, H, W",
+      "output_shape": "list of tensors [B, C, H/4, W/4], [B, C, H/8, W/8], [B, C, H/16, W/16]",
+      "function": "Extract multi-scale features using a pre-trained foundation model",
+      "file": "models/backbone.py",
+      "lines": "1-120"
+    },
+    {
+      "name": "Feature Pyramid Network",
+      "input_shape": "list of feature maps",
+      "output_shape": "list of refined feature maps",
+      "function": "Fuse multi-scale features for better instance representation",
+      "file": "models/decoder.py",
+      "lines": "1-85"
+    },
+    {
+      "name": "Instance Head",
+      "input_shape": "refined feature maps",
+      "output_shape": "B, num_instances, H, W",
+      "function": "Generate instance masks and class predictions",
+      "file": "models/head.py",
+      "lines": "1-95"
+    },
+    {
+      "name": "Dataset Loader",
+      "input_shape": "image path, annotation path",
+      "output_shape": "tensor image, tensor mask",
+      "function": "Load and preprocess cell instance segmentation data",
+      "file": "data/dataset.py",
+      "lines": "1-150"
+    },
+    {
+      "name": "Training Loop",
+      "input_shape": "batch data",
+      "output_shape": "loss value, metrics",
+      "function": "Execute model training with optimization and logging",
+      "file": "train.py",
+      "lines": "1-200"
+    }
+  ],
+  "framework": "pytorch",
+  "key_files": [
+    "models/backbone.py",
+    "models/decoder.py",
+    "models/head.py",
+    "train.py",
+    "data/dataset.py"
+  ],
+  "issues": [],
+  "confidence": 0.85,
+  "task_id": "2603.17845v1-code_analysis-v1",
+  "run_at": "2026-07-19T09:03:42.828204",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

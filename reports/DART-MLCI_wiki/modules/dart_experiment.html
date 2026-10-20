@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DART-MLCI Wiki — dart_experiment</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / DART-MLCI Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>dart-mlci</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/dart_experiment.html">dart_experiment</a></li>
+<li><a href="../modules/docs.html">docs</a></li>
+<li><a href="../modules/artifacts.html">artifacts</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/dart_mlci.html">dart_mlci</a></li>
+<li><a href="../modules/tests.html">tests</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>dart_experiment</h1>
+<br>
+<p>&gt; 校准和验证微流控芯片的像素尺度，并配置不同分割器进行细胞分析实验</p>
+<br>
+<p>该模块负责将微流控芯片蓝图与显微镜图像对齐，用于实时细胞分析。核心功能包括：1) 通过检测芯片上的标记点（十字和圆圈）来验证实际像素尺度与配置值的一致性；2) 提供多种实验配置，支持不同的分割器（Omnipose、Cellpose+SAM）和芯片类型（如Mother Machines），并控制图像翻转、截断和配准等参数。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">dart_experiment/calibration_data/calibration_config.json</code></h3>
+<br>
+<p>存储芯片校准的元数据，包括芯片名称、校准图像路径、物镜位置、像素尺寸、芯片配置路径和模型路径。</p>
+<br>
+<h3><code class="inline-code">dart_experiment/check_pixel_scale.py</code></h3>
+<br>
+<p>脚本用于检查所有腔室类型的像素尺度因子。它加载芯片配置和标记检测模型，遍历指定文件夹，检测图像中的标记点，计算物理距离与检测距离的比值，从而验证像素尺寸是否准确。</p>
+<br>
+<ul>
+<li><code class="inline-code">chip_lib</code> (variable) - 从sak.json加载的芯片结构库实例</li>
+<li><code class="inline-code">mdm</code> (variable) - 标记检测模型实例，用于预测图像中的标记点</li>
+<li><code class="inline-code">folders</code> (variable) - 文件夹名称到腔室类型的映射字典</li>
+<li><code class="inline-code">config_pixel_size</code> (variable) - 当前配置的像素尺寸值，用于计算预期距离</li>
+<li><code class="inline-code">main loop</code> (function) - 遍历每个文件夹，加载图像，检测标记，计算物理距离与检测距离的误差，并输出统计结果</li>
+</ul>
+<br>
+<h3><code class="inline-code">dart_experiment/folder_config.json</code></h3>
+<br>
+<p>定义使用Omnipose分割器的实验配置，包含输入输出目录、像素尺寸、芯片配置、模型路径、图像翻转、截断、配准设置以及要处理的文件夹映射。</p>
+<br>
+<h3><code class="inline-code">dart_experiment/folder_config_cellpose_sam.json</code></h3>
+<br>
+<p>定义使用Cellpose+SAM分割器的实验配置，与folder_config.json类似，但禁用了配准功能。</p>
+<br>
+<h3><code class="inline-code">dart_experiment/folder_config_mm.json</code></h3>
+<br>
+<p>专门针对Mother Machines芯片类型的实验配置，仅处理Mothermachine-2x-inner文件夹。</p>
+<br>
+<h3><code class="inline-code">dart_experiment/folder_config_reproduce.json</code></h3>
+<br>
+<p>用于复现实验的配置，使用Cellpose+SAM分割器且禁用配准，处理所有文件夹类型。</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>像素尺度校准</strong>: 通过检测芯片上已知物理距离的标记点（十字和圆圈），计算图像中检测到的像素距离，从而反推实际像素尺寸，验证配置值的准确性。</li>
+<li><strong>芯片配置</strong>: artifacts/chips/sak.json 定义了不同腔室类型中标记点的物理坐标，是计算物理距离的基础。</li>
+<li><strong>分割器选择</strong>: 支持Omnipose和Cellpose+SAM两种分割器，通过不同的配置文件切换，以适应不同的细胞分割需求。</li>
+<li><strong>图像预处理</strong>: 包括Y轴翻转、归一化到uint8、转换为3通道等步骤，确保图像符合模型输入要求。</li>
+<li><strong>配准</strong>: 使用归一化互相关（NCC）方法将图像与芯片蓝图对齐，确保分析区域准确对应。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">dart_experiment/check_pixel_scale.py</code> → <code class="inline-code">dart_experiment/calibration_data/calibration_config.json</code>: check_pixel_scale.py 读取 calibration_config.json 中的像素尺寸和模型路径，但主要依赖 artifacts/chips/sak.json 和 artifacts/models/v26_detect_s_imgsz1280.pt</li>
+<li><code class="inline-code">dart_experiment/check_pixel_scale.py</code> → <code class="inline-code">dart_experiment/folder_config.json</code>: 两者共享相同的文件夹映射和芯片配置，但 check_pixel_scale.py 是独立脚本，不直接导入这些JSON</li>
+<li><code class="inline-code">dart_experiment/folder_config.json</code> → <code class="inline-code">dart_experiment/folder_config_cellpose_sam.json</code>: 两者结构相似，但分割器和配准设置不同，用于对比实验</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

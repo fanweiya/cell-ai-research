@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MalariAI Wiki — Phase4-WebApp</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / MalariAI Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>MalariAI</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/Phase3-PipelineB.html">Phase3-PipelineB</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/Phase4-WebApp.html">Phase4-WebApp</a></li>
+<li><a href="../modules/Phase2-BaselineA.html">Phase2-BaselineA</a></li>
+<li><a href="../modules/results.html">results</a></li>
+<li><a href="../modules/Phase1-EDA.html">Phase1-EDA</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/data.html">data</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Phase4-WebApp</h1>
+<br>
+<p>&gt; 提供基于Flask的Web界面，用于上传血涂片图像并执行疟原虫细胞分割与分期分类推理。</p>
+<br>
+<p>该模块是一个完整的Web应用，部署在HuggingFace Spaces上。它接收用户上传的Giemsa染色血涂片图像，通过后端Python管道（pipeline.py）执行三个核心步骤：1) 使用分水岭算法分割单个细胞；2) 使用EfficientNet-B0模型对分割出的细胞进行7类分类（背景、RBC、滋养体、环状体、裂殖体、配子体、白细胞）；3) 生成Grad-CAM++热力图以提供可解释性。前端通过HTML/CSS/JS构建临床仪表盘，实时展示统计指标、细胞网格、分割结果和感染率报告。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">Dockerfile</code></h3>
+<br>
+<p>定义容器化部署环境，安装Python 3.10、OpenCV依赖及Python包，并配置端口7860以适配HuggingFace Spaces。</p>
+<br>
+<h3><code class="inline-code">requirements.txt</code></h3>
+<br>
+<p>声明应用依赖，包括Flask、PyTorch (CPU版)、OpenCV-headless、Pillow、NumPy、SciPy、scikit-image和Matplotlib。</p>
+<br>
+<h3><code class="inline-code">app.py</code></h3>
+<br>
+<p>Flask应用入口，处理HTTP请求、文件上传、模型初始化和推理调用。</p>
+<br>
+<ul>
+<li><code class="inline-code">MalariAI</code> (class) - 从pipeline.py导入的推理类，封装了分水岭分割、分类和Grad-CAM生成逻辑。</li>
+<li><code class="inline-code">analyze</code> (function) - 处理POST请求的视图函数，接收上传的图像，保存临时文件，调用model.analyze()并返回JSON结果。</li>
+<li><code class="inline-code">index</code> (function) - 首页路由，返回HTML模板。</li>
+</ul>
+<br>
+<h3><code class="inline-code">pipeline.py</code></h3>
+<br>
+<p>核心推理逻辑，整合分水岭分割、EfficientNet-B0分类和Grad-CAM++可视化。</p>
+<br>
+<ul>
+<li><code class="inline-code">watershed_cells_with_labels</code> (function) - 执行分水岭分割算法，返回细胞边界框列表和标签掩码。</li>
+<li><code class="inline-code">extract_masked_crop</code> (function) - 根据边界框提取细胞裁剪图，并将背景填充为白色以优化分类输入。</li>
+<li><code class="inline-code">MalariAI</code> (class) - 主推理类，初始化加载模型权重，提供analyze()方法处理单张图像，输出包含分割图、细胞列表、分类结果和Grad-CAM图的JSON。</li>
+</ul>
+<br>
+<h3><code class="inline-code">templates/index.html</code></h3>
+<br>
+<p>前端HTML结构，定义临床仪表盘布局，包括顶部栏、统计条、三列网格（输入/结果/报告）及加载遮罩。</p>
+<br>
+<h3><code class="inline-code">static/css/style.css</code></h3>
+<br>
+<p>定义UI样式，采用医疗级配色和卡片布局，确保响应式设计和视觉清晰度。</p>
+<br>
+<h3><code class="inline-code">static/js/app.js</code></h3>
+<br>
+<p>前端交互逻辑，处理文件拖拽上传、调用后端API、解析JSON响应并动态更新DOM元素（统计数字、图像、进度条）。</p>
+<br>
+<ul>
+<li><code class="inline-code">handleFileSelect</code> (function) - 读取选中的文件并预览图像。</li>
+<li><code class="inline-code">renderResults</code> (function) - 解析后端返回的数据并更新页面统计和可视化组件。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>分水岭分割 (Watershed Segmentation)</strong>:</li>
+<li><strong>EfficientNet-B0分类</strong>:</li>
+<li><strong>Grad-CAM++</strong>:</li>
+<li><strong>Flask API</strong>:</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">app.py</code> → <code class="inline-code">pipeline.py</code>: app.py导入并实例化MalariAI类，调用其analyze方法执行推理。</li>
+<li><code class="inline-code">app.py</code> → <code class="inline-code">templates/index.html</code>: app.py通过Flask的render_template函数渲染前端页面。</li>
+<li><code class="inline-code">templates/index.html</code> → <code class="inline-code">static/css/style.css</code>: HTML页面引用CSS文件以应用样式。</li>
+<li><code class="inline-code">templates/index.html</code> → <code class="inline-code">static/js/app.js</code>: HTML页面通过script标签加载JS文件以处理用户交互和API通信。</li>
+<li><code class="inline-code">pipeline.py</code> → <code class="inline-code">requirements.txt</code>: pipeline.py使用的库（torch, opencv, scipy等）在requirements.txt中声明。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+ "id": "2608.14355",
+ "chars": 30228,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": true,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": false,
+   "mentions_dataset_split": false,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 5
+ },
+ "key_claims": [
+  "for g → \\rightarrow he reconstruction, disssl did not consistently improve over clip.",
+  "this asymmetry is consistent with stronger disentanglement removing information useful for image-embedding reconstruction, rather than uniformly improving cross-modal prediction.",
+  "mmvae showed the lowest cross-modality probe performance, whereas mmvae+ and mmvae + sg +_{\\mathrm{sg}} improved over mmvae but generally remained below clip and disssl."
+ ],
+ "ref_spotcheck_targets": [],
+ "citation_results": []
+}

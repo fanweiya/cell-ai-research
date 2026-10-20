@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DriftST Wiki — root</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / DriftST Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>DriftST</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/process.html">process</a></li>
+<li><a href="../modules/src.html">src</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>root</h1>
+<br>
+<p>&gt; DriftST 项目的根模块，提供从 H&amp;E 组织切片推断空间转录组的一站式生成框架，包含训练、测试、数据预处理及实验脚本。</p>
+<br>
+<p>该模块实现了 DriftST 框架，通过提取病理基础模型特征、使用 STransformer 模块预测空间基因表达，并采用漂移目标（drifting objective）训练预测器。支持细胞级 Xenium 数据和斑点级 Visium 数据集。核心流程包括：预处理原始数据生成统一格式、训练模型（结合 ZINB 重建损失与一步漂移损失）、评估模型性能并导出预测结果。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">train.py</code></h3>
+<br>
+<p>训练入口点，执行 DriftST 模型的训练流程。</p>
+<br>
+<ul>
+<li><code class="inline-code">capture_stochastic</code> (function) - 收集每个空间点的 K 个随机 Dropout 预测样本，用于分布可视化。</li>
+<li><code class="inline-code">warmup_bank</code> (function) - 使用 K 次 Dropout 前向传播填充预测银行（PredictionBank），为漂移步骤准备负样本。</li>
+<li><code class="inline-code">sample_k_predictions</code> (function) - 返回 K 个随机预测，仅保留第一个的梯度，用于高效训练。</li>
+<li><code class="inline-code">main</code> (function) - 解析参数，构建数据集，初始化模型和漂移银行，执行训练循环并记录指标。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test.py</code></h3>
+<br>
+<p>在验证/测试集上评估训练好的 DriftST 检查点，并可选导出 h5ad 文件。</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 加载模型和测试数据，执行评估指标计算（PCC, SVG-PCC, MSE, MAE），支持方差后处理校准。</li>
+</ul>
+<br>
+<h3><code class="inline-code">src/model.py</code></h3>
+<br>
+<p>定义 DriftST 核心模型架构（GenePredictor/STransformer）及损失函数。</p>
+<br>
+<ul>
+<li><code class="inline-code">GenePredictor</code> (class) - 主模型类，包含图像特征编码器、STransformer 模块、基因残差门控机制，输出基因表达分布。</li>
+<li><code class="inline-code">zinb_loss</code> (function) - 零膨胀负二项分布（ZINB）重建损失函数，用于原始计数数据的拟合。</li>
+</ul>
+<br>
+<h3><code class="inline-code">src/dataset.py</code></h3>
+<br>
+<p>数据加载器，将原始计数转换为 log1p(count) 目标并准备图像特征及邻居图。</p>
+<br>
+<ul>
+<li><code class="inline-code">build_datasets</code> (function) - 构建训练集、验证集和测试集，处理空间坐标、邻居映射及基因表达数据。</li>
+</ul>
+<br>
+<h3><code class="inline-code">src/drift_step.py</code></h3>
+<br>
+<p>实现一步漂移目标（one-step drifting target）和预测银行（PredictionBank）。</p>
+<br>
+<ul>
+<li><code class="inline-code">PredictionBank</code> (class) - 环形缓冲区，存储模型生成的随机预测样本作为漂移损失的负样本。</li>
+<li><code class="inline-code">multi_scale_drift_step</code> (function) - 执行多尺度漂移步骤，对齐随机预测分布与匹配的真实转录组谱。</li>
+<li><code class="inline-code">drift_loss_fn</code> (function) - 计算漂移损失函数，结合正样本（真实表达）和负样本（银行中的预测）。</li>
+</ul>
+<br>
+<h3><code class="inline-code">src/evaluation.py</code></h3>
+<br>
+<p>计算模型评估指标，包括 PCC、SVG-PCC、MSE、MAE。</p>
+<br>
+<ul>
+<li><code class="inline-code">evaluate</code> (function) - 综合计算各项指标，返回评估结果字典。</li>
+<li><code class="inline-code">metrics_from_arrays</code> (function) - 基于预测数组和真实数组计算具体指标值。</li>
+</ul>
+<br>
+<h3><code class="inline-code">src/postprocess.py</code></h3>
+<br>
+<p>对导出预测进行基因级方差校准（per-gene variance calibration）。</p>
+<br>
+<ul>
+<li><code class="inline-code">gene_stats</code> (function) - 计算基因统计信息，用于方差校准参考。</li>
+<li><code class="inline-code">variance_postprocess</code> (function) - 执行仿射方差校准，调整预测方差以匹配训练集的参考方差。</li>
+</ul>
+<br>
+<h3><code class="inline-code">process/preprocess_xenium_cell_level.py</code></h3>
+<br>
+<p>Xenium 细胞级数据预处理，从转录表重建细胞-基因矩阵并提取细胞中心 H&amp;E 特征。</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 执行完整的 Xenium 细胞级预处理流程。</li>
+</ul>
+<br>
+<h3><code class="inline-code">process/select_xenium_cell_level_genes.py</code></h3>
+<br>
+<p>选择 Xenium 面板基因。</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 根据面板信息筛选基因。</li>
+</ul>
+<br>
+<h3><code class="inline-code">process/select_xenium_cell_level_hvg.py</code></h3>
+<br>
+<p>可选的 Xenium 高变基因（HVG）选择。</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 识别并选择高变基因。</li>
+</ul>
+<br>
+<h3><code class="inline-code">process/generate_xenium_cell_level_splits.py</code></h3>
+<br>
+<p>生成细胞级空间交叉验证分割（spatial CV splits）。</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 为单个切片生成 5 折空间交叉验证分割。</li>
+</ul>
+<br>
+<h3><code class="inline-code">process/preprocess_spot_level.py</code></h3>
+<br>
+<p>HEST 风格斑点级数据预处理（如 Visium）。</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 处理斑点级数据，生成统一格式。</li>
+</ul>
+<br>
+<h3><code class="inline-code">process/compute_spatial_variable_genes.py</code></h3>
+<br>
+<p>计算空间可变基因（SVG）排名，用于评估。</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 计算并保存 SVG 排名。</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/run_xenium_cell_level_preprocess.sh</code></h3>
+<br>
+<p>执行默认的 Xenium 细胞级预处理脚本。</p>
+<br>
+<h3><code class="inline-code">scripts/run_xenium_cell_level_train.sh</code></h3>
+<br>
+<p>在 Xenium 乳腺癌细胞级数据上训练 DriftST。</p>
+<br>
+<h3><code class="inline-code">scripts/run_xenium_coad_cell_level_train.sh</code></h3>
+<br>
+<p>在 Xenium COAD 细胞级数据上训练 DriftST。</p>
+<br>
+<h3><code class="inline-code">scripts/run_spot_level_train.sh</code></h3>
+<br>
+<p>在 HER2ST/PRAD/Kidney 等斑点级数据上训练 DriftST。</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>漂移目标（Drifting Objective）</strong>: 一种训练策略，将模型生成的随机 Dropout 预测（负样本）与匹配的真实转录组谱（正样本）进行对齐，通过漂移损失函数优化模型分布。</li>
+<li><strong>预测银行（Prediction Bank）</strong>: 一个环形缓冲区，存储模型在训练过程中生成的随机预测样本，作为漂移损失的负样本池。</li>
+<li><strong>STransformer 模块</strong>: 基于 Transformer 的空间转录组预测核心，利用病理基础模型（UNI2/CONCH）提取的图像特征，结合共表达注意力偏置和渐进基因残差门控机制。</li>
+<li><strong>ZINB 重建</strong>: 零膨胀负二项分布重建损失，用于直接拟合原始基因计数数据，处理空间转录组数据中的零膨胀特性。</li>
+<li><strong>方差后处理校准</strong>: 对导出预测进行基因级仿射方差校准，使预测方差与训练集参考方差匹配，提高预测质量。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">train.py</code> → <code class="inline-code">src/dataset.py</code>: train.py 导入 build_datasets 以加载训练和验证数据。</li>
+<li><code class="inline-code">train.py</code> → <code class="inline-code">src/model.py</code>: train.py 导入 GenePredictor 和 zinb_loss 以构建模型和计算损失。</li>
+<li><code class="inline-code">train.py</code> → <code class="inline-code">src/drift_step.py</code>: train.py 导入 PredictionBank、multi_scale_drift_step 和 drift_loss_fn 以执行漂移训练。</li>
+<li><code class="inline-code">train.py</code> → <code class="inline-code">src/evaluation.py</code>: train.py 导入 evaluate 以在训练过程中监控性能。</li>
+<li><code class="inline-code">test.py</code> → <code class="inline-code">src/dataset.py</code>: test.py 导入 build_datasets 以加载测试数据。</li>
+<li><code class="inline-code">test.py</code> → <code class="inline-code">src/model.py</code>: test.py 导入 GenePredictor 以加载预训练模型。</li>
+<li><code class="inline-code">test.py</code> → <code class="inline-code">src/evaluation.py</code>: test.py 导入 evaluate 和 metrics_from_arrays 以计算评估指标。</li>
+<li><code class="inline-code">test.py</code> → <code class="inline-code">src/postprocess.py</code>: test.py 导入 gene_stats 和 variance_postprocess 以进行方差校准。</li>
+<li><code class="inline-code">process/preprocess_xenium_cell_level.py</code> → <code class="inline-code">src/dataset.py</code>: 预处理脚本生成符合 src.dataset 要求的 processed_data 格式。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

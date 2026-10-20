@@ -1,0 +1,58 @@
+{
+  "paper_id": "2605.08566",
+  "task": "single_review",
+  "overall_assessment": "MicroDiffuse3D 提出了一种基于扩散模型的3D显微图像重建框架，通过大规模预训练和任务特定微调，在多个下游任务中表现出色，包括极端稀疏条件下的3D超分辨率和低信噪比下的去噪。其方法设计合理，尤其是分解注意力机制和3D扩散架构的结合，有效应对了显微成像中的光学各向异性问题。然而，论文在统计报告、引用真实性和泛化性方面存在若干关键问题，需要进一步澄清和补充。",
+  "strengths": [
+    "提出了一种新颖的3D扩散模型架构，结合了分解注意力机制，有效处理显微图像的各向异性结构。",
+    "在多个3D图像恢复任务中表现优异，且在下游生物分析（如细胞核分割）中展现出实际应用价值。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "论文声称MicroDiffuse3D基于物理退化模拟和3D块掩码进行预训练",
+      "concern": "缺乏对物理退化模拟的具体实现细节，如PSF建模、散射模拟的参数设置和验证方法。",
+      "why_it_matters": "物理退化模拟的质量直接影响模型对真实退化模式的学习能力，缺乏细节将影响方法的可复现性和科学性。",
+      "resolution_test": "补充物理退化模拟的数学公式、参数设置、以及与真实退化数据的对比实验。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "statistics",
+      "claim_pointer": "论文使用PSNR、SSIM、LPIPS等指标评估模型性能",
+      "concern": "未报告统计显著性检验结果（如p值）或置信区间，仅依赖箱型图展示分布。",
+      "why_it_matters": "缺乏统计显著性分析可能掩盖模型性能提升的偶然性，影响结论的可信度。",
+      "resolution_test": "提供统计检验结果（如t检验或Wilcoxon检验）以支持性能提升的显著性。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "论文声称MicroDiffuse3D适用于多种显微成像模态",
+      "concern": "仅在SRS和SIM模态上进行了评估，缺乏对其他模态（如荧光、电子显微镜）的泛化实验。",
+      "why_it_matters": "泛化性是‘foundation model’的核心承诺，缺乏跨模态验证将削弱其通用性主张。",
+      "resolution_test": "补充在其他成像模态（如荧光显微镜或电子显微镜）上的测试结果，或提供迁移学习的适应性实验。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "citation",
+      "claim_pointer": "引用了多个未定义文献（如[undefaa], [undefab]）",
+      "concern": "文献引用不完整或缺失，影响相关工作的可追溯性和学术严谨性。",
+      "why_it_matters": "未定义引用可能掩盖关键方法来源或已有工作，违反学术规范。",
+      "resolution_test": "补充完整参考文献条目或提供预印本/正式出版物链接。"
+    }
+  ],
+  "assessment_boundaries": [
+    "未提供代码或训练细节，无法评估模型训练的可复现性。",
+    "未说明模型在不同硬件平台上的推理效率，影响其在临床场景中的适用性评估。",
+    "未提供模型在不同组织类型或细胞类型上的性能差异分析，限制了对泛化能力的全面理解。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

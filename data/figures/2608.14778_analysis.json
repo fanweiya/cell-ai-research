@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "多期CT扫描时序示意图：平扫、动脉期、门静脉期、延迟期四期肝脏CT图像及造影剂注射后各期采集时间点"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "LI-RADS 分类标准流程图，展示肝脏病变从良性到恶性（LR-1至LR-TIV）的判定逻辑及基于增强特征和大小的LR-3/4/5分级表格，配以CT示例图像"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "展示LI-RADS各分级（LR-1至LR-TIV）代表性肝脏病灶CT图像示例图，是数据集的核心内容展示"
+  }
+}

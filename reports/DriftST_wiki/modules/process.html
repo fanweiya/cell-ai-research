@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DriftST Wiki — process</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / DriftST Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>DriftST</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/process.html">process</a></li>
+<li><a href="../modules/src.html">src</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>process</h1>
+<br>
+<p>&gt; 提供从H&amp;E组织切片推断空间转录组的一站式数据预处理、特征选择与空间变量基因计算流程</p>
+<br>
+<p>该模块负责处理两种主要数据格式：HEST风格的spot-level数据和Xenium风格的cell-level数据。核心流程包括：1) 从原始转录本parquet文件重建细胞-基因计数矩阵并提取H&amp;E图像特征；2) 筛选有效基因（去除对照）和高度可变基因(HVGs)；3) 计算空间自相关性(Moran's I)以识别空间变量基因(SVGs)；4) 生成空间交叉验证分割方案。所有处理后的数据均标准化为DriftST框架所需的AnnData格式，包含基因表达矩阵、空间坐标和元数据。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">process/compute_spatial_variable_genes.py</code></h3>
+<br>
+<p>基于Moran's I统计量对空间变量基因进行排序</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 加载处理后的基因表达数据，构建空间邻域图，计算Moran's I，输出SVG排序结果</li>
+<li><code class="inline-code">parse_args</code> (function) - 解析命令行参数，包括数据目录、slide ID和邻居数量</li>
+</ul>
+<br>
+<h3><code class="inline-code">process/generate_xenium_cell_level_splits.py</code></h3>
+<br>
+<p>为单个Xenium slide生成空间5折交叉验证分割</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 按X或Y坐标将细胞划分为水平或垂直条带，生成训练/测试集分割方案</li>
+<li><code class="inline-code">parse_args</code> (function) - 解析数据目录、slide ID、折叠数和分割轴参数</li>
+</ul>
+<br>
+<h3><code class="inline-code">process/preprocess_spot_level.py</code></h3>
+<br>
+<p>预处理HEST风格的spot-level数据集以适配DriftST</p>
+<br>
+<ul>
+<li><code class="inline-code">load_one_slide</code> (function) - 读取单个slide的h5ad文件，筛选目标基因，填充缺失基因，提取空间坐标和spot直径</li>
+<li><code class="inline-code">load_gene_list</code> (function) - 加载目标基因列表</li>
+</ul>
+<br>
+<h3><code class="inline-code">process/preprocess_xenium_cell_level.py</code></h3>
+<br>
+<p>预处理Xenium cell-level数据以适配DriftST</p>
+<br>
+<ul>
+<li><code class="inline-code">load_one_slide</code> (function) - 从转录本parquet文件重建细胞-基因计数矩阵，过滤低质量转录本，提取UNI2+CONCH H&amp;E特征，构建空间邻域图</li>
+<li><code class="inline-code">load_gene_list</code> (function) - 加载目标基因列表</li>
+</ul>
+<br>
+<h3><code class="inline-code">process/select_xenium_cell_level_genes.py</code></h3>
+<br>
+<p>从Xenium转录本文件中提取有效面板基因</p>
+<br>
+<ul>
+<li><code class="inline-code">is_control</code> (function) - 根据正则表达式模式识别并排除对照探针</li>
+<li><code class="inline-code">main</code> (function) - 扫描所有parquet文件，收集唯一特征名，过滤对照，输出有效基因列表</li>
+</ul>
+<br>
+<h3><code class="inline-code">process/select_xenium_cell_level_hvg.py</code></h3>
+<br>
+<p>从单个Xenium转录本文件中选择高度可变基因</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 读取转录本数据，过滤低质量转录本和细胞，构建计数矩阵，使用Seurat v3方法选择HVGs</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>空间变量基因 (SVGs)</strong>: 通过Moran's I统计量识别在空间上具有显著自相关性的基因，这些基因的表达模式与组织空间结构相关</li>
+<li><strong>Xenium转录本重建</strong>: 从原始转录本parquet文件中聚合细胞ID和基因表达计数，构建细胞-基因表达矩阵</li>
+<li><strong>空间交叉验证</strong>: 按空间坐标（X或Y轴）将细胞划分为连续条带作为测试集，确保模型评估反映空间泛化能力</li>
+<li><strong>DriftST数据格式</strong>: 标准化的AnnData格式，包含基因表达矩阵、空间坐标(obsm['spatial'])和元数据(obs)</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">process/preprocess_xenium_cell_level.py</code> → <code class="inline-code">process/select_xenium_cell_level_genes.py</code>: preprocess_xenium_cell_level.py依赖select_xenium_cell_level_genes.py生成的基因列表作为输入</li>
+<li><code class="inline-code">process/select_xenium_cell_level_hvg.py</code> → <code class="inline-code">process/select_xenium_cell_level_genes.py</code>: select_xenium_cell_level_hvg.py使用select_xenium_cell_level_genes.py输出的候选基因列表进行HVG筛选</li>
+<li><code class="inline-code">process/compute_spatial_variable_genes.py</code> → <code class="inline-code">process/preprocess_spot_level.py</code>: compute_spatial_variable_genes.py处理preprocess_spot_level.py生成的标准化数据</li>
+<li><code class="inline-code">process/generate_xenium_cell_level_splits.py</code> → <code class="inline-code">process/preprocess_xenium_cell_level.py</code>: generate_xenium_cell_level_splits.py利用preprocess_xenium_cell_level.py生成的元数据进行空间分割</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

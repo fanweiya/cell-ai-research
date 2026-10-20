@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HASSL Wiki — combined_report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / HASSL Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>HASSL</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/notebooks.html">notebooks</a></li>
+<li><a href="modules/docs.html">docs</a></li>
+<li><a href="modules/dinov3.html">dinov3</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>HASSL — 综合分析报告</h1>
+<br>
+<ul>
+<li><strong>GitHub</strong>: tum-ai/HASSL</li>
+<li><strong>评分</strong>: 8.5/10</li>
+<li><strong>分析时间</strong>: 2026-07-15T18:26:41.634153</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2>CodeGraph 知识图谱分析</h2>
+<br>
+<br>
+<h2>RepoWiki 文档生成</h2>
+<br>
+<ul>
+<li>✅ 扫描成功</li>
+<li>📁 Wiki 目录: <code class="inline-code">/mnt/c/workspace/cell-ai-research/reports/HASSL_wiki</code></li>
+<li>📄 生成文件:</li>
+<li>architecture.md</li>
+<li>dependencies.md</li>
+<li>index.md</li>
+<li>reading-guide.md</li>
+<li>_sidebar.md</li>
+<li>modules/.codegraph.md</li>
+<li>modules/.github.md</li>
+<li>modules/dinov3.md</li>
+<li>modules/docs.md</li>
+<li>modules/notebooks.md</li>
+<li>输出: Project: HASSL</li>
+</ul>
+<p>Files:   169</p>
+<p>Lines:   28,872</p>
+<p>Languages</p>
+<p>┏━━━━━━━━━━┳━━━━━━━┓</p>
+<p>┃ Language ┃ Files ┃</p>
+<p>┡━━━━━━━━━━╇━━━━━━━┩</p>
+<p>│ python   │   135 │</p>
+<p>│ yaml     │    15 │</p>
+<p>│ markdown │     5 │</p>
+<p>│ unknown  │     5 │</p>
+<p>│ c        │     3 │</p>
+<p>│ text     │     2 │</p>
+<p>│ cpp      │     2 │</p>
+<p>│ toml     │     1 │</p>
+<p>│ html     │     1 │</p>
+<p>└──────────┴───────┘</p>
+<p>HASSL/</p>
+<p>├── ⚙️ README.md (markdown)</p>
+<p>├── 📁 dinov3/</p>
+<p>│   ├── ⚙️ configs/config.py (python)</p>
+<p>│   ├── ⚙️ eval/detection/config.py (python)</p>
+<p>│   ├── ⚙️ eval/segmentation/models/utils/ops/setup.py (python)</p>
+<p>│   ├── ⚙️ eval/setup.py (python)</p>
+<p>│   ├── 📄 __init__.py (python)</p>
+<p>│   ├── 📄 checkpointer/__init__.py (python)</p>
+<p>│   ├── 📄 checkpointer/checkpointer.py (python)</p>
+<p>│   ├── 📄 configs/__init__.py (python)</p>
+<p>│   ├── 📄 configs/ssl_default_config.yaml (yaml)</p>
+<p>│   ├── 📄 configs/train/dinov3_neglambds.yaml (yaml)</p>
+<p>│   ├── 📄 configs/train/dinov3_vit7b16_gram_anchor.yaml (yaml)</p>
+<p>│   ├── 📄 configs/train/dinov3_vit7b16_high_res_adapt.yaml (yaml)</p>
+<p>│   ├── 📄 configs/train/dinov3_vit7b16_</p>
+<br>
+<h2>原有子代理分析报告</h2>
+<br>
+<pre class="code-block"><code class="language-">现在让我总结分析结果并输出报告。基于我对 HASSL 仓库的深入分析，我来生成结构化报告：
+
+## 项目概述
+
+HASSL（Hierarchy-Aware Self-Supervised Learning）是一个针对单细胞显微镜图像的层次感知自监督学习框架，对应论文 **"HASSL: Hierarchy-Aware Self-Supervised Learning Framework for Single Cell Microscopy"** (arXiv:2607.04353, 2026年7月)。
+
+**核心问题**：在生物细胞图像中，当前自监督学习模型常常抑制层次结构，粗粒度的成像因素（如成像模式、染色协议）会掩盖精细的形态学特征，导致潜在空间中语义上不同的细胞看起来相同，层次相关的亚型坍缩到同一个簇中。
+
+**解决方案**：HASSL 在 DINOv3 基础上引入两个核心组件：
+1. **Double-Teacher Distillation**：结合分割教师（使用 CellposeSAM 零样本分割掩码）和标准 EMA 图像教师，引导学生模型关注细胞形态而非采集模式
+2. **Hierarchy-Aware Contrastive Loss**：基于 HDBSCAN 在批次嵌入中构建层次原型树，通过稳定性权重（λ）在每一层次挖掘正负样本，拉拢细胞向祖先聚类中心靠拢，同时推开不同亚型
+
+**数据集**：在 230 万细胞、20 个显微镜数据集、208 个细胞类上训练和评估。
+
+**性能提升**：相比最先进自监督基线，Top-K 准确率提升 2.8%，最深层次结构 Top-9 检索提升 6.3%，药物扰动分类 F1 分数提升 7.8%。
+
+## 架构分析
+
+### 目录结构</code></pre>
+<p>HASSL/</p>
+<p>├── dinov3/              # 基于 DINOv3 核心代码</p>
+<p>│   ├── data/            # 数据集、数据增强、加载器</p>
+<p>│   ├── layers/          # 网络层，包括 clustering.py（HDBSCAN 原型构建）</p>
+<p>│   ├── loss/            # 损失函数，包括 triplet_hierachical_loss.py（层级对比损失）</p>
+<p>│   ├── models/          # 模型架构</p>
+<p>│   ├── train/           # 训练架构（ssl_meta_arch.py 为核心）</p>
+<p>│   └── eval/            # 评估脚本</p>
+<p>├── notebooks/           # 提取嵌入的 Jupyter 示例</p>
+<p>├── manifests/           # 预设的训练/验证/测试清单</p>
+<p>└── docs/                # 项目文档</p>
+<pre class="code-block"><code class="language-">
+### 主要模块依赖关系
+1. **基础框架**：DINOv3（PyTorch，FSDP2，混合精度）
+2. **核心依赖**：
+   - `hdbscan==0.8.41`：层次聚类
+   - `torch==2.10.0`：深度学习框架
+   - `wandb==0.25.0`：实验追踪
+   - `omegaconf==2.3.0`：配置管理
+3. **数据格式**：自定义 `.npy` 图像和掩码格式，通过 manifest CSV 管理
+
+### 数据流水线
+- **数据集类**：`NCells` (dinov3/data/datasets/n_cells.py) 支持多源数据集
+- **数据增强**：DINO 风格多尺度裁剪 + 颜色抖动
+- **特殊处理**：支持分割掩码（CellposeSAM）作为额外输入
+
+## 核心算法实现原理
+
+### 1. Double-Teacher Distillation
+在 `ssl_meta_arch.py` 的 `seg` 模块实现（第 421-466 行）：
+</code></pre>
+<p>if getattr(self.cfg, "seg", None) and self.cfg.seg.enabled:</p>
+<h1>Seg -&gt; Seg loss (student segmentation vs teacher segmentation)</h1>
+<p>seg2seg = dino_loss(seg_student, seg_teacher)</p>
+<h1>Seg -&gt; Image loss (student image vs teacher segmentation)</h1>
+<p>seg2img = dino_loss(student, seg_teacher)</p>
+<h1>权重动态调整：min(0.2, (iteration/125000)*0.2)</h1>
+<p>seg_extra_loss = w * (seg2seg + seg2img)</p>
+<pre class="code-block"><code class="language-">
+**关键设计**：分割教师使用 CellposeSAM 零样本掩码，与学生-图像对进行知识蒸馏。这就像是一个注意力机制，引导模型关注细胞结构而非背景或成像伪影。
+
+### 2. HDBSCAN 原型层次构建
+`clustering.py` 中的 `build_triplet_lists_with_paths` 函数：
+
+- 输入：批次嵌入 X (N, D)
+- 使用 HDBSCAN 构建聚类树
+- 修剪单子树边（singleton-child edges），保留有意义的层次结构
+- 为每个样本构建：
+  - **Positive**：路径上所有祖先原型（深度&gt;0）及其 λ 值
+  - **Negative**：同层其他簇原型 + 同簇内更细粒度原型
+- 输出： positives, negatives, lambdas, neg_lambdas
+
+### 3. 层级三元组对比损失
+`triplet_hierachical_loss.py` 实现：
+</code></pre>
+<h1>对每个锚点</h1>
+<p>positive_sum = Σ (dist(anchor, pos_i)² × λ_i) / P</p>
+<p>negative_sum = Σ (max(0, 2 - dist(anchor, neg_i))² × λ_neg_i) / N</p>
+<p>loss = positive_sum + negative_sum</p>
+<pre class="code-block"><code class="language-">
+**创新点**：
+- 使用稳定性 λ 作为权重，强调可靠的层次关系
+- 拉普拉斯平滑处理距离，避免极端值
+- 支持全局或局部权重缩放
+
+### 4. 训练流程
+1. 标准 DINOv3 双师生蒸馏（Image-Image）
+2. 分割教师蒸馏（Seg-Image）
+3. HDBSCAN 聚类批次嵌入
+4. 构建 triplet 正负样本
+5. 计算层级三元组损失
+6. 多任务联合优化
+
+## 代码质量
+
+### ✅ 优点
+1. **模块化设计清晰**：各组件职责分离，易于理解和维护
+2. **配置系统完善**：YAML 配置 + 动态命令行覆盖
+3. **分布式训练支持**：FSDP2、混合精度、梯度累积
+4. **日志追踪</code></pre>
+<br>
+<p>&gt; 完整报告: <a href="HASSL.html">reports/HASSL.md</a></p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

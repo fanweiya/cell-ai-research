@@ -1,0 +1,57 @@
+{
+  "paper_id": "2601.11645",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种名为IMSAHLO的深度学习方法，用于荧光标记神经元细胞的显微图像分割。论文在方法设计上具有一定的创新性，结合了多尺度密集块（MSDB）和分层注意力机制（HA），并引入了一种混合损失函数，以应对神经元分割中的边界模糊、拓扑结构保持等挑战。实验部分与现有方法进行了比较，并展示了在特定数据集上的性能优势。然而，论文在统计报告、引用真实性和泛化性方面存在一些关键问题，需要进一步澄清和补充。",
+  "strengths": [
+    "提出的IMSAHLO架构结合了多尺度特征提取和注意力机制，有效应对了神经元细胞分割中的关键挑战。",
+    "混合损失函数的设计具有生物学动机，结合了Tversky Loss、Boundary Loss、Focal Loss和clDice Loss，提升了模型在边界精度、拓扑连续性等方面的表现。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "论文声称IMSAHLO在神经元分割中优于现有方法",
+      "concern": "论文中提到的模型变体（如NeuroSegNet + MSDBs 和 IMSAHLO）之间的对比缺乏足够的实验细节，例如训练轮次、超参数设置、模型复杂度对比等。",
+      "why_it_matters": "缺乏实验细节使得无法判断模型性能提升是由于架构改进还是训练策略优化。",
+      "resolution_test": "需要补充详细的训练配置、模型参数量、推理速度等信息，并提供消融实验的完整结果表格或图表。"
+    },
+    {
+      "id": "S-M2",
+      "severity": "major",
+      "blocking": true,
+      "axis": "statistics",
+      "claim_pointer": "论文声称其混合损失函数优于单一损失函数",
+      "concern": "损失函数的权重（0.4, 0.2, 0.3, 0.1）是经验设定，但未提供交叉验证或统计显著性检验来支持其最优性。",
+      "why_it_matters": "经验设定的权重缺乏统计依据，可能影响模型的泛化能力和可复现性。",
+      "resolution_test": "应提供不同权重组合的实验结果，并进行统计检验（如t检验）以验证权重选择的合理性。"
+    },
+    {
+      "id": "S-M3",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "generalizability",
+      "claim_pointer": "论文声称IMSAHLO具有良好的泛化能力",
+      "concern": "实验仅在一个公开数据集上进行，未在跨数据集或跨模态任务中评估模型的泛化能力。",
+      "why_it_matters": "单一数据集的评估不足以证明模型的泛化能力，尤其是在生物医学图像领域，数据分布差异较大。",
+      "resolution_test": "应补充在其他神经元图像数据集或不同成像模态（如电子显微镜）上的实验结果。"
+    },
+    {
+      "id": "S-M4",
+      "severity": "major",
+      "blocking": true,
+      "axis": "citation",
+      "claim_pointer": "论文引用了多个现有方法（如U-Net、Attention U-Net、clDice Loss等）",
+      "concern": "部分引用文献存在不准确或不完整的情况，例如clDice Loss的引用格式不规范，且未引用原始论文，而是引用了未发表的预印本或非权威来源。",
+      "why_it_matters": "引用不规范会影响论文的学术严谨性，并可能误导读者。",
+      "resolution_test": "应核实所有引用文献的来源，确保引用格式符合学术规范，并引用原始论文而非非权威来源。"
+    }
+  ],
+  "assessment_boundaries": [
+    "论文未提供足够的代码或训练细节，无法复现实验结果。",
+    "未提供模型在真实临床或科研场景中的应用验证，无法评估其实际价值。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

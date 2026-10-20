@@ -1,0 +1,29 @@
+{
+ "id": "2608.17598",
+ "chars": 60000,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": true,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": true,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 5
+ },
+ "key_claims": [
+  "across all datasets, spurcon substantially outperforms prior methods in worst-group (wg) accuracy , demonstrating its effectiveness in mitigating spurious correlations.",
+  "as can be seen in table 2 , spurcon significantly outperforms prior methods on waterbirds across all metrics except auc, where it trails dfr by a small margin.",
+  "among the examined methods, spurcon achieves the best balance between average and worst-group accuracy."
+ ],
+ "ref_spotcheck_targets": [],
+ "citation_results": []
+}

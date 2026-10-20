@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "三联图：近邻jaccard距离分布、异常标记细胞比例柱状图、经验生存曲线，展示预训练数据污染审计的实验结果"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "实验结果图：MIA-scfm方法检测单细胞基础模型记忆化式过拟合的AUROC柱状图与剂量-响应散点图"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "核心实验结果图：A展示各单细胞基础模型（Geneformer、scGPT、UCE）的供体匹配细胞类型tightness gap分布，B对比真实gap与置换零假设的统计显著性检验"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "SLICEChat模型架构图，展示从全切片图像到语言模型输出的流程"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "方法流程图：展示列主序与Hilbert曲线两种token扫描排序方式及其对patch token顺序的影响，用于说明WSI编码器的token组织策略"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "展示SLICEChat渐进式token剪枝过程：各阶段保留的病理切片token从4785逐步减少至957。"
+  }
+}

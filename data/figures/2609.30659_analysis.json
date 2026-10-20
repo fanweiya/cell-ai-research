@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法流程图：展示基于神经先验的相位恢复迭代框架（IFFT-Neural Prior-FFT循环）"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "77张图像配对的收敛对比图，展示SelfDeblur与Self-Diffusion在不同阶段和设置下的平均ΔMSE曲线。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "展示不同最终相位仅传递次数下PSNR和SSIM的折线图，评估图像重建性能。"
+  }
+}

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>micro-sam Wiki — test</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / micro-sam Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>micro-sam</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/doc.html">doc</a></li>
+<li><a href="../modules/test.html">test</a></li>
+<li><a href="../modules/finetuning.html">finetuning</a></li>
+<li><a href="../modules/workshops.html">workshops</a></li>
+<li><a href="../modules/examples.html">examples</a></li>
+<li><a href="../modules/development.html">development</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/deployment.html">deployment</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/micro_sam.html">micro_sam</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>test</h1>
+<br>
+<p>&gt; 测试 micro-sam 项目的核心功能、CLI 工具、模型集成及 GUI 组件。</p>
+<br>
+<p>该模块包含一系列单元测试和集成测试，用于验证 micro-sam 在图像分割、跟踪、提示生成、模型导出及命令行接口方面的正确性。测试覆盖 2D/3D 自动分割、基于提示的分割、实例分割、多尺度分割、PEFT 模型微调、生物图像格式导出以及 Napari 插件的 GUI 交互。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">test/test_automatic_segmentation.py</code></h3>
+<br>
+<p>测试自动实例分割功能，包括标准模式和分块模式，支持 2D 和 3D 数据。</p>
+<br>
+<ul>
+<li><code class="inline-code">TestAutomaticSegmentation</code> (class) - 测试类，生成合成数据并验证 automatic_instance_segmentation 函数的输出形状和正确性。</li>
+<li><code class="inline-code">_get_2d_inputs</code> (method) - 静态方法，生成包含三个对象的 2D 合成掩码和图像。</li>
+<li><code class="inline-code">_get_3d_inputs</code> (method) - 类方法，通过堆叠带位移的 2D 切片生成 3D 合成数据。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_bioimageio/test_model_export.py</code></h3>
+<br>
+<p>测试将 SAM 模型导出为 bioimage.io 规范格式的功能。</p>
+<br>
+<ul>
+<li><code class="inline-code">TestModelExport</code> (class) - 测试类，验证 export_sam_model 函数能否成功生成有效的导出文件。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_cli.py</code></h3>
+<br>
+<p>测试命令行接口 (CLI) 命令的存在性及基本功能，如 annotator、precompute_embeddings 和 automatic_segmentation。</p>
+<br>
+<ul>
+<li><code class="inline-code">TestCLI</code> (class) - 测试类，验证 CLI 命令是否可执行并检查输出文件的有效性。</li>
+<li><code class="inline-code">test_precompute_embeddings</code> (method) - 测试 precompute_embeddings 命令对单张图像和图像栈的处理，验证嵌入文件结构。</li>
+<li><code class="inline-code">test_automatic_segmentation</code> (method) - 测试 automatic_segmentation 命令的 AMG 模式输出。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_instance_segmentation.py</code></h3>
+<br>
+<p>测试实例分割模块，包括 AutomaticMaskGenerator 的初始化、生成、状态序列化及分块处理。</p>
+<br>
+<ul>
+<li><code class="inline-code">TestInstanceSegmentation</code> (class) - 测试类，验证实例分割流程的完整性和状态保持能力。</li>
+<li><code class="inline-code">_test_instance_segmentation</code> (method) - 通用测试方法，检查分割精度、可重复性及状态序列化/反序列化。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_models/test_peft_sam.py</code></h3>
+<br>
+<p>测试基于 PEFT (Parameter-Efficient Fine-Tuning) 的 SAM 模型变体，包括 LoRA、FacT 等。</p>
+<br>
+<ul>
+<li><code class="inline-code">TestPEFTSam</code> (class) - 测试类，验证不同 PEFT 模块 (LoRASurgery, FacTSurgery 等) 与 SAM 集成的输出形状。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_models/test_sam_3d_wrapper.py</code></h3>
+<br>
+<p>测试 3D SAM 包装器模型，验证其输入输出张量形状是否符合 3D 分割要求。</p>
+<br>
+<ul>
+<li><code class="inline-code">TestSAM3DWrapper</code> (class) - 测试类，检查 get_sam_3d_model 生成的模型能否正确处理 3D 输入。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_models/test_simple_sam_3d_wrapper.py</code></h3>
+<br>
+<p>测试简化版 3D SAM 包装器模型，验证其基本推理功能。</p>
+<br>
+<ul>
+<li><code class="inline-code">TestSimpleSAM3DWrapper</code> (class) - 测试类，检查 get_simple_sam_3d_model 生成的模型输出。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_multi_dimensional_segmentation.py</code></h3>
+<br>
+<p>测试多维分割功能，包括 3D 实例分割的合并 (merge) 和跨帧跟踪 (track)。</p>
+<br>
+<ul>
+<li><code class="inline-code">TestMultiDimensionalSegmentation</code> (class) - 测试类，验证 merge_instance_segmentation_3d 和 track_across_frames 的逻辑正确性。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_prompt_based_segmentation.py</code></h3>
+<br>
+<p>测试基于提示的分割功能，包括点提示、框提示和掩码提示在不同图像尺寸和分块模式下的表现。</p>
+<br>
+<ul>
+<li><code class="inline-code">TestPromptBasedSegmentation</code> (class) - 测试类，验证 segment_from_points 等函数在不同提示组合下的分割精度。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_prompt_generators.py</code></h3>
+<br>
+<p>测试提示生成器，验证点/框提示生成器能否正确生成与真实标签一致的坐标和标签。</p>
+<br>
+<ul>
+<li><code class="inline-code">TestPromptGenerators</code> (class) - 测试类，检查 PointAndBoxPromptGenerator 生成的提示是否与 ground truth 匹配。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_sam_annotator/test_annotator_2d.py</code></h3>
+<br>
+<p>集成测试 2D 标注器 GUI 组件，验证其在 Napari 中的初始化和显示。</p>
+<br>
+<ul>
+<li><code class="inline-code">test_annotator_2d</code> (function) - 测试函数，启动 annotator_2d 并检查图层初始化状态。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_sam_annotator/test_annotator_3d.py</code></h3>
+<br>
+<p>集成测试 3D 标注器 GUI 组件，验证其在 Napari 中的初始化和显示。</p>
+<br>
+<ul>
+<li><code class="inline-code">test_annotator_3d</code> (function) - 测试函数，启动 annotator_3d 并检查图层初始化状态。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_sam_annotator/test_annotator_tracking.py</code></h3>
+<br>
+<p>集成测试跟踪标注器 GUI 组件，验证其在 Napari 中的初始化和显示。</p>
+<br>
+<ul>
+<li><code class="inline-code">test_annotator_tracking</code> (function) - 测试函数，启动 annotator_tracking 并检查图层初始化状态。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_sam_annotator/test_image_series_annotator.py</code></h3>
+<br>
+<p>集成测试图像序列和文件夹标注器，验证批量处理流程的 GUI 集成。</p>
+<br>
+<ul>
+<li><code class="inline-code">test_image_series_annotator</code> (function) - 测试函数，验证 image_series_annotator 的初始化。</li>
+<li><code class="inline-code">test_image_folder_annotator</code> (function) - 测试函数，验证 image_folder_annotator 的初始化。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_sam_annotator/test_imports.py</code></h3>
+<br>
+<p>测试 Napari 插件清单中所有命令的导入性，确保插件加载时不会因导入错误而崩溃。</p>
+<br>
+<ul>
+<li><code class="inline-code">test_napari_manifest_command_importable</code> (function) - 参数化测试函数，检查每个命令目标是否可解析。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_sam_annotator/test_state.py</code></h3>
+<br>
+<p>测试标注器状态管理 (AnnotatorState) 的初始化和状态检查逻辑。</p>
+<br>
+<ul>
+<li><code class="inline-code">TestState</code> (class) - 测试类，验证 AnnotatorState 在交互分割和跟踪模式下的状态。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_sam_annotator/test_widgets.py</code></h3>
+<br>
+<p>测试 Napari 插件中的 EmbeddingWidget 组件，验证嵌入计算和保存功能。</p>
+<br>
+<ul>
+<li><code class="inline-code">test_embedding_widget</code> (function) - 测试函数，检查 EmbeddingWidget 的推理、状态存储及文件输出。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_training.py</code></h3>
+<br>
+<p>测试训练相关功能，包括数据集构建和模型训练流程（部分测试在 CI 中被跳过）。</p>
+<br>
+<ul>
+<li><code class="inline-code">TestDataset</code> (class) - 测试类，验证 default_sam_dataset 生成的数据集结构和形状。</li>
+<li><code class="inline-code">TestTraining</code> (class) - 测试类，集成测试 SAM 模型的训练流程（通常被跳过）。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_util.py</code></h3>
+<br>
+<p>测试工具函数，包括模型获取、IoU 计算、NMS 应用及预计算嵌入设置。</p>
+<br>
+<ul>
+<li><code class="inline-code">TestUtil</code> (class) - 测试类，验证 util 模块中核心函数的正确性。</li>
+<li><code class="inline-code">test_model_registry</code> (method) - 检查模型注册表中所有 URL 的有效性。</li>
+<li><code class="inline-code">test_get_sam_model</code> (method) - 验证 get_sam_model 返回的预测器类型和属性。</li>
+<li><code class="inline-code">test_apply_nms_tiled_border_masks</code> (method) - 测试 apply_nms 函数在分块边界掩码处理上的正确性。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test/test_vendored.py</code></h3>
+<br>
+<p>测试 vendored 模块中的底层算子，如 mask_to_box 和 mask_to_rle_pytorch，确保其与 SAM 官方实现一致。</p>
+<br>
+<ul>
+<li><code class="inline-code">TestVendored</code> (class) - 测试类，验证 batched_mask_to_box 和 mask_to_rle_pytorch 的输出正确性。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>Automatic Mask Generator (AMG)</strong>: 无需用户提示即可自动检测图像中所有实例的分割模块，测试覆盖其 2D/3D 及分块推理模式。</li>
+<li><strong>Prompt-Based Segmentation</strong>: 基于点、框或掩码提示进行交互式分割的功能，测试验证不同提示组合下的分割精度。</li>
+<li><strong>State Management</strong>: 标注器应用中的状态持久化机制，支持分割状态的保存、加载和序列化，确保交互连续性。</li>
+<li><strong>PEFT (Parameter-Efficient Fine-Tuning)</strong>: 对 SAM 模型进行高效微调的技术，测试涵盖 LoRA、FacT 等多种微调策略的集成。</li>
+<li><strong>3D Segmentation &amp; Tracking</strong>: 处理三维体积数据及时间序列数据的分割与跟踪功能，包括实例合并和跨帧关联。</li>
+<li><strong>Napari Plugin Integration</strong>: 将 micro-sam 功能集成到 Napari 图像查看器中的 GUI 组件测试，包括标注器和小部件。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">test/test_automatic_segmentation.py</code> → <code class="inline-code">micro_sam.automatic_segmentation</code>: 导入并测试 automatic_instance_segmentation 和 get_predictor_and_segmenter 函数。</li>
+<li><code class="inline-code">test/test_instance_segmentation.py</code> → <code class="inline-code">micro_sam.instance_segmentation</code>: 导入并测试 AutomaticMaskGenerator 类及其相关功能。</li>
+<li><code class="inline-code">test/test_prompt_based_segmentation.py</code> → <code class="inline-code">micro_sam.prompt_based_segmentation</code>: 导入并测试 segment_from_points 等提示分割函数。</li>
+<li><code class="inline-code">test/test_sam_annotator/*.py</code> → <code class="inline-code">micro_sam.sam_annotator</code>: 导入并测试 Napari 插件的 GUI 组件、状态管理和小部件。</li>
+<li><code class="inline-code">test/test_util.py</code> → <code class="inline-code">micro_sam.util</code>: 导入并测试核心工具函数，如模型加载、嵌入预计算和 IoU 计算。</li>
+<li><code class="inline-code">test/test_models/*.py</code> → <code class="inline-code">micro_sam.models</code>: 导入并测试 PEFT SAM、3D SAM 包装器等模型变体。</li>
+<li><code class="inline-code">test/test_multi_dimensional_segmentation.py</code> → <code class="inline-code">micro_sam.multi_dimensional_segmentation</code>: 导入并测试 3D 分割合并和跟踪函数。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

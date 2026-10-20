@@ -1,0 +1,19 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2607.28007v1",
+  "status": "done",
+  "task_family": "cell_detection",
+  "input": "Whole Slide Images (WSI) / Histopathology patches",
+  "output": "Bounding box coordinates and class labels for mitotic figures",
+  "notable": "Evaluates frozen pathology foundation model backbones (ViT-based) for dense object detection of mitotic figures using single-stage, dual-stage, and self-attention detectors on MIDOG++ and TUPAC16 datasets.",
+  "task_type": [
+    "detection",
+    "benchmark",
+    "foundation_model"
+  ],
+  "confidence": 0.95,
+  "task_id": "2607.28007v1-task_analysis-v1",
+  "run_at": "2026-08-06T11:47:15.944554",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

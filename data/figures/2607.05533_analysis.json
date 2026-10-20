@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法架构图：多教师对比蒸馏框架，从全切片图像提取tile，经增强后由学生模型学习多个冻结病理基础模型教师（H-Optimus-1、Virchow2、UNI2等）的嵌入，使用对比损失训练边缘高效病理基础模型"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "实验结果对比图：不同骨干网络参数量与Mean AUROC的权衡曲线，对比RepViT/MobileOne与LiteFM及大型病理基础模型"
+  },
+  "2": {
+    "relevant": true,
+    "score": 7,
+    "caption": "柱状图展示多个轻量级模型（RepViT、MobileOne、LiteFM）相对Virchow2的推理加速倍数对比"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "展示均匀、集中、分支三类点云及其持续同调图与Hilbert占用特征对比，属于论文核心方法与数据可视化图示。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "3D生成结果对比图：展示DiT3D、TopoDiT与HilbertGen-3D在椅子、飞机、汽车等点云模型上的生成效果对比。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "多行多列彩色3D椅子生成结果展示，属于论文的实验结果与定性可视化图。"
+  }
+}

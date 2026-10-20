@@ -1,0 +1,19 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2605.22000v1",
+  "status": "done",
+  "task_family": "virtual_imaging / multimodal / benchmark",
+  "input": "3D Back-illumination Interference Tomography (BIT) volumes",
+  "output": "3D virtual H&E stained histopathology volumes",
+  "notable": "Introduces HistoBIT3D, the first voxel-wise paired 3D BIT-fluorescence dataset for quantitative validation of structural preservation in unsupervised virtual staining.",
+  "task_type": [
+    "virtual_staining",
+    "multimodal",
+    "benchmark"
+  ],
+  "confidence": 0.92,
+  "task_id": "2605.22000v1-task_analysis-v1",
+  "run_at": "2026-07-26T09:02:34.648995",
+  "priority": 12,
+  "agent": "Agents-A1"
+}

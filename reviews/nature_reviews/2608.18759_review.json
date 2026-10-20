@@ -1,0 +1,57 @@
+{
+  "paper_id": "2608.18759",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一个新颖的Explanation Consistency Score (ECS)来量化在糖尿病视网膜病变筛查中不同人口统计群体间模型归因的一致性。研究设计合理，方法论严谨，且在公平性分析方面具有临床意义。尽管预测性能在不同种族群体间存在显著差异，但归因一致性保持较高，表明模型在不同群体中使用了相似的视觉证据。论文在方法创新和公平性分析方面具有价值，但需要进一步验证ECS的鲁棒性和泛化性。",
+  "strengths": [
+    "提出了一种新的归因一致性度量ECS，具有理论严谨性和实际应用潜力。",
+    "在公平性分析中结合了预测性能和解释一致性，提供了对模型行为的多维理解。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "ECS能够有效衡量不同种族群体间的归因一致性",
+      "concern": "ECS基于平均归因分布，可能掩盖个体层面的差异，且未充分验证其对模型偏差的敏感性。",
+      "why_it_matters": "如果ECS无法捕捉个体层面的归因差异，可能无法准确反映模型在不同群体中的解释公平性。",
+      "resolution_test": "需要在更多数据集和模型结构上进行测试，并提供个体层面的归因一致性分析以验证ECS的有效性。"
+    },
+    {
+      "id": "S-M2",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "研究结果适用于其他种族群体和医疗AI模型",
+      "concern": "研究仅基于EyePACS数据集和ResNet-50模型，缺乏跨数据集和模型结构的泛化性验证。",
+      "why_it_matters": "仅基于单一数据集和模型的结论可能不具备普遍性，限制了方法的适用范围。",
+      "resolution_test": "需要在其他医疗图像数据集（如APTOS、MESSIDOR）和不同架构（如Vision Transformer）上重复实验以验证泛化性。"
+    },
+    {
+      "id": "S-M3",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "statistics",
+      "claim_pointer": "预测性能差异与ECS无显著相关性",
+      "concern": "Spearman相关系数未达到统计显著性（n=5），因此无法得出明确结论。",
+      "why_it_matters": "样本量过小导致统计检验力不足，可能掩盖潜在的相关性。",
+      "resolution_test": "应增加更多人口统计子组或使用合成数据扩展样本量，以提高统计显著性分析的可靠性。"
+    },
+    {
+      "id": "S-M4",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "citation",
+      "claim_pointer": "引用了TorchCAM、SmoothGradCAM++等现有归因方法",
+      "concern": "部分引用（如[11] TorchCAM）为软件库而非学术论文，缺乏方法背景的详细文献支持。",
+      "why_it_matters": "仅引用软件库可能不足以支撑方法的技术背景，影响论文的学术严谨性。",
+      "resolution_test": "建议补充对原始归因方法（如Grad-CAM、Score-CAM）的引用，并在方法部分更详细地描述其理论基础。"
+    }
+  ],
+  "assessment_boundaries": [
+    "无法评估ECS在非图像医疗AI任务中的适用性",
+    "无法判断模型在真实临床环境中的部署效果"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

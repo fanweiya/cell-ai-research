@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "Loom 空间转录组分析工具的用户界面与核心功能模块概览，包括组织样本面板、空间轨迹面板、UMAP视图以及伪时间轨迹面板"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "Loom系统的整体架构流程图，展示了从数据预处理、在线处理到可视化分析的完整工作流。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 7,
+    "caption": "展示不同分辨率空间转录组学图像之间分辨率对齐（resolution alignment）与逆视角变换（inverse view transform）的方法示意图"
+  }
+}

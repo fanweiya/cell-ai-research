@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CellQuant-Net Wiki — architecture</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / CellQuant-Net Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>CellQuant-Net</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/WSI_QA.html">WSI_QA</a></li>
+<li><a href="modules/CP-Net.html">CP-Net</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/input.html">input</a></li>
+<li><a href="modules/output.html">output</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>架构</h1>
+<br>
+<p><strong>类型：</strong> 流水线</p>
+<br>
+<p>CellQuant-Net 是一个用于计算病理学全切片图像分析的多阶段流水线。它集成了一个质量评估模块以过滤包含伪影的图像，随后是一个轻量级的细胞核检测与分类模型（CP-Net），最后通过连通性分析来计算定量指标。</p>
+<br>
+<h2>组件图</h2>
+<br>
+<pre class="code-block"><code class="language-mermaid">graph TD
+  Main_Orchestrator --&gt; WSI_QA
+  WSI_QA --&gt; CP_Net
+  CP_Net --&gt; Main_Orchestrator</code></pre>
+<br>
+<h2>组件</h2>
+<br>
+<h3>WSI_QA</h3>
+<br>
+<p>质量评估模块，用于过滤掉包含模糊或褶皱等伪影的低质量图像切片。</p>
+<br>
+<p>文件：<code class="inline-code">WSI_QA/config.py</code>, <code class="inline-code">WSI_QA/datasets/dataset.py</code>, <code class="inline-code">WSI_QA/network/ConvNeXt/ConvNeXt.py</code>, <code class="inline-code">WSI_QA/network/ConvNeXt/ConvNeXtUnet.py</code>, <code class="inline-code">WSI_QA/network/DHUnet.py</code>, <code class="inline-code">WSI_QA/network/SwinTransformer/SwinTransformer.py</code>, <code class="inline-code">WSI_QA/network/SwinTransformer/SwinUnet.py</code>, <code class="inline-code">WSI_QA/network/TransFuse/DeiT.py</code>, <code class="inline-code">WSI_QA/network/TransFuse/TransFuse.py</code>, <code class="inline-code">WSI_QA/network/UNet/Unet.py</code>, <code class="inline-code">WSI_QA/network/UperNet/upernet_convnext_tiny.py</code>, <code class="inline-code">WSI_QA/patch_analyze.py</code>, <code class="inline-code">WSI_QA/test_qa.py</code>, <code class="inline-code">WSI_QA/utils.py</code></p>
+<br>
+<h3>CP_Net</h3>
+<br>
+<p>核心细胞核检测与分类引擎，采用轻量级 CNN 和苏木精染色通道先验知识。</p>
+<br>
+<p>文件：<code class="inline-code">CP-Net/cell_connectivitey.py</code>, <code class="inline-code">CP-Net/dataset.py</code>, <code class="inline-code">CP-Net/model/model.py</code>, <code class="inline-code">CP-Net/model/unirepLKnet.py</code>, <code class="inline-code">CP-Net/post_process.py</code>, <code class="inline-code">CP-Net/qupath_jsn.py</code>, <code class="inline-code">CP-Net/spli_H.py</code>, <code class="inline-code">CP-Net/test_cp_net.py</code></p>
+<br>
+<h3>Main_Orchestrator</h3>
+<br>
+<p>入口点脚本，负责协调 QA 和 CP-Net 模块并管理执行参数。</p>
+<br>
+<p>文件：<code class="inline-code">run_cellquant_net.py</code>, <code class="inline-code">verify_installation.py</code></p>
+<br>
+<h2>序列图</h2>
+<br>
+<pre class="code-block"><code class="language-mermaid">sequenceDiagram
+  participant Main
+  participant QA
+  participant CP
+  Main-&gt;&gt;QA: 处理 WSI 切片
+  QA--&gt;&gt;Main: 返回合格切片
+  Main-&gt;&gt;CP: 分析合格切片
+  CP--&gt;&gt;Main: 返回细胞核结果
+  Main-&gt;&gt;Main: 保存输出</code></pre>
+<br>
+<h2>数据流</h2>
+<br>
+<p>流水线始于摄入全切片图像，这些图像被传递给 WSI_QA 模块以过滤伪影。剩余的高质量切片随后由 CP-Net 处理以进行细胞核检测与分类。最后，主协调器汇总结果并将其保存到输出目录。</p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

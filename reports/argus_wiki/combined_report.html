@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>argus Wiki — combined_report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / argus Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>argus</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/src.html">src</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/notebooks.html">notebooks</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>argus — 综合分析报告</h1>
+<br>
+<ul>
+<li><strong>GitHub</strong>: Gitinc/argus</li>
+<li><strong>评分</strong>: 7.0/10</li>
+<li><strong>分析时间</strong>: 2026-07-15T18:32:43.262446</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2>CodeGraph 知识图谱分析</h2>
+<br>
+<br>
+<h2>RepoWiki 文档生成</h2>
+<br>
+<ul>
+<li>✅ 扫描成功</li>
+<li>📁 Wiki 目录: <code class="inline-code">/mnt/c/workspace/cell-ai-research/reports/argus_wiki</code></li>
+<li>📄 生成文件:</li>
+<li>architecture.md</li>
+<li>index.md</li>
+<li>reading-guide.md</li>
+<li>_sidebar.md</li>
+<li>modules/.codegraph.md</li>
+<li>modules/notebooks.md</li>
+<li>modules/root.md</li>
+<li>modules/src.md</li>
+<li>输出: Project: argus</li>
+</ul>
+<p>Files:   13</p>
+<p>Lines:   5,467</p>
+<p>Languages</p>
+<p>┏━━━━━━━━━━┳━━━━━━━┓</p>
+<p>┃ Language ┃ Files ┃</p>
+<p>┡━━━━━━━━━━╇━━━━━━━┩</p>
+<p>│ python   │     6 │</p>
+<p>│ unknown  │     5 │</p>
+<p>│ markdown │     1 │</p>
+<p>│ text     │     1 │</p>
+<p>└──────────┴───────┘</p>
+<p>argus/</p>
+<p>├── ⚙️ README.md (markdown)</p>
+<p>├── ⚙️ requirements.txt (text)</p>
+<p>├── 📁 .codegraph/</p>
+<p>│   └── 📄 .gitignore (unknown)</p>
+<p>├── 📄 .gitignore (unknown)</p>
+<p>├── 📄 LICENSE (unknown)</p>
+<p>├── 📁 notebooks/</p>
+<p>│   ├── 📄 compute_cell_paths.ipynb (unknown)</p>
+<p>│   └── 📄 format_tracks_for_CTC.ipynb (unknown)</p>
+<p>└── 📁 src/</p>
+<p>├── 📄 algo_funcs.py (python)</p>
+<p>├── 📄 algo_funcs_old.py (python)</p>
+<p>├── 📄 ctc_reformat.py (python)</p>
+<p>├── 📄 display_funcs.py (python)</p>
+<p>├── 📄 parameter_scan.py (python)</p>
+<p>└── 📄 utils.py (python)</p>
+<p>⠋ Done!</p>
+<br>
+<p>Wiki generated: /mnt/c/workspace/cell-ai-research/reports/argus_wiki/</p>
+<p>Tokens used: 19,420 in / 5,032 out</p>
+<br>
+<h2>原有子代理分析报告</h2>
+<br>
+<pre class="code-block"><code class="language-">现在我已经充分了解了这个仓库。让我开始撰写报告。
+
+## 项目概述
+
+**ARGUS** (Gitinc/argus) 是一个用于时序显微图像中细胞追踪的鲁棒、通用且计算高效的框架。其名称来源于希腊神话中的百眼巨人阿尔戈斯 (Argus Panoptes)，象征"全知全能"。
+
+### 论文来源
+- **论文标题**: ARGUS: Accelerated, Robust, General, and Unsupervised Cell Tracking Solutions
+- **arXiv**: 2607.08297
+- **代码仓库**: https://github.com/Gitinc/argus
+
+### 核心问题
+解决细胞追踪任务中的以下挑战：
+- **多样化成像条件**: 需要在不同对比度、信噪比の下工作
+- **无需训练**: 不依赖深度学习模型，适用于没有标注数据的情况  
+- **计算效率**: 可在 CPU 上运行，适合长时序和高通量工作流
+- **鲁棒性**: 处理细胞分裂、遮挡、移出视野等情况
+
+---
+
+## 架构分析
+
+### 目录结构</code></pre>
+<p>ARGUS/</p>
+<p>├─ notebooks/           # 交互式 Jupyter Notebook 示例</p>
+<p>├─ src/                 # 核心算法实现</p>
+<p>│  ├─ algo_funcs.py     # 主要算法函数 (检测 + 追踪)</p>
+<p>│  ├─ algo_funcs_old.py # 旧版算法 (可能已废弃)</p>
+<p>│  ├─ ctc_reformat.py   # CTC 格式转换工具</p>
+<p>│  ├─ display_funcs.py  # 可视化和分析函数</p>
+<p>│  └─ parameter_scan.py # 参数扫描脚本</p>
+<p>├─ results/             # 示例输出视频</p>
+<p>└─ requirements.txt     # 依赖列表</p>
+<pre class="code-block"><code class="language-">
+### 核心模块依赖关系
+</code></pre>
+<p>依赖关系链:</p>
+<p>notebooks → src.algo_funcs (核心) → src.display_funcs (可视化)</p>
+<p>↓</p>
+<p>src.ctc_reformat (输出格式)</p>
+<p>↓</p>
+<p>ctc_metrics (外部评估包)</p>
+<pre class="code-block"><code class="language-">
+### 技术栈
+- **图像加载/处理**: PIL, scikit-image, OpenCV, ITK
+- **PDE/滤波**: BM3D, 小波变换, monogenic 滤波
+- **追踪算法**: Farneback 光流 + 匈牙利算法
+- **并行计算**: multiprocessing, concurrent.futures
+- **可视化**: matplotlib (出版质量)
+- **外部依赖**: `ctc_metrics` (用于 CTC 评估)
+
+---
+
+## 核心算法
+
+### 1. 细胞检测模块
+
+ARGUS 提供三种检测策略：
+
+#### a) 质心检测 (`locate_all_cells_centroids`)
+- **原理**: Otsu 阈值 + 区域属性 (regionprops) 提取质心
+- **适用**: 较大细胞 (形态清晰)
+- **关键参数**: `cell_size` (期望细胞大小), `min_distance` (最小间距)
+</code></pre>
+<h1>核心逻辑</h1>
+<p>thresh = skimage.filters.threshold_otsu(image)  # 自适应阈值</p>
+<p>labeled_mask = skimage.measure.label(thresh_img)</p>
+<p>centers = [region.centroid for region in regionprops(labeled_mask)]</p>
+<h1>非极大值抑制 (based on min_distance)</h1>
+<pre class="code-block"><code class="language-">
+#### b) 局部极大值检测 (`locate_all_cells_local_maxima`)
+- **原理**: 在分割后的区域内寻找局部极大值点
+- **适用**: 小细胞或欠分割场景
+- **关键参数**: `min_size`, `expected_mask_size`, `min_distance`
+</code></pre>
+<h1>核心逻辑</h1>
+<p>for region in area_props:</p>
+<p>region_maxima = peak_local_max(region_image, min_distance)</p>
+<h1>若区域过大，则人工拆分 (保留 max_allowed 个极大值)</h1>
+<pre class="code-block"><code class="language-">
+#### c) Monogenic 滤波检测 (`locate_all_cells_monogenic_filter`)
+- **原理**: 利用单色滤波 (monogenic filter) 提取相位对称性特征
+- **适用**: 纹理丰富或边界清晰的图像
+- **关键参数**: `cw_monogenic` (特征尺度), `T` (阈值)
+
+### 2. 追踪算法 (`track_points_optical_flow`)
+
+这是 ARGUS 的核心，结合了光流预测和线性分配：
+
+#### 流程:
+1. **光流计算**: 使用 OpenCV 的 Farneback 算法计算相邻帧稠密光流
+2. **点匹配**: 匈牙利算法 (Hungarian assignment) 将预测位置与检测点匹配
+3. **轨迹管理**: 支持分裂 (mitosis)、遮挡、新生轨迹
+4. **幽灵位置**: 未检测到细胞时使用光流预测位置 (ghost position)
+</code></pre>
+<h1>核心追踪循环</h1>
+<p>for t, (flow_y, flow_x) in enumerate(flows):</p>
+<h1>1. 对活跃轨迹进行光流预测</h1>
+<p>predicted = _advect_points(current_points, flow_x, flow_y)</p>
+<br>
+<h1>2. 匈牙利匹配</h1>
+<p>matches, unmatched_points = hungarian_assignment(predicted, detected, max_distance)</p>
+<br>
+<h1>3. 处理匹配冲突 (collision)</h1>
+<p>collided = _find_collisions(matches, active_indices, label_of)</p>
+<br>
+<h1>4. 扩展匹配轨迹，标记未匹配轨迹为遮挡</h1>
+<p>for k, entry in enumerate(active_indices):</p>
+<p>if matched:</p>
+<p>_extend_track(entry, matc</p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

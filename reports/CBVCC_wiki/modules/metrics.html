@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CBVCC Wiki — metrics</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / CBVCC Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>CBVCC</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/metrics.html">metrics</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>metrics</h1>
+<br>
+<p>&gt; 计算视频质量指标、评估模型性能并生成可视化报告。</p>
+<br>
+<p>该模块用于处理细胞行为视频，计算信噪比（SNR）、细胞密度等质量指标，评估不同模型在分类任务上的表现（AUC、精确率、召回率等），并生成分布图、ROC曲线和按细胞数量/SNR分组的性能分析图。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">metrics/compute_quality_metrics.py</code></h3>
+<br>
+<p>读取视频和追踪数据，计算每个视频帧的质量指标（SNR、对比度、异质性、密度、细胞数量）。</p>
+<br>
+<ul>
+<li><code class="inline-code">load_paths</code> (function) - 扫描数据集目录，匹配视频文件（.avi）和追踪文件（.csv），返回公共键值的字典。</li>
+<li><code class="inline-code">process_videos</code> (function) - 核心处理函数。遍历视频，提取前景/背景区域，计算SNR、CR、HET、密度（DEN）和细胞数量（NUM），并将结果存入数组。</li>
+</ul>
+<br>
+<h3><code class="inline-code">metrics/descriptives.py</code></h3>
+<br>
+<p>生成数据集类别分布和指标分布的可视化图表。</p>
+<br>
+<ul>
+<li><code class="inline-code">plot_class_distribution</code> (function) - 绘制训练集、验证集、测试集中不同类别（0/1）的视频片段数量分布柱状图。</li>
+<li><code class="inline-code">plot_metric_distributions</code> (function) - 绘制细胞数量（N.TRACKS）和信噪比（SNR）在不同数据集划分中的直方图分布。</li>
+</ul>
+<br>
+<h3><code class="inline-code">metrics/generate_gt.py</code></h3>
+<br>
+<p>根据目录结构自动生成包含文件名和类别标签的CSV文件。</p>
+<br>
+<ul>
+<li><code class="inline-code">generate_label_csv</code> (function) - 递归遍历根目录下的子集和类别文件夹，提取.avi文件名并标记类别（0或1），输出为CSV。</li>
+</ul>
+<br>
+<h3><code class="inline-code">metrics/ncell_curves.py</code></h3>
+<br>
+<p>按细胞数量分组评估模型性能，并绘制分数随细胞数量变化的曲线及排名图。</p>
+<br>
+<ul>
+<li><code class="inline-code">compute_score_per_cell_count</code> (function) - 将模型预测数据与细胞数量数据合并，按细胞数量分桶计算AUC、精确率、召回率等指标，并计算综合得分。</li>
+<li><code class="inline-code">plot_score_vs_cells</code> (function) - 绘制各模型在不同细胞数量下的综合得分曲线，并在下方子图中绘制排名条形图。</li>
+</ul>
+<br>
+<h3><code class="inline-code">metrics/overall_metrics.py</code></h3>
+<br>
+<p>计算所有模型在测试集上的整体评估指标。</p>
+<br>
+<ul>
+<li><code class="inline-code">evaluate_models</code> (function) - 遍历数据集中的预测列，计算AUC、精确率、召回率、平衡准确率及混淆矩阵，生成按综合得分排序的指标DataFrame。</li>
+</ul>
+<br>
+<h3><code class="inline-code">metrics/roc_curves.py</code></h3>
+<br>
+<p>绘制所有模型的ROC曲线并计算AUC值。</p>
+<br>
+<ul>
+<li><code class="inline-code">clean_model_name</code> (function) - 清理模型名称，移除括号内容并将长名称缩写。</li>
+<li><code class="inline-code">plot_roc_curves</code> (function) - 计算并绘制各模型的ROC曲线，标注AUC值，按AUC降序排列图例。</li>
+</ul>
+<br>
+<h3><code class="inline-code">metrics/snr_curves.py</code></h3>
+<br>
+<p>按信噪比（SNR）分组评估模型性能，并绘制分数随SNR变化的曲线及排名图。</p>
+<br>
+<ul>
+<li><code class="inline-code">compute_score_by_snr</code> (function) - 将模型数据与SNR指标合并，按SNR分桶计算各模型的综合得分。</li>
+<li><code class="inline-code">plot_score_vs_snr</code> (function) - 绘制各模型在不同SNR区间下的综合得分曲线，并在下方子图中绘制排名条形图。</li>
+</ul>
+<br>
+<h3><code class="inline-code">metrics/upload_files.py</code></h3>
+<br>
+<p>加载和预处理提交文件，构建包含所有模型预测和真实标签的合并数据集。</p>
+<br>
+<ul>
+<li><code class="inline-code">load_track_counts</code> (function) - 读取追踪CSV文件，统计每个视频中的唯一细胞ID数量。</li>
+<li><code class="inline-code">preprocess_submission</code> (function) - 清洗提交数据，过滤无效分数，去重，转换时间戳格式。</li>
+<li><code class="inline-code">build_all_data</code> (function) - 将多个团队的预测文件与真实标签（gt）合并，生成包含所有文件ID和模型预测列的统一DataFrame。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>综合得分 (Score)</strong>: 由0.4*AUC + 0.2*(Precision + Recall + Balanced Accuracy)计算得出，用于平衡评估模型性能。</li>
+<li><strong>信噪比 (SNR)</strong>: 前景平均强度与背景标准差之比，用于衡量视频图像质量。</li>
+<li><strong>细胞密度 (DEN)</strong>: 通过计算细胞间最近邻距离来量化视频帧中细胞的密集程度。</li>
+<li><strong>数据合并 (Merge)</strong>: 将预测文件、追踪计数、真实标签通过file_id进行外连接，形成统一的评估数据集。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">metrics/upload_files.py</code> → <code class="inline-code">metrics/overall_metrics.py</code>: upload_files.py构建的all_data DataFrame被overall_metrics.py用于计算整体指标。</li>
+<li><code class="inline-code">metrics/upload_files.py</code> → <code class="inline-code">metrics/ncell_curves.py</code>: upload_files.py生成的all_data和counts数据被ncell_curves.py用于按细胞数量分析性能。</li>
+<li><code class="inline-code">metrics/upload_files.py</code> → <code class="inline-code">metrics/snr_curves.py</code>: upload_files.py生成的all_data和quality_metric数据被snr_curves.py用于按SNR分析性能。</li>
+<li><code class="inline-code">metrics/compute_quality_metrics.py</code> → <code class="inline-code">metrics/descriptives.py</code>: compute_quality_metrics.py计算的质量指标（如SNR, N.TRACKS）被descriptives.py用于绘制分布图。</li>
+<li><code class="inline-code">metrics/generate_gt.py</code> → <code class="inline-code">metrics/upload_files.py</code>: generate_gt.py生成的gt.csv被upload_files.py中的load_gt函数读取以构建真实标签数据。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

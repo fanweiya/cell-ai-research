@@ -1,0 +1,19 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2607.23258v1",
+  "status": "done",
+  "task_family": "cell_embedding",
+  "input": "钙成像连续时间序列数据（钙离子荧光信号）",
+  "output": "预测的未来钙活动连续值、行为解码结果、神经元功能嵌入向量",
+  "notable": "该论文提出的是钙成像群体动力学的连续自回归Transformer基础模型，核心在于跨数据集和跨物种的迁移学习与表示学习，而非传统的细胞检测或分割任务。",
+  "task_type": [
+    "embedding",
+    "foundation_model",
+    "multimodal"
+  ],
+  "confidence": 0.85,
+  "task_id": "2607.23258v1-task_analysis-v1",
+  "run_at": "2026-08-06T11:43:31.477043",
+  "priority": 12,
+  "agent": "Agents-A1"
+}

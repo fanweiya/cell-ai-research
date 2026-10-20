@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法架构对比图：展示ARCHER利用训练参考对未知目标进行摊销姿态估计并与传统管线流程对比"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "ARCHER方法的核心架构流程图，展示pipeline（参考模板生成、CTF-Free/CTF-Aware编码器、余弦相似度）与训练流程（对比损失、测地线监督）"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心实验结果图：展示ARCHER与CryoFM在多个EMPIAR数据集上的重建密度对比（A）、潜在空间PCA可视化（B）以及余弦相似度定量评估矩阵（C）"
+  }
+}

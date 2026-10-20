@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MorphoHELM Wiki — huggingface_loader</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / MorphoHELM Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>MorphoHELM</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/feature-extraction.html">feature-extraction</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/data_installation.html">data_installation</a></li>
+<li><a href="../modules/data-preprocessing.html">data-preprocessing</a></li>
+<li><a href="../modules/huggingface_loader.html">huggingface_loader</a></li>
+<li><a href="../modules/raw_to_huggingface.html">raw_to_huggingface</a></li>
+<li><a href="../modules/data.html">data</a></li>
+<li><a href="../modules/benchmarks.html">benchmarks</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>huggingface_loader</h1>
+<br>
+<p>&gt; 用于创建和管理显微镜图像数据集的划分与特征提取的实用工具</p>
+<br>
+<p>该模块提供了一套完整的流水线，用于从原始元数据生成Hugging Face格式的数据集划分。核心功能包括按来源(source)、批次(batch)或板(plate)进行数据分割，使用贪婪算法确保划分比例接近目标值，支持数据集下采样，以及基于JCP元数据进行过滤。模块通过懒加载机制处理大型Parquet元数据文件，并直接构建可立即用于模型训练的数据集对象。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">src/cellpainting_huggingface_loader/create_splits.py</code></h3>
+<br>
+<p>实现数据集划分、下采样和过滤的核心逻辑</p>
+<br>
+<ul>
+<li><code class="inline-code">CreateSplits</code> (class) - 核心类，负责管理数据集划分流程。初始化时接收元数据路径和Blob存储挂载点。</li>
+<li><code class="inline-code">__init__</code> (method) - 初始化实例，设置元数据路径和Blob挂载点，初始化元数据DataFrame为None。</li>
+<li><code class="inline-code">metadata_df</code> (property) - 懒加载属性，仅在需要时读取plate_metadata/metadata.parquet文件到内存。</li>
+<li><code class="inline-code">generate_dataset_splits</code> (method) - 主方法，根据split_type（source/batch/plate）生成训练、验证和测试集。内部调用_load_source_batch_plate_info加载信息，使用_greedy_find_splits算法进行划分，最后调用_create_hf_dataset构建Hugging Face数据集。</li>
+<li><code class="inline-code">_load_source_batch_plate_info</code> (method) - 私有方法，从Blob存储加载源、批次和板的信息数据。</li>
+<li><code class="inline-code">_specify_split</code> (method) - 私有方法，确定包含在划分中的源列表，并计算总图像数。</li>
+<li><code class="inline-code">_generate_name_count_list</code> (method) - 私有方法，生成包含源/批次/板名称及其图像计数的列表，用于贪婪算法。</li>
+<li><code class="inline-code">_greedy_find_splits</code> (method) - 私有方法，使用贪婪算法将名称列表划分为训练、验证和测试集，以匹配目标比例。</li>
+<li><code class="inline-code">_count_split_image_count</code> (method) - 私有方法，统计各划分集中的实际图像数量，并检查是否与目标比例偏差过大。</li>
+<li><code class="inline-code">_create_hf_dataset</code> (method) - 私有方法，根据给定的划分列表创建Hugging Face DatasetDict对象。</li>
+<li><code class="inline-code">create_downsampled_dataset</code> (method) - 方法，对现有划分进行下采样（默认0.2），并创建新的Hugging Face数据集。根据split_type不同，下采样后的划分层级会提升（如by_source下采样后变为by_batch划分）。</li>
+<li><code class="inline-code">_downsample_data</code> (method) - 私有方法，对指定列表进行下采样处理。</li>
+<li><code class="inline-code">filter_dataset</code> (method) - 方法，根据JCP元数据列表过滤数据集，移除不匹配的条目。</li>
+<li><code class="inline-code">filter_JCP_metadata</code> (function) - 内部函数，用于filter_dataset，检查示例的filename是否在JCP元数据列表中。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>懒加载元数据</strong>:</li>
+<li><strong>贪婪划分算法</strong>:</li>
+<li><strong>分层划分</strong>:</li>
+<li><strong>Hugging Face数据集集成</strong>:</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">src/cellpainting_huggingface_loader/create_splits.py</code> → <code class="inline-code">src/cellpainting_huggingface_loader/__init__.py</code>: create_splits.py 中的类会被导入到包初始化文件中，以便外部使用。</li>
+<li><code class="inline-code">src/cellpainting_huggingface_loader/create_splits.py</code> → <code class="inline-code">datasets</code>: create_splits.py 导入 datasets 库用于加载、连接和创建Hugging Face数据集对象。</li>
+<li><code class="inline-code">src/cellpainting_huggingface_loader/create_splits.py</code> → <code class="inline-code">pandas</code>: create_splits.py 导入 pandas 用于处理元数据表格和进行数据过滤操作。</li>
+<li><code class="inline-code">src/cellpainting_huggingface_loader/create_splits.py</code> → <code class="inline-code">numpy</code>: create_splits.py 导入 numpy 用于数值计算和数组操作。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

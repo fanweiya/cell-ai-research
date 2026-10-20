@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "COAST方法架构图：展示预训练特征提取、局部/全局上下文特征调制、Transformer编码器及回归/差分双输出头的完整流程"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "多数据集上COAST与基线方法（STNet、HisToGene等）在PCC、MI、AUC等指标上的雷达图对比及Top-1频率柱状图，属核心实验结果图"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "实验对比图：COAST与EGNv2、NH2ST、PEKA等方法在AHSC和VMB数据集上的空间基因表达预测可视化对比，与Ground Truth对比"
+  }
+}

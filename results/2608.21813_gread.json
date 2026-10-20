@@ -1,0 +1,46 @@
+{
+  "source": "gread",
+  "analysis_depth": "multi_pass_static",
+  "repository": "fengluo233/AutolysisBench",
+  "repository_url": "https://github.com/fengluo233/AutolysisBench",
+  "collected_at": "2026-08-26T01:21:30.544112+00:00",
+  "coverage": {
+    "repository_kind": "placeholder_or_docs_only",
+    "has_implementation": false,
+    "code_file_count_in_tree": 0,
+    "selected_file_count": 1,
+    "selected_code_file_count": 0,
+    "languages_by_extension": {},
+    "tests_present": false,
+    "test_files": [],
+    "manifest_files": [
+      "README.md"
+    ],
+    "read_errors": [],
+    "limitations": [
+      "Static remote inspection only; files were not executed.",
+      "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+    ],
+    "search_errors": []
+  },
+  "overview": "# fengluo233/AutolysisBench\n**Stars**: 1 | **Language**: \n**Description**: The AutolysisBench repository is associated with the MICCAI 2026 Early Accept paper titled &#x27;Through the Schrödinger Bridge: Benchmarking Antemortem Image Restoration from Postmortem Autolysis to Enhance Forensic Diagnostics&#x27;. The project focuses on addressing the degradation of forensic histopathology images caused by postmortem autolysis. It formulates autolysis restoration as an unpaired image restoration task, aiming to reconstruct plausible antemortem morphology from postmortem images. The repository will eventually include code, dataset access instructions, and pretrained models, although these are slated for release at later dates.\n\n\n## Directory Tree\n```\nREADME.md\n```",
+  "tree": "## Directory Tree\n```\nREADME.md\n```",
+  "key_files": [
+    "README.md"
+  ],
+  "source_files": "## README.md\n```\n# AutolysisBench\n\nThis is the official repository for our MICCAI 2026 Early Accept paper:\n\n**Through the Schrödinger Bridge: Benchmarking Antemortem Image Restoration from Postmortem Autolysis to Enhance Forensic Diagnostics**\n\n## Status\n\n- [ ] Code release before July 2026\n- [ ] Dataset access instructions before September 2026\n- [ ] Pretrained models and additional materials after the camera-ready version is finalized\n\n## Abstract\n\nPostmortem autolysis causes severe morphological degradation in forensic histopathology, making diagnosis more difficult and less reproducible. We formulate autolysis restoration as an unpaired image restoration task and benchmark restoration from autolyzed liver histopathology images toward plausible antemortem morphology. Our study introduces a physical tissue-splitting dataset construction protocol, evaluates Schrödinger Bridge based restoration against representative baselines, and shows that conventional image-level metrics such as FID can be poorly aligned with diagnostic utility.\n\n## Citation\n\n```bibtex\n@inproceedings{autolysis_schrodinger_bridge_2026,\n  title     = {Through the Schrödinger Bridge: Benchmarking Antemortem Image Restoration from Postmortem Autolysis to Enhance Forensic Diagnostics},\n  author    = {TBD},\n  booktitle = {International Conference on Medical Image Computing and Computer-Assisted Intervention},\n  year      = {2026},\n  note      = {Early Accept}\n}\n```\n\n```",
+  "search_queries": [
+    "class |def |function |interface |struct |fn |func ",
+    "main\\(|train\\(|forward\\(|fit\\(|predict\\(|infer|generate",
+    "TODO|FIXME|NotImplemented|raise |throw ",
+    "pytest|unittest|test_|describe\\(|@Test",
+    "import |from |require\\(|use |#include"
+  ],
+  "search_results": [
+    "## Search inside fengluo233/AutolysisBench for \"class |def |function |interface |struct |fn |func \"\n```\nNo matches found.\n```",
+    "## Search inside fengluo233/AutolysisBench for \"main\\(|train\\(|forward\\(|fit\\(|predict\\(|infer|generate\"\n```\nNo matches found.\n```",
+    "## Search inside fengluo233/AutolysisBench for \"TODO|FIXME|NotImplemented|raise |throw \"\n```\nNo matches found.\n```",
+    "## Search inside fengluo233/AutolysisBench for \"pytest|unittest|test_|describe\\(|@Test\"\n```\nNo matches found.\n```",
+    "## Search inside fengluo233/AutolysisBench for \"import |from |require\\(|use |#include\"\n```\nHEAD:README.md-4-\nHEAD:README.md:5:**Through the Schrödinger Bridge: Benchmarking Antemortem Image Restoration from Postmortem Autolysis to Enhance Forensic Diagnostics**\nHEAD:README.md-6-\n--\nHEAD:README.md-14-\nHEAD:README.md:15:Postmortem autolysis causes severe morphological degradation in forensic histopathology, making diagnosis more difficult and less reproducible. We formulate autolysis restoration as an unpaired image restoration task and benchmark restoration from autolyzed liver histopathology images toward plausible antemortem morphology. Our study introduces a physical tissue-splitting dataset construction protocol, evaluates Schrödinger Bridge based restoration against representative baselines, and shows that conventional image-level metrics such as FID can be poorly aligned with diagnostic utility.\nHEAD:README.md-16-\n--\nHEAD:README.md-20-@inproceedings{autolysis_schrodinger_bridge_2026,\nHEAD:README.md:21:  title     = {Through the Schrödinger Bridge: Benchmarking Antemortem Image Restoration from Postmortem Autolysis to Enhance Forensic Diagnostics},\nHEAD:README.md-22-  author    = {TBD},\n\n```"
+  ]
+}

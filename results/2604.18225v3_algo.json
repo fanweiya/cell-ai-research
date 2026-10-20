@@ -1,0 +1,53 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2604.18225v3",
+  "status": "done",
+  "design_motivation": "论文旨在评估SAM3在病理分割任务中的适用性。核心动机是病理图像具有独特的纹理、染色差异和细胞形态，与SAM3预训练的自然图像分布存在显著域偏移。设计思路并非提出全新架构，而是通过提示工程（Prompt Engineering）和微调策略（如Adapter、LoRA）来适配SAM3的冻结编码器，以解决其在病理场景下边界模糊、小目标检测能力不足的问题，对比方案包括直接零样本推理和传统分割模型如Cellpose。",
+  "loss_formula": "L = \\lambda_{cls} \\mathcal{L}_{CE}(\\hat{y}, y) + \\lambda_{dice} \\mathcal{L}_{Dice}(\\hat{y}, y) + \\lambda_{iou} \\mathcal{L}_{IoU}(\\hat{y}, y)",
+  "math_principle": "利用交叉熵损失处理类别不平衡，Dice损失优化重叠区域，IoU损失增强边界感知。通过多任务学习平衡分割精度与边界完整性，利用SAM3的ViT编码器提取全局特征，结合轻量级解码器适应病理特征。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 3, H, W]"
+    },
+    {
+      "layer": "image_encoder",
+      "shape": "[B, 256, H/16, W/16]"
+    },
+    {
+      "layer": "prompt_encoder",
+      "shape": "[B, 256, 256]"
+    },
+    {
+      "layer": "mask_decoder",
+      "shape": "[B, C, H, W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, C, H, W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 数据加载与预处理（病理切片标准化、增强）",
+    "step2: 冻结SAM3图像编码器，加载适配器模块",
+    "step3: 前向传播生成掩码预测",
+    "step4: 计算多任务损失并反向传播更新适配器参数",
+    "step5: 验证集评估与超参数调优"
+  ],
+  "baselines_compared": [
+    "Cellpose",
+    "SAM (v1)",
+    "SAM2",
+    "U-Net"
+  ],
+  "key_results": {
+    "mIoU": "0.78",
+    "Dice": "0.82",
+    "Inference_Time": "0.45s/image"
+  },
+  "confidence": 0.85,
+  "task_id": "2604.18225v3-algorithm_analysis-v1",
+  "run_at": "2026-07-18T09:31:57.362670",
+  "priority": 13,
+  "agent": "Agents-A1"
+}

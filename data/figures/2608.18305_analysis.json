@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 7,
+    "caption": "方法示意图：光学参考图像中的定位真值与预测对比，以及XRF瓦片组及其相对扫描中心"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "该图展示了X射线荧光(XRF)图谱在光学显微镜图像中的定位方法对比。图a为XRF图像块，图b和图c分别展示了单块匹配（Separate single-tile matches）和锚点验证组匹配（Anchor-verified group matcher）的定位结果及GroupIoU指标，直观体现了所提方法的有效性。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "展示了四种不同情况下的定位结果对比，包含Ground Truth轮廓与Bridge-rule预测的重叠可视化及IoU指标数据。"
+  }
+}

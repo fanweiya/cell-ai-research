@@ -1,0 +1,54 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2601.13021v1",
+  "status": "done",
+  "design_motivation": "旨在通过集成学习（Ensemble Methods）和特征重要性分析提升镰状细胞贫血（SCD）诊断的泛化能力。设计动机在于：1）单一模型在未见数据上泛化性不足，集成多个分类器（RF, ET, GB, MLP等）可通过投票或堆叠降低方差；2）传统方法依赖全量特征（121维），导致计算复杂且模型不透明，通过特征重要性筛选关键特征可提升效率与可解释性；3）颜色特征被证明对形态分类贡献较低，剔除后可增强模型鲁棒性。",
+  "loss_formula": "N/A (Classification task using Voting/Stacking, no explicit differentiable loss function described)",
+  "math_principle": "基于集成学习理论：1）Bagging/Random Forest通过构建多棵决策树并取多数投票降低方差；2）Extra Trees在随机森林基础上进一步增加随机性（随机选择切分点）；3）Stacking通过元分类器（Meta-learner）学习基分类器的输出以优化预测；4）特征重要性基于基尼不纯度（Gini Impurity）或排列重要性（Permutation Importance）评估。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 1, H, W] (Single channel cell images)"
+    },
+    {
+      "layer": "preprocessing",
+      "shape": "[B, 1, H, W] (Scaled to fixed dimension)"
+    },
+    {
+      "layer": "feature_extractor",
+      "shape": "[B, 121] (121 hand-crafted features: 41 shape, 18 color, 62 texture)"
+    },
+    {
+      "layer": "classifier_ensemble",
+      "shape": "[B, C] (Probabilities from RF, ET, etc.)"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, 3] (Class probabilities: Normal, Sickle, Other)"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 数据预处理与分割（图像缩放至统一尺寸）",
+    "step2: 手工特征提取（形状、颜色、纹理共121维）",
+    "step3: 特征标准化（StandardScaler）",
+    "step4: 基分类器训练与调参（RF, ET, GB, MLP, SVM, kNN, DT）",
+    "step5: 构建集成模型（Voting或Stacking）",
+    "step6: 特征重要性分析（筛选关键特征）",
+    "step7: 使用关键特征重训练模型",
+    "step8: 在新数据集上验证泛化能力"
+  ],
+  "baselines_compared": [
+    "Gradient Boosting (GB) classifier",
+    "Previous work [19] models"
+  ],
+  "key_results": {
+    "F1-score": "90.71%",
+    "SDS-score": "93.33%",
+    "Best_Ensemble": "Random Forest + Extra Trees"
+  },
+  "confidence": 0.95,
+  "task_id": "2601.13021v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:46:44.166183",
+  "priority": 10,
+  "agent": "Agents-A1"
+}

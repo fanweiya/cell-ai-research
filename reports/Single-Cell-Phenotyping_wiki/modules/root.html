@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Single-Cell-Phenotyping Wiki — root</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / Single-Cell-Phenotyping Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>Single-Cell-Phenotyping</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>root</h1>
+<br>
+<p>&gt; 实现无标签单细胞表型分类与蛋白表达回归的多任务学习框架</p>
+<br>
+<p>该项目是一个统一的深度学习框架，用于从无标签的微分干涉相差（DPC）显微镜图像中联合执行白细胞（WBC）分类和连续蛋白表达回归。核心架构采用混合CNN-ViT设计，结合局部纹理特征和全局空间依赖，通过任务自适应门控机制实现可控制的跨任务信息交换。项目包含数据加载、模型定义、损失函数、训练流程、评估脚本及LLM可解释性模块，支持BSCCM和BCCD数据集。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">README.md</code></h3>
+<br>
+<p>项目文档，包含概述、架构说明、安装指南、数据集下载、预训练模型使用及训练命令</p>
+<br>
+<h3><code class="inline-code">requirements.txt</code></h3>
+<br>
+<p>定义项目依赖，包括PyTorch核心库、数据处理库、可视化工具及可选的LLM和W&amp;B集成</p>
+<br>
+<h3><code class="inline-code">.gitignore</code></h3>
+<br>
+<p>配置版本控制忽略规则，排除虚拟环境、数据、模型检查点、训练输出及临时文件</p>
+<br>
+<h3><code class="inline-code">LICENSE</code></h3>
+<br>
+<p>MIT许可证，规定软件使用、修改和分发的权利与责任</p>
+<br>
+<h3><code class="inline-code">bccd_data_loading.py</code></h3>
+<br>
+<p>加载和预处理BCCD数据集，将Kaggle的4类标签映射到项目的3类标签（淋巴细胞、粒细胞、单核细胞）</p>
+<br>
+<ul>
+<li><code class="inline-code">KAGGLE_TO_MODEL_MAPPING</code> (constant) - 定义Kaggle标签到模型标签的映射关系</li>
+<li><code class="inline-code">load_kaggle_bccd_dataset</code> (function) - 从目录结构加载BCCD数据集，按TRAIN/TEST/TEST_SIMPLE划分训练、验证和测试集</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_loading.py</code></h3>
+<br>
+<p>为BSCCM数据集提供多任务数据加载，支持多通道DPC图像和蛋白表达标签</p>
+<br>
+<ul>
+<li><code class="inline-code">BSCCMMultiTaskDataset</code> (class) - 多任务学习数据集类，返回图像、细胞类型标签和蛋白表达值</li>
+<li><code class="inline-code">load_bsccm_dataset</code> (function) - 加载BSCCM数据集并返回处理后的数据对象</li>
+<li><code class="inline-code">create_train_val_test_splits</code> (function) - 创建训练、验证和测试集划分</li>
+<li><code class="inline-code">create_data_loaders</code> (function) - 根据划分创建PyTorch DataLoader</li>
+</ul>
+<br>
+<h3><code class="inline-code">model.py</code></h3>
+<br>
+<p>定义混合CNN-ViT多任务模型架构，包含共享ECA注意力、CNN分支、ViT分支、跨模态融合及任务特定头</p>
+<br>
+<ul>
+<li><code class="inline-code">EfficientChannelAttention</code> (class) - 高效通道注意力模块，自适应加权不同DPC方向</li>
+<li><code class="inline-code">InceptionModule</code> (class) - 简化的Inception模块，包含残差连接</li>
+<li><code class="inline-code">LightweightViT</code> (class) - 轻量级Vision Transformer分支</li>
+<li><code class="inline-code">CrossModalFusion</code> (class) - 跨模态融合模块，结合CNN和ViT特征</li>
+<li><code class="inline-code">TaskGating</code> (class) - 任务自适应门控，控制分类和回归路径间的信息交换</li>
+<li><code class="inline-code">create_model</code> (function) - 工厂函数，创建并初始化多任务模型</li>
+</ul>
+<br>
+<h3><code class="inline-code">losses.py</code></h3>
+<br>
+<p>实现多任务学习损失函数，包括改进的回归损失、自适应任务权重、Focal Loss和标签平滑</p>
+<br>
+<ul>
+<li><code class="inline-code">ImprovedRegressionLoss</code> (class) - 结合MSE和Pearson相关性的回归损失，增强梯度</li>
+<li><code class="inline-code">AdaptiveMultiTaskLoss</code> (class) - 基于不确定性的自适应多任务损失，自动平衡分类和回归权重</li>
+<li><code class="inline-code">FocalLoss</code> (class) - 解决类别不平衡的分类损失</li>
+<li><code class="inline-code">CombinedClassificationLoss</code> (class) - Focal Loss与标签平滑的混合分类损失</li>
+</ul>
+<br>
+<h3><code class="inline-code">train.py</code></h3>
+<br>
+<p>训练脚本，实现多任务模型的训练循环，支持Mixup增强、W&amp;B日志记录和模型保存</p>
+<br>
+<ul>
+<li><code class="inline-code">mixup_data</code> (function) - Mixup数据增强函数</li>
+<li><code class="inline-code">ImprovedMultiTaskTrainer</code> (class) - 改进的多任务训练器，管理训练、验证、日志记录和模型保存</li>
+</ul>
+<br>
+<h3><code class="inline-code">evaluate.py</code></h3>
+<br>
+<p>评估脚本，计算分类指标（准确率、混淆矩阵、ROC）和回归指标（MSE、Pearson相关性），生成可视化结果</p>
+<br>
+<ul>
+<li><code class="inline-code">MultiTaskEvaluator</code> (class) - 多任务模型评估器，执行完整评估并计算各项指标</li>
+</ul>
+<br>
+<h3><code class="inline-code">llm_summarizer.py</code></h3>
+<br>
+<p>LLM集成模块，将模型预测转换为生物学的自然语言摘要，支持OpenAI API和本地LLM</p>
+<br>
+<ul>
+<li><code class="inline-code">format_predictions_for_llm</code> (function) - 将模型预测格式化为LLM可处理的字典结构</li>
+<li><code class="inline-code">build_llm_prompt</code> (function) - 根据格式化预测构建LLM提示词</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>混合CNN-ViT架构</strong>: 结合CNN提取局部纹理特征和ViT捕获全局空间依赖，通过跨模态融合和任务门控实现高效特征整合</li>
+<li><strong>多任务学习</strong>: 同时优化白细胞分类（离散）和蛋白表达回归（连续）两个任务，通过自适应损失权重平衡任务间梯度冲突</li>
+<li><strong>任务自适应门控</strong>: 可学习的门控机制，根据样本动态调整分类和回归路径间的信息交换强度</li>
+<li><strong>改进回归损失</strong>: 结合Huber损失和Pearson相关性损失，提高蛋白表达预测的鲁棒性和相关性</li>
+<li><strong>无标签表型分类</strong>: 仅使用DPC显微镜图像，无需荧光染色即可预测细胞类型和蛋白表达水平</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">train.py</code> → <code class="inline-code">model.py</code>: train.py导入create_model函数来实例化多任务模型</li>
+<li><code class="inline-code">train.py</code> → <code class="inline-code">losses.py</code>: train.py导入ImprovedRegressionLoss、AdaptiveMultiTaskLoss等损失函数</li>
+<li><code class="inline-code">train.py</code> → <code class="inline-code">data_loading.py</code>: train.py导入load_bsccm_dataset、create_data_loaders等数据加载函数</li>
+<li><code class="inline-code">evaluate.py</code> → <code class="inline-code">model.py</code>: evaluate.py导入create_model加载评估模型</li>
+<li><code class="inline-code">evaluate.py</code> → <code class="inline-code">data_loading.py</code>: evaluate.py导入数据加载函数以获取测试集</li>
+<li><code class="inline-code">bccd_data_loading.py</code> → <code class="inline-code">data_loading.py</code>: 两者都处理细胞数据集，但bccd_data_loading.py专门处理BCCD数据集的标签映射</li>
+<li><code class="inline-code">llm_summarizer.py</code> → <code class="inline-code">evaluate.py</code>: llm_summarizer.py可接收evaluate.py的预测结果生成自然语言摘要</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

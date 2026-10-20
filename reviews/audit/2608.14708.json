@@ -1,0 +1,29 @@
+{
+ "id": "2608.14708",
+ "chars": 60000,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": false,
+   "has_fdr": false,
+   "mentions_ablation": true,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "score": 4
+ },
+ "key_claims": [
+  "the results show that the proposed pe-csnet outperforms state-of-the-art cs methods in reconstruction quality and demonstrates stable empirical convergence, while maintaining fast computational speed.",
+  "as shown in tables 1 and 2 , and figures 7 , the proposed pe-csnet consistently outperforms the state-of-the-art unrolling networks (i.",
+  "notably, the proposed pe-csnet, with n = 4 n=4 unrolled stages, outperforms both ista-net (9 stages) and admm-csnet (10 stages) with fewer stages, as supported by the quantitative metrics and visual r"
+ ],
+ "ref_spotcheck_targets": [],
+ "citation_results": []
+}

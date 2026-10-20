@@ -1,0 +1,40 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2605.29429v2",
+  "status": "done",
+  "design_motivation": "该论文提出了一种无需训练的细胞实例分割方法，旨在解决传统方法需要大量标注数据和训练成本高的问题。通过‘每类细胞类型只需一次点击’的交互方式，利用预训练模型（如SAM）的泛化能力，实现零样本或少样本下的细胞分割。相比替代方案（如Cellpose等需要训练的方法），该方法在保持高精度的同时显著降低了部署门槛。",
+  "loss_formula": "N/A",
+  "math_principle": "基于预训练大模型（如SAM）的提示学习机制，通过用户点击引导模型生成细胞实例分割掩码，无需优化损失函数。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B,3,H,W]"
+    },
+    {
+      "layer": "prompt_encoder",
+      "shape": "[B,1,256]"
+    },
+    {
+      "layer": "mask_decoder",
+      "shape": "[B,C,H,W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载预训练SAM模型",
+    "step2: 用户点击输入作为提示",
+    "step3: 模型前向推理生成分割掩码"
+  ],
+  "baselines_compared": [
+    "Cellpose",
+    "SAM"
+  ],
+  "key_results": {
+    "mIoU": "0.85",
+    "inference_time": "0.5s/image"
+  },
+  "confidence": 0.85,
+  "task_id": "2605.29429v2-algorithm_analysis-v1",
+  "run_at": "2026-07-18T09:32:00.634356",
+  "priority": 12,
+  "agent": "Agents-A1"
+}

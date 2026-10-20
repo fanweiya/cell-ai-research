@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MorphoHELM Wiki — raw_to_huggingface</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / MorphoHELM Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>MorphoHELM</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/feature-extraction.html">feature-extraction</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/data_installation.html">data_installation</a></li>
+<li><a href="../modules/data-preprocessing.html">data-preprocessing</a></li>
+<li><a href="../modules/huggingface_loader.html">huggingface_loader</a></li>
+<li><a href="../modules/raw_to_huggingface.html">raw_to_huggingface</a></li>
+<li><a href="../modules/data.html">data</a></li>
+<li><a href="../modules/benchmarks.html">benchmarks</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>raw_to_huggingface</h1>
+<br>
+<p>&gt; 将原始细胞形态学图像板文件夹转换为每块板的 HuggingFace 数据集。</p>
+<br>
+<p>该模块负责将原始的 Cell Painting 图像数据（按板文件夹组织）转换为 HuggingFace DatasetDict 格式。每个板文件夹对应一个独立的数据集，包含训练集分割。数据集中的每一行记录包含图像本身（以字节形式存储）、文件名、板名、孔位、视野（FOV）、通道元数据，以及从同板级别的 pickle 文件中查找到的边界框。它支持 CPG 和 BBBC036 两种数据集格式，通过正则表达式解析文件名，并处理图像数据的标准化和编码。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">raw_to_huggingface/transform_dataset.py</code></h3>
+<br>
+<p>实现从原始图像板文件夹到 HuggingFace 数据集的转换逻辑，包括目录发现、图像加载、元数据提取、边界框关联和数据序列化。</p>
+<br>
+<ul>
+<li><code class="inline-code">ImageRecord</code> (dataclass) - 定义单条图像记录的数据结构，包含图像字典、文件名、板名、孔位、FOV、通道和边界框列表。</li>
+<li><code class="inline-code">discover_plates</code> (function) - 扫描原始根目录，返回所有符合板目录命名规则（排除包含 bf、metadata、brightfield 的目录）的板名列表。</li>
+<li><code class="inline-code">_normalise_boxes</code> (function) - 标准化边界框数据，将 numpy 数组转换为列表，处理 None 情况。</li>
+<li><code class="inline-code">_to_uint8</code> (function) - 将任意 numpy 图像数组转换为 0-255 范围的 uint8 数组，处理不同数据类型的归一化。</li>
+<li><code class="inline-code">_uint8_png_payload</code> (function) - 读取图像文件，转换为 uint8 PNG 格式，并返回包含字节内容和文件名的字典。</li>
+<li><code class="inline-code">_load_cpg_boxes</code> (function) - 从 pickle 文件中加载 CPG 格式的边界框数据，按板名解析并返回键值对映射。</li>
+<li><code class="inline-code">_load_bbbc036_boxes</code> (function) - 从 pickle 文件中加载 BBBC036 格式的边界框数据，解析文件名中的孔位和 FOV 信息。</li>
+<li><code class="inline-code">process_plate</code> (function) - 处理单个板文件夹，遍历其中的图像文件，提取元数据，加载边界框，构建 ImageRecord 列表并保存为 HuggingFace 数据集。</li>
+<li><code class="inline-code">main</code> (function) - 命令行入口函数，解析参数，调用 process_plate 处理指定的板或所有板。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>HuggingFace DatasetDict</strong>:</li>
+<li><strong>板级边界框查找</strong>:</li>
+<li><strong>图像标准化</strong>:</li>
+<li><strong>多数据集支持</strong>:</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

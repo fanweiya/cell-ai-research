@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ucell Wiki — reading-guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / ucell Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>ucell</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/ucell.html">ucell</a></li>
+<li><a href="modules/dead_neuron_analysis.html">dead_neuron_analysis</a></li>
+<li><a href="modules/tests.html">tests</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Reading Guide</h1>
+<br>
+<p>本代码库是一个名为UCell的通用细胞分割模型项目，包含训练、推理、评估及死神经元分析等完整流程。建议按‘配置 -&gt; 核心模型 -&gt; 训练/推理流程 -&gt; 分析工具 -&gt; 测试’的顺序阅读，以建立对系统架构和关键逻辑的整体认知。</p>
+<br>
+<h2>Step 1: 了解项目概览与基础配置 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">README.md</code>, <code class="inline-code">config.py</code>, <code class="inline-code">pyproject.toml</code></p>
+<br>
+<p>首先通过README.md了解项目背景、依赖和快速开始指南；接着阅读config.py理解全局配置参数（如路径、超参数）；最后查看pyproject.toml确认项目依赖和构建配置。这有助于建立对项目的整体认知。</p>
+<br>
+<h2>Step 2: 掌握核心模型架构 (~25 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">ucell/layers.py</code>, <code class="inline-code">ucell/frm.py</code>, <code class="inline-code">ucell/dynamics.py</code></p>
+<br>
+<p>阅读ucell/layers.py了解基础层实现；然后深入ucell/frm.py理解FRM模型的核心结构；最后通过ucell/dynamics.py掌握细胞动力学的数学建模部分。这是理解模型如何工作的关键。</p>
+<br>
+<h2>Step 3: 理解训练与推理流程 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">train.py</code>, <code class="inline-code">predict.py</code>, <code class="inline-code">eval.py</code></p>
+<br>
+<p>train.py展示完整的训练循环和数据处理；predict.py演示推理流程；eval.py提供评估指标计算。这三个文件串联起模型从训练到应用的全生命周期。</p>
+<br>
+<h2>Step 4: 探索少样本适配机制 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">few_shot_adapt.py</code>, <code class="inline-code">ucell/lora.py</code></p>
+<br>
+<p>few_shot_adapt.py实现少样本学习策略，ucell/lora.py提供LoRA微调的具体实现。了解这些内容有助于理解模型如何高效适应新任务。</p>
+<br>
+<h2>Step 5: 学习死神经元分析工具 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">dead_neuron_analysis/detect_dead_neurons.py</code>, <code class="inline-code">dead_neuron_analysis/analyze_neurons_advanced.py</code></p>
+<br>
+<p>detect_dead_neurons.py实现神经元活性检测算法；analyze_neurons_advanced.py提供深入分析功能。这些工具对于理解模型内部状态和优化至关重要。</p>
+<br>
+<h2>Step 6: 检查数据加载与处理 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">data.py</code></p>
+<br>
+<p>data.py包含数据加载、预处理和增强逻辑。理解数据流对于调试和自定义数据集非常重要。</p>
+<br>
+<h2>Step 7: 验证模型加载与权重一致性 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">tests/test_checkpoint_loading.py</code></p>
+<br>
+<p>通过测试文件了解不同检查点格式的加载机制和权重验证方法，确保模型在不同场景下的稳定性。</p>
+<br>
+<h2>Tips</h2>
+<br>
+<ul>
+<li>在阅读核心模型文件时，建议配合绘制简单的架构图来理解数据流向</li>
+<li>遇到不理解的数学公式或算法时，先查看相关文档注释，再深入代码实现</li>
+<li>重点关注config.py中的参数如何影响各个模块的行为</li>
+<li>死神经元分析部分与模型性能密切相关，建议结合训练日志一起理解</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

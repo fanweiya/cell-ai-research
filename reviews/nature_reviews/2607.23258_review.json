@@ -1,0 +1,57 @@
+{
+  "paper_id": "2607.23258",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了CAPT，一个用于钙成像数据的连续自回归Transformer模型，旨在实现跨数据集和跨物种的神经表示迁移。方法新颖，实验设计广泛，涵盖了多个物种和实验条件，展示了在神经群体预测和行为解码任务上的优越性能。此外，CAPT的嵌入空间与生物学细胞身份相关联，提供了潜在的功能坐标系统。然而，论文在统计报告的严谨性、泛化性的边界条件以及引用真实性方面存在一些问题，需要进一步澄清和补充。",
+  "strengths": [
+    "CAPT的连续patch tokenization策略避免了离散tokenization的额外计算开销，并保持了预测和解码任务在连续信号空间中的一致性。",
+    "论文展示了跨物种（小鼠、斑马鱼、线虫）和跨实验条件的泛化能力，特别是在C. elegans数据中与NeuroPAL注释的结合分析，提供了生物学意义的验证。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "CAPT的连续自回归建模优于离散tokenization方法",
+      "concern": "论文声称连续tokenization优于离散tokenization，但缺乏对两种方法在相同模型架构下的公平比较。例如，是否仅tokenization策略不同，而其他超参数（如模型大小、训练步数、优化器设置）保持一致？",
+      "why_it_matters": "若未控制变量，无法确定性能提升来源于tokenization策略本身，还是其他训练或模型设计因素。",
+      "resolution_test": "提供在相同模型架构和训练条件下，仅tokenization策略不同的对比实验，包括消融研究或与CalM的直接比较。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "statistics",
+      "claim_pointer": "CAPT在跨数据集和跨物种任务中显著优于基线模型",
+      "concern": "论文中未报告统计显著性检验（如t检验或bootstrap检验）来支持跨数据集和跨物种性能提升的结论。",
+      "why_it_matters": "缺乏统计显著性检验可能导致夸大模型性能提升的结论，影响结果的可信度。",
+      "resolution_test": "补充统计显著性检验的结果，例如p值或置信区间，以验证CAPT与基线模型之间的性能差异是否具有统计学意义。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "CAPT可以泛化到不同物种和实验条件",
+      "concern": "论文仅使用一个大规模小鼠数据集进行预训练，未探讨多数据集联合预训练对泛化性的影响。",
+      "why_it_matters": "当前的泛化能力可能受限于源数据分布，缺乏多数据集预训练的对比实验，限制了模型在更广泛条件下的适用性。",
+      "resolution_test": "补充多数据集联合预训练的实验，比较其与单数据集预训练在跨物种和跨实验条件下的性能差异。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "citation",
+      "claim_pointer": "POCO、POYO+、CalM等方法的引用",
+      "concern": "论文引用了多个未发表或尚未广泛验证的预印本（如POYO+、CalM），但未充分讨论这些方法的局限性或潜在偏差。",
+      "why_it_matters": "引用未验证方法可能误导读者对现有技术的理解，影响论文的科学严谨性。",
+      "resolution_test": "补充对所引用方法的局限性分析，并在讨论中明确CAPT相对于这些方法的具体改进点。"
+    }
+  ],
+  "assessment_boundaries": [
+    "论文未提供足够的实现细节（如模型参数量、训练时间、硬件配置），难以复现实验。",
+    "附录中提到的消融实验（如Appendix D和E）未在正文详细讨论，无法全面评估其对主结果的影响。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

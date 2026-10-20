@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CBVCC Wiki — subagent_report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / CBVCC Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>CBVCC</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/metrics.html">metrics</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <p>现在我已经收集了足够的信息。让我基于分析结果输出结构化报告：</p>
+<br>
+<h2>项目概述</h2>
+<br>
+<p><strong>CBVCC</strong> (Cell Behavior Video Classification Challenge) 是一个针对活细胞行为视频分类的基准挑战评测仓库。</p>
+<br>
+<ul>
+<li><strong>论文来源</strong>: Cell Behavior Video Classification Challenge, a benchmark for computer vision methods in time-lapse microscopy (arXiv 2601.10250)</li>
+<li><strong>主要问题</strong>: 分类 intravital microscopy (IVM) 拍摄的细胞行为视频，识别细胞运动模式：</li>
+<li>方向突然变化的行为</li>
+<li>一致线性运动</li>
+<li>静止细胞</li>
+<li>纯背景</li>
+<li><strong>核心任务</strong>: 二分类（Class 0 vs Class 1），实质是区分"异常运动" vs "正常/静止/背景"</li>
+</ul>
+<br>
+<h2>架构分析</h2>
+<br>
+<h3>目录结构</h3>
+<pre class="code-block"><code class="language-">CBVCC/
+├── metrics/              # 核心模块
+│   ├── compute_quality_metrics.py   # 视频质量指标计算
+│   ├── generate_gt.py             # 生成标签CSV
+│   ├── overall_metrics.py         # 综合评价指标
+│   ├── roc_curves.py              # ROC曲线绘制
+│   ├── ncell_curves.py            # 细胞数量-分数关系
+│   ├── snr_curves.py              # SNR-分数关系
+│   ├── descriptives.py            # 分布可视化
+│   └── upload_files.py            # 文件处理与数据构建
+├── run_analysis.py          # 主分析脚本
+├── eval_code.php            # PHP评估脚本
+├── environment.yml          # 环境配置
+└── README.md                 # 使用说明</code></pre>
+<br>
+<h3>主要模块与依赖关系</h3>
+<br>
+<ul>
+<li><strong>数据输入层</strong></li>
+<li>视频 patches (.avi) - 按数据集划分</li>
+<li>追踪文件 (.csv) - 细胞追踪结果</li>
+<li>提交预测文件 (.csv) - 参赛队伍结果</li>
+</ul>
+<br>
+<ul>
+<li><strong>处理层</strong></li>
+<li><code class="inline-code">generate_gt.py</code>: 从目录结构自动生成 ground truth CSV</li>
+<li><code class="inline-code">compute_quality_metrics.py</code>: 计算 SNR、细胞数量等质量指标</li>
+</ul>
+<br>
+<ul>
+<li><strong>评估层</strong></li>
+<li><code class="inline-code">overall_metrics.py</code>: 计算 AUC、Precision、Recall、Balanced Accuracy</li>
+<li><code class="inline-code">roc_curves.py</code>: 可视化 ROC 曲线</li>
+</ul>
+<br>
+<ul>
+<li><strong>分析层</strong></li>
+<li><code class="inline-code">ncell_curves.py</code>: 分析细胞数量对性能的影响</li>
+<li><code class="inline-code">snr_curves.py</code>: 分析 SNR 对性能的影响</li>
+</ul>
+<br>
+<h3>技术依赖</h3>
+<ul>
+<li>Python 3.9</li>
+<li>OpenCV (视频处理)</li>
+<li>Pandas (数据处理)</li>
+<li>Scikit-learn (评价指标)</li>
+<li>Matplotlib/Seaborn (可视化)</li>
+<li>SciPy (距离计算)</li>
+<li>TensorFlow/Keras (环境文件中包含，但代码未直接使用)</li>
+</ul>
+<br>
+<h2>核心算法</h2>
+<br>
+<h3>1. 视频质量指标计算 (<code class="inline-code">compute_quality_metrics.py</code>)</h3>
+<br>
+<p>核心算法流程：</p>
+<pre class="code-block"><code class="language-python"># 关键参数
+SAMPLING_DISTANCE = 1
+TH_DISTANCE_BG = 20 / 0.8      # 背景区域阈值
+TH_DISTANCE_FG = 3 / 0.8       # 前景区域阈值
+
+# 计算指标
+SNR = |FG_avg - BG_avg| / BG_std        # 信噪比
+CR = FG_avg / BG_avg                    # 对比度
+DEN = 细胞间最小距离                    # 细胞密度</code></pre>
+<br>
+<p><strong>实现原理</strong>:</p>
+<ul>
+<li>从视频中提取灰度帧，预处理为三维数组 (H, W, T)</li>
+<li>读取追踪 CSV 文件，获取每帧细胞坐标</li>
+<li>对每帧使用距离变换 (distance_transform_edt) 分割前景/背景</li>
+<li>在前景和背景区域分别计算灰度统计量</li>
+<li>汇总每视频的平均 SNR、细胞数量 (N.TRACKS) 等</li>
+</ul>
+<br>
+<h3>2. 综合评价指标 (<code class="inline-code">overall_metrics.py</code>)</h3>
+<br>
+<p>采用 CBVCC 官方评分公式：</p>
+<pre class="code-block"><code class="language-python">score = 0.4 * AUC + 0.2 * (Precision + Recall + Balanced Accuracy)</code></pre>
+<br>
+<p>其中：</p>
+<ul>
+<li>AUC: ROC曲线下面积</li>
+<li>Precision = TP / (TP + FP)</li>
+<li>Recall = TP / (TP + FN)</li>
+<li>Balanced Accuracy = (Sensitivity + Specificity) / 2</li>
+</ul>
+<br>
+<h3>3. 数据匹配逻辑 (<code class="inline-code">upload_files.py</code>)</h3>
+<br>
+<p>核心挑战：将预测提交与 ground truth 匹配</p>
+<pre class="code-block"><code class="language-python">def get_nearest_file(timestamp, file_timestamp_dict):
+    """根据时间戳找到最近的预测文件"""
+    closest_timestamp = min(file_timestamp_dict.keys(), 
+                           key=lambda x: abs(x - timestamp))
+    return file_timestamp_dict[closest_timestamp]</code></pre>
+<br>
+<p>涉及的时间戳 extraction 和文件名规范化：</p>
+<ul>
+<li>预测文件命名格式：<code class="inline-code">predicted{timestamp}.csv</code></li>
+<li>视频文件名：类似 <code class="inline-code">01_1.avi</code> → <code class="inline-code">_</code> 分隔，数字部分补零</li>
+</ul>
+<br>
+<h2>代码质量</h2>
+<br>
+<h3>优点</h3>
+<ul>
+<li><strong>模块清晰</strong>: 每个脚本职责单一，功能解耦</li>
+<li><strong>依赖明确</strong>: 使用标准库 + 流行科学计算栈</li>
+<li><strong>可视化丰富</strong>: 自动输出 ROC 曲线、分布图、质量指标散点图</li>
+<li><strong>文档完整</strong>: README 包含详细使用示例、数据集结构、评估流程</li>
+</ul>
+<br>
+<h3>缺点</h3>
+<ul>
+<li><strong>错误处理一般</strong>: 视频读取失败时仅有简单异常捕获和打印</li>
+<li><strong>缺少单元测试</strong>: 没有 pytest/unittest 测试覆盖</li>
+<li><strong>硬编码较多</strong>: 阈值参数、颜色映射、文件名模式等可配置化不足</li>
+<li><strong>性能问题</strong>: 视频处理使用纯 Python 循环，逐帧读取效率低</li>
+<li><strong>PHP 脚本陈旧</strong>: <code class="inline-code">eval_code.php</code> 使用早期 PHP 语法，未采用现代最佳实践</li>
+</ul>
+<br>
+<h3>可读性评价</h3>
+<ul>
+<li>代码注释适中，函数命名直观（如 <code class="inline-code">load_gt</code>, <code class="inline-code">preprocess_submission</code>）</li>
+<li>未使用类型注解，但变量名意义清晰</li>
+<li>整体结构易于理解，新手快速上手难度中等</li>
+</ul>
+<br>
+<h2>可复现性</h2>
+<br>
+<h3>环境配置</h3>
+<ul>
+<li>提供 <code class="inline-code">environment.yml</code> (Conda 格式)，但依赖版本过于具体（包含构建哈希）</li>
+<li>问题：难以直接复现，建议用 <code class="inline-code">requirements.txt</code> + 宽松版本约束</li>
+</ul>
+<br>
+<h3>安装脚本</h3>
+<ul>
+<li>无自动安装脚本，需手动 clone + conda 创建环境</li>
+<li>依赖 <code class="inline-code">opencv-python</code>、<code class="inline-code">scikit-learn</code> 等常见包，安装风险低</li>
+</ul>
+<br>
+<h3>使用文档</h3>
+<ul>
+<li><strong>优秀的 README</strong>: 包含完整使用流程、示例命令、目录结构说明</li>
+<li>缺乏快速开始指南和 troubleshooting 章节</li>
+<li>无 Colab/Jupyter 笔记本示例</li>
+</ul>
+<br>
+<h3>数据依赖</h3>
+<ul>
+<li>需要额外下载数据集和追踪文件（通过链接）</li>
+<li>无 sample data 用于测试</li>
+</ul>
+<br>
+<h3>评分：6/10</h3>
+<ul>
+<li>环境配置需要手动调整</li>
+<li>文档充分但缺少容错指南</li>
+<li>无 Docker 容器化支持</li>
+</ul>
+<br>
+<h2>与项目（YOLO+SAM 管线）的相关性</h2>
+<br>
+<h3>可直接复用模块</h3>
+<br>
+<ul>
+<li><strong>质量指标计算逻辑</strong></li>
+<pre class="code-block"><code class="language-python">   # compute_quality_metrics.py
+   SNR 计算、细胞密度测量、对比度分析</code></pre>
+<li><strong>适用性</strong>: 可用于评估 YOLO 检测质量、SAM 分割效果</li>
+<li><strong>直接应用</strong>: 计算视频帧的 SNR、细胞计数等指标</li>
+</ul>
+<br>
+<ul>
+<li><strong>多源数据匹配</strong></li>
+<pre class="code-block"><code class="language-python">   # upload_files.py
+   build_all_data() - 合并预测、ground truth、质量指标</code></pre>
+<li><strong>适用性</strong>: 用于整合 YOLO 输出、SAM mask、真实标签</li>
+<li><strong>参考价值</strong>: 处理时间戳对齐、文件名规范化逻辑</li>
+</ul>
+<br>
+<ul>
+<li><strong>综合评价指标</strong></li>
+<pre class="code-block"><code class="language-python">   # overall_metrics.py
+   score = 0.4*AUC + 0.2*(Precision + Recall + Balanced Accuracy)</code></pre>
+<li><strong>适用性</strong>: 可作为细胞行为分类任务的评估公式</li>
+<li><strong>调整建议</strong>: 根据任务调整权重</li>
+</ul>
+<br>
+<ul>
+<li><strong>可视化模板</strong></li>
+<pre class="code-block"><code class="language-python">   # roc_curves.py, ncell_curves.py, snr_curves.py
+   多模型对比、分组统计图表</code></pre>
+<li><strong>可直接复用</strong>: 绘制模型性能对比图</li>
+</ul>
+<br>
+<h3>需参考的核心思路</h3>
+<br>
+<ul>
+<li><strong>分阶段分析</strong></li>
+<li>先计算基础质量指标</li>
+<li>再评估模型性能</li>
+<li>最后分析性能与质量指标的关系</li>
+</ul>
+<br>
+<ul>
+<li><strong>二维分析框架</strong></li>
+<li>按细胞数量分组分析性能</li>
+<li>按 SNR 分组分析性能</li>
+<li>这对抗细胞密度变化、噪声扰动有参考价值</li>
+</ul>
+<br>
+<ul>
+<li><strong>标准化评估流程</strong></li>
+<li>从数据准备 → 质量计算 → 模型评估 → 可视化</li>
+<li>可作为 pipeline 模板</li>
+</ul>
+<br>
+<h3>不直接适用的部分</h3>
+<br>
+<ul>
+<li><strong>PHP 评估脚本</strong></li>
+<li>已过时，建议用 Python 重实现</li>
+<li>仅学习其评价指标计算逻辑</li>
+</ul>
+<br>
+<ul>
+<li><strong>特定数据格式假设</strong></li>
+<li>追踪 CSV 格式、视频命名规则</li>
+<li>需要适配 YOLO+SAM 的输出格式</li>
+</ul>
+<br>
+<h3>建议复用优先级</h3>
+<ul>
+<li><strong>高优先级</strong>: <code class="inline-code">compute_quality_metrics.py</code> 中 SNR、细胞密度算法</li>
+<li><strong>中优先级</strong>: 数据合并逻辑（<code class="inline-code">upload_files.py</code>）</li>
+<li><strong>低优先级</strong>: 可视化代码（根据需求调整）</li>
+</ul>
+<br>
+<h2>综合评分</h2>
+<br>
+<p><strong>总评分：7/10</strong></p>
+<br>
+<ul>
+<li><strong>优点</strong>: 模块清晰、文档完善、评价指标设计合理、可视化专业</li>
+<li><strong>缺点</strong>: 环境配置过于具体、缺少测试、性能未优化</li>
+<li><strong>适用性</strong>: 对细胞视频分析任务有很强的参考价值和可直接复用的代码模块</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h3>补充建议</h3>
+<br>
+<ul>
+<li><strong>对于 YOLO+SAM 管线</strong></li>
+<li>可从 <code class="inline-code">compute_quality_metrics.py</code> 抽象出通用的视频质量评估函数</li>
+<li>借鉴其多指标（SNR、细胞密度）综合分析思路</li>
+</ul>
+<br>
+<ul>
+<li><strong>最佳实践</strong></li>
+<li>考虑将其部分模块包装成类，提高复用性</li>
+<li>添加类型注解和单元测试</li>
+<li>将固定参数提取为配置文件</li>
+</ul>
+<br>
+<ul>
+<li><strong>性能改进点</strong></li>
+<li>视频读取使用 <code class="inline-code">cv2.VideoCapture</code> 缓存机制</li>
+<li>质量指标计算可向量化或并行化</li>
+<li>大数据集处理考虑内存映射</li>
+</ul>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+{
+  "source": "gread",
+  "analysis_depth": "multi_pass_static",
+  "repository": "Sun15194/Poly-DETR",
+  "repository_url": "https://github.com/Sun15194/Poly-DETR",
+  "collected_at": "2026-08-12T01:24:29.385461+00:00",
+  "coverage": {
+    "repository_kind": "placeholder_or_docs_only",
+    "has_implementation": false,
+    "code_file_count_in_tree": 0,
+    "selected_file_count": 1,
+    "selected_code_file_count": 0,
+    "languages_by_extension": {},
+    "tests_present": false,
+    "test_files": [],
+    "manifest_files": [
+      "README.md"
+    ],
+    "read_errors": [],
+    "limitations": [
+      "Static remote inspection only; files were not executed.",
+      "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+    ],
+    "search_errors": []
+  },
+  "overview": "# Sun15194/Poly-DETR\n**Stars**: 80 | **Language**: \n**Description**: The Poly-DETR repository focuses on bridging object detection and instance segmentation using a novel approach called Polygon Detection Transformers. It introduces a method to perform instance segmentation by directly predicting polygons around objects, integrating aspects of both object detection and segmentation tasks within a Transformer-based framework.\n\n\n## Directory Tree\n```\nREADME.md\n```",
+  "tree": "## Directory Tree\n```\nREADME.md\n```",
+  "key_files": [
+    "README.md"
+  ],
+  "source_files": "## README.md\n```\n# Poly-DETR\nBridging Object Detection and Segmentation with Polygon Detection Transformers.\n\n```",
+  "search_queries": [
+    "class |def |function |interface |struct |fn |func ",
+    "main\\(|train\\(|forward\\(|fit\\(|predict\\(|infer|generate",
+    "TODO|FIXME|NotImplemented|raise |throw ",
+    "pytest|unittest|test_|describe\\(|@Test",
+    "import |from |require\\(|use |#include"
+  ],
+  "search_results": [
+    "## Search inside Sun15194/Poly-DETR for \"class |def |function |interface |struct |fn |func \"\n```\nNo matches found.\n```",
+    "## Search inside Sun15194/Poly-DETR for \"main\\(|train\\(|forward\\(|fit\\(|predict\\(|infer|generate\"\n```\nNo matches found.\n```",
+    "## Search inside Sun15194/Poly-DETR for \"TODO|FIXME|NotImplemented|raise |throw \"\n```\nNo matches found.\n```",
+    "## Search inside Sun15194/Poly-DETR for \"pytest|unittest|test_|describe\\(|@Test\"\n```\nNo matches found.\n```",
+    "## Search inside Sun15194/Poly-DETR for \"import |from |require\\(|use |#include\"\n```\nNo matches found.\n```"
+  ]
+}

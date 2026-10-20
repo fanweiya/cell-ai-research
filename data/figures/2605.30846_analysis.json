@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 7,
+    "caption": "培养皿菌落计数图像，带检测标注，为论文实验测试样本"
+  },
+  "1": {
+    "relevant": true,
+    "score": 7,
+    "caption": "培养皿菌落检测示例图，带有标注点的计数结果展示"
+  },
+  "2": {
+    "relevant": true,
+    "score": 7,
+    "caption": "培养皿菌落图像，展示待计数的细菌菌落样本，属于论文Count Anything任务的核心实验数据图"
+  }
+}

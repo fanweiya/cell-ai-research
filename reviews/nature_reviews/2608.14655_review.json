@@ -1,0 +1,58 @@
+{
+  "paper_id": "2608.14655",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种训练无关的模态子空间激活（MSA）方法，用于缓解Omni-Modal幻觉问题，并引入了CausalMSBench和CMS指标来评估模型的模态敏感性。方法论上具有创新性，结合了微观logit分析和宏观决策不变性，为Omni-LLMs的行为诊断提供了新的视角。实验设计较为严谨，展示了MSA在多个Omni-LLM上的有效性。然而，论文在统计报告和引用真实性方面存在一些关键问题，可能影响其结论的可信度。",
+  "strengths": [
+    "提出了一种新颖的训练无关的推理时干预方法MSA，通过子空间激活调节模态依赖性，具有实际应用潜力。",
+    "引入了CMS指标，结合ARR和LAD，提供了多粒度的模型诊断框架，弥补了传统准确率指标的不足。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "MSA方法通过SVD构建模态子空间并进行推理时干预",
+      "concern": "论文未提供足够的细节说明如何选择SVD的主成分数量（k=64）的依据，也未讨论不同k值对MSA性能的影响。",
+      "why_it_matters": "主成分数量的选择直接影响子空间的表达能力和计算效率，缺乏系统分析可能影响方法的可复现性和泛化性。",
+      "resolution_test": "应提供不同k值下的消融实验，分析其对CMS和Accuracy的影响，并讨论选择k=64的合理性。"
+    },
+    {
+      "id": "S-M2",
+      "severity": "major",
+      "blocking": true,
+      "axis": "statistics",
+      "claim_pointer": "MSA显著提升了模型的CMS指标",
+      "concern": "论文未提供统计显著性检验（如t-test或bootstrap分析）来验证MSA提升CMS的显著性。",
+      "why_it_matters": "缺乏统计显著性检验可能导致结论不可靠，尤其是在样本量较小的情况下。",
+      "resolution_test": "应补充统计显著性检验，验证MSA在不同模型和扰动设置下的提升是否具有统计意义。"
+    },
+    {
+      "id": "S-M3",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "generalizability",
+      "claim_pointer": "MSA适用于多种Omni-LLM架构",
+      "concern": "实验仅在少数几个Omni-LLM上进行评估，缺乏对更多模型架构或非Omni-LLM的泛化能力验证。",
+      "why_it_matters": "当前实验范围有限，难以判断MSA是否具有广泛的适用性。",
+      "resolution_test": "应补充在更多模型架构（如不同参数规模、架构设计）或非Omni-LLM上的实验，以验证MSA的泛化能力。"
+    },
+    {
+      "id": "S-M4",
+      "severity": "major",
+      "blocking": true,
+      "axis": "citation",
+      "claim_pointer": "引用了多个2026年发表的工作（如Leng et al. 2024, Guan et al. 2026等）",
+      "concern": "文中引用了大量2026年发表的文献，而当前时间为2024年，这些文献尚未发表，存在引用真实性问题。",
+      "why_it_matters": "引用未来文献可能误导读者，影响论文的学术诚信。",
+      "resolution_test": "应核实所有引用文献的真实性，删除或替换尚未发表的文献引用。"
+    }
+  ],
+  "assessment_boundaries": [
+    "论文未提供代码或数据集链接，无法验证实验的可复现性。",
+    "未讨论MSA在不同任务（如segmentation、tracking）中的具体应用效果，仅聚焦于问答任务。",
+    "未提供MSA在推理速度、内存占用等方面的性能分析，影响其在实际部署中的评估。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

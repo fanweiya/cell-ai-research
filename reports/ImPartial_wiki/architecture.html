@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ImPartial Wiki — architecture</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / ImPartial Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>ImPartial</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/monailabel-app.html">monailabel-app</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/config.html">config</a></li>
+<li><a href="modules/data.html">data</a></li>
+<li><a href="modules/impartial.html">impartial</a></li>
+<li><a href="modules/imagej-plugin.html">imagej-plugin</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>架构</h1>
+<br>
+<p><strong>类型：</strong> 插件系统</p>
+<br>
+<p>ImPartial 实现了基于插件的架构，与 MONAI Label 和 ImageJ/Fiji 集成。核心 Python 库提供深度学习模型和训练逻辑，而 ImageJ 插件则作为桌面客户端，用于交互式标注和推理。MONAI Label API 实现了服务器端模型服务和主动学习工作流。</p>
+<br>
+<h2>组件图</h2>
+<br>
+<pre class="code-block"><code class="language-mermaid">graph TD
+  core_library --&gt; monai_label_api
+  core_library --&gt; imagej_plugin
+  imagej_plugin --&gt; monai_label_api
+  configuration --&gt; core_library
+  configuration --&gt; monai_label_api</code></pre>
+<br>
+<h2>组件</h2>
+<br>
+<h3>core_library</h3>
+<br>
+<p>包含模型、训练、推理和工具函数的核心 Python 库</p>
+<br>
+<p>文件：<code class="inline-code">impartial/dataprocessing/</code>、<code class="inline-code">impartial/general/</code>、<code class="inline-code">setup.py</code>、<code class="inline-code">requirements.txt</code></p>
+<br>
+<h3>monai_label_api</h3>
+<br>
+<p>用于模型服务和主动学习的 MONAI Label 服务器集成</p>
+<br>
+<p>文件：<code class="inline-code">monailabel-app/api/main.py</code>、<code class="inline-code">monailabel-app/api/lib/</code>、<code class="inline-code">monailabel-app/Impartial_classes.py</code>、<code class="inline-code">monailabel-app/Impartial_dataloaders.py</code>、<code class="inline-code">monailabel-app/Impartial_functions.py</code></p>
+<br>
+<h3>imagej_plugin</h3>
+<br>
+<p>通过 ImageJ/Fiji 进行交互式标注、训练和推理的桌面客户端</p>
+<br>
+<p>文件：<code class="inline-code">imagej-plugin/src/main/java/org/nadeemlab/impartial/</code>、<code class="inline-code">imagej-plugin/pom.xml</code></p>
+<br>
+<h3>configuration</h3>
+<br>
+<p>针对不同数据集和模型的配置文件</p>
+<br>
+<p>文件：<code class="inline-code">config/</code>、<code class="inline-code">impartial/general/config.py</code></p>
+<br>
+<h2>序列图</h2>
+<br>
+<pre class="code-block"><code class="language-mermaid">sequenceDiagram
+  participant User
+  participant ImageJ
+  participant MONAI_API
+  participant CoreLib
+  User-&gt;&gt;ImageJ: 上传图像
+  ImageJ-&gt;&gt;MONAI_API: 发送至服务器
+  MONAI_API-&gt;&gt;CoreLib: 执行推理
+  CoreLib--&gt;&gt;MONAI_API: 返回预测结果
+  MONAI_API--&gt;&gt;ImageJ: 显示结果
+  User-&gt;&gt;ImageJ: 添加涂鸦
+  ImageJ-&gt;&gt;MONAI_API: 提交标注
+  MONAI_API-&gt;&gt;CoreLib: 重新训练模型
+  CoreLib--&gt;&gt;MONAI_API: 更新后的模型</code></pre>
+<br>
+<h2>数据流</h2>
+<br>
+<p>用户通过 ImageJ 插件上传图像，插件将其发送至 MONAI Label API 服务器。服务器使用核心库执行推理并返回预测结果。用户添加涂鸦作为部分标注，这些标注被发送回服务器以进行主动学习和模型重新训练。</p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

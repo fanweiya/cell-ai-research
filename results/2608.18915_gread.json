@@ -1,0 +1,48 @@
+{
+  "source": "gread",
+  "analysis_depth": "multi_pass_static",
+  "repository": "sdoerrich97/colorist",
+  "repository_url": "https://github.com/sdoerrich97/colorist",
+  "collected_at": "2026-08-21T01:22:38.013260+00:00",
+  "coverage": {
+    "repository_kind": "placeholder_or_docs_only",
+    "has_implementation": false,
+    "code_file_count_in_tree": 0,
+    "selected_file_count": 2,
+    "selected_code_file_count": 0,
+    "languages_by_extension": {},
+    "tests_present": false,
+    "test_files": [],
+    "manifest_files": [
+      "README.md",
+      "LICENSE"
+    ],
+    "read_errors": [],
+    "limitations": [
+      "Static remote inspection only; files were not executed.",
+      "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+    ],
+    "search_errors": []
+  },
+  "overview": "# sdoerrich97/colorist\n**Stars**: 0 | **Language**: \n**Description**: This repository is the official PyTorch implementation for the paper &#x27;Simple, Safe, and Overlooked: Reclaiming Sustainable Domain Generalization with Statistical Color Matching&#x27;, presented at MICCAI-DEMI 2026. The project is marked as &#x27;Coming Soon&#x27;, indicating that the code and resources are not yet publicly available.\n\n\n## Directory Tree\n```\nLICENSE\nREADME.md\n```",
+  "tree": "## Directory Tree\n```\nLICENSE\nREADME.md\n```",
+  "key_files": [
+    "LICENSE",
+    "README.md"
+  ],
+  "source_files": "## LICENSE\n```\nMIT License\n\nCopyright (c) 2026 Sebastian Doerrich\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n```\n\n## README.md\n```\n# colorist\nOfficial PyTorch implementation of the paper \"Simple, Safe, and Overlooked: Reclaiming Sustainable Domain Generalization with Statistical Color Matching\" @ MICCAI-DEMI 2026\n\n-> Coming Soon!\n\n```",
+  "search_queries": [
+    "class |def |function |interface |struct |fn |func ",
+    "main\\(|train\\(|forward\\(|fit\\(|predict\\(|infer|generate",
+    "TODO|FIXME|NotImplemented|raise |throw ",
+    "pytest|unittest|test_|describe\\(|@Test",
+    "import |from |require\\(|use |#include"
+  ],
+  "search_results": [
+    "## Search inside sdoerrich97/colorist for \"class |def |function |interface |struct |fn |func \"\n```\nNo matches found.\n```",
+    "## Search inside sdoerrich97/colorist for \"main\\(|train\\(|forward\\(|fit\\(|predict\\(|infer|generate\"\n```\nNo matches found.\n```",
+    "## Search inside sdoerrich97/colorist for \"TODO|FIXME|NotImplemented|raise |throw \"\n```\nNo matches found.\n```",
+    "## Search inside sdoerrich97/colorist for \"pytest|unittest|test_|describe\\(|@Test\"\n```\nNo matches found.\n```",
+    "## Search inside sdoerrich97/colorist for \"import |from |require\\(|use |#include\"\n```\nHEAD:LICENSE-19-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nHEAD:LICENSE:20:OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nHEAD:LICENSE-21-SOFTWARE.\n\n```"
+  ]
+}

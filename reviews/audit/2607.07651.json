@@ -1,0 +1,46 @@
+{
+ "id": "2607.07651",
+ "chars": 60000,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": false,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 3
+ },
+ "key_claims": [
+  "beyond spectral reconstruction, generated spectra retained functional molecular discrimination in bacterial systems, accurately resolving mutation-driven transgenic states and predicting green fluores",
+  "in bacterial systems, the generated spectra was able to discriminate mutation-driven transgenic states within isogenic populations and predict fluorescent protein expression with 88% accuracy, substan",
+  "joint image-spectrum latent learning improves spectral realism to determine how architectural design influences image-to-spectrum translation, we compared pic2spec with two alternative modeling strate"
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "Cellpose: a generalist algorithm for cellular segmentation",
+   "doi": "10.1038/s41592-020-01018-x"
+  },
+  {
+   "title": "Segment Anything",
+   "doi": null
+  }
+ ],
+ "citation_results": [
+  {
+   "title": "Cellpose: a generalist algorithm for cellular segmentation",
+   "doi": "10.1038/s41592-020-01018-x",
+   "verdict": "PASS",
+   "confirmed_n": 2
+  }
+ ]
+}

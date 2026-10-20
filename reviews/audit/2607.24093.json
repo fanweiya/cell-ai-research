@@ -1,0 +1,31 @@
+{
+ "id": "2607.24093",
+ "chars": 60000,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": false,
+   "has_std": false,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": true,
+   "mentions_dataset_split": false,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 0
+ },
+ "key_claims": [
+  "all paper-contextualized llm settings outperform the two fixed-nomenclature baselines on this evaluation set (table 2 ).",
+  "25-percentage-point improvement: gpt-5.",
+  "5 improves from 93."
+ ],
+ "ref_spotcheck_targets": [],
+ "citation_results": []
+}

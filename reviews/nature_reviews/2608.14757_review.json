@@ -1,0 +1,57 @@
+{
+  "paper_id": "2608.14757",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种新颖的KHiM-Mamba方法，通过将语言先验知识注入选择性状态空间模型，改进了计算病理学中全切片图像的诊断相关证据传播。方法在癌症亚型分类和生存分析任务中均表现出色，超越了现有方法。然而，论文在统计报告和泛化性方面存在一些不足，需要进一步验证和改进。",
+  "strengths": [
+    "创新性地将语言先验知识引入Mamba模型的状态转移机制，增强了模型的诊断感知能力。",
+    "在多个数据集上取得了显著优于现有方法的性能，验证了方法的有效性。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "声称语言先验知识可以有效提升Mamba模型在病理学任务中的表现。",
+      "concern": "论文未提供足够的消融实验来验证语言先验知识对模型性能的具体贡献。",
+      "why_it_matters": "缺乏消融实验使得无法确定语言先验是否真正提升了模型性能，还是仅依赖于更复杂的模型结构。",
+      "resolution_test": "应提供去除语言先验模块的对比实验，以验证其对最终性能的贡献。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "statistics",
+      "claim_pointer": "声称KHiM-Mamba在多个数据集上显著优于现有方法。",
+      "concern": "论文未报告统计显著性检验的具体细节，如p值的多重比较校正方法。",
+      "why_it_matters": "未说明多重比较校正可能导致假阳性结果，影响结论的可信度。",
+      "resolution_test": "应补充统计检验方法的详细说明，并提供校正后的p值。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "声称KHiM-Mamba具有良好的泛化能力。",
+      "concern": "论文仅在有限的癌症类型和数据集上进行了评估，缺乏跨组织类型和跨疾病类型的泛化实验。",
+      "why_it_matters": "当前实验不足以证明模型在更广泛病理任务中的泛化能力。",
+      "resolution_test": "应补充在更多组织类型（如神经、肺等）和非癌症疾病上的实验验证。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "citation",
+      "claim_pointer": "引用了多个Mamba相关工作作为背景。",
+      "concern": "部分引用文献（如M3Mamba）未提供可复现的代码，但论文未明确指出这一限制。",
+      "why_it_matters": "未明确指出引用工作的可复现性问题可能影响读者对实验公平性的判断。",
+      "resolution_test": "应在方法部分或补充材料中明确说明引用工作的可复现性限制。"
+    }
+  ],
+  "assessment_boundaries": [
+    "未提供代码或模型细节，难以复现实验结果。",
+    "未评估模型在真实临床环境中的部署性能（如推理速度、内存占用等）。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic-J Wiki — skills</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / Agentic-J Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>imagentj</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/skills.html">skills</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/user_guide.html">user_guide</a></li>
+<li><a href="../modules/docs.html">docs</a></li>
+<li><a href="../modules/config.html">config</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/qdrant_data.html">qdrant_data</a></li>
+<li><a href="../modules/patch_stardist.html">patch_stardist</a></li>
+<li><a href="../modules/data.html">data</a></li>
+<li><a href="../modules/imagentj.html">imagentj</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>技能库</h1>
+<br>
+<p>&gt; 一个全面的库，包含经过验证的 Fiji/ImageJ 自动化模式、插件文档以及可重复显微镜图像分析的工作流阶段。</p>
+<br>
+<p>本仓库包含用于在 Fiji 中自动化显微镜图像分析的一系列技能（文档和代码）。它涵盖了广泛的插件，包括 3D ImageJ Suite、BigStitcher、Bio-Formats、BoneJ、CSBDeep、DeepImageJ、ilastik、LabelMe、MorphoLibJ、NeuronJ、OrientationJ、SNT、StarDist、TrackMate、TransformJ 等。每个技能都提供了经过验证的 Groovy/Python 脚本、API 参考、用户界面指南和故障排除说明。该仓库还包含一个具有 7 个阶段的管理员管道，用于管理从数据收集到质量保证的项目。</p>
+<br>
+<h2>文件</h2>
+<br>
+<h3><code class="inline-code">skills/3d_imagej_suite_documentation/OVERVIEW.md</code></h3>
+<br>
+<p>提供 3D ImageJ Suite 插件的概述，包括其安装、涵盖的工作流和自动化指南。</p>
+<br>
+<h3><code class="inline-code">skills/3d_imagej_suite_documentation/SCRIPT_API.md</code></h3>
+<br>
+<p>记录 3D ImageJ Suite 的经过验证的 Groovy API 调用，包括 FastFilters3D、ImageHandler 和 SimpleMeasure。</p>
+<br>
+<h3><code class="inline-code">skills/3d_imagej_suite_documentation/GROOVY_WORKFLOW_3D_SEGMENT_AND_MEASURE.groovy</code></h3>
+<br>
+<p>一个可运行的 Fiji 工作流，用于平滑、阈值分割、3D 标记和 CSV 导出。</p>
+<br>
+<h3><code class="inline-code">skills/bigstitcher_documentation/OVERVIEW.md</code></h3>
+<br>
+<p>描述 BigStitcher 的功能、支持的格式和处理管道。</p>
+<br>
+<h3><code class="inline-code">skills/bigstitcher_documentation/WORKFLOW_TILE_STITCHING.groovy</code></h3>
+<br>
+<p>一个使用 BigStitcher 宏可记录命令进行批量瓦片拼接的 Groovy 脚本。</p>
+<br>
+<h3><code class="inline-code">skills/bioimageformat_documentation/OVERVIEW.md</code></h3>
+<br>
+<p>解释 Bio-Formats 在读取/写入 150 多种显微镜格式并转换为 OME-TIFF 方面的作用。</p>
+<br>
+<h3><code class="inline-code">skills/bioimageformat_documentation/WORKFLOW_BATCH_CONVERT.groovy</code></h3>
+<br>
+<p>一个使用 Bio-Formats 导入器和导出器的批量转换脚本。</p>
+<br>
+<h3><code class="inline-code">skills/bonej_documentation/SKILL.md</code></h3>
+<br>
+<p>总结 BoneJ 在厚度、分数和连通性测量方面的经过验证的自动化路径。</p>
+<br>
+<h3><code class="inline-code">skills/bonej_documentation/GROOVY_WORKFLOW_THICKNESS_AND_FRACTION.groovy</code></h3>
+<br>
+<p>一个用于 BoneJ 厚度和面积/体积分数测量的工作流。</p>
+<br>
+<h3><code class="inline-code">skills/csbdeep_documentation/SKILL.md</code></h3>
+<br>
+<p>记录 CSBDeep 的 SciJava 命令表面，用于运行 CARE 模型。</p>
+<br>
+<h3><code class="inline-code">skills/csbdeep_documentation/GROOVY_WORKFLOW_RUN_YOUR_NETWORK.groovy</code></h3>
+<br>
+<p>一个从本地 ZIP 文件或 URL 运行通用 CSBDeep 网络的脚本。</p>
+<br>
+<h3><code class="inline-code">skills/deepimagej_documentation/SKILL.md</code></h3>
+<br>
+<p>解释通过 'DeepImageJ Run' 菜单命令实现 DeepImageJ 的自动化。</p>
+<br>
+<h3><code class="inline-code">skills/deepimagej_documentation/GROOVY_WORKFLOW_BRIGHTFIELD_NUCLEI_SEGMENTATION.groovy</code></h3>
+<br>
+<p>一个运行 brightfield_nuclei 模型的工作流。</p>
+<br>
+<h3><code class="inline-code">skills/ilastik_documentation/SKILL.md</code></h3>
+<br>
+<p>记录 ilastik4ij 的 HDF5 传输和预测工作流。</p>
+<br>
+<h3><code class="inline-code">skills/ilastik_documentation/GROOVY_WORKFLOW_PIXEL_CLASSIFICATION.groovy</code></h3>
+<br>
+<p>一个运行已训练像素分类项目的脚本。</p>
+<br>
+<h3><code class="inline-code">skills/morpholibj_documentation/SKILL.md</code></h3>
+<br>
+<p>总结通过距离变换分水岭算法实现 MorphoLibJ 细胞分割管道的方法。</p>
+<br>
+<h3><code class="inline-code">skills/morpholibj_documentation/GROOVY_WORKFLOW_CELL_SEGMENTATION.groovy</code></h3>
+<br>
+<p>一个使用 MorphoLibJ 的完整细胞分割工作流。</p>
+<br>
+<h3><code class="inline-code">skills/snt_documentation/SKILL.md</code></h3>
+<br>
+<p>记录 SNT 的 API，用于 SWC 分析、形态测量、Sholl 分析和数据库下载。</p>
+<br>
+<h3><code class="inline-code">skills/snt_documentation/GROOVY_WORKFLOW_SWC_ANALYSIS.groovy</code></h3>
+<br>
+<p>一个分析 SWC 重建并导出形态测量和 Sholl 指标的脚本。</p>
+<br>
+<h3><code class="inline-code">skills/trackmate_documentation/SKILL.md</code></h3>
+<br>
+<p>记录 TrackMate 的 Java API，用于粒子追踪和 Cellpose 集成。</p>
+<br>
+<h3><code class="inline-code">skills/trackmate_documentation/GROOVY_WORKFLOW_PARTICLE_TRACKING.groovy</code></h3>
+<br>
+<p>一个完全自动化的单粒子追踪管道。</p>
+<br>
+<h3><code class="inline-code">skills/trackmate_documentation/GROOVY_WORKFLOW_CELLPOSE_SINGLE_IMAGE.groovy</code></h3>
+<br>
+<p>一个使用 TrackMate-Cellpose 进行单图像分割的脚本。</p>
+<br>
+<h3><code class="inline-code">skills/stardists_documentation/SKILL.md</code></h3>
+<br>
+<p>记录 StarDist 的 Groovy API，用于细胞和细胞核检测。</p>
+<br>
+<h3><code class="inline-code">skills/stardists_documentation/GROOVY_WORKFLOW_CELL_SEGMENTATION.groovy</code></h3>
+<br>
+<p>一个使用 StarDist 进行细胞分割、计数和比较的脚本。</p>
+<br>
+<h3><code class="inline-code">skills/transformj_documentation/SKILL.md</code></h3>
+<br>
+<p>记录通过 ImageScience 类实现 TransformJ 的几何变换。</p>
+<br>
+<h3><code class="inline-code">skills/transformj_documentation/GROOVY_WORKFLOW_GEOMETRIC_TRANSFORM.groovy</code></h3>
+<br>
+<p>一个用于几何变换（缩放、平移、旋转等）的参数化工作流。</p>
+<br>
+<h3><code class="inline-code">skills/turboreg_documentation/SKILL.md</code></h3>
+<br>
+<p>记录 TurboReg 用于配准的手动参数字符串构建方法。</p>
+<br>
+<h3><code class="inline-code">skills/turboreg_documentation/WORKFLOW_BATCH_REGISTRATION.groovy</code></h3>
+<br>
+<p>一个将堆栈配准到参考图像的批量配准脚本。</p>
+<br>
+<h3><code class="inline-code">skills/stackreg_documentation/SKILL.md</code></h3>
+<br>
+<p>记录 StackReg 的宏可记录 API，用于切片到切片的配准。</p>
+<br>
+<h3><code class="inline-code">skills/stackreg_documentation/WORKFLOW_BATCH_REGISTRATION.groovy</code></h3>
+<br>
+<p>一个使用 StackReg 的批量配准脚本。</p>
+<br>
+<h3><code class="inline-code">skills/imagej_groovy_patterns/SKILL.md</code></h3>
+<br>
+<p>一个关于常见 Groovy/ImageJ 编码陷阱及其修复方法的索引。</p>
+<br>
+<h3><code class="inline-code">skills/imagej_groovy_patterns/pitfall_thresholding_direction.md</code></h3>
+<br>
+<p>解释在 IJ.setAutoThreshold 中使用 'dark' 后缀的重要性。</p>
+<br>
+<h3><code class="inline-code">skills/imagej_groovy_patterns/pitfall_z_vs_t_dimensions.md</code></h3>
+<br>
+<p>解释如何为时间序列数据正确设置 Z 和 T 维度。</p>
+<br>
+<h3><code class="inline-code">skills/workflow/supervisor_pipeline_phases/SKILL.md</code></h3>
+<br>
+<p>定义用于管理 ImageJ 分析项目的 7 阶段管理员管道。</p>
+<br>
+<h3><code class="inline-code">skills/workflow/supervisor_pipeline_phases/phase_1_gathering.md</code></h3>
+<br>
+<p>信息收集阶段的说明。</p>
+<br>
+<h3><code class="inline-code">skills/workflow/supervisor_pipeline_phases/phase_2_planning.md</code></h3>
+<br>
+<p>任务规划和管道设计的说明。</p>
+<br>
+<h3><code class="inline-code">skills/workflow/supervisor_pipeline_phases/phase_4b_processing.md</code></h3>
+<br>
+<p>图像处理步骤和验证的指南。</p>
+<br>
+<h3><code class="inline-code">skills/workflow/workflow-documentation/SKILL.md</code></h3>
+<br>
+<p>生成工作流文档的模板和说明。</p>
+<br>
+<h2>核心概念</h2>
+<br>
+<ul>
+<li><strong>经过验证的自动化路径</strong>：每个技能都记录了一种特定的、经过测试的 Fiji 插件自动化方法，通常使用直接的 Java API 调用（例如 CommandService）或宏可记录的字符串，而不是猜测 IJ.run() 命令。</li>
+<li><strong>Groovy 脚本</strong>：Groovy 是本仓库中用于 Fiji 自动化的主要脚本语言，允许直接访问 Java 类和服务。</li>
+<li><strong>无头执行</strong>：许多工作流设计为在无头模式下运行（例如，通过 fiji-linux-x64 --headless --run），从而实现服务器上的批量处理。</li>
+<li><strong>项目账本</strong>：一个中央状态管理系统，由管理员管道使用，用于跨阶段跟踪项目元数据、决策和已完成步骤。</li>
+<li><strong>插件管理器</strong>：一个在技能注册表中搜索并推荐最适合给定科学任务的插件的工具，确保使用经过验证的自动化路径。</li>
+<li><strong>陷阱规避</strong>：该仓库包含常见错误（陷阱）及其标准修复方法的集合，例如处理 RGB 与多通道图像或正确设置 Z/T 维度。</li>
+<li><strong>可重复性</strong>：强调记录参数、版本控制和容器化执行，确保分析可以完全精确地复现。</li>
+</ul>
+<br>
+<h2>内部关系</h2>
+<br>
+<ul>
+<li><code class="inline-code">skills/3d_imagej_suite_documentation/GROOVY_WORKFLOW_3D_SEGMENT_AND_MEASURE.groovy</code> → <code class="inline-code">skills/3d_imagej_suite_documentation/SCRIPT_API.md</code>：工作流脚本使用了 API 参考文件中记录的经过验证的 API 调用。</li>
+<li><code class="inline-code">skills/bigstitcher_documentation/WORKFLOW_TILE_STITCHING.groovy</code> → <code class="inline-code">skills/bigstitcher_documentation/OVERVIEW.md</code>：工作流实现了概述中描述的拼接管道。</li>
+<li><code class="inline-code">skills/bonej_documentation/GROOVY_WORKFLOW_THICKNESS_AND_FRACTION.groovy</code> → <code class="inline-code">skills/bonej_documentation/SCRIPT_API.md</code>：工作流使用了 API 参考中记录的 CommandService 调用。</li>
+<li><code class="inline-code">skills/snt_documentation/GROOVY_WORKFLOW_SWC_ANALYSIS.groovy</code> → <code class="inline-code">skills/snt_documentation/SCRIPT_API.md</code>：工作流使用了 API 中记录的 Tree、TreeStatistics 和 ShollAnalyzer 类。</li>
+<li><code class="inline-code">skills/trackmate_documentation/GROOVY_WORKFLOW_PARTICLE_TRACKING.groovy</code> → <code class="inline-code">skills/trackmate_documentation/SCRIPT_API.md</code>：工作流使用了 API 参考中记录的 TrackMate Java API 类。</li>
+<li><code class="inline-code">skills/trackmate_documentation/GROOVY_WORKFLOW_CELLPOSE_SINGLE_IMAGE.groovy</code> → <code class="inline-code">skills/trackmate_documentation/CELLPOSE_DETECTOR_API.md</code>：工作流使用了 API 文件中记录的 Cellpose 检测器设置和模式。</li>
+<li><code class="inline-code">skills/stardists_documentation/GROOVY_WORKFLOW_CELL_SEGMENTATION.groovy</code> → <code class="inline-code">skills/stardists_documentation/SCRIPT_API.md</code>：工作流使用了 API 参考中记录的 StarDist2D 命令 API。</li>
+<li><code class="inline-code">skills/transformj_documentation/GROOVY_WORKFLOW_GEOMETRIC_TRANSFORM.groovy</code> → <code class="inline-code">skills/transformj_documentation/GROOVY_API.md</code>：工作流使用了 API 中记录的 ImageScience 变换类。</li>
+<li><code class="inline-code">skills/turboreg_documentation/WORKFLOW_BATCH_REGISTRATION.groovy</code> → <code class="inline-code">skills/turboreg_documentation/GROOVY_SCRIPT_API.md</code>：工作流根据 API 文档构建 TurboReg 参数字符串。</li>
+<li><code class="inline-code">skills/imagej_groovy_patterns/pitfall_thresholding_direction.md</code> → <code class="inline-code">skills/imagej_groovy_patterns/SKILL.md</code>：陷阱文件列在索引中，并为常见错误提供了特定的修复方法。</li>
+<li><code class="inline-code">skills/workflow/supervisor_pipeline_phases/phase_4b_processing.md</code> → <code class="inline-code">skills/workflow/supervisor_pipeline_phases/SKILL.md</code>：阶段文件详细说明了管道概述中定义的 imagej_coder 代理的步骤。</li>
+</ul>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

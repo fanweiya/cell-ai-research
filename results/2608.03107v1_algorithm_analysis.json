@@ -1,0 +1,57 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2608.03107v1",
+  "status": "done",
+  "design_motivation": "现有深度学习方法需要为每种光学配置（狭缝宽度）训练单独的模型，限制了跨不同采集参数的实际部署。本文提出统一框架，通过分辨率条件化（FiLM）和自适应机制（Adaptive RELA），使单个模型能处理任意分辨率比率，避免多模态歧义，实现连续调节和插值配置泛化。",
+  "loss_formula": "\\mathcal{L} = \\| \\hat{I} - I_{\\text{gt}} \\|_1 + \\lambda \\cdot \\mathcal{L}_{\\text{grad}}",
+  "math_principle": "基于标量衍射分析的可分离PSF近似，利用FiLM在归一化后注入条件信号以稳定不同能量分布下的调制；Adaptive RELA通过多尺度深度卷积与可学习温度参数动态调整感受野，解决小狭缝下线性注意力过于全局、传统卷积过于局部的问题。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 2, H, W]"
+    },
+    {
+      "layer": "dual_encoder",
+      "shape": "[B, 256, H/4, W/4]"
+    },
+    {
+      "layer": "adaptive_rela_block",
+      "shape": "[B, 256, H/4, W/4]"
+    },
+    {
+      "layer": "channel_attention",
+      "shape": "[B, 256, H/4, W/4]"
+    },
+    {
+      "layer": "decoder",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, 1, H, W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 构建物理信息多分辨率数据集，生成正交线扫描图像对及对应PSF",
+    "step2: 双分支编码器提取特征，FiLM注入狭缝比率条件",
+    "step3: Adaptive RELA模块动态融合全局与局部特征",
+    "step4: 解码器重建融合图像，计算L1损失与梯度损失",
+    "step5: 反向传播优化，验证插值狭缝配置泛化能力"
+  ],
+  "baselines_compared": [
+    "Attn-DualUnet (uncond.)",
+    "CondLAformer (FiLM)",
+    "per-slit specialist models"
+  ],
+  "key_results": {
+    "PSNR_small_slit": "26.1 dB",
+    "PSNR_large_slit": "25.1 dB",
+    "PSNR_interpolated": "23.1 dB",
+    "vs_per_slit_models": "统一模型性能接近单配置上限，且支持连续调节"
+  },
+  "confidence": 0.85,
+  "task_id": "2608.03107v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:49:26.063793",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

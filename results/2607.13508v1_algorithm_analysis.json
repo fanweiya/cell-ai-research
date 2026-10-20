@@ -1,0 +1,50 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2607.13508v1",
+  "status": "done",
+  "design_motivation": "现有方法（如注意力机制、归因或相关性）仅能捕捉关联，缺乏在受控扰动下评估定向效应的原则性框架。CDS 通过结构化反事实干预（Type-Swap 和 Within-Type）在保持空间结构和图拓扑不变的前提下，隔离发送者细胞类型对接收者状态的影响，从而区分真实交互与混淆信号。",
+  "loss_formula": "NIM 训练采用标准均方误差损失：\\( \\mathcal{L} = \\mathbb{E}_{i} \\| f(a_i) - x_i \\|^2 \\)",
+  "math_principle": "CDS 被理论化为结构化扰动下模型预测的一阶有限差分（finite-difference）度量。通过保持邻域大小、空间距离权重和微环境一致性的约束，CDS 将预测变化归因于邻域组成的改变，而非图拓扑或权重变化。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[N, F]"
+    },
+    {
+      "layer": "neighborhood_aggregation",
+      "shape": "[N, D]"
+    },
+    {
+      "layer": "gating_mlp",
+      "shape": "[N, H]"
+    },
+    {
+      "layer": "output",
+      "shape": "[N, F]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 构建空间图并计算距离加权邻域表示",
+    "step2: 训练邻居影响模型 (NIM) 预测接收者细胞状态",
+    "step3: 执行结构化反事实干预（Type-Swap 和 Within-Type）",
+    "step4: 计算 CDS 分数并聚合",
+    "step5: 核心级别引导 (core-level bootstrap) 进行统计推断"
+  ],
+  "baselines_compared": [
+    "GNNExplainer",
+    "Graph Attention Networks (GATs)",
+    "CellPhoneDB",
+    "Standard Attribution Methods"
+  ],
+  "key_results": {
+    "synthetic_recovery": "在合成数据中准确恢复已知定向结构",
+    "null_calibration": "在零假设条件下 CDS 值接近零，校准良好",
+    "confounding_robustness": "在存在混淆信号时仍能区分真实交互",
+    "auc_roc": "在区分真实交互与混淆设置方面表现优于基线"
+  },
+  "confidence": 0.92,
+  "task_id": "2607.13508v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:46:38.652151",
+  "priority": 9,
+  "agent": "Agents-A1"
+}

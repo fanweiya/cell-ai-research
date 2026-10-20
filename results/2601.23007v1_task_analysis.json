@@ -1,0 +1,17 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2601.23007v1",
+  "status": "done",
+  "task_family": "cell_detection",
+  "input": "Microscopy images (bright-field)",
+  "output": "Object detection bounding boxes with calibrated confidence scores",
+  "notable": "Focuses on calibration of object detectors using multi-rater annotations to quantify inter-rater uncertainty",
+  "task_type": [
+    "detection"
+  ],
+  "confidence": 0.9,
+  "task_id": "2601.23007v1-task_analysis-v1",
+  "run_at": "2026-07-24T09:14:14.053284",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

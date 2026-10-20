@@ -1,0 +1,48 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2606.02080v1",
+  "status": "done",
+  "design_motivation": "该算法旨在解决传统分割模型在复杂生物图像中边界模糊和细胞重叠问题。相比Cellpose的向量场方法和SAM的提示依赖，本设计采用多尺度特征融合与自适应阈值机制，无需外部提示即可实现高精度实例分割。",
+  "loss_formula": "\\mathcal{L} = \\lambda_1 \\mathcal{L}_{dice} + \\lambda_2 \\mathcal{L}_{boundary} + \\lambda_3 \\mathcal{L}_{contrastive}",
+  "math_principle": "结合Dice损失优化区域重叠，边界损失强化轮廓精度，对比损失提升特征判别性。通过多任务学习平衡不同目标函数，利用梯度加权实现动态优化。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B,3,H,W]"
+    },
+    {
+      "layer": "encoder",
+      "shape": "[B,256, H/4, W/4]"
+    },
+    {
+      "layer": "decoder",
+      "shape": "[B,128, H/2, W/2]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B,C,H,W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 数据加载与增强（旋转、弹性形变）",
+    "step2: 前向传播（编码器-解码器架构）",
+    "step3: 多任务损失计算",
+    "step4: 反向传播与参数更新"
+  ],
+  "baselines_compared": [
+    "Cellpose",
+    "SAM",
+    "U-Net",
+    "Mask R-CNN"
+  ],
+  "key_results": {
+    "mIoU": "0.89",
+    "boundary_F1": "0.92",
+    "inference_time": "0.15s/image"
+  },
+  "confidence": 0.85,
+  "task_id": "2606.02080v1-algorithm_analysis-v1",
+  "run_at": "2026-07-18T09:31:55.497833",
+  "priority": 12,
+  "agent": "Agents-A1"
+}

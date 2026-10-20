@@ -1,0 +1,53 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2607.20572v1",
+  "status": "done",
+  "design_motivation": "设计动机：解决单细胞基础模型（scFMs）基准测试中因预训练数据污染导致的性能虚高问题。现有方法无法在细胞级别检测污染，且简单的数据集级性能比较混淆了生物学差异与预训练暴露。替代方案（如直接比较ASW分数）无法区分是模型泛化能力强还是仅仅记住了训练数据。本算法通过引入Signal A（基于MinHash的基因集指纹信号）和MIA-scFM（基于过拟合程度的成员推断），在细胞级别进行可操作的审计，从而量化污染对基准分数的影响。",
+  "loss_formula": "无传统训练Loss，核心审计统计量为：\\[ S(c) = \\max_{h \\in \\mathcal{H}} \\left| \\frac{1}{|\\mathcal{R}|} \\sum_{r \\in \\mathcal{R}} \\mathbb{I}(h(c) = h(r)) - \\frac{1}{|\\mathcal{R}|} \\sum_{r \\in \\mathcal{R}} \\mathbb{I}(h(c) = h(r')) \\right| \\]",
+  "math_principle": "基于MinHash（最小哈希）技术估计Jaccard相似度的无偏估计。利用局部敏感哈希（LSH）高效计算查询细胞与预训练语料库中细胞集合的相似度。通过置换检验（Permutation null）构建零分布，判断基准测试细胞是否属于预训练集合。利用过拟合程度（Capacity/cell）与成员推断AUROC的单调关系来校准审计的敏感性。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[N_cells, G_genes]"
+    },
+    {
+      "layer": "minhash_sketch",
+      "shape": "[N_cells, K_hashes]"
+    },
+    {
+      "layer": "similarity_estimation",
+      "shape": "[N_cells, 1]"
+    },
+    {
+      "layer": "audit_statistic",
+      "shape": "[N_cells, 1]"
+    },
+    {
+      "layer": "output",
+      "shape": "[N_cells, 1]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 构建预训练语料库的MinHash指纹库",
+    "step2: 计算基准测试中每个细胞的MinHash指纹",
+    "step3: 通过LSH计算每个细胞与语料库的Jaccard相似度估计",
+    "step4: 计算审计统计量S(c)并生成污染标签",
+    "step5: 基于污染标签进行分层分析（如供体匹配）以评估基准分数偏差"
+  ],
+  "baselines_compared": [
+    "Geneformer V1",
+    "scGPT-human",
+    "UCE-4L"
+  ],
+  "key_results": {
+    "PBMC_3k_contamination": "Confirmed (High overlap with CELLxGENE)",
+    "Pancreatic_islet_contamination": "Confirmed (Partial overlap)",
+    "AIDA_v2_contamination": "Null (No overlap)",
+    "UCE_effect_magnitude": "Order of magnitude larger than rank-encoding models"
+  },
+  "confidence": 0.95,
+  "task_id": "2607.20572v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:42:09.135478",
+  "priority": 13,
+  "agent": "Agents-A1"
+}

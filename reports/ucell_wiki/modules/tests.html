@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ucell Wiki — tests</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / ucell Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>ucell</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/ucell.html">ucell</a></li>
+<li><a href="../modules/dead_neuron_analysis.html">dead_neuron_analysis</a></li>
+<li><a href="../modules/tests.html">tests</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>tests</h1>
+<br>
+<p>&gt; 验证通用细胞分割模型FRM在不同检查点格式下的加载与权重一致性</p>
+<br>
+<p>该模块专注于测试FRM模型在多种检查点场景下的加载正确性，包括基础模型字典检查点、序列化模块对象检查点、LoRA微调检查点（合并后加载）、遗留的融合gate_up_proj检查点（加载时拆分）以及融合gate_up_proj与LoRA的组合场景。通过构造小型配置和辅助函数，确保模型权重在保存和加载后保持一致，并验证LoRA适配器在加载时的合并逻辑。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">tests/test_checkpoint_loading.py</code></h3>
+<br>
+<p>测试FRM模型在不同检查点格式下的加载路径和权重一致性</p>
+<br>
+<ul>
+<li><code class="inline-code">_small_config</code> (function) - 生成一个极小的FRM配置字典，用于快速测试，包含patch_size=8、hidden_size=64等参数</li>
+<li><code class="inline-code">_make_model</code> (function) - 基于_small_config创建FRM模型实例</li>
+<li><code class="inline-code">_small_wrapper_config</code> (function) - 生成包含LoRA配置的FRMWrapper配置，用于测试LoRA相关功能</li>
+<li><code class="inline-code">_round_trip</code> (function) - 将给定模型的state_dict加载到新模型中并返回，用于权重对比</li>
+<li><code class="inline-code">_weights_equal</code> (function) - 比较两个模型的所有参数是否相等，返回布尔值和第一个不匹配的参数量名称</li>
+<li><code class="inline-code">test_base_dict_checkpoint</code> (function) - 测试基础模型字典检查点（如{'model': state_dict}）的加载和权重一致性</li>
+<li><code class="inline-code">test_module_object_checkpoint</code> (function) - 测试序列化模块对象检查点（final_ema.pt风格）的加载，使用load_checkpoint方法</li>
+<li><code class="inline-code">test_lora_checkpoint_merge</code> (function) - 测试LoRA检查点加载：将带有LoRA适配器的模型保存后，加载到纯FRM模型中应自动合并权重</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>检查点格式兼容性</strong>: 测试覆盖多种检查点保存和加载格式，确保模型在不同训练阶段和保存方式下能正确恢复</li>
+<li><strong>LoRA权重合并</strong>: 验证LoRA适配器在加载到基础模型时能正确合并到原始权重中，无需额外步骤</li>
+<li><strong>权重一致性验证</strong>: 通过_round_trip和_weights_equal函数确保模型状态在保存和加载后完全一致</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">tests/test_checkpoint_loading.py</code> → <code class="inline-code">ucell.frm</code>: 导入FRM和FRMWrapper类用于创建和测试模型</li>
+<li><code class="inline-code">tests/test_checkpoint_loading.py</code> → <code class="inline-code">ucell.lora</code>: 导入inject_lora函数用于向模型注入LoRA适配器</li>
+<li><code class="inline-code">tests/test_checkpoint_loading.py</code> → <code class="inline-code">ml_collections</code>: 导入ConfigDict用于构建测试配置</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DART-MLCI Wiki — scripts</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / DART-MLCI Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>dart-mlci</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/dart_experiment.html">dart_experiment</a></li>
+<li><a href="../modules/docs.html">docs</a></li>
+<li><a href="../modules/artifacts.html">artifacts</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/dart_mlci.html">dart_mlci</a></li>
+<li><a href="../modules/tests.html">tests</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>scripts</h1>
+<br>
+<p>&gt; 提供从图像预处理、芯片校准、实验处理到结果分析和可视化的完整命令行工具链</p>
+<br>
+<p>该模块包含一系列Python脚本和Shell脚本，用于支持微流控芯片蓝图文本与显微镜图像的对齐和实时细胞分析。核心功能包括：批量图像掩膜处理、芯片校准、时间序列实验处理、生长分析、基准测试以及演示视频生成。这些脚本是DART-MLCI项目的用户接口，封装了底层dart_mlci库的功能，并处理文件I/O、参数解析和结果输出。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">scripts/analyze_growth.py</code></h3>
+<br>
+<p>分析处理后的实验输出，计算细胞生长统计并生成图表</p>
+<br>
+<ul>
+<li><code class="inline-code">parse_args</code> (function) - 解析命令行参数，支持输出目录、配置JSON、面积过滤、生长曲线拟合等选项</li>
+<li><code class="inline-code">_load_all</code> (function) - 加载并过滤所有cells.csv文件，返回包含统计数据和数据框的字典</li>
+<li><code class="inline-code">OKABE_ITO</code> (constant) - 色盲安全调色板，用于区分不同实验组</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/batch_masking.py</code></h3>
+<br>
+<p>批量处理图像掩膜流程，提供详细的通过/失败报告和调试输出</p>
+<br>
+<ul>
+<li><code class="inline-code">BatchMaskingRunner</code> (class) - 对多张图像运行掩膜流程的类，支持不同腔室类型</li>
+<li><code class="inline-code">ImageResult</code> (dataclass) - 存储单张图像处理结果的类，包含成功状态、错误信息和部分结果</li>
+<li><code class="inline-code">_get_chamber_components</code> (method) - 获取或创建特定腔室类型的流程组件</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/benchmark.py</code></h3>
+<br>
+<p>测量掩膜流程每个步骤的执行时间和GPU内存使用</p>
+<br>
+<ul>
+<li><code class="inline-code">PipelineBenchmark</code> (class) - DMC掩膜流程的基准测试运行器</li>
+<li><code class="inline-code">warmup</code> (method) - 运行预热迭代以稳定GPU/JIT编译</li>
+<li><code class="inline-code">run_benchmark</code> (method) - 执行基准测试并收集性能数据</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/calibrate_map.py</code></h3>
+<br>
+<p>从已知显微镜台位置的校准图像中估计地图变换</p>
+<br>
+<ul>
+<li><code class="inline-code">calibrate_map</code> (function) - 主校准函数，处理校准图像并生成显微镜坐标下的Map</li>
+<li><code class="inline-code">crop_calibration_image</code> (function) - 使用无旋转掩膜方法裁剪校准图像</li>
+<li><code class="inline-code">process_calibration_image</code> (function) - 处理单个校准图像的包装函数</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/calibrate_pixel_scale.py</code></h3>
+<br>
+<p>通过比较检测到的标记距离与物理距离来验证像素校准</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 主函数，加载配置并计算实际像素大小</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/generate_chip_config.py</code></h3>
+<br>
+<p>从遗留文件生成统一的芯片配置文件</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 读取chamber_structure.json和blueprint_map.csv，输出统一的芯片配置JSON</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/generate_dart_frame_video.py</code></h3>
+<br>
+<p>为单个Dart实验帧渲染流程演示视频</p>
+<br>
+<ul>
+<li><code class="inline-code">_parse_args</code> (function) - 解析输入模式（元数据或TIFF堆栈）和流程配置参数</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/generate_golden_files.py</code></h3>
+<br>
+<p>为回归测试生成黄金文件</p>
+<br>
+<ul>
+<li><code class="inline-code">generate_calibration_golden</code> (function) - 运行校准并保存校准位置、变换参数和图像结果的JSON文件</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/generate_sak_videos.py</code></h3>
+<br>
+<p>为所有SAK腔室类型生成流程演示视频和/或静态图像</p>
+<br>
+<ul>
+<li><code class="inline-code">generate_pipeline_video</code> (function) - 渲染流程步骤的视频</li>
+<li><code class="inline-code">load_image</code> (function) - 加载图像并处理.tif格式归一化</li>
+<li><code class="inline-code">_add_scalebar_cv</code> (function) - 在帧的右下角绘制物理长度比例尺</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/make_demo_assets.sh</code></h3>
+<br>
+<p>从MP4生成README的演示媒体（英雄GIF和每个腔室的缩略图）</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 使用ffmpeg处理视频，生成优化的GIF和缩略图</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/prepare_calibration_data.py</code></h3>
+<br>
+<p>为可重复性准备校准数据zip文件</p>
+<br>
+<ul>
+<li><code class="inline-code">select_validation_images</code> (function) - 使用贪婪最远点采样策略选择空间分布的验证图像</li>
+<li><code class="inline-code">build_calibration_config</code> (function) - 构建calibration_config.json内容</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/process_experiment.py</code></h3>
+<br>
+<p>使用完整的DMC掩膜和细胞分割流程处理实验数据集</p>
+<br>
+<ul>
+<li><code class="inline-code">render_cropped_visualization</code> (function) - 渲染带有彩色细胞、腔室掩膜和比例尺的可视化图像</li>
+<li><code class="inline-code">render_uncropped_visualization</code> (function) - 渲染未裁剪的可视化，突出显示ROI并叠加细胞</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/process_folder.py</code></h3>
+<br>
+<p>处理按腔室类型组织的文件夹中的时间序列TIFF堆栈</p>
+<br>
+<ul>
+<li><code class="inline-code">collect_files</code> (function) - 从配置的文件夹中收集所有TIFF文件</li>
+<li><code class="inline-code">process_stack</code> (function) - 处理单个TIFF堆栈，执行掩膜和细胞分割</li>
+<li><code class="inline-code">render_frame_visualization</code> (function) - 渲染单帧的细胞可视化</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/process_image.py</code></h3>
+<br>
+<p>通过DMC掩膜流程处理单张图像</p>
+<br>
+<ul>
+<li><code class="inline-code">process_image</code> (function) - 在图像上运行完整的掩膜流程，返回裁剪图像、掩膜和计时</li>
+<li><code class="inline-code">print_success</code> (function) - 打印结构化的成功消息</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/run_timelapse_full.sh</code></h3>
+<br>
+<p>完整的时间序列堆叠管道（所有ROI）</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 执行process_experiment.py处理所有ROI</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/run_timelapse_stacking.sh</code></h3>
+<br>
+<p>时间序列堆叠管道，支持可选的配准</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 构建并执行处理命令</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/test_api_endpoints.py</code></h3>
+<br>
+<p>测试DMC掩膜API端点</p>
+<br>
+<ul>
+<li><code class="inline-code">test_health</code> (function) - 测试/health端点</li>
+<li><code class="inline-code">test_chamber_types</code> (function) - 测试/chamber-types端点</li>
+<li><code class="inline-code">test_process_image</code> (function) - 测试/process-image端点</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/test_timelapse_quick.sh</code></h3>
+<br>
+<p>快速测试时间序列堆叠管道（仅1个ROI）</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 运行process_experiment.py处理单个ROI</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/validate_map.py</code></h3>
+<br>
+<p>比较计算的腔室位置与校准地图</p>
+<br>
+<ul>
+<li><code class="inline-code">run_validation_cli</code> (function) - 运行完整的验证流程</li>
+<li><code class="inline-code">process_validation_image</code> (function) - 处理单个验证图像</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>DMC掩膜流程</strong>: 检测标记（cross/circle）→ 匹配标记 → 计算旋转角度 → 旋转图像 → 应用ROI掩膜 → 可选细胞分割</li>
+<li><strong>芯片配置</strong>: 统一的JSON文件，包含腔室多边形、标记位置、ROI模式和蓝图文本映射</li>
+<li><strong>校准地图</strong>: 将图像坐标映射到显微镜物理坐标的仿射变换，通过已知台位置的校准图像计算</li>
+<li><strong>时间序列处理</strong>: 支持TIFF堆栈的时间序列处理，包括帧间配准和堆叠</li>
+<li><strong>腔室类型</strong>: 不同微流控芯片结构（如NormaleBox、BigBox、OpenBox、Mothermachine）有特定的标记模式和ROI形状</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">scripts/analyze_growth.py</code> → <code class="inline-code">dart_mlci.analysis</code>: 导入compute_growth_stats、load_cells_data等分析函数</li>
+<li><code class="inline-code">scripts/batch_masking.py</code> → <code class="inline-code">dart_mlci</code>: 使用ChamberPipelineCache、MarkerDetectionStep等核心组件</li>
+<li><code class="inline-code">scripts/calibrate_map.py</code> → <code class="inline-code">dart_mlci.calibration</code>: 调用process_calibration_image和run_calibration函数</li>
+<li><code class="inline-code">scripts/generate_sak_videos.py</code> → <code class="inline-code">dart_mlci.visualization</code>: 使用render_markers_to_frame、add_step_title等可视化函数</li>
+<li><code class="inline-code">scripts/process_experiment.py</code> → <code class="inline-code">scripts/process_folder.py</code>: 两者都使用类似的渲染和流程处理逻辑</li>
+<li><code class="inline-code">scripts/process_folder.py</code> → <code class="inline-code">dart_mlci.mask</code>: 使用filter_segmentation_by_area和filter_segmentation_by_mask</li>
+<li><code class="inline-code">scripts/process_image.py</code> → <code class="inline-code">dart_mlci</code>: 直接使用MarkerDetectionStep、MarkerMatchingStep等步骤类</li>
+<li><code class="inline-code">scripts/validate_map.py</code> → <code class="inline-code">dart_mlci.calibration.validation</code>: 导入ValidationResult和process_validation_image</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+ "id": "2608.14759",
+ "chars": 45401,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": false,
+   "has_std": true,
+   "has_seeds_or_repeats": true,
+   "has_significance_test": false,
+   "has_fdr": false,
+   "mentions_ablation": true,
+   "mentions_dataset_split": false,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "score": 6
+ },
+ "key_claims": [
+  "we then compute e ′ = mil ​ ( ℋ ′ ) ∈ ℝ d h e^{\\prime}=\\texttt{mil}(\\mathcal{h}^{\\prime})\\in\\mathbb{r}^{d_{\\text{h}}} , that maintains or even improves the slide-level prediction compared to using the",
+  "2 test-time instance selection framework ttis operates in three steps: (1) hierarchical spatio-semantic clustering to partition patches into groups capturing both spatial organization and morphologica",
+  "overall, ttis consistently improves or preserves performance relative to baseline (processing all patches)."
+ ],
+ "ref_spotcheck_targets": [],
+ "citation_results": []
+}

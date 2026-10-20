@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "球体显微图像分割示例：原图、Spheroid先验分割结果与Decay模式对比，红色为分割叠加"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "展示不同经典先验（Frangi、Sauvola、结构滤波）处理球体显微图像的效果及分割预测结果的可视化对比图"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "球状体显微图像分割结果对比图：Ground truth 与 HyperBank（IoU=0.78）、DCAMA、SegGPT 方法可视化比较"
+  }
+}

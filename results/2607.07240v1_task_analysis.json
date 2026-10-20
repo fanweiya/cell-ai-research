@@ -1,0 +1,17 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2607.07240v1",
+  "status": "done",
+  "task_family": "cell_segmentation",
+  "input": "Ultrasound images",
+  "output": "Segmentation masks",
+  "notable": "Edge-aware Prompt-enhanced SAM for Ultrasound Image Segmentation",
+  "task_type": [
+    "segmentation"
+  ],
+  "confidence": 0.85,
+  "task_id": "2607.07240v1-task_analysis-v1",
+  "run_at": "2026-07-12T09:04:54.054845",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法架构图：展示基于UNI的patch特征提取、距离感知空间建模（gated attention与contextual attention）、SDF特征与Kmeans聚类的整体流程"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "论文核心实验结果图：组织切片H&E图像与距离感知空间建模的RBF空间特征图可视化（多通道热图及聚类结果）"
+  },
+  "2": {
+    "relevant": true,
+    "score": 6,
+    "caption": "H&E染色病理组织切片拼图，展示原发癌组织形态样例，属于数据示例图，但非方法架构或核心结果图"
+  }
+}

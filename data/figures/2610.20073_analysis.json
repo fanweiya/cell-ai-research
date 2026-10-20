@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "GDBA-Net整体架构图，展示冻结SAM2编码器、双分支GDBA模块、频域/语义特征提取及掩码解码器。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "GDBA-Net的双分支架构图：上方为基于FFT/IFFT的频率特征提取分支，下方为基于冻结SAM2编码器的语义特征提取分支，包含可训练组件和冻结组件标识。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 10,
+    "caption": "论文提出的GDBA模块架构图，展示了手工特征与语义特征的双分支适配、门控融合机制以及与SAM2 Transformer集成的核心流程"
+  }
+}

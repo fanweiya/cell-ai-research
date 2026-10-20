@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DART-MLCI Wiki — docs</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / DART-MLCI Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>dart-mlci</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/dart_experiment.html">dart_experiment</a></li>
+<li><a href="../modules/docs.html">docs</a></li>
+<li><a href="../modules/artifacts.html">artifacts</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/dart_mlci.html">dart_mlci</a></li>
+<li><a href="../modules/tests.html">tests</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>docs</h1>
+<br>
+<p>&gt; 提供DART微流控芯片分析系统的配置、部署和坐标系统文档。</p>
+<br>
+<p>docs模块包含四个核心Markdown文档，分别阐述芯片配置规范、Docker部署指南、运行时配置参考以及坐标系统转换原理。这些文档共同构成了系统的技术文档体系，指导用户如何定义芯片设计、部署API服务、配置批处理流程以及理解底层坐标变换逻辑。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">docs/CHIP_CONFIG.md</code></h3>
+<br>
+<p>定义芯片配置JSON文件的完整规范，包括芯片名称、版本、腔室类型、标记位置及蓝图映射。</p>
+<br>
+<ul>
+<li><code class="inline-code">chamber_types</code> (field) - JSON对象，映射腔室类型名称到其几何形状（GeoJSON多边形）和标记位置（十字和圆圈标记的微米坐标）。</li>
+<li><code class="inline-code">blueprint_map</code> (field) - JSON数组，列出所有ROI的ID、在蓝图坐标系中的X/Y位置以及对应的结构类型。</li>
+<li><code class="inline-code">ChipStructureLibrary</code> (class) - 在dart_mlci/chip.py中实现，用于加载和查询芯片配置的核心类，支持通过ROI ID查找腔室信息和蓝图映射。</li>
+</ul>
+<br>
+<h3><code class="inline-code">docs/DOCKER_GUIDE.md</code></h3>
+<br>
+<p>提供DART API的Docker容器化部署指南，包括构建、运行、环境变量配置及多芯片支持。</p>
+<br>
+<ul>
+<li><code class="inline-code">DART_MODEL_PATH</code> (env_var) - 环境变量，指定YOLO模型权重文件的路径，默认指向容器内的artifacts/models/v26_detect_s_imgsz1280.pt。</li>
+<li><code class="inline-code">DART_CHIP_CONFIGS_DIR</code> (env_var) - 环境变量，指定存放芯片配置JSON文件的目录，支持多芯片加载。</li>
+<li><code class="inline-code">docker-compose</code> (command) - 用于一键构建和启动DART API服务的Docker Compose命令。</li>
+</ul>
+<br>
+<h3><code class="inline-code">docs/configuration.md</code></h3>
+<br>
+<p>详解运行时配置（folder_config.json）的字段含义、段选器选择及输出文件结构。</p>
+<br>
+<ul>
+<li><code class="inline-code">folder_config.json</code> (config_file) - 批处理脚本process_folder.py使用的JSON配置文件，定义输入输出目录、像素大小、段选器类型及文件夹映射。</li>
+<li><code class="inline-code">segmenter</code> (field) - 配置字段，选择细胞分割算法，支持'cellpose-sam'（默认）或'omnipose'。</li>
+<li><code class="inline-code">stack.tif</code> (output_file) - 每层堆栈的输出文件，包含分割掩码（uint16，每层H×W，标签值代表不同细胞实例）。</li>
+</ul>
+<br>
+<h3><code class="inline-code">docs/coordinate_systems.md</code></h3>
+<br>
+<p>解释DART掩蔽校准流程中使用的三种坐标系统及其转换关系，重点说明Y轴反转的处理逻辑。</p>
+<br>
+<ul>
+<li><code class="inline-code">BLUEPRINT</code> (coordinate_system) - 蓝图坐标系统，单位为微米，采用笛卡尔坐标系（Y轴向上），原点通常在芯片设计左上角。</li>
+<li><code class="inline-code">IMAGE_PIXEL</code> (coordinate_system) - 图像像素坐标系统，单位为像素，采用标准图像坐标系（Y轴向下），原点为图像左上角。</li>
+<li><code class="inline-code">STAGE</code> (coordinate_system) - 显微镜载物台坐标系统，单位为微米，原点为硬件参考点，Y轴方向通常向下。</li>
+<li><code class="inline-code">Y-axis Inversion</code> (concept) - 蓝图与图像坐标系统之间的关键转换：由于Y轴方向相反，计算偏移量时Y坐标需使用加法而非减法。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>芯片配置即真理</strong>: 每个芯片设计对应一个JSON配置文件，作为腔室几何形状、标记位置和蓝图映射的唯一数据源，通过ChipStructureLibrary类进行查询。</li>
+<li><strong>坐标系统转换</strong>: 系统核心难点在于蓝图（笛卡尔，Y向上）与图像（标准图像，Y向下）之间的坐标转换，特别是Y轴反转在计算偏移量时的特殊处理。</li>
+<li><strong>容器化部署</strong>: 通过Docker和Docker Compose实现DART API的标准化部署，支持CPU/GPU模式，环境变量控制模型路径、芯片配置目录和像素大小。</li>
+<li><strong>批处理流水线</strong>: process_folder.py脚本使用folder_config.json配置，自动执行从图像读取、标记检测、旋转校正到掩蔽裁剪和细胞分割的全流程。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">CHIP_CONFIG.md</code> → <code class="inline-code">configuration.md</code>: CHIP_CONFIG.md定义的芯片配置JSON是configuration.md中folder_config.json可选参数chip_config的具体实现格式。</li>
+<li><code class="inline-code">DOCKER_GUIDE.md</code> → <code class="inline-code">CHIP_CONFIG.md</code>: DOCKER_GUIDE.md中的DART_CHIP_CONFIGS_DIR环境变量指向的目录应包含符合CHIP_CONFIG.md规范的芯片配置文件。</li>
+<li><code class="inline-code">coordinate_systems.md</code> → <code class="inline-code">CHIP_CONFIG.md</code>: coordinate_systems.md解释的蓝图坐标系统（微米、Y轴向上）是CHIP_CONFIG.md中polygon和marker位置数据的坐标基准。</li>
+<li><code class="inline-code">DOCKER_GUIDE.md</code> → <code class="inline-code">configuration.md</code>: DOCKER_GUIDE.md描述的Docker部署环境运行process_folder.py脚本时，需要挂载或配置configuration.md定义的folder_config.json。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

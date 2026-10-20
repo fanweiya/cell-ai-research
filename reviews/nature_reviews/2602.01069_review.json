@@ -1,0 +1,57 @@
+{
+  "paper_id": "2602.01069",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种基于PDE约束优化的神经图像分割框架，结合了反应-扩散先验和相场界面能量，以提升细胞图像分割的边界保真度和泛化能力。方法在LIVECell数据集上进行了验证，特别是在低样本和分布外（OOD）场景下表现出显著提升。论文在方法论上具有创新性，将物理先验与深度学习结合，具有实际应用潜力。然而，在统计报告和引用真实性方面存在若干关键问题，需要进一步澄清和补充。",
+  "strengths": [
+    "提出了一种将物理先验（反应-扩散方程和相场模型）与深度学习结合的新颖分割框架，具有理论深度和实际意义。",
+    "在低样本和分布外泛化场景下展示了显著的性能提升，特别是在边界F1 Score、Dice和IoU指标上，表明物理约束的有效性。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "PDE约束通过残差损失弱约束，避免显式求解PDE",
+      "concern": "论文未明确说明如何离散化微分算子，也未提供梯度计算的细节，这影响了方法的可复现性。",
+      "why_it_matters": "缺乏对微分算子离散化和梯度传播的具体实现描述，可能导致其他研究者难以复现结果。",
+      "resolution_test": "需要补充微分项（如∇²u）的数值离散方法（如有限差分、自动微分等）以及梯度计算的实现细节。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "statistics",
+      "claim_pointer": "在10%训练数据下，PDE约束模型在OOD样本上实现了113.23%的Dice提升",
+      "concern": "未提供统计显著性检验（如t检验或置信区间），无法判断该提升是否具有统计意义。",
+      "why_it_matters": "仅报告百分比提升而不提供统计显著性分析，可能导致夸大模型性能。",
+      "resolution_test": "应提供多次独立实验的均值与标准差，并进行统计显著性检验以验证结果的可靠性。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "generalizability",
+      "claim_pointer": "模型在BV-2细胞上实现了显著的OOD泛化提升",
+      "concern": "仅使用一个OOD细胞类型（BV-2）进行评估，泛化性结论可能受限。",
+      "why_it_matters": "单一OOD样本可能无法代表模型在更广泛细胞类型上的表现。",
+      "resolution_test": "应增加更多不同形态的OOD细胞类型进行验证，以增强泛化性结论的说服力。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "citation",
+      "claim_pointer": "引用了Edlund et al. (2021) 和 Lin et al. (2014)",
+      "concern": "未明确引用反应-扩散模型和相场模型在图像分割中的早期工作，如Chan和Vese模型、经典的PDE-based图像处理方法。",
+      "why_it_matters": "缺乏对相关领域已有工作的充分引用，可能影响论文的学术严谨性。",
+      "resolution_test": "应补充对PDE在图像分割中早期应用的文献引用，如Chan–Vese模型、Ginzburg–Landau能量等。"
+    }
+  ],
+  "assessment_boundaries": [
+    "未提供代码或训练细节（如优化器参数、学习率调度），无法评估方法的可复现性。",
+    "未说明是否进行交叉验证或多次实验，无法判断结果的稳定性。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

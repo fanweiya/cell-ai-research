@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法核心架构图：展示动态焦点注意力机制，通过难度感知偏置（类别频率与相对稀有度）对注意力logits进行偏置，生成难度感知嵌入并迭代更新偏置参数"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "柱状图展示BCSS、BDS和CRAG三个数据集中各类别的像素频率与基线Dice分数对比，分析类别难度与分割性能的关系"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "论文实验结果图：三个数据集（BCSS、BDSA、CRAG）上各类别logit偏置柱状图与最终IoU相对基线Dice的散点图，展示焦点注意力对难类的偏置调整"
+  }
+}

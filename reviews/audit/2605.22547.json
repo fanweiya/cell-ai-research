@@ -1,0 +1,35 @@
+{
+ "id": "2605.22547",
+ "chars": 53645,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": false,
+   "has_std": false,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": false,
+   "has_fdr": false,
+   "mentions_ablation": true,
+   "mentions_dataset_split": false,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "score": 0
+ },
+ "key_claims": [
+  "early approaches are primarily based on convolutional neural networks (cnns), such as efficientnet ( 32 ) and convnext ( 20 ) , which improve performance through architectural scaling and optimization",
+  "this refinement mechanism improves robustness by emphasizing reliable and relevant retrieved samples, while suppressing noisy ones.",
+  "we also report the performance of medmamba ( 38 ) as a backbone baseline to verify the improvement brought by our knowledge-enhanced framework."
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+   "doi": null
+  }
+ ],
+ "citation_results": []
+}

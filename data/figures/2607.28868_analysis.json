@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "4D-STEM四元数回归实验柱状图，对比原始与物理对齐自监督方法在多个SSL模型上的平均测地误差"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "4D-STEM实验结果对比图：展示各自监督方法（MAE、DINOv2、VICRegL、SimCLR、I-JEPA）在物理对齐前后Pareto偏移的散点图"
+  },
+  "2": {
+    "relevant": true,
+    "score": 7,
+    "caption": "电子显微镜细胞图像网格，疑似论文中用于展示数据集或实验结果的多面板显微镜图像"
+  }
+}

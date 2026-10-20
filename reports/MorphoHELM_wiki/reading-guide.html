@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MorphoHELM Wiki — reading-guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / MorphoHELM Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>MorphoHELM</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/feature-extraction.html">feature-extraction</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/configs.html">configs</a></li>
+<li><a href="modules/data_installation.html">data_installation</a></li>
+<li><a href="modules/data-preprocessing.html">data-preprocessing</a></li>
+<li><a href="modules/huggingface_loader.html">huggingface_loader</a></li>
+<li><a href="modules/raw_to_huggingface.html">raw_to_huggingface</a></li>
+<li><a href="modules/data.html">data</a></li>
+<li><a href="modules/benchmarks.html">benchmarks</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Reading Guide</h1>
+<br>
+<p>本代码库是一个基于 Cell Painting 技术的细胞形态学基准测试与特征提取系统。建议按‘配置先行、核心逻辑跟进、工具链收尾’的顺序阅读，以快速建立全局认知并深入关键模块。</p>
+<br>
+<h2>Step 1: 项目概览与依赖配置 (~5 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">README.md</code>, <code class="inline-code">requirements.txt</code>, <code class="inline-code">huggingface_loader/pyproject.toml</code></p>
+<br>
+<p>首先了解项目目标、架构概览及核心依赖。README.md 提供整体功能描述；requirements.txt 和 pyproject.toml 揭示技术栈（如 PyTorch、HuggingFace 库），帮助理解环境要求。</p>
+<br>
+<h2>Step 2: 核心配置参数解析 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">feature-extraction/src/config.py</code>, <code class="inline-code">benchmarks/config.py</code>, <code class="inline-code">benchmarks/configs/benchmarks.yaml</code></p>
+<br>
+<p>这些文件定义了数据路径、模型选择、批处理大小等关键参数。重点关注 config.py 中的类结构，理解配置如何驱动特征提取与基准测试流程。</p>
+<br>
+<h2>Step 3: 数据安装与预处理流程 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">data_installation/README.md</code>, <code class="inline-code">data-preprocessing/normalize.py</code>, <code class="inline-code">data-preprocessing/dimensionality_reduction.py</code></p>
+<br>
+<p>了解原始数据如何下载、去光照校正，以及后续如何标准化和降维。注意数据流向和中间产物格式，这是特征提取的基础。</p>
+<br>
+<h2>Step 4: 特征提取核心流水线 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">feature-extraction/src/pipeline.py</code>, <code class="inline-code">feature-extraction/src/model_inference.py</code></p>
+<br>
+<p>阅读特征提取的主流程：图像加载、模型推理、结果聚合。重点关注多模型支持机制和并行处理策略，这是系统的核心计算部分。</p>
+<br>
+<h2>Step 5: HuggingFace 数据集集成 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">huggingface_loader/dataset_builder.py</code>, <code class="inline-code">raw_to_huggingface/convert.py</code></p>
+<br>
+<p>理解如何将本地图像数据转换为 HuggingFace 数据集格式。注意数据划分逻辑和元数据管理，这对后续模型训练至关重要。</p>
+<br>
+<h2>Step 6: 基准测试执行与评估 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">benchmarks/enrichment/cpg_moa/run_cpg_moa_enrichment.py</code>, <code class="inline-code">benchmarks/enrichment/cpg_moa/plot_moa_results.py</code></p>
+<br>
+<p>分析基准测试的具体实现：富集分析、结果可视化。关注统计方法和评估指标，理解如何验证特征提取的有效性。</p>
+<br>
+<h2>Step 7: 辅助工具与实用函数 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">data/utils.py</code>, <code class="inline-code">benchmarks/utils/plotting.py</code></p>
+<br>
+<p>浏览通用工具函数，如数据加载器、绘图辅助。这些模块虽非核心，但能提升代码复用性和可维护性。</p>
+<br>
+<h2>Tips</h2>
+<br>
+<ul>
+<li>先通读 README.md 建立整体框架，再深入具体模块</li>
+<li>重点关注 config.py 文件，配置参数往往决定系统行为</li>
+<li>遇到复杂逻辑时，结合调试日志或测试用例理解数据流</li>
+<li>利用 .codegraph 目录了解代码依赖关系图</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

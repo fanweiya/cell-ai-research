@@ -1,0 +1,19 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2608.00361v1",
+  "status": "done",
+  "task_family": "multimodal",
+  "input": "光学显微镜图像",
+  "output": "语义丰富的图像嵌入向量",
+  "notable": "使用多模态教师模型（图像+文本）进行知识蒸馏，生成可解释的块结构化嵌入，无需对比负采样",
+  "task_type": [
+    "embedding",
+    "multimodal",
+    "foundation_model"
+  ],
+  "confidence": 0.85,
+  "task_id": "2608.00361v1-task_analysis-v1",
+  "run_at": "2026-08-06T11:46:48.778057",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

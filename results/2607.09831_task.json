@@ -1,0 +1,18 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2607.09831",
+  "status": "done",
+  "task_family": "cell_segmentation",
+  "input": "H&E stained histology images",
+  "output": "Cell segmentation masks",
+  "notable": "Focuses on slide-level active learning to reduce annotation burden in H&E images",
+  "task_type": [
+    "segmentation",
+    "active_learning"
+  ],
+  "confidence": 0.85,
+  "task_id": "2607.09831-task_analysis-v1",
+  "run_at": "2026-07-18T09:31:14.060613",
+  "priority": 9,
+  "agent": "Agents-A1"
+}

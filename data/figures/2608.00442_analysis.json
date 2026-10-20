@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心方法架构图：展示训练阶段（冻结CLIP视觉编码器、轻量适配器、语言无关原型学习、少样本记忆库）与推理阶段的完整流程"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "多模态医学图像异常检测的定性对比图：展示Brain MRI、Liver CT、Retina OCT上不同方法（April-GAN、MVFA、MadCLIP、VisualAD）与本文方法的异常定位热图对比及真值掩膜"
+  },
+  "2": {
+    "relevant": true,
+    "score": 7,
+    "caption": "四个数据集（OCT17、RESC、BrainMRI、LiverCT）上正常与异常样本的分数分布直方图，属于实验分析可视化图"
+  }
+}

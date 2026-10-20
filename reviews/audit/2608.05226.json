@@ -1,0 +1,46 @@
+{
+ "id": "2608.05226",
+ "chars": 23448,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": false,
+   "has_std": false,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": false,
+   "has_fdr": false,
+   "mentions_ablation": false,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "score": 0
+ },
+ "key_claims": [
+  "fluorescence improves visibility of live neurons at the cost of cell viability and longitudinal studies.",
+  "the tool does not assume that every fine-tuning run necessarily improves performance: a validation window is provided for that purpose, so that a current model and afine-tunned one can be compared on ",
+  "by keeping the user in the loop at every stage—reviewing detections, correcting them, and verifying whether adaptation actually improves performance—the tool aims to make deep-learning-assisted segmen"
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "Cellpose: a generalist algorithm for cellular segmentation",
+   "doi": "10.1038/s41592-020-01018-x"
+  },
+  {
+   "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+   "doi": null
+  }
+ ],
+ "citation_results": [
+  {
+   "title": "Cellpose: a generalist algorithm for cellular segmentation",
+   "doi": "10.1038/s41592-020-01018-x",
+   "verdict": "PASS",
+   "confirmed_n": 2
+  }
+ ]
+}

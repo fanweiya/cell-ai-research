@@ -1,0 +1,59 @@
+{
+  "task": "code_analysis",
+  "paper_id": "2606.07676v1",
+  "status": "done",
+  "project_structure": "未提供代码仓库，仅基于论文文本分析",
+  "architecture": "input (scRNA-seq count data) -> encoder (GeneformerV2 pre-trained) -> adversarial fine-tuning (WGAN-GP discriminator) -> decoder (generative mapping) -> output (spatially bulked expression)",
+  "modules": [
+    {
+      "name": "GeneformerV2 Encoder",
+      "input_shape": "[batch_size, seq_len]",
+      "output_shape": "[batch_size, hidden_dim]",
+      "function": "Pre-trained transformer encoder for single-cell RNA sequencing gene expression",
+      "file": "unknown",
+      "lines": "unknown"
+    },
+    {
+      "name": "Adversarial Discriminator",
+      "input_shape": "[batch_size, spatial_gene_count]",
+      "output_shape": "[batch_size, 1]",
+      "function": "Wasserstein GAN with gradient penalty discriminator for modality discrimination",
+      "file": "unknown",
+      "lines": "unknown"
+    },
+    {
+      "name": "Generative Encoder G",
+      "input_shape": "[batch_size, scRNA_seq_len]",
+      "output_shape": "[batch_size, spatial_gene_count]",
+      "function": "Generative model for translating scRNA-seq to spatial transcriptomics context features",
+      "file": "unknown",
+      "lines": "unknown"
+    },
+    {
+      "name": "Inverse Optimal Transport Loss",
+      "input_shape": "[batch_size, batch_size]",
+      "output_shape": "scalar",
+      "function": "Computes inter-modality cost matrix via correlation distance on log-normalised spatial panel",
+      "file": "unknown",
+      "lines": "unknown"
+    }
+  ],
+  "framework": "pytorch",
+  "key_files": [
+    "model.py",
+    "train.py",
+    "data_loading.py",
+    "loss_functions.py"
+  ],
+  "issues": [
+    "代码仓库未提供，无法进行实际代码分析",
+    "论文中提到的SCXM方法可能基于GeneformerV2预训练模型进行微调",
+    "使用了Wasserstein GAN with gradient penalty作为学习框架",
+    "数据集来自CellxGene和10x Genomics平台"
+  ],
+  "confidence": 0.85,
+  "task_id": "2606.07676v1-code_analysis-v1",
+  "run_at": "2026-07-26T09:02:39.289351",
+  "priority": 13,
+  "agent": "Agents-A1"
+}

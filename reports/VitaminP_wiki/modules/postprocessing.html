@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VitaminP Wiki — postprocessing</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / VitaminP Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>VitaminP</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/vitaminp.html">vitaminp</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/dataset.html">dataset</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/metrics.html">metrics</a></li>
+<li><a href="../modules/postprocessing.html">postprocessing</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>postprocessing</h1>
+<br>
+<p>&gt; 处理Vision Transformer模型输出的HV图，生成实例分割掩码并提供可视化分析工具</p>
+<br>
+<p>该模块负责将模型预测的HV（水平/垂直）图转换为最终的细胞实例分割结果。核心流程包括：根据放大倍数自适应调整形态学参数、通过分水岭算法分离粘连细胞、移除小噪声对象、提取实例信息（如类型、边界框、面积）。模块包含主处理类HVPostProcessor和辅助的可视化分析脚本。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">postprocessing/__init__.py</code></h3>
+<br>
+<p>模块入口，导出公共API</p>
+<br>
+<ul>
+<li><code class="inline-code">HVPostProcessor</code> (class) - HV图后处理主类，封装分割算法和参数配置</li>
+<li><code class="inline-code">process_hv_maps</code> (function) - 处理HV图的独立函数（在hv_postprocess中定义）</li>
+<li><code class="inline-code">process_model_outputs</code> (function) - 处理模型原始输出的独立函数（在hv_postprocess中定义）</li>
+</ul>
+<br>
+<h3><code class="inline-code">postprocessing/hv_postprocess.py</code></h3>
+<br>
+<p>实现HV图到实例分割的核心算法</p>
+<br>
+<ul>
+<li><code class="inline-code">HVPostProcessor</code> (class) - 后处理类，根据放大倍数(20x/40x)和是否处理真值(gt)初始化参数，执行分割流程</li>
+<li><code class="inline-code">post_process_segmentation</code> (method) - 主入口函数，接收预测图（3通道或4通道），返回实例掩码和实例信息字典</li>
+<li><code class="inline-code">_process_hv_maps</code> (method) - 核心算法，将HV图转换为实例分割掩码，使用形态学操作和分水岭算法</li>
+<li><code class="inline-code">_extract_instance_info</code> (method) - 从实例掩码中提取每个实例的详细信息（类型、边界框、面积、中心点）</li>
+<li><code class="inline-code">remove_small_objects</code> (function) - 移除二值图像中面积小于min_size的连通区域，过滤噪声</li>
+<li><code class="inline-code">get_bounding_box</code> (function) - 计算二值图像中非零像素的边界框坐标</li>
+</ul>
+<br>
+<h3><code class="inline-code">postprocessing/utils.py</code></h3>
+<br>
+<p>提供WSI切片可视化、批量推理和结果分析工具</p>
+<br>
+<ul>
+<li><code class="inline-code">wsi_inference</code> (module) - 外部导入的推理模块，用于对WSI补丁进行细胞和细胞核分割</li>
+<li><code class="inline-code">tifffile</code> (module) - 用于读取和写入大型TIFF格式WSI文件</li>
+<li><code class="inline-code">cv2.drawContours</code> (function) - 在图像上绘制细胞轮廓用于可视化</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>HV图 (Horizontal/Vertical Maps)</strong>:</li>
+<li><strong>自适应参数</strong>:</li>
+<li><strong>分水岭分割</strong>:</li>
+<li><strong>实例信息提取</strong>:</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">postprocessing/__init__.py</code> → <code class="inline-code">postprocessing/hv_postprocess.py</code>: __init__.py 导入 hv_postprocess.py 中的类和方法作为模块公共接口</li>
+<li><code class="inline-code">postprocessing/hv_postprocess.py</code> → <code class="inline-code">postprocessing/utils.py</code>: 无直接导入关系，但utils.py 依赖 hv_postprocess.py 生成的实例掩码进行可视化</li>
+<li><code class="inline-code">postprocessing/utils.py</code> → <code class="inline-code">wsi_inference</code>: utils.py 调用 wsi_inference 模块执行WSI补丁的推理，获取细胞和细胞核分割结果</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+{
+  "paper_id": "2606.23487",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种名为CADRE的方法，用于在连续模态流中进行参数高效的持续适应，特别是在组织病理学、超声和放射影像任务中。方法在减少遗忘（forgetting）和提高稳定性-可塑性权衡方面表现出色。论文在方法论上具有创新性，尤其是在对EWC的改进和稳定性约束的设计上。然而，统计报告和泛化性方面存在一些关键问题，需要进一步澄清和验证。",
+  "strengths": [
+    "方法论上对EWC进行了有效的改进，包括归一化Fisher矩阵、自缩放强度和相似性感知保留机制，这些改进在理论上和实验中都显示出对减少遗忘的积极作用。",
+    "实验设计较为严谨，包括对组件的消融研究和对遗忘、BWT、SPQ等指标的系统分析，增强了结果的可信度。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "论文声称CADRE在跨模态任务中具有顺序鲁棒性（order-robustness）",
+      "concern": "论文仅基于两个模态顺序（2 out of 6）的实验结果得出顺序不变性的结论，缺乏足够的统计支持。",
+      "why_it_matters": "顺序鲁棒性是持续学习方法的重要性质，仅基于两个顺序的实验不足以证明该性质，可能高估方法的泛化能力。",
+      "resolution_test": "需要在所有6种模态顺序上进行实验，并报告遗忘、BWT和SPQ的均值和方差，以验证顺序不变性。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "statistics",
+      "claim_pointer": "论文声称CADRE在遗忘指标上显著优于LoRA + Anchor（p=0.023）",
+      "concern": "实验仅基于n=6的样本（3个种子 × 2个顺序），且未进行多重比较校正，p值可能高估显著性。",
+      "why_it_matters": "样本量较小可能导致统计检验的效力不足，p值可能不具有统计显著性，影响结论的可靠性。",
+      "resolution_test": "应增加样本量（如更多种子或顺序），并使用多重比较校正方法（如Bonferroni或FDR校正）来验证结果的显著性。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "论文声称CADRE在跨模态任务中具有良好的泛化能力",
+      "concern": "实验仅在三个医学影像模态（乳腺组织病理学、乳腺超声、胸部X光）上进行，缺乏对其他模态或非医学任务的泛化验证。",
+      "why_it_matters": "泛化能力是持续学习方法的关键属性，仅在有限的医学任务上验证无法证明其广泛适用性。",
+      "resolution_test": "应在更多样化的模态（如MRI、CT、皮肤镜等）或其他非医学领域任务上进行实验，以验证方法的泛化能力。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "citation",
+      "claim_pointer": "引用了EWC、LoRA、BiomedCLIP等相关工作",
+      "concern": "部分引用不够全面，例如对持续学习中其他正则化方法（如LwF、iCaRL）的讨论不足。",
+      "why_it_matters": "引用不全面可能影响读者对相关工作的理解，也可能低估其他方法的贡献。",
+      "resolution_test": "补充对其他持续学习正则化方法的引用和比较，以提供更全面的背景。"
+    }
+  ],
+  "assessment_boundaries": [
+    "论文未提供足够的实现细节（如BiomedCLIP的具体结构、训练过程中的超参数设置等），导致部分实验结果难以复现。",
+    "论文未讨论模型在实际临床部署中的潜在偏差或伦理问题，如数据隐私、模型公平性等。",
+    "未提供对模型在分布外（out-of-distribution）数据上的表现分析，限制了对模型鲁棒性的评估。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

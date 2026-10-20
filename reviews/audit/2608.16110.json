@@ -1,0 +1,53 @@
+{
+ "id": "2608.16110",
+ "chars": 60000,
+ "statistics": {
+  "checks": {
+   "has_p_value": true,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": true,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 7
+ },
+ "key_claims": [
+  "38%, outperforming the best existing method fps (84.",
+  "25%, outperforming the second-best method probcover (88.",
+  "compared to the top existing methods probcover [ 43 ] and fps [ 23 ] , our approach obtains more consistent improvements across both dsc and hd95 metrics, especially in the extremely low annotation bu"
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "Segment Anything",
+   "doi": null
+  },
+  {
+   "title": "DINOv3",
+   "doi": null
+  },
+  {
+   "title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+   "doi": "10.1007/978-3-319-24574-4_28"
+  },
+  {
+   "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+   "doi": null
+  }
+ ],
+ "citation_results": [
+  {
+   "title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+   "doi": "10.1007/978-3-319-24574-4_28",
+   "verdict": "PASS",
+   "confirmed_n": 3
+  }
+ ]
+}

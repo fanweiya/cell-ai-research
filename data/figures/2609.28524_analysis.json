@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法总体架构图：多序列MRI与H&E病理切片分别经Graph编码器，结合报告语义锚点进行拓扑感知对齐与跨尺度融合，输出亚型预测、生存分析和检索结果"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "方法架构图：展示MRI与WSI分别构建Habitat/Niche节点，并经拓扑编码器对齐为患者图对。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 10,
+    "caption": "方法架构图：展示MRI与病理WSI节点嵌入、跨模态代价矩阵、Sinkhorn求解与耦合，以及Gromov结构损失和语义锚点损失。"
+  }
+}

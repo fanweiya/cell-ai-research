@@ -1,0 +1,12 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "GATE-ST模型架构图：H&E图像经图像编码器与基因文本编码器（CONCH）通过交叉注意力层融合，最终经预测头输出结果"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "SPA126 IGKC基因预测空间可视化对比：真值与Gate-ST及基线方法结果"
+  }
+}

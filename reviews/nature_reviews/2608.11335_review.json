@@ -1,0 +1,58 @@
+{
+  "paper_id": "2608.11335",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了DD-CMD，一种结合空间跨模态对齐和频域校准的文本引导医学图像分割网络。方法设计新颖，将文本引导分为空间注意力和频谱调制两个互补模块，提升了语义对齐和细节保留。实验部分充分，与SOTA方法对比显示性能提升，尤其是在Dice和mIoU指标上表现优异。消融实验验证了各模块的有效性。然而，论文在统计报告和泛化性方面存在一些问题，需要进一步澄清和改进。",
+  "strengths": [
+    "提出了一种创新的双域文本引导机制（空间注意力 + 频谱调制），在医学图像分割中具有潜力。",
+    "实验设计严谨，与多个SOTA方法进行了对比，并提供了消融实验和可视化结果，增强了可信度。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "论文声称TGSA和STAM模块分别负责空间注意力和频谱调制，从而提升分割性能。",
+      "concern": "缺乏对TGSA和STAM模块如何具体提升性能的理论分析或可视化解释，仅依赖消融实验不足以证明其机制有效性。",
+      "why_it_matters": "缺乏机制层面的解释会削弱模型的可解释性和可信度，影响读者对其创新性的认可。",
+      "resolution_test": "需要补充对TGSA和STAM模块在特征空间中如何影响注意力权重或频谱分布的可视化分析，例如注意力热图或频域特征图。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "statistics",
+      "claim_pointer": "论文声称在QaTa-COV19和MosMedData+上取得了SOTA性能。",
+      "concern": "未报告统计显著性检验（如t检验或bootstrap分析）来验证性能提升是否具有统计意义。",
+      "why_it_matters": "仅报告平均指标可能不足以说明性能提升的稳定性，尤其是在不同数据分布下。",
+      "resolution_test": "应补充统计显著性分析，以验证性能提升是否在多个随机种子或交叉验证下保持一致。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "论文声称DD-CMD具有良好的泛化能力，适用于不同模态（CT/X-ray）的医学图像。",
+      "concern": "仅在两个数据集上验证模型性能，且均为肺部感染分割任务，缺乏对其他器官或病理类型的泛化能力评估。",
+      "why_it_matters": "医学图像分割模型的泛化能力是关键，仅在有限数据集上验证可能限制其临床适用性。",
+      "resolution_test": "应补充在其他医学图像数据集（如脑部MRI或皮肤病变）上的实验，以验证模型的跨模态和跨任务泛化能力。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "citation",
+      "claim_pointer": "引用了PubMedBERT、FiLM、DCT等技术作为基础。",
+      "concern": "部分引用未准确反映最新进展，例如PubMedBERT已有更大版本（如PubMedBERT-large）。",
+      "why_it_matters": "引用过时或非最优方法可能影响论文的学术严谨性。",
+      "resolution_test": "更新引用以反映相关领域的最新研究进展，尤其是PubMedBERT的后续版本或其他更优的医学语言模型。"
+    }
+  ],
+  "assessment_boundaries": [
+    "未提供代码或训练细节（如优化器参数、学习率调度器的具体实现）以复现结果，因此无法评估模型的可复现性。",
+    "未讨论模型在实际临床环境中的部署可行性（如推理速度、内存占用）。",
+    "未提供对文本输入多样性和噪声鲁棒性的分析。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

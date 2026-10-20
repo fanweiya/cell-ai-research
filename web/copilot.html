@@ -1,0 +1,50 @@
+<aside class="chat-drawer" id="chatDrawer" aria-label="Cell AI Copilot" inert>
+  <div class="chat-header">
+    <div class="chat-title"><h3>Cell AI Copilot</h3><span class="chat-subtitle">从论文出发，让研究彼此连接</span></div>
+    <div class="copilot-tools">
+      <button type="button" id="chatExpand" onclick="expandCopilot()" aria-label="展开对话" aria-pressed="false">展开</button>
+      <button type="button" onclick="toggleChat()" aria-label="关闭 Copilot">✕</button>
+    </div>
+  </div>
+  <div class="copilot-scope">
+    <div class="scope-tabs" role="group" aria-label="论文范围">
+      <button type="button" id="scopeAll" onclick="setCopilotScope('all')" aria-pressed="true">全库探索</button>
+      <button type="button" id="scopeSelected" onclick="setCopilotScope('selected')" aria-pressed="false">指定论文 <span id="scopeCount">0</span></button>
+    </div>
+    <div id="scopePapers" class="scope-papers"></div>
+    <div class="scope-actions">
+      <button type="button" onclick="openPaperPicker()">＋ 添加论文</button>
+      <button type="button" onclick="useFilteredPapers()">使用当前筛选</button>
+    </div>
+    <label id="relatedLabel" class="related-toggle" hidden><input type="checkbox" id="includeRelated" onchange="updateCopilotScope()"> 同时查找全库中的相关研究</label>
+    <p id="chatScope" class="scope-note" aria-live="polite"></p>
+  </div>
+  <div class="chat-messages" id="chatMessages" role="log" aria-label="研究对话" aria-live="polite">
+    <div class="copilot-welcome">
+      <span class="welcome-kicker">研究，从一个好问题开始</span>
+      <h4>读懂一篇，也连接更多篇。</h4>
+      <p>选择论文深入解读，或从全库出发寻找方法与研究之间的联系。</p>
+      <div class="suggestion-chips">
+        <button class="chip" type="button" onclick="sendSuggestion('解释这些论文的核心方法与适用条件')">解释核心方法</button>
+        <button class="chip" type="button" onclick="sendSuggestion('比较这些论文的技术路线、实验条件和主要局限')">比较技术路线</button>
+        <button class="chip" type="button" onclick="sendSuggestion('这些研究有哪些可以结合的思路？区分已验证结论和待验证假设')">寻找研究关联</button>
+      </div>
+    </div>
+  </div>
+  <form class="chat-input-area" id="copilotForm">
+    <label class="sr-only" for="chatInput">输入研究问题</label>
+    <textarea class="chat-input" id="chatInput" placeholder="想了解哪些方法、差异或关联？" rows="3"></textarea>
+    <div class="composer-footer"><span id="chatStatus" role="status">Enter 发送 · Shift+Enter 换行</span><button class="chat-send" id="chatSendBtn" type="submit">发送</button><button class="chat-send" id="chatStopBtn" type="button" onclick="cancelCopilot()" hidden>停止</button></div>
+  </form>
+</aside>
+<button class="chat-trigger" id="chatTrigger" type="button" onclick="openGlobalCopilot()" aria-controls="chatDrawer" aria-expanded="false">✦ 研究 Copilot</button>
+<div class="paper-selection-bar" id="selectionBar" hidden aria-label="已选论文操作">
+  <span>已选 <strong id="selectionCount">0</strong> 篇</span><button type="button" onclick="clearPaperSelection()">清空</button><button class="selection-primary" type="button" onclick="discussSelection()">对比 / 提问 →</button>
+</div>
+<dialog id="paperPicker" class="paper-picker" aria-labelledby="pickerTitle">
+  <div class="picker-header"><h3 id="pickerTitle">添加到讨论</h3><button type="button" onclick="closePaperPicker()" aria-label="关闭论文选择">✕</button></div>
+  <label class="sr-only" for="pickerSearch">搜索论文</label><input id="pickerSearch" type="search" placeholder="搜索标题、论文 ID 或研究任务" oninput="renderPaperPicker()">
+  <div class="picker-toolbar"><label>范围 <select id="pickerFilter" onchange="renderPaperPicker()"><option value="all">全部论文</option><option value="visible">当前筛选</option></select></label><span id="pickerCount"></span></div>
+  <div id="pickerResults" class="picker-results"></div>
+  <div class="picker-footer"><span id="pickerSelected"></span><button type="button" onclick="closePaperPicker()">取消</button><button type="button" class="selection-primary" onclick="applyPaperPicker()">应用选择</button></div>
+</dialog>

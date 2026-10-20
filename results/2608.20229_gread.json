@@ -1,0 +1,46 @@
+{
+  "source": "gread",
+  "analysis_depth": "multi_pass_static",
+  "repository": "kamruleee51/PROMISENet",
+  "repository_url": "https://github.com/kamruleee51/PROMISENet",
+  "collected_at": "2026-08-22T01:21:58.070310+00:00",
+  "coverage": {
+    "repository_kind": "placeholder_or_docs_only",
+    "has_implementation": false,
+    "code_file_count_in_tree": 0,
+    "selected_file_count": 1,
+    "selected_code_file_count": 0,
+    "languages_by_extension": {},
+    "tests_present": false,
+    "test_files": [],
+    "manifest_files": [
+      "README.md"
+    ],
+    "read_errors": [],
+    "limitations": [
+      "Static remote inspection only; files were not executed.",
+      "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+    ],
+    "search_errors": []
+  },
+  "overview": "# kamruleee51/PROMISENet\n**Stars**: 1 | **Language**: \n**Description**: The PROMISE-Net repository provides an official implementation of a prompt-aware medical image segmentation framework. It introduces Prompt-Conditioned Channel Attention (PCCA), a novel attention mechanism designed to hierarchically integrate spatial prompts (like bounding boxes) into every stage of encoder-decoder networks. This allows for prompt-driven feature modulation from low-level textures to high-level semantics, improving segmentation performance across various datasets and imaging modalities. The repository includes two main model variants: PROMISE-CNN, based on U-Net for local feature extraction, and PROMISE-Txformer, based on UNETR for leveraging global self-attention. The framework is validated on datasets such as ISIC-2017, Kvasir-SEG, and Kvasir-Instrument.\n\n\n## Directory Tree\n```\nPROMISE-Net.png\nREADME.md\n```",
+  "tree": "## Directory Tree\n```\nPROMISE-Net.png\nREADME.md\n```",
+  "key_files": [
+    "README.md"
+  ],
+  "source_files": "## README.md\n```\n<div align=\"center\">\n\n# 🧠✨ PROMISE-Net  \n### Prompt-Conditioned Channel Attention for Medical Image Segmentation\n\n[![Paper](https://img.shields.io/badge/Paper-IEEE-blue)](#)\n[![Framework](https://img.shields.io/badge/Framework-PyTorch-red)](#)\n[![Task](https://img.shields.io/badge/Task-Medical%20Image%20Segmentation-green)](#)\n\n</div>\n\n---\n\n## 📌 Overview\n\n**PROMISE-Net (PROmpt Modulated Integration for SEgmentation)** is a **prompt-aware medical image segmentation framework** that introduces a novel attention mechanism called **Prompt-Conditioned Channel Attention (PCCA)**.  \n\nThe core idea is to **deeply integrate user-provided spatial prompts (e.g., bounding boxes)** into **every stage of an encoder–decoder network**, enabling **hierarchical, prompt-driven feature modulation** instead of shallow or late-stage prompt fusion.\n\nThis repository contains the **official implementation** of the models proposed in the paper:\n\n> **“Prompt-Conditioned Channel Attention for Hierarchical Feature Modulation in Medical Image Segmentation”**\n\n---\n\n## 🧩 PROMISE-Net Architecture\n\n<div align=\"center\">\n  <img src=\"PROMISE-Net.png\" width=\"850\"/>\n</div>\n\n<p align=\"center\">\n  <em>\n  PROMISE-Net framework with hierarchical Prompt-Conditioned\n  Channel Attention (PCCA) integrated across encoder and decoder stages.\n  </em>\n</p>\n\n---\n\n## 🚀 Key Contributions\n\n### 🔹 Prompt-Conditioned Channel Attention (PCCA)\n- A **lightweight, channel-wise attention module**\n- Conditions feature excitation on **both image features and prompt embeddings**\n- Enables **prompt-aware gating** across the entire network hierarchy\n\n### 🔹 Hierarchical Prompt Integration\n- Prompts influence:\n  - Early **low-level texture features**\n  - Mid-level **structural representations**\n  - High-level **semantic abstractions**\n- Prevents loss of prompt information in deep networks\n\n### 🔹 Cross-Architectural Generality\n- Works seamlessly with:\n  - **CNN-based backbones** → **PROMISE-CNN**\n  - **Transformer-based backbones** → **PROMISE-Txformer**\n\n### 🔹 Strong Generalization\n- Validated across:\n  - Multiple **anatomical structures**\n  - Diverse **imaging modalities**\n  - Binary **and** multi-class segmentation tasks\n\n---\n\n\n📌 **PCCA is inserted at *every encoder and decoder stage***, allowing prompts to continuously guide feature learning.\n\n---\n\n## 🏗️ Model Variants\n\n### 🔵 PROMISE-CNN\n- Based on **U-Net**\n- Strong at capturing **local textures and boundaries**\n- Lightweight and efficient\n\n### 🟣 PROMISE-Txformer\n- Based on **UNETR**\n- Leverages **global self-attention**\n- Better long-range dependency modeling\n\nBoth variants use **the same PCCA module**, demonstrating architectural flexibility.\n\n---\n\n## 🧪 Datasets Supported\n\nPROMISE-Net is evaluated on **four major medical segmentation benchmarks**:\n\n| Dataset | Task | Modality |\n|------|------|------|\n| 🧴 ISIC-2017 | Skin lesion segmentation | Dermoscopy |\n| 🦠 Kvasir-SEG | Polyp segmentation | Endoscopy |\n| 🛠️ Kvasir-Instrument | Tool segmentation | Endoscopy |\n| ❤️ CAMUS | Cardiac chamber segmentation | Echocardiography |\n\n---\n\n## 📈 Evaluation\n\nEvaluation code for benchmarking PROMISE-Net will be provided in a future update.\n\nThe evaluation framework will support:\n- Dice Score (DSC)\n- Intersection-over-Union (IoU)\n- Hausdorff Distance (HD95)\n- False Negative Rate (FNR)\n- Dataset-specific clinical metrics (e.g., EF for CAMUS)\n\n📌 **Status:** _Coming soon_\n\n---\n\n## 🏋️ Training\n\nTraining scripts and configuration files for PROMISE-Net will be released soon.\n\nThe planned training pipeline will include:\n- Support for **PROMISE-CNN** and **PROMISE-Txformer**\n- Prompt-based supervision using **bounding box annotations**\n- Standard medical image losses (e.g., Dice + Cross-Entropy)\n- Reproducible training across all reported datasets\n\n📌 **Status:** _Coming soon_\n\n---\n\n## 📊 Performance Highlights\n\n- **Consistent Dice & IoU improvements** over U-Net, UNETR, and SAM\n- **Significant reduction in false negatives (FNR)**\n- Improved **boundary precision (HD95)**\n- Robust to:\n  - Prompt perturbations\n  - Inter-observer variability\n  - Image quality degradation\n\n---\n\n## 🧠 Why PROMISE-Net?\n\n✔ Deep prompt integration (not late fusion)  \n✔ Channel-wise semantic modulation  \n✔ Transformer & CNN compatible  \n✔ Lightweight and scalable  \n✔ Clinically reliable boundaries  \n\nPROMISE-Net bridges the gap between **interactive segmentation** and **deep hierarchical feature learning**.\n\n\n\n```",
+  "search_queries": [
+    "class |def |function |interface |struct |fn |func ",
+    "main\\(|train\\(|forward\\(|fit\\(|predict\\(|infer|generate",
+    "TODO|FIXME|NotImplemented|raise |throw ",
+    "pytest|unittest|test_|describe\\(|@Test",
+    "import |from |require\\(|use |#include"
+  ],
+  "search_results": [
+    "## Search inside kamruleee51/PROMISENet for \"class |def |function |interface |struct |fn |func \"\n```\nHEAD:README.md-63-  - Diverse **imaging modalities**\nHEAD:README.md:64:  - Binary **and** multi-class segmentation tasks\nHEAD:README.md-65-\n\n```",
+    "## Search inside kamruleee51/PROMISENet for \"main\\(|train\\(|forward\\(|fit\\(|predict\\(|infer|generate\"\n```\nNo matches found.\n```",
+    "## Search inside kamruleee51/PROMISENet for \"TODO|FIXME|NotImplemented|raise |throw \"\n```\nNo matches found.\n```",
+    "## Search inside kamruleee51/PROMISENet for \"pytest|unittest|test_|describe\\(|@Test\"\n```\nNo matches found.\n```",
+    "## Search inside kamruleee51/PROMISENet for \"import |from |require\\(|use |#include\"\n```\nHEAD:README.md-84-\nHEAD:README.md:85:Both variants use **the same PCCA module**, demonstrating architectural flexibility.\nHEAD:README.md-86-\n\n```"
+  ]
+}

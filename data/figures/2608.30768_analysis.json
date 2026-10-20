@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 7,
+    "caption": "论文中比较Ground truth与预测神经元的局部几何与结构感知指标（SD/SSD、Point/Length/Keypoint/Fiber指标对比）以及DIADEM与Fiber方法差异的图示"
+  },
+  "1": {
+    "relevant": true,
+    "score": 7,
+    "caption": "全脑神经元重建结果的三视角可视化（背视图与左右半球矢状视图），展示重建神经元在大脑参考框架中的分布"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心图：展示CORAL基准的两项任务（局部块级重建与全脑重建）、全脑示踪框架流程及评估指标（FIoU匹配、TP/FP/FN/未匹配判定）"
+  }
+}

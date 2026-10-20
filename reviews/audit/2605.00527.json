@@ -1,0 +1,39 @@
+{
+ "id": "2605.00527",
+ "chars": 17580,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": true,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 3
+ },
+ "key_claims": [
+  "7% accuracy, outperforming basicvsr++ and turtle by 11.",
+  "mira outperforms the baselines across all metrics.",
+  "the results show that mira’s advantage goes beyond pixel-level fidelity to improved reconstruction of structural properties."
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "Segment Anything",
+   "doi": null
+  },
+  {
+   "title": "Segment Anything in Medical Images (MedSAM)",
+   "doi": null
+  }
+ ],
+ "citation_results": []
+}

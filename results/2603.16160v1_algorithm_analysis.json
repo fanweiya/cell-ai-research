@@ -1,0 +1,50 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2603.16160v1",
+  "status": "done",
+  "design_motivation": "现有虚拟染色方法仅优化像素级保真度，忽略了核形态约束，导致核计数、形状及空间排列的细微失真，进而影响Ki67等下游定量指标的准确性。本文设计旨在通过引入预训练核分割模型生成的连续细胞概率图作为显式输入先验，替代传统的二值化掩码，以保留梯度级边界信息并消除阈值超参数。相比仅依赖像素级监督的替代方案，该设计在不修改翻译架构的前提下，显著提升了结构保真度和下游诊断效用。",
+  "loss_formula": "L_total = L_pixel + lambda * L_var",
+  "math_principle": "利用Cellpose输出的连续细胞概率图P作为软先验，其信息量包含二值化掩码M但更丰富，能提供更平滑的梯度。同时引入局部方差匹配项L_var，通过计算合成图像与真实图像在局部窗口内的方差差异，保持荧光通道内的细胞级强度异质性，防止过度平滑。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 4, H, W]"
+    },
+    {
+      "layer": "encoder",
+      "shape": "[B, 256, H/4, W/4]"
+    },
+    {
+      "layer": "decoder",
+      "shape": "[B, 256, H, W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, C, H, W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载配对的IHC RGB图像和mIF真值",
+    "step2: 通过Cellpose前向传播提取连续细胞概率图P",
+    "step3: 将P通道与IHC图像拼接形成增强输入",
+    "step4: 生成器前向传播合成mIF通道",
+    "step5: 计算像素级损失L_pixel和局部方差匹配损失L_var",
+    "step6: 反向传播更新生成器参数"
+  ],
+  "baselines_compared": [
+    "Pix2Pix (U-Net)",
+    "Pix2Pix (ResNet)",
+    "Regression U-Net",
+    "Conditional Diffusion"
+  ],
+  "key_results": {
+    "nuclei_count_fidelity": "显著提升",
+    "Ki67_quantification_error": "降低",
+    "SSIM": "优于基线"
+  },
+  "confidence": 0.85,
+  "task_id": "2603.16160v1-algorithm_analysis-v1",
+  "run_at": "2026-07-24T09:13:39.411056",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

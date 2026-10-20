@@ -1,0 +1,41 @@
+{
+ "id": "2603.13377",
+ "chars": 60000,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": true,
+   "has_significance_test": false,
+   "has_fdr": false,
+   "mentions_ablation": false,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "score": 6
+ },
+ "key_claims": [
+  "4 ), we observe that performance generally decreases or remains stable in deeper layers for biological recall, in contrast to the monotonic improvements typically observed on natural image benchmarks ",
+  "overall, pretrained and foundation models consistently outperform untrained and pixel-based baselines.",
+  "for example, although jcp2022_037716 achieves a higher absolute score than jcp2022_046054, the relative improvement over untrained baselines is larger for jcp2022_046054."
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "DINOv2: Learning Robust Visual Features without Supervision",
+   "doi": null
+  },
+  {
+   "title": "DINOv3",
+   "doi": null
+  },
+  {
+   "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+   "doi": null
+  }
+ ],
+ "citation_results": []
+}

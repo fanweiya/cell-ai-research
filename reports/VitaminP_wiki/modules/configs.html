@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VitaminP Wiki — configs</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / VitaminP Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>VitaminP</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/vitaminp.html">vitaminp</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/dataset.html">dataset</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/metrics.html">metrics</a></li>
+<li><a href="../modules/postprocessing.html">postprocessing</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>configs</h1>
+<br>
+<p>&gt; 管理基于Vision Transformer的病理细胞分割框架的训练、推理和作业配置。</p>
+<br>
+<p>该模块包含所有用于配置模型训练、推理和Kubernetes作业的文件。主要分为三类：1) inference/ 目录下的YAML文件，用于定义在Kubernetes集群中运行推理任务的Job规范，包含具体的命令行参数和硬件资源需求；2) jobs/ 目录下的YAML文件，用于定义训练和GAN任务的Job规范；3) training/ 目录下的YAML文件，用于定义数据加载、样本划分、数据增强和预处理的具体参数。训练配置文件展示了数据集从单一CRC/Xenium逐步扩展到包含TissueNet、PanNuke、Lizard、MoNuSeg、TNBC、NuInsSeg、CryoNuSeg、BC、ConSep、Kumar、CPM-17等数十个数据集的混合训练策略。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">configs/inference/inference.yaml</code></h3>
+<br>
+<p>定义H&amp;E图像推理的Kubernetes Job，使用flex大模型对WSI进行细胞分割。</p>
+<br>
+<h3><code class="inline-code">configs/inference/inference_mif.yaml</code></h3>
+<br>
+<p>定义MIF（多免疫荧光）图像推理的Kubernetes Job，处理ome.tiff格式文件。</p>
+<br>
+<h3><code class="inline-code">configs/inference/inference_xenium.yaml</code></h3>
+<br>
+<p>定义Xenium空间转录组数据推理的Kubernetes Job，包含动态生成Python脚本的逻辑。</p>
+<br>
+<h3><code class="inline-code">configs/inference/inference_xenium_he.yaml</code></h3>
+<br>
+<p>定义Xenium H&amp;E图像配准后推理的Kubernetes Job。</p>
+<br>
+<h3><code class="inline-code">configs/inference/inference_xenium_qptiff.yaml</code></h3>
+<br>
+<p>定义QPTIFF格式全切片图像推理的Kubernetes Job，支持多通道提取和合并。</p>
+<br>
+<h3><code class="inline-code">configs/jobs/job.yaml</code></h3>
+<br>
+<p>定义标准模型训练任务的Kubernetes Job，支持dual、syn、flex等模型类型和UNI预训练。</p>
+<br>
+<h3><code class="inline-code">configs/jobs/job_gan.yaml</code></h3>
+<br>
+<p>定义Pix2Pix GAN训练任务的Kubernetes Job，用于H&amp;E到MIF的图像合成。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold1.yaml</code></h3>
+<br>
+<p>定义CRC和Xenium数据集的3折交叉验证第1折配置，包含数据路径、样本划分和增强参数。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold2.yaml</code></h3>
+<br>
+<p>定义CRC和Xenium数据集的3折交叉验证第2折配置。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold3.yaml</code></h3>
+<br>
+<p>定义CRC和Xenium数据集的3折交叉验证第3折配置。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold4.yaml</code></h3>
+<br>
+<p>定义仅CRC数据集的第1折配置，包含HV图生成和过滤参数。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold5.yaml</code></h3>
+<br>
+<p>定义仅Xenium数据集的第1折配置。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold6.yaml</code></h3>
+<br>
+<p>定义GAN训练的数据配置，采用90/10训练/验证划分。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold11.yaml</code></h3>
+<br>
+<p>定义合成CRC和Xenium数据集的混合训练配置第1折。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold12.yaml</code></h3>
+<br>
+<p>定义合成CRC和Xenium数据集的混合训练配置第2折。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold13.yaml</code></h3>
+<br>
+<p>定义合成CRC和Xenium数据集的混合训练配置第3折。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold21.yaml</code></h3>
+<br>
+<p>定义包含CRC、Xenium和TissueNet的混合数据集配置第1折。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold22.yaml</code></h3>
+<br>
+<p>定义包含CRC、Xenium、TissueNet的混合数据集配置第1折（num_workers=16）。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold23.yaml</code></h3>
+<br>
+<p>定义包含CRC、Xenium、TissueNet、PanNuke的混合数据集配置。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold24.yaml</code></h3>
+<br>
+<p>定义包含CRC、Xenium、TissueNet、PanNuke、Lizard的混合数据集配置。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold25.yaml</code></h3>
+<br>
+<p>定义包含CRC、Xenium、TissueNet、PanNuke、Lizard、MoNuSeg的混合数据集配置。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold26.yaml</code></h3>
+<br>
+<p>定义包含CRC、Xenium、TissueNet、PanNuke、Lizard、MoNuSeg、TNBC的混合数据集配置。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold27.yaml</code></h3>
+<br>
+<p>定义包含CRC、Xenium、TissueNet、PanNuke、Lizard、MoNuSeg、TNBC、NuInsSeg的混合数据集配置。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold28.yaml</code></h3>
+<br>
+<p>定义包含CRC、Xenium、TissueNet、PanNuke、Lizard、MoNuSeg、TNBC、NuInsSeg、CryoNuSeg的混合数据集配置。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold29.yaml</code></h3>
+<br>
+<p>定义包含CRC、Xenium、TissueNet、PanNuke、Lizard、MoNuSeg、TNBC、NuInsSeg、CryoNuSeg、BC的混合数据集配置。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold30.yaml</code></h3>
+<br>
+<p>定义包含CRC、Xenium、TissueNet、PanNuke、Lizard、MoNuSeg、TNBC、NuInsSeg、CryoNuSeg、BC、ConSep的混合数据集配置。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold31.yaml</code></h3>
+<br>
+<p>定义包含CRC、Xenium、TissueNet、PanNuke、Lizard、MoNuSeg、TNBC、NuInsSeg、CryoNuSeg、BC、ConSep、Kumar、CPM-17的混合数据集配置。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold32.yaml</code></h3>
+<br>
+<p>定义包含CRC、Xenium、TissueNet、PanNuke、Lizard、MoNuSeg、TNBC、NuInsSeg、CryoNuSeg、BC、ConSep、Kumar、CPM-17的混合数据集配置（完整列表）。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold33.yaml</code></h3>
+<br>
+<p>定义包含CRC、Xenium、TissueNet、PanNuke、Lizard、MoNuSeg、TNBC、NuInsSeg、CryoNuSeg、BC、ConSep、Kumar、CPM-17的混合数据集配置（训练集微调）。</p>
+<br>
+<h3><code class="inline-code">configs/training/config_fold34.yaml</code></h3>
+<br>
+<p>定义包含CRC、Xenium、TissueNet、PanNuke、Lizard、MoNuSeg、TNBC、NuInsSeg、CryoNuSeg、BC、ConSep、Kumar、CPM-17、MoNuSAC的混合数据集配置。</p>
+<br>
+<h3><code class="inline-code">configs/training/newmethod.yaml</code></h3>
+<br>
+<p>定义新方法实验的数据配置，使用DSB2018和CPM15数据集，采用激进的数据增强策略。</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>混合数据集训练</strong>: 通过逐步增加不同来源的病理图像数据集（CRC、Xenium、TissueNet、PanNuke等）来增强模型的泛化能力，配置文件从简单的双数据集扩展到包含15+个数据集的复杂混合训练。</li>
+<li><strong>3折交叉验证</strong>: 早期配置文件（fold1-3）采用标准的3折交叉验证策略，将数据划分为训练、验证和测试集，确保模型评估的可靠性。</li>
+<li><strong>合成数据增强</strong>: 使用GAN生成的合成数据（config_fold11-13）来扩充训练集，解决特定数据集样本不足的问题。</li>
+<li><strong>Kubernetes作业编排</strong>: 所有推理和训练任务都通过Kubernetes Job进行编排，配置文件包含详细的资源需求（GPU、CPU、内存）、节点选择器和存储卷挂载信息。</li>
+<li><strong>数据缓存策略</strong>: 配置文件包含数据缓存设置（cache_dir、cache_filename），用于加速大规模病理图像数据的加载过程。</li>
+<li><strong>多通道图像处理</strong>: 推理配置支持处理多种图像格式（SVS、OME.TIFF、QPTIFF）和多通道数据（H&amp;E、MIF、Xenium），并包含通道映射和合并逻辑。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">configs/inference/inference.yaml</code> → <code class="inline-code">configs/training/config_fold1.yaml</code>: 推理配置与训练配置共享相同的数据路径和预处理参数，但推理配置专注于模型加载和预测参数。</li>
+<li><code class="inline-code">configs/jobs/job.yaml</code> → <code class="inline-code">configs/training/config_fold1.yaml</code>: 训练Job通过命令行参数引用具体的训练配置文件（如config_fold1.yaml）。</li>
+<li><code class="inline-code">configs/training/config_fold1.yaml</code> → <code class="inline-code">configs/training/config_fold11.yaml</code>: config_fold11是config_fold1的变体，将数据源从原始CRC/Xenium切换到合成数据。</li>
+<li><code class="inline-code">configs/training/config_fold21.yaml</code> → <code class="inline-code">configs/training/config_fold22.yaml</code>: config_fold22在config_fold21基础上增加了num_workers和persistent_workers以优化多GPU训练。</li>
+<li><code class="inline-code">configs/training/config_fold23.yaml</code> → <code class="inline-code">configs/training/config_fold24.yaml</code>: config_fold24在config_fold23基础上增加了Lizard数据集。</li>
+<li><code class="inline-code">configs/training/config_fold24.yaml</code> → <code class="inline-code">configs/training/config_fold25.yaml</code>: config_fold25在config_fold24基础上增加了MoNuSeg数据集。</li>
+<li><code class="inline-code">configs/training/config_fold25.yaml</code> → <code class="inline-code">configs/training/config_fold26.yaml</code>: config_fold26在config_fold25基础上增加了TNBC数据集。</li>
+<li><code class="inline-code">configs/training/config_fold26.yaml</code> → <code class="inline-code">configs/training/config_fold27.yaml</code>: config_fold27在config_fold26基础上增加了NuInsSeg数据集。</li>
+<li><code class="inline-code">configs/training/config_fold27.yaml</code> → <code class="inline-code">configs/training/config_fold28.yaml</code>: config_fold28在config_fold27基础上增加了CryoNuSeg数据集。</li>
+<li><code class="inline-code">configs/training/config_fold28.yaml</code> → <code class="inline-code">configs/training/config_fold29.yaml</code>: config_fold29在config_fold28基础上增加了BC数据集。</li>
+<li><code class="inline-code">configs/training/config_fold29.yaml</code> → <code class="inline-code">configs/training/config_fold30.yaml</code>: config_fold30在config_fold29基础上增加了ConSep数据集。</li>
+<li><code class="inline-code">configs/training/config_fold30.yaml</code> → <code class="inline-code">configs/training/config_fold31.yaml</code>: config_fold31在config_fold30基础上增加了Kumar和CPM-17数据集。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

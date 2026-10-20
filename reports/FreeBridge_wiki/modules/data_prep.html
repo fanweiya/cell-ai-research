@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreeBridge Wiki — data_prep</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / FreeBridge Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>FreeBridge</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/data_prep.html">data_prep</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/freebridge.html">freebridge</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>data_prep</h1>
+<br>
+<p>&gt; 预处理BBBC021单细胞图像数据，训练VAE编码器，提取潜变量，并构建控制/扰动组的端点数据集。</p>
+<br>
+<p>该模块负责从原始显微镜图像到单细胞潜变量表示的完整流水线。包括数据下载与分割、单细胞裁剪、VAE模型训练、潜变量提取、以及根据实验条件将潜变量分组为控制源和扰动目标。核心流程为：原始图像 -&gt; 单细胞裁剪 -&gt; VAE编码 -&gt; 潜变量矩阵 -&gt; 按条件分组。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">data_prep/__init__.py</code></h3>
+<br>
+<p>模块初始化文件，当前为空。</p>
+<br>
+<h3><code class="inline-code">data_prep/build_bbbc021_endpoints.py</code></h3>
+<br>
+<p>将VAE提取的潜变量张量按正则表达式匹配条件，分割为控制（src）和扰动（tgt）的numpy数组。</p>
+<br>
+<ul>
+<li><code class="inline-code">_split</code> (function) - 加载.pt文件，根据控制/目标正则表达式筛选索引，返回对应的潜变量数组。</li>
+<li><code class="inline-code">main</code> (function) - 解析命令行参数，处理训练集和验证集，保存src_train.npy, tgt_train.npy, src_val.npy, tgt_val.npy。</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_prep/cellvae_adapter.py</code></h3>
+<br>
+<p>提供统一的VAE编码/解码接口，支持动态加载任意Checkpoint格式的预训练模型。</p>
+<br>
+<ul>
+<li><code class="inline-code">_import_obj</code> (function) - 通过字符串导入模块和类，格式如 'train_vae_full:VAE'。</li>
+<li><code class="inline-code">_load_ckpt_state_dict</code> (function) - 兼容多种Checkpoint格式（PyTorch Lightning, 自定义训练等）并提取state_dict。</li>
+<li><code class="inline-code">_strip_prefix</code> (function) - 移除state_dict键名中的常见前缀（如model., vae., module.）。</li>
+<li><code class="inline-code">CellVAEAdapterConfig</code> (class) - 数据类，配置VAE加载参数（ckpt路径、模型导入路径、设备、输出范围等）。</li>
+<li><code class="inline-code">CellVAEAdapter</code> (class) - 封装VAE模型，提供encode和decode方法，处理设备迁移和输出范围归一化。</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_prep/crop_bbbc021_singlecell.py</code></h3>
+<br>
+<p>从原始多通道显微图像中，基于掩膜（mask）裁剪出单个细胞的ROI图像。</p>
+<br>
+<ul>
+<li><code class="inline-code">robust_rescale_to_u8</code> (function) - 基于百分位数的鲁棒直方图拉伸，将图像重缩放为0-255的uint8。</li>
+<li><code class="inline-code">crop_square_with_padding</code> (function) - 以指定中心点裁剪正方形区域，超出边界时自动填充。</li>
+<li><code class="inline-code">find_channel_files_any</code> (function) - 扫描原始数据目录，识别多通道TIF文件并建立通道索引。</li>
+<li><code class="inline-code">guess_mask_path</code> (function) - 根据原始图像文件名在掩膜目录中模糊匹配对应的细胞分割掩膜文件。</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_prep/export_latents_from_vae.py</code></h3>
+<br>
+<p>使用训练好的VAE模型对图像列表进行批量编码，导出潜变量张量和对应路径。</p>
+<br>
+<ul>
+<li><code class="inline-code">_load_list_paths</code> (function) - 读取路径列表文件，解析绝对/相对路径，过滤非图像和缺失文件。</li>
+<li><code class="inline-code">PathImageDataset</code> (class) - PyTorch Dataset，加载图像并预处理为RGB张量。</li>
+<li><code class="inline-code">main</code> (function) - 加载VAE，遍历图像数据集，提取mu或采样z，保存为包含'Z'和'paths'的.pt文件。</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_prep/export_latents_mu.py</code></h3>
+<br>
+<p>从Checkpoint文件反推并重建VAE模型结构，用于潜变量提取（与train_vae_full.py结构对应）。</p>
+<br>
+<ul>
+<li><code class="inline-code">_infer_stride_padding</code> (function) - 根据卷积核大小推断步长和填充参数。</li>
+<li><code class="inline-code">_build_vae_from_sd</code> (function) - 解析Checkpoint的state_dict，动态构建Enc和Dec网络层。</li>
+<li><code class="inline-code">load_vae_from_ckpt</code> (function) - 加载Checkpoint，构建VAE模型，返回模型、zdim和img_size。</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_prep/finetune_decoder_lpips.py</code></h3>
+<br>
+<p>在固定编码器的情况下，仅微调VAE解码器以优化感知损失（LPIPS），提升重建图像的结构细节。</p>
+<br>
+<ul>
+<li><code class="inline-code">CropDataset</code> (class) - 图像数据集，支持0-1或-1到1的范围归一化。</li>
+<li><code class="inline-code">save_pair</code> (function) - 保存原始图像与重建图像的对比网格图。</li>
+<li><code class="inline-code">main</code> (function) - 加载VAE，冻结编码器，使用L1+LPIPS损失函数训练解码器。</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_prep/gen_cells.py</code></h3>
+<br>
+<p>从潜变量文件中随机采样，通过VAE解码生成细胞图像网格。</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 加载潜变量和VAE配置，解码指定数量的潜变量，保存网格图和单张图像。</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_prep/make_split.py</code></h3>
+<br>
+<p>按实验组（site或well）对单细胞图像进行训练/验证/测试分割，防止数据泄露。</p>
+<br>
+<ul>
+<li><code class="inline-code">site_key</code> (function) - 从文件名提取分组键（site或well级别）。</li>
+<li><code class="inline-code">main</code> (function) - 遍历周文件夹，按组打乱并划分训练集、验证集和测试集，保存为txt列表。</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_prep/run_week.sh</code></h3>
+<br>
+<p>Bash脚本，自动化下载BBBC021特定周次的原始图像和掩膜数据，并执行单细胞裁剪。</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 下载ZIP和TAR文件，解压，调用crop_bbbc021_singlecell.py进行裁剪，清理临时文件。</li>
+</ul>
+<br>
+<h3><code class="inline-code">data_prep/train_vae_full.py</code></h3>
+<br>
+<p>定义并训练用于BBBC021单细胞图像的卷积VAE模型。</p>
+<br>
+<ul>
+<li><code class="inline-code">Enc</code> (class) - 卷积编码器，将96x96 RGB图像映射为潜变量分布的mu和logvar。</li>
+<li><code class="inline-code">Dec</code> (class) - 转置卷积解码器，将潜变量重构为96x96 RGB图像。</li>
+<li><code class="inline-code">VAE</code> (class) - 组合编码器和解码器，实现前向传播和重参数化技巧。</li>
+<li><code class="inline-code">vae_loss</code> (function) - 计算重建误差（MSE）和KL散度的加权和。</li>
+<li><code class="inline-code">main</code> (function) - 解析命令行参数，启动训练循环，保存包含model、zdim、img_size的Checkpoint。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>单细胞潜变量提取</strong>: 通过训练好的VAE将单细胞图像压缩为低维潜变量向量（z），用于后续的微扰响应建模。</li>
+<li><strong>数据分组与防泄露</strong>: 在分割数据集时，确保来自同一显微视野（site）或同一井（well）的细胞被划分到同一个集合中，避免训练集和验证集之间存在数据泄露。</li>
+<li><strong>条件分组</strong>: 通过正则表达式匹配图像文件名中的控制/扰动标识，将潜变量分为源（控制）和目标（扰动）两组，用于构建Schrödinger Bridge的端点分布。</li>
+<li><strong>感知损失微调</strong>: 使用LPIPS（Learned Perceptual Image Patch Similarity）替代传统的像素级损失来微调解码器，以获得更清晰、结构更准确的细胞图像重建。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">data_prep/export_latents_from_vae.py</code> → <code class="inline-code">data_prep/export_latents_mu.py</code>: export_latents_from_vae.py 导入 load_vae_from_ckpt 以从Checkpoint重建VAE模型。</li>
+<li><code class="inline-code">data_prep/build_bbbc021_endpoints.py</code> → <code class="inline-code">data_prep/export_latents_from_vae.py</code>: build_bbbc021_endpoints.py 处理 export_latents_from_vae.py 生成的.pt潜变量文件。</li>
+<li><code class="inline-code">data_prep/cellvae_adapter.py</code> → <code class="inline-code">data_prep/train_vae_full.py</code>: cellvae_adapter.py 通过动态导入加载 train_vae_full.py 中的VAE类定义。</li>
+<li><code class="inline-code">data_prep/gen_cells.py</code> → <code class="inline-code">data_prep/cellvae_adapter.py</code>: gen_cells.py 使用 CellVAEAdapter 进行潜变量解码生成图像。</li>
+<li><code class="inline-code">data_prep/run_week.sh</code> → <code class="inline-code">data_prep/crop_bbbc021_singlecell.py</code>: run_week.sh 脚本在数据准备阶段调用 crop_bbbc021_singlecell.py 执行裁剪。</li>
+<li><code class="inline-code">data_prep/make_split.py</code> → <code class="inline-code">data_prep/crop_bbbc021_singlecell.py</code>: make_split.py 处理 crop_bbbc021_singlecell.py 输出的单细胞图像目录。</li>
+<li><code class="inline-code">data_prep/export_latents_mu.py</code> → <code class="inline-code">data_prep/train_vae_full.py</code>: export_latents_mu.py 中的模型构建逻辑与 train_vae_full.py 中的Enc/Dec结构保持一致。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

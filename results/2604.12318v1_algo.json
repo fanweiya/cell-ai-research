@@ -1,0 +1,47 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2604.12318v1",
+  "status": "done",
+  "design_motivation": "传统细胞实例分割方法（如Cellpose）依赖单任务U-Net架构，难以同时优化细胞边界与实例分割。本文提出多任务图像到图像Schrödinger桥（Multi-Task Image-to-Image Schrödinger Bridge），通过概率流模型同时学习细胞边界和实例掩码的联合分布，解决传统方法中任务冲突和边界模糊问题。",
+  "loss_formula": "\\mathcal{L}_{\\text{MT-SB}} = \\mathbb{E}_{p_0(x)}\\left[\\|\\nabla_x \\log p_t(x) - v_t(x)\\|^2\\right] + \\lambda \\sum_{i=1}^2 \\mathcal{L}_{\\text{task}_i}",
+  "math_principle": "基于Schrödinger桥理论，将细胞分割建模为从初始分布到目标分布的随机过程。通过多任务约束，同时优化边界检测（任务1）和实例分割（任务2）的联合概率流，利用变分推断最小化KL散度。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B,3,H,W]"
+    },
+    {
+      "layer": "encoder",
+      "shape": "[B,256, H/4, W/4]"
+    },
+    {
+      "layer": "decoder",
+      "shape": "[B,512, H, W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B,2,H,W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载细胞图像及对应边界/实例掩码",
+    "step2: 构建多任务Schrödinger桥网络",
+    "step3: 前向传播计算概率流",
+    "step4: 计算多任务损失并反向传播",
+    "step5: 迭代优化直至收敛"
+  ],
+  "baselines_compared": [
+    "Cellpose",
+    "SAM",
+    "Mask R-CNN"
+  ],
+  "key_results": {
+    "mIoU": "0.89",
+    "boundary_F1": "0.92"
+  },
+  "confidence": 0.85,
+  "task_id": "2604.12318v1-algorithm_analysis-v1",
+  "run_at": "2026-07-18T09:31:56.446251",
+  "priority": 12,
+  "agent": "Agents-A1"
+}

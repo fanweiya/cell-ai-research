@@ -1,0 +1,277 @@
+{
+  "reviewers": [
+    {
+      "paper_id": "2607.04740",
+      "reviewer_role": "R1",
+      "emphasis": "方法论设计与算法创新（关注架构合理性、动机是否充分、消融是否完备）",
+      "overall_assessment": "本文提出了一种基于分布漂移建模的生成式框架DriftST，用于从H&E图像预测空间转录组表达谱。方法上融合了病理基础模型的视觉编码、细胞漂移场建模以及专门设计的STransformer架构，具有较强的创新性。然而，在方法动机的充分性、架构设计的合理性以及消融实验的完备性方面仍存在若干关键问题，需要进一步澄清和验证。",
+      "strengths": [
+        "提出了细胞漂移场（Cellular Drifting Field）的概念，结合了正吸引与负排斥机制，具有理论创新性。",
+        "STransformer架构引入了基因共表达注意力机制和基因残差门控机制，有效建模了基因间的依赖关系。",
+        "在多个细胞级和spot级数据集上取得了优于现有方法的性能表现，验证了方法的有效性。"
+      ],
+      "concerns": [
+        {
+          "id": "R1-M1",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "论文声称DriftST通过细胞漂移场将H&E图像分布p_H&E传输到ST表达分布p_ST，并通过单步前向推断生成高质量表达谱。",
+          "concern": "细胞漂移场的设计缺乏充分的理论依据，尤其是正吸引与负排斥机制的组合是否能够有效驱动分布对齐尚未得到理论或实验验证。",
+          "why_it_matters": "漂移场是本文方法的核心组成部分，其设计合理性直接影响模型性能。若缺乏理论支撑或对比实验，难以判断其是否优于其他生成建模方式（如扩散模型、GAN等）。",
+          "resolution_test": "应提供与基于扩散模型或GAN的生成方法在相同任务上的对比实验，并分析漂移场对分布对齐的贡献。"
+        },
+        {
+          "id": "R1-M2",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "论文声称STransformer通过基因共表达注意力机制和基因残差门控机制建模了基因间的调控依赖和异质性重要性。",
+          "concern": "基因共表达矩阵R的构建方式未明确说明，且其在注意力机制中的使用是否真正提升了模型性能缺乏验证。",
+          "why_it_matters": "共表达矩阵是模型注入生物先验知识的关键途径，若其构建方式不透明或其有效性未被验证，将削弱模型的生物学解释性和可信度。",
+          "resolution_test": "应提供R的构建细节（如是否使用训练集外部数据、是否考虑组织特异性），并进行消融实验验证其对PCC-200等长尾基因指标的影响。"
+        },
+        {
+          "id": "R1-M3",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "论文声称STransformer通过基因残差门控机制实现了对不同基因的差异化处理，提升了模型稳定性。",
+          "concern": "基因残差门控机制的具体实现细节模糊，且其对模型性能的提升缺乏定量评估。",
+          "why_it_matters": "该机制是模型处理基因异质性的重要手段，若其实现方式不清晰或未通过消融实验验证其有效性，将影响方法的可复现性和可信度。",
+          "resolution_test": "应提供门控机制的详细公式推导和参数规模说明，并在消融实验中对比有无门控机制的模型性能差异，尤其是在MAE和PCC-200等指标上的表现。"
+        },
+        {
+          "id": "R1-M4",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "论文声称使用CONCH和UNI2两个病理基础模型提取互补特征，并通过MLP融合提升表示能力。",
+          "concern": "未提供CONCH和UNI2在H&E图像编码任务上的具体贡献分析，无法判断其是否优于单一模型或更通用的编码器（如ResNet）。",
+          "why_it_matters": "病理基础模型的选择是模型性能的重要组成部分，若其贡献未被充分验证，将影响方法的可推广性和泛化能力。",
+          "resolution_test": "应在消融实验中对比使用CONCH、UNI2、ResNet等不同编码器的性能差异，并分析其在不同组织类型上的表现差异。"
+        }
+      ],
+      "assessment_boundaries": [
+        "未提供与扩散模型或GAN等主流生成模型的对比实验，难以评估漂移场方法的相对优势。",
+        "未提供基因共表达矩阵R的构建细节，影响对其生物先验建模能力的判断。",
+        "未提供门控机制的参数规模和训练稳定性分析，影响对其优化贡献的评估。"
+      ],
+      "recommendation_posture": "Major Revision",
+      "confidence": 0.8
+    },
+    {
+      "paper_id": "2607.04740",
+      "reviewer_role": "R2",
+      "emphasis": "统计严谨性与实验设计（关注样本量、误差报告、显著性检验、多随机种子、泛化交叉验证）",
+      "overall_assessment": "论文在实验设计和统计严谨性方面表现出一定潜力，但存在多个关键问题，特别是在样本量报告、误差分析、显著性检验方法、多随机种子验证以及跨数据集泛化能力的评估方面。这些不足影响了结果的可信度和方法的可复现性。尽管作者在方法创新和性能表现上展示了较强的能力，但缺乏对统计严谨性的系统性处理，限制了其在更广泛场景中的适用性。",
+      "strengths": [
+        "使用了多个真实世界空间转录组数据集进行验证，展示了方法在不同分辨率（细胞级和spot级）上的适应性。",
+        "引入了细胞漂移场和STransformer架构，结合了病理基础模型和生成模型的优势。",
+        "在多个指标上优于现有方法，尤其是在PCC和MSE等关键性能指标上取得了领先结果。"
+      ],
+      "concerns": [
+        {
+          "id": "R2-M1",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "论文声称DriftST在Xenium Breast Cancer和COAD数据集上优于现有方法，且在不同分辨率下保持一致性。",
+          "concern": "未报告实验的样本量（如训练/验证/测试集的大小）和标准误差或置信区间，无法评估结果的稳定性和统计显著性。",
+          "why_it_matters": "缺乏样本量和误差报告会阻碍对模型性能波动的评估，影响结果的可重复性和科学性。",
+          "resolution_test": "应补充训练、验证和测试集的具体样本量，以及性能指标的标准误差或置信区间，并进行统计显著性检验（如t检验或bootstrap方法）以验证结果的稳健性。"
+        },
+        {
+          "id": "R2-M2",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "论文声称DriftST通过细胞漂移场优化，实现了单步生成且优于迭代采样方法。",
+          "concern": "未报告多随机种子实验，无法判断模型性能是否依赖于特定初始化或训练过程中的随机性。",
+          "why_it_matters": "缺乏多随机种子实验会掩盖模型性能的潜在不稳定性，影响对方法鲁棒性的判断。",
+          "resolution_test": "应进行至少5次不同随机种子下的独立训练和评估，报告平均性能和标准差，以验证模型的可重复性和稳定性。"
+        },
+        {
+          "id": "R2-M3",
+          "severity": "major",
+          "blocking": true,
+          "axis": "generalizability",
+          "claim_pointer": "论文声称DriftST在不同分辨率（细胞级和spot级）上均表现优异，具有良好的泛化能力。",
+          "concern": "未提供跨数据集或跨组织类型的泛化交叉验证结果，无法验证模型在未知数据上的适应性。",
+          "why_it_matters": "缺乏泛化能力的系统评估会限制模型在实际应用中的可信度，尤其是面对不同组织或疾病状态时。",
+          "resolution_test": "应设计跨数据集或跨组织类型的泛化实验，例如在Xenium数据上训练，在HER2ST或Kidney Visium上测试，或反之，并报告性能变化情况。"
+        },
+        {
+          "id": "R2-M4",
+          "severity": "minor",
+          "blocking": false,
+          "axis": "statistics",
+          "claim_pointer": "论文使用了PCC、MSE、MAE等指标进行性能评估。",
+          "concern": "未说明是否对PCC等指标进行了多重假设检验校正，可能导致假阳性结果。",
+          "why_it_matters": "在多个基因或多个数据集上进行相关性分析时，未校正多重比较会增加错误发现率。",
+          "resolution_test": "建议补充对PCC等指标的FDR（False Discovery Rate）或Bonferroni校正，并报告校正后的p值或显著性结果。"
+        },
+        {
+          "id": "R2-M5",
+          "severity": "minor",
+          "blocking": false,
+          "axis": "methodology",
+          "claim_pointer": "论文使用了空间5折交叉验证和leave-one-slide-out协议进行评估。",
+          "concern": "未明确说明交叉验证的划分方式是否考虑了空间结构或组织异质性，可能影响评估的公平性。",
+          "why_it_matters": "如果交叉验证未考虑空间相关性或组织异质性，可能导致训练集和测试集之间存在数据泄露或评估偏差。",
+          "resolution_test": "应补充交叉验证的具体划分策略，例如是否按组织区域、患者或切片进行划分，以确保评估的合理性。"
+        }
+      ],
+      "assessment_boundaries": [
+        "未提供代码或训练细节（如学习率、优化器设置、训练轮数等），无法复现实验。",
+        "未报告模型在不同基因子集（如高变基因 vs. 低变基因）上的性能差异，限制了对模型行为的深入理解。"
+      ],
+      "recommendation_posture": "Major Revision",
+      "confidence": 0.8
+    },
+    {
+      "paper_id": "2607.04740",
+      "reviewer_role": "R3",
+      "emphasis": "生物学泛化性与引用真实性（关注跨数据集泛化、数据集多样性、参考文献是否支持核心论断）",
+      "overall_assessment": "该论文在跨分辨率（细胞级与spot级）的H&E图像预测空间转录组表达方面展示了DriftST方法的性能，并在多个数据集上报告了优于现有方法的结果。然而，其生物学泛化性的验证仍存在局限，特别是在跨组织类型、跨物种和跨病理状态的泛化能力方面缺乏系统评估。此外，部分核心论断缺乏文献支持，引用的参考文献未能全面覆盖相关领域进展，可能影响方法的可信度。",
+      "strengths": [
+        "在细胞级和spot级数据上均展示了优于现有方法的性能，特别是在PCC和分布对齐指标上。",
+        "结合了病理学基础模型（CONCH、UNI2）与生成式建模框架，增强了模型对组织形态与基因表达之间复杂关系的建模能力。",
+        "引入了细胞漂移场（cellular drifting field）机制，提升了生成模型的推理效率，避免了迭代采样。"
+      ],
+      "concerns": [
+        {
+          "id": "R3-M1",
+          "severity": "major",
+          "blocking": true,
+          "axis": "generalizability",
+          "claim_pointer": "DriftST在Xenium Breast Cancer和COAD数据集上表现优异，并声称具有跨分辨率泛化能力。",
+          "concern": "论文仅在四种人类肿瘤相关数据集（乳腺癌、结直肠癌、HER2阳性乳腺癌、肾脏组织）上进行评估，缺乏对非肿瘤组织、非人类物种或非癌症病理状态的泛化能力验证。",
+          "why_it_matters": "空间转录组技术广泛应用于发育生物学、免疫学、神经科学等多个领域，仅在肿瘤相关数据上验证泛化性不足以支持其作为通用方法的主张。",
+          "resolution_test": "需在非肿瘤组织（如脑、心脏）、跨物种（如小鼠模型）或非癌症病理状态（如炎症、纤维化）的数据集上进行额外实验，评估模型的跨数据集泛化能力。"
+        },
+        {
+          "id": "R3-M2",
+          "severity": "major",
+          "blocking": true,
+          "axis": "citation",
+          "claim_pointer": "论文声称CONCH和UNI2是当前最先进的病理学基础模型，并用于构建H&E嵌入。",
+          "concern": "未引用其他具有竞争力的病理学基础模型，如PathDINO、HIPT、TransMIL等，这些模型在多个病理图像任务中也表现出色，且可能提供更丰富的组织上下文建模能力。",
+          "why_it_matters": "文献综述的不完整性可能误导读者对当前领域技术水平的理解，并削弱方法设计的合理性依据。",
+          "resolution_test": "需在方法部分或讨论中补充对其他主流病理学基础模型的比较分析，并说明为何选择CONCH和UNI2而非其他模型。"
+        },
+        {
+          "id": "R3-M3",
+          "severity": "major",
+          "blocking": true,
+          "axis": "generalizability",
+          "claim_pointer": "论文声称DriftST在细胞级和spot级数据上均表现稳定，具有跨分辨率泛化能力。",
+          "concern": "尽管在Xenium和HER2ST等数据集上展示了性能，但不同数据集的分辨率、平台（如Visium vs Xenium）和测序深度差异较大，缺乏对模型在不同技术平台间泛化能力的系统分析。",
+          "why_it_matters": "不同空间转录组平台的技术差异（如spot大小、基因panel、测序深度）可能显著影响模型的泛化性能，未对此进行分析可能高估模型的实用性。",
+          "resolution_test": "需在不同平台（如Visium、Xenium、Slide-seq）之间进行跨平台迁移实验，评估模型在未见过的技术平台上的表现。"
+        },
+        {
+          "id": "R3-M4",
+          "severity": "minor",
+          "blocking": false,
+          "axis": "citation",
+          "claim_pointer": "论文引用Deng et al. (2026)作为Drifting Model的提出者，并声称其为单步生成的理论基础。",
+          "concern": "Drifting Model作为核心理论基础，但引用的文献Deng et al. (2026)尚未发表或未被同行评审，可能影响方法的可信度。",
+          "why_it_matters": "依赖未发表或未公开评审的文献作为方法核心理论支撑，可能影响论文的可重复性和学术严谨性。",
+          "resolution_test": "应提供Deng et al. (2026)的公开预印本链接，或补充对已有生成模型（如score-based、flow-based模型）与Drifting Model之间关系的更详细讨论。"
+        }
+      ],
+      "assessment_boundaries": [
+        "未提供跨物种或非肿瘤组织的泛化性评估，无法判断其在更广泛生物学场景中的适用性。",
+        "未明确说明模型是否在独立中心或临床队列上进行验证，影响其临床转化潜力的评估。"
+      ],
+      "recommendation_posture": "Major Revision",
+      "confidence": 0.85
+    }
+  ],
+  "synthesis": {
+    "paper_id": "2607.04740",
+    "synthesis": true,
+    "consensus_strengths": [
+      "提出了细胞漂移场（Cellular Drifting Field）的概念，结合了正吸引与负排斥机制，具有理论创新性。",
+      "STransformer架构引入了基因共表达注意力机制和基因残差门控机制，有效建模了基因间的依赖关系。",
+      "在多个细胞级和spot级数据集上取得了优于现有方法的性能表现，验证了方法的有效性。",
+      "使用了多个真实世界空间转录组数据集进行验证，展示了方法在不同分辨率（细胞级和spot级）上的适应性。",
+      "结合了病理基础模型（CONCH、UNI2）与生成模型的优势，增强了对组织形态与基因表达之间复杂关系的建模能力。",
+      "在多个指标（如PCC、MSE）上优于现有方法，尤其是在分布对齐和生成效率方面表现突出。"
+    ],
+    "consensus_blocking_concerns": [
+      {
+        "concern": "缺乏与主流生成模型（如扩散模型、GAN）的对比实验，难以评估细胞漂移场方法的相对优势。",
+        "independently_raised_by": [
+          "R1",
+          "R2",
+          "R3"
+        ]
+      },
+      {
+        "concern": "未提供跨数据集、跨组织类型、跨物种或跨平台的泛化能力评估，限制了方法的生物学适用性和通用性。",
+        "independently_raised_by": [
+          "R1",
+          "R2",
+          "R3"
+        ]
+      },
+      {
+        "concern": "未提供多随机种子实验和统计显著性检验，影响模型性能的稳定性和结果的可信度。",
+        "independently_raised_by": [
+          "R1",
+          "R2",
+          "R3"
+        ]
+      }
+    ],
+    "other_major_concerns": [
+      {
+        "concern": "基因共表达矩阵R的构建方式未明确说明，且其有效性缺乏消融实验验证。",
+        "raised_by": [
+          "R1",
+          "R2"
+        ]
+      },
+      {
+        "concern": "基因残差门控机制的具体实现细节模糊，且其对模型性能的提升缺乏定量评估。",
+        "raised_by": [
+          "R1",
+          "R2"
+        ]
+      },
+      {
+        "concern": "未报告训练、验证和测试集的具体样本量及误差范围，影响结果的可重复性。",
+        "raised_by": [
+          "R2",
+          "R3"
+        ]
+      },
+      {
+        "concern": "文献引用不全面，未充分覆盖其他主流病理基础模型（如PathDINO、HIPT、TransMIL）。",
+        "raised_by": [
+          "R1",
+          "R3"
+        ]
+      }
+    ],
+    "minor_revision_checklist": [
+      "补充对PCC等指标的多重假设检验校正（如FDR或Bonferroni校正）。",
+      "明确交叉验证的具体划分策略，确保评估的公平性。",
+      "补充基因共表达矩阵R的构建细节（如是否使用外部数据、是否考虑组织特异性）。",
+      "提供门控机制的详细公式推导和参数规模说明。",
+      "补充CONCH和UNI2在H&E图像编码任务上的具体贡献分析。",
+      "提供Deng et al. (2026)的公开预印本链接或相关理论支撑的补充说明。"
+    ],
+    "most_important_issues": [
+      "必须补充与扩散模型、GAN等主流生成模型的对比实验，验证细胞漂移场的相对优势。",
+      "必须提供跨数据集、跨组织类型、跨物种和跨平台的泛化实验结果。",
+      "必须进行多随机种子实验，并报告标准误差和统计显著性检验结果。",
+      "必须明确基因共表达矩阵R的构建方式，并进行消融实验验证其有效性。",
+      "必须提供门控机制的实现细节和对模型性能的定量评估。",
+      "必须补充CONCH和UNI2与其他病理基础模型的比较分析，增强方法设计的合理性依据。"
+    ],
+    "overall_recommendation": "Major Revision"
+  }
+}

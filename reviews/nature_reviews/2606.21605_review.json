@@ -1,0 +1,58 @@
+{
+  "paper_id": "2606.21605",
+  "task": "single_review",
+  "overall_assessment": "该论文系统地研究了监督学习、半监督学习（SSL）和领域自适应（DA）在大规模电子显微镜（EM）数据中的实例分割任务，包括细胞核、线粒体和神经突的分割。方法上结合了视觉基础模型（VFMs）初始化的UNETR架构和学生-教师SSL框架，展示了显著的性能提升。论文在方法论上具有创新性，实验设计全面，但部分统计分析和引用真实性存在疑问，泛化性方面也受到数据集限制。",
+  "strengths": [
+    "系统性地评估了多种学习范式（监督、半监督、领域自适应）在多个EM数据集上的表现，提供了有价值的实验结论。",
+    "结合了最新的视觉基础模型（如SAM、DINOv2/v3）与UNETR架构，并在细胞分割任务中验证了其有效性，具有一定的方法创新性。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "论文声称UniMatch v2在多个任务中表现最佳",
+      "concern": "论文未提供足够的消融实验或统计检验来支持UniMatch v2优于Mean Teacher或FixMatch的结论。",
+      "why_it_matters": "缺乏对不同SSL方法之间性能差异的统计显著性分析，可能影响结论的可信度。",
+      "resolution_test": "应提供成对t检验或置信区间分析，以验证UniMatch v2的性能提升是否具有统计显著性。"
+    },
+    {
+      "id": "S-M2",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "statistics",
+      "claim_pointer": "论文报告了mSA和CREMI Score的提升",
+      "concern": "未报告标准差或置信区间，无法评估实验结果的稳定性。",
+      "why_it_matters": "缺乏误差估计使得难以判断实验结果是否可靠，尤其是在不同数据集上的表现波动。",
+      "resolution_test": "应补充标准差或置信区间，并在图表中显示误差条。"
+    },
+    {
+      "id": "S-M3",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "论文声称方法适用于大规模EM数据",
+      "concern": "实验仅在有限数量的EM数据集上进行，且未测试在非EM或非细胞图像上的泛化能力。",
+      "why_it_matters": "结论的泛化能力受限，无法判断该方法是否适用于其他模态或非生物医学图像。",
+      "resolution_test": "应补充在非EM图像（如自然图像或组织切片）上的实验，以验证方法的通用性。"
+    },
+    {
+      "id": "S-M4",
+      "severity": "major",
+      "blocking": true,
+      "axis": "citation",
+      "claim_pointer": "引用了μSAM、MitoNet等模型作为零样本迁移的基线",
+      "concern": "未引用μSAM和MitoNet的原始论文，仅引用了未发表的预印本或内部报告。",
+      "why_it_matters": "引用不完整可能导致学术不规范，影响读者对相关工作的理解。",
+      "resolution_test": "应补充μSAM和MitoNet的正式出版文献引用，或提供预印本链接。"
+    }
+  ],
+  "assessment_boundaries": [
+    "未提供代码或模型权重，无法复现结果。",
+    "未明确说明数据集是否公开可用，影响方法的可重复性。",
+    "未讨论模型在实际部署中的计算效率和推理速度。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

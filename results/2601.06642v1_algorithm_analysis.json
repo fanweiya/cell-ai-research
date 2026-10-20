@@ -1,0 +1,64 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2601.06642v1",
+  "status": "done",
+  "design_motivation": "针对半监督实例分割中重叠类器官伪标签错误（多实例被误判为单实例）的问题，提出伪标签解混（PLU）策略。替代方案（传统SSL）依赖阈值过滤伪标签，无法解决重叠导致的实例合并错误；本方法通过掩码分解将错误伪标签重构为多个实例掩码。同时，采用基于轮廓的合成方法替代基于掩码的合成，以保留类器官的相交关系和空间结构，解决合成数据分布偏移问题。",
+  "loss_formula": "L_{total} = \\sum_{i=1}^{6} L_i = L_{cls} + L_{box} + L_{mask} + L_{syn} + L_{pseudo} + L_{aux}",
+  "math_principle": "基于Teacher-Student半监督学习框架。核心数学原理包括：1) 伪标签解混：利用特征图预测多个掩码，将单个错误伪标签分解为多个真实实例掩码，解决重叠导致的实例缺失；2) 轮廓引导合成：通过生成器将伪标签轮廓转换为真实图像，确保合成图像与伪标签严格对齐，消除合成数据与伪标签的不一致性；3) 数据增强平衡：通过控制缩放增强（Scale Augmentation）在增加数据多样性和保持分布一致性之间取得平衡，最小化FID（Fréchet Inception Distance）。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 3, H, W]"
+    },
+    {
+      "layer": "backbone_ResNet50",
+      "shape": "[B, 256, H/4, W/4]"
+    },
+    {
+      "layer": "FPN",
+      "shape": "[B, 256, H/4, W/4]"
+    },
+    {
+      "layer": "RPN",
+      "shape": "[B, 256, H/4, W/4]"
+    },
+    {
+      "layer": "RoIAlign",
+      "shape": "[N, 256, 7, 7]"
+    },
+    {
+      "layer": "Mask_Head",
+      "shape": "[N, 1, 28, 28]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, K, 4] + [B, K, 28, 28]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 数据加载与伪标签生成（Teacher模型推理）",
+    "step2: 伪标签解混（PLU模块处理重叠错误）",
+    "step3: 基于轮廓的图像合成（生成合成数据）",
+    "step4: 混合训练（真实图像+合成图像，Teacher-Student范式）",
+    "step5: 多任务损失优化（分类、边界框、掩码、合成一致性）",
+    "step6: 模型更新与迭代"
+  ],
+  "baselines_compared": [
+    "Self-Training (ST)",
+    "Noisy Boundary (NB)",
+    "Polite Teacher (PT)",
+    "Guided Distillation (GD)",
+    "Fully Supervised Mask R-CNN"
+  ],
+  "key_results": {
+    "mAP_OrgaSegment_10%": "接近全监督性能",
+    "AJI_M-OrgaQuant": "显著优于SSL基线",
+    "FID_Scale_Aug": "最低分布偏移",
+    "PLU_improvement": "在M-OrgaQuant挑战性场景下显著提升"
+  },
+  "confidence": 0.85,
+  "task_id": "2601.06642v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:44:44.593864",
+  "priority": 11,
+  "agent": "Agents-A1"
+}

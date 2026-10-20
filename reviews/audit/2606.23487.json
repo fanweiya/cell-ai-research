@@ -1,0 +1,33 @@
+{
+ "id": "2606.23487",
+ "chars": 19219,
+ "statistics": {
+  "checks": {
+   "has_p_value": true,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": true,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 7
+ },
+ "key_claims": [
+  "cadre collapses neither an early modality nor a class: it achieves the best abnormal-class recall on the hardest modality, chest radiography ( 0.",
+  "844 ) and chest-radiograph accuracy improving after a later modality ( 0."
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+   "doi": null
+  }
+ ],
+ "citation_results": []
+}

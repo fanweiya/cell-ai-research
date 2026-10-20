@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "不同分辨率（4×4到64×64）下PathMNIST和BloodMNIST生成图像质量的渐进式对比结果图"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心方法架构图：展示基于StyleGAN的映射网络与NCA（神经细胞自动机）模块的迭代对抗医学图像合成流程，包括NCA细胞更新细节与多尺度图像生成过程"
+  },
+  "2": {
+    "relevant": true,
+    "score": 7,
+    "caption": "生成图像样本对比图，展示不同方法在组织病理和血细胞图像上的合成结果"
+  }
+}

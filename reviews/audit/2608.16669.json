@@ -1,0 +1,37 @@
+{
+ "id": "2608.16669",
+ "chars": 57966,
+ "statistics": {
+  "checks": {
+   "has_p_value": true,
+   "has_ci": false,
+   "has_std": true,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": false,
+   "has_fdr": false,
+   "mentions_ablation": false,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "score": 8
+ },
+ "key_claims": [
+  "recent studies have demonstrated increasingly accurate prediction of spatial ge from routine histology, while foundation models have substantially improved representation learning and generalization a",
+  "alternative clustering approaches, resampling-based stability analyses, and recently proposed concept-quality metrics may improve the reproducibility and interpretability of discovered concepts in fut",
+  "second, improvements in relevance propagation may further enhance the fidelity of local explanations; in particular, the structure of the top layers of our architecture is compatible with reference-va"
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "DINOv2: Learning Robust Visual Features without Supervision",
+   "doi": null
+  },
+  {
+   "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+   "doi": null
+  }
+ ],
+ "citation_results": []
+}

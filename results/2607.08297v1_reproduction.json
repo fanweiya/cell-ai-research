@@ -1,0 +1,29 @@
+{
+  "task": "reproduction",
+  "paper_id": "2607.08297v1",
+  "status": "done",
+  "level": "C",
+  "level_description": "A=一键运行, B=需要数据, C=需要修改, D=不可复现",
+  "gpu_requirements": {
+    "min_vram_gb": 24,
+    "gpu_count": 1,
+    "gpu_type": "A100/RTX4090"
+  },
+  "training_time_hours": null,
+  "data_public": true,
+  "data_source": "公开数据集名称或'未公开'",
+  "dependencies": [
+    "pytorch",
+    "cuda11.8"
+  ],
+  "pretrained_weights_available": true,
+  "reproduction_steps": [
+    "1. 下载数据",
+    "2. 运行train.py"
+  ],
+  "confidence": 0.85,
+  "task_id": "2607.08297v1-reproduction-v1",
+  "run_at": "2026-07-21T09:48:44.541981",
+  "priority": 14,
+  "agent": "Agents-A1"
+}

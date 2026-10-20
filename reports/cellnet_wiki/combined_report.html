@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>cellnet Wiki — combined_report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / cellnet Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>cellnet</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/bin.html">bin</a></li>
+<li><a href="modules/cellnet.html">cellnet</a></li>
+<li><a href="modules/baselines.html">baselines</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>cellnet — 综合分析报告</h1>
+<br>
+<ul>
+<li><strong>GitHub</strong>: beijn/cellnet</li>
+<li><strong>评分</strong>: ?/10</li>
+<li><strong>分析时间</strong>: 2026-07-15T18:33:23.059779</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2>CodeGraph 知识图谱分析</h2>
+<br>
+<br>
+<h2>RepoWiki 文档生成</h2>
+<br>
+<ul>
+<li>✅ 扫描成功</li>
+<li>📁 Wiki 目录: <code class="inline-code">/mnt/c/workspace/cell-ai-research/reports/cellnet_wiki</code></li>
+<li>📄 生成文件:</li>
+<li>architecture.md</li>
+<li>dependencies.md</li>
+<li>index.md</li>
+<li>reading-guide.md</li>
+<li>_sidebar.md</li>
+<li>modules/.codegraph.md</li>
+<li>modules/baselines.md</li>
+<li>modules/bin.md</li>
+<li>modules/cellnet.md</li>
+<li>modules/root.md</li>
+<li>输出: Project: cellnet</li>
+</ul>
+<p>Files:   34</p>
+<p>Lines:   2,409</p>
+<p>Languages</p>
+<p>┏━━━━━━━━━━┳━━━━━━━┓</p>
+<p>┃ Language ┃ Files ┃</p>
+<p>┡━━━━━━━━━━╇━━━━━━━┩</p>
+<p>│ python   │    16 │</p>
+<p>│ unknown  │    13 │</p>
+<p>│ yaml     │     2 │</p>
+<p>│ markdown │     1 │</p>
+<p>│ toml     │     1 │</p>
+<p>│ shell    │     1 │</p>
+<p>└──────────┴───────┘</p>
+<p>cellnet/</p>
+<p>├── ⚙️ README.md (markdown)</p>
+<p>├── ⚙️ pyproject.toml (toml)</p>
+<p>├── 📁 bin/</p>
+<p>│   ├── 📄 clean (unknown)</p>
+<p>│   ├── 📄 code-tunnel (unknown)</p>
+<p>│   ├── 📄 data-sync (unknown)</p>
+<p>│   ├── 📄 imports.sh (shell)</p>
+<p>│   ├── 📄 install (unknown)</p>
+<p>│   ├── 📄 job-ipynb (unknown)</p>
+<p>│   ├── 📄 normalize_paths (unknown)</p>
+<p>│   ├── 📄 release (unknown)</p>
+<p>│   ├── 📄 submit-job (unknown)</p>
+<p>│   └── 📄 test-release (unknown)</p>
+<p>├── 📁 .codegraph/</p>
+<p>│   └── 📄 .gitignore (unknown)</p>
+<p>├── 📄 .gitignore (unknown)</p>
+<p>├── 📁 baselines/</p>
+<p>│   └── 📄 cpsam.py (python)</p>
+<p>├── 📄 cellnet-vs-countess-all.csv (unknown)</p>
+<p>├── 📄 cellnet.yml (yaml)</p>
+<p>├── 📁 cellnet/</p>
+<p>│   ├── 📄 __init__.py (python)</p>
+<p>│   ├── 📄 data.py (python)</p>
+<p>│   ├── 📄 debug.py (python)</p>
+<p>│   ├── 📄 evaluate.py (python)</p>
+<p>│   ├── 📄 internet.py (</p>
+<br>
+<h2>原有子代理分析报告</h2>
+<br>
+<pre class="code-block"><code class="language-">Now I have sufficient information to write a comprehensive analysis report. Let me structure my response:
+
+## 项目概述
+
+**CellNet** 是一个用于在相差显微镜图像中自动化细胞定位和计数的机器学习项目。该仓库是 Wellcome Sanger Institute、哥廷根大学计算细胞分析实验室和塔图大学生物医学计算机视觉实验室的合作成果。
+
+论文来源：arXiv 2606.12286，题为 "**CellNet: Localizing Cells using Sparse and Noisy Point Annotations**" (2026)。
+
+核心创新点：
+- 将细胞定位与计数转化为**回归任务**，通过预测高斯热图而非传统分割掩码
+- 能够从**稀疏且带噪声的点标注**中学习，大幅降低标注成本
+- 在小数据条件下表现良好，适合生物医学研究资源受限场景
+
+主要解决的问题：
+- 传统细胞分割需要像素级标注，耗时费力
+- 相差显微图像质量较低，细胞边界模糊
+- 现有方法（如 Cellpose）在低质量图像上表现不稳定
+
+---
+
+## 架构分析
+
+### 目录结构
+</code></pre>
+<p>cellnet/</p>
+<p>├── cellnet/                  # 核心包</p>
+<p>│   ├── __init__.py           # 导出 init_model, count，定义 API 版本</p>
+<p>│   ├── data.py               # 数据加载、预处理、数据集类</p>
+<p>│   ├── evaluate.py           # 评估指标 (sMAPE, MAE, precision/recall/F1)</p>
+<p>│   ├── plot.py               # 可视化模块</p>
+<p>│   └── release.py            # 模型推理和发布逻辑</p>
+<p>├── baselines/                # 基线方法</p>
+<p>│   └── cpsam.py              # Cellpose-SAM 基线</p>
+<p>├── bin/                      # 工具脚本</p>
+<p>│   ├── install               # 安装脚本</p>
+<p>│   ├── submit-job            # 集群作业提交</p>
+<p>│   ├── job-ipynb             # 笔记本作业执行</p>
+<p>│   └── normalize_paths       # 路径标准化</p>
+<p>├── data/                     # 数据目录（需自行准备）</p>
+<p>├── train.py                  # 主训练脚本（Jupyter笔记本格式）</p>
+<p>├── train_livecell.py         # LiveCell 数据集训练脚本</p>
+<p>├── preprocess_annotations.py # Label Studio 标注转换工具</p>
+<p>├── eval.py                   # 模型评估脚本</p>
+<p>├── pyproject.toml            # 项目依赖配置</p>
+<p>├── cellnet.yml               # Conda 环境配置</p>
+<p>└── README.md                 # 完整文档</p>
+<pre class="code-block"><code class="language-">
+### 依赖关系
+
+**核心依赖**：
+- `torch~=2.6.0` (PyTorch)
+- `segmentation-models-pytorch&gt;=0.5.0` (UNet等模型)
+- `albumentations==1.4.22` (图像增强)
+- `numpy&lt;2.0`, `scipy`, `matplotlib`, `pandas`, `scikit-image`
+
+**可选依赖**：
+- CPU 版本：`torch` from `pytorch-cpu` index
+- CUDA 12.4：`torch` from `pytorch-cu124` index
+
+### 主要模块
+
+1. **数据管道** (`data.py`)
+   - `CellnetDataset`: PyTorch Dataset，处理图像和关键点标注
+   - `Keypoints2Heatmap`: 关键点→高斯热图生成
+   - `mask_sparse`: 生成前景掩码（用于负样本）
+   - `load_image`, `load_points`: 数据加载器
+
+2. **模型定义** (`train.py`)
+   - 使用 `segmentation_models_pytorch` 构建解码器
+   - 支持多种架构：Unet, UnetPlusPlus, FPN, PSPNet 等
+   - 支持多种编码器：ResNet, EfficientNet, MoNet 等
+
+3. **训练流程** (`train.py`)
+   - 多实验配置系统 (`EXPERIMENTS` 字典)
+   - 交叉验证支持
+   - 学习率调度和早停机制
+
+4. **推理接口** (`release.py`)
+   - `init_model()`: 自动下载和缓存模型
+   - `count()`: 批量细胞计数
+   - `wrap_padded`: 形状对齐推理（避免边界伪影）
+
+---
+
+## 核心算法
+
+### 方法原理
+
+CellNet 的核心思想是将细胞计数问题建模为**密度图回归**任务：
+
+1. **标注转换**：
+   - 将稀疏的点标注（中心点）转换为高斯热图
+   - 公式：`H(x,y) = exp(-||x-y||² / (2σ²))`
+   - σ 是关键超参数，默认 `σ=5×1.5=7.5`（与图像尺度相关）
+
+2. **模型训练**：
+   - 输入：单通道相差显微图像 (1×H×W)
+   - 输出：预测热图 (1×H×W)
+   - 损失函数：**MSE + BCE** 组合
+     - MSE: 回归热图数值
+     - BCE: 确保前景区域激活
+   - 优化器：Adam (lr=5e-3)，StepLR 调度
+
+3. **热图→计数**：
+   - 计数 = `热图总和 × ymax`
+   - `ymax` 在训练时计算，用于归一化热图和真实热图至相同尺度
+
+4. **数据增强**：
+   - 随机裁剪 (256×256)
+   - 随机亮度/对比度调整 (±0.25)
+   - D4 对称变换 (旋转/镜像)
+   - 标准归一化 (ImageNet 统计或图像自适应)
+
+5. **推理优化**：
+   - `wrap_padded`: 将输入扩展到 32 的倍数，预测后裁剪
+   - 避免边界伪影，同时满足 UNet 下采样要求
+
+### 关键实现细节
+</code></pre>
+<h1>关键点 → 热图 (data.</h1>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

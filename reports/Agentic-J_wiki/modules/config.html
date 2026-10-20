@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic-J Wiki — config</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / Agentic-J Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>imagentj</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/skills.html">skills</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/user_guide.html">user_guide</a></li>
+<li><a href="../modules/docs.html">docs</a></li>
+<li><a href="../modules/config.html">config</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/qdrant_data.html">qdrant_data</a></li>
+<li><a href="../modules/patch_stardist.html">patch_stardist</a></li>
+<li><a href="../modules/data.html">data</a></li>
+<li><a href="../modules/imagentj.html">imagentj</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>config</h1>
+<br>
+<p>&gt; 集中管理AI代理运行所需的外部依赖配置、环境变量和检索参数。</p>
+<br>
+<p>该模块负责定义和初始化系统运行所需的所有配置项，包括ImageJ/Fiji路径、LangSmith追踪密钥、Qdrant向量数据库设置、嵌入模型参数、混合检索策略以及文档 ingestion 规则。它确保代理在不同环境（Docker容器或本地）下能正确获取外部资源并执行RAG（检索增强生成）流程。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">src/config/imagej_config.py</code></h3>
+<br>
+<p>配置ImageJ/Fiji的路径，支持Docker和本地环境。</p>
+<br>
+<ul>
+<li><code class="inline-code">FIJI_JAVA_HOME</code> (variable) - 从环境变量FIJI_PATH读取Fiji安装路径，默认值为/opt/Fiji.app（Docker环境）。</li>
+</ul>
+<br>
+<h3><code class="inline-code">src/config/keys_template.py</code></h3>
+<br>
+<p>设置LangSmith追踪和OpenAI API密钥的环境变量。</p>
+<br>
+<ul>
+<li><code class="inline-code">gpt_key</code> (variable) - 获取OPENAI_API_KEY环境变量，若未设置则使用占位符字符串。</li>
+</ul>
+<br>
+<h3><code class="inline-code">src/config/rag_config.py</code></h3>
+<br>
+<p>定义RAG系统的核心参数，包括向量库路径、检索阈值、模型设置和文档处理策略。</p>
+<br>
+<ul>
+<li><code class="inline-code">BASE_DIR</code> (variable) - 通过Path解析确定项目根目录，确保路径在容器和主机间兼容。</li>
+<li><code class="inline-code">QDRANT_DATA_PATH</code> (variable) - 指定Qdrant向量数据库的存储路径，优先使用/app/qdrant_data。</li>
+<li><code class="inline-code">DOCS_COLLECTION_NAME</code> (variable) - 定义存储生物图像分析文档的Qdrant集合名称。</li>
+<li><code class="inline-code">MISTAKES_COLLECTION_NAME</code> (variable) - 定义存储代码错误及解决方案的Qdrant集合名称。</li>
+<li><code class="inline-code">RECIPES_COLLECTION_NAME</code> (variable) - 定义存储代码配方的Qdrant集合名称。</li>
+<li><code class="inline-code">MIN_RECIPIE_SCORE</code> (variable) - 混合检索（RRF）的最低分数阈值，低于此值视为无匹配结果。</li>
+<li><code class="inline-code">DEDUP_SIMILARITY_THRESHOLD</code> (variable) - 用于去重的余弦相似度阈值，超过此值视为重复文档。</li>
+<li><code class="inline-code">EMBEDDING_MODEL</code> (variable) - 指定使用的稠密向量嵌入模型名称。</li>
+<li><code class="inline-code">SPARSE_MODEL</code> (variable) - 指定用于稀疏向量检索的模型名称。</li>
+<li><code class="inline-code">CONTENT_CHUNKING_STRATEGY</code> (variable) - 定义不同文件类型（代码、文档、笔记本）的切片大小、重叠量和策略。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>混合检索 (Hybrid Search)</strong>: 结合稠密向量（Dense）和稀疏向量（Sparse）检索，通过RRF（Reciprocal Rank Fusion）算法融合结果，提高召回率和准确性。</li>
+<li><strong>容器化路径兼容</strong>: 通过BASE_DIR和特定路径（如/app/qdrant_data）处理Docker容器与宿主机之间的路径差异，确保配置在两种环境下均有效。</li>
+<li><strong>RAG去重机制</strong>: 在文档入库前通过余弦相似度计算（DEDUP_SIMILARITY_THRESHOLD）识别并合并高度相似的文档，避免向量数据库冗余。</li>
+<li><strong>内容感知切片</strong>: 根据文件类型（代码、文档、Notebook）采用不同的切片策略和参数，以优化语义保留和检索效果。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">src/config/rag_config.py</code> → <code class="inline-code">src/config/imagej_config.py</code>: rag_config.py 不直接导入 imagej_config.py，但两者共同服务于主代理逻辑，分别处理向量检索和ImageJ执行环境。</li>
+<li><code class="inline-code">src/config/keys_template.py</code> → <code class="inline-code">src/config/rag_config.py</code>: keys_template.py 设置LangSmith追踪环境变量，rag_config.py 可能间接依赖这些环境变量进行日志记录。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

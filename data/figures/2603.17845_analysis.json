@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心图示：(a) μSAM方法架构流程图，展示图像编码器、分割解码器与掩码解码器流程；(b) 四种显微分割任务的定量对比柱状图；(c) LIVECell数据集上与CellPose3、SAM3、CellPoseSAM等方法的定性分割结果可视化对比。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "该图展示了多种细胞分割模型在不同数据集上的性能对比柱状图，属于论文的核心实验结果展示。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "多数据集（OmniPose、HPA、Parthale Regen、PUMA）上不同细胞实例分割方法（AMG(SAM)、AIS、CellPoseSAM、CellSAM、APG）的定性分割结果对比图"
+  }
+}

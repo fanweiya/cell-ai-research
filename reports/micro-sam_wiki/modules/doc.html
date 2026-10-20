@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>micro-sam Wiki — doc</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / micro-sam Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>micro-sam</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/doc.html">doc</a></li>
+<li><a href="../modules/test.html">test</a></li>
+<li><a href="../modules/finetuning.html">finetuning</a></li>
+<li><a href="../modules/workshops.html">workshops</a></li>
+<li><a href="../modules/examples.html">examples</a></li>
+<li><a href="../modules/development.html">development</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/deployment.html">deployment</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/micro_sam.html">micro_sam</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>doc</h1>
+<br>
+<p>&gt; 提供 micro-sam 项目的用户文档、API 参考、安装指南和模型说明。</p>
+<br>
+<p>该模块包含一系列 Markdown 文件，用于文档化 micro-sam 工具的各项功能。内容涵盖交互式标注工具（2D/3D/跟踪）、自动分割模式（AMG/AIS/APG）、命令行接口 (CLI)、Python 库使用、微调模型介绍、数据集详情、安装步骤、常见问题解答 (FAQ) 以及贡献指南。这些文档旨在帮助用户快速上手、理解核心概念并有效利用软件进行显微图像分割。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">doc/annotation_tools.md</code></h3>
+<br>
+<p>介绍交互式标注工具的使用，包括 2D、3D 和跟踪功能，以及如何在 napari 插件、命令行和 Python 脚本中启动它们。</p>
+<br>
+<h3><code class="inline-code">doc/apg.md</code></h3>
+<br>
+<p>解释自动提示生成 (APG) 分割模式，对比 AMG 和 AIS，并说明如何配置和运行。</p>
+<br>
+<h3><code class="inline-code">doc/band.md</code></h3>
+<br>
+<p>指导用户如何在 BAND 云平台上启动和使用 micro-sam。</p>
+<br>
+<h3><code class="inline-code">doc/bioimageio/em_organelles_v2.md</code></h3>
+<br>
+<p>描述针对电子显微镜线粒体和细胞核分割的 v2 微调模型。</p>
+<br>
+<h3><code class="inline-code">doc/bioimageio/em_organelles_v4.md</code></h3>
+<br>
+<p>描述针对电子显微镜线粒体和细胞核分割的 v4 微调模型（架构更新版）。</p>
+<br>
+<h3><code class="inline-code">doc/bioimageio/histopathology_v1.md</code></h3>
+<br>
+<p>描述针对组织病理学数据核分割的 v1 微调模型。</p>
+<br>
+<h3><code class="inline-code">doc/bioimageio/inference_parameters.md</code></h3>
+<br>
+<p>列出不同显微图像数据集（如 LIVECell, DeepBacs 等）上微调模型的推荐推理参数。</p>
+<br>
+<h3><code class="inline-code">doc/bioimageio/lm_v2.md</code></h3>
+<br>
+<p>描述针对光显微镜细胞和细胞核分割的 v2 微调模型。</p>
+<br>
+<h3><code class="inline-code">doc/bioimageio/lm_v3.md</code></h3>
+<br>
+<p>描述针对光显微镜细胞和细胞核分割的 v3 微调模型。</p>
+<br>
+<h3><code class="inline-code">doc/bioimageio/lm_v4.md</code></h3>
+<br>
+<p>描述针对光显微镜细胞和细胞核分割的 v4 微调模型（架构更新版）。</p>
+<br>
+<h3><code class="inline-code">doc/cli_tools.md</code></h3>
+<br>
+<p>文档化 micro-sam 的命令行接口 (CLI) 脚本，包括嵌入预计算、标注器启动、模型微调和自动分割等命令。</p>
+<br>
+<h3><code class="inline-code">doc/contributing.md</code></h3>
+<br>
+<p>提供贡献指南，包括环境设置、代码修改、测试和提交 Pull Request 的流程。</p>
+<br>
+<h3><code class="inline-code">doc/data_submission.md</code></h3>
+<br>
+<p>说明社区如何提交数据以改进 micro-sam 模型。</p>
+<br>
+<h3><code class="inline-code">doc/datasets/em_organelles_v2.md</code></h3>
+<br>
+<p>列出用于训练 EM Organelle v2 模型的数据集详情。</p>
+<br>
+<h3><code class="inline-code">doc/datasets/em_organelles_v4.md</code></h3>
+<br>
+<p>列出用于训练 EM Organelle v4 模型的数据集详情。</p>
+<br>
+<h3><code class="inline-code">doc/datasets/lm_v2.md</code></h3>
+<br>
+<p>列出用于训练 LM Generalist v2 模型的数据集详情。</p>
+<br>
+<h3><code class="inline-code">doc/datasets/lm_v3.md</code></h3>
+<br>
+<p>列出用于训练 LM Generalist v3 模型的数据集详情。</p>
+<br>
+<h3><code class="inline-code">doc/datasets/lm_v4.md</code></h3>
+<br>
+<p>列出用于训练 LM Generalist v4 模型的数据集详情。</p>
+<br>
+<h3><code class="inline-code">doc/deprecated/development.md</code></h3>
+<br>
+<p>（已废弃）开发者指南，描述软件模块结构和标注工具设计。</p>
+<br>
+<h3><code class="inline-code">doc/faq.md</code></h3>
+<br>
+<p>解答关于安装、系统要求和基本使用的常见问题。</p>
+<br>
+<h3><code class="inline-code">doc/finetuned_models.md</code></h3>
+<br>
+<p>介绍所有可用的微调模型，包括模型类型、尺寸及选择方法。</p>
+<br>
+<h3><code class="inline-code">doc/installation.md</code></h3>
+<br>
+<p>提供通过 pip、conda、源码和安装程序四种方式安装 micro-sam 的详细步骤。</p>
+<br>
+<h3><code class="inline-code">doc/python_library.md</code></h3>
+<br>
+<p>文档化 Python 库的功能，包括提示分割、实例分割、训练和评估模块。</p>
+<br>
+<h3><code class="inline-code">doc/start_page.md</code></h3>
+<br>
+<p>项目主页文档，包含快速开始指南、核心组件介绍和引用信息。</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>交互式标注 (Interactive Annotation)</strong>: 通过 napari 插件提供的工具，允许用户使用点、框或形状提示来交互式地分割图像中的对象。支持 2D、3D 和时序跟踪。</li>
+<li><strong>自动实例分割 (Automatic Instance Segmentation)</strong>: 无需用户交互即可分割图像中所有实例的方法。micro-sam 支持三种模式：自动掩码生成 (AMG)、自动实例分割 (AIS) 和自动提示生成 (APG)。</li>
+<li><strong>微调模型 (Finetuned Models)</strong>: 在原始 SAM 模型基础上，使用大量显微图像数据（光镜、电镜、病理）进行微调的模型，针对特定生物医学成像任务优化。</li>
+<li><strong>napari 插件 (napari Plugin)</strong>: micro-sam 的标注工具作为 napari 图像查看器的插件运行，利用 napari 的图层和交互功能。</li>
+<li><strong>推理参数 (Inference Parameters)</strong>: 用于控制自动分割后处理过程的参数（如 IoU 阈值、稳定性分数阈值），针对不同数据集有推荐的最佳配置。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">doc/finetuned_models.md</code> → <code class="inline-code">doc/bioimageio/lm_v4.md</code>: finetuned_models.md 引用并链接到具体的模型说明文档（如 lm_v4.md）。</li>
+<li><code class="inline-code">doc/annotation_tools.md</code> → <code class="inline-code">doc/python_library.md</code>: annotation_tools.md 提及 Python 库用于脚本调用标注工具。</li>
+<li><code class="inline-code">doc/cli_tools.md</code> → <code class="inline-code">doc/finetuned_models.md</code>: cli_tools.md 说明 CLI 命令可以使用不同的微调模型。</li>
+<li><code class="inline-code">doc/start_page.md</code> → <code class="inline-code">doc/installation.md</code>: start_page.md 提供快速安装链接，指向详细的 installation.md。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

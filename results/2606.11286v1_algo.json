@@ -1,0 +1,53 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2606.11286v1",
+  "status": "done",
+  "design_motivation": "FreeBridge 旨在解决细胞状态转换动力学建模中的分布漂移问题。传统方法（如普通扩散模型或变分自编码器）难以精确捕捉细胞在连续时间下的非平衡态转移过程。本设计采用变分Schrödinger桥（Variational Schrödinger Bridge）框架，通过最小化两个概率分布之间的KL散度，将细胞状态从初始分布演化到目标分布，相比传统扩散模型能更准确地建模细胞命运决定的随机路径，且无需假设具体的动力学方程。",
+  "loss_formula": "\\mathcal{L}_{\\text{VSB}} = \\mathbb{E}_{p_0, p_1} \\left[ \\int_0^T \\left\\| \\mathbf{v}_\\theta(\\mathbf{x}_t, t) - \\mathbf{v}^*_{t}(\\mathbf{x}_t) \\right\\|^2 dt \\right] + \\lambda \\cdot \\text{KL}(q_\\phi(\\mathbf{x}_T | \\mathbf{x}_0) \\| p_1(\\mathbf{x}_T))",
+  "math_principle": "基于Schrödinger桥理论，将细胞状态转移建模为两个边缘分布之间的最优传输问题。通过变分推断近似后验路径分布，利用随机微分方程（SDE）描述状态演化，目标是最小化路径分布与真实转移路径之间的KL散度。核心数学原理包括Fokker-Planck方程的逆问题求解以及Girsanov定理下的测度变换。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 3, H, W]"
+    },
+    {
+      "layer": "spatial_encoder",
+      "shape": "[B, 128, H/4, W/4]"
+    },
+    {
+      "layer": "temporal_transformer",
+      "shape": "[B, T, 256]"
+    },
+    {
+      "layer": "velocity_net",
+      "shape": "[B, T, 3]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, 3, H, W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载单细胞时间序列图像数据并构建初始/目标分布",
+    "step2: 前向SDE过程生成噪声路径",
+    "step3: 训练速度网络预测漂移项",
+    "step4: 反向SDE采样重构细胞状态轨迹",
+    "step5: 联合优化变分下界与KL正则项"
+  ],
+  "baselines_compared": [
+    "Cellpose",
+    "SAM",
+    "CellTraj",
+    "DiffusionModel"
+  ],
+  "key_results": {
+    "F1_score": "0.89",
+    "trajectory_accuracy": "0.92",
+    "computational_efficiency": "3.2x faster than Cellpose"
+  },
+  "confidence": 0.85,
+  "task_id": "2606.11286v1-algorithm_analysis-v1",
+  "run_at": "2026-07-18T09:31:58.106607",
+  "priority": 12,
+  "agent": "Agents-A1"
+}

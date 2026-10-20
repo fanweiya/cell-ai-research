@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic-J Wiki — root</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / Agentic-J Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>imagentj</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/skills.html">skills</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/user_guide.html">user_guide</a></li>
+<li><a href="../modules/docs.html">docs</a></li>
+<li><a href="../modules/config.html">config</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/qdrant_data.html">qdrant_data</a></li>
+<li><a href="../modules/patch_stardist.html">patch_stardist</a></li>
+<li><a href="../modules/data.html">data</a></li>
+<li><a href="../modules/imagentj.html">imagentj</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>root</h1>
+<br>
+<p>&gt; 编排一个容器化的 AI 代理部署，该代理可自动化 ImageJ/Fiji 显微图像分析工作流。</p>
+<br>
+<p>根模块提供了在 Docker 容器内运行基于大语言模型（LLM）代理的基础设施。它将预构建的 ImageJ 环境与基于 Python 的代理系统（LangChain/LangGraph）相结合，用于规划、编写并执行用于生物图像分析的 Groovy 宏。该设置处理了复杂的依赖关系，包括 Java、OpenCL、用于远程桌面访问的 VNC，以及用于插件和向量数据库的持久化存储。</p>
+<br>
+<h2>文件</h2>
+<br>
+<h3><code class="inline-code">Dockerfile</code></h3>
+<br>
+<p>构建包含 ImageJ/Fiji、系统依赖项和所需插件的容器镜像。</p>
+<br>
+<ul>
+<li><code class="inline-code">base-cpu</code>（阶段）- 使用 Miniconda3 作为 CPU 执行的基础阶段。</li>
+<li><code class="inline-code">cpu</code>（阶段）- 最终阶段，安装 X11、VNC、Java 依赖项和 Fiji。</li>
+<li><code class="inline-code">TARGETARCH</code>（参数）- 架构参数，用于选择正确的 Fiji 二进制文件（arm64 与 x64）。</li>
+</ul>
+<br>
+<h3><code class="inline-code">docker-compose.yml</code></h3>
+<br>
+<p>定义容器运行时配置、网络、卷和资源限制。</p>
+<br>
+<ul>
+<li><code class="inline-code">imagentj</code>（服务）- 运行代理和 Fiji 的主要服务。</li>
+<li><code class="inline-code">volumes</code>（配置）- 在重启之间持久化 Fiji 插件、JAR 文件、脚本、Qdrant 数据库和 Cellpose 模型。</li>
+</ul>
+<br>
+<h3><code class="inline-code">docker-entrypoint.sh</code></h3>
+<br>
+<p>在容器启动时初始化容器，填充卷并应用关键补丁。</p>
+<br>
+<ul>
+<li><code class="inline-code">_seed_volume</code>（函数）- 将镜像中的插件/JAR 种子文件复制到命名卷中，跳过已存在的文件。</li>
+<li><code class="inline-code">TrackMate-StarDist 补丁</code>（逻辑）- 确保使用已修补的 JAR 文件以防止 ClassCastException。</li>
+<li><code class="inline-code">CSBDeep 补丁</code>（逻辑）- 为 CSBDeep 插件应用 ARM64 TensorFlow Java 补丁。</li>
+</ul>
+<br>
+<h3><code class="inline-code">micromamba_shim.sh</code></h3>
+<br>
+<p>将 TrackMate 中硬编码的 micromamba 调用重定向到正确的 Conda 环境。</p>
+<br>
+<ul>
+<li><code class="inline-code">CMD</code>（变量）- 命令参数（run、env 等）。</li>
+<li><code class="inline-code">ENV_NAME</code>（变量）- 提取的环境名称，用于路由到正确的 Conda 前缀。</li>
+</ul>
+<br>
+<h3><code class="inline-code">setup_wizard.py</code></h3>
+<br>
+<p>当在 <code class="inline-code">.env</code> 中未找到 API 密钥时，用于首次配置 API 密钥的 PySide6 GUI。</p>
+<br>
+<ul>
+<li><code class="inline-code">SetupWizard</code>（类）- 用于输入 OpenAI 或 OpenRouter API 密钥的主窗口。</li>
+<li><code class="inline-code">validate_key</code>（函数）- 验证 OpenAI 或 OpenRouter API 密钥的格式。</li>
+</ul>
+<br>
+<h3><code class="inline-code">run.py</code></h3>
+<br>
+<p>具有流式输出功能的交互式代理循环的 CLI 入口点。</p>
+<br>
+<ul>
+<li><code class="inline-code">interactive_loop</code>（函数）- 处理代理交互和检查点的主要循环。</li>
+<li><code class="inline-code">handle_event</code>（函数）- 处理来自 LangGraph 的流式事件以打印 AI 思维过程和工具调用。</li>
+</ul>
+<br>
+<h3><code class="inline-code">gui_runner.py</code></h3>
+<br>
+<p>提供聊天界面和使用跟踪的 PySide6 GUI 应用程序。</p>
+<br>
+<ul>
+<li><code class="inline-code">ImagentJGUI</code>（类）- 管理聊天气泡、历史记录和代理连接的主 GUI 类。</li>
+<li><code class="inline-code">_md_to_html</code>（函数）- 将 Markdown 文本转换为 HTML 以便在 QLabel 中显示。</li>
+</ul>
+<br>
+<h3><code class="inline-code">environment.yml</code></h3>
+<br>
+<p>定义包含所有 Python、Java 和数据科学依赖项的 Conda 环境。</p>
+<br>
+<ul>
+<li><code class="inline-code">dependencies</code>（列表）- 包含 pyimagej、langchain、langgraph、pyside6 以及各种图像处理库。</li>
+</ul>
+<br>
+<h3><code class="inline-code">pyproject.toml</code></h3>
+<br>
+<p><code class="inline-code">imagentj</code> 包的 Python 项目元数据和构建配置。</p>
+<br>
+<ul>
+<li><code class="inline-code">imagentj</code>（包）- 位于 src/ 中的 Python 包名称。</li>
+</ul>
+<br>
+<h3><code class="inline-code">.dockerignore</code></h3>
+<br>
+<p>从 Docker 构建上下文中排除不必要的文件，以减小体积并防止泄露。</p>
+<br>
+<h3><code class="inline-code">.env.template</code></h3>
+<br>
+<p>环境变量模板，主要用于 API 密钥和可选设置。</p>
+<br>
+<h3><code class="inline-code">.gitattributes</code></h3>
+<br>
+<p>为大型二进制文件（如 Qdrant 向量数据库）配置 Git LFS。</p>
+<br>
+<h3><code class="inline-code">.gitignore</code></h3>
+<br>
+<p>从版本控制中排除构建产物、日志和敏感数据。</p>
+<br>
+<h3><code class="inline-code">README.md</code></h3>
+<br>
+<p>项目文档、快速入门指南和架构概览。</p>
+<br>
+<h3><code class="inline-code">LICENSE</code></h3>
+<br>
+<p>Apache License 2.0 条款。</p>
+<br>
+<h3><code class="inline-code">NOTICE</code></h3>
+<br>
+<p>ISAS e.V. 的版权声明。</p>
+<br>
+<h2>核心概念</h2>
+<br>
+<ul>
+<li><strong>容器化 ImageJ</strong>：Fiji 安装在 Docker 容器内，并配有虚拟 X 服务器（Xvfb）和 VNC（noVNC），以便通过浏览器进行远程 GUI 访问。</li>
+<li><strong>持久化卷</strong>：命名卷（fiji_plugins、fiji_jars、qdrant_data 等）在容器重启之间保留状态，避免重新下载插件或重新索引文档。</li>
+<li><strong>RAG 插件搜索</strong>：代理使用 Qdrant 向量数据库在运行时检索相关的插件文档和使用示例，以实现上下文感知的脚本编写。</li>
+<li><strong>环境模拟（Shimming）</strong>：<code class="inline-code">micromamba_shim.sh</code> 将 TrackMate 中硬编码的环境调用重定向到正确的 Conda 环境（cellpose、stardist），以确保兼容性。</li>
+<li><strong>代理架构</strong>：使用 LangGraph 创建一个主管代理，用于规划任务、调用工具（ImageJ 宏、文件操作），并迭代直到实现用户目标。</li>
+</ul>
+<br>
+<h2>内部关系</h2>
+<br>
+<ul>
+<li><code class="inline-code">docker-compose.yml</code> → <code class="inline-code">Dockerfile</code>：docker-compose 构建由 Dockerfile 定义的镜像，并配置运行时资源。</li>
+<li><code class="inline-code">docker-entrypoint.sh</code> → <code class="inline-code">docker-compose.yml</code>：docker-compose 将 <code class="inline-code">docker-entrypoint.sh</code> 挂载到容器中，以便在启动时运行。</li>
+<li><code class="inline-code">run.py</code> → <code class="inline-code">src/imagentj</code>：<code class="inline-code">run.py</code> 从 <code class="inline-code">src/imagentj</code> 包导入主要的代理逻辑和工具。</li>
+<li><code class="inline-code">gui_runner.py</code> → <code class="inline-code">src/imagentj</code>：<code class="inline-code">gui_runner.py</code> 从 <code class="inline-code">src/imagentj</code> 导入代理初始化和工具定义。</li>
+<li><code class="inline-code">micromamba_shim.sh</code> → <code class="inline-code">docker-compose.yml</code>：docker-compose 将模拟脚本绑定挂载到容器中，以覆盖 TrackMate 的 micromamba 调用。</li>
+<li><code class="inline-code">setup_wizard.py</code> → <code class="inline-code">docker-compose.yml</code>：docker-compose 将向导脚本绑定挂载到容器中，以便在未配置 API 密钥时运行。</li>
+</ul>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

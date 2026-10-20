@@ -1,0 +1,56 @@
+{
+  "paper_id": "2607.09166",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了COAST框架，用于从H&E染色的组织病理学图像中预测空间基因表达。通过结合局部微环境和全局组织结构，COAST在多个数据集上表现出优于现有方法的性能，并且其表达表示保留了临床相关的预后信号。然而，在方法论和统计报告方面存在一些需要进一步澄清的问题，以确保结果的可靠性和可重复性。",
+  "strengths": [
+    "COAST在多个数据集上表现出色，优于现有方法，表明其设计的有效性。",
+    "论文展示了COAST在临床预后信号保留方面的应用，增强了其实际意义。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "COAST通过结合局部和全局上下文特征实现了优越的性能。",
+      "concern": "论文没有详细说明局部和全局上下文特征的具体融合机制，以及这种融合如何提升模型性能。",
+      "why_it_matters": "缺乏对关键设计选择的详细描述可能影响其他研究人员的复现和进一步改进。",
+      "resolution_test": "需要提供更详细的上下文融合机制描述，包括局部和全局特征的交互方式及其对模型性能的具体贡献。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "statistics",
+      "claim_pointer": "COAST在多个评估指标上显著优于基线模型。",
+      "concern": "论文中报告的性能提升缺乏统计显著性检验（如p值）。",
+      "why_it_matters": "缺乏统计显著性检验可能影响对结果可靠性的判断。",
+      "resolution_test": "需要补充统计检验结果，以验证COAST的性能提升是否具有统计显著性。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "generalizability",
+      "claim_pointer": "COAST在七个不同的数据集上均表现出色。",
+      "concern": "论文未明确说明这些数据集的多样性是否足够代表不同的组织类型和物种。",
+      "why_it_matters": "如果数据集多样性不足，可能会限制COAST在更广泛场景中的适用性。",
+      "resolution_test": "需要提供更详细的数据集描述，包括组织类型、物种和实验条件的多样性分析。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "citation",
+      "claim_pointer": "论文引用了多个相关工作，如UNI、STNet、Hist2ST等。",
+      "concern": "部分引用的文献（如UNI）可能未充分讨论其在当前任务中的具体贡献。",
+      "why_it_matters": "不充分的文献讨论可能影响对COAST创新性的准确评估。",
+      "resolution_test": "需要补充对引用文献在当前任务中具体贡献的讨论，以明确COAST的创新点。"
+    }
+  ],
+  "assessment_boundaries": [
+    "无法评估COAST在其他未测试的组织类型或更大规模数据集上的表现。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

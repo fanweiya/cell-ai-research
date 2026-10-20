@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CellQuant-Net Wiki — CP-Net</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / CellQuant-Net Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>CellQuant-Net</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/WSI_QA.html">WSI_QA</a></li>
+<li><a href="../modules/CP-Net.html">CP-Net</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/input.html">input</a></li>
+<li><a href="../modules/output.html">output</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>CP-Net</h1>
+<br>
+<p>&gt; 用于全切片图像(WSI)中细胞核检测、分类及质量评估的端到端推理流水线。</p>
+<br>
+<p>CP-Net 是一个基于深度学习的细胞核分析系统，通过双通道输入（HE 染色图像 + 提取的 H 通道）实现高精度的细胞核分割与分类。系统包含预处理、模型推理、后处理、空间关系分析及结果导出功能，支持 20x 和 40x 不同放大倍率，输出符合 QuPath 标准的 GeoJSON 文件及可视化图像。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">CP-Net/cell_connectivitey.py</code></h3>
+<br>
+<p>处理细胞核的空间关系分析，构建邻域图并计算免疫浸润评分。</p>
+<br>
+<ul>
+<li><code class="inline-code">build_radius_graph</code> (function) - 基于欧氏距离半径构建细胞核邻域图，节点包含坐标、类型及原始 ID。</li>
+<li><code class="inline-code">immune_infiltration_score</code> (function) - 计算肿瘤细胞周围免疫细胞的平均比例，量化免疫浸润程度。</li>
+<li><code class="inline-code">save_geojson</code> (function) - 将特征数据保存为 GeoJSON 格式，用于 QuPath 导入。</li>
+</ul>
+<br>
+<h3><code class="inline-code">CP-Net/configs/configs_test.yaml</code></h3>
+<br>
+<p>存储模型推理的配置参数，包括数据路径、模型结构、后处理阈值及颜色映射。</p>
+<br>
+<ul>
+<li><code class="inline-code">postprocessing</code> (config_section) - 定义不同放大倍率下的形态学处理参数，如腐蚀半径、最小面积等。</li>
+<li><code class="inline-code">model</code> (config_section) - 指定骨干网络（unireplknet_n）及分类头参数（4类：背景、肿瘤、TILs、其他）。</li>
+</ul>
+<br>
+<h3><code class="inline-code">CP-Net/dataset.py</code></h3>
+<br>
+<p>定义数据集类与数据加载逻辑，负责 HE 图像与 H 通道的预处理及增强。</p>
+<br>
+<ul>
+<li><code class="inline-code">extract_H_channel</code> (function) - 从 RGB 图像中通过光密度转换提取 H 通道（Hematoxylin），用于增强核特征。</li>
+<li><code class="inline-code">Load_Dataset</code> (class) - 继承自 torch.utils.data.Dataset，处理图像路径管理、H 通道生成及 Albumentations 增强。</li>
+</ul>
+<br>
+<h3><code class="inline-code">CP-Net/model/model.py</code></h3>
+<br>
+<p>定义 CP-Net 主网络架构，整合 UniRepLKNet 骨干与双任务解码头。</p>
+<br>
+<ul>
+<li><code class="inline-code">CellPriorNet</code> (class) - 主模型类，接收 RGB 和 H 通道输入，输出二值掩膜和类型分类图。</li>
+<li><code class="inline-code">RingBank</code> (class) - 环形核模块，用于提取多尺度环形特征，增强核边缘检测能力。</li>
+<li><code class="inline-code">get_conv2d</code> (function) - 根据环境配置选择标准卷积或优化的 iGEMM 大核卷积实现。</li>
+</ul>
+<br>
+<h3><code class="inline-code">CP-Net/model/unirepLKnet.py</code></h3>
+<br>
+<p>实现 UniRepLKNet 骨干网络，支持大核深度卷积以提升感受野和特征提取能力。</p>
+<br>
+<ul>
+<li><code class="inline-code">GRNwithNHWC</code> (class) - 全局响应归一化层，基于 ConvNeXt V2，用于特征重校准。</li>
+<li><code class="inline-code">get_conv2d</code> (function) - 决定使用原生卷积还是 iGEMM 加速的大核卷积。</li>
+</ul>
+<br>
+<h3><code class="inline-code">CP-Net/post_process.py</code></h3>
+<br>
+<p>执行模型输出后处理，包括实例分割、大小分类及距离图计算。</p>
+<br>
+<ul>
+<li><code class="inline-code">gpu_split_small_med_big_vbig_binary</code> (function) - 在 GPU 上将二值掩膜按面积分割为小、中、大、超大四类实例。</li>
+<li><code class="inline-code">torch_to_cupy</code> (function) - 通过 DLPack 在 torch 张量和 CuPy 数组间零拷贝转换，加速形态学操作。</li>
+<li><code class="inline-code">process_mask_batch_dist_map</code> (function) - 批量处理掩膜并计算实例间的距离图。</li>
+</ul>
+<br>
+<h3><code class="inline-code">CP-Net/qupath_jsn.py</code></h3>
+<br>
+<p>生成 QuPath 兼容的 GeoJSON 文件，将检测结果转换为细胞对象。</p>
+<br>
+<ul>
+<li><code class="inline-code">make_qupath_cell_feature</code> (function) - 将单个细胞核的坐标和类型转换为 QuPath 的 Feature 对象。</li>
+<li><code class="inline-code">save_qupath_geojson</code> (function) - 将特征列表保存为 GeoJSON 文件。</li>
+</ul>
+<br>
+<h3><code class="inline-code">CP-Net/spli_H.py</code></h3>
+<br>
+<p>独立脚本，用于批量预处理图像，提取 H 通道并保存。</p>
+<br>
+<ul>
+<li><code class="inline-code">normalize_staining_H</code> (function) - 实现 H 通道提取算法，基于光密度变换和主成分分析。</li>
+</ul>
+<br>
+<h3><code class="inline-code">CP-Net/test_cp_net.py</code></h3>
+<br>
+<p>主推理入口脚本，协调数据加载、模型预测、后处理及结果保存。</p>
+<br>
+<ul>
+<li><code class="inline-code">infer_magnification_from_ckpt_name</code> (function) - 根据检查点文件名自动推断图像放大倍率（20x/40x）。</li>
+<li><code class="inline-code">_forward_flexible</code> (function) - 处理模型输入，支持双通道或四通道拼接输入。</li>
+<li><code class="inline-code">save_classify_dots</code> (function) - 在原始图像上绘制分类点并保存可视化结果。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>双通道输入 (HE + H)</strong>: 模型同时接收标准 RGB 图像和提取的 H 通道（苏木精染色通道），利用 H 通道增强细胞核对比度，提高分割精度。</li>
+<li><strong>UniRepLKNet 骨干</strong>: 采用大核卷积网络（Large-Kernel ConvNet）作为特征提取器，通过堆叠大卷积核扩大感受野，捕捉长距离依赖。</li>
+<li><strong>GPU 加速后处理</strong>: 使用 CuPy 和 DLPack 实现 torch 张量与 GPU 数组的零拷贝交互，加速形态学操作和连通域分析。</li>
+<li><strong>QuPath 兼容性</strong>: 输出结果包含 GeoJSON 格式的空间标注和可视化图像，可直接导入 QuPath 进行病理学分析。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">test_cp_net.py</code> → <code class="inline-code">dataset.py</code>: test_cp_net 导入 Load_Dataset 进行数据加载和预处理。</li>
+<li><code class="inline-code">test_cp_net.py</code> → <code class="inline-code">model/model.py</code>: test_cp_net 实例化 CellPriorNet 模型并执行前向推理。</li>
+<li><code class="inline-code">test_cp_net.py</code> → <code class="inline-code">post_process.py</code>: test_cp_net 调用后处理函数对模型输出进行实例分割和类型分配。</li>
+<li><code class="inline-code">test_cp_net.py</code> → <code class="inline-code">cell_connectivitey.py</code>: test_cp_net 使用邻域分析函数计算空间关系指标。</li>
+<li><code class="inline-code">test_cp_net.py</code> → <code class="inline-code">qupath_jsn.py</code>: test_cp_net 将最终检测结果转换为 QuPath 格式并保存。</li>
+<li><code class="inline-code">dataset.py</code> → <code class="inline-code">spli_H.py</code>: dataset.py 中的 extract_H_channel 函数逻辑与 spli_H.py 中的 normalize_staining_H 高度相似，用于 H 通道提取。</li>
+<li><code class="inline-code">model/model.py</code> → <code class="inline-code">model/unirepLKnet.py</code>: model.py 导入 UniRepLKNet 作为骨干网络。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

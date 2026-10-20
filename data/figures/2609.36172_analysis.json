@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "论文核心方法流程图，展示图像预处理、标注、数据增强、模型训练及性能评估的完整流程。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "混淆矩阵热力图，展示Containment、Disjoint、Touch三类拓扑关系的分类预测结果。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "三分类混淆矩阵热力图，展示模型预测结果与真实标签的对应数量。"
+  }
+}

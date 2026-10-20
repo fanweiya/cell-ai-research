@@ -1,0 +1,53 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2607.24702v1",
+  "status": "done",
+  "design_motivation": "现有空间转录组聚类方法存在两个主要局限：1) 降维与聚类分步进行，目标函数不一致；2) 将细胞类型聚类与空间域聚类混为一谈，未区分单细胞尺度与组织区域尺度的多尺度分析。BayesClint旨在通过贝叶斯因子分析模型，在多个样本上同时执行降维、多尺度聚类（细胞类型+空间域）和嵌套特征选择，以解决上述问题。",
+  "loss_formula": "无传统Loss函数，采用贝叶斯后验推断。目标为最大化后验概率：\\[ p(\\theta | Y) \\propto p(Y | \\theta) p(\\theta) \\]",
+  "math_principle": "基于贝叶斯分层模型。假设基因表达数据服从因子分析模型，引入多尺度混合模型（Multi-scale mixture model）对潜在因子进行建模，分别对应细胞类型和空间域。通过稀疏先验（Sparsity prior）对因子载荷矩阵A进行约束以实现特征选择。使用部分坍缩吉布斯采样（Partially collapsed Gibbs sampling）进行MCMC后验推断，解决标签切换问题。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[N_cells, N_genes]"
+    },
+    {
+      "layer": "factor_analysis",
+      "shape": "[N_cells, r]"
+    },
+    {
+      "layer": "spatial_domain_cluster",
+      "shape": "[N_cells]"
+    },
+    {
+      "layer": "cell_type_cluster",
+      "shape": "[N_cells]"
+    },
+    {
+      "layer": "feature_selection",
+      "shape": "[N_genes]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 初始化MCMC链，设定burn-in和迭代次数",
+    "step2: 执行部分坍缩吉布斯采样，更新因子载荷、聚类标签、特征选择指示器",
+    "step3: 后处理对齐聚类标签（解决标签切换）",
+    "step4: 基于后验概率计算特征选择结果（Active/Differentiating genes）"
+  ],
+  "baselines_compared": [
+    "BASS",
+    "PRECAST",
+    "SPC+kmeans",
+    "HMRF",
+    "Seurat"
+  ],
+  "key_results": {
+    "ARI_cell_type": "在16个模拟场景中10个场景最高",
+    "ARI_spatial_domain": "在16个模拟场景中6个场景最高",
+    "gene_selection_AUC": "显著优于BASS+DESeq2等基因选择方法"
+  },
+  "confidence": 0.95,
+  "task_id": "2607.24702v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:42:14.994147",
+  "priority": 13,
+  "agent": "Agents-A1"
+}

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心方法与结果概览图：展示MIMIC-CXR数据集统计与病理分布、Rad-DINO编码器配合三种适配策略（No Adapter、MLP、Attention Pooling）的流程示意图，以及各适配策略下子群体性能对比柱状图。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "三个适配策略（No Adapter、MLP、Attention Pooling）在不同人群子组和投影属性上的AUMRC性能变化热图对比"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "四个热力图展示不同适配策略（各层子集）在胸部X光基础模型上按人口属性和视图的子组AUROC差异（Δ AUROC）"
+  }
+}

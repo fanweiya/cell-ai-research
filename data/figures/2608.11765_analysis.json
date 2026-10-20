@@ -1,0 +1,12 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "该图展示了论文提出的ProBAG方法的整体架构，包括原型引导、边界感知图扩散等核心模块。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "BCSS-WSSS与LUAD-HistoSeg数据集上分割结果的定性对比图，比较本文方法(Ours)与CAM、Grad-CAM、TPRO、PBIP等方法及GT的可视化结果"
+  }
+}

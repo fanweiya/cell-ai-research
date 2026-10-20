@@ -1,0 +1,12 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "SBF-SEM三维树突实例分割完整自动流程图，展示从输入预处理、YOLO引导SAM二维分割、实例细化、IOF连接到三维重建的核心方法流程"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "两个SBF-SEM数据集上的3D树突实例分割结果，包括切片上的实例标注和三维重建可视化"
+  }
+}

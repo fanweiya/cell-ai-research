@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心方法图：展示WSI分类流水线（patch提取、特征提取器FE、聚合模块AM、MLP）及不同中心偏置训练数据的实验设置与BACC性能曲线"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "散点图展示不同病理基础模型在鲁棒性指数(RI)与轮廓指数(FM-SI)上的对比"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "实验结果图：四个数据集上不同病理基础模型在不同V值下的平衡准确率(BACC)对比，展示中心偏置对模型性能的影响"
+  }
+}

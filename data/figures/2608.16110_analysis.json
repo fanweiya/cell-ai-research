@@ -1,0 +1,12 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文整体方法架构图：展示不确定性引导的主动选择（PFUC、PGDR、GSCU）与不确定性提示微调SAM（UPFT）的完整流程"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "多数据集（Promise2、UTAH、Liver、ISIC）上不同主动学习方法（Random、ALPS、CALR、FPS、Probcover、TypiClust、CEC与本文方法）的分割结果可视化对比图，附GroundTruth"
+  }
+}

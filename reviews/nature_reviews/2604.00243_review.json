@@ -1,0 +1,57 @@
+{
+  "paper_id": "2604.00243",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种参数效率高的小型模型UCell，用于单细胞分割任务，并展示了其在多个基准测试中的性能与大规模模型相当。UCell通过递归结构设计，在不显著增加参数数量的情况下提升了模型的非线性和特征复杂度。论文在方法论上具有创新性，且在泛化性和适应性方面进行了广泛实验。然而，论文在统计报告和引用真实性方面存在一些问题，需要进一步澄清和改进。",
+  "strengths": [
+    "UCell的递归结构设计具有创新性，且在参数效率和性能方面表现出色。",
+    "论文在模型适应性和泛化性方面进行了广泛实验，验证了模型的实用性。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "UCell的递归结构能够显著提升模型性能",
+      "concern": "论文未提供足够的消融实验来验证递归结构对模型性能的具体贡献。",
+      "why_it_matters": "缺乏消融实验使得无法确定递归结构是否是性能提升的关键因素。",
+      "resolution_test": "需要补充消融实验，比较UCell与非递归版本的性能差异。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "statistics",
+      "claim_pointer": "UCell在多个数据集上的F1和Dice分数优于现有模型",
+      "concern": "论文未提供统计显著性检验来验证性能提升是否具有统计意义。",
+      "why_it_matters": "缺乏统计显著性检验可能导致性能提升的误判。",
+      "resolution_test": "需要补充统计显著性检验结果，如t检验或bootstrap方法。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "UCell在多个out-of-domain数据集上表现良好",
+      "concern": "论文在out-of-domain实验中未提供足够的数据集多样性描述，无法评估模型的泛化能力。",
+      "why_it_matters": "缺乏数据集多样性描述可能导致对模型泛化能力的高估。",
+      "resolution_test": "需要补充out-of-domain数据集的详细描述，包括数据来源、样本特征等。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "citation",
+      "claim_pointer": "论文引用了TRM、HRM等模型作为相关工作",
+      "concern": "论文未正确引用TRM和HRM的相关文献，导致引用真实性存疑。",
+      "why_it_matters": "引用不准确可能影响论文的可信度，并可能侵犯他人知识产权。",
+      "resolution_test": "需要补充TRM和HRM的正确文献引用，并确保引用格式符合学术规范。"
+    }
+  ],
+  "assessment_boundaries": [
+    "论文未提供足够的实验细节，如训练超参数、模型结构的具体实现等，无法完全复现实验。",
+    "论文未提供代码或数据集的公开链接，无法验证实验的可重复性。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

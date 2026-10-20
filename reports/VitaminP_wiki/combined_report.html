@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VitaminP Wiki — combined_report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / VitaminP Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>VitaminP</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/configs.html">configs</a></li>
+<li><a href="modules/vitaminp.html">vitaminp</a></li>
+<li><a href="modules/scripts.html">scripts</a></li>
+<li><a href="modules/notebooks.html">notebooks</a></li>
+<li><a href="modules/dataset.html">dataset</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/metrics.html">metrics</a></li>
+<li><a href="modules/postprocessing.html">postprocessing</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>VitaminP — 综合分析报告</h1>
+<br>
+<ul>
+<li><strong>GitHub</strong>: idso-fa1-pathology/VitaminP</li>
+<li><strong>评分</strong>: 8.2/10</li>
+<li><strong>分析时间</strong>: 2026-07-15T18:32:13.860199</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2>CodeGraph 知识图谱分析</h2>
+<br>
+<br>
+<h2>RepoWiki 文档生成</h2>
+<br>
+<ul>
+<li>✅ 扫描成功</li>
+<li>📁 Wiki 目录: <code class="inline-code">/mnt/c/workspace/cell-ai-research/reports/VitaminP_wiki</code></li>
+<li>📄 生成文件:</li>
+<li>architecture.md</li>
+<li>dependencies.md</li>
+<li>index.md</li>
+<li>reading-guide.md</li>
+<li>_sidebar.md</li>
+<li>modules/.codegraph.md</li>
+<li>modules/.github.md</li>
+<li>modules/configs.md</li>
+<li>modules/dataset.md</li>
+<li>modules/metrics.md</li>
+<li>输出: Project: VitaminP</li>
+</ul>
+<p>Files:   123</p>
+<p>Lines:   48,643</p>
+<p>Languages</p>
+<p>┏━━━━━━━━━━━━┳━━━━━━━┓</p>
+<p>┃ Language   ┃ Files ┃</p>
+<p>┡━━━━━━━━━━━━╇━━━━━━━┩</p>
+<p>│ python     │    64 │</p>
+<p>│ yaml       │    31 │</p>
+<p>│ unknown    │    24 │</p>
+<p>│ markdown   │     2 │</p>
+<p>│ dockerfile │     1 │</p>
+<p>│ text       │     1 │</p>
+<p>└────────────┴───────┘</p>
+<p>VitaminP/</p>
+<p>├── ⚙️ Dockerfile (dockerfile)</p>
+<p>├── ⚙️ README.md (markdown)</p>
+<p>├── 📁 dataset/</p>
+<p>│   └── ⚙️ config.py (python)</p>
+<p>├── ⚙️ requirements.txt (text)</p>
+<p>├── 📁 scripts/</p>
+<p>│   ├── ⚙️ data_preprocessing/README.md (markdown)</p>
+<p>│   ├── 📄 run_wsi_inference.py (python)</p>
+<p>│   ├── 📄 train copy.py (python)</p>
+<p>│   ├── 📄 train.py (python)</p>
+<p>│   └── 📄 train_gan.py (python)</p>
+<p>├── ⚙️ setup.py (python)</p>
+<p>├── 📁 .codegraph/</p>
+<p>│   └── 📄 .gitignore (unknown)</p>
+<p>├── 📁 .github/</p>
+<p>│   └── 📄 workflows/docker-image.yml (yaml)</p>
+<p>├── 📄 .gitignore (unknown)</p>
+<p>├── 📄 LICENSE (unknown)</p>
+<p>├── 📁 configs/</p>
+<p>│   ├── 📄 inference/inference.yaml (yaml)</p>
+<p>│   ├── 📄 inference/inference_mif.yaml (yaml)</p>
+<p>│   ├── 📄 inference/inference_xenium.yaml (yaml)</p>
+<p>│   ├── 📄 inference/</p>
+<br>
+<h2>原有子代理分析报告</h2>
+<br>
+<pre class="code-block"><code class="language-">现在我已经收集了足够的信息来分析 VitaminP 仓库。让我整理并输出结构化报告：
+
+# VitaminP 代码深度分析报告
+
+## 1. 项目概述
+
+**VitaminP** 是一个基于 Vision Transformer 的多模态细胞分割框架，论文来源于 `arXiv 2604.23799`，题为 "VitaminP: cross-modal learning enables whole-cell segmentation from routine histology"。
+
+**核心问题**：利用配准的 H&amp;E（苏木精-伊红染色）与多重免疫荧光（mIF）数据，将荧光中的完整细胞边界知识迁移到普通 H&amp;E 图像，实现**仅输入 H&amp;E 的全细胞分割**，无需在推理时使用免疫荧光。
+
+**关键特点**：
+- 训练数据：14个公共数据集，34种癌症类型，超过700万标注实例
+- 支持两种推理模式：H&amp;E alone 或 H&amp;E + MIF 联合
+- 预训练模型提供：`flex`（通用）、`dual`（高精度）、`syn`（合成 MIF）
+
+## 2. 架构分析
+
+### 目录结构</code></pre>
+<p>vitaminp/</p>
+<p>├── models.py           # 四个核心模型架构</p>
+<p>├── backbone.py         # DINOv2 特征提取器</p>
+<p>├── blocks.py           # 构建块（ConvBlock, ASPP, SegmentationHead 等）</p>
+<p>├── losses.py           # 损失函数（DiceFocal, HVLoss）</p>
+<p>├── trainer.py          # 训练循环（支持 4 种模型类型）</p>
+<p>├── evaluator.py        # 测试评估（含 PQ 指标）</p>
+<p>├── pretrained.py       # 模型预加载注册表</p>
+<p>├── utils.py            # 预处理工具</p>
+<p>├── gan/                # GAN 合成 MIF 模块</p>
+<p>├── inference/          # 推理相关（tile_processor, wsi_handler）</p>
+<p>└── postprocessing/     # 后处理（HV 地图转实例）</p>
+<pre class="code-block"><code class="language-">
+### 核心模块
+1. **DINOv2 Backbone**：通过 timm 加载官方 DINOv2 ViT，提取 4 个层级的特征
+2. **模型架构**：
+   - `VitaminPDual`：双编码器的中期融合架构
+   - `VitaminPFlex`：单编码器 + ASPP + 4 个独立解码器
+   - `VitaminPSyn`：使用合成 MIF 的双编码器
+   - `VitaminPBaseline*`：单模态基线对比模型
+
+3. **推理管道**：
+   - `TileProcessor`：大图像分块处理（512x512）
+   - `HV 约束的分割`（HoVer-Net 风格）
+   - 支持全切片图像（WSI）处理
+
+### 依赖关系
+- **核心**：PyTorch 2.0+，timm，numpy，scipy
+- **WSI 支持**：openslide-python，tifffile，geopandas
+- **高级功能**：wandb，albumentations，zarr
+
+## 3. 核心算法实现原理
+
+### 3.1 多模态融合策略
+
+**Dual 架构**：
+- H&amp;E 编码器和 MIF 编码器各自处理 0-1 层特征
+- 在第 1 层特征处进行通道拼接 + 1x1 卷积融合
+- 融合特征输入共享的 2-3 层 DINOv2 编码器
+- 输出 4 个分支的预测（H&amp;E 核、H&amp;E 细胞、MIF 核、MIF 细胞）
+
+**Flex 架构**：
+- 共享编码器 + ASPP 深度特征增强
+- 4 个独立解码器进行多任务学习
+- 推理时根据数据集动态选择模态（H&amp;E 或 MIF）
+
+### 3.2 HoVer-Net 后处理
+
+模型输出 3 通道：
+- **segmentation**：Δx（水平方向），Δy（垂直方向）
+- 通过霍夫变换 converts 距离图到细胞边界
+- 使用有向有向图（hoVer-Net）分割细胞实例
+
+### 3.3 数据增强策略
+
+**智能增强**：
+- **MIF 数据**：通道洗牌（防止模型记住特定荧光标记）
+- **H&amp;E 数据**：禁止通道洗牌（保持染色关系）
+- **灰度化**（概率 20%）：强制学习形状而非颜色
+- **颜色反转**（概率 20%）：使 H&amp;E 视觉上接近 MIF，缩小域差距
+- **亮度/对比度抖动**（概率 50%）
+
+### 3.4 损失函数
+
+**组合损失**：</code></pre>
+<p>总损失 = Σ(核分割 + 2×核HV + 细胞分割 + 2×细胞HV) / 4</p>
+<pre class="code-block"><code class="language-">- **DiceFocal Loss**：结合 Dice 和 Focal 损失
+- **HVLoss**：MSE + MSGE（梯度误差）
+
+## 4. 代码质量评估
+
+### 优点
+1. **模块化设计**：每个组件职责清晰，易于理解和修改
+2. **文档完整**：详细的 docstring 和类型提示
+3. **测试覆盖**：包含验证/测试逻辑，提供 PQ 等高级指标
+4. **训练稳定性**：梯度裁剪、学习率调度、自定义损失
+5. **灵活配置**：YAML 配置支持不同数据集和交叉验证
+6. **推理优化**：分块处理、内存流式读取、边界检测
+
+### 需要改进
+1. **并行训练**：缺乏 DistributedDataParallel 示例代码
+2. **量化支持**：无模型量化或剪枝
+3. **容器化**：Dockerfile 较复杂，但完整
+4. **错误处理**：部分地方异常处理不够完善
+
+### 可读性
+- 变量命名规范（如 `he_nuclei_mask`）
+- 逻辑清晰，注释详细
+- 代码长度适中，函数职责单一
+
+## 5. 可复现性分析
+
+### 安装
+- **pip 安装**：`pip install vitaminp` 完整依赖
+- **Docker 支持**：提供完整 Dockerfile（包含 CUDA 12.1）
+- **依赖文件**：`requirements.txt` 和 `setup.py` 清晰
+
+### 预训练模型
+- **自动下载**：通过 HuggingFace Hub 自动缓存
+- **多模型支持**：`dual`、`flex`、`syn` 三种
+- **版本控制**：PyPI 版本 0.2.1
+
+### 复现实验
+- 提供 3 折交叉验证配置（`configs/training/config_fold*.yaml`）
+- 数据集路径和 splits 明确
+- 训练脚本完整，包含 wandb 日志
+
+## 6. 与高通量细胞图像分析项目的关联性
+
+### 可直接复用的模块
+
+1. **Vitamins-P 核心架构**</code></pre>
+<br>
+<p>&gt; 完整报告: <a href="VitaminP.html">reports/VitaminP.md</a></p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

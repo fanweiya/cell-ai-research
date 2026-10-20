@@ -1,0 +1,12 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "左图为节点跨任务出现次数分布直方图（Attention Heads与MLPs），右图为19个任务间的性能迁移热力图（Natural/Spectral/Structured分组），属于论文核心实验结果图"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心实验结果图：展示CFT方法与多种微调基线在VTAB-1k上的准确率随训练FLOPs和墙钟时间的对比曲线"
+  }
+}

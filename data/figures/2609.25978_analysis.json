@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "论文核心图示：展示乳腺MRI可解释性评估中的三个关键陷阱（目标、实现与分析），包含输入影像、Grad-CAM/Attention Rollout可视化、不同掩码策略及类特异性/类无关性方法对比曲线。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "乳腺癌MRI输入图像与多种可解释性/显著性方法（Grad-SAM、Gradient Rollout、GMAR L1/L2、Grad-CAM、HiResCAM）生成热力图的对比结果"
+  },
+  "2": {
+    "relevant": true,
+    "score": 10,
+    "caption": "展示多种可解释性方法在乳腺MRI上的热力图对比结果"
+  }
+}

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VitaminP Wiki — root</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / VitaminP Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>VitaminP</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/vitaminp.html">vitaminp</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/dataset.html">dataset</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/metrics.html">metrics</a></li>
+<li><a href="../modules/postprocessing.html">postprocessing</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>root</h1>
+<br>
+<p>&gt; 项目根目录，包含Docker环境配置、安装脚本、文档和许可证，用于部署和分发基于Vision Transformer的病理细胞分割框架VitaminP。</p>
+<br>
+<p>该模块是VitaminP项目的顶层结构，主要提供容器化部署方案、Python包安装配置及项目元数据。Dockerfile定义了基于CUDA 12.1和Ubuntu 22.04的完整运行环境，预装了PyTorch、OpenCV、OpenSlide等依赖，并自动下载预训练权重。setup.py定义了Python包的元数据、核心依赖及可选扩展（如WSI支持、开发工具）。README.md提供项目概述、安装指南和API用法。requirements.txt列出运行时依赖，.gitignore排除缓存和临时文件，LICENSE采用MIT协议。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">Dockerfile</code></h3>
+<br>
+<p>构建包含CUDA 12.1、PyTorch 2.1.0及所有依赖的Docker镜像，并预下载预训练权重。</p>
+<br>
+<h3><code class="inline-code">README.md</code></h3>
+<br>
+<p>项目文档，包含功能介绍、模型说明、快速开始指南和API示例。</p>
+<br>
+<h3><code class="inline-code">requirements.txt</code></h3>
+<br>
+<p>列出Python运行时依赖包及其版本约束。</p>
+<br>
+<h3><code class="inline-code">setup.py</code></h3>
+<br>
+<p>定义Python包的元数据、安装依赖和可选扩展，用于通过pip安装vitaminp。</p>
+<br>
+<ul>
+<li><code class="inline-code">setup</code> (function) - 调用setuptools.setup()配置包名称、版本、依赖和元数据。</li>
+</ul>
+<br>
+<h3><code class="inline-code">.gitignore</code></h3>
+<br>
+<p>指定Git忽略的文件和目录，如缓存、构建产物和临时文件。</p>
+<br>
+<h3><code class="inline-code">LICENSE</code></h3>
+<br>
+<p>MIT许可证文本，定义软件使用、修改和分发的法律条款。</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>容器化部署</strong>: 通过Dockerfile提供包含CUDA、PyTorch及所有依赖的完整环境，确保跨平台一致性。</li>
+<li><strong>预训练权重集成</strong>: Docker构建时自动从HuggingFace下载vitamin_p_dual.pth和vitamin_p_flex.pth权重，无需运行时下载。</li>
+<li><strong>可选依赖</strong>: setup.py定义wsi、gan、dev等可选扩展，允许用户按需安装WSI处理或开发工具。</li>
+<li><strong>多模态分割</strong>: 项目支持H&amp;E、MIF、IHC等多种病理图像模态的细胞和细胞核分割。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">Dockerfile</code> → <code class="inline-code">requirements.txt</code>: Dockerfile中手动安装依赖，requirements.txt作为参考清单。</li>
+<li><code class="inline-code">setup.py</code> → <code class="inline-code">README.md</code>: setup.py读取README.md作为包的长描述。</li>
+<li><code class="inline-code">Dockerfile</code> → <code class="inline-code">setup.py</code>: Dockerfile在构建时安装依赖，setup.py定义Python包的依赖结构。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

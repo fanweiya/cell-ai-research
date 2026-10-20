@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "展示了不同半监督学习框架（FixMatch, UniMatch系列）的架构对比图，重点突出了改进后的UniMatch V2模型结构。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "该图展示了论文提出的SSS方法的整体网络架构，包括弱/强数据增强池、图像编码器、PCSW提示生成器、MedSAM-2解码器以及记忆库等核心组件及其连接关系。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "医学图像分割实验结果对比图，展示了输入图像、真实标签（Ground Truth）与基线模型及改进模型（Baseline+DFE, Baseline+DFE+PCSW）的分割效果对比。"
+  }
+}

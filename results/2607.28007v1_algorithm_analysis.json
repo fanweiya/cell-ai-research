@@ -1,0 +1,51 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2607.28007v1",
+  "status": "done",
+  "design_motivation": "探究病理基础模型（FMs）的冻结潜在空间是否具备足够的判别力和空间分辨率，以直接作为密集目标检测（有丝分裂图检测）的骨干网络，而非仅用于图像级分类。与全端到端训练的ResNet50基线相比，验证预训练FMs在无需微调情况下的泛化能力和鲁棒性。",
+  "loss_formula": "未明确给出单一核心Loss公式，实验采用标准检测器损失函数（如Faster R-CNN的RPN损失+分类/回归损失，RetinaNet的Focal Loss，Deformable DETR的匈牙利匹配损失+L1/CIoU损失）。",
+  "math_principle": "利用自监督图像级预训练模型提取的冻结特征表示，通过多尺度特征金字塔（或单尺度ViT特征）输入到不同的检测头（两阶段、单阶段、基于自注意力），通过优化检测头的参数来学习有丝分裂图的定位和分类，验证特征空间的判别性。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 3, H, W]"
+    },
+    {
+      "layer": "frozen_fm_encoder",
+      "shape": "[B, C, H', W']"
+    },
+    {
+      "layer": "detection_head",
+      "shape": "[B, num_anchors, 4]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, num_detections, 5]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载MIDOG++和TUPAC16数据集，应用随机翻转和仿射变换增强",
+    "step2: 使用冻结的病理基础模型（UNI, Virchow, H-optimus等）或ResNet50作为骨干提取特征",
+    "step3: 将特征输入到RetinaNet、Faster R-CNN或Deformable DETR检测头",
+    "step4: 计算检测损失并优化检测头参数（骨干网络参数冻结）",
+    "step5: 在验证集上评估微平均F1、精确率、召回率和FROC-AUC"
+  ],
+  "baselines_compared": [
+    "ResNet-50 (frozen)",
+    "RetinaNet",
+    "Faster R-CNN",
+    "Deformable DETR"
+  ],
+  "key_results": {
+    "best_f1_midog": "0.7718 (H-optimus-0 + Faster R-CNN)",
+    "best_froc_auc_midog": "5.490 (H-optimus-0 + Faster R-CNN)",
+    "best_f1_tupac16": "0.7584 (H-optimus-1 + Faster R-CNN)",
+    "best_froc_auc_tupac16": "5.264 (H-optimus-1 + Faster R-CNN)",
+    "conclusion": "H-optimus-0和Virchow模型在冻结状态下表现具有竞争力，表明当前FMs的潜在空间适用于直接有丝分裂图检测"
+  },
+  "confidence": 0.85,
+  "task_id": "2607.28007v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:49:23.486848",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

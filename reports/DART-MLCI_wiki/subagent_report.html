@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DART-MLCI Wiki — subagent_report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / DART-MLCI Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>dart-mlci</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/scripts.html">scripts</a></li>
+<li><a href="modules/dart_experiment.html">dart_experiment</a></li>
+<li><a href="modules/docs.html">docs</a></li>
+<li><a href="modules/artifacts.html">artifacts</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/dart_mlci.html">dart_mlci</a></li>
+<li><a href="modules/tests.html">tests</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <p>现在我已经收集了足够的信息来分析这个仓库。让我创建结构化报告：</p>
+<br>
+<h2>DART-MLCI 项目深度分析报告</h2>
+<br>
+<h3>1. 项目概述</h3>
+<br>
+<p><strong>DART-MLCI</strong> (Design-Aware and Real-Time capable Microfluidic Live-Cell Image analysis) 是一个用于高通量微流控活细胞图像实时分析的软件系统，源自论文 <strong>"DART: A design-aware microfluidic chip paradigm for real-time live-cell image analysis"</strong> (arXiv:2606.18523, 2026)。</p>
+<br>
+<p><strong>核心问题</strong>：高通量微流控活细胞成像产生大量单细胞数据，但定位包含特定细胞群的区域 (ROI) 以及去除周围微流控结构的操作是半自动的，随着ROI数量增加而变得繁琐，阻碍了实时图像分析。</p>
+<br>
+<p><strong>解决方案</strong>：通过嵌入式的标记物(fiducial markers)和深度学习标记检测，将CAD蓝图与物理芯片对齐，实现：</p>
+<ul>
+<li><strong>Fine alignment</strong> (掩膜流水线)：标记物检测、配对匹配、旋转校正、多边形掩膜、ROI裁剪</li>
+<li><strong>Coarse alignment</strong> (映射校准)：芯片蓝图与显微镜平台坐标的仿射对齐</li>
+</ul>
+<br>
+<h3>2. 架构分析</h3>
+<br>
+<p><strong>目录结构</strong>：</p>
+<pre class="code-block"><code class="language-">DART-MLCI/
+├── dart_mlci/              # 核心Python包
+│   ├── __init__.py         # 公开API
+│   ├── detection.py        # YOLO标记检测模型
+│   ├── match.py            # 标记物匹配算法
+│   ├── pipeline.py         # 步骤式处理流水线
+│   ├── chip.py             # 芯片配置和结构库
+│   ├── mask.py             # 掩膜操作和ROI多边形
+│   ├── rotation.py         # 图像和标记物旋转
+│   ├── map.py              # 芯片蓝图映射
+│   ├── calibration/        # 校准模块
+│   ├── registration/       # 图像配准模块
+│   └── api/                # FastAPI服务
+├── tests/                  # 测试套件
+├── artifacts/              # 示例数据和模型
+├── scripts/                # 处理脚本
+└── docs/                   # 文档</code></pre>
+<br>
+<p><strong>关键依赖</strong>：</p>
+<ul>
+<li><strong>Ultralytics YOLO</strong>：标记物检测</li>
+<li><strong>OpenCV + Kornia</strong>：图像旋转和变换</li>
+<li><strong>Shapely + Rasterio</strong>：几何处理和 masks</li>
+<li><strong>PyTorch</strong>：深度学习</li>
+<li><strong>FastAPI</strong>：REST API</li>
+</ul>
+<br>
+<h3>3. 核心算法</h3>
+<br>
+<p><strong>标记检测</strong> (<code class="inline-code">detection.py</code>)：</p>
+<ul>
+<li>使用YOLO模型检测两种标记：cross和circle</li>
+<li>置信度过滤和边界框中心提取</li>
+</ul>
+<br>
+<p><strong>标记匹配</strong> (<code class="inline-code">match.py</code>)：</p>
+<ul>
+<li>通过线性分配算法将检测到的cross和circle标记配对</li>
+<li>计算匹配距离与期望距离的误差，容忍度设置为5像素</li>
+<li>考虑置信度加权</li>
+</ul>
+<br>
+<p><strong>旋转估计</strong> (<code class="inline-code">rotation.py</code>)：</p>
+<ul>
+<li>计算成对标记方向向量与蓝图方向向量的夹角</li>
+<li>使用带符号角度 (<code class="inline-code">signed_angle_between</code>) 获取-180°~180°范围</li>
+<li>多对标记时取平均，并检查角度一致性</li>
+</ul>
+<br>
+<p><strong>图像旋转</strong>：</p>
+<ul>
+<li>支持CPU (OpenCV) 和 GPU (Kornia) 两种路径</li>
+<li>自动扩展边界以容纳旋转后的完整图像</li>
+</ul>
+<br>
+<p><strong>掩膜应用</strong> (<code class="inline-code">mask.py</code>)：</p>
+<ul>
+<li>基于匹配标记将ROI多边形定位到图像</li>
+<li>选择距离图像边界最远的ROI</li>
+<li>支持旋转-free模式，通过旋转多边形而非图像来节省计算</li>
+</ul>
+<br>
+<p><strong>芯片配置</strong> (<code class="inline-code">chip.py</code>)：</p>
+<ul>
+<li>统一JSON格式描述芯片设计： chamber多边形、标记位置、蓝图映射</li>
+<li>从GeoJSON坐标缩放到像素坐标</li>
+</ul>
+<br>
+<h3>4. 代码质量</h3>
+<br>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>✅ 模块化设计清晰，各模块职责单一</li>
+<li>✅ 类型注解完善，使用dataclass</li>
+<li>✅ 单元测试覆盖核心逻辑</li>
+<li>✅ 遵循PEP8，使用ruff格式化</li>
+<li>✅ 详细的文档字符串</li>
+<li>✅ 版本控制和CI/CD完善</li>
+</ul>
+<br>
+<p><strong>不足</strong>：</p>
+<ul>
+<li>⚠️ 部分函数过于通用化，存在双路径（GPU/CPU）可能引入复杂性</li>
+<li>⚠️ 一些硬编码的坐标转换逻辑在<code class="inline-code">calibration/core.py</code>中需要仔细观察</li>
+<li>⚠️ 缺少集成测试（标记为integration，默认不运行）</li>
+</ul>
+<br>
+<h3>5. 可复现性</h3>
+<br>
+<p><strong>非常优秀</strong>：</p>
+<ul>
+<li>✅ <code class="inline-code">pyproject.toml</code> 明确声明依赖</li>
+<li>✅ <code class="inline-code">Dockerfile</code> 完整，包含CUDA版本控制</li>
+<li>✅ <code class="inline-code">reproduce.sh</code> 脚本自动化实验复现</li>
+<li>✅ 自动下载模型和示例数据（~40MB）</li>
+<li>✅ 详细的配置文档 (<code class="inline-code">docs/configuration.md</code>, <code class="inline-code">docs/CHIP_CONFIG.md</code>)</li>
+<li>✅ 支持PyPI安装 (<code class="inline-code">pip install dart-mlci</code>)</li>
+</ul>
+<br>
+<p><strong>安装</strong>：</p>
+<pre class="code-block"><code class="language-bash">pip install ".[dev]"       # 核心 + 开发依赖
+pip install ".[api]"       # API服务
+pip install ".[segmentation]"  # 分割模型依赖</code></pre>
+<br>
+<h3>6. 与高通量细胞图像分析项目 (YOLO+SAM) 的相关性</h3>
+<br>
+<p><strong>可直接复用的模块</strong>：</p>
+<br>
+<ul>
+<li><strong>标记检测框架</strong> (<code class="inline-code">MarkerDetectionModel</code>)：</li>
+<li>YOLO模型的封装和推理接口</li>
+<li>可替换为你的YOLO检测器</li>
+</ul>
+<br>
+<ul>
+<li><strong>标记匹配算法</strong> (<code class="inline-code">match_markers</code>)：</li>
+<li>适用于需要根据模板匹配成对标记物的场景</li>
+<li>线性分配 + 距离约束</li>
+</ul>
+<br>
+<ul>
+<li><strong>芯片配置系统</strong> (<code class="inline-code">ChipStructureLibrary</code>)：</li>
+<li>统一的JSON配置描述芯片蓝图</li>
+<li>支持从几何坐标到像素坐标的转换</li>
+</ul>
+<br>
+<ul>
+<li><strong>流水线架构</strong> (<code class="inline-code">pipeline.py</code> 中的Step类)：</li>
+<li>链式调用设计 (<code class="inline-code">detect → match → rotate → mask</code>)</li>
+<li>缓存机制 (<code class="inline-code">ChamberPipelineCache</code>) 避免重复初始化</li>
+</ul>
+<br>
+<ul>
+<li><strong>掩膜生成</strong> (<code class="inline-code">apply_mask</code>)：</li>
+<li>基于多边形裁剪和掩膜操作</li>
+<li>支持 roi_if_needed 的边界处理</li>
+</ul>
+<br>
+<ul>
+<li><strong>坐标系统处理</strong>：</li>
+<li>蓝图坐标系 (Cartesian) 到图像坐标系 (Y-down) 的转换注意</li>
+</ul>
+<br>
+<p><strong>可参考的改进点</strong>：</p>
+<ul>
+<li>GPU加速路径设计（Kornia + 张量保持）</li>
+<li>旋转-free模式（避免昂贵图像旋转）</li>
+<li>自动化校准流程（三张标定图计算仿射变换）</li>
+<li>配置驱动的芯片设计（易于适配新芯片）</li>
+</ul>
+<br>
+<p><strong>适配你的场景建议</strong>：</p>
+<ul>
+<li>替换YOLO模型为你的细胞检测模型</li>
+<li>将标记物替换为你的参考点/特征</li>
+<li>使用SAM作为分割模块（已有<code class="inline-code">[segmentation]</code>支持Cellpose-SAM/Omnipose）</li>
+<li>利用Map校准实现高通量定位</li>
+</ul>
+<br>
+<h3>7. 综合评分</h3>
+<br>
+<p><strong>项目评分：9/10</strong></p>
+<br>
+<p><strong>计分理由</strong>：</p>
+<ul>
+<li>⭐⭐⭐⭐⭐ 架构设计优秀，模块化清晰（2/2）</li>
+<li>⭐⭐⭐⭐⭐ 文档完善，安装和复现性强（2/2）</li>
+<li>⭐⭐⭐⭐ 算法实现严谨，测试覆盖好（2/2）</li>
+<li>⭐⭐⭐⭐ 性能优化充分考虑GPU路径（1.5/2）</li>
+<li>⭐⭐⭐ 部分复杂逻辑可进一步简化（0.5/2）</li>
+</ul>
+<br>
+<p><strong>核心亮点</strong>：</p>
+<ul>
+<li>真正端到端解决方案：检测→对齐→掩膜→分割</li>
+<li>实时性能：40ms per image</li>
+<li>高度可配置：单一JSON描述芯片设计</li>
+<li>生产就绪：Docker、API、自动下载、版本管理</li>
+</ul>
+<br>
+<p><strong>对细胞分析项目的价值</strong>：可直接移植其对齐和定位模块，结合YOLO+SAM管线，实现自动化高通量细胞图像分析。</p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

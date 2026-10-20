@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ImPartial Wiki — subagent_report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / ImPartial Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>ImPartial</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/monailabel-app.html">monailabel-app</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/config.html">config</a></li>
+<li><a href="modules/data.html">data</a></li>
+<li><a href="modules/impartial.html">impartial</a></li>
+<li><a href="modules/imagej-plugin.html">imagej-plugin</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <p>现在我已经收集了足够的信息来进行全面分析。让我生成最终的结构化报告：</p>
+<br>
+<h2>ImPartial 仓库深度分析报告</h2>
+<br>
+<h3>1. 项目概述</h3>
+<p><strong>ImPartial</strong> 是一个由 Nadeem Lab 开发的深度学习框架，核心论文为《ImPartial: Multi-channel Whole-Cell Segmentation using Partial Annotations》（arXiv 2605.24128, MICCAI'26）。</p>
+<br>
+<p><strong>主要解决的问题</strong>：病理图像中的细胞分割通常需要密集的像素级标注，成本高昂且耗时。ImPartial 通过<strong>稀疏涂鸦标注（partial annotations）</strong>与<strong>自监督多通道量化插补</strong>相结合，用远少于完整像素标注的数据获得接近全监督的全细胞分割效果。</p>
+<br>
+<p><strong>核心创新</strong>：</p>
+<ul>
+<li>将图像块分为“插补块”和“盲点块”</li>
+<li>盲点块通过 U-Net 恢复分量混合和分量统计</li>
+<li>结合涂鸦损失和重建损失进行联合训练</li>
+<li>支持不确定性map引导的主动学习迭代优化</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h3>2. 架构分析</h3>
+<p><strong>目录结构</strong>：</p>
+<pre class="code-block"><code class="language-">ImPartial/
+├── impartial/               # 核心代码
+│   ├── general/             # 通用模块
+│   │   ├── networks.py      # U-Net 及变体网络
+│   │   ├── losses.py        # 损失函数（分割+重建+正则）
+│   │   ├── datasets.py      # 数据集和增强
+│   │   ├── training.py      # 训练器
+│   │   ├── inference.py     # 推理与不确定性计算
+│   │   └── config.py        # 配置管理
+│   └── dataprocessing/      # 数据处理
+├── monailabel-app/          # MONAI Label 集成
+├── imagej-plugin/           # ImageJ/Fiji 插件
+└── config/                  # 配置文件</code></pre>
+<br>
+<p><strong>依赖关系</strong>：</p>
+<ul>
+<li>Python &gt;= 3.10</li>
+<li>核心依赖：<code class="inline-code">monailabel==0.8.0</code>, <code class="inline-code">csbdeep==0.8.1</code>, <code class="inline-code">torch</code>, <code class="inline-code">scikit-learn</code></li>
+<li>支持多通道图像（最多3通道）</li>
+</ul>
+<br>
+<p><strong>主要模块</strong>：</p>
+<ul>
+<li><strong>网络</strong>：UNet、UNetFactors（混合模型输出）</li>
+<li><strong>数据加载</strong>：ImageBlindSpotDataset（盲点采样）</li>
+<li><strong>损失函数</strong>：ImpartialLoss（分割+重建+正则化）</li>
+<li><strong>训练器</strong>：Trainer（支持MC Dropout）</li>
+<li><strong>集成</strong>：MONAI Label API + ImageJ/Fiji 插件</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h3>3. 核心算法原理</h3>
+<br>
+<p><strong>网络架构</strong>：</p>
+<pre class="code-block"><code class="language-python"># impartial/general/networks.py
+class UNetFactors(nn.Module):
+    # 输入：多通道图像
+    # 输出：(分类分割, 混合因子, 重建分量)
+    - UNet 主干提取特征
+    - Softmax 混合因子 (n_factors)
+    - 全连接层映射到类别</code></pre>
+<br>
+<p><strong>损失函数</strong>（<code class="inline-code">impartial/general/losses.py</code>）：</p>
+<pre class="code-block"><code class="language-python">total_loss = α·seg_fore + β·seg_back + γ·rec + δ·reg</code></pre>
+<ul>
+<li><strong>seg_fore</strong>：前景点涂鸦损失（交叉熵）</li>
+<pre class="code-block"><code class="language-python">  # 仅对标注的像素计算损失
+  seg_class_loss = criterio_seg(out_seg_class, scribbles_class) * scribbles_class</code></pre>
+<li><strong>seg_back</strong>：背景涂鸦损失</li>
+<li><strong>rec</strong>：自监督重建损失（高斯/拉普拉斯）</li>
+<pre class="code-block"><code class="language-python">  rec_x = criterio_rec(input[:, ch], mean=mean_x, logstd=std_x) * (1 - mask)</code></pre>
+<li><strong>reg</strong>：Mumford-Shah 正则化（L1/L2梯度惩罚）</li>
+</ul>
+<br>
+<p><strong>数据增强</strong>：</p>
+<ul>
+<li>盲点采样：随机替换 5% 像素为邻域随机值</li>
+<li>几何变换：随机翻转、旋转</li>
+<li>通道置换：随机打乱通道顺序</li>
+<li>大小调整：多尺度 patch 采样</li>
+</ul>
+<br>
+<p><strong>不确定性估计</strong>：</p>
+<ul>
+<li>MC Dropout：多次前向传播计算方差</li>
+<li>熵图：指导用户标注高不确定性区域</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h3>4. 代码质量评估</h3>
+<br>
+<p><strong>优点</strong>：</p>
+<ul>
+<li><strong>模块化设计</strong>：网络、损失、数据集清晰分离</li>
+<li><strong>配置驱动</strong>：支持 INI 配置文件，灵活可调</li>
+<li><strong>文档完善</strong>：README 详细，QUICK_START 指南清晰</li>
+<li><strong>工程化</strong>：支持 Docker、AWS 云部署、MONAI Label API</li>
+</ul>
+<br>
+<p><strong>待改进</strong>：</p>
+<ul>
+<li><strong>测试覆盖</strong>：未见明显单元测试文件</li>
+<li><strong>类型注解</strong>：Python 代码缺少类型提示</li>
+<li><strong>依赖管理</strong>：requirements.txt 较简单，无版本锁定</li>
+<li><strong>错误处理</strong>：异常处理相对基础</li>
+</ul>
+<br>
+<p><strong>可维护性</strong>：中等偏上，代码结构清晰但缺少自动化测试</p>
+<br>
+<p>---</p>
+<br>
+<h3>5. 可复现性分析</h3>
+<br>
+<p><strong>✅ 良好支持</strong>：</p>
+<ul>
+<li><code class="inline-code">requirements.txt</code> 列出核心依赖</li>
+<li><code class="inline-code">Dockerfile</code> 支持容器化部署</li>
+<li>详细安装指南（本地、Docker、云）</li>
+<li>配置文件模板（config/ 目录下）</li>
+<li>公开数据集链接（VECTRA_2CH、CPDMFCI）</li>
+</ul>
+<br>
+<p><strong>⚠️ 注意事项</strong>：</p>
+<ul>
+<li>需要手动准备数据集（图像 + ROI）</li>
+<li>MONAI Label 安装需 GitHub 每周版本</li>
+<li>训练时间可能较长（EPOCHS=220）</li>
+</ul>
+<br>
+<p><strong>可复现性评分</strong>：8/10</p>
+<br>
+<p>---</p>
+<br>
+<h3>6. 与你的项目（YOLO+SAM 管线）相关性</h3>
+<br>
+<p><strong>可直接复用/参考的模块</strong>：</p>
+<br>
+<h4><strong>数据管道</strong>（高度相关）</h4>
+<pre class="code-block"><code class="language-python"># impartial/dataprocessing/reader.py
+- percentile_normalization：图像标准化
+- get_scribble：从标注生成涂鸦
+- prepare_data_train：训练数据准备流程</code></pre>
+<br>
+<h4><strong>增强策略</strong>（可借鉴）</h4>
+<pre class="code-block"><code class="language-python"># impartial/dataprocessing/datasets.py
+- BlindSpotPatch：盲点采样（可用于数据增强）
+- RandomPermuteChannel：通道置换
+- 多尺度 patch 采样</code></pre>
+<br>
+<h4><strong>损失函数设计</strong>（部分参考）</h4>
+<pre class="code-block"><code class="language-python"># impartial/general/losses.py
+- seglosses：自定义分割损失
+- reclosses：重建损失（高斯/拉普拉斯）
+- gradientLoss2d：梯度正则化</code></pre>
+<br>
+<h4><strong>后处理</strong>（可参考）</h4>
+<pre class="code-block"><code class="language-python"># impartial/general/figures.py
+- post_process：阈值分割 + 小对象移除 + 形态学膨胀
+- dilate_masks：实例分割后处理</code></pre>
+<br>
+<h4><strong>集成方案</strong>（架构参考）</h4>
+<ul>
+<li>MONAI Label API 模式： Webbased 主动学习</li>
+<li>不确定性量化：熵图指导标注</li>
+</ul>
+<br>
+<p><strong>不适用的部分</strong>：</p>
+<ul>
+<li>ImPartial 基于 U-Net（像素级分割）</li>
+<li>你的项目使用 YOLO（目标检测）+ SAM（分割）</li>
+<li>但<strong>多通道处理</strong>和<strong>主动学习流程</strong>可参考</li>
+</ul>
+<br>
+<p><strong>建议集成点</strong>：</p>
+<ul>
+<li>使用 ImPartial 的<strong>数据增强策略</strong>改进 SAM 训练</li>
+<li>参考其<strong>多任务损失设计</strong>（分割 + 重建）</li>
+<li>学习其<strong>不确定性感知的主动学习流程</strong></li>
+<li>借鉴<strong>配置化管理</strong>和<strong>Docker 部署方案</strong></li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h3>7. 总评分</h3>
+<br>
+<p>| 维度 | 评分 | 说明 |</p>
+<p>|------|------|------|</p>
+<p>| 创新性 | 9/10 | 稀疏标注 + 自监督重建的巧妙结合 |</p>
+<p>| 代码质量 | 7/10 | 结构清晰但缺少测试 |</p>
+<p>| 可复现性 | 8/10 | 文档详尽，依赖明确 |</p>
+<p>| 工程化 | 8/10 | 多平台部署支持 |</p>
+<p>| 与你项目相关性 | 6/10 | 数据管道和主动学习流程可参考 |</p>
+<br>
+<p><strong>综合评分：7.6/10</strong></p>
+<br>
+<p><strong>推荐学习重点</strong>：</p>
+<ul>
+<li>盲点采样数据增强策略</li>
+<li>多任务损失设计（分割 + 重建）</li>
+<li>不确定性感知的主动学习流程</li>
+<li>MONAI Label 集成模式</li>
+</ul>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

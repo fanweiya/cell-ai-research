@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>micro-sam Wiki — workshops</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / micro-sam Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>micro-sam</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/doc.html">doc</a></li>
+<li><a href="../modules/test.html">test</a></li>
+<li><a href="../modules/finetuning.html">finetuning</a></li>
+<li><a href="../modules/workshops.html">workshops</a></li>
+<li><a href="../modules/examples.html">examples</a></li>
+<li><a href="../modules/development.html">development</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/deployment.html">deployment</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/micro_sam.html">micro_sam</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>workshops</h1>
+<br>
+<p>&gt; 提供用于micro-sam工作坊的教程文档、数据下载脚本和模型下载脚本</p>
+<br>
+<p>该模块包含针对EPFL 2026、I2K 2024和TIM 2025三个工作坊的完整准备材料。每个工作坊子目录包含README教程文档、用于下载示例数据集和预计算嵌入的脚本、以及用于微调SAM模型的脚本。这些文件共同确保参与者能够在工作坊前安装软件、下载必要的数据和模型，并快速开始交互式分割和自动分割的练习。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">workshops/epfl_2026/README.md</code></h3>
+<br>
+<p>EPFL 2026工作坊的教程文档，包含安装指南、模型下载步骤和四个示例应用说明</p>
+<br>
+<h3><code class="inline-code">workshops/i2k_2024/README.md</code></h3>
+<br>
+<p>I2K 2024工作坊的教程文档，涵盖线下和线上工作坊的准备步骤</p>
+<br>
+<h3><code class="inline-code">workshops/tim_2025/README.md</code></h3>
+<br>
+<p>TIM 2025工作坊的教程文档，包含详细的安装说明和三个小时的议程</p>
+<br>
+<h3><code class="inline-code">workshops/epfl_2026/download_datasets.py</code></h3>
+<br>
+<p>下载工作坊所需示例数据集的脚本，支持细胞、3D细胞核、体积EM和HPA数据集</p>
+<br>
+<ul>
+<li><code class="inline-code">_download_sample_data</code> (function) - 从URL下载并解压数据集</li>
+<li><code class="inline-code">_get_cells_sample_data_paths</code> (function) - 获取2D细胞分割数据集路径</li>
+<li><code class="inline-code">_get_nuclei_3d_data_paths</code> (function) - 获取3D细胞核分割数据集路径</li>
+<li><code class="inline-code">_get_volume_em_data_paths</code> (function) - 获取体积EM分割数据集路径</li>
+<li><code class="inline-code">_get_hpa_data_paths</code> (function) - 获取HPA数据集路径</li>
+<li><code class="inline-code">_get_dataset_paths</code> (function) - 根据数据集名称返回路径并可选下载</li>
+</ul>
+<br>
+<h3><code class="inline-code">workshops/i2k_2024/download_datasets.py</code></h3>
+<br>
+<p>I2K 2024版本的数据下载脚本，支持owncloud和Google Drive两种下载源</p>
+<br>
+<ul>
+<li><code class="inline-code">_download_sample_data</code> (function) - 支持owncloud和drive的下载解压</li>
+<li><code class="inline-code">_get_cells_sample_data_paths</code> (function) - 获取细胞数据集路径</li>
+<li><code class="inline-code">_get_hpa_data_paths</code> (function) - 获取HPA数据集路径</li>
+<li><code class="inline-code">_get_nuclei_3d_data_paths</code> (function) - 获取3D细胞核数据集路径</li>
+<li><code class="inline-code">_get_volume_em_data_paths</code> (function) - 获取体积EM数据集路径</li>
+<li><code class="inline-code">_get_dataset_paths</code> (function) - 根据数据集名称和下载器返回路径</li>
+</ul>
+<br>
+<h3><code class="inline-code">workshops/tim_2025/download_datasets.py</code></h3>
+<br>
+<p>TIM 2025版本的数据下载脚本，与I2K版本类似但针对TIM工作坊优化</p>
+<br>
+<ul>
+<li><code class="inline-code">_download_sample_data</code> (function) - 下载并解压样本数据</li>
+<li><code class="inline-code">_get_cells_sample_data_paths</code> (function) - 获取细胞数据集路径</li>
+<li><code class="inline-code">_get_hpa_data_paths</code> (function) - 获取HPA数据集路径</li>
+<li><code class="inline-code">_get_nuclei_3d_data_paths</code> (function) - 获取3D细胞核数据集路径</li>
+<li><code class="inline-code">_get_volume_em_data_paths</code> (function) - 获取体积EM数据集路径</li>
+<li><code class="inline-code">_get_dataset_paths</code> (function) - 返回数据集路径</li>
+</ul>
+<br>
+<h3><code class="inline-code">workshops/epfl_2026/download_embeddings.py</code></h3>
+<br>
+<p>下载预计算图像嵌入的脚本，用于3D交互式分割</p>
+<br>
+<ul>
+<li><code class="inline-code">_download_embeddings</code> (function) - 下载并解压指定数据集的嵌入文件</li>
+<li><code class="inline-code">main</code> (function) - 解析命令行参数并调用下载函数</li>
+</ul>
+<br>
+<h3><code class="inline-code">workshops/i2k_2024/download_embeddings.py</code></h3>
+<br>
+<p>I2K 2024版本的嵌入下载脚本，支持owncloud和Google Drive</p>
+<br>
+<ul>
+<li><code class="inline-code">_download_embeddings</code> (function) - 根据下载器选择下载嵌入</li>
+<li><code class="inline-code">main</code> (function) - 解析参数并执行下载</li>
+</ul>
+<br>
+<h3><code class="inline-code">workshops/tim_2025/download_embeddings.py</code></h3>
+<br>
+<p>TIM 2025版本的嵌入下载脚本，与I2K版本结构相同</p>
+<br>
+<ul>
+<li><code class="inline-code">_download_embeddings</code> (function) - 下载嵌入文件</li>
+<li><code class="inline-code">main</code> (function) - 命令行入口</li>
+</ul>
+<br>
+<h3><code class="inline-code">workshops/epfl_2026/download_models.py</code></h3>
+<br>
+<p>下载micro-sam工作模型（vit_b_lm和vit_b_em_organelles）的脚本</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 调用get_sam_model下载两个模型</li>
+</ul>
+<br>
+<h3><code class="inline-code">workshops/i2k_2024/download_models.py</code></h3>
+<br>
+<p>I2K 2024版本的模型下载脚本，下载三个模型</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 下载vit_b、vit_b_lm和vit_b_em_organelles模型</li>
+</ul>
+<br>
+<h3><code class="inline-code">workshops/tim_2025/download_models.py</code></h3>
+<br>
+<p>TIM 2025版本的模型下载脚本，下载三个模型</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 下载三个SAM模型</li>
+</ul>
+<br>
+<h3><code class="inline-code">workshops/epfl_2026/finetune_sam.py</code></h3>
+<br>
+<p>使用HPA数据集微调SAM模型的示例脚本</p>
+<br>
+<ul>
+<li><code class="inline-code">load_images_and_labels</code> (function) - 加载图像和标签并预处理</li>
+<li><code class="inline-code">get_dataloaders</code> (function) - 创建训练和验证数据加载器</li>
+</ul>
+<br>
+<h3><code class="inline-code">workshops/i2k_2024/finetune_sam.py</code></h3>
+<br>
+<p>I2K 2024版本的微调脚本，包含数据下载、验证和预处理功能</p>
+<br>
+<ul>
+<li><code class="inline-code">download_dataset</code> (function) - 下载HPA数据集</li>
+<li><code class="inline-code">verify_inputs</code> (function) - 验证输入数据格式</li>
+<li><code class="inline-code">preprocess_inputs</code> (function) - 预处理图像数据</li>
+<li><code class="inline-code">visualize_inputs</code> (function) - 可视化图像和标签</li>
+</ul>
+<br>
+<h3><code class="inline-code">workshops/tim_2025/finetune_sam.py</code></h3>
+<br>
+<p>TIM 2025版本的微调脚本，与I2K版本功能相同</p>
+<br>
+<ul>
+<li><code class="inline-code">download_dataset</code> (function) - 下载数据集</li>
+<li><code class="inline-code">verify_inputs</code> (function) - 验证输入</li>
+<li><code class="inline-code">preprocess_inputs</code> (function) - 预处理输入</li>
+<li><code class="inline-code">visualize_inputs</code> (function) - 可视化输入</li>
+</ul>
+<br>
+<h3><code class="inline-code">workshops/tim_2025/check_omero_mask.py</code></h3>
+<br>
+<p>从OMERO服务器加载分割掩码并在napari中可视化的脚本</p>
+<br>
+<ul>
+<li><code class="inline-code">load_masks</code> (function) - 从OMERO加载ROI并转换为分割掩码</li>
+<li><code class="inline-code">main</code> (function) - 连接OMERO并可视化结果</li>
+</ul>
+<br>
+<h3><code class="inline-code">workshops/tim_2025/omero_utils.py</code></h3>
+<br>
+<p>OMERO连接和上传工具的实用函数库</p>
+<br>
+<ul>
+<li><code class="inline-code">connect_to_omero</code> (function) - 连接到OMERO服务器</li>
+<li><code class="inline-code">upload_lucchi</code> (function) - 上传Lucchi数据集到OMERO</li>
+<li><code class="inline-code">upload_livecell</code> (function) - 上传LiveCell数据到OMERO</li>
+<li><code class="inline-code">omero_credential_parser</code> (function) - 解析OMERO凭据参数</li>
+<li><code class="inline-code">create_dataset</code> (function) - 在OMERO中创建新数据集</li>
+</ul>
+<br>
+<h3><code class="inline-code">workshops/tim_2025/upload_segmentation_to_omero.py</code></h3>
+<br>
+<p>将分割结果上传到OMERO服务器的脚本，支持多边形和掩码格式</p>
+<br>
+<ul>
+<li><code class="inline-code">upload_as_polygon</code> (function) - 将分割作为多边形上传</li>
+<li><code class="inline-code">upload_as_mask</code> (function) - 将分割作为二值掩码上传</li>
+<li><code class="inline-code">upload_segmentation</code> (function) - 上传整个分割结果</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>预计算嵌入</strong>: 为3D交互式分割预先计算的图像特征嵌入，避免在CPU上实时计算的高耗时</li>
+<li><strong>SAM模型类型</strong>: workshops中使用的三种SAM变体：vit_b（通用）、vit_b_lm（光显微镜）、vit_b_em_organelles（电子显微镜细胞器）</li>
+<li><strong>数据下载器</strong>: 支持从owncloud或Google Drive下载数据，适应不同网络环境</li>
+<li><strong>OMERO集成</strong>: TIM 2025工作坊特有的功能，用于在OMERO服务器上传和加载分割结果</li>
+<li><strong>微调流程</strong>: 使用HPA数据集展示如何微调SAM模型以适应特定显微镜图像分割任务</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">workshops/epfl_2026/download_models.py</code> → <code class="inline-code">micro_sam.util</code>: 调用get_sam_model下载模型</li>
+<li><code class="inline-code">workshops/epfl_2026/download_embeddings.py</code> → <code class="inline-code">torch_em.data.datasets.util</code>: 使用下载和解压工具</li>
+<li><code class="inline-code">workshops/epfl_2026/finetune_sam.py</code> → <code class="inline-code">micro_sam.training</code>: 使用训练模块创建数据加载器</li>
+<li><code class="inline-code">workshops/i2k_2024/download_datasets.py</code> → <code class="inline-code">workshops/i2k_2024/download_embeddings.py</code>: 两者配合使用，先下载数据再下载嵌入</li>
+<li><code class="inline-code">workshops/tim_2025/check_omero_mask.py</code> → <code class="inline-code">workshops/tim_2025/omero_utils.py</code>: 使用omero_utils中的连接函数</li>
+<li><code class="inline-code">workshops/tim_2025/upload_segmentation_to_omero.py</code> → <code class="inline-code">workshops/tim_2025/omero_utils.py</code>: 使用omero_utils中的连接和凭证解析函数</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

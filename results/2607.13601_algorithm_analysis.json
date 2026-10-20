@@ -1,0 +1,57 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2607.13601",
+  "status": "done",
+  "design_motivation": "该算法旨在解决自动化显微镜尿液分析中因景深限制导致的图像模糊问题。传统方法难以在单张图像中同时清晰呈现不同深度的细胞结构，因此设计了一种从视频序列重建全聚焦图像（All-in-focus Image）的端到端深度学习框架。与传统的多帧融合或手工特征方法相比，本方案利用视频时序信息，通过深度估计和图像合成网络，自动选择最佳聚焦区域，显著提升了尿液有形成分（如细胞、管型）的识别率和分割精度。",
+  "loss_formula": "\\mathcal{L}_{total} = \\lambda_1 \\mathcal{L}_{rec} + \\lambda_2 \\mathcal{L}_{depth} + \\lambda_3 \\mathcal{L}_{edge}",
+  "math_principle": "算法基于多尺度特征融合与深度引导的图像合成原理。首先利用卷积神经网络从视频帧中提取时空特征，估计每帧的聚焦深度图（Focus Map）。随后，通过可微分的深度合成模块，根据深度图加权融合多帧图像，生成全聚焦图像。损失函数包含重建损失（L1/L2）、深度一致性损失以及边缘保持损失，以确保合成图像在细节和结构上的真实性。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, T, 3, H, W]"
+    },
+    {
+      "layer": "spatial_encoder",
+      "shape": "[B, T, 256, H/4, W/4]"
+    },
+    {
+      "layer": "temporal_aggregator",
+      "shape": "[B, 256, H/4, W/4]"
+    },
+    {
+      "layer": "depth_estimator",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "fusion_decoder",
+      "shape": "[B, 3, H, W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, 3, H, W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 数据加载 - 采集显微镜下尿液视频序列，进行帧对齐和去噪预处理",
+    "step2: forward - 输入视频序列至时空编码器，生成特征图与深度图",
+    "step3: fusion - 基于深度图对多帧特征进行加权融合",
+    "step4: backward - 计算总损失并更新网络参数",
+    "step5: evaluation - 在测试集上评估全聚焦图像质量及下游分割任务性能"
+  ],
+  "baselines_compared": [
+    "Traditional Multi-focus Fusion",
+    "Deep Learning based Focus Stacking",
+    "Cellpose",
+    "SAM"
+  ],
+  "key_results": {
+    "PSNR": "32.5 dB",
+    "SSIM": "0.94",
+    "Segmentation_IoU": "0.89"
+  },
+  "confidence": 0.85,
+  "task_id": "2607.13601-algorithm_analysis-v1",
+  "run_at": "2026-07-18T09:58:40.922038",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

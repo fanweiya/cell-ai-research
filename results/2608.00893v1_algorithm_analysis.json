@@ -1,0 +1,48 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2608.00893v1",
+  "status": "done",
+  "design_motivation": "针对传统有限差分法求解局部Chan-Vese (LCV) 模型效率低且存在网格方向偏差的问题，提出基于Merriman-Bence-Osher (MBO) 方案的替代算法。该方案利用谱离散化（FFT）处理扩散步骤，实现各向同性、无网格方向偏差的演化，同时通过算子分裂将复杂的偏微分方程分解为线性ODE、热方程和阈值化三个简单子步骤，显著提升了计算效率和数值稳定性。",
+  "loss_formula": "LCV能量泛函：\\[ E(u, c_1, c_2) = \\int_\\Omega \\left( \\frac{\\epsilon}{2}|\\nabla u|^2 + \\frac{1}{\\epsilon}W(u) + \\lambda_1 g(x)|u - c_1|^2 + \\lambda_2 g(x)|1-u - c_2|^2 \\right) dx \\]",
+  "math_principle": "基于变分法推导Euler-Lagrange梯度流方程，采用算子分裂策略（Operator Splitting）进行时间离散化。核心数学原理包括：1) 相场近似（Phase-field approximation）将界面能转化为Ginzburg-Landau双势阱能量；2) 热方程扩散步骤在傅里叶域通过FFT显式求解；3) 非线性ODE步骤通过阈值化操作（Thresholding）实现相分离。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, H, W, C]"
+    },
+    {
+      "layer": "local_fidelity",
+      "shape": "[B, H, W, C]"
+    },
+    {
+      "layer": "diffusion_fft",
+      "shape": "[B, H, W, C]"
+    },
+    {
+      "layer": "thresholding",
+      "shape": "[B, H, W, 1]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 初始化水平集函数或特征函数",
+    "step2: 计算局部区域均值 c_k",
+    "step3: 求解线性ODE子步骤",
+    "step4: 在傅里叶域求解热方程扩散子步骤",
+    "step5: 执行阈值化操作更新相场",
+    "step6: 迭代直至能量收敛"
+  ],
+  "baselines_compared": [
+    "Finite Difference (IPOL)",
+    "Classical Chan-Vese (CV)"
+  ],
+  "key_results": {
+    "convergence": "能量单调下降",
+    "robustness": "对光照不均匀和噪声具有强鲁棒性",
+    "efficiency": "相比有限差分法计算效率更高，无网格方向偏差"
+  },
+  "confidence": 0.95,
+  "task_id": "2608.00893v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:47:46.429148",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

@@ -1,0 +1,50 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2605.03053v1",
+  "status": "done",
+  "design_motivation": "现有单一工具无法在所有测试条件下对类器官图像进行足够准确的分割。设计动机是将通用基础模型SAM与特定领域工具结合，利用SAM的泛化能力和领域工具的专业性，以达到接近人工标注的分割质量。",
+  "loss_formula": "未明确给出单一核心Loss公式，主要依赖SAM的掩码生成损失与领域工具的优化目标组合。",
+  "math_principle": "通过集成学习策略，结合SAM的提示编码（Prompt Encoding）与领域特定分割算法的形态学约束，最小化自动分割结果与人工标注之间的IoU差异。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, H, W, 3]"
+    },
+    {
+      "layer": "sam_encoder",
+      "shape": "[B, 256, H/16, W/16]"
+    },
+    {
+      "layer": "domain_tool",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "fusion",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, 1, H, W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载类器官图像数据及人工标注掩码",
+    "step2: 使用SAM生成初始分割掩码",
+    "step3: 应用领域特定工具进行后处理优化",
+    "step4: 计算与人工标注的IoU并评估性能"
+  ],
+  "baselines_compared": [
+    "Cellpose",
+    "SAM",
+    "Manual Annotation"
+  ],
+  "key_results": {
+    "inter_observer_similarity": "接近人工标注者间变异水平",
+    "accuracy_across_conditions": "在所有测试条件下表现一致且准确，仅极少数困难图像例外"
+  },
+  "confidence": 0.85,
+  "task_id": "2605.03053v1-algorithm_analysis-v1",
+  "run_at": "2026-07-24T09:12:15.217708",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

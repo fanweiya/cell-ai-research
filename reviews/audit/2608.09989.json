@@ -1,0 +1,34 @@
+{
+ "id": "2608.09989",
+ "chars": 32737,
+ "statistics": {
+  "checks": {
+   "has_p_value": true,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": false,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 7
+ },
+ "key_claims": [
+  "these improved error rates generally hovered between 0.",
+  "small training set supervised regression models were trained on the ncd output space to map the ncd to δ \\delta vfmd, leveraging the smooth characteristics of the metric embedding (rkhs) kernel to imp",
+  "our approach to predicting the change in visual field function ( δ \\delta vfmd) differs from most existing approaches but is able to achieve improved accuracy with a fundamentally unsupervised model."
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+   "doi": null
+  }
+ ],
+ "citation_results": []
+}

@@ -1,0 +1,33 @@
+{
+ "id": "2608.12035",
+ "chars": 60000,
+ "statistics": {
+  "checks": {
+   "has_p_value": true,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": true,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": false,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 9
+ },
+ "key_claims": [
+  "), and surpasses targetonly for three.",
+  ") exceeds sourceonly in eight of the eleven scenarios, and in two it even surpasses targetonly .",
+  "as shown in table 4 , a small budget improves selection steadily, surpassing both best val."
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+   "doi": null
+  }
+ ],
+ "citation_results": []
+}

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "论文方法核心图示：对比CutMix、MixUp与SlideMix对全切片图像增强及其正/负类注意力热图效果"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "SlideMix方法总体架构图，展示VARS模块、ITS模块、VLM软标签、Tile Sampler、CLF模块及Patch/Similarity/Mix Ratio调度器的完整流程"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "VLM区域选择器方法流程图：展示利用RAG从PubMed检索上下文、构建提示词、并用Gemini筛选WSI中医学相关区域的流程"
+  }
+}

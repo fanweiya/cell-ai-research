@@ -1,0 +1,37 @@
+{
+ "id": "2608.17337",
+ "chars": 60000,
+ "statistics": {
+  "checks": {
+   "has_p_value": true,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": true,
+   "has_fdr": true,
+   "mentions_ablation": false,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "score": 8
+ },
+ "key_claims": [
+  "on tcga-ucec and tcga-ucs, spatie also improved or matched upfm across downstream tasks covering morphological diagnosis, gene prediction, and survival prediction (sec.",
+  "compared with upfm, spatie preserved a similarly rich but more uterus-adapted embedding structure, suggesting that domain-adapted self-supervised learning improved the representation of uterine-specif",
+  "these results indicate that spatie improves both structural organization and information distribution in the latent histopathological representation, providing a stable feature basis for subsequent tu"
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "DINOv2: Learning Robust Visual Features without Supervision",
+   "doi": null
+  },
+  {
+   "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+   "doi": null
+  }
+ ],
+ "citation_results": []
+}

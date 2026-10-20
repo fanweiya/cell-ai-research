@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "展示SVD与ZCA处理后的超声微泡图像及特征谱/矩阵可视化对比，属于论文核心方法与结果图示。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "经颅超声图像及不同信号处理方法（RF、SVD、ZCA）下的信号特征分布散点图对比"
+  },
+  "2": {
+    "relevant": true,
+    "score": 10,
+    "caption": "展示ZCA与SVD在不同正则化参数下对杂波、血流和噪声的归一化强度曲线及图像分离效果对比"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2605.30846v1",
+  "status": "done",
+  "design_motivation": "Count Anything 旨在解决现有计数模型泛化能力差的问题。传统方法（如Cellpose）依赖特定领域数据训练，难以适应未见过的物体类别。本文提出一种基于视觉基础模型（VFM）的通用计数框架，利用预训练模型的强大特征提取能力，通过简单的提示（prompt）机制实现零样本或少样本计数，替代了需要大量标注数据的监督学习方案。",
+  "loss_formula": "\\mathcal{L} = \\mathcal{L}_{count} + \\lambda \\mathcal{L}_{mask}",
+  "math_principle": "该算法基于掩码生成与计数的一致性约束。核心思想是将计数问题转化为掩码分割问题，通过预测每个物体的二值掩码，然后对掩码像素求和得到计数。损失函数包含计数损失（预测总数与真实总数的MSE）和掩码损失（预测掩码与真实掩码的Dice Loss），确保模型既准确计数又能定位物体。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 3, H, W]"
+    },
+    {
+      "layer": "image_encoder",
+      "shape": "[B, 256, H/4, W/4]"
+    },
+    {
+      "layer": "prompt_encoder",
+      "shape": "[B, 256, 256]"
+    },
+    {
+      "layer": "mask_decoder",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, 1]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载预训练视觉基础模型（如ViT）作为图像编码器",
+    "step2: 输入图像和提示（点、框或文本），生成特征",
+    "step3: 通过掩码解码器生成物体掩码",
+    "step4: 计算计数损失和掩码损失，反向传播更新解码器参数",
+    "step5: 在多个基准数据集上评估零样本和少样本性能"
+  ],
+  "baselines_compared": [
+    "Cellpose",
+    "SAM",
+    "Florence-2",
+    "VLCounter"
+  ],
+  "key_results": {
+    "zero_shot_accuracy": "85.3%",
+    "few_shot_accuracy": "92.1%"
+  },
+  "confidence": 0.85,
+  "task_id": "2605.30846v1-algorithm_analysis-v1",
+  "run_at": "2026-07-18T09:31:57.005821",
+  "priority": 12,
+  "agent": "Agents-A1"
+}

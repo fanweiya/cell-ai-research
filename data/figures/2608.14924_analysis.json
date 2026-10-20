@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "PaSTel方法整体架构图：WSI图像块经Vision Transformer与病理/通路句子经文本编码器进行多尺度对比学习，并对齐空间转录组区域表征"
+  },
+  "1": {
+    "relevant": true,
+    "score": 7,
+    "caption": "多数据集（HER2、Kidney、Breast Cancer）下MSE和PCC随Ratio变化的折线对比实验图，比较PaSTel与其他方法性能"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "PaSTel与BLEEP、HistToGene、mcSTExp、OmniCLIP等基线方法在空间转录组基因表达预测上的空间可视化对比图（含PCC指标），属于实验结果对比图"
+  }
+}

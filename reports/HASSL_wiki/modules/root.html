@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HASSL Wiki — root</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / HASSL Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>HASSL</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/docs.html">docs</a></li>
+<li><a href="../modules/dinov3.html">dinov3</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>root</h1>
+<br>
+<p>&gt; 配置和文档根目录，用于定义项目结构、依赖、许可及运行环境。</p>
+<br>
+<p>该模块包含 HASSL 项目的核心配置文件和文档。README.md 是项目的主入口，详细阐述了 HASSL 框架的动机、双教师蒸馏和层次感知对比损失两大核心组件，以及训练流程和数据集信息。pyproject.toml 和 setup.py 定义了 Python 包元数据、依赖项和安装配置。requirements.txt 和 conda.yaml 分别指定了 pip 和 conda 环境的具体依赖版本。hubconf.py 提供了通过 PyTorch Hub 加载预训练模型的接口。LICENSE.md、CODE_OF_CONDUCT.md 和 CONTRIBUTING.md 分别规定了法律许可、行为准则和贡献指南。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">README.md</code></h3>
+<br>
+<p>项目主文档，介绍 HASSL 框架、安装步骤、训练流程和数据集。</p>
+<br>
+<h3><code class="inline-code">pyproject.toml</code></h3>
+<br>
+<p>配置代码质量工具（mypy, pylint, ruff）的规则和排除项。</p>
+<br>
+<h3><code class="inline-code">requirements.txt</code></h3>
+<br>
+<p>列出项目运行时所需的所有 Python 依赖包及其版本。</p>
+<br>
+<h3><code class="inline-code">setup.py</code></h3>
+<br>
+<p>定义 Python 包的元数据、依赖项和安装逻辑，用于构建和分发 dinov3 包。</p>
+<br>
+<ul>
+<li><code class="inline-code">get_requirements</code> (function) - 解析 requirements.txt 文件，返回依赖列表和额外索引 URL。</li>
+<li><code class="inline-code">get_package_version</code> (function) - 从 dinov3/__init__.py 中读取并返回包的版本号。</li>
+<li><code class="inline-code">setup</code> (function) - 调用 setuptools 配置包安装信息。</li>
+</ul>
+<br>
+<h3><code class="inline-code">.docstr.yaml</code></h3>
+<br>
+<p>配置 docstr-coverage 工具，用于检查文档字符串覆盖率。</p>
+<br>
+<h3><code class="inline-code">.gitignore</code></h3>
+<br>
+<p>定义 Git 版本控制中需要忽略的文件和目录模式。</p>
+<br>
+<h3><code class="inline-code">CODE_OF_CONDUCT.md</code></h3>
+<br>
+<p>规定项目社区的行为准则和举报机制。</p>
+<br>
+<h3><code class="inline-code">CONTRIBUTING.md</code></h3>
+<br>
+<p>指导开发者如何向项目提交贡献（PR、Issue、CLA）。</p>
+<br>
+<h3><code class="inline-code">LICENSE.md</code></h3>
+<br>
+<p>声明 DINOv3 项目的许可条款和使用限制。</p>
+<br>
+<h3><code class="inline-code">MODEL_CARD.md</code></h3>
+<br>
+<p>提供 DINOv3 模型的技术细节、用途、偏见风险和快速入门指南。</p>
+<br>
+<h3><code class="inline-code">conda.yaml</code></h3>
+<br>
+<p>定义使用 conda 创建项目环境所需的依赖包。</p>
+<br>
+<h3><code class="inline-code">hubconf.py</code></h3>
+<br>
+<p>暴露 PyTorch Hub 接口，允许用户通过 torch.hub.load 加载预训练模型。</p>
+<br>
+<ul>
+<li><code class="inline-code">dinov3_vits16</code> (function) - 加载 dinov3_vits16 模型。</li>
+<li><code class="inline-code">dinov3_vit7b16</code> (function) - 加载 dinov3_vit7b16 模型。</li>
+<li><code class="inline-code">dinov3_convnext_tiny</code> (function) - 加载 dinov3_convnext_tiny 模型。</li>
+</ul>
+<br>
+<h3><code class="inline-code">requirements-dev.txt</code></h3>
+<br>
+<p>列出开发环境所需的额外工具依赖（如 linting, type checking）。</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>HASSL (Hierarchy-Aware Self-Supervised Learning)</strong>: 一种针对单细胞显微图像的层次感知自监督学习框架，旨在解决粗粒度成像因素掩盖细粒度形态学信号的问题。</li>
+<li><strong>Double-Teacher Distillation</strong>: HASSL 的核心组件之一，结合标准 EMA 图像教师和一个基于零样本分割掩码（CellposeSAM）的分割教师，以引导模型关注细胞形态而非成像模态。</li>
+<li><strong>Hierarchy-Aware Contrastive Loss</strong>: HASSL 的另一个核心组件，利用 HDBSCAN 在批次嵌入上构建聚类树，并通过稳定性加权（λ）在每一层级挖掘正负原型，实现层次一致的对比学习。</li>
+<li><strong>DINOv3</strong>: HASSL 构建的基础视觉基础模型系列，提供高质量的密集特征，支持多种下游任务。</li>
+<li><strong>PyTorch Hub Integration</strong>: 通过 hubconf.py 实现与 PyTorch Hub 的无缝集成，方便用户直接加载和使用预训练模型。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">setup.py</code> → <code class="inline-code">requirements.txt</code>: setup.py 读取 requirements.txt 以获取安装依赖。</li>
+<li><code class="inline-code">setup.py</code> → <code class="inline-code">dinov3/__init__.py</code>: setup.py 读取 dinov3/__init__.py 以获取版本号。</li>
+<li><code class="inline-code">hubconf.py</code> → <code class="inline-code">dinov3.hub.backbones</code>: hubconf.py 从 dinov3.hub.backbones 模块导入模型加载函数。</li>
+<li><code class="inline-code">hubconf.py</code> → <code class="inline-code">dinov3.hub.classifiers</code>: hubconf.py 从 dinov3.hub.classifiers 模块导入分类器模型。</li>
+<li><code class="inline-code">hubconf.py</code> → <code class="inline-code">dinov3.hub.segmentors</code>: hubconf.py 从 dinov3.hub.segmentors 模块导入分割模型。</li>
+<li><code class="inline-code">README.md</code> → <code class="inline-code">conda.yaml</code>: README.md 中的安装指南引用 conda.yaml 来创建环境。</li>
+<li><code class="inline-code">README.md</code> → <code class="inline-code">requirements.txt</code>: README.md 中的安装指南引用 requirements.txt 作为依赖列表。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

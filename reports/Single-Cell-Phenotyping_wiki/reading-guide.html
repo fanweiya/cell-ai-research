@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Single-Cell-Phenotyping Wiki — reading-guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / Single-Cell-Phenotyping Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>Single-Cell-Phenotyping</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Reading Guide</h1>
+<br>
+<p>本指南旨在帮助你系统性地理解这个无标签单细胞表型分类与蛋白表达回归的多任务学习框架。建议按照从配置到核心逻辑，再到辅助工具的顺序阅读，重点关注数据流和模型架构。</p>
+<br>
+<h2>Step 1: 理解项目概览与环境配置 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">README.md</code>, <code class="inline-code">requirements.txt</code></p>
+<br>
+<p>首先阅读README.md了解项目目标、核心功能和使用方法，然后查看requirements.txt确认依赖包版本，确保开发环境一致性。</p>
+<br>
+<h2>Step 2: 掌握数据加载与预处理流程 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">data_loading.py</code>, <code class="inline-code">bccd_data_loading.py</code></p>
+<br>
+<p>重点关注数据读取、清洗、特征提取和批次处理逻辑，理解单细胞数据如何被转换为模型可接受的格式，这是整个框架的基础。</p>
+<br>
+<h2>Step 3: 深入模型架构与多任务设计 (~25 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">model.py</code>, <code class="inline-code">losses.py</code></p>
+<br>
+<p>分析模型结构，特别是多任务学习部分如何同时处理分类和回归任务，以及自定义损失函数的设计原理和权重平衡策略。</p>
+<br>
+<h2>Step 4: 学习训练循环与优化策略 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">train.py</code></p>
+<br>
+<p>研究训练循环的实现，包括数据迭代、模型更新、验证机制和早停策略，理解如何监控训练过程并防止过拟合。</p>
+<br>
+<h2>Step 5: 掌握模型评估与结果分析 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">evaluate.py</code>, <code class="inline-code">llm_summarizer.py</code></p>
+<br>
+<p>了解评估指标的计算方式、结果可视化方法，以及LLM摘要器如何自动化生成实验报告，这对结果解释很重要。</p>
+<br>
+<h2>Step 6: 探索代码图工具与调试 (~5 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">.codegraph/.gitignore</code></p>
+<br>
+<p>虽然主要是配置，但了解.codegraph如何管理代码图数据有助于理解项目的代码组织结构和依赖关系可视化。</p>
+<br>
+<h2>Tips</h2>
+<br>
+<ul>
+<li>在阅读数据加载文件时，注意区分不同数据源的处理差异</li>
+<li>重点关注多任务学习中分类和回归任务的梯度平衡机制</li>
+<li>遇到复杂逻辑时，先画数据流程图再深入代码细节</li>
+<li>利用README中的示例代码快速验证理解</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

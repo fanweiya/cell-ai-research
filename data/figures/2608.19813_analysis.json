@@ -1,0 +1,7 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 7,
+    "caption": "Energy-Mamba与纯SSM基线在不同块深度下相对能量梯度方向的平均余弦相似度对比曲线，展示物理约束的有效性"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "paper_id": "2608.14759",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种名为TTIS的测试时实例选择框架，用于改进全切片图像（WSI）分类任务中的多实例学习（MIL）模型性能。通过结合分层聚类、分层采样和多视角集成，TTIS在多个数据集上展示了对现有MIL模型的性能提升。论文方法具有创新性，并在实验部分展示了其有效性。然而，在方法论和统计报告方面存在一些关键问题，可能影响结果的可信度和方法的可复现性。",
+  "strengths": [
+    "TTIS框架结合了空间和语义信息，通过分层聚类和Farthest Point Sampling（FPS）进行高效实例选择，这一方法具有创新性。",
+    "实验部分覆盖了多个公开数据集，并与随机采样和无实例选择的基线进行了比较，展示了TTIS在多数模型上的性能提升。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "论文声称TTIS在多个MIL模型上一致提升了性能。",
+      "concern": "论文未提供足够的细节来解释TTIS如何具体提升模型性能，例如是否通过减少冗余信息、增强代表性样本的覆盖范围，还是通过其他机制。此外，对于不同MIL模型（如ABMIL、TransMIL等）的提升程度不同，但论文未分析其潜在原因。",
+      "why_it_matters": "缺乏对性能提升机制的深入分析，使得读者难以理解TTIS的有效性来源，从而影响方法的可推广性和理论贡献。",
+      "resolution_test": "需要补充对TTIS如何影响模型预测的详细分析，例如通过可视化样本选择结果、分析冗余样本的减少程度，或对比不同MIL模型的响应机制。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "statistics",
+      "claim_pointer": "论文声称TTIS在CAMELYON16上实现了显著的性能提升。",
+      "concern": "论文在表格1中报告了结果的均值和标准差，但未明确说明统计检验方法（如t-test）是否支持这些提升具有统计显著性。此外，对于不同模型的提升幅度，论文未提供p值或置信区间。",
+      "why_it_matters": "缺乏统计显著性检验可能导致对结果的过度解读，影响结论的可信度。",
+      "resolution_test": "需要补充统计检验结果，如p值或置信区间，以验证性能提升的显著性。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "generalizability",
+      "claim_pointer": "论文声称TTIS适用于多种MIL模型和数据集。",
+      "concern": "虽然TTIS在多个数据集和MIL模型上进行了实验，但所有实验均基于单一GPU（NVIDIA RTX A6000）进行，未讨论在不同硬件配置或更大规模数据集上的可扩展性。",
+      "why_it_matters": "缺乏对计算资源需求和可扩展性的讨论，可能限制TTIS在实际应用中的适用性。",
+      "resolution_test": "需要补充对TTIS在不同硬件配置下的运行时间和内存消耗的分析，以评估其可扩展性。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "citation",
+      "claim_pointer": "论文引用了TITAN和MUSK作为预训练模型。",
+      "concern": "论文引用了TITAN和MUSK，但未明确说明这些模型的训练数据是否与实验中使用的数据集重叠，可能影响对TTIS性能的评估。",
+      "why_it_matters": "如果预训练模型的训练数据与实验数据集重叠，可能导致性能评估的偏差。",
+      "resolution_test": "需要明确说明TITAN和MUSK的训练数据来源，并确保与实验数据集无重叠。"
+    }
+  ],
+  "assessment_boundaries": [
+    "论文未提供代码或具体实现细节，因此无法评估方法的可复现性。",
+    "由于实验仅在固定随机种子下进行，无法评估结果的稳定性。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

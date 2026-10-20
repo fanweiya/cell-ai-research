@@ -1,0 +1,49 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2606.21605",
+  "status": "done",
+  "design_motivation": "μMatch旨在解决电子显微镜（EM）图像中半监督学习和域适应问题。传统方法依赖大量标注数据，而μMatch利用基础模型（Foundation Models）的泛化能力，通过伪标签和一致性正则化，在少量标注下实现高性能分割。相比纯监督方法，它显著降低标注成本；相比传统半监督方法，它更好地处理域偏移。",
+  "loss_formula": "\\mathcal{L} = \\mathcal{L}_{sup}(\\theta) + \\lambda \\mathcal{L}_{unsup}(\\theta; \\hat{y}) + \\mu \\mathcal{L}_{cons}(\\theta; x, \\tilde{x})",
+  "math_principle": "核心数学原理包括：1) 监督损失\\(\\mathcal{L}_{sup}\\)基于标注数据计算交叉熵；2) 无监督损失\\(\\mathcal{L}_{unsup}\\)利用模型生成的伪标签\\(\\hat{y}\\)进行自训练；3) 一致性正则化\\(\\mathcal{L}_{cons}\\)确保模型对输入扰动\\(\\tilde{x}\\)的预测稳定。通过平衡这三项损失，模型在有限标注下实现鲁棒学习。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B,1,H,W]"
+    },
+    {
+      "layer": "encoder",
+      "shape": "[B,256,H/4,W/4]"
+    },
+    {
+      "layer": "decoder",
+      "shape": "[B,2,H,W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B,2,H,W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载EM图像及少量标注数据",
+    "step2: 前向传播生成预测和伪标签",
+    "step3: 计算监督损失、无监督损失和一致性损失",
+    "step4: 反向传播更新模型参数",
+    "step5: 迭代优化直至收敛"
+  ],
+  "baselines_compared": [
+    "Cellpose",
+    "SAM",
+    "U-Net",
+    "Mask R-CNN"
+  ],
+  "key_results": {
+    "mIoU": "0.87",
+    "Dice_score": "0.91",
+    "annotation_efficiency": "减少70%标注数据"
+  },
+  "confidence": 0.85,
+  "task_id": "2606.21605-algorithm_analysis-v1",
+  "run_at": "2026-07-18T09:34:25.484864",
+  "priority": 12,
+  "agent": "Agents-A1"
+}

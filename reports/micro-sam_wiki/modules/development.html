@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>micro-sam Wiki — development</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / micro-sam Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>micro-sam</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/doc.html">doc</a></li>
+<li><a href="../modules/test.html">test</a></li>
+<li><a href="../modules/finetuning.html">finetuning</a></li>
+<li><a href="../modules/workshops.html">workshops</a></li>
+<li><a href="../modules/examples.html">examples</a></li>
+<li><a href="../modules/development.html">development</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/deployment.html">deployment</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/micro_sam.html">micro_sam</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>development</h1>
+<br>
+<p>&gt; 存放用于开发新功能（如实例分割、跟踪、3D分割、微调）的脚本和工具。</p>
+<br>
+<p>该模块包含一系列实验性脚本，用于开发和完善micro-sam的额外功能。这些脚本通常变化较快，可能不稳定。主要涵盖3D和分块图像分割、时间序列跟踪、自动提示生成、模型微调、基准测试以及数据检查等任务。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">development/README.md</code></h3>
+<br>
+<p>提供模块概述和使用说明，警告脚本处于开发阶段。</p>
+<br>
+<h3><code class="inline-code">development/annotator_3d_tiled.py</code></h3>
+<br>
+<p>演示如何在3D数据上使用分块（tiling）策略进行交互式标注和实例分割，以处理大内存需求。</p>
+<br>
+<ul>
+<li><code class="inline-code">annotator_with_tiling</code> (function) - 加载3D数据并使用分块策略启动3D标注器。</li>
+<li><code class="inline-code">segment_tiled</code> (function) - 使用分块预计算嵌入并执行3D实例分割。</li>
+</ul>
+<br>
+<h3><code class="inline-code">development/annotator_tracking_tiled.py</code></h3>
+<br>
+<p>演示在时间序列数据上使用分块策略进行交互式跟踪标注。</p>
+<br>
+<ul>
+<li><code class="inline-code">annotator_with_tiling</code> (function) - 加载时间序列数据并使用分块策略启动跟踪标注器。</li>
+</ul>
+<br>
+<h3><code class="inline-code">development/annotators_in_image_series.py</code></h3>
+<br>
+<p>提供处理大型3D体积的不同策略：一次性加载整个体积、逐切片加载或按批次加载切片。</p>
+<br>
+<ul>
+<li><code class="inline-code">segment_volume</code> (function) - 将整个3D体积加载到工具中进行分割。</li>
+<li><code class="inline-code">segment_each_slice</code> (function) - 逐个切片加载体积并使用图像系列标注器。</li>
+<li><code class="inline-code">segment_each_n_slices</code> (function) - 将体积按Z轴批次（n个切片）分割并逐个处理。</li>
+</ul>
+<br>
+<h3><code class="inline-code">development/apg_example.py</code></h3>
+<br>
+<p>展示自动提示生成器（Automatic Prompt Generator）的使用，包括标准模式和分块模式，以及全切片图像（WSI）处理示例。</p>
+<br>
+<ul>
+<li><code class="inline-code">example_script</code> (function) - 使用AutomaticPromptGenerator进行2D自动分割的示例。</li>
+<li><code class="inline-code">example_script_tiled</code> (function) - 使用TiledAutomaticPromptGenerator进行分块自动分割的示例。</li>
+<li><code class="inline-code">example_script_wsi</code> (function) - 处理全切片图像（WSI）的示例，包含掩膜优化。</li>
+</ul>
+<br>
+<h3><code class="inline-code">development/benchmark.py</code></h3>
+<br>
+<p>运行性能基准测试，评估不同模型和设备下嵌入计算、提示分割等操作的运行时间。</p>
+<br>
+<ul>
+<li><code class="inline-code">benchmark_embeddings</code> (function) - 测量预计算图像嵌入的时间。</li>
+<li><code class="inline-code">benchmark_prompts</code> (function) - 测量基于点、框等提示进行分割的时间。</li>
+</ul>
+<br>
+<h3><code class="inline-code">development/check_3d_model.py</code></h3>
+<br>
+<p>用于测试和训练3D SAM模型（SemanticSamTrainer3D）的脚本。</p>
+<br>
+<ul>
+<li><code class="inline-code">predict_3d_model</code> (function) - 加载3D SAM模型并进行前向预测。</li>
+<li><code class="inline-code">train_3d_model</code> (function) - 使用虚拟数据集训练3D SAM模型。</li>
+</ul>
+<br>
+<h3><code class="inline-code">development/check_data_count.py</code></h3>
+<br>
+<p>统计和打印常用显微图像数据集（如LIVECell, DeepBacs, TissueNet等）的图像和对象数量。</p>
+<br>
+<ul>
+<li><code class="inline-code">check_data_count</code> (function) - 遍历多个数据集并统计图像和实例数量。</li>
+</ul>
+<br>
+<h3><code class="inline-code">development/check_omero_connection.py</code></h3>
+<br>
+<p>演示如何连接OMERO服务器，获取图像数据，使用micro-sam进行标注，并将结果作为多边形上传回OMERO。</p>
+<br>
+<ul>
+<li><code class="inline-code">_load_image</code> (function) - 从OMERO加载图像，运行2D标注器，并可选上传分割结果。</li>
+</ul>
+<br>
+<h3><code class="inline-code">development/instance_segmentation.py</code></h3>
+<br>
+<p>演示在3D光片数据（细胞核）和时间序列数据（细胞）上进行实例分割的多种方法，包括SAM直接预测和基于嵌入的分割。</p>
+<br>
+<ul>
+<li><code class="inline-code">nucleus_segmentation</code> (function) - 在3D光片数据单切片上分割细胞核。</li>
+<li><code class="inline-code">nucleus_segmentation_3d</code> (function) - 在3D光片数据上进行全3D细胞核分割。</li>
+<li><code class="inline-code">cell_segmentation</code> (function) - 在时间序列数据上分割细胞。</li>
+</ul>
+<br>
+<h3><code class="inline-code">development/instance_segmentation_3d.py</code></h3>
+<br>
+<p>专注于3D实例分割的脚本，处理线粒体等结构的3D分割，包含数据切块加载功能。</p>
+<br>
+<ul>
+<li><code class="inline-code">get_dataset_cutout</code> (function) - 从HDF5文件中加载指定形状和起始位置的切块数据。</li>
+</ul>
+<br>
+<h3><code class="inline-code">development/promptable_segmentation.py</code></h3>
+<br>
+<p>从AGAR数据集的元数据中提取点或框提示，并自动执行分割，展示提示可分割功能。</p>
+<br>
+<ul>
+<li><code class="inline-code">get_agar_data</code> (function) - 下载并解压AGAR演示数据集。</li>
+<li><code class="inline-code">extract_prompts_from_data</code> (function) - 从元数据中提取点或框坐标作为提示。</li>
+</ul>
+<br>
+<h3><code class="inline-code">development/support/finetune_nucleus.py</code></h3>
+<br>
+<p>针对细胞核分割任务微调SAM模型的脚本，包含数据加载和训练流程。</p>
+<br>
+<ul>
+<li><code class="inline-code">get_loaders</code> (function) - 构建训练和验证数据加载器。</li>
+<li><code class="inline-code">main</code> (function) - 启动微调流程。</li>
+</ul>
+<br>
+<h3><code class="inline-code">development/support/train_cell_fluo_embl_alm.py</code></h3>
+<br>
+<p>针对特定荧光显微图像数据集（EMBL ALM）微调SAM模型并导出自定义模型的脚本。</p>
+<br>
+<ul>
+<li><code class="inline-code">train_embl_alm_data</code> (function) - 准备数据加载器并运行训练。</li>
+</ul>
+<br>
+<h3><code class="inline-code">development/tracking.py</code></h3>
+<br>
+<p>演示时间序列数据的跟踪功能，包括交互式标注和基于提示的自动跟踪调试。</p>
+<br>
+<ul>
+<li><code class="inline-code">debug_tracking</code> (function) - 使用预计算嵌入和提示从特定位点开始跟踪。</li>
+<li><code class="inline-code">load_data</code> (function) - 从文件路径加载时间序列数据。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>分块处理 (Tiling)</strong>: 将大图像或体积分割成小块（tile）进行处理，配合halo区域以减少边界效应，从而在有限内存下处理大数据集。</li>
+<li><strong>自动提示生成 (Automatic Prompt Generation)</strong>: 算法自动为图像生成点或框提示，无需人工交互即可实现实例分割。</li>
+<li><strong>3D SAM模型</strong>: 针对3D体积数据设计的SAM变体，支持3D图像嵌入和3D分割掩膜预测。</li>
+<li><strong>微调 (Fine-tuning)</strong>: 在特定领域数据（如细胞核、荧光图像）上继续训练SAM模型，以优化其在特定任务上的性能。</li>
+<li><strong>跟踪 (Tracking)</strong>: 在时间序列数据中关联不同帧中的实例，形成目标的时间轨迹。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">development/annotator_3d_tiled.py</code> → <code class="inline-code">micro_sam.sam_annotator</code>: 导入annotator_3d和precompute_image_embeddings用于分块3D标注。</li>
+<li><code class="inline-code">development/instance_segmentation.py</code> → <code class="inline-code">micro_sam.segment_instances</code>: 导入segment_instances_from_embeddings等函数执行实例分割。</li>
+<li><code class="inline-code">development/apg_example.py</code> → <code class="inline-code">micro_sam.instance_segmentation</code>: 导入TiledAutomaticPromptGenerator和AutomaticPromptGenerator。</li>
+<li><code class="inline-code">development/support/finetune_nucleus.py</code> → <code class="inline-code">micro_sam.training</code>: 使用sam_training模块中的训练函数和数据加载器。</li>
+<li><code class="inline-code">development/check_3d_model.py</code> → <code class="inline-code">micro_sam.sam_3d_wrapper</code>: 导入get_3d_sam_model用于加载和测试3D模型。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

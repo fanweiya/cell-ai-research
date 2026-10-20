@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文方法流程图：展示单细胞基因表达处理、自编码器（掩码重建）训练及下游分析（聚类、UMAP、空间基因图等）的架构概览"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "scVision与其他单细胞基础模型（scGPT、Geneformer、scFoundation）的多面板对比图：UMAP嵌入可视化、分类准确率、少样本学习、kNN基线对比及通路富集分析，为论文核心结果图"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "多面板核心结果图：scVision与scGPT、scFoundation、Geneformer等基础模型在UMAP嵌入、分类指标、少样本学习、通路富集及注意力基因一致性上的对比"
+  }
+}

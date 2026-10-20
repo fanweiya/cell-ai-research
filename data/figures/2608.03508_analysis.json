@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "雷达图对比多个模型（MRPT-LLaVA、SlideChat、WSI-LLaVA等）在SlideBenchVQA、WSI-Bench等基准及不同倍率下的性能表现"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "多数据集上不同病理基础模型性能对比的雷达图"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "多分辨率WSI层级结构示意图，展示40x/20x/10x不同倍率下从细胞特征、细胞组织到组织表型的多尺度切片表征"
+  }
+}

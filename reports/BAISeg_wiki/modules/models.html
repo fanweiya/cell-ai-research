@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAISeg Wiki — models</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / BAISeg Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>BAISeg</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/models.html">models</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>models</h1>
+<br>
+<p>&gt; 实现基于有符号距离函数预测和边界感知损失显微镜细胞分割的深度学习模型架构与训练逻辑。</p>
+<br>
+<p>该模块负责定义用于细胞分割的神经网络模型及其训练流程。核心思想是预测有符号距离函数（SDF），并通过边界感知损失优化模型，以精确分割细胞边界。模块包含基础训练框架、可复用的网络构建块（如DoubleConv、UpBlock、DenseBlock）以及具体的U-Net变体实现（Unet3d、DenseUnet3d）。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">models/base_model.py</code></h3>
+<br>
+<p>定义基于PyTorch Lightning的基础模型类，封装训练、验证和优化的通用逻辑。</p>
+<br>
+<ul>
+<li><code class="inline-code">BaseModel</code> (class) - 继承自pl.LightningModule，管理模型配置、优化器、学习率调度器及训练/验证步骤。</li>
+<li><code class="inline-code">configure_optimizers</code> (function) - 动态配置优化器（默认Adam）和可选的学习率调度器（如ReduceLROnPlateau）。</li>
+<li><code class="inline-code">training_step</code> (function) - 执行单步训练，调用predict_batch获取预测，计算损失并记录日志。</li>
+<li><code class="inline-code">validation_step</code> (function) - 执行单步验证，计算验证损失并记录。</li>
+</ul>
+<br>
+<h3><code class="inline-code">models/blocks.py</code></h3>
+<br>
+<p>提供构建U-Net架构所需的模块化网络层，包括卷积块、上采样块和密集连接块。</p>
+<br>
+<ul>
+<li><code class="inline-code">DoubleConv2D</code> (class) - 双卷积块，包含两个卷积层、BatchNorm和GELU激活，用于特征提取。</li>
+<li><code class="inline-code">Up2DBlock</code> (class) - 2D上采样块，使用反卷积（ConvTranspose2d）进行上采样，并融合跳跃连接。</li>
+<li><code class="inline-code">Up2DBlock2</code> (class) - 2D上采样块变体，使用双线性插值上采样替代反卷积。</li>
+<li><code class="inline-code">Dense2DBlock</code> (class) - 2D密集连接块，通过多层连接增强特征复用（代码片段被截断，但意图明显）。</li>
+</ul>
+<br>
+<h3><code class="inline-code">models/unet.py</code></h3>
+<br>
+<p>实现具体的3D U-Net模型架构，用于预测有符号距离图和二值分割图。</p>
+<br>
+<ul>
+<li><code class="inline-code">Unet3d</code> (class) - 标准3D U-Net实现，包含下采样路径、瓶颈层和上采样路径，输出有符号距离图（x_signDist）和经过线性变换的二值分割图（x_binSeg）。</li>
+<li><code class="inline-code">DenseUnet3d</code> (class) - 基于密集连接（DenseNet风格）的3D U-Net变体，支持标记点输入（with_markers），增强特征传播。</li>
+<li><code class="inline-code">forward</code> (function) - 模型前向传播，处理输入图像，通过编码器-解码器结构生成距离场和分割掩码。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>有符号距离函数 (SDF)</strong>: 模型不直接预测分割掩码，而是预测每个像素到最近边界的距离（内部为正，外部为负），通过阈值化（alpha*x + beta）得到最终分割，能更精确地捕捉细胞边界。</li>
+<li><strong>U-Net 架构</strong>: 采用经典的编码器-解码器结构，配合跳跃连接（Skip Connections）将浅层细节信息传递到深层，保持空间分辨率。</li>
+<li><strong>PyTorch Lightning</strong>: 使用Lightning框架简化训练流程，自动处理分布式训练、日志记录和回调机制。</li>
+<li><strong>密集连接 (Dense Connections)</strong>: 在DenseUnet3d中，通过密集块（DenseBlock）连接相邻层，促进特征复用并缓解梯度消失问题。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">models/unet.py</code> → <code class="inline-code">models/base_model.py</code>: unet.py 中的模型类（如Unet3d）继承自base_model.py中的BaseModel，复用训练循环逻辑。</li>
+<li><code class="inline-code">models/unet.py</code> → <code class="inline-code">models/blocks.py</code>: unet.py 导入blocks.py中的DoubleConv3D、Up3DBlock等组件来构建具体的网络层。</li>
+<li><code class="inline-code">models/unet.py</code> → <code class="inline-code">utils</code>: unet.py 导入utils模块中的辅助函数（如distance_transform_edt, watershed_labels_from_binary）用于后处理和评估。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

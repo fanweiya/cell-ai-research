@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VitaminP Wiki — reading-guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / VitaminP Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>VitaminP</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/configs.html">configs</a></li>
+<li><a href="modules/vitaminp.html">vitaminp</a></li>
+<li><a href="modules/scripts.html">scripts</a></li>
+<li><a href="modules/notebooks.html">notebooks</a></li>
+<li><a href="modules/dataset.html">dataset</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/metrics.html">metrics</a></li>
+<li><a href="modules/postprocessing.html">postprocessing</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Reading Guide</h1>
+<br>
+<p>本指南旨在帮助你快速理解基于Vision Transformer的病理细胞分割框架VitaminP。请按照从宏观配置到核心逻辑的顺序阅读，重点关注数据流和模型架构。</p>
+<br>
+<h2>Step 1: 理解项目概览与部署环境 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">README.md</code>, <code class="inline-code">Dockerfile</code>, <code class="inline-code">requirements.txt</code></p>
+<br>
+<p>首先通过README.md了解项目的核心功能（病理细胞分割与合成）、依赖环境及基本用法。接着查看Dockerfile和requirements.txt，确认项目运行所需的Python版本、关键库（如PyTorch, Vision Transformer相关库）以及Docker构建指令，为后续代码阅读建立环境上下文。</p>
+<br>
+<h2>Step 2: 掌握核心配置结构 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">dataset/config.py</code>, <code class="inline-code">configs/inference/inference.yaml</code>, <code class="inline-code">configs/jobs/job.yaml</code></p>
+<br>
+<p>dataset/config.py定义了数据集加载、增强及HV图生成的全局配置，是理解数据流向的关键。configs目录下的yaml文件则分别管理推理（inference）和作业（jobs）的具体参数，重点关注模型输入输出路径、超参数设置及不同模态（如Xenium, H&amp;E）的配置差异。</p>
+<br>
+<h2>Step 3: 梳理训练与推理入口流程 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">scripts/train.py</code>, <code class="inline-code">scripts/run_wsi_inference.py</code></p>
+<br>
+<p>train.py是模型训练的主入口，需关注其如何解析配置、初始化数据集、构建Vision Transformer模型以及训练循环逻辑。run_wsi_inference.py则是全切片图像（WSI）推理的入口，重点看它如何加载预训练模型、处理大规模图像切片以及调用后处理模块生成最终分割结果。</p>
+<br>
+<h2>Step 4: 深入核心数据模块 (~25 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">dataset/__init__.py</code>, <code class="inline-code">dataset/dataset.py</code>, <code class="inline-code">dataset/utils.py</code></p>
+<br>
+<p>进入dataset模块内部，查看数据加载器如何从Zarr格式读取多模态病理数据，数据增强策略如何应用，以及HV图（Heatmap Vector）是如何生成的。这是理解模型输入数据形态和预处理逻辑的核心。</p>
+<br>
+<h2>Step 5: 解析模型架构与后处理 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">vitaminp/models/vit.py</code>, <code class="inline-code">postprocessing/hv_to_instances.py</code></p>
+<br>
+<p>vitaminp/models/vit.py包含Vision Transformer的具体实现，需关注其编码器结构、注意力机制及分割头的输出形式。postprocessing模块负责将模型输出的HV图转换为实例分割掩码，这是从预测结果到可用分割结果的关键步骤，需理解其算法逻辑。</p>
+<br>
+<h2>Step 6: 了解评估与指标计算 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">metrics/segmentation_metrics.py</code>, <code class="inline-code">metrics/instance_metrics.py</code></p>
+<br>
+<p>查看metrics模块如何计算二值分割和实例分割的评估指标（如Dice系数、IoU等）。了解这些指标如何定义，以及它们如何被集成到训练或评估脚本中，这对于理解项目如何量化模型性能至关重要。</p>
+<br>
+<h2>Tips</h2>
+<br>
+<ul>
+<li>在阅读代码时，优先关注函数签名和文档字符串，快速把握模块功能。</li>
+<li>结合配置文件和脚本入口，尝试在脑海中绘制数据从读取到输出的完整流程图。</li>
+<li>遇到不理解的依赖库时，先查阅requirements.txt确认版本，再查看官方文档。</li>
+<li>利用IDE的跳转功能，从入口脚本追踪到具体的模型类定义，理清调用链。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

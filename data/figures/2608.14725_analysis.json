@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法架构图：展示基于U-Net掩码生成器与ResNet编码器的空间注意力噪声掩蔽流程及各项损失函数"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心实验结果对比图：SANM方法与GradCAM、Guided GradCAM、Integrated Gradients、Occlusion等可解释性方法在ImageNet-1k和CIFAR-100数据集上的显著性图可视化对比。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心实验对比图：展示SANM方法与GradCAM、Guided GradCAM、Integrated Gradients、Occlusion等可解释性方法在肺部CT、脑部MRI、腹部/盆腔超声图像上的注意力掩码可视化结果对比"
+  }
+}

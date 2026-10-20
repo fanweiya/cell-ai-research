@@ -1,0 +1,51 @@
+{
+ "id": "2603.14321",
+ "chars": 18872,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": false,
+   "has_std": false,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": false,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 0
+ },
+ "key_claims": [
+  "our percs-dino, trained specifically for the personalized cell segmentation task, surpasses both baselines and achieves the best performance on the percs test set, reaching ap of 73.",
+  "percs-dino also attains the highest ap on perpannuke, although performance remains limited by the high morphological similarity among nucleus categories in histopathology images, underscoring the intr",
+  "our percs-dino, trained specifically for the personalized cell segmentation task, surpasses both baselines and achieves the best performance on the percs test set, reaching ap of 73."
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "Cellpose: a generalist algorithm for cellular segmentation",
+   "doi": "10.1038/s41592-020-01018-x"
+  },
+  {
+   "title": "Segment Anything",
+   "doi": null
+  },
+  {
+   "title": "DINOv2: Learning Robust Visual Features without Supervision",
+   "doi": null
+  }
+ ],
+ "citation_results": [
+  {
+   "title": "Cellpose: a generalist algorithm for cellular segmentation",
+   "doi": "10.1038/s41592-020-01018-x",
+   "verdict": "PASS",
+   "confirmed_n": 2
+  }
+ ]
+}

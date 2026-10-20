@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "该图展示了在EPVS数据集上，Swin-UNETR与U-Net模型在单模态（T1）与多模态输入下的性能对比（DSC指标）。图表直观地呈现了多模态融合导致的性能下降（Performance Drop）现象，左侧展示了T1、T2、Flair三种模态的脑部MRI图像，这是论文提出问题的核心动机图示。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "展示了T1、T2和Flair三种模态下的融合特征可视化图（热力图），并标注了F-CNR指标，用于直观展示多模态融合效果。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 10,
+    "caption": "该图展示了论文提出的多模态医学图像分割网络架构，包含编码器、IMSH模块、MBCF模块及解码器结构。"
+  }
+}

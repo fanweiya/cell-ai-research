@@ -1,0 +1,43 @@
+{
+ "id": "2608.15195",
+ "chars": 28506,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": false,
+   "has_std": false,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": false,
+   "has_fdr": false,
+   "mentions_ablation": false,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "score": 0
+ },
+ "key_claims": [
+  "dinov3-sat493m [ 27 ] , pretrained on satellite imagery, outperforms dinov3-lvd1689m, pretrained on natural images, on all vascular segmentation tasks, including arteries, veins, and their union, i.",
+  "on idrid, dinov3-sat493m overall achieves the best performance on retinopathy lesion segmentation, outperforming dinov3-lvd1689m and the two cfp domain-specific models, dinov3-retfound [ 35 ] and mae-",
+  "on fives, the two non-medical models show comparable vessel segmentation performance and outperform the domain-specific models."
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "DINOv2: Learning Robust Visual Features without Supervision",
+   "doi": null
+  },
+  {
+   "title": "DINOv3",
+   "doi": null
+  },
+  {
+   "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+   "doi": null
+  }
+ ],
+ "citation_results": []
+}

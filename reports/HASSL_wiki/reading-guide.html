@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HASSL Wiki — reading-guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / HASSL Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>HASSL</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/notebooks.html">notebooks</a></li>
+<li><a href="modules/docs.html">docs</a></li>
+<li><a href="modules/dinov3.html">dinov3</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Reading Guide</h1>
+<br>
+<p>本指南旨在帮助您系统性地理解 DinoV3 代码库。建议从配置和入口点开始，逐步深入到核心逻辑和工具函数。重点关注模型架构、训练流程和评估机制。</p>
+<br>
+<h2>Step 1: 理解项目配置与依赖 (~15 分钟)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">README.md</code>, <code class="inline-code">pyproject.toml</code>, <code class="inline-code">requirements.txt</code>, <code class="inline-code">dinov3/configs/config.py</code></p>
+<br>
+<p>首先阅读 README.md 了解项目概览，然后查看 pyproject.toml 和 requirements.txt 了解依赖关系。重点阅读 dinov3/configs/config.py 以理解配置系统的结构和默认参数设置。</p>
+<br>
+<h2>Step 2: 探索模块入口与初始化 (~10 分钟)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">dinov3/__init__.py</code>, <code class="inline-code">dinov3/checkpointer/__init__.py</code>, <code class="inline-code">dinov3/checkpointer/checkpointer.py</code></p>
+<br>
+<p>查看 dinov3/__init__.py 了解模块导出内容，然后深入 checkpointer 模块理解模型检查点的保存和加载机制，这是训练和评估的关键组件。</p>
+<br>
+<h2>Step 3: 理解评估配置系统 (~10 分钟)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">dinov3/eval/detection/config.py</code>, <code class="inline-code">dinov3/eval/setup.py</code></p>
+<br>
+<p>阅读评估相关的配置文件，了解检测任务的配置结构。查看 setup.py 了解评估环境的初始化流程，为后续理解评估逻辑做准备。</p>
+<br>
+<h2>Step 4: 探索核心模型架构 (~20 分钟)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">dinov3/models/__init__.py</code>, <code class="inline-code">dinov3/models/dinov3.py</code></p>
+<br>
+<p>查找并阅读模型定义文件，重点关注网络架构、层设计和前向传播逻辑。这是理解模型功能的核心部分。</p>
+<br>
+<h2>Step 5: 理解训练流程 (~15 分钟)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">dinov3/train/__init__.py</code>, <code class="inline-code">dinov3/train/trainer.py</code></p>
+<br>
+<p>查看训练模块的初始化文件，然后深入 trainer.py 了解训练循环、损失计算、优化器配置等核心训练逻辑。</p>
+<br>
+<h2>Step 6: 掌握数据加载与预处理 (~15 分钟)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">dinov3/data/__init__.py</code>, <code class="inline-code">dinov3/data/dataset.py</code>, <code class="inline-code">dinov3/data/loader.py</code></p>
+<br>
+<p>了解数据集类的设计、数据增强策略和数据加载器的实现。这是理解模型如何接收和处理输入数据的关键。</p>
+<br>
+<h2>Step 7: 探索工具与辅助函数 (~10 分钟)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">dinov3/utils/__init__.py</code>, <code class="inline-code">dinov3/utils/logger.py</code>, <code class="inline-code">dinov3/utils/metrics.py</code></p>
+<br>
+<p>查看工具模块，了解日志记录、指标计算等辅助功能的实现。这些函数在训练和评估过程中被广泛使用。</p>
+<br>
+<h2>Step 8: 理解评估实现细节 (~15 分钟)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">dinov3/eval/__init__.py</code>, <code class="inline-code">dinov3/eval/evaluator.py</code></p>
+<br>
+<p>深入评估模块，了解评估器的实现逻辑，包括如何运行推理、计算指标和生成结果。这是验证模型性能的关键部分。</p>
+<br>
+<h2>Tips</h2>
+<br>
+<ul>
+<li>在阅读代码时，先关注函数签名和文档字符串，理解接口设计</li>
+<li>遇到不理解的依赖时，使用 IDE 的跳转功能快速定位相关代码</li>
+<li>结合 README 和文档理解整体架构，再深入具体实现细节</li>
+<li>对于大型文件，先浏览目录结构，找到关键函数后再详细阅读</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

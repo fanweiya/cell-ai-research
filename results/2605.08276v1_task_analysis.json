@@ -1,0 +1,19 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2605.08276v1",
+  "status": "done",
+  "task_family": "cell_segmentation",
+  "input": "RGB pathology image patches (512x512)",
+  "output": "Cell-level dense prediction masks (segmentation maps)",
+  "notable": "Proposes a masked-diffusion convolutional foundation model (CMD) for cell-level dense prediction, using ConvNeXt-UNet backbone and pixel-space masked diffusion pretraining. The model is designed as a frozen feature extractor for downstream segmentation tasks, demonstrating strong performance in few-shot and scaling regimes for nuclear segmentation and inflammatory cell detection.",
+  "task_type": [
+    "segmentation",
+    "foundation_model",
+    "embedding"
+  ],
+  "confidence": 0.95,
+  "task_id": "2605.08276v1-task_analysis-v1",
+  "run_at": "2026-07-24T09:11:40.510659",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

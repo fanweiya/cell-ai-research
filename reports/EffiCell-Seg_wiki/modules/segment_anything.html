@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EffiCell-Seg Wiki — segment_anything</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / EffiCell-Seg Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>EffiCell-Seg</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/segment_anything.html">segment_anything</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/.zread.html">.zread</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>segment_anything</h1>
+<br>
+<p>&gt; 实现基于提示引导的细胞实例分割框架的核心模块，使用冻结的DINOv3骨干网络和SAM风格解码器。</p>
+<br>
+<p>该模块提供了完整的分割一切模型（SAM）实现，包括模型构建、推理预测器和自动掩码生成器。核心架构由图像编码器（ViT变体）、提示编码器（处理点、框和掩码输入）和掩码解码器（基于Transformer的掩码预测）组成。模块支持通过点、框等提示进行交互式分割，以及全自动的实例分割。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">segment_anything/__init__.py</code></h3>
+<br>
+<p>模块入口，导出主要API。</p>
+<br>
+<ul>
+<li><code class="inline-code">build_sam</code> (function) - 默认构建SAM模型（ViT-H），支持加载预训练权重。</li>
+<li><code class="inline-code">SamPredictor</code> (class) - 交互式预测器，用于对单张图像进行多次提示式掩码预测。</li>
+<li><code class="inline-code">SamAutomaticMaskGenerator</code> (class) - 自动掩码生成器，对整张图像进行无监督的实例分割。</li>
+</ul>
+<br>
+<h3><code class="inline-code">segment_anything/build_sam.py</code></h3>
+<br>
+<p>定义模型构建工厂函数和注册表。</p>
+<br>
+<ul>
+<li><code class="inline-code">build_sam_vit_h</code> (function) - 构建ViT-H大模型，embed_dim=1280, depth=32。</li>
+<li><code class="inline-code">build_sam_vit_l</code> (function) - 构建ViT-L模型，embed_dim=1024, depth=24。</li>
+<li><code class="inline-code">build_sam_vit_b</code> (function) - 构建ViT-B模型，embed_dim=768, depth=12。</li>
+<li><code class="inline-code">sam_model_registry</code> (dict) - 模型注册表，键为模型类型，值为对应的构建函数。</li>
+</ul>
+<br>
+<h3><code class="inline-code">segment_anything/predictor.py</code></h3>
+<br>
+<p>实现SamPredictor类，用于高效交互式预测。</p>
+<br>
+<ul>
+<li><code class="inline-code">SamPredictor</code> (class) - 封装模型推理流程，缓存图像嵌入，支持重复预测。</li>
+<li><code class="inline-code">set_image</code> (method) - 预处理图像并计算图像嵌入。</li>
+<li><code class="inline-code">predict</code> (method) - 根据点坐标、标签、框等提示生成掩码和IoU预测。</li>
+</ul>
+<br>
+<h3><code class="inline-code">segment_anything/automatic_mask_generator.py</code></h3>
+<br>
+<p>实现SamAutomaticMaskGenerator类，用于全自动实例分割。</p>
+<br>
+<ul>
+<li><code class="inline-code">SamAutomaticMaskGenerator</code> (class) - 通过网格点采样、多尺度裁剪和非极大值抑制生成全图掩码。</li>
+<li><code class="inline-code">generate</code> (method) - 执行自动掩码生成流程，返回MaskData对象。</li>
+</ul>
+<br>
+<h3><code class="inline-code">segment_anything/modeling/sam.py</code></h3>
+<br>
+<p>定义SAM主模型类，整合编码器和解码器。</p>
+<br>
+<ul>
+<li><code class="inline-code">Sam</code> (class) - 端到端掩码预测模型，包含图像编码器、提示编码器和掩码解码器。</li>
+<li><code class="inline-code">forward</code> (method) - 模型前向传播，接收批处理输入并返回掩码和IoU预测。</li>
+</ul>
+<br>
+<h3><code class="inline-code">segment_anything/modeling/image_encoder.py</code></h3>
+<br>
+<p>实现基于ViT的图像编码器。</p>
+<br>
+<ul>
+<li><code class="inline-code">ImageEncoderViT</code> (class) - 使用PatchEmbed和ViT Block提取图像特征，通过Neck降维。</li>
+<li><code class="inline-code">PatchEmbed</code> (class) - 将图像分割为patch并投影到嵌入空间。</li>
+<li><code class="inline-code">Block</code> (class) - ViT Block，支持窗口注意力或全局注意力。</li>
+</ul>
+<br>
+<h3><code class="inline-code">segment_anything/modeling/prompt_encoder.py</code></h3>
+<br>
+<p>实现提示编码器，将点、框和掩码输入转换为嵌入。</p>
+<br>
+<ul>
+<li><code class="inline-code">PromptEncoder</code> (class) - 编码稀疏提示（点、框）和密集提示（掩码输入）。</li>
+<li><code class="inline-code">get_dense_pe</code> (method) - 生成图像尺寸密度的位置编码。</li>
+<li><code class="inline-code">_embed_points</code> (method) - 将点坐标和标签编码为嵌入向量。</li>
+<li><code class="inline-code">_embed_boxes</code> (method) - 将边界框坐标编码为嵌入向量。</li>
+</ul>
+<br>
+<h3><code class="inline-code">segment_anything/modeling/mask_decoder.py</code></h3>
+<br>
+<p>实现掩码解码器，基于Transformer预测掩码。</p>
+<br>
+<ul>
+<li><code class="inline-code">MaskDecoder</code> (class) - 接收图像嵌入和提示嵌入，输出多张掩码及其质量评分。</li>
+<li><code class="inline-code">predict_masks</code> (method) - 核心推理逻辑，通过Transformer和上采样网络生成掩码。</li>
+</ul>
+<br>
+<h3><code class="inline-code">segment_anything/modeling/transformer.py</code></h3>
+<br>
+<p>实现TwoWayTransformer，用于图像-提示交互。</p>
+<br>
+<ul>
+<li><code class="inline-code">TwoWayTransformer</code> (class) - 双向Transformer解码器，处理点查询与图像特征的交互。</li>
+<li><code class="inline-code">TwoWayAttentionBlock</code> (class) - 包含自注意力、交叉注意力和MLP的Transformer块。</li>
+</ul>
+<br>
+<h3><code class="inline-code">segment_anything/modeling/common.py</code></h3>
+<br>
+<p>提供通用网络组件。</p>
+<br>
+<ul>
+<li><code class="inline-code">MLPBlock</code> (class) - 两层MLP模块，含GELU激活。</li>
+<li><code class="inline-code">LayerNorm2d</code> (class) - 2D批量归一化层，对通道进行归一化。</li>
+</ul>
+<br>
+<h3><code class="inline-code">segment_anything/utils/amg.py</code></h3>
+<br>
+<p>提供自动掩码生成器所需的工具函数和数据结构。</p>
+<br>
+<ul>
+<li><code class="inline-code">MaskData</code> (class) - 批量存储掩码及相关数据的容器，支持过滤和拼接。</li>
+<li><code class="inline-code">calculate_stability_score</code> (function) - 计算掩码的稳定性分数，用于过滤低质量掩码。</li>
+<li><code class="inline-code">remove_small_regions</code> (function) - 移除面积过小的掩码区域或孔洞。</li>
+<li><code class="inline-code">batched_nms</code> (function) - 批量非极大值抑制，去重重叠掩码。</li>
+</ul>
+<br>
+<h3><code class="inline-code">segment_anything/utils/transforms.py</code></h3>
+<br>
+<p>提供图像和坐标变换工具。</p>
+<br>
+<ul>
+<li><code class="inline-code">ResizeLongestSide</code> (class) - 将图像长边缩放到指定长度，并同步变换坐标和框。</li>
+</ul>
+<br>
+<h3><code class="inline-code">segment_anything/utils/onnx.py</code></h3>
+<br>
+<p>提供ONNX导出所需的模型包装类。</p>
+<br>
+<ul>
+<li><code class="inline-code">SamOnnxModel</code> (class) - 用于ONNX导出的SAM模型变体，支持固定尺寸推理。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>SAM架构</strong>: 分割一切模型由图像编码器（ViT）、提示编码器（处理点、框、掩码）和掩码解码器（Transformer）组成，实现从图像和提示到掩码的端到端预测。</li>
+<li><strong>提示编码</strong>: 将稀疏提示（点、框）和密集提示（掩码输入）转换为统一嵌入空间，结合位置编码后输入解码器。</li>
+<li><strong>双向Transformer</strong>: 解码器核心，通过自注意力处理点查询，通过交叉注意力关联图像特征，实现提示与图像的交互。</li>
+<li><strong>交互式预测</strong>: SamPredictor缓存图像嵌入，允许对同一图像反复进行不同提示的掩码预测，提高效率。</li>
+<li><strong>自动掩码生成</strong>: 通过网格点采样、多尺度裁剪和NMS后处理，实现无需人工提示的全自动实例分割。</li>
+<li><strong>掩码后处理</strong>: 包括稳定性评分、小区域移除、NMS去重等步骤，提升掩码质量。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">segment_anything/__init__.py</code> → <code class="inline-code">segment_anything/build_sam.py</code>: 导出模型构建函数和注册表。</li>
+<li><code class="inline-code">segment_anything/__init__.py</code> → <code class="inline-code">segment_anything/predictor.py</code>: 导出交互式预测器。</li>
+<li><code class="inline-code">segment_anything/__init__.py</code> → <code class="inline-code">segment_anything/automatic_mask_generator.py</code>: 导出自动掩码生成器。</li>
+<li><code class="inline-code">segment_anything/build_sam.py</code> → <code class="inline-code">segment_anything/modeling/sam.py</code>: 实例化Sam模型并配置各组件。</li>
+<li><code class="inline-code">segment_anything/build_sam.py</code> → <code class="inline-code">segment_anything/modeling/image_encoder.py</code>: 配置图像编码器参数。</li>
+<li><code class="inline-code">segment_anything/build_sam.py</code> → <code class="inline-code">segment_anything/modeling/prompt_encoder.py</code>: 配置提示编码器参数。</li>
+<li><code class="inline-code">segment_anything/build_sam.py</code> → <code class="inline-code">segment_anything/modeling/mask_decoder.py</code>: 配置掩码解码器参数。</li>
+<li><code class="inline-code">segment_anything/predictor.py</code> → <code class="inline-code">segment_anything/modeling/sam.py</code>: 使用Sam模型进行推理。</li>
+<li><code class="inline-code">segment_anything/predictor.py</code> → <code class="inline-code">segment_anything/utils/transforms.py</code>: 使用ResizeLongestSide进行图像预处理。</li>
+<li><code class="inline-code">segment_anything/automatic_mask_generator.py</code> → <code class="inline-code">segment_anything/predictor.py</code>: 复用SamPredictor进行批量点提示推理。</li>
+<li><code class="inline-code">segment_anything/automatic_mask_generator.py</code> → <code class="inline-code">segment_anything/utils/amg.py</code>: 使用MaskData存储结果，使用AMG工具进行后处理。</li>
+<li><code class="inline-code">segment_anything/modeling/sam.py</code> → <code class="inline-code">segment_anything/modeling/image_encoder.py</code>: 包含图像编码器实例。</li>
+<li><code class="inline-code">segment_anything/modeling/sam.py</code> → <code class="inline-code">segment_anything/modeling/prompt_encoder.py</code>: 包含提示编码器实例。</li>
+<li><code class="inline-code">segment_anything/modeling/sam.py</code> → <code class="inline-code">segment_anything/modeling/mask_decoder.py</code>: 包含掩码解码器实例。</li>
+<li><code class="inline-code">segment_anything/modeling/mask_decoder.py</code> → <code class="inline-code">segment_anything/modeling/transformer.py</code>: 使用TwoWayTransformer进行特征交互。</li>
+<li><code class="inline-code">segment_anything/modeling/image_encoder.py</code> → <code class="inline-code">segment_anything/modeling/common.py</code>: 使用LayerNorm2d和MLPBlock组件。</li>
+<li><code class="inline-code">segment_anything/modeling/prompt_encoder.py</code> → <code class="inline-code">segment_anything/modeling/common.py</code>: 使用LayerNorm2d组件。</li>
+<li><code class="inline-code">segment_anything/modeling/mask_decoder.py</code> → <code class="inline-code">segment_anything/modeling/common.py</code>: 使用LayerNorm2d组件。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

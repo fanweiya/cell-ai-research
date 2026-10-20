@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wbcattplus Wiki — dataset_txt</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / wbcattplus Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>wbcattplus</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/Mask2Former.html">Mask2Former</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/utils.html">utils</a></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/results.html">results</a></li>
+<li><a href="../modules/dataset_txt.html">dataset_txt</a></li>
+<li><a href="../modules/.codegraph.html">.codegraph</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>dataset_txt</h1>
+<br>
+<p>&gt; 定义白细胞图像细粒度形态标注的类别属性映射与数据加载配置</p>
+<br>
+<p>该模块负责将白细胞的形态学特征（如细胞大小、核形、胞浆颜色等）映射为模型可处理的数值标签，并提供CSV格式的数据索引文件以支持数据集的划分与加载。attribute.yml 定义了所有形态学属性的类别及其对应的整数编码，确保标注数据与模型输入的一致性。pbc_attr_v1_ccrop_val.csv 是验证集的数据清单，包含图像名称、细胞类型、12个形态学属性字段、文件路径及分割标识（split），用于训练流程中读取样本元数据。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">dataset_txt/attribute.yml</code></h3>
+<br>
+<p>定义白细胞形态学属性的类别标签及其数值编码</p>
+<br>
+<ul>
+<li><code class="inline-code">cell_size</code> (mapping) - 细胞大小属性映射：big=0, small=1</li>
+<li><code class="inline-code">cell_shape</code> (mapping) - 细胞形状属性映射：irregular=0, round=1</li>
+<li><code class="inline-code">nucleus_shape</code> (mapping) - 细胞核形状属性映射：irregular=0, segmented-bilobed=1, segmented-multilobed=2, unsegmented-band=3, unsegmented-indented=4, unsegmented-round=5</li>
+<li><code class="inline-code">nuclear_cytoplasmic_ratio</code> (mapping) - 核质比属性映射：high=0, low=1</li>
+<li><code class="inline-code">chromatin_density</code> (mapping) - 染色质密度属性映射：densely=0, loosely=1</li>
+<li><code class="inline-code">cytoplasm_vacuole</code> (mapping) - 胞浆空泡属性映射：no=0, yes=1</li>
+<li><code class="inline-code">cytoplasm_texture</code> (mapping) - 胞浆质地属性映射：clear=0, frosted=1</li>
+<li><code class="inline-code">cytoplasm_colour</code> (mapping) - 胞浆颜色属性映射：blue=0, light blue=1, purple blue=2</li>
+<li><code class="inline-code">granule_type</code> (mapping) - 颗粒类型属性映射：coarse=0, nil=1, round=2, small=3</li>
+<li><code class="inline-code">granule_colour</code> (mapping) - 颗粒颜色属性映射：nil=0, pink=1, purple=2, red=3</li>
+<li><code class="inline-code">granularity</code> (mapping) - 颗粒性属性映射：no=0, yes=1</li>
+</ul>
+<br>
+<h3><code class="inline-code">dataset_txt/pbc_attr_v1_ccrop_val.csv</code></h3>
+<br>
+<p>存储验证集图像及其形态学标注的CSV索引文件</p>
+<br>
+<ul>
+<li><code class="inline-code">img_name</code> (column) - 图像文件名</li>
+<li><code class="inline-code">label</code> (column) - 细胞类型标签（如Neutrophil, Lymphocyte等）</li>
+<li><code class="inline-code">cell_size</code> (column) - 细胞大小属性（文本值，需映射为数值）</li>
+<li><code class="inline-code">cell_shape</code> (column) - 细胞形状属性（文本值）</li>
+<li><code class="inline-code">nucleus_shape</code> (column) - 细胞核形状属性（文本值）</li>
+<li><code class="inline-code">nuclear_cytoplasmic_ratio</code> (column) - 核质比属性（文本值）</li>
+<li><code class="inline-code">chromatin_density</code> (column) - 染色质密度属性（文本值）</li>
+<li><code class="inline-code">cytoplasm_vacuole</code> (column) - 胞浆空泡属性（文本值）</li>
+<li><code class="inline-code">cytoplasm_texture</code> (column) - 胞浆质地属性（文本值）</li>
+<li><code class="inline-code">cytoplasm_colour</code> (column) - 胞浆颜色属性（文本值）</li>
+<li><code class="inline-code">granule_type</code> (column) - 颗粒类型属性（文本值）</li>
+<li><code class="inline-code">granule_colour</code> (column) - 颗粒颜色属性（文本值）</li>
+<li><code class="inline-code">granularity</code> (column) - 颗粒性属性（文本值）</li>
+<li><code class="inline-code">path</code> (column) - 图像文件相对路径</li>
+<li><code class="inline-code">split</code> (column) - 数据集划分标识（val表示验证集）</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>细粒度形态标注</strong>: 对白细胞进行多属性联合标注，包括细胞大小、形状、核形态、核质比、染色质密度、胞浆特征及颗粒特性，用于像素级分割与分类任务</li>
+<li><strong>属性编码映射</strong>: 将人类可读的形态学术语（如'round', 'light blue'）映射为模型可处理的整数索引，确保数据一致性</li>
+<li><strong>验证集索引</strong>: 通过CSV文件管理验证集样本的元数据，包含图像路径、细胞类型及12个形态学属性，支持数据加载器按split过滤</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">pbc_attr_v1_ccrop_val.csv</code> → <code class="inline-code">attribute.yml</code>: CSV中的形态学属性文本值需依据attribute.yml定义的映射关系转换为数值标签</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

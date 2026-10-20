@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "系统界面概览图：展示Spatial Action Review仪表盘，包括Language-to-Action Hand-off流程、Spatial Action Review统计面板、Answer-Action Ledger四象限数据、图像区域审计及路由决策模块"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心图示：包含静默失败率热图（按任务类型×数据集）、语义动作审查界面及电镜图像的已发布记录与重新标注对比面板"
+  },
+  "2": {
+    "relevant": true,
+    "score": 10,
+    "caption": "展示“Spatial Action Review”视觉分析仪表盘界面，包含统计指标、热力图、日志和图表等核心内容。"
+  }
+}

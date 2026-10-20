@@ -1,0 +1,63 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2605.22290v1",
+  "status": "done",
+  "design_motivation": "针对生物医学显微图像中病毒斑点和微小细胞斑块检测难的问题，YOLOv2原始架构因单尺度特征图导致小目标空间细节丢失。设计动机是：1) 引入特征金字塔网络（FPN）融合多尺度特征，解决小目标上下文信息不足和定位不准的问题；2) 引入可切换空洞卷积（SAC）动态调整感受野，适应不同大小和形状的病毒/细胞结构。相比仅使用SAC或仅使用FPN的替代方案，两者结合能同时提升对小目标的敏感度和对密集目标的区分能力。",
+  "loss_formula": "L = \\lambda_{box} \\sum_{i=0}^{S^2} \\mathbb{1}_{ij}^{obj} \\left[ (x_i - \\hat{x}_i)^2 + (y_i - \\hat{y}_i)^2 + (w_i - \\hat{w}_i)^2 + (h_i - \\hat{h}_i)^2 \\right] + \\lambda_{conf} \\sum_{i=0}^{S^2} \\mathbb{1}_{ij}^{obj} (C_i - \\hat{C}_i)^2 + \\lambda_{conf} \\sum_{i=0}^{S^2} \\mathbb{1}_{ij}^{noobj} (C_i - \\hat{C}_i)^2 + \\sum_{i=0}^{S^2} \\mathbb{1}_{ij}^{obj} \\sum_{c \\in classes} (p_i(c) - \\hat{p}_i(c))^2",
+  "math_principle": "基于YOLOv2的单阶段检测框架，利用多尺度特征融合（FPN）增强层级特征表示，通过可切换空洞卷积（SAC）动态调整卷积核的空洞率以改变感受野大小，从而在保持计算效率的同时捕捉不同尺度的生物目标特征。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 3, H, W]"
+    },
+    {
+      "layer": "backbone",
+      "shape": "[B, 512, H/4, W/4]"
+    },
+    {
+      "layer": "fpn_up",
+      "shape": "[B, 256, H/2, W/2]"
+    },
+    {
+      "layer": "fpn_down",
+      "shape": "[B, 512, H/4, W/4]"
+    },
+    {
+      "layer": "switchable_conv",
+      "shape": "[B, 512, H/4, W/4]"
+    },
+    {
+      "layer": "detection_head",
+      "shape": "[B, (5 + C) * A, H/4, W/4]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, C]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载病毒斑点和微小细胞斑块数据集，进行数据增强（翻转、缩放、颜色抖动）",
+    "step2: 前向传播通过YOLOv2骨干网络提取特征",
+    "step3: 特征通过FPN进行自顶向下和自底向上的多尺度融合",
+    "step4: 融合特征输入可切换空洞卷积模块动态调整感受野",
+    "step5: 检测头预测边界框坐标、置信度和类别概率",
+    "step6: 计算多任务损失（边界框回归、置信度、分类）",
+    "step7: 反向传播更新网络参数",
+    "step8: 使用非极大值抑制（NMS）后处理输出最终检测结果"
+  ],
+  "baselines_compared": [
+    "YOLOv2",
+    "YOLOv2_FPN",
+    "SAC_YOLOv2",
+    "SAC_YOLOv7"
+  ],
+  "key_results": {
+    "small_cell_mAP_25": "40.5%",
+    "virus_patch_mAP_25": "68.0%"
+  },
+  "confidence": 0.85,
+  "task_id": "2605.22290v1-algorithm_analysis-v1",
+  "run_at": "2026-07-24T09:10:43.997023",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

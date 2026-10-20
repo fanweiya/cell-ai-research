@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "SAM+D方法整体架构图，展示3D体积分割与4D时空分割两条流水线，包含冻结ViT-B/Hiera编码器、Depth-Routed LoRA、Mask解码器与3D内存库等核心模块"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "DRLoRA方法架构图：展示基于深度位置的专家路由机制、专家库及注入Q和V的LoRA结构"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "深度移位模块（DSM）方法示意图：展示沿深度维度的前移/后移/恒等操作及零参数Shift Operation在Transformer块中的应用"
+  }
+}

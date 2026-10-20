@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>micro-sam Wiki — index</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / micro-sam Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>micro-sam</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/doc.html">doc</a></li>
+<li><a href="modules/test.html">test</a></li>
+<li><a href="modules/finetuning.html">finetuning</a></li>
+<li><a href="modules/workshops.html">workshops</a></li>
+<li><a href="modules/examples.html">examples</a></li>
+<li><a href="modules/development.html">development</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/deployment.html">deployment</a></li>
+<li><a href="modules/notebooks.html">notebooks</a></li>
+<li><a href="modules/scripts.html">scripts</a></li>
+<li><a href="modules/micro_sam.html">micro_sam</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>micro-sam</h1>
+<br>
+<p>&gt; 使用 Segment Anything 进行显微镜图像交互式与自动分割及追踪的工具。</p>
+<br>
+<p>micro-sam 提供了用于在显微镜图像中分割和追踪对象的 napari 插件和 Python 库。它支持交互式 2D 和 3D 分割，以及 2D 时间序列数据的追踪。该项目包含针对各种显微镜模态的预训练模型，以及用于在自定义数据集上微调模型的脚本。</p>
+<br>
+<p>该仓库包含用于运行标注工具、自动分割和追踪的示例脚本。此外，它还提供了详尽的文档、用于模型基准测试的评估代码以及用于研讨会的资源。核心功能基于 Segment Anything 模型构建，并针对显微镜数据进行了专门微调，具备实例分割能力。</p>
+<br>
+<h2>技术栈</h2>
+<br>
+<ul>
+<li><strong>Python</strong> 3.10+（编程语言）</li>
+<li><strong>PyTorch</strong> 2.5+（框架）</li>
+<li><strong>napari</strong> 0.7+（图形用户界面）</li>
+<li><strong>segment-anything</strong> 最新版（库）</li>
+<li><strong>trackastra</strong> 0.5.3+（库）</li>
+</ul>
+<br>
+<h2>主要功能</h2>
+<br>
+<ul>
+<li>通过 napari 插件实现交互式 2D 分割</li>
+<li>针对体积数据的交互式 3D 分割</li>
+<li>交互式追踪 2D 时间序列图像</li>
+<li>使用微调后的解码器进行自动实例分割</li>
+<li>用于自定义显微镜数据集的微调脚本</li>
+<li>针对光学显微镜、电子显微镜和组织病理学的预训练模型</li>
+<li>用于模型性能评估与基准测试的工具</li>
+<li>用于程序化使用的 Python 库 API</li>
+</ul>
+<br>
+<h2>快速开始</h2>
+<br>
+<ul>
+<li>创建 conda 环境：<code class="inline-code">conda create -c conda-forge -n micro_sam python=3.11 natsort</code></li>
+<li>激活环境：<code class="inline-code">conda activate micro_sam</code></li>
+<li>安装软件包：<code class="inline-code">conda install -c conda-forge "micro_sam&gt;=1.1" "pytorch&gt;=2.4"</code></li>
+<li>使用研讨会或示例文件夹中提供的脚本下载模型和数据</li>
+</ul>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

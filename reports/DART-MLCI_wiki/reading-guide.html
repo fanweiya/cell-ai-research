@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DART-MLCI Wiki — reading-guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / DART-MLCI Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>dart-mlci</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/scripts.html">scripts</a></li>
+<li><a href="modules/dart_experiment.html">dart_experiment</a></li>
+<li><a href="modules/docs.html">docs</a></li>
+<li><a href="modules/artifacts.html">artifacts</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/dart_mlci.html">dart_mlci</a></li>
+<li><a href="modules/tests.html">tests</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Reading Guide</h1>
+<br>
+<p>本代码库是一个用于DART微流控芯片图像分析的系统，涉及从图像预处理、芯片校准到实验处理和可视化的完整流程。建议按配置-&gt;入口-&gt;核心逻辑-&gt;工具链的顺序阅读，以建立整体认知。</p>
+<br>
+<h2>Step 1: 理解项目配置与依赖 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">README.md</code>, <code class="inline-code">pyproject.toml</code>, <code class="inline-code">requirements.txt</code>, <code class="inline-code">Dockerfile</code>, <code class="inline-code">docker-compose.yml</code></p>
+<br>
+<p>首先阅读README.md了解项目概述和快速开始指南；然后查看pyproject.toml和requirements.txt理解项目依赖和构建配置；最后看Dockerfile和docker-compose.yml了解容器化部署方式。这有助于建立环境认知。</p>
+<br>
+<h2>Step 2: 掌握核心API入口 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">dart_mlci/api/main.py</code></p>
+<br>
+<p>作为API主入口，main.py定义了Web服务接口和路由。重点关注API端点设计、中间件配置和请求处理流程，这是理解系统对外交互的关键。</p>
+<br>
+<h2>Step 3: 理解配置管理模块 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">dart_mlci/config.py</code></p>
+<br>
+<p>config.py包含所有配置参数和常量定义。重点关注环境配置、路径设置、模型参数和实验配置结构，这是理解系统行为的基础。</p>
+<br>
+<h2>Step 4: 探索核心实验处理逻辑 (~30 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">scripts/process_experiment.py</code>, <code class="inline-code">scripts/process_folder.py</code></p>
+<br>
+<p>这两个脚本是核心处理逻辑，分别处理单个实验和批量文件夹。重点关注图像预处理流程、芯片校准算法、细胞分割方法和结果生成机制。</p>
+<br>
+<h2>Step 5: 学习校准与验证流程 (~25 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">scripts/calibrate_map.py</code>, <code class="inline-code">scripts/calibrate_pixel_scale.py</code>, <code class="inline-code">scripts/prepare_calibration_data.py</code></p>
+<br>
+<p>这些脚本负责芯片校准和像素尺度验证。重点关注坐标映射算法、校准数据生成流程和验证方法，理解如何确保图像与芯片结构的精确对齐。</p>
+<br>
+<h2>Step 6: 了解数据生成与可视化 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">scripts/generate_dart_frame_video.py</code>, <code class="inline-code">scripts/generate_sak_videos.py</code>, <code class="inline-code">scripts/generate_golden_files.py</code></p>
+<br>
+<p>这些脚本用于生成视频和参考文件。重点关注视频生成逻辑、帧处理方式和golden文件的作用，理解如何创建演示和验证材料。</p>
+<br>
+<h2>Step 7: 掌握分析与基准测试 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">scripts/analyze_growth.py</code>, <code class="inline-code">scripts/benchmark.py</code></p>
+<br>
+<p>分析脚本处理实验数据并生成生长曲线，基准测试脚本评估系统性能。重点关注数据分析方法和性能指标计算，理解如何量化实验结果。</p>
+<br>
+<h2>Step 8: 理解辅助工具与脚本 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">scripts/batch_masking.py</code>, <code class="inline-code">scripts/generate_chip_config.py</code></p>
+<br>
+<p>这些是辅助工具，用于批量掩膜处理和芯片配置生成。重点关注掩膜生成逻辑和配置自动化流程，理解如何提高工作效率。</p>
+<br>
+<h2>Tips</h2>
+<br>
+<ul>
+<li>先阅读README.md建立整体概念，再深入具体代码</li>
+<li>重点关注数据流向：从图像输入到结果输出的完整路径</li>
+<li>注意配置文件中的路径设置，理解相对路径和绝对路径的使用</li>
+<li>结合测试文件理解预期行为，特别是process_experiment.py的测试用例</li>
+<li>遇到复杂算法时，先理解输入输出接口，再深入实现细节</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

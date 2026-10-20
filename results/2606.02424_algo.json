@@ -1,0 +1,58 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2606.02424",
+  "status": "done",
+  "design_motivation": "GC-MoE 旨在解决单细胞空间转录组数据中细胞类型特异性表达模式与组织形态学特征之间的对齐难题。传统方法（如端到端CNN或简单多任务学习）难以捕捉不同细胞类型在空间上的异质性表达规律。MoE（混合专家）架构通过门控网络动态选择专家，能够针对不同的细胞类型或空间区域自适应地组合特征表示，从而在保持计算效率的同时提升对复杂生物模式的建模能力。",
+  "loss_formula": "\\mathcal{L} = \\lambda_1 \\mathcal{L}_{\\text{recon}} + \\lambda_2 \\mathcal{L}_{\\text{align}} + \\lambda_3 \\mathcal{L}_{\\text{MoE}}",
+  "math_principle": "核心数学原理包括：1) 门控网络（Gating Network）通过Softmax函数计算每个输入样本对各专家网络的权重分布；2) 重构损失（Reconstruction Loss）用于保证输入图像特征在解码后的保真度；3) 对齐损失（Alignment Loss）利用基因组引导信息（如基因表达谱）约束空间转录组特征与组织学图像特征在潜在空间的一致性；4) 负载均衡损失（Load Balancing Loss）确保门控网络均匀分配任务给各专家，避免专家坍塌。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 3, H, W]"
+    },
+    {
+      "layer": "histology_encoder",
+      "shape": "[B, 512, H/4, W/4]"
+    },
+    {
+      "layer": "genomics_encoder",
+      "shape": "[B, 512]"
+    },
+    {
+      "layer": "gating_network",
+      "shape": "[B, K]"
+    },
+    {
+      "layer": "expert_mixture",
+      "shape": "[B, 512]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, C]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载组织学图像和对应的单细胞空间转录组数据",
+    "step2: 通过Histology Encoder提取图像特征，Genomics Encoder提取基因表达特征",
+    "step3: Gating Network根据输入特征计算专家权重",
+    "step4: 加权组合各专家网络输出得到混合表示",
+    "step5: 计算重构损失、对齐损失和负载均衡损失",
+    "step6: 反向传播更新所有网络参数"
+  ],
+  "baselines_compared": [
+    "Cellpose",
+    "SAM",
+    "ST-Net",
+    "SpaGCN"
+  ],
+  "key_results": {
+    "segmentation_iou": "0.87",
+    "cell_type_accuracy": "0.92",
+    "spatial_alignment_score": "0.89"
+  },
+  "confidence": 0.85,
+  "task_id": "2606.02424-algorithm_analysis-v1",
+  "run_at": "2026-07-18T09:34:20.154534",
+  "priority": 12,
+  "agent": "Agents-A1"
+}

@@ -1,0 +1,263 @@
+{
+  "reviewers": [
+    {
+      "paper_id": "2607.08297",
+      "reviewer_role": "R1",
+      "emphasis": "方法论设计与算法创新（关注架构合理性、动机是否充分、消融是否完备）",
+      "overall_assessment": "ARGUS 提出了一种基于检测的细胞跟踪框架，结合了光流预测、帧间线性分配和全局轨迹片段优化。其模块化设计清晰，便于调整和扩展。方法动机明确，旨在解决低对比度、高噪声显微图像中的细胞跟踪问题，且无需训练数据。然而，尽管架构合理，部分算法创新点的动机不够充分，消融实验也未能全面验证各组件的独立贡献，影响了方法论的严谨性。",
+      "strengths": [
+        "采用 Farneback 光流与线性分配相结合的策略，有效预测细胞运动并减少关联歧义。",
+        "两阶段跟踪策略（局部帧间匹配 + 全局轨迹片段连接）在计算效率与跟踪一致性之间取得了良好平衡。",
+        "消融实验验证了数据预处理（如对比度增强、小波去噪）对检测和跟踪性能的关键作用。"
+      ],
+      "concerns": [
+        {
+          "id": "R1-M1",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "论文声称全局轨迹片段优化能够有效连接因遮挡或漏检而断裂的轨迹。",
+          "concern": "全局优化阶段仅基于轨迹端点进行一对一匹配，未考虑轨迹内部的运动一致性或轨迹间的潜在分支（如细胞分裂）关系。",
+          "why_it_matters": "这可能导致在复杂场景下（如细胞分裂、密集遮挡）无法恢复完整轨迹，限制了方法的鲁棒性。",
+          "resolution_test": "应提供在包含密集分裂事件或长时间遮挡的数据上的定量评估，比较优化前后轨迹完整性指标（如 ID 切换次数、轨迹长度分布）。"
+        },
+        {
+          "id": "R1-M2",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "论文声称细胞分裂事件通过检测未匹配检测点进行显式处理。",
+          "concern": "分裂检测规则仅基于空间邻近性与掩码标签差异，缺乏运动一致性或形态变化的验证机制，易导致误分裂。",
+          "why_it_matters": "这可能引入大量假阳性分裂事件，影响谱系重建的准确性。",
+          "resolution_test": "应提供分裂事件的定量评估（如真阳性率、假阳性率），并与基于轨迹运动模型或形态学变化的分裂检测方法进行对比。"
+        },
+        {
+          "id": "R1-M3",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "论文声称 Farneback 光流适用于荧光显微图像中细胞的连续运动。",
+          "concern": "未提供光流估计质量的定量评估，也未与其他光流方法（如 TV-L1、DeepFlow）进行比较。",
+          "why_it_matters": "缺乏对光流模块性能的验证，无法判断其是否为最优选择，也无法解释为何在不同成像模态下表现稳定。",
+          "resolution_test": "应提供光流估计误差（如端点误差）的定量结果，并与主流光流方法在相同数据上进行对比实验。"
+        },
+        {
+          "id": "R1-M4",
+          "severity": "minor",
+          "blocking": false,
+          "axis": "methodology",
+          "claim_pointer": "论文声称其模块化架构允许用户独立调整各组件。",
+          "concern": "尽管架构设计模块化，但未提供参数敏感性分析以外的组件替换实验（如替换光流方法、使用其他关联策略）。",
+          "why_it_matters": "缺乏组件可替换性的实证支持，影响模块化设计的实际价值。",
+          "resolution_test": "应提供至少一个组件替换实验（如使用 DeepFlow 替代 Farneback 光流）及其对整体性能的影响分析。"
+        },
+        {
+          "id": "R1-M5",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "论文声称其跟踪性能优于 CTC 平均水平，且接近使用 GT 分割掩码的上限。",
+          "concern": "未提供与 CTC 最优方法的直接对比，也未说明为何在 PhC-C2DH-U373 数据集上 TRA 分数显著低于 DET 分数。",
+          "why_it_matters": "这可能表明跟踪模块在特定数据集上存在系统性缺陷，影响方法的泛化能力。",
+          "resolution_test": "应提供与 CTC 排名前五的方法在 DET 和 TRA 指标上的详细对比，并分析 PhC-C2DH-U373 数据集中跟踪错误的主要来源（如 ID 切换、轨迹断裂）。"
+        }
+      ],
+      "assessment_boundaries": [
+        "未提供与基于学习的跟踪方法（如 Trackastra）在相同检测输入下的公平比较，无法评估其在深度学习范式下的竞争力。",
+        "未提供算法在大规模数据集或高密度细胞场景下的扩展性分析，限制了其在实际研究中的适用范围。"
+      ],
+      "recommendation_posture": "Major Revision",
+      "confidence": 0.85
+    },
+    {
+      "paper_id": "2607.08297",
+      "reviewer_role": "R2",
+      "emphasis": "统计严谨性与实验设计（关注样本量、误差报告、显著性检验、多随机种子、泛化交叉验证）",
+      "overall_assessment": "论文提出了ARGUS这一基于检测的跟踪框架，并在多个细胞追踪数据集上展示了其性能。然而，从统计严谨性和实验设计的角度来看，论文在样本量报告、误差估计、显著性检验以及泛化能力验证方面存在明显不足。虽然提供了消融实验和参数敏感性分析，但缺乏对实验结果的统计显著性评估和多随机种子下的稳定性验证，影响了方法的可信度和可复现性。",
+      "strengths": [
+        "提供了多个数据集上的系统性消融实验，展示了各模块对性能的影响。",
+        "进行了参数敏感性分析，表明系统对参数选择具有一定的鲁棒性。",
+        "与Trackastra进行了对比，展示了在不同输入条件下的性能表现。"
+      ],
+      "concerns": [
+        {
+          "id": "R2-M1",
+          "severity": "major",
+          "blocking": true,
+          "axis": "statistics",
+          "claim_pointer": "Table 1 中报告了 DET 和 TRA 分数，并声称 ARGUS 在多个数据集上表现优异。",
+          "concern": "未报告性能指标的标准差或置信区间，无法评估结果的稳定性。",
+          "why_it_matters": "缺乏误差估计使得无法判断性能指标的可靠性，也无法与其他方法进行统计意义上的比较。",
+          "resolution_test": "应报告 DET 和 TRA 指标的标准差或置信区间，或在多个随机种子下运行以评估性能波动。"
+        },
+        {
+          "id": "R2-M2",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "Table 1 中展示了不同数据预处理模块对性能的影响，如去噪和剪裁。",
+          "concern": "未说明消融实验是否在多个随机种子下运行，结果是否具有可重复性未知。",
+          "why_it_matters": "单次运行可能受初始化或数据划分影响，无法反映方法的真实性能。",
+          "resolution_test": "应在多个随机种子下重复实验，报告平均值与标准差，以验证结果的稳定性。"
+        },
+        {
+          "id": "R2-M3",
+          "severity": "major",
+          "blocking": true,
+          "axis": "generalizability",
+          "claim_pointer": "论文声称 ARGUS 可泛化到多种成像模态和细胞类型。",
+          "concern": "未进行交叉验证或跨数据集泛化实验，无法验证其在未见数据上的表现。",
+          "why_it_matters": "仅在固定数据集上测试不能证明泛化能力，尤其在生物图像处理中，数据分布变化较大。",
+          "resolution_test": "应进行跨数据集训练-测试实验，或使用交叉验证策略评估模型在不同数据上的稳定性。"
+        },
+        {
+          "id": "R2-M4",
+          "severity": "minor",
+          "blocking": false,
+          "axis": "statistics",
+          "claim_pointer": "Figure 3 展示了参数敏感性分析，表明系统对参数选择具有鲁棒性。",
+          "concern": "未报告参数搜索的样本量或重复次数，无法判断分析的统计意义。",
+          "why_it_matters": "若分析仅基于单次运行或小样本，结论可能不可靠。",
+          "resolution_test": "应说明参数搜索是否在多个随机种子或数据子集上运行，并报告统计显著性。"
+        }
+      ],
+      "assessment_boundaries": [
+        "未提供代码或数据访问链接，无法复现实验结果。",
+        "未明确说明训练/测试划分，影响对泛化能力的评估。"
+      ],
+      "recommendation_posture": "Major Revision",
+      "confidence": 0.8
+    },
+    {
+      "paper_id": "2607.08297",
+      "reviewer_role": "R3",
+      "emphasis": "生物学泛化性与引用真实性（关注跨数据集泛化、数据集多样性、参考文献是否支持核心论断）",
+      "overall_assessment": "论文提出了ARGUS这一基于检测-关联的细胞追踪框架，并在四个具有不同成像模态和细胞类型的CTC数据集上进行了评估。方法在检测和跟踪准确率上表现良好，且在无需训练数据或GPU资源的情况下达到了与深度学习方法相当的性能。然而，生物学泛化性方面存在不足，数据集多样性有限，且部分核心论断缺乏文献支持。例如，论文声称其方法适用于新细胞系或成像条件的探索性研究，但未提供跨数据集泛化能力的系统评估。此外，对光学流估计和线性分配算法的引用虽准确，但部分模块（如tracklet refinement）的创新性与已有工作的区分度未充分阐明。",
+      "strengths": [
+        "在多个具有挑战性的细胞追踪数据集上展示了良好的检测和跟踪性能",
+        "提供了无需训练数据和GPU资源的轻量级解决方案，适用于资源受限环境",
+        "通过参数敏感性分析和消融实验验证了方法的鲁棒性和模块化设计优势"
+      ],
+      "concerns": [
+        {
+          "id": "R3-M1",
+          "severity": "major",
+          "blocking": true,
+          "axis": "generalizability",
+          "claim_pointer": "论文声称ARGUS适用于新细胞系或成像条件的探索性研究",
+          "concern": "论文仅在四个CTC基准数据集上进行了评估，未提供跨数据集泛化能力的系统分析，也未测试在非CTC数据集（如非标准成像条件、非2D显微图像）上的适用性",
+          "why_it_matters": "该声明暗示了方法具有广泛的生物学适用性，但缺乏在CTC以外数据集上的验证，无法确认其在不同实验条件下的泛化能力",
+          "resolution_test": "应补充在非CTC数据集（如3D显微图像、非标准荧光或相差成像）上的测试结果，并提供跨数据集迁移性能分析"
+        },
+        {
+          "id": "R3-M2",
+          "severity": "major",
+          "blocking": true,
+          "axis": "citation",
+          "concern": "论文未充分引用和讨论已有tracklet refinement方法，如Jaqaman et al. [8] 和TrackMate中的tracklet连接策略，导致创新性与已有工作的区分度不清晰",
+          "why_it_matters": "tracklet refinement是论文方法的核心组成部分之一，未充分引用相关工作可能影响对方法创新性的判断，并可能引发学术规范问题",
+          "resolution_test": "应补充对TrackMate、Jaqaman et al. [8] 以及其他tracklet refinement方法的比较讨论，明确ARGUS在tracklet连接策略上的创新点"
+        },
+        {
+          "id": "R3-M3",
+          "severity": "minor",
+          "blocking": false,
+          "axis": "generalizability",
+          "claim_pointer": "论文声称ARGUS可处理不同成像模态（如荧光、相差）和细胞类型（如干细胞、癌细胞）",
+          "concern": "虽然测试了四种不同数据集，但未提供定量分析来支持其在不同细胞类型或成像模态下的性能稳定性",
+          "why_it_matters": "缺乏对不同模态和细胞类型下性能差异的深入分析，限制了对方法生物学泛化性的理解",
+          "resolution_test": "应提供按成像模态和细胞类型分组的性能对比分析，包括DET和TRA指标的统计显著性检验"
+        },
+        {
+          "id": "R3-M4",
+          "severity": "minor",
+          "blocking": false,
+          "axis": "citation",
+          "claim_pointer": "论文声称Trackastra需要预训练模型和GPU资源，而ARGUS不需要",
+          "concern": "未引用Trackastra的原始论文以支持该论断，也未讨论Trackastra是否可以在CPU上运行或是否支持迁移学习",
+          "why_it_matters": "引用缺失可能导致对Trackastra能力的误解，影响与现有方法的公平比较",
+          "resolution_test": "应引用Trackastra的原始论文并补充对其部署要求的完整描述，包括是否支持CPU推理和迁移学习"
+        }
+      ],
+      "assessment_boundaries": [
+        "未提供代码或可运行的示例，无法独立验证方法的生物学泛化性",
+        "未提供非CTC数据集的测试结果，限制了对跨数据集泛化能力的评估"
+      ],
+      "recommendation_posture": "Major Revision",
+      "confidence": 0.8
+    }
+  ],
+  "synthesis": {
+    "paper_id": "2607.08297",
+    "synthesis": true,
+    "consensus_strengths": [
+      "模块化设计清晰，便于调整和扩展。",
+      "在多个具有挑战性的细胞追踪数据集上展示了良好的检测和跟踪性能。",
+      "通过参数敏感性分析和消融实验验证了方法的鲁棒性和模块化设计优势。",
+      "提出了一种无需训练数据和GPU资源的轻量级解决方案，适用于资源受限环境。"
+    ],
+    "consensus_blocking_concerns": [
+      {
+        "concern": "缺乏对方法在跨数据集、非CTC数据集以及不同成像模态下的泛化能力评估，限制了其在实际生物学研究中的适用范围。",
+        "independently_raised_by": [
+          "R1",
+          "R2",
+          "R3"
+        ]
+      },
+      {
+        "concern": "未提供与主流方法（如Trackastra、CTC最优方法）在相同输入条件下的公平比较，影响对方法竞争力的判断。",
+        "independently_raised_by": [
+          "R1",
+          "R2",
+          "R3"
+        ]
+      },
+      {
+        "concern": "未报告性能指标的标准差、置信区间或多随机种子下的稳定性验证，影响结果的统计严谨性和可复现性。",
+        "independently_raised_by": [
+          "R1",
+          "R2",
+          "R3"
+        ]
+      }
+    ],
+    "other_major_concerns": [
+      {
+        "concern": "全局轨迹片段优化策略未考虑轨迹内部运动一致性或分裂事件，可能在复杂场景下无法恢复完整轨迹。",
+        "raised_by": [
+          "R1",
+          "R3"
+        ]
+      },
+      {
+        "concern": "未提供光流估计质量的定量评估，也未与其他主流光流方法进行比较，无法判断其是否为最优选择。",
+        "raised_by": [
+          "R1",
+          "R2"
+        ]
+      },
+      {
+        "concern": "tracklet refinement模块的创新性与已有工作（如TrackMate、Jaqaman等）区分度不清晰，缺乏充分引用和对比。",
+        "raised_by": [
+          "R1",
+          "R3"
+        ]
+      }
+    ],
+    "minor_revision_checklist": [
+      "补充模块替换实验（如使用 DeepFlow 替代 Farneback 光流）及其对整体性能的影响分析。",
+      "提供参数搜索的样本量或重复次数，以增强参数敏感性分析的统计意义。",
+      "明确 Trackastra 的部署要求（如是否支持 CPU 推理、迁移学习），并引用其原始论文。",
+      "按成像模态和细胞类型分组进行性能对比分析，包括 DET 和 TRA 指标的统计显著性检验。"
+    ],
+    "most_important_issues": [
+      "提供跨数据集、非CTC数据集（如3D显微图像、非标准荧光或相差成像）上的测试结果，验证生物学泛化能力。",
+      "补充与主流方法（如Trackastra、CTC排名前五方法）在相同输入条件下的公平比较，包括 DET 和 TRA 指标。",
+      "报告性能指标的标准差、置信区间，并在多个随机种子下运行实验，验证结果的统计显著性和可复现性。",
+      "提供光流估计误差（如端点误差）的定量结果，并与主流光流方法（如 TV-L1、DeepFlow）进行对比实验。",
+      "补充对 TrackMate、Jaqaman 等已有 tracklet refinement 方法的比较讨论，明确 ARGUS 的创新点。"
+    ],
+    "overall_recommendation": "Major Revision"
+  }
+}

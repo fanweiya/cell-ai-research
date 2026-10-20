@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wbcattplus Wiki — configs</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / wbcattplus Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>wbcattplus</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/Mask2Former.html">Mask2Former</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/utils.html">utils</a></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/results.html">results</a></li>
+<li><a href="../modules/dataset_txt.html">dataset_txt</a></li>
+<li><a href="../modules/.codegraph.html">.codegraph</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>configs</h1>
+<br>
+<p>&gt; 存储和定义不同语义分割模型训练所需的配置参数。</p>
+<br>
+<p>该模块包含5个YAML配置文件，分别对应不同的分割模型架构（BMC-Adapt、ConvNeXt、FCN、SegFormer、Swin Transformer）。每个配置文件详细指定了PyTorch Lightning训练器参数、模型超参数、数据路径、优化器设置及检查点策略。这些配置被主训练脚本读取，用于实例化对应的模型和数据加载器，支持在相同数据集上对不同架构进行公平比较和微调。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">configs/bmcseg_adapt.yaml</code></h3>
+<br>
+<p>定义BMC-Adapt模型的训练配置，该模型基于DINOv2 backbone和DeepLabV3+结构，支持域自适应。</p>
+<br>
+<h3><code class="inline-code">configs/convnext.yaml</code></h3>
+<br>
+<p>定义基于ConvNeXt backbone的UperNet分割模型训练配置。</p>
+<br>
+<h3><code class="inline-code">configs/fcn.yaml</code></h3>
+<br>
+<p>定义基于ResNet50的FCN分割模型训练配置。</p>
+<br>
+<h3><code class="inline-code">configs/segformer.yaml</code></h3>
+<br>
+<p>定义基于SegFormer（MIT-B5）的分割模型训练配置。</p>
+<br>
+<h3><code class="inline-code">configs/swin.yaml</code></h3>
+<br>
+<p>定义基于Swin Transformer的UperNet分割模型训练配置。</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>Lightning配置</strong>: 所有配置均遵循PyTorch Lightning 2.2.1的 Trainer 参数规范，包括加速器、精度（16-mixed）、日志记录器和回调设置。</li>
+<li><strong>模型架构复用</strong>: 除bmcseg_adapt外，其余模型均通过config_url和checkpoint_url引用OpenMMLab MMSegmentation的预训练配置和权重，实现即插即用。</li>
+<li><strong>上采样策略</strong>: 配置项upsample_in和upsample_out控制特征图上采样行为，不同模型采用不同的上采样倍数（4或8）以适应输出分辨率。</li>
+<li><strong>域自适应支持</strong>: bmcseg_adapt.yaml包含adapt_data和adapt_image_dir字段，用于指定自适应训练数据，这是其他配置所不具备的。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">configs/*.yaml</code> → <code class="inline-code">main.py / train.py</code>: 配置文件被主训练脚本通过OmegaConf或PyYAML加载，用于初始化LightningModule和DataModule。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

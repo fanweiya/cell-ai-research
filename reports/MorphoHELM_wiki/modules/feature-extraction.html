@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MorphoHELM Wiki — feature-extraction</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / MorphoHELM Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>MorphoHELM</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/feature-extraction.html">feature-extraction</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/data_installation.html">data_installation</a></li>
+<li><a href="../modules/data-preprocessing.html">data-preprocessing</a></li>
+<li><a href="../modules/huggingface_loader.html">huggingface_loader</a></li>
+<li><a href="../modules/raw_to_huggingface.html">raw_to_huggingface</a></li>
+<li><a href="../modules/data.html">data</a></li>
+<li><a href="../modules/benchmarks.html">benchmarks</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>feature-extraction</h1>
+<br>
+<p>&gt; Cell Painting 图像特征提取流水线，支持多模型推理与结果聚合</p>
+<br>
+<p>该模块实现了从原始显微图像到特征向量的完整处理流程。核心功能包括：通过 YAML 配置动态加载模型和预处理流程、支持单通道与多通道模型的推理、处理不同数据集（CPG0016, BBBC036）的切片、将推理结果聚合为 Parquet 文件。系统支持本地和云环境（AMLT）部署，包含诊断工具和单元测试。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">feature-extraction/src/config.py</code></h3>
+<br>
+<p>中央配置模块，负责加载 YAML 配置文件并动态构建模型包装器、数据加载器和图像变换流程。</p>
+<br>
+<ul>
+<li><code class="inline-code">load_config</code> (function) - 加载 YAML 配置文件并设为活动配置</li>
+<li><code class="inline-code">get_transform</code> (function) - 根据模型名称返回对应的图像预处理变换</li>
+<li><code class="inline-code">get_model_wrapper</code> (function) - 根据模型名称返回对应的模型包装器类</li>
+<li><code class="inline-code">MODEL_WRAPPERS</code> (dictionary) - 模型包装器类注册表，映射模型名到类</li>
+<li><code class="inline-code">_build_classic_transform</code> (function) - 构建适用于 ImageNet 预训练模型的标准化变换流程</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/models/base_model_wrapper.py</code></h3>
+<br>
+<p>定义所有模型包装器的抽象基类，提供推理循环、补丁处理（patching）和通用工具方法。</p>
+<br>
+<ul>
+<li><code class="inline-code">ModelWrapper</code> (class) - 抽象基类，定义 _load_model, infer, postprocess 接口</li>
+<li><code class="inline-code">_patch_batch</code> (method) - 将图像批次分割为不重叠的补丁，支持对齐约束</li>
+<li><code class="inline-code">_average_patch_outputs</code> (method) - 对补丁输出进行平均，支持张量和字典类型</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/custom_datasets/direct_dataset.py</code></h3>
+<br>
+<p>直接从磁盘加载 PNG 图像的 PyTorch Dataset，绕过 HuggingFace 数据集开销，支持单通道和多通道模式。</p>
+<br>
+<ul>
+<li><code class="inline-code">DirectImageDataset</code> (class) - 直接图像加载数据集类</li>
+<li><code class="inline-code">_get_stacked_item</code> (method) - 加载并堆叠 5 个通道用于多通道模型</li>
+<li><code class="inline-code">_get_single_channel_item</code> (method) - 加载单个通道用于单通道模型</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/aggregate_features.py</code></h3>
+<br>
+<p>将每个 GPU 的推理结果（pkl）聚合成按孔板（well）级别的特征 Parquet 文件。</p>
+<br>
+<ul>
+<li><code class="inline-code">run_aggregation_for_config</code> (function) - 根据配置运行聚合流程</li>
+<li><code class="inline-code">get_model_category</code> (function) - 判断模型类别（单通道、多通道等）以确定聚合策略</li>
+<li><code class="inline-code">parse_single_channel_filename</code> (function) - 解析单通道文件名提取孔板、井号和通道信息</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/run_inference.py</code></h3>
+<br>
+<p>主推理脚本，支持多 GPU 并行推理，处理 HuggingFace 数据集格式。</p>
+<br>
+<ul>
+<li><code class="inline-code">inference</code> (function) - 在单个 GPU 上运行模型推理</li>
+<li><code class="inline-code">run_model</code> (function) - 为单个模型启动多 GPU 推理进程</li>
+<li><code class="inline-code">run_inference_for_config</code> (function) - 根据配置运行所有启用的模型</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/run_inference_direct.py</code></h3>
+<br>
+<p>直接推理脚本，直接从磁盘加载 PNG 并预过滤 MOA 化合物，比 HF 路径快约 4 倍。</p>
+<br>
+<ul>
+<li><code class="inline-code">load_and_filter_metadata</code> (function) - 加载并过滤元数据，仅保留 MOA 化合物和对照</li>
+<li><code class="inline-code">inference_direct</code> (function) - 直接模式下的单 GPU 推理</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/models/resnet101_wrapper.py</code></h3>
+<br>
+<p>ResNet-101 包装器，加载 ImageNet 预训练权重，输出 2048 维特征向量。</p>
+<br>
+<ul>
+<li><code class="inline-code">ResNetWrapper</code> (class) - ResNet-101 包装器类</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/models/resnet101_untrained_wrapper.py</code></h3>
+<br>
+<p>随机初始化 ResNet-101 包装器，作为基线对比。</p>
+<br>
+<ul>
+<li><code class="inline-code">ResNetUntrainedWrapper</code> (class) - 未训练 ResNet-101 包装器类</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/models/dinov2_wrapper.py</code></h3>
+<br>
+<p>DINOv2 包装器，支持标准 224x224 和高分辨率 448x448 输入，输出 cls_token 和 patch_token 特征。</p>
+<br>
+<ul>
+<li><code class="inline-code">DINOv2Wrapper</code> (class) - 标准 DINOv2 包装器</li>
+<li><code class="inline-code">DINOv2HighRes448Wrapper</code> (class) - 448x448 输入 DINOv2 包装器</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/models/vgg19_wrapper.py</code></h3>
+<br>
+<p>VGG19 包装器，加载 ImageNet 预训练权重，输出 4096 维特征向量。</p>
+<br>
+<ul>
+<li><code class="inline-code">VGG19Wrapper</code> (class) - VGG19 包装器类</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/models/OpenPhenom_wrapper.py</code></h3>
+<br>
+<p>OpenPhenom MAE 模型包装器，从 HuggingFace 自动下载权重，输出 384 维特征向量。</p>
+<br>
+<ul>
+<li><code class="inline-code">OpenPhenomWrapper</code> (class) - OpenPhenom 包装器类</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/models/cloome_wrapper.py</code></h3>
+<br>
+<p>CLOOME 模型包装器，使用修改版 ResNet-50 处理 5 通道图像，输出 512 维 L2 归一化嵌入。</p>
+<br>
+<ul>
+<li><code class="inline-code">CloomeWrapper</code> (class) - CLOOME 包装器类</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/models/subcell_wrapper.py</code></h3>
+<br>
+<p>SubCell 模型包装器，基于 ViT 和门控注意力池化，对 ER-DNA-Protein 变体进行 3 次推理并拼接特征。</p>
+<br>
+<ul>
+<li><code class="inline-code">SubCellWrapper</code> (class) - SubCell 包装器类</li>
+<li><code class="inline-code">GatedAttentionPooler</code> (class) - 门控注意力池化模块</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/models/openphenom/huggingface_mae.py</code></h3>
+<br>
+<p>OpenPhenom MAE 模型实现，包含编码器、解码器和损失函数。</p>
+<br>
+<ul>
+<li><code class="inline-code">MAEModel</code> (class) - MAE 模型主类</li>
+<li><code class="inline-code">MAEConfig</code> (class) - MAE 配置类</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/models/cloome/model.py</code></h3>
+<br>
+<p>CLOOME 模型核心实现，包含 ResNet 骨干网络和 CLIP 通用架构。</p>
+<br>
+<ul>
+<li><code class="inline-code">ResNet</code> (class) - CLOOME 使用的 ResNet 实现</li>
+<li><code class="inline-code">Bottleneck</code> (class) - ResNet 瓶颈块</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/run_inference_splits.py</code></h3>
+<br>
+<p>支持对多个数据集切片（splits）进行批量推理的脚本。</p>
+<br>
+<ul>
+<li><code class="inline-code">build_split_config</code> (function) - 为指定切片构建专用配置</li>
+<li><code class="inline-code">parse_splits</code> (function) - 解析命令行提供的切片列表</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/aggregate_splits.py</code></h3>
+<br>
+<p>对多个切片的推理结果进行聚合，支持并行模型聚合。</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 聚合脚本入口点</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/diagnose_nan.py</code></h3>
+<br>
+<p>诊断工具，检查聚合后的 Parquet 文件和原始 pkl 文件中是否存在 NaN 或 Inf 值。</p>
+<br>
+<ul>
+<li><code class="inline-code">check_parquets</code> (function) - 检查 Parquet 文件中的 NaN/Inf</li>
+<li><code class="inline-code">check_pkls</code> (function) - 检查 pkl 文件中的 NaN/Inf</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/tests/test_patching.py</code></h3>
+<br>
+<p>单元测试，验证补丁处理逻辑的几何正确性和输出一致性。</p>
+<br>
+<ul>
+<li><code class="inline-code">TestPatchGeometry</code> (class) - 补丁几何测试类</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/utils/util.py</code></h3>
+<br>
+<p>通用工具函数，包括图像归一化、位深转换、板分块等。</p>
+<br>
+<ul>
+<li><code class="inline-code">illumination_threshold_tensor</code> (function) - 16 位图像转 8 位的光照阈值化</li>
+<li><code class="inline-code">get_plate_chunks</code> (function) - 将孔板分配给多个 GPU</li>
+<li><code class="inline-code">repeat</code> (function) - 单通道重复为 3 通道</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/src/utils/huggingface_loader.py</code></h3>
+<br>
+<p>HuggingFace 数据集包装器，统一接口并应用变换。</p>
+<br>
+<ul>
+<li><code class="inline-code">DatasetWrapper</code> (class) - 数据集包装类</li>
+</ul>
+<br>
+<h3><code class="inline-code">feature-extraction/configs/inference_config.yaml</code></h3>
+<br>
+<p>标准推理配置文件，定义模型、数据集和推理参数。</p>
+<br>
+<h3><code class="inline-code">feature-extraction/configs/inference_splits.yaml</code></h3>
+<br>
+<p>多切片推理配置文件，支持对多个数据集切片进行批量处理。</p>
+<br>
+<h3><code class="inline-code">feature-extraction/configs/direct_moa_config.yaml</code></h3>
+<br>
+<p>直接推理配置，专门用于 MOA 化合物分析，预过滤数据以提高效率。</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>模型包装器模式</strong>: 所有模型通过统一的 ModelWrapper 接口封装，隐藏具体实现细节，支持热插拔和并行推理。</li>
+<li><strong>补丁处理（Patching）</strong>: 对于大图像，可将其分割为多个不重叠补丁分别推理，然后平均结果，以适配显存限制或提高分辨率。</li>
+<li><strong>单通道 vs 多通道</strong>: 单通道模型（如 ResNet）每次处理一个通道并重复为 3 通道；多通道模型（如 CLOOME）直接处理 5 通道堆叠图像。</li>
+<li><strong>直接数据集加载</strong>: 绕过 HuggingFace 数据集层，直接从 PNG 文件读取，配合元数据过滤，显著提升 MOA 分析效率。</li>
+<li><strong>多 GPU 并行推理</strong>: 通过 torch.multiprocessing 将不同孔板分配给不同 GPU，每个进程独立运行模型并保存中间 pkl 文件。</li>
+<li><strong>结果聚合策略</strong>: 根据模型类型采用不同聚合方式：单通道模型按孔板和通道平均后拼接；多通道模型直接按孔板平均。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">run_inference.py</code> → <code class="inline-code">config.py</code>: 导入 config 模块以加载配置和获取模型包装器</li>
+<li><code class="inline-code">run_inference.py</code> → <code class="inline-code">models/base_model_wrapper.py</code>: 使用 ModelWrapper 基类实例化具体模型</li>
+<li><code class="inline-code">run_inference_direct.py</code> → <code class="inline-code">custom_datasets/direct_dataset.py</code>: 使用 DirectImageDataset 直接从磁盘加载图像</li>
+<li><code class="inline-code">aggregate_features.py</code> → <code class="inline-code">run_inference.py</code>: 依赖 run_inference 生成的 pkl 文件进行聚合</li>
+<li><code class="inline-code">models/OpenPhenom_wrapper.py</code> → <code class="inline-code">models/openphenom/huggingface_mae.py</code>: OpenPhenomWrapper 调用 MAEModel 进行推理</li>
+<li><code class="inline-code">models/cloome_wrapper.py</code> → <code class="inline-code">models/cloome/model.py</code>: CloomeWrapper 加载 CLIPGeneral 模型</li>
+<li><code class="inline-code">config.py</code> → <code class="inline-code">models/__init__.py</code>: 从 models 包导入所有包装器类到注册表</li>
+<li><code class="inline-code">run_inference_splits.py</code> → <code class="inline-code">aggregate_splits.py</code>: split 推理后可直接调用 aggregate_splits 进行结果聚合</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

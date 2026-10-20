@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 7,
+    "caption": "展示不同数据集（ISIC 2018、CBIS-DDSM、BUSI）上扰动攻击对MedSAM分割影响的示例图，红色与青色框对比扰动前后的分割区域"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "核心实验结果图：四个数据集(ISIC 2018、PH2、BUSI、CBIS-DDSM)上不同微调策略(Zero-shot、Decoder-only、VPT、LoRA、Full FT等)在不同评估抖动水平下的Dice性能对比曲线，展示ID与OOD性能退化"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "四面板实验结果图：不同微调策略（Zero-shot、LoRA、VPT、Full FT等）在ID和OOD数据集上HD95随边界框抖动的变化对比"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "FreeBridge模型的方法架构图及实验性能对比图"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "FreeBridge与基线方法在t=0到1细胞转变过程中的对比图，展示基线进入空白区域（伪迹）而FreeBridge保持流形上的轨迹"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "细胞图像生成对比实验结果：FreeBridge与IMPA、PhenDiff、CellFlux在两种药物扰动下的细胞形态可视化对比"
+  }
+}

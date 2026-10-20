@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>count-anything Wiki — reading-guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / count-anything Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>count-anything</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/data.html">data</a></li>
+<li><a href="modules/count_anything.html">count_anything</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/config.html">config</a></li>
+<li><a href="modules/sam3.html">sam3</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Reading Guide</h1>
+<br>
+<p>本指南旨在帮助您快速理解 Count Anything 项目的架构与核心逻辑。建议从项目概览和配置入手，逐步深入数据流程、模型核心及推理逻辑，最后关注辅助工具。</p>
+<br>
+<h2>Step 1: 项目概览与环境配置 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">README.md</code>, <code class="inline-code">requirements.txt</code>, <code class="inline-code">data/README.md</code></p>
+<br>
+<p>首先通过 README.md 了解项目背景、核心功能及整体架构。接着查看 requirements.txt 确认依赖环境。data/README.md 对于理解数据准备流程至关重要，它详细说明了 CLOC 数据集的处理方式。</p>
+<br>
+<h2>Step 2: 理解核心配置参数 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">config/count_anything_train_cloc.yaml</code>, <code class="inline-code">config/count_anything_val_cloc.yaml</code>, <code class="inline-code">config/count_anything_test_cloc.yaml</code></p>
+<br>
+<p>这三个 YAML 文件定义了模型训练、验证和测试的关键超参数。重点关注数据路径、模型结构设置、优化器配置以及评估指标，这是理解模型行为的基础。</p>
+<br>
+<h2>Step 3: 掌握数据加载与处理流程 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">data/README.md</code>, <code class="inline-code">count_anything/__init__.py</code></p>
+<br>
+<p>虽然 data 目录下文件众多，但先通过 README 建立数据流的整体认知。然后查看 count_anything/__init__.py 了解模块的公共接口和初始化逻辑，确认数据模块如何被引入。</p>
+<br>
+<h2>Step 4: 深入模型核心架构 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">count_anything/model/count_anything.py</code>, <code class="inline-code">count_anything/model/fusion.py</code></p>
+<br>
+<p>这是项目的核心。count_anything.py 定义了主模型类，需关注其前向传播逻辑和文本引导机制。fusion.py 则处理多模态信息的融合策略，理解两者如何协同工作。</p>
+<br>
+<h2>Step 5: 解析推理与后处理逻辑 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">count_anything/inference.py</code>, <code class="inline-code">count_anything/eval/postprocessor.py</code></p>
+<br>
+<p>inference.py 展示了模型如何从输入到输出的完整推理流程。postprocessor.py 则负责将模型原始预测转换为最终计数结果，需关注其中的阈值设定和形态学操作。</p>
+<br>
+<h2>Step 6: 了解评估与可视化工具 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">count_anything/eval/counting_meter.py</code>, <code class="inline-code">count_anything/eval/visualizer.py</code></p>
+<br>
+<p>counting_meter.py 用于在训练和验证过程中实时统计误差指标。visualizer.py 则负责将计数结果可视化，帮助直观理解模型表现。</p>
+<br>
+<h2>Tips</h2>
+<br>
+<ul>
+<li>在阅读代码前，先通读 README 和配置文档，建立宏观认知框架。</li>
+<li>重点关注数据流向：从配置文件 -&gt; 数据加载 -&gt; 模型处理 -&gt; 推理输出 -&gt; 评估结果。</li>
+<li>遇到不理解的函数时，先查看其调用上下文，再深入实现细节。</li>
+<li>注意区分训练、验证和测试配置的不同之处，这有助于理解模型在不同阶段的行为。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

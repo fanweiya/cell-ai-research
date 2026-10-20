@@ -1,0 +1,34 @@
+{
+ "id": "2608.00405",
+ "chars": 60000,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": false,
+   "has_fdr": false,
+   "mentions_ablation": true,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "score": 4
+ },
+ "key_claims": [
+  "although these methods improve predictive performance by enriching histological signals, the gene decoding process relies on a flat structure.",
+  "experiments we conduct experiments on nine datasets to address the following questions: rq1: does msgr outperform existing flat-decoding methods? rq2: can the go-guided decoder improve existing archit",
+  "517, surpassing both the generative stflow approach (0."
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+   "doi": null
+  }
+ ],
+ "citation_results": []
+}

@@ -1,0 +1,32 @@
+[
+ {
+  "title": "Cellpose: a generalist algorithm for cellular segmentation",
+  "doi": "10.1038/s41592-020-01018-x",
+  "verdict": "PASS",
+  "confirmed_n": 2
+ },
+ {
+  "title": "Segment Anything",
+  "doi": null,
+  "verdict": "SKIP",
+  "confirmed_n": 0
+ },
+ {
+  "title": "Segment Anything",
+  "doi": null,
+  "verdict": "SKIP",
+  "confirmed_n": 0
+ },
+ {
+  "title": "Segment Anything in Medical Images (MedSAM)",
+  "doi": null,
+  "verdict": "SKIP",
+  "confirmed_n": 0
+ },
+ {
+  "title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+  "doi": "10.1007/978-3-319-24574-4_28",
+  "verdict": "PASS",
+  "confirmed_n": 4
+ }
+]

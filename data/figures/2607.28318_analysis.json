@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "PathView-Bench基准概览图：对比现有文本驱动问答基准，展示包含区域分类、目标计数、病变定位、密度定位、空间关系等多任务细粒度视觉理解基准及多模型性能排名"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "PathView-Bench基准构建流程图：数据收集、标准化与质检、VQA任务构建、数据划分与评估四个阶段"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "PathView-Bench数据集组成的环形图，展示308,070条数据在Region-FOV和Slide-FOV两大层级下各任务（分类、定位、计数等）的样本分布"
+  }
+}

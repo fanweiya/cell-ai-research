@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法总览图：基础模型分割解剖区域，结合注意力正则化（Locus）与SOTA分类器对比热力图"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法总体架构图：展示解剖引导的注意力正则化框架，包括分割基础模型、patchwise提示、注意力图与网络损失的计算流程"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "方法结果对比图：展示乳腺超声和胸片中FIP与所提PAP注意力图的可视化对比，绿色箭头突出PAP聚焦病灶区域的优势"
+  }
+}

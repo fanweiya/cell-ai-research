@@ -1,0 +1,20 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2608.01370v1",
+  "status": "done",
+  "task_family": "cell_embedding",
+  "input": "High-resolution digital pathology images (tiles/WSIs)",
+  "output": "Fused tile-level representations and slide-level predictions (classification/regression)",
+  "notable": "Focuses on adaptive fusion of multiple pathology foundation models (PFMs) to improve robustness and interpretability of tile representations for downstream tasks.",
+  "task_type": [
+    "embedding",
+    "multimodal",
+    "foundation_model",
+    "benchmark"
+  ],
+  "confidence": 0.85,
+  "task_id": "2608.01370v1-task_analysis-v1",
+  "run_at": "2026-08-06T11:47:37.194432",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

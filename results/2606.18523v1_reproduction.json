@@ -1,0 +1,38 @@
+{
+  "task": "reproduction",
+  "paper_id": "2606.18523v1",
+  "status": "done",
+  "level": "B",
+  "level_description": "B=需要数据",
+  "gpu_requirements": {
+    "min_vram_gb": 24,
+    "gpu_count": 1,
+    "gpu_type": "A100/RTX4090"
+  },
+  "training_time_hours": null,
+  "data_public": true,
+  "data_source": "公开数据集名称或'未公开'",
+  "dependencies": [
+    "pytorch",
+    "cuda11.8",
+    "cellpose",
+    "segment-anything",
+    "opencv-python",
+    "numpy",
+    "pandas",
+    "scikit-image"
+  ],
+  "pretrained_weights_available": true,
+  "reproduction_steps": [
+    "1. 克隆项目仓库",
+    "2. 安装依赖 (pip install -r requirements.txt)",
+    "3. 准备显微镜图像数据并放置于指定目录",
+    "4. 配置实验参数 (config.yaml)",
+    "5. 运行 pipeline.py 执行完整分析流程"
+  ],
+  "confidence": 0.85,
+  "task_id": "2606.18523v1-reproduction-v1",
+  "run_at": "2026-07-18T09:59:06.195178",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

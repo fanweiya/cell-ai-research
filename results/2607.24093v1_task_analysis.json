@@ -1,0 +1,20 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2607.24093v1",
+  "status": "done",
+  "task_family": "cell_embedding",
+  "input": "Single-cell RNA sequencing datasets and scientific literature text",
+  "output": "Standardized T-cell population labels aligned with Cell Ontology",
+  "notable": "Uses multi-agent LLM workflow for nomenclature-guided cross-study alignment rather than direct image or expression analysis",
+  "task_type": [
+    "embedding",
+    "benchmark",
+    "multimodal",
+    "foundation_model"
+  ],
+  "confidence": 0.85,
+  "task_id": "2607.24093v1-task_analysis-v1",
+  "run_at": "2026-08-06T11:44:08.863423",
+  "priority": 11,
+  "agent": "Agents-A1"
+}

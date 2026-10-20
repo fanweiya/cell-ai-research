@@ -1,0 +1,58 @@
+{
+  "paper_id": "2608.05226",
+  "task": "single_review",
+  "overall_assessment": "NeuroAdaptTrainer 是一个将 YOLO 实例分割模型集成到 Fiji/ImageJ 的开源插件，旨在简化神经元图像分割、手动校正和迁移学习的流程。该工具在方法设计上具有创新性，特别是在将深度学习模型与用户交互结合方面，有助于非专业用户更便捷地使用 AI 技术。然而，论文在方法细节、统计验证、泛化能力评估和引用真实性方面存在一些问题，需要进一步澄清和补充。",
+  "strengths": [
+    "将 YOLO 模型与 Fiji/ImageJ 集成，提供了一个用户友好的交互式 AI 工作流，降低了非专业用户的使用门槛。",
+    "支持迁移学习和模型验证，使得模型能够适应不同实验条件，提升了实用性。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "论文声称 NeuroAdaptTrainer 使用 YOLO 模型进行神经元分割，并通过手动校正实现迁移学习。",
+      "concern": "论文未提供足够的技术细节，例如模型结构、训练策略、损失函数、数据预处理方式等，无法评估其方法的科学性和可复现性。",
+      "why_it_matters": "缺乏方法细节会阻碍其他研究人员复现该工作，也难以判断其技术贡献是否合理。",
+      "resolution_test": "需要补充模型架构、训练流程、数据增强策略、优化器设置等详细信息。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "statistics",
+      "claim_pointer": "论文报告了 base model 的 mask mAP50 为 0.9228，mask mAP50-95 为 0.4075。",
+      "concern": "未提供统计显著性检验或置信区间，也未说明评估集的大小和来源，无法判断这些指标的可信度。",
+      "why_it_matters": "缺乏统计验证的细节会削弱模型性能评估的可信度，无法判断其是否显著优于现有方法。",
+      "resolution_test": "应补充评估集的样本量、交叉验证方法、置信区间或显著性检验结果。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "论文声称 NeuroAdaptTrainer 可以适应不同显微镜、染色协议和培养条件。",
+      "concern": "未提供跨实验室、跨设备或跨数据集的泛化实验结果，仅提到通过迁移学习进行适应，但缺乏系统性评估。",
+      "why_it_matters": "缺乏泛化性验证会限制该工具在实际多变实验环境中的适用性。",
+      "resolution_test": "应提供在不同实验室、不同显微镜或不同染色条件下的测试结果，以验证其泛化能力。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "citation",
+      "claim_pointer": "论文引用了 Cellpose、Ilastik、ViNe-Seg 等相关工作。",
+      "concern": "部分引用未提供 DOI 或完整出版信息，例如 ViNe-Seg 的引用未说明是否为正式发表论文。",
+      "why_it_matters": "引用不完整可能影响读者追溯原始文献，降低学术严谨性。",
+      "resolution_test": "应补充完整文献信息，包括 DOI、期刊名称、发表年份等。"
+    }
+  ],
+  "assessment_boundaries": [
+    "无法评估模型训练的具体超参数设置",
+    "无法验证迁移学习过程中使用的样本量和训练轮次",
+    "无法评估插件在不同操作系统下的兼容性和性能表现"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

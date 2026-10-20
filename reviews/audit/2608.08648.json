@@ -1,0 +1,30 @@
+{
+ "id": "2608.08648",
+ "chars": 34940,
+ "statistics": {
+  "checks": {
+   "has_p_value": true,
+   "has_ci": false,
+   "has_std": false,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": true,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 3
+ },
+ "key_claims": [
+  "(4) thus, an observation receives a positive reward when it improves abnormality recognition.",
+  "81% on slidebench-vqa (bcnb), surpassing pathnavigate by 2.",
+  "adaptivepath significantly outperforms the variant without consistency fine-tuning ( p < 0."
+ ],
+ "ref_spotcheck_targets": [],
+ "citation_results": []
+}

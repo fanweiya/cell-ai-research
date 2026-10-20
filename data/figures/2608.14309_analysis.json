@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文方法架构图：展示空间消息传递（SLMP）流程，包括WSI感兴趣区域、图像切片GPT-4生成描述、LLM消息传递与提示优化"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "方法示意图：展示病理图像描述输入GPT-4.1，结合邻接上下文信息后，从错误分类纠正为正确分类的对比流程"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "Message passing (MP) before and after tumor region segmentation prediction comparison diagram, showing the improvement effect of spatial message passing on tumor segmentation results, an experimental result visualization figure."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 7,
+    "caption": "生物组织H&E染色图像及其对应的图结构（网络/拓扑）可视化，展示深度学习对生物图像特征的表征"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "实验结果对比图：比较多种深度学习模型（CNN、ViT、DINO等）与随机基线在检索任务上的表现（Recall@5和mAP），对比训练与未训练状态"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "热力图对比预训练与未训练模型（ResNet50、DINOv3、ViT等）之间的表征相似性矩阵，是论文的核心实验结果可视化"
+  }
+}

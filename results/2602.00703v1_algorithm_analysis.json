@@ -1,0 +1,53 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2602.00703v1",
+  "status": "done",
+  "design_motivation": "针对高粱气孔结构微小（<40μm）、嵌套且标注成本高的问题，设计基于Patch的预处理策略以放大特征并解决尺度失衡，结合半监督伪标签框架利用未标注数据扩展训练集，相比全图训练和纯监督学习，显著提升了小目标分割精度并降低了标注依赖。",
+  "loss_formula": "L_total = L_mask + λ * L_dice",
+  "math_principle": "采用Mask R-CNN架构，结合交叉熵损失（L_mask）与Dice损失（L_dice）以处理类别不平衡；通过置信度阈值过滤伪标签，确保半监督学习中的噪声抑制。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 3, 256, 256]"
+    },
+    {
+      "layer": "backbone",
+      "shape": "[B, 256, H/4, W/4]"
+    },
+    {
+      "layer": "roi_align",
+      "shape": "[N, 256, 7, 7]"
+    },
+    {
+      "layer": "mask_branch",
+      "shape": "[N, 3, 28, 28]"
+    },
+    {
+      "layer": "output",
+      "shape": "[N, 3]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 原始图像切片为256x256 Patch，过滤无气孔区域",
+    "step2: 使用Mask R-CNN在11,060标注Patch上训练初始模型",
+    "step3: 对未标注图像生成伪标签，应用类别特定置信度阈值（气孔0.5，保卫细胞0.7，复合体0.7）",
+    "step4: 合并标注Patch与56,428伪标签Patch进行半监督重训练",
+    "step5: 在测试集上评估mAP和mIoU"
+  ],
+  "baselines_compared": [
+    "Mask R-CNN (Full-frame)",
+    "SAM2.1",
+    "FCN",
+    "Mask2Former"
+  ],
+  "key_results": {
+    "mIoU_improvement": "65.93% -> 70.35%",
+    "pore_AP_improvement": "6% increase",
+    "dataset_size": "11,060 human + 56,428 pseudo"
+  },
+  "confidence": 0.85,
+  "task_id": "2602.00703v1-algorithm_analysis-v1",
+  "run_at": "2026-07-24T09:14:06.872581",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

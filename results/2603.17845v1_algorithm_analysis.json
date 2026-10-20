@@ -1,0 +1,73 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2603.17845v1",
+  "status": "done",
+  "design_motivation": "现有基于SAM的微细胞分割模型（如CellSAM）通常仅结合自动提示生成或自定义解码器，缺乏将自动提示生成、自定义解码器与针对可提示分割的微调三者结合的策略。CellSAM虽接近但未针对可提示分割进行微调，导致若物体检测失败则无法通过SAM的提示分割恢复，泛化性差。本文提出APG（自动提示生成）算法，旨在无需额外训练的情况下，在微调SAM基础上实现更灵活的提示策略，从而提升分割性能并增强域外泛化能力。",
+  "loss_formula": "无（APG为推理阶段算法，不引入新的训练损失函数）",
+  "math_principle": "基于距离变换（Distance Transform）和连通分量分析（Connected Components）的提示生成机制。通过计算前景概率图与边界距离变换的交集，提取每个连通分量的最大边界距离点作为点提示（Point Prompt），利用SAM的提示编码器（Prompt Encoder）和掩码解码器（Mask Decoder）生成掩码及IoU预测，最后通过尺寸过滤和非极大值抑制（NMS）优化实例分割结果。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 3, H, W]"
+    },
+    {
+      "layer": "image_encoder",
+      "shape": "[B, 256, H/4, W/4]"
+    },
+    {
+      "layer": "seg_decoder",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "boundary_distance_transform",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "point_prompt",
+      "shape": "[N, 2]"
+    },
+    {
+      "layer": "prompt_encoder",
+      "shape": "[N, 256]"
+    },
+    {
+      "layer": "mask_decoder",
+      "shape": "[N, 1, H, W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[N, 1, H, W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载预训练的SAM模型（图像编码器、提示编码器、掩码解码器）",
+    "step2: 输入图像，通过图像编码器提取特征",
+    "step3: 使用分割解码器预测前景概率图",
+    "step4: 应用阈值生成二值掩码",
+    "step5: 对二值掩码进行连通分量分析",
+    "step6: 计算每个连通分量的边界距离变换最大值，生成点提示",
+    "step7: 将点提示输入提示编码器和掩码解码器，获得掩码和IoU预测",
+    "step8: 应用尺寸过滤和非极大值抑制（NMS）得到最终实例分割结果"
+  ],
+  "baselines_compared": [
+    "CellPoseSAM",
+    "CellSAM",
+    "μ",
+    "SAM (w/ AMG)",
+    "SAM3",
+    "CellPose",
+    "DeepBacs",
+    "OmniPose"
+  ],
+  "key_results": {
+    "APG_improvement": "APG显著提升了μ模型在36个数据集上的分割性能，效果与SOTA相当",
+    "SAM3_performance": "SAM3在显微镜任务上表现良好，但尚未达到专用微分割基础模型的水平",
+    "training_data_impact": "模型性能与训练数据规模显著相关，域外数据集表现差异更明显",
+    "generalization": "APG在域内（如OmniPose, DeepBacs）和域外（如TOIAM）数据集上均带来实质性提升"
+  },
+  "confidence": 0.85,
+  "task_id": "2603.17845v1-algorithm_analysis-v1",
+  "run_at": "2026-07-19T09:04:16.900738",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

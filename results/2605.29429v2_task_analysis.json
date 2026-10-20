@@ -1,0 +1,20 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2605.29429v2",
+  "status": "done",
+  "task_family": "cell_detection / cell_segmentation / cell_embedding / cell_tracking / spatial_biology / virtual_imaging / benchmark / multimodal / counting",
+  "input": "多模态细胞图像",
+  "output": "细胞检测与分割结果",
+  "notable": "无需训练的组交互网络",
+  "task_type": [
+    "detection",
+    "segmentation",
+    "multimodal",
+    "foundation_model"
+  ],
+  "confidence": 0.85,
+  "task_id": "2605.29429v2-task_analysis-v1",
+  "run_at": "2026-07-19T09:02:53.016787",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

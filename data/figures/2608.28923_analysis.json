@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "ActiveAugment方法流程图：展示对mini-batch中每个样本施加不同强度的数据增强，通过策略模块评分并选择最高分增强样本供分类器训练"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "论文核心实验结果图：左侧热图展示自然图像上各主动学习策略选择数据增强的总频率，右侧展示ActiveAugment训练过程中增强选择频率的演化及选择一致性(CV)曲线。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "医学图像数据增强选择频率热力图及ActiveAugment选择频率演化曲线，展示方法的核心实验结果"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "QINA模块架构图：展示QINA内部结构（Linear Encoder、三角函数提升、Linear Decoder、tanh）及其在残差CNN块和Transformer块中的插入方式"
+  },
+  "1": {
+    "relevant": false,
+    "score": 3,
+    "caption": "一张脑部MRI扫描图像，与QINA论文标题不符，可能仅是某数据集的示例图片，而非核心架构图或实验结果图"
+  }
+}

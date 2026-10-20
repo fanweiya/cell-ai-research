@@ -1,0 +1,17 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2607.23371v1",
+  "status": "done",
+  "task_family": "cell_segmentation",
+  "input": "Microscopy and Fundus Imaging",
+  "output": "Vascular Segmentation Masks",
+  "notable": "Focus on visual cues (shape, texture, receptive field) for CNN interpretation in vascular segmentation",
+  "task_type": [
+    "segmentation"
+  ],
+  "confidence": 0.85,
+  "task_id": "2607.23371v1-task_analysis-v1",
+  "run_at": "2026-08-06T11:44:11.399093",
+  "priority": 11,
+  "agent": "Agents-A1"
+}

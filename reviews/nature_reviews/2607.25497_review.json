@@ -1,0 +1,241 @@
+{
+  "reviewers": [
+    {
+      "paper_id": "2607.25497",
+      "reviewer_role": "R1",
+      "emphasis": "方法论设计与算法创新（关注架构合理性、动机是否充分、消融是否完备）",
+      "overall_assessment": "本文提出了三种用于评估表示鲁棒性的指标：Robustness Index (RI)、Margin-aware Robustness Index (MaRI) 和 Cross-confounder Robustness Margin (CRoMa)。这些指标基于邻域分析，旨在衡量表示空间中生物学标签与混杂因子之间的分离程度。方法设计上具有一定的创新性，特别是在引入距离敏感性和样本级鲁棒性分布方面。然而，方法动机的充分性、架构选择的合理性以及消融实验的完备性仍存在若干关键问题，影响了方法的可信度和推广性。",
+      "strengths": [
+        "CRoMa 引入了样本级鲁棒性分布，避免了固定邻域大小 k 的依赖性，提升了方法的可解释性和跨模型比较能力。",
+        "MaRI 在 RI 的基础上引入了距离加权机制，弥补了 RI 忽略局部几何结构的缺陷，具有直观的几何意义。",
+        "方法在多个组织病理学数据集上进行了验证，展示了其在不同尺度和混杂因子下的适用性。"
+      ],
+      "concerns": [
+        {
+          "id": "R1-M1",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "CRoMa 的设计声称能够为每个样本提供鲁棒性评分，而 RI 和 MaRI 仅在部分样本上有效。",
+          "concern": "虽然论文指出 CRoMa 在所有样本上都有定义，但并未提供充分的实验证明其在样本级评分上的稳定性与可解释性，尤其是在不同数据分布下的鲁棒性。",
+          "why_it_matters": "若 CRoMa 的样本级评分对数据扰动敏感或在不同数据集上表现不稳定，则其作为鲁棒性度量的可靠性将受到质疑。",
+          "resolution_test": "应提供 CRoMa 在多个数据集上的样本级评分分布，并进行稳定性分析（如 bootstrapping 或 cross-validation），以验证其在不同子集上的鲁棒性。"
+        },
+        {
+          "id": "R1-M2",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "MaRI 被描述为 RI 的最小距离加权改进，能够区分局部几何结构差异。",
+          "concern": "论文未提供充分的消融实验来验证距离加权是否真正提升了模型区分能力，也未分析温度参数 τ 的敏感性。",
+          "why_it_matters": "缺乏对 τ 的系统分析和对 MaRI 相较 RI 的性能提升的量化评估，使得其创新性和实用性存疑。",
+          "resolution_test": "应提供不同 τ 值下 MaRI 与 RI 的相关性分析，并在多个模型上进行对比实验，展示 MaRI 在区分局部几何结构方面的优势。"
+        },
+        {
+          "id": "R1-M3",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "RI 和 MaRI 的固定 k 选择依赖于 k 的优化过程，而该过程缺乏唯一原则性选择。",
+          "concern": "论文承认 k 的选择存在模糊性，但未提出替代方案或验证该选择对最终评分的影响。",
+          "why_it_matters": "k 的选择直接影响 RI 和 MaRI 的支持集，进而影响模型比较的公平性，缺乏替代方案限制了方法的通用性。",
+          "resolution_test": "应提供基于不同 k 选择策略（如固定 k、基于密度的邻域、自适应 k）的对比实验，以评估其对最终评分的影响。"
+        },
+        {
+          "id": "R1-M4",
+          "severity": "minor",
+          "blocking": false,
+          "axis": "interpretability",
+          "claim_pointer": "CRoMa 的中位数被用作模型比较的主要指标。",
+          "concern": "仅使用中位数进行模型比较忽略了分布的尾部信息，而论文同时提供了 F(0) 和 LTMα，但未说明为何中位数是主要指标。",
+          "why_it_matters": "若中位数无法反映模型在关键尾部样本上的表现，则其作为主要指标的合理性存疑。",
+          "resolution_test": "应提供中位数与 LTMα 的相关性分析，并讨论在不同应用场景下应优先使用哪个指标。"
+        }
+      ],
+      "assessment_boundaries": [
+        "未提供代码或具体实现细节，难以复现和验证方法细节。",
+        "未对模型预训练数据与测试数据之间的重叠进行系统控制实验，影响对鲁棒性估计的可信度。"
+      ],
+      "recommendation_posture": "Major Revision",
+      "confidence": 0.8
+    },
+    {
+      "paper_id": "2607.25497",
+      "reviewer_role": "R2",
+      "emphasis": "统计严谨性与实验设计（关注样本量、误差报告、显著性检验、多随机种子、泛化交叉验证）",
+      "overall_assessment": "该论文在设计用于评估表征鲁棒性的指标（RI、MaRI、CRoMa）方面具有创新性，并在多个基准上进行了广泛的实验。然而，在统计严谨性和实验设计方面存在若干关键问题，尤其是在误差估计、显著性检验和模型泛化能力的验证方面。虽然作者提供了补充材料，但缺乏对随机种子变化的分析、置信区间或p值报告，这削弱了结果的可信度和可复现性。",
+      "strengths": [
+        "提出了新的鲁棒性度量CRoMa，具有良好的几何解释性和跨模型可比性。",
+        "在多个基准和模型上进行了广泛的实验验证，展示了方法的适用范围。",
+        "对RI和MaRI的局限性进行了清晰的讨论，特别是在固定k邻域下的样本支持问题。"
+      ],
+      "concerns": [
+        {
+          "id": "R2-M1",
+          "severity": "major",
+          "blocking": true,
+          "axis": "statistics",
+          "claim_pointer": "论文声称CRoMa的中位数可以反映典型样本的局部几何结构，并用于模型比较。",
+          "concern": "未报告CRoMa中位数的置信区间或显著性检验结果，无法判断模型间差异是否具有统计显著性。",
+          "why_it_matters": "仅报告中位数而无误差估计或显著性检验，无法判断模型性能差异是否由随机波动引起，影响结论的可信度。",
+          "resolution_test": "应报告CRoMa中位数的bootstrap置信区间，并进行Wilcoxon符号秩检验或permutation检验，以评估模型间差异的显著性。"
+        },
+        {
+          "id": "R2-M2",
+          "severity": "major",
+          "blocking": true,
+          "axis": "methodology",
+          "claim_pointer": "论文在多个模型上使用固定k值进行RI和MaRI评估，而CRoMa则固定m=5。",
+          "concern": "未报告多个随机种子下指标的稳定性，无法评估指标对初始化或数据划分的鲁棒性。",
+          "why_it_matters": "深度学习模型和k近邻方法可能对数据划分或初始化敏感，缺乏多随机种子实验会削弱指标的可重复性和泛化能力论证。",
+          "resolution_test": "应在多个随机种子下重复实验，报告指标的标准差或误差条，并分析其在不同种子下的分布稳定性。"
+        },
+        {
+          "id": "R2-M3",
+          "severity": "major",
+          "blocking": true,
+          "axis": "generalizability",
+          "claim_pointer": "论文声称CRoMa适用于不同尺度、器官和生物标签结构的基准。",
+          "concern": "缺乏跨基准的泛化交叉验证或迁移能力分析，无法判断CRoMa是否具有真正的跨任务泛化能力。",
+          "why_it_matters": "当前实验仅在独立同分布（i.i.d.）设置下评估，未测试在分布外（out-of-distribution）场景下的表现，限制了其在实际部署中的适用性。",
+          "resolution_test": "应进行跨基准迁移实验，例如在一个基准上训练参数（如m值或阈值），在另一个基准上评估，或使用leave-one-domain-out交叉验证策略。"
+        },
+        {
+          "id": "R2-M4",
+          "severity": "minor",
+          "blocking": false,
+          "axis": "statistics",
+          "claim_pointer": "论文使用LTM（下尾均值）来衡量鲁棒性失败的严重程度。",
+          "concern": "未报告LTM的方差或样本量对估计的影响，可能高估或低估尾部风险。",
+          "why_it_matters": "尾部估计对样本量敏感，尤其在医学数据中样本有限时，可能导致误导性结论。",
+          "resolution_test": "应报告LTM的置信区间或使用Jackknife方法估计其稳定性，并分析其随样本量变化的趋势。"
+        }
+      ],
+      "assessment_boundaries": [
+        "未提供代码或数据访问权限，无法验证指标实现的正确性。",
+        "补充材料中部分实验（如m值扫描）未详细说明统计方法，影响复现性。"
+      ],
+      "recommendation_posture": "Major Revision",
+      "confidence": 0.8
+    },
+    {
+      "paper_id": "2607.25497",
+      "reviewer_role": "R3",
+      "emphasis": "生物学泛化性与引用真实性（关注跨数据集泛化、数据集多样性、参考文献是否支持核心论断）",
+      "overall_assessment": "本文提出了三种用于评估表示鲁棒性的指标（RI、MaRI、CRoMa），并基于多个病理图像数据集进行了验证。方法设计具有一定的创新性，且在跨数据集泛化性方面有所考虑。然而，论文在引用真实性方面存在不足，部分核心论断缺乏文献支持，同时数据集多样性有限，影响了生物学泛化性的可信度。",
+      "strengths": [
+        "提出了一种新的鲁棒性评估指标 CRoMa，具有明确的几何解释，并避免了固定 k 的局限性。",
+        "在 Camelyon、TCGA、Tolkach-ESCA 和 PCaBiop 等多个病理图像数据集上进行了系统评估，展示了方法的跨数据集表现。",
+        "对样本间的生物学-混杂因子关系进行了细致建模，有助于理解表示学习中的混杂效应。"
+      ],
+      "concerns": [
+        {
+          "id": "R3-M1",
+          "severity": "major",
+          "blocking": true,
+          "axis": "citation",
+          "claim_pointer": "论文声称 CRoMa 的设计基于 PathoROB 的 typed-neighbour 框架，并引用 [6] 和 [18] 作为基础。",
+          "concern": "论文未充分说明 [6] 和 [18] 是否确实提出了 SO/OS 邻居分类法，也未明确 PathoROB 是否定义了 CRoMa 的核心思想，存在引用真实性问题。",
+          "why_it_matters": "如果 SO/OS 分类法或 CRoMa 的思想并非源自所引用文献，则构成学术不规范，影响方法的原创性与可信度。",
+          "resolution_test": "应提供 [6] 和 [18] 的具体段落或图表，明确其与 SO/OS 分类法及 CRoMa 的关联，以支持引用的合理性。"
+        },
+        {
+          "id": "R3-M2",
+          "severity": "major",
+          "blocking": true,
+          "axis": "generalizability",
+          "claim_pointer": "论文声称其方法在 Camelyon、TCGA、Tolkach-ESCA 和 PCaBiop 上表现稳定，具有生物学泛化能力。",
+          "concern": "所用数据集均来自病理图像领域，缺乏跨模态生物学数据（如基因组、蛋白质组、细胞图像等），无法验证方法在更广泛生物学场景中的泛化性。",
+          "why_it_matters": "仅在单一模态（病理图像）中验证方法，无法支持其在更广泛的生物学研究中的泛化能力，限制了方法的适用范围。",
+          "resolution_test": "应补充在非图像类生物学数据（如基因表达谱、蛋白质结构）上的测试，或引用已有研究说明该方法在其他模态中的适用性。"
+        },
+        {
+          "id": "R3-M3",
+          "severity": "minor",
+          "blocking": false,
+          "axis": "citation",
+          "claim_pointer": "论文引用 [18]（PathoROB）作为 RI 的原始定义来源。",
+          "concern": "未明确说明 PathoROB 是否定义了 RI 的 pooled proportion 形式，或是否为本文的创新点。",
+          "why_it_matters": "若 RI 的 pooled proportion 形式为本文首次提出，则应明确指出，否则可能误导读者认为该形式已由 [18] 定义。",
+          "resolution_test": "应补充说明 RI 的 pooled proportion 是否为本文提出的新形式，或已在 [18] 中定义，以避免引用模糊。"
+        }
+      ],
+      "assessment_boundaries": [
+        "未提供代码或数据访问链接，无法复现结果或验证方法在其他数据集上的表现。",
+        "未讨论模型预训练数据与测试数据之间的重叠情况，可能影响鲁棒性评估的客观性。"
+      ],
+      "recommendation_posture": "Major Revision",
+      "confidence": 0.8
+    }
+  ],
+  "synthesis": {
+    "paper_id": "2607.25497",
+    "synthesis": true,
+    "consensus_strengths": [
+      "提出了新的鲁棒性评估指标 CRoMa，具有良好的几何解释性和跨模型可比性。",
+      "方法在多个组织病理学数据集上进行了系统验证，展示了其在不同尺度和混杂因子下的适用性。",
+      "对 RI 和 MaRI 的局限性进行了清晰讨论，特别是在固定 k 邻域下的样本支持问题。"
+    ],
+    "consensus_blocking_concerns": [
+      {
+        "concern": "缺乏对 CRoMa 样本级评分的稳定性与可解释性的充分实验证明，尤其是在不同数据分布下的鲁棒性分析。",
+        "independently_raised_by": [
+          "R1",
+          "R2"
+        ]
+      },
+      {
+        "concern": "未提供多随机种子实验或统计显著性检验，无法评估指标对初始化、数据划分的鲁棒性以及模型间差异的统计显著性。",
+        "independently_raised_by": [
+          "R1",
+          "R2"
+        ]
+      },
+      {
+        "concern": "CRoMa 和其他指标在跨模态生物学数据（如基因组、蛋白质组等）中的泛化能力未被验证，限制了其在更广泛生物学研究中的适用性。",
+        "independently_raised_by": [
+          "R2",
+          "R3"
+        ]
+      },
+      {
+        "concern": "论文引用 [6] 和 [18] 支持 CRoMa 的设计基础，但未明确说明这些文献是否确实提出了相关概念，存在引用真实性问题。",
+        "independently_raised_by": [
+          "R3"
+        ]
+      }
+    ],
+    "other_major_concerns": [
+      {
+        "concern": "缺乏对 MaRI 中温度参数 τ 的系统分析，未验证距离加权是否真正提升了模型区分能力。",
+        "raised_by": [
+          "R1"
+        ]
+      },
+      {
+        "concern": "RI 和 MaRI 的固定 k 选择缺乏唯一原则性选择，且未提供替代方案或验证其对最终评分的影响。",
+        "raised_by": [
+          "R1"
+        ]
+      },
+      {
+        "concern": "未进行跨基准的泛化交叉验证或迁移能力分析，无法判断 CRoMa 是否具有真正的跨任务泛化能力。",
+        "raised_by": [
+          "R2"
+        ]
+      }
+    ],
+    "minor_revision_checklist": [
+      "提供中位数与 LTMα 的相关性分析，并讨论在不同应用场景下应优先使用哪个指标。",
+      "报告 LTM 的置信区间或使用 Jackknife 方法估计其稳定性，并分析其随样本量变化的趋势。",
+      "补充说明 RI 的 pooled proportion 是否为本文提出的新形式，以避免引用模糊。"
+    ],
+    "most_important_issues": [
+      "提供 CRoMa 在多个数据集上的样本级评分分布，并进行稳定性分析（如 bootstrapping 或 cross-validation）。",
+      "报告 CRoMa 中位数的 bootstrap 置信区间，并进行 Wilcoxon 符号秩检验或 permutation 检验，以评估模型间差异的显著性。",
+      "补充在非图像类生物学数据（如基因表达谱、蛋白质结构）上的测试，或引用已有研究说明该方法在其他模态中的适用性。",
+      "提供 [6] 和 [18] 的具体段落或图表，明确其与 SO/OS 分类法及 CRoMa 的关联，以支持引用的合理性。"
+    ],
+    "overall_recommendation": "Major Revision"
+  }
+}

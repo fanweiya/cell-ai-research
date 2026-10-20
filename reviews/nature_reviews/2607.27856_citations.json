@@ -1,0 +1,14 @@
+[
+ {
+  "title": "Segment Anything",
+  "doi": null,
+  "verdict": "SKIP",
+  "confirmed_n": 0
+ },
+ {
+  "title": "Segment Anything in Medical Images (MedSAM)",
+  "doi": null,
+  "verdict": "SKIP",
+  "confirmed_n": 0
+ }
+]

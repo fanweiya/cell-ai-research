@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心概念图：展示卫星遥感图像与眼部OCTA血管图像之间的结构相似性类比，说明用卫星图像预训练模型应用于眼科影像分析的动机"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "不同眼科成像模态（OCTA、UWF、CFP、OCT、AOSLO）在DINOv3自然图像与卫星预训练模型下的特征图（PCA可视化）对比，展示卫星预训练特征更好保留眼底结构信息"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心实验结果图：对比DINOv3自然图像与卫星图像预训练模型在OCTA和UWF眼科图像上的注意力/分割可视化，与Ground Truth掩膜对比"
+  }
+}

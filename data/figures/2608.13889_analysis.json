@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心方法流程图：多智能体（Claude/GPT/Gemini）提议-辩论-撰写-交叉评审-验证-训练评分-保留或回退的循环管线"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "U-Net风格编码器-解码器架构图，含Strip-Pool+SE模块与FPN融合头，输入地震剖面输出预测断层"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "神经架构搜索变异运行过程中代理验证F1分数变化曲线及参数量预算约束图，展示保留/回退/中止的变异决策和最优结果"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "四个数据集(HSPC、MUSC、Ovules、TissueNet)上Baseline与LoRA微调方法的分割结果定性对比可视化，展示GT与预测掩码的差异"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "多面板散点图：在不同数据集（celapse、livecell、nips、tissuenet）上比较各模型的F1和Instance Dice随模型规模的变化"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "多数据集上模型性能（F1与实例Dice）随模型规模变化的散点对比图，展示UCell SAM与StarDist等方法的性能-规模权衡"
+  }
+}

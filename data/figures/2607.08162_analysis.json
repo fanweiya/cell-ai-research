@@ -1,0 +1,12 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "该图展示了ProsMAE模型的整体架构，包括多源数据（PANDA, CAMELYON17, BRACS）的图块提取、噪声注入以及基于Transformer的掩码自编码器（MAE）预训练流程。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "该图展示了论文提出的ProsMAE模型的整体架构和流程。它描绘了从PANDA数据集输入病理图像，经过编码器（Encoder）处理生成Token，再通过线性层（Linear Layer）进行分类，最终输出ISUP分级（从良性到5级）的完整过程。"
+  }
+}

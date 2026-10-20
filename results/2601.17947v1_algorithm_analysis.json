@@ -1,0 +1,52 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2601.17947v1",
+  "status": "done",
+  "design_motivation": "现有方法将微流控视频视为通用图像序列，仅依赖形态学特征（如轴比、运动图）且未显式强制层流斯托克斯物理、面积守恒或壁面无滑移条件。FlowMorph 旨在通过物理一致性自监督学习，无需人工标注即可推断细胞力学代理变量。相比传统分割网络或纯光学流方法，FlowMorph 结合了低维轮廓表示、可微分的‘流中胶囊’动力学模型和轻量级时间编码器，确保预测符合物理规律（如不可压缩流体、壁面约束）。",
+  "loss_formula": "\\mathcal{L} = \\lambda_{\\text{sil}} \\mathcal{L}_{\\text{sil}} + \\lambda_{\\text{flow}} \\mathcal{L}_{\\text{flow}} + \\lambda_{\\text{area}} \\mathcal{L}_{\\text{area}} + \\lambda_{\\text{wall}} \\mathcal{L}_{\\text{wall}} + \\lambda_{\\text{smooth}} \\mathcal{L}_{\\text{smooth}} + \\lambda_{\\text{photo}} \\mathcal{L}_{\\text{photo}}",
+  "math_principle": "基于斯托克斯流（低雷诺数）假设，将红细胞膜建模为具有弯曲能量的薄壳。利用星凸傅里叶参数化表示轮廓，通过可微分映射将轮廓点变换为像素掩码。损失函数强制预测轮廓与观测掩码一致、光学流匹配、面积守恒（不可压缩）、壁面不穿透/无滑移，以及时间平滑性。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, T, 1, H, W]"
+    },
+    {
+      "layer": "temporal_encoder",
+      "shape": "[B, T, 64-128]"
+    },
+    {
+      "layer": "physics_module",
+      "shape": "[B, T, N_points]"
+    },
+    {
+      "layer": "rasterizer",
+      "shape": "[B, T, 1, H, W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, T, 1]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 合成数据预热（训练物理模块和光栅化器）",
+    "step2: 在RBCdataset上进行物理丰富训练（激活所有损失项）",
+    "step3: 在RBC dynamics数据集上微调（禁用扩展流模型和壁面损失）"
+  ],
+  "baselines_compared": [
+    "Cellpose + MLP",
+    "Classical DI pipeline",
+    "No-Physics Net",
+    "Mask R-CNN + warp",
+    "Optical-flow-only warp"
+  ],
+  "key_results": {
+    "mean_silhouette_IoU": "0.905",
+    "MAE_MPa": "calibrated to physical stiffness",
+    "physics_violations": "significantly lower than baselines"
+  },
+  "confidence": 0.85,
+  "task_id": "2601.17947v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:44:49.459334",
+  "priority": 11,
+  "agent": "Agents-A1"
+}

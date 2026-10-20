@@ -1,0 +1,59 @@
+{
+  "paper_id": "2607.20572",
+  "task": "single_review",
+  "overall_assessment": "本文提出了scContam框架，通过MinHash指纹（Signal A）和基于损失的成员推断（MIA-scFM）审计单细胞基础模型的预训练数据污染。方法论设计严谨，特别是引入了受控重训练实验来验证MIA对过拟合的敏感性，以及供体匹配的嵌入紧致度分析。然而，核心发现（PBMC 3k和胰腺数据集存在~80%污染）依赖于对Genecorpus-30M参考集的假设，且未充分讨论生物学相似性导致的假阳性风险。统计报告规范，但样本量（特别是供体匹配分析中的9对）限制了统计功效。引用真实性需进一步核实2025年数据集。",
+  "strengths": [
+    "提出了正交的双重审计机制：Signal A检测分布级污染，MIA-scFM检测实例级记忆，互补性强。",
+    "设计了严谨的受控重训练实验（Table 3），通过剂量-反应关系证明了MIA-scFM在过拟合场景下的有效性，解释了生产模型中MIA信号缺失的原因。",
+    "引入了供体匹配（donor-matched）的嵌入紧致度分析，控制了细胞类型和供体变异，比传统的ASW对比更具因果解释力。",
+    "包含明确的阴性对照（AIDA v2随机伪污染），验证了统计检验的校准性。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "Signal A使用MinHash Jaccard相似度检测污染，认为高Jaccard值（>0.47）表明基准数据与预训练语料重叠。",
+      "concern": "MinHash Jaccard相似度对基因表达谱的生物学相似性敏感，而不仅仅是数据重叠。PBMC 3k和胰腺数据集作为经典免疫/内分泌细胞类型，其转录组特征在单细胞数据集中高度保守。即使没有直接的数据泄漏，不同来源的相同细胞类型也可能表现出高Jaccard相似度。论文未提供基于生物学相似性（如不同物种或不同技术平台但相同细胞类型）的阴性对照来排除这种‘生物学假阳性’。",
+      "why_it_matters": "如果高Jaccard值主要由细胞类型的生物学保守性驱动，而非数据泄漏，那么‘80%污染’的结论将被高估，导致对现有基准数据集的过度悲观评价。",
+      "resolution_test": "需要增加一个‘生物学相似但无数据重叠’的对照数据集（例如，来自不同物种但具有相似细胞类型的scRNA-seq数据，或来自Genecorpus-30M截止后但细胞类型相同的独立数据集），并展示其Jaccard分布显著低于PBMC 3k。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "major",
+      "blocking": false,
+      "axis": "statistics",
+      "claim_pointer": "供体匹配的嵌入紧致度分析（Section 5.4）在胰腺数据集中仅使用了9个（细胞类型，供体）对。",
+      "concern": "样本量极小（n=9），导致统计功效较低。虽然置换检验p值显著（p<0.03），但置信区间较宽（例如Geneformer的95% CI为[-1.01, +0.78]，跨越0）。此外，仅9个对可能无法代表整个胰腺数据集的污染情况，且对异常值敏感。",
+      "why_it_matters": "小样本量使得结果容易受到个别供体或细胞类型的影响，降低了结论的稳健性。",
+      "resolution_test": "报告每个（细胞类型，供体）对的详细统计量，或增加更多供体/细胞类型对的分析，以展示结果的稳定性。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "moderate",
+      "blocking": false,
+      "axis": "generalizability",
+      "claim_pointer": "Signal A和MIA-scFM仅在Geneformer V1上评估，而嵌入几何分析扩展到scGPT和UCE。",
+      "concern": "Signal A的参考集是Genecorpus-30M，这与Geneformer的预训练语料一致。对于scGPT（预训练于CELLxGENE Census）和UCE（预训练于CELLxGENE Census），Signal A的审计结果可能不适用，因为它们的预训练语料不同。论文承认这一点，但未提供针对scGPT/UCE预训练语料的Signal A审计结果，限制了方法对其他基础模型的泛化性。",
+      "why_it_matters": "读者可能误以为Signal A的结果适用于所有单细胞基础模型，而实际上它依赖于特定的预训练语料。",
+      "resolution_test": "提供针对CELLxGENE Census的Signal A审计结果，以验证scGPT和UCE的污染情况。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "citation",
+      "claim_pointer": "引用了2025年的数据集AIDA v2 (Kock et al., 2025) 和 Tahoe-100M (Zhang et al., 2025)。",
+      "concern": "这些引用是2025年的，需要确认这些数据集是否已正式发表或预印本，以及引用信息是否准确。特别是Tahoe-100M被描述为‘released by Tahoe Therapeutics (formerly Vevo Therapeutics) in February 2025’，需要核实公司更名和数据集发布的具体细节。",
+      "why_it_matters": "引用准确性是学术严谨性的基本要求，尤其是对于较新的数据集。",
+      "resolution_test": "核实AIDA v2和Tahoe-100M的正式引用信息，确保作者、年份和标题准确无误。"
+    }
+  ],
+  "assessment_boundaries": [
+    "无法评估Genecorpus-30M的具体构建细节，因为论文未提供该语料的完整元数据。",
+    "无法评估UCE-4L的嵌入几何分析是否受到其蛋白质嵌入架构的特定影响，因为缺乏与其他蛋白质嵌入模型的对比。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.85
+}

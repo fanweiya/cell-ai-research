@@ -1,0 +1,57 @@
+{
+  "paper_id": "2608.17337",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了SpaTIE，一种基于子宫特异性组织病理学图像的肿瘤状态推断框架，结合了表征学习与轨迹推断方法，旨在从静态组织病理学图像中恢复与肿瘤进展相关的潜在状态。方法具有创新性，结合了单细胞生物学中的轨迹推断思想，并在TCGA数据集上进行了多组学关联分析和虚拟扰动实验，展示了其与临床变量、基因组变异和生存预后的部分关联。然而，论文在方法论的严谨性、统计报告的透明性以及引用真实性方面存在若干关键问题，需要进一步澄清和补充。",
+  "strengths": [
+    "将单细胞轨迹推断的思想引入组织病理学分析，具有跨模态创新性。",
+    "结合多组学数据和虚拟扰动分析，为形态学推断的分子机制提供了探索性线索。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "论文声称SpaTIE能够从静态H&E图像中恢复‘进展相关肿瘤状态’",
+      "concern": "缺乏对‘肿瘤状态’定义的明确数学或生物学建模，且未提供与真实时间序列或纵向数据的验证，仅依赖TCGA的横断面数据进行推断。",
+      "why_it_matters": "若无法验证状态轴与真实肿瘤进展的关联性，则‘状态’可能仅是图像特征的低维组织，而非具有生物学意义的进展轨迹。",
+      "resolution_test": "需提供独立纵向数据集或模拟数据验证状态轴是否反映真实进展，或提供机制性实验支持。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "statistics",
+      "claim_pointer": "论文声称SpaTIE状态与基因组变异（如FGA）和生存预后显著相关",
+      "concern": "未报告多重假设检验校正后的p值或FDR控制方法，且部分显著性结果基于小样本子集（如FIGO IV期n=18）。",
+      "why_it_matters": "可能高估统计显著性，导致假阳性结果，影响结论的可信度。",
+      "resolution_test": "应补充FDR校正后的p值、置信区间及样本量敏感性分析。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "generalizability",
+      "claim_pointer": "论文声称SpaTIE适用于子宫肿瘤的广泛临床场景",
+      "concern": "训练数据仅来自单一机构（PK3-Uter）和TCGA，未在不同种族、设备或染色协议的数据上验证泛化能力。",
+      "why_it_matters": "可能限制模型在其他临床环境中的适用性。",
+      "resolution_test": "需在独立外部数据集（如来自欧洲或非洲人群）上进行性能评估。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "citation",
+      "claim_pointer": "引用文献[33]以支持虚拟扰动作为‘AI-based虚拟细胞研究范式’",
+      "concern": "文献[33]为预印本，且未明确说明其与本研究方法的直接关联，存在引用不当风险。",
+      "why_it_matters": "影响方法学基础的可信度，尤其是当引用文献尚未经过同行评审时。",
+      "resolution_test": "应补充对虚拟扰动方法的独立理论依据或引用已发表文献。"
+    }
+  ],
+  "assessment_boundaries": [
+    "无法评估模型在其他器官或癌症类型中的迁移能力，因论文仅聚焦子宫肿瘤。",
+    "无法验证虚拟扰动是否真正反映生物学因果关系，因缺乏实验验证。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

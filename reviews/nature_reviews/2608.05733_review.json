@@ -1,0 +1,58 @@
+{
+  "paper_id": "2608.05733",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种基于动态对比增强MRI（DCE-MRI）和MGMT甲基化状态的放射组学方法，用于区分胶质母细胞瘤治疗后假性进展（PsP）和真实进展（TP）。方法上采用了基于AIC的体素级药代动力学模型选择，结合深度学习分割和特征提取，最终通过机器学习分类器实现了较高的诊断性能。论文在方法论上有创新，但统计分析和泛化性方面存在显著问题，需要进一步验证。",
+  "strengths": [
+    "创新性地采用AIC驱动的体素级药代动力学模型选择，提升了放射组学特征的生理一致性。",
+    "结合分子标志物MGMT状态，显著提高了分类器的特异性，具有临床实用价值。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "使用AIC选择模型并构建参数图",
+      "concern": "AIC公式的表述存在错误，分母应为N-p-1，但论文中公式书写格式不清晰，可能影响模型选择的可靠性。",
+      "why_it_matters": "AIC是模型选择的关键依据，公式错误可能导致模型选择偏差，影响后续放射组学特征的质量。",
+      "resolution_test": "提供AIC计算的详细代码或验证实验，确保模型选择过程正确无误。"
+    },
+    {
+      "id": "S-M2",
+      "severity": "major",
+      "blocking": true,
+      "axis": "statistics",
+      "claim_pointer": "分类器性能评估",
+      "concern": "多次重复实验使用多个随机种子，但未报告置信区间或进行多重假设检验校正，可能导致统计显著性误判。",
+      "why_it_matters": "缺乏适当的统计校正可能夸大模型性能，影响结果的可信度。",
+      "resolution_test": "补充置信区间、校正后的p值，或使用更严格的统计检验方法。"
+    },
+    {
+      "id": "S-M3",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "模型在独立中心的泛化能力",
+      "concern": "研究为单中心回顾性研究，未进行外部验证，且MRI采集参数未标准化，可能影响模型在其他机构的适用性。",
+      "why_it_matters": "放射组学特征对采集参数敏感，缺乏外部验证限制了其临床推广。",
+      "resolution_test": "提供多中心数据验证或进行参数鲁棒性分析，评估模型在不同扫描仪和协议下的稳定性。"
+    },
+    {
+      "id": "S-M4",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "citation",
+      "claim_pointer": "引用文献支持方法和结果",
+      "concern": "部分关键方法（如AIC模型选择在DCE-MRI中的应用）未引用已有相关研究，可能忽略先前工作。",
+      "why_it_matters": "未充分引用可能低估已有研究，影响方法的创新性评价。",
+      "resolution_test": "补充相关文献，明确本文方法与已有工作的区别。"
+    }
+  ],
+  "assessment_boundaries": [
+    "未提供代码或数据集，无法复现结果。",
+    "未评估模型在不同时间点或纵向数据中的表现。",
+    "未讨论模型在临床工作流中的实际部署挑战。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

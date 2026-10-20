@@ -1,0 +1,12 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心方法架构图：展示病理基础模型的裁切嵌入、自适应融合及下游预测流程"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "多面板核心图示：(A/B) 不同病理基础模型嵌入空间的UMAP可视化，(C) 全切片上不同模型的组织区域分割对比，(D) 各模型（COUCH v1.5、Phikon v2、UNI v2、H-optimus-0、Prov-GigaPath、Virchow v2）关注的patch块对比，展示模型间特征差异"
+  }
+}

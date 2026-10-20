@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 7,
+    "caption": "脑部MRI扫描及肿瘤分割掩膜示例图（8个样本数据可视化）"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "论文核心架构图：提出的CNN-Transformer混合U-Net网络结构，展示编码器、Transformer瓶颈层、解码器及跳跃连接"
+  },
+  "2": {
+    "relevant": true,
+    "score": 10,
+    "caption": "脑肿瘤分割模型的测试集性能可视化，包括IoU/Dice分布、箱线图、置信度热力图、误差图和指标汇总表。"
+  }
+}

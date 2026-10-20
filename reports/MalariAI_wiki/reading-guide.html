@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MalariAI Wiki — reading-guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / MalariAI Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>MalariAI</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/Phase3-PipelineB.html">Phase3-PipelineB</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/Phase4-WebApp.html">Phase4-WebApp</a></li>
+<li><a href="modules/Phase2-BaselineA.html">Phase2-BaselineA</a></li>
+<li><a href="modules/results.html">results</a></li>
+<li><a href="modules/Phase1-EDA.html">Phase1-EDA</a></li>
+<li><a href="modules/notebooks.html">notebooks</a></li>
+<li><a href="modules/data.html">data</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Reading Guide</h1>
+<br>
+<p>这是一个疟疾血涂片分析项目，包含从数据探索到Web部署的完整流程。建议按开发阶段顺序阅读，先理解业务目标，再深入模型细节，最后查看部署方式。</p>
+<br>
+<h2>Step 1: 理解项目概览与部署配置 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">README.md</code>, <code class="inline-code">Phase4-WebApp/Dockerfile</code>, <code class="inline-code">Phase4-WebApp/requirements.txt</code></p>
+<br>
+<p>首先阅读README.md了解项目背景、疟疾检测的业务目标和整体架构。然后查看Dockerfile和requirements.txt，了解项目依赖、环境配置和部署方式，为后续代码阅读建立上下文。</p>
+<br>
+<h2>Step 2: 探索数据特征与预处理 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">Phase1-EDA/dataset.py</code>, <code class="inline-code">Phase1-EDA/eda.py</code></p>
+<br>
+<p>查看dataset.py了解数据加载、预处理和增强策略，这是所有模型的基础。通过eda.py理解数据分布、类别平衡和关键特征，这些决策直接影响后续模型选择。</p>
+<br>
+<h2>Step 3: 掌握基线模型实现 (~30 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">Phase2-BaselineA/train_frcnn.py</code>, <code class="inline-code">Phase2-BaselineA/Phase2_FasterRCNN_Kaggle.ipynb</code></p>
+<br>
+<p>train_frcnn.py包含Faster R-CNN模型的训练逻辑、损失函数和优化器配置。Jupyter Notebook展示了实验过程和结果分析，理解模型架构选择的原因和训练技巧。</p>
+<br>
+<h2>Step 4: 学习改进版Pipeline (~25 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">Phase3-PipelineB/gradcam.py</code>, <code class="inline-code">Phase3-PipelineB/stage2_inference.py</code></p>
+<br>
+<p>gradcam.py实现可解释性推理，展示模型决策依据。stage2_inference.py包含改进网络B0的分类逻辑和推理流程，对比基线模型理解性能提升的关键改进。</p>
+<br>
+<h2>Step 5: 理解Web应用入口 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">Phase4-WebApp/app.py</code></p>
+<br>
+<p>app.py是Flask应用入口，查看如何集成模型推理、处理用户请求、管理文件上传和返回结果。理解API设计、错误处理和响应格式，这是用户与系统交互的界面。</p>
+<br>
+<h2>Step 6: 分析推理结果与评估 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">Phase3-PipelineB/results/v1/inference/results.json</code>, <code class="inline-code">Phase2-BaselineA/checkpoints-local-20epoch/metrics.json</code></p>
+<br>
+<p>查看不同阶段的推理结果JSON文件，理解模型输出格式、置信度阈值和评估指标。对比不同checkpoint的metrics.json，分析模型训练过程中的性能变化。</p>
+<br>
+<h2>Tips</h2>
+<br>
+<ul>
+<li>重点关注数据预处理部分，因为医学图像的质量直接影响模型性能</li>
+<li>对比Phase2和Phase3的代码差异，理解模型改进的具体实现</li>
+<li>注意Grad-CAM可视化代码，这对医学诊断的可解释性至关重要</li>
+<li>Web应用代码相对简单，重点理解模型推理的集成方式</li>
+<li>结果文件很大，重点关注关键指标而非全部内容</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

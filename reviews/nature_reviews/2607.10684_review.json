@@ -1,0 +1,57 @@
+{
+  "paper_id": "2607.10684",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种名为HyperBank的紧凑型few-shot分割方法，适用于显微镜图像中的类器官分割任务。方法基于经典图像处理算子的可微分特征库，并结合多重启聚合策略和基于支持集的后处理优化。实验设计严谨，涵盖了多个显微镜数据集，并与经典方法和深度学习方法进行了对比。论文在方法论上具有创新性，且在特定场景下表现出色。然而，统计报告和泛化性方面存在一些关键问题，需要进一步澄清和验证。",
+  "strengths": [
+    "HyperBank方法在few-shot设置下参数量极低，同时在特定数据集（如Original和Decay）上表现优异，展示了经典图像处理算子与现代深度学习结合的潜力。",
+    "实验设计严谨，涵盖了多个显微镜数据集，并与多个SOTA方法进行了对比，结果具有可解释性。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "HyperBank在few-shot设置下优于现有方法",
+      "concern": "论文声称HyperBank在few-shot设置下优于现有方法，但未明确说明其few-shot适应机制与现有方法（如SAM-based方法）在参数更新策略上的差异。例如，HyperBank仅更新少量参数，而其他方法可能冻结主干网络，但论文未对这种适应策略的公平性进行讨论。",
+      "why_it_matters": "不同方法的few-shot适应策略差异可能影响性能比较的公平性。例如，冻结主干网络的方法可能在few-shot设置下表现受限，而HyperBank通过更新少量参数可能获得优势，但这种优势是否源于方法本身而非实验设置需要进一步验证。",
+      "resolution_test": "需要明确说明不同方法在few-shot设置下的参数更新策略，并在实验中控制变量，确保比较的公平性。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "statistics",
+      "claim_pointer": "HyperBank在K=1时表现优于ilastik-RF",
+      "concern": "论文提到HyperBank在K=1时在所有三个数据集上均优于ilastik-RF，但未提供具体的统计检验结果（如p值）来支持这一结论。",
+      "why_it_matters": "缺乏统计显著性检验可能影响结论的可信度，尤其是在数据集较小或方差较大的情况下。",
+      "resolution_test": "应补充具体的统计检验结果（如Wilcoxon检验的p值）以支持K=1时的性能比较结论。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "HyperBank适用于显微镜图像的few-shot分割",
+      "concern": "论文仅在三个特定显微镜数据集上进行了评估，且未测试其他成像模式（如荧光成像、倒置对比度等），也未进行跨数据集迁移实验。",
+      "why_it_matters": "缺乏对其他成像模式和跨数据集泛化能力的评估可能限制该方法的适用性。",
+      "resolution_test": "应补充对其他成像模式（如荧光、多站点采集）和跨数据集迁移实验的结果，以验证HyperBank的泛化能力。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "citation",
+      "claim_pointer": "引用了多个few-shot分割和显微镜图像分割相关工作",
+      "concern": "部分引用（如ilastik-RF、SAM-based方法）未引用原始论文，而是引用了实现或工具的文档。",
+      "why_it_matters": "引用实现文档而非原始论文可能影响学术严谨性，并可能忽略原始方法的重要贡献。",
+      "resolution_test": "应补充对原始论文的引用，以确保学术引用的准确性和完整性。"
+    }
+  ],
+  "assessment_boundaries": [
+    "无法评估HyperBank在其他成像模式（如荧光、多通道图像）上的性能，因为论文未提供相关实验。",
+    "无法评估HyperBank在更大规模数据集或更多支持样本（K > 10）下的性能，因为论文仅测试了K=1,3,5,10。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

@@ -1,0 +1,12 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "多数据集与模型（RSNA/BHAM/Tiny ImageNet，ResNet-18/ViT）下不同交叉验证策略（F/R/C）随训练样本数n变化的Test AUROC与AEE实验结果对比图"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "折线图展示不同交叉验证策略（F、R、C）在不同训练样本量n下的Top-1准确率对比"
+  }
+}

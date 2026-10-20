@@ -1,0 +1,19 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2605.18923v1",
+  "status": "done",
+  "task_family": "cell_segmentation",
+  "input": "2D time-lapse videos of bovine embryos (first four days of development)",
+  "output": "Embryo transferability prediction score on day four, with auxiliary developmental stage representations",
+  "notable": "Uses transformer-based framework (TransFACT) combining frame-level temporal features and stage-level representations; leverages temporal cell-stage segmentation as auxiliary supervision for transferability prediction",
+  "task_type": [
+    "segmentation",
+    "multimodal",
+    "foundation_model"
+  ],
+  "confidence": 0.85,
+  "task_id": "2605.18923v1-task_analysis-v1",
+  "run_at": "2026-07-24T09:11:03.870891",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

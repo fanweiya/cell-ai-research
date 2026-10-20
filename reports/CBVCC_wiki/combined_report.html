@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CBVCC Wiki — combined_report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / CBVCC Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>CBVCC</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/metrics.html">metrics</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>CBVCC — 综合分析报告</h1>
+<br>
+<ul>
+<li><strong>GitHub</strong>: rcabini/CBVCC</li>
+<li><strong>评分</strong>: 7.0/10</li>
+<li><strong>分析时间</strong>: 2026-07-15T18:23:21.072059</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2>CodeGraph 知识图谱分析</h2>
+<br>
+<br>
+<h2>RepoWiki 文档生成</h2>
+<br>
+<ul>
+<li>✅ 扫描成功</li>
+<li>📁 Wiki 目录: <code class="inline-code">/mnt/c/workspace/cell-ai-research/reports/CBVCC_wiki</code></li>
+<li>📄 生成文件:</li>
+<li>architecture.md</li>
+<li>dependencies.md</li>
+<li>index.md</li>
+<li>reading-guide.md</li>
+<li>_sidebar.md</li>
+<li>modules/.codegraph.md</li>
+<li>modules/metrics.md</li>
+<li>modules/root.md</li>
+<li>输出: Project: CBVCC</li>
+</ul>
+<p>Files:   14</p>
+<p>Lines:   1,367</p>
+<p>Languages</p>
+<p>┏━━━━━━━━━━┳━━━━━━━┓</p>
+<p>┃ Language ┃ Files ┃</p>
+<p>┡━━━━━━━━━━╇━━━━━━━┩</p>
+<p>│ python   │     9 │</p>
+<p>│ unknown  │     2 │</p>
+<p>│ markdown │     1 │</p>
+<p>│ yaml     │     1 │</p>
+<p>│ php      │     1 │</p>
+<p>└──────────┴───────┘</p>
+<p>CBVCC/</p>
+<p>├── ⚙️ README.md (markdown)</p>
+<p>├── 📁 .codegraph/</p>
+<p>│   └── 📄 .gitignore (unknown)</p>
+<p>├── 📄 LICENSE (unknown)</p>
+<p>├── 📄 environment.yml (yaml)</p>
+<p>├── 📄 eval_code.php (php)</p>
+<p>├── 📁 metrics/</p>
+<p>│   ├── 📄 compute_quality_metrics.py (python)</p>
+<p>│   ├── 📄 descriptives.py (python)</p>
+<p>│   ├── 📄 generate_gt.py (python)</p>
+<p>│   ├── 📄 ncell_curves.py (python)</p>
+<p>│   ├── 📄 overall_metrics.py (python)</p>
+<p>│   ├── 📄 roc_curves.py (python)</p>
+<p>│   ├── 📄 snr_curves.py (python)</p>
+<p>│   └── 📄 upload_files.py (python)</p>
+<p>└── 📄 run_analysis.py (python)</p>
+<p>⠋ Done!</p>
+<br>
+<p>Wiki generated: /mnt/c/workspace/cell-ai-research/reports/CBVCC_wiki/</p>
+<br>
+<h2>原有子代理分析报告</h2>
+<br>
+<pre class="code-block"><code class="language-">现在我已经收集了足够的信息。让我基于分析结果输出结构化报告：
+
+## 项目概述
+
+**CBVCC** (Cell Behavior Video Classification Challenge) 是一个针对活细胞行为视频分类的基准挑战评测仓库。
+
+- **论文来源**: Cell Behavior Video Classification Challenge, a benchmark for computer vision methods in time-lapse microscopy (arXiv 2601.10250)
+- **主要问题**: 分类 intravital microscopy (IVM) 拍摄的细胞行为视频，识别细胞运动模式：
+  - 方向突然变化的行为
+  - 一致线性运动
+  - 静止细胞
+  - 纯背景
+- **核心任务**: 二分类（Class 0 vs Class 1），实质是区分"异常运动" vs "正常/静止/背景"
+
+## 架构分析
+
+### 目录结构</code></pre>
+<p>CBVCC/</p>
+<p>├── metrics/              # 核心模块</p>
+<p>│   ├── compute_quality_metrics.py   # 视频质量指标计算</p>
+<p>│   ├── generate_gt.py             # 生成标签CSV</p>
+<p>│   ├── overall_metrics.py         # 综合评价指标</p>
+<p>│   ├── roc_curves.py              # ROC曲线绘制</p>
+<p>│   ├── ncell_curves.py            # 细胞数量-分数关系</p>
+<p>│   ├── snr_curves.py              # SNR-分数关系</p>
+<p>│   ├── descriptives.py            # 分布可视化</p>
+<p>│   └── upload_files.py            # 文件处理与数据构建</p>
+<p>├── run_analysis.py          # 主分析脚本</p>
+<p>├── eval_code.php            # PHP评估脚本</p>
+<p>├── environment.yml          # 环境配置</p>
+<p>└── README.md                 # 使用说明</p>
+<pre class="code-block"><code class="language-">
+### 主要模块与依赖关系
+
+1. **数据输入层**
+   - 视频 patches (.avi) - 按数据集划分
+   - 追踪文件 (.csv) - 细胞追踪结果
+   - 提交预测文件 (.csv) - 参赛队伍结果
+
+2. **处理层**
+   - `generate_gt.py`: 从目录结构自动生成 ground truth CSV
+   - `compute_quality_metrics.py`: 计算 SNR、细胞数量等质量指标
+
+3. **评估层**
+   - `overall_metrics.py`: 计算 AUC、Precision、Recall、Balanced Accuracy
+   - `roc_curves.py`: 可视化 ROC 曲线
+
+4. **分析层**
+   - `ncell_curves.py`: 分析细胞数量对性能的影响
+   - `snr_curves.py`: 分析 SNR 对性能的影响
+
+### 技术依赖
+- Python 3.9
+- OpenCV (视频处理)
+- Pandas (数据处理)
+- Scikit-learn (评价指标)
+- Matplotlib/Seaborn (可视化)
+- SciPy (距离计算)
+- TensorFlow/Keras (环境文件中包含，但代码未直接使用)
+
+## 核心算法
+
+### 1. 视频质量指标计算 (`compute_quality_metrics.py`)
+
+核心算法流程：</code></pre>
+<h1>关键参数</h1>
+<p>SAMPLING_DISTANCE = 1</p>
+<p>TH_DISTANCE_BG = 20 / 0.8      # 背景区域阈值</p>
+<p>TH_DISTANCE_FG = 3 / 0.8       # 前景区域阈值</p>
+<br>
+<h1>计算指标</h1>
+<p>SNR = |FG_avg - BG_avg| / BG_std        # 信噪比</p>
+<p>CR = FG_avg / BG_avg                    # 对比度</p>
+<p>DEN = 细胞间最小距离                    # 细胞密度</p>
+<pre class="code-block"><code class="language-">
+**实现原理**:
+- 从视频中提取灰度帧，预处理为三维数组 (H, W, T)
+- 读取追踪 CSV 文件，获取每帧细胞坐标
+- 对每帧使用距离变换 (distance_transform_edt) 分割前景/背景
+- 在前景和背景区域分别计算灰度统计量
+- 汇总每视频的平均 SNR、细胞数量 (N.TRACKS) 等
+
+### 2. 综合评价指标 (`overall_metrics.py`)
+
+采用 CBVCC 官方评分公式：</code></pre>
+<p>score = 0.4 * AUC + 0.2 * (Precision + Recall + Balanced Accuracy)</p>
+<pre class="code-block"><code class="language-">
+其中：
+- AUC: ROC曲线下面积
+- Precision = TP / (TP + FP)
+- Recall = TP / (TP + FN)
+- Balanced Accuracy = (Sensitivity + Specificity) / 2
+
+### 3. 数据匹配逻辑 (`upload_files.py`)
+
+核心挑战：将预测提交与 ground truth 匹配</code></pre>
+<p>def get_nearest_file(timestamp, file_timestamp_dict):</p>
+<p>"""根据时间戳找到最近的预测文件"""</p>
+<p>closest_timestamp = min(file_timestamp_dict.keys(),</p>
+<p>key=lambda x: abs(x - timestamp))</p>
+<p>return file_timestamp_dict[closest_timestamp]</p>
+<pre class="code-block"><code class="language-">
+涉及的时间戳 extraction 和文件名规范化：
+- 预测文件命名格式：`predicted{timestamp}.csv`
+- 视频文件名：类似 `01_1.avi` → `_` 分隔，数字部分补零
+
+## 代码质量
+
+### 优点
+- **模块清晰**: 每个脚本职责单一，功能解耦
+- **依赖明确**: 使用标准库 + 流行科学计算栈
+- **可视化丰富**: 自动输出 ROC 曲线、分布图、质量指标散点图
+- **文档完整**: README 包含详细使用示例、数据集结构、评估流程
+
+### 缺点
+- **错误处理一般**: 视频读取失败时仅有简单异常捕获和打印
+- **缺少单元测试**: 没有 pytest/u</code></pre>
+<br>
+<p>&gt; 完整报告: <a href="CBVCC.html">reports/CBVCC.md</a></p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

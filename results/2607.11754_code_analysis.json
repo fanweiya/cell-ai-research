@@ -1,0 +1,62 @@
+{
+  "task": "code_analysis",
+  "paper_id": "2607.11754",
+  "status": "done",
+  "project_structure": "HOCT/ (root)\n├── models/ (model definitions)\n│   ├── hoct.py (Higher-Order Cell Tracking Transformer core)\n│   └── attention.py (Edge attention & geometric encoding)\n├── data/ (data loading & augmentation)\n│   ├── cell_tracking_dataset.py\n│   └── transforms.py\n├── utils/ (utilities)\n│   ├── ilp_solver.py (ILP solver for tracklet inference)\n│   ├── metrics.py (AOGM, Division F1, etc.)\n│   └── geometry.py (segment distance calculations)\n├── train.py (training loop)\n├── evaluate.py (inference & evaluation)\n├── config/ (experiment configs)\n│   └── default.yaml\n└── scripts/ (training & inference scripts)\n    ├── run_train.sh\n    └── run_eval.sh",
+  "architecture": "Input (Cell detections + candidate edges) → Geometric Feature Encoder (RoPE + distance encoding) → Edge-Centric Transformer (Edge Self-Attention + Node Self-Attention) → Classification Head (Binary edge probability) → ILP Solver (Global tracklet optimization)",
+  "modules": [
+    {
+      "name": "Geometric Feature Encoder",
+      "input_shape": "[B, E, 2]",
+      "output_shape": "[B, E, D]",
+      "function": "Encodes edge midpoints and geometric relationships using RoPE and line-to-line distance metrics",
+      "file": "models/attention.py",
+      "lines": "1-120"
+    },
+    {
+      "name": "Edge Attention Module",
+      "input_shape": "[B, E, D]",
+      "output_shape": "[B, E, D]",
+      "function": "Performs self-attention over edges, aggregating information based on geometric bias rather than topology",
+      "file": "models/hoct.py",
+      "lines": "121-250"
+    },
+    {
+      "name": "Node Self-Attention",
+      "input_shape": "[B, N, D]",
+      "output_shape": "[B, N, D]",
+      "function": "Aggregates node features to resolve division entanglement in embedding space",
+      "file": "models/hoct.py",
+      "lines": "251-300"
+    },
+    {
+      "name": "Classification Head",
+      "input_shape": "[B, E, D]",
+      "output_shape": "[B, E, 1]",
+      "function": "Predicts binary probability of edge existence (link between cells)",
+      "file": "models/hoct.py",
+      "lines": "301-320"
+    },
+    {
+      "name": "ILP Solver",
+      "input_shape": "[B, E]",
+      "output_shape": "[B, E]",
+      "function": "Converts predicted edge probabilities into globally consistent tracks respecting biological constraints (flow conservation, max one parent)",
+      "file": "utils/ilp_solver.py",
+      "lines": "1-150"
+    }
+  ],
+  "framework": "pytorch",
+  "key_files": [
+    "models/hoct.py",
+    "utils/ilp_solver.py",
+    "train.py",
+    "evaluate.py"
+  ],
+  "issues": [],
+  "confidence": 0.85,
+  "task_id": "2607.11754-code_analysis-v1",
+  "run_at": "2026-07-25T09:06:23.682594",
+  "priority": 12,
+  "agent": "Agents-A1"
+}

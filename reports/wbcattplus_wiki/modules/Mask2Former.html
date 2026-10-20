@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wbcattplus Wiki — Mask2Former</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / wbcattplus Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>wbcattplus</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/Mask2Former.html">Mask2Former</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/utils.html">utils</a></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/results.html">results</a></li>
+<li><a href="../modules/dataset_txt.html">dataset_txt</a></li>
+<li><a href="../modules/.codegraph.html">.codegraph</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Mask2Former</h1>
+<br>
+<p>&gt; A unified transformer-based model for panoptic, instance, and semantic segmentation.</p>
+<br>
+<p>Mask2Former is a transformer-based architecture that treats segmentation as a set prediction problem. It uses a backbone to extract features, a pixel decoder to generate multi-scale features, and a transformer decoder with learnable queries to predict binary masks and class labels. The model supports semantic, instance, and panoptic segmentation tasks simultaneously.</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">mask2former/config.py</code></h3>
+<br>
+<p>Defines configuration parameters for MaskFormer2, including model architecture, loss weights, and training settings.</p>
+<br>
+<ul>
+<li><code class="inline-code">add_maskformer2_config</code> (function) - Registers MaskFormer2 configuration options into the Detectron2 CfgNode system.</li>
+</ul>
+<br>
+<h3><code class="inline-code">mask2former/modeling/meta_arch/mask_former_head.py</code></h3>
+<br>
+<p>Implements the main segmentation head that combines pixel decoder and transformer decoder.</p>
+<br>
+<ul>
+<li><code class="inline-code">MaskFormerHead</code> (class) - Main segmentation head that processes multi-scale features through a transformer decoder to produce mask predictions.</li>
+</ul>
+<br>
+<h3><code class="inline-code">mask2former/modeling/pixel_decoder/msdeformattn.py</code></h3>
+<br>
+<p>Implements MSDeformAttnPixelDecoder, which uses deformable attention to aggregate multi-scale features.</p>
+<br>
+<ul>
+<li><code class="inline-code">MSDeformAttnPixelDecoder</code> (class) - Pixel decoder using multi-scale deformable attention to enhance feature representation.</li>
+<li><code class="inline-code">MSDeformAttnTransformerEncoderOnly</code> (class) - Transformer encoder for processing multi-scale features with deformable attention.</li>
+</ul>
+<br>
+<h3><code class="inline-code">mask2former/modeling/transformer_decoder/mask2former_transformer_decoder.py</code></h3>
+<br>
+<p>Implements MultiScaleMaskedTransformerDecoder, the core transformer decoder for mask prediction.</p>
+<br>
+<ul>
+<li><code class="inline-code">MultiScaleMaskedTransformerDecoder</code> (class) - Transformer decoder that predicts masks using learnable queries and multi-scale features.</li>
+</ul>
+<br>
+<h3><code class="inline-code">mask2former/modeling/criterion.py</code></h3>
+<br>
+<p>Defines the loss function for training, including classification, mask, and dice losses.</p>
+<br>
+<ul>
+<li><code class="inline-code">SetCriterion</code> (class) - Computes loss between predictions and ground truth using Hungarian matching.</li>
+<li><code class="inline-code">HungarianMatcher</code> (class) - Performs optimal assignment between predictions and ground truth objects.</li>
+</ul>
+<br>
+<h3><code class="inline-code">mask2former/maskformer_model.py</code></h3>
+<br>
+<p>Defines the main MaskFormer model architecture that integrates backbone, head, and criterion.</p>
+<br>
+<ul>
+<li><code class="inline-code">MaskFormer</code> (class) - Main model class that coordinates backbone, segmentation head, and loss computation.</li>
+</ul>
+<br>
+<h3><code class="inline-code">mask2former/data/dataset_mappers/mask_former_semantic_dataset_mapper.py</code></h3>
+<br>
+<p>Preprocesses images and annotations for semantic segmentation training.</p>
+<br>
+<ul>
+<li><code class="inline-code">MaskFormerSemanticDatasetMapper</code> (class) - Applies augmentations and transforms to prepare data for semantic segmentation.</li>
+</ul>
+<br>
+<h3><code class="inline-code">mask2former/data/datasets/register_pbcseg_full.py</code></h3>
+<br>
+<p>Registers the custom medical WBC dataset for semantic segmentation.</p>
+<br>
+<ul>
+<li><code class="inline-code">register_all_ade20k_full</code> (function) - Registers the PBCseg dataset with Detectron2's DatasetCatalog.</li>
+</ul>
+<br>
+<h3><code class="inline-code">datasets/prepare_medical_sem_seg.py</code></h3>
+<br>
+<p>Preprocesses the medical WBC dataset into Detectron2 format.</p>
+<br>
+<ul>
+<li><code class="inline-code">__main__</code> (script) - Copies images and masks from raw data into train/val/test splits.</li>
+</ul>
+<br>
+<h3><code class="inline-code">mask2former/modeling/pixel_decoder/ops/modules/ms_deform_attn.py</code></h3>
+<br>
+<p>Implements the Multi-Scale Deformable Attention module with CUDA support.</p>
+<br>
+<ul>
+<li><code class="inline-code">MSDeformAttn</code> (class) - CUDA-accelerated deformable attention mechanism for efficient multi-scale feature aggregation.</li>
+</ul>
+<br>
+<h3><code class="inline-code">train_net.py</code></h3>
+<br>
+<p>Main training script that sets up and runs the training loop.</p>
+<br>
+<ul>
+<li><code class="inline-code">Trainer</code> (class) - Custom training class extending Detectron2's DefaultTrainer for MaskFormer.</li>
+</ul>
+<br>
+<h3><code class="inline-code">demo/demo.py</code></h3>
+<br>
+<p>Provides a command-line interface for running inference on images.</p>
+<br>
+<ul>
+<li><code class="inline-code">VisualizationDemo</code> (class) - Handles image inference and visualization of segmentation results.</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>Set Prediction</strong>: Mask2Former treats segmentation as predicting a fixed set of binary masks, each associated with a class label. This avoids traditional pixel-wise classification and enables end-to-end learning.</li>
+<li><strong>Learnable Queries</strong>: The model uses learnable query vectors that act as object probes. The transformer decoder attends to image features through these queries to predict masks.</li>
+<li><strong>Multi-Scale Deformable Attention</strong>: MSDeformAttn efficiently aggregates features from multiple resolution levels by learning adaptive sampling locations, improving feature representation for segmentation.</li>
+<li><strong>Hungarian Matching</strong>: During training, predictions are matched to ground truth using the Hungarian algorithm to establish optimal one-to-one correspondence for loss computation.</li>
+<li><strong>Unified Architecture</strong>: The same model can perform semantic, instance, and panoptic segmentation by enabling different output heads, sharing the same backbone and transformer decoder.</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">mask2former/maskformer_model.py</code> → <code class="inline-code">mask2former/modeling/meta_arch/mask_former_head.py</code>: MaskFormer model instantiates MaskFormerHead for segmentation predictions.</li>
+<li><code class="inline-code">mask2former/modeling/meta_arch/mask_former_head.py</code> → <code class="inline-code">mask2former/modeling/pixel_decoder/msdeformattn.py</code>: MaskFormerHead uses MSDeformAttnPixelDecoder to process backbone features.</li>
+<li><code class="inline-code">mask2former/modeling/meta_arch/mask_former_head.py</code> → <code class="inline-code">mask2former/modeling/transformer_decoder/mask2former_transformer_decoder.py</code>: MaskFormerHead uses MultiScaleMaskedTransformerDecoder for mask prediction.</li>
+<li><code class="inline-code">mask2former/modeling/meta_arch/mask_former_head.py</code> → <code class="inline-code">mask2former/modeling/criterion.py</code>: MaskFormerHead computes losses using SetCriterion during training.</li>
+<li><code class="inline-code">train_net.py</code> → <code class="inline-code">mask2former/data/dataset_mappers/mask_former_semantic_dataset_mapper.py</code>: Training script uses dataset mapper to preprocess data for semantic segmentation.</li>
+<li><code class="inline-code">mask2former/data/datasets/register_pbcseg_full.py</code> → <code class="inline-code">datasets/prepare_medical_sem_seg.py</code>: Dataset registration expects data prepared by the medical segmentation script.</li>
+<li><code class="inline-code">mask2former/modeling/pixel_decoder/msdeformattn.py</code> → <code class="inline-code">mask2former/modeling/pixel_decoder/ops/modules/ms_deform_attn.py</code>: MSDeformAttnPixelDecoder imports MSDeformAttn module for deformable attention.</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+ "id": "2607.14163",
+ "chars": 60000,
+ "statistics": {
+  "checks": {
+   "has_p_value": true,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": true,
+   "has_fdr": true,
+   "mentions_ablation": false,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "score": 8
+ },
+ "key_claims": [
+  "scvision outperformed the next-best model in balanced accuracy, scfoundation [ 23 ] (0.",
+  "remarkably, one labelled cell per type with scvision outperformed fifty labelled cells per type with scgpt, scfoundation and geneformer (0.",
+  "allowing each method to use its own classifier improved the strongest classical baselines, but none matched scvision."
+ ],
+ "ref_spotcheck_targets": [],
+ "citation_results": []
+}

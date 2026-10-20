@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic-J Wiki — combined_report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / Agentic-J Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>imagentj</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/skills.html">skills</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/user_guide.html">user_guide</a></li>
+<li><a href="modules/docs.html">docs</a></li>
+<li><a href="modules/config.html">config</a></li>
+<li><a href="modules/scripts.html">scripts</a></li>
+<li><a href="modules/qdrant_data.html">qdrant_data</a></li>
+<li><a href="modules/patch_stardist.html">patch_stardist</a></li>
+<li><a href="modules/data.html">data</a></li>
+<li><a href="modules/imagentj.html">imagentj</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Agentic-J — 综合分析报告</h1>
+<br>
+<ul>
+<li><strong>GitHub</strong>: MMV-Lab/Agentic-J</li>
+<li><strong>评分</strong>: 8.5/10</li>
+<li><strong>分析时间</strong>: 2026-07-15T18:23:11.124043</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2>CodeGraph 知识图谱分析</h2>
+<br>
+<br>
+<h2>RepoWiki 文档生成</h2>
+<br>
+<ul>
+<li>✅ 扫描成功</li>
+<li>📁 Wiki 目录: <code class="inline-code">/mnt/c/workspace/cell-ai-research/reports/Agentic-J_wiki</code></li>
+<li>📄 生成文件:</li>
+<li>architecture.md</li>
+<li>dependencies.md</li>
+<li>index.md</li>
+<li>reading-guide.md</li>
+<li>_sidebar.md</li>
+<li>modules/.codegraph.md</li>
+<li>modules/config.md</li>
+<li>modules/data.md</li>
+<li>modules/docs.md</li>
+<li>modules/imagentj.md</li>
+<li>输出: Project: imagentj</li>
+</ul>
+<p>Files:   250</p>
+<p>Lines:   46,743</p>
+<p>Languages</p>
+<p>┏━━━━━━━━━━━━┳━━━━━━━┓</p>
+<p>┃ Language   ┃ Files ┃</p>
+<p>┡━━━━━━━━━━━━╇━━━━━━━┩</p>
+<p>│ markdown   │   147 │</p>
+<p>│ unknown    │    59 │</p>
+<p>│ python     │    32 │</p>
+<p>│ yaml       │     2 │</p>
+<p>│ shell      │     2 │</p>
+<p>│ json       │     2 │</p>
+<p>│ dockerfile │     1 │</p>
+<p>│ toml       │     1 │</p>
+<p>│ javascript │     1 │</p>
+<p>│ css        │     1 │</p>
+<p>└────────────┴───────┘</p>
+<p>imagentj/</p>
+<p>├── ⚙️ Dockerfile (dockerfile)</p>
+<p>├── ⚙️ README.md (markdown)</p>
+<p>├── ⚙️ docker-compose.yml (yaml)</p>
+<p>├── 📁 docs/</p>
+<p>│   ├── ⚙️ README.md (markdown)</p>
+<p>│   ├── 📄 js/main.js (javascript)</p>
+<p>│   ├── 📄 DEPLOY.md (markdown)</p>
+<p>│   ├── 📄 SCREENSHOTS.md (markdown)</p>
+<p>│   ├── 📄 css/styles.css (css)</p>
+<p>│   └── 📄 index.html (html)</p>
+<p>├── ⚙️ pyproject.toml (toml)</p>
+<p>├── 📁 user_guide/</p>
+<p>│   └── ⚙️ README.md (markdown)</p>
+<p>├── 📄 run.py (python)</p>
+<p>├── 📁 .codegraph/</p>
+<p>│   └── 📄 .gitignore (unknown)</p>
+<p>├── 📄 .dockerignore (unknown)</p>
+<p>├── 📄 .env.template (unknown)</p>
+<p>├── 📄 .gitattributes (unknown)</p>
+<p>├── 📄 .gitignore (unknown)</p>
+<p>├── 📄 LICENSE (unknown)</p>
+<p>├── 📄 NOTI</p>
+<br>
+<h2>原有子代理分析报告</h2>
+<br>
+<pre class="code-block"><code class="language-">现在我已经收集了足够的信息来分析这个仓库。让我开始编写结构化报告。
+
+## 项目概述
+
+Agentic-J 是一个由 AI 驱动的多智能体系统，专为生物显微镜图像分析设计。该项目来自论文 **"Agentic-J: An AI Agent for Biological Microscopy Image Analysis"** (arXiv:2606.02080，2026年6月)。
+
+**核心问题**：生物图像分析需要整合多种异构工具、编程环境和领域知识，这对研究者构成了巨大挑战。Agentic-J 通过将多智能体系统与 ImageJ/Fiji 封装进 Docker 容器，将自然语言请求转化为可追溯的分割、追踪、定量、质量检查和报告流程。
+
+**主要特点**：
+- 容器化部署（Docker），提供 noVNC 远程桌面界面
+- 多智能体协作架构（ supervisor + 专用 subagents）
+- 基于 RAG 的持续学习机制（记录错误和解决方案）
+- 完整的状态追踪（state ledger）确保可复现性
+- 支持 30+  Fiji 插件（StarDist、Cellpose、TrackMate 等）
+
+## 架构分析
+
+### 目录结构</code></pre>
+<p>Agentic-J/</p>
+<p>├── src/imagentj/           # 核心 Python 包</p>
+<p>│   ├── agents.py           # 智能体定义和协调</p>
+<p>│   ├── imagej_context.py   # ImageJ/Fiji 初始化</p>
+<p>│   ├── prompts.py          # 系统提示词</p>
+<p>│   ├── tracker.py          # 使用指标跟踪</p>
+<p>│   ├── tools/              # 工具实现</p>
+<p>│   │   ├── state_ledger.py # 状态账本（核心持久化机制）</p>
+<p>│   │   ├── script_tools.py # 脚本执行和错误处理</p>
+<p>│   │   ├── rag_tools.py    # RAG 检索和持久化</p>
+<p>│   │   └── ...</p>
+<p>│   └── rag/                # RAG 系统</p>
+<p>├── skills/                 # 插件文档包（200+ SKILL.md 文件）</p>
+<p>├── bundled_jars/           # 离线 JAR 依赖</p>
+<p>├── data/                   # 数据和输出目录</p>
+<p>├── models/                 # Cellpose 模型</p>
+<p>├── Dockerfile              # 容器构建</p>
+<p>├── docker-compose.yml      # 容器编排</p>
+<p>└── environment.yml         # Conda 环境</p>
+<pre class="code-block"><code class="language-">
+### 主要模块
+1. **Supervisor Agent**：中央协调者，负责任务分解和阶段控制
+2. **Coder Agent**：生成 ImageJ/Fiji Groovy 脚本
+3. **Debugger Agent**：修复失败的脚本
+4. **Data Analyst Agent**：Python 统计分析
+5. **QA Reporter Agent**：质量检查
+6. **Plugin Manager Agent**：插件推荐和安装
+7. **State Ledger**：JSON 形态的项目状态持久化
+8. **RAG 系统**：基于 Qdrant 的文档、错误和经验检索
+
+### 依赖关系
+- **Java/Fiji**： ImageJ/Fiji 作为分析引擎
+- **Python 3.10/3.11/3.13**：多个 Conda 环境（cellpose, stardist, cellpose4）
+- **LLM**： OpenAI GPT-5 系列或 OpenRouter
+- **向量数据库**：Qdrant（存储在 Git LFS 中）
+- **Docker**：容器化部署
+
+## 核心算法
+
+### 1. 智能体协作模式
+采用 **Supervisor-Subagent 架构**：
+- Supervisor 接收用户请求，分解为 Pipeline Plan
+- 通过 State Ledger 记录每个阶段的执行状态
+- 根据阶段进度调用相应的 subagent 工具
+
+### 2. 状态管理（State Ledger）
+使用 `state_ledger.json` 实现**可追溯的流水线**：</code></pre>
+<p>{</p>
+<p>"scientific_goal": "...",</p>
+<p>"completed_steps": [</p>
+<p>{"phase": "2", "step": "thresholding", "status": "completed",</p>
+<p>"script_path": "...", "outputs": ["mask.tif"]}</p>
+<p>],</p>
+<p>"key_decisions": [...],</p>
+<p>"image_metadata": {...}</p>
+<p>}</p>
+<pre class="code-block"><code class="language-">- 原子写入保证数据完整性
+- 紧凑格式（~800 tokens）适合 LLM 上下文
+- 跨会话持久化
+
+### 3. 脚本执行与错误处理
+`script_tools.py` 实现了**健壮的 Groovy 执行环境**：
+- 实时监控 ImageJ 窗口（错误对话框、结果表、信息窗口）
+- 自动分类窗口内容：ERROR/RESULTS/INFO
+- 失败时自动关闭新窗口，支持重试
+- 捕获 IJ.log、STDOUT、STDERR 多源输出
+
+### 4. RAG 持续学习
+**三种向量集合**：
+- **Docs**：BioimageAnalysisDocs（静态文档）
+- **Mistakes**：codingerrors_and_solutions（错误→修复规则）
+- **Recipes**：code_recipes（可复用脚本模板）
+
+**关键设计**：
+- 仅嵌入**症状描述**（rule），代码存储在 metadata 中
+- 检索时应用**和相关性阈值**，避免噪声
+- **去重机制**：相似经验合并 `times_seen` 计数
+
+### 5. 插件推荐机制
+Plugin Manager 使用 `SkillsMiddleware` 扫描 `skills/` 目录，根据科学任务推荐最佳插件，并强制 Coder 使用推荐插件。
+
+## 代码质量
+
+### 优点
+1. **模块化设计**：工具包（`tools/`）职责清晰，每个工具都有明确的 `WHEN TO USE` 说明
+2. **文档完整性**：200+ SKILL.md 文件覆盖所有 Fiji 插件，用户指南详尽
+3. **错误处理**：完善的错误分类、捕获和修复机制
+4. **可测试性**：状态账本、RAG 系统等核心组件易于独立验证
+5. **原子操作**：文件写</code></pre>
+<br>
+<p>&gt; 完整报告: <a href="Agentic-J.html">reports/Agentic-J.md</a></p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+{
+  "paper_id": "2608.08402",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种基于AI的柔性光纤束内窥镜平台，结合光学-计算协同设计，用于高分辨率的NIR-II荧光成像。方法上创新性地引入了Agent-Guided Mixture-of-Experts (GAME)框架，实现了跨尺度、跨波长的图像重建，有效解决了光纤束成像中的蜂窝伪影和分辨率限制问题。实验设计全面，涵盖了从细胞到小鼠和人体组织的多尺度验证，并展示了其在NIR-II窗口下的体内成像能力。然而，论文在统计报告和泛化性方面存在一些关键问题，需要进一步澄清和补充。",
+  "strengths": [
+    "提出了一种新颖的AI驱动的混合专家框架（GAME），能够动态路由输入图像到合适的重建专家，提升了图像恢复的灵活性和适应性。",
+    "通过光学-计算协同设计优化了光纤束结构，显著降低了核心间串扰，实现了超越奈奎斯特采样极限的分辨率提升（最高达4倍）。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "GAME框架能够动态路由输入图像并实现跨尺度重建",
+      "concern": "论文未提供GAME框架中专家模型的具体结构、训练策略和路由机制的详细描述，缺乏可复现性。",
+      "why_it_matters": "缺乏对模型架构和训练过程的详细说明，使得其他研究人员难以复现该方法，也难以评估其技术贡献的实质性和创新性。",
+      "resolution_test": "需要补充专家模型的网络结构、训练损失函数、路由机制的实现细节，以及消融实验验证各模块的有效性。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "statistics",
+      "claim_pointer": "GAME在PSNR、SSIM和LPIPS指标上优于现有方法",
+      "concern": "论文仅提供了部分定量指标的对比，但未提供统计显著性检验（如t检验）或置信区间，难以判断性能提升是否具有统计意义。",
+      "why_it_matters": "缺乏统计显著性分析可能导致对模型性能提升的高估，影响结果的可信度。",
+      "resolution_test": "应补充对PSNR、SSIM和LPIPS指标的统计显著性检验，并提供置信区间或误差条图。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "GAME适用于从细胞到人体组织的跨尺度重建",
+      "concern": "论文未提供在未见数据（如新组织类型）上的泛化能力评估，仅展示了有限的测试案例，缺乏对模型外推能力的系统验证。",
+      "why_it_matters": "缺乏对模型泛化能力的系统评估，限制了其在临床实际应用中的可信度和推广潜力。",
+      "resolution_test": "应补充在未参与训练的组织类型或成像条件下的测试结果，并提供详细的泛化性能分析，包括混淆矩阵或跨域迁移实验。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "citation",
+      "claim_pointer": "引用了UniFMIR、U-Net等现有方法作为对比",
+      "concern": "部分引用文献未准确反映其原始贡献，例如UniFMIR的SwiN Transformer结构是否确实用于图像重建任务未明确说明。",
+      "why_it_matters": "文献引用不准确可能误导读者对相关工作的理解，影响论文的学术严谨性。",
+      "resolution_test": "应核查并修正文献引用内容，确保所引用方法的描述与其原始工作一致。"
+    }
+  ],
+  "assessment_boundaries": [
+    "未提供源代码或训练数据集细节，无法评估模型训练的可重复性。",
+    "未提供在临床环境中的实际部署测试，无法评估其在真实手术场景中的实用性。",
+    "未提供与现有商业系统的对比实验，无法判断其在临床转化中的竞争力。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

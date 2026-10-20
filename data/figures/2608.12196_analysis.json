@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "三种网络结构变体对比图：U-Net基线、加入kappa输入拼接、以及kappa-MAG跳跃连接的架构示意"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "训练过程对比图：(a) U-Net与先验变体的验证Dice曲线对比，(b) 跳跃连接层级的消融实验分析"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "论文实验结果对比图：三个肝脏CT病例中U-Net与M-Net(MAG)分割结果与Ground Truth的对比"
+  }
+}

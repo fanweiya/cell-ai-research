@@ -1,0 +1,57 @@
+{
+  "paper_id": "2608.13660",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种基于深度约束适应的持续学习框架，用于妇科医学图像分割任务，旨在缓解模型在学习新任务时的遗忘问题。论文方法设计合理，实验设计较为严谨，且结果展示了深度约束适应对遗忘问题的缓解潜力。然而，论文在统计报告和引用真实性方面存在一些问题，可能影响其结论的可信度。",
+  "strengths": [
+    "提出了基于深度约束适应的持续学习策略，具有明确的医学图像分割应用场景。",
+    "通过块级消融分析和深度约束实验，深入探讨了遗忘在编码器-解码器结构中的分布机制。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "论文声称通过冻结特定编码器-解码器区域可以有效缓解遗忘问题。",
+      "concern": "论文未明确说明如何选择冻结区域的策略，缺乏理论依据或对比实验支持。",
+      "why_it_matters": "缺乏对冻结策略选择的解释会削弱方法的可重复性和科学性。",
+      "resolution_test": "应补充对冻结策略选择的理论依据或对比实验，例如随机冻结、自适应冻结等方法的比较。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "statistics",
+      "claim_pointer": "论文声称深度约束适应显著降低了遗忘率。",
+      "concern": "论文未提供统计显著性检验（如t检验）来支持其结论。",
+      "why_it_matters": "缺乏统计显著性检验可能导致结论不可靠，无法判断实验结果是否偶然。",
+      "resolution_test": "应补充统计检验结果，以验证深度约束适应与传统持续学习方法之间的性能差异是否具有统计显著性。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "generalizability",
+      "claim_pointer": "论文声称其方法适用于多种医学图像分割任务。",
+      "concern": "实验仅基于三个妇科图像数据集，缺乏跨模态或跨器官的泛化实验。",
+      "why_it_matters": "限制在单一器官系统和任务类型可能影响方法的通用性。",
+      "resolution_test": "应补充在其他器官系统（如脑部、胸部）或非医学图像上的泛化实验。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "citation",
+      "claim_pointer": "论文引用了多个现有持续学习方法作为对比。",
+      "concern": "部分引用（如Lifelong nnU-Net、MultiTalent nnU-Net）未提供足够的上下文说明其与本文方法的差异。",
+      "why_it_matters": "缺乏对引用方法的清晰描述可能影响读者对本文贡献的理解。",
+      "resolution_test": "应补充对引用方法的简要描述，明确其与本文方法在架构、训练策略等方面的区别。"
+    }
+  ],
+  "assessment_boundaries": [
+    "无法评估实验代码和数据集的可访问性",
+    "无法验证实验结果的可复现性"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

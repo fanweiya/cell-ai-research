@@ -1,0 +1,19 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2607.04486v1",
+  "status": "done",
+  "task_family": "cell_detection / cell_segmentation / counting",
+  "input": "Microscopic blood cell images (BCCD dataset)",
+  "output": "Bounding boxes for blood cells (RBC, WBC, Platelets), WBC subtype classification (Neutrophils, Lymphocytes, Monocytes, Eosinophils, Basophils), and cell counts per type",
+  "notable": "Hybrid pipeline using YOLOv5 for detection/segmentation and MobileNetV2 + Logistic Regression for classification; focuses on automated WBC counting and subtyping in medical imaging",
+  "task_type": [
+    "detection",
+    "segmentation",
+    "counting"
+  ],
+  "confidence": 0.85,
+  "task_id": "2607.04486v1-task_analysis-v1",
+  "run_at": "2026-07-24T09:09:49.843776",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

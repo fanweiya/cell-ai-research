@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法对比图：展示Baselines与AnaDiffusion生成脑MRI的解剖学缺陷（左右结构不一致、部件不连续、边界塌陷）对比及定量雷达图结果"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "方法流程图：展示LDM生成脑部部件、注入支架并经全脑LDM去噪生成3D脑部MRI的流程"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "与多种LDM基线方法的生成脑部MRI视觉对比图，展示本文AnaDiffusion方法效果"
+  }
+}

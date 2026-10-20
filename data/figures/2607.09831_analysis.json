@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法流程图：展示基于U-Net的分割网络、不确定性预测与slide级主动学习选择未标注数据的完整pipeline"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "展示主动学习多轮中持续困难patch的分割结果对比图（原图、真值与R1/R3/R6预测对比）"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "多面板实验结果图：学习曲线、主动学习方法（SHAL、Random、Entropy、BALD、CoreSet）的Dice/IoU对比表、各队列性能柱状图及内外部验证对比"
+  }
+}

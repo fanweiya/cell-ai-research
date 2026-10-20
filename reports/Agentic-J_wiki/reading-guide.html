@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic-J Wiki — reading-guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / Agentic-J Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>imagentj</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/skills.html">skills</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/user_guide.html">user_guide</a></li>
+<li><a href="modules/docs.html">docs</a></li>
+<li><a href="modules/config.html">config</a></li>
+<li><a href="modules/scripts.html">scripts</a></li>
+<li><a href="modules/qdrant_data.html">qdrant_data</a></li>
+<li><a href="modules/patch_stardist.html">patch_stardist</a></li>
+<li><a href="modules/data.html">data</a></li>
+<li><a href="modules/imagentj.html">imagentj</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Reading Guide</h1>
+<br>
+<p>本代码库是一个基于容器的AI代理系统，用于自动化ImageJ/Fiji显微镜图像分析工作流。建议按从宏观配置到核心逻辑的顺序阅读，优先理解部署架构和入口点，再深入模块功能。</p>
+<br>
+<h2>Step 1: 理解项目概览与部署架构 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">README.md</code>, <code class="inline-code">docker-compose.yml</code>, <code class="inline-code">Dockerfile</code></p>
+<br>
+<p>首先通过README.md了解项目目标和整体架构，然后查看docker-compose.yml理解服务编排和依赖关系，最后阅读Dockerfile了解容器构建细节和运行环境配置。</p>
+<br>
+<h2>Step 2: 掌握环境变量与配置管理 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">.env.template</code>, <code class="inline-code">pyproject.toml</code>, <code class="inline-code">config/</code></p>
+<br>
+<p>查看.env.template了解必需的环境变量和配置项，通过pyproject.toml理解Python依赖和项目元数据，浏览config目录了解AI代理运行所需的外部依赖配置和检索参数。</p>
+<br>
+<h2>Step 3: 探索应用入口与启动流程 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">run.py</code>, <code class="inline-code">docker-entrypoint.sh</code></p>
+<br>
+<p>run.py是Python应用的主入口，理解其如何初始化AI代理和连接外部服务；docker-entrypoint.sh是容器启动脚本，了解容器化部署的初始化流程和命令执行逻辑。</p>
+<br>
+<h2>Step 4: 理解核心模块：ImageJ集成 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">imagentj/</code></p>
+<br>
+<p>浏览imagentj模块的所有文件，重点关注ImageJ/Fiji的Java桥接实现、脚本执行机制和图像分析API封装，这是AI代理与图像分析工具交互的核心层。</p>
+<br>
+<h2>Step 5: 学习技能模块与AI代理能力 (~25 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">skills/</code></p>
+<br>
+<p>skills模块包含188个文件，是AI代理的具体能力实现。重点关注技能定义、提示工程模板和工具调用逻辑，理解代理如何规划任务并调用ImageJ功能。</p>
+<br>
+<h2>Step 6: 掌握脚本管理与执行机制 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">scripts/</code>, <code class="inline-code">patch_stardist/</code></p>
+<br>
+<p>scripts目录存储ImageJ/Groovy脚本及其元数据，了解脚本如何被AI代理调用和执行；patch_stardist包含对TrackMate-StarDist的修复，理解特定插件的兼容性问题处理。</p>
+<br>
+<h2>Step 7: 理解数据管理与向量检索 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">data/</code>, <code class="inline-code">qdrant_data/</code></p>
+<br>
+<p>data目录存储容器环境快照和运行时元数据，qdrant_data管理向量数据库配置。了解AI代理如何存储和检索知识，以及环境状态的持久化机制。</p>
+<br>
+<h2>Step 8: 熟悉代码图与监控机制 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">.codegraph/</code></p>
+<br>
+<p>.codegraph目录管理代码图数据的本地缓存、守护进程和通信套接字，了解项目如何维护和查询代码结构信息，这对AI代理理解代码库很重要。</p>
+<br>
+<h2>Tips</h2>
+<br>
+<ul>
+<li>先阅读文档再深入代码，特别是user_guide/README.md和docs/DEPLOY.md</li>
+<li>重点关注AI代理如何与ImageJ交互，这是系统的核心创新点</li>
+<li>注意容器化部署的特殊性，理解docker-entrypoint.sh和Dockerfile的协同工作</li>
+<li>遇到复杂逻辑时，结合调试日志和实际运行场景理解</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

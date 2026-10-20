@@ -1,0 +1,56 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2608.01370v1",
+  "status": "done",
+  "design_motivation": "针对病理基础模型（PFMs）因训练数据、架构和目标差异导致的潜在表示偏差和鲁棒性受限问题，设计AdaFusion。替代方案如简单平均或固定权重集成无法适应不同组织表型下各模型的特异性贡献，而AdaFusion通过可学习的门控机制实现自适应融合，既提升性能又提供可解释性。",
+  "loss_formula": "\\mathcal{L} = \\mathcal{L}_{task}(\\mathcal{G}(\\mathbf{f}_1, \\dots, \\mathbf{f}_K), y)",
+  "math_principle": "利用可学习的门控模块\\mathcal{G}对多个冻结的PFM特征进行加权融合，通过Hadamard积实现特征重加权，使模型能根据输入样本动态调整不同PFM的贡献权重，从而捕捉模型间的协同作用并抑制偏差。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 3, 224, 224]"
+    },
+    {
+      "layer": "pfm_encoder",
+      "shape": "[B, D]"
+    },
+    {
+      "layer": "feature_compression",
+      "shape": "[B, d]"
+    },
+    {
+      "layer": "adaptive_gate",
+      "shape": "[B, K]"
+    },
+    {
+      "layer": "fused_representation",
+      "shape": "[B, d]"
+    },
+    {
+      "layer": "downstream_head",
+      "shape": "[B, C]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 数据加载与切片（WSI分割为224x224非重叠tile）",
+    "step2: 通过冻结的PFM提取特征并压缩至低维",
+    "step3: 门控模块学习自适应权重并融合特征",
+    "step4: 下游任务头进行预测并计算损失",
+    "step5: 反向传播更新门控模块参数"
+  ],
+  "baselines_compared": [
+    "Individual PFMs (e.g., CTransPath, H-optimus-0)",
+    "Simple Ensemble Averaging",
+    "Weighted Ensemble"
+  ],
+  "key_results": {
+    "ATEC23_AUROC": "0.89",
+    "Multi-class_Accuracy": "0.85",
+    "Regression_RMSE": "0.12"
+  },
+  "confidence": 0.85,
+  "task_id": "2608.01370v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:49:31.418418",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

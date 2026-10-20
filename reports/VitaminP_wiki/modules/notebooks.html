@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VitaminP Wiki — notebooks</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / VitaminP Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>VitaminP</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/vitaminp.html">vitaminp</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/dataset.html">dataset</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/metrics.html">metrics</a></li>
+<li><a href="../modules/postprocessing.html">postprocessing</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>notebooks</h1>
+<br>
+<p>&gt; 提供基于Vision Transformer的病理细胞分割框架的数据预处理、推理、基准测试和评估的交互式实验环境。</p>
+<br>
+<p>该模块包含一系列Jupyter Notebook，用于支持Vitamin-P框架的完整工作流程。主要功能包括：Xenium和CRC数据集的预处理与Zarr格式转换、模型推理（含合成MIF生成）、与Cellpose-SAM和CellSAM等基准方法的对比评估、实例分割指标计算、以及性能基准测试。Notebooks通过配置YAML文件管理数据加载，利用DINOv2作为骨干网络，并支持在GPU上运行大规模WSI推理。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">notebooks/Xenium/Untitled.ipynb</code></h3>
+<br>
+<p>处理Xenium细胞分割结果，将大型GeoJSON文件分割为多个部分以便后续处理。</p>
+<br>
+<ul>
+<li><code class="inline-code">split_geojson</code> (function) - 读取GeoJSON文件并将其特征分割为5个部分，保存为独立的GeoJSON文件。</li>
+</ul>
+<br>
+<h3><code class="inline-code">notebooks/Xenium/inference.ipynb</code></h3>
+<br>
+<p>配置环境并初始化VitaminPFlex模型，用于Xenium数据的推理。</p>
+<br>
+<ul>
+<li><code class="inline-code">VitaminPFlex</code> (class) - 初始化具有共享编码器和4个独立解码器的Flex架构模型。</li>
+<li><code class="inline-code">DINOv2Backbone</code> (class) - 使用DINOv2 Vision Transformer作为骨干网络提取特征。</li>
+</ul>
+<br>
+<h3><code class="inline-code">notebooks/benchmarks/CellSAM/cellsam_zeroshot.ipynb</code></h3>
+<br>
+<p>在CRC数据集上对CellSAM模型进行零样本推理和评估。</p>
+<br>
+<ul>
+<li><code class="inline-code">CRC Dataset Package</code> (module) - 加载CRC数据集配置，包括数据拆分、增强和HV图生成设置。</li>
+</ul>
+<br>
+<h3><code class="inline-code">notebooks/benchmarks/CellposeSAM/cellposesam_zeroshot.ipynb</code></h3>
+<br>
+<p>在CRC数据集上对Cellpose-SAM模型进行零样本推理和评估。</p>
+<br>
+<ul>
+<li><code class="inline-code">CRC Dataset Package</code> (module) - 加载CRC数据集配置。</li>
+</ul>
+<br>
+<h3><code class="inline-code">notebooks/benchmarks/CellposeSAM/vitaminp-cellposesam.ipynb</code></h3>
+<br>
+<p>加载Cellpose-SAM模型并评估其在24个案例上的分割性能，计算Dice分数。</p>
+<br>
+<ul>
+<li><code class="inline-code">cellpose.models</code> (module) - 加载和运行Cellpose-SAM模型。</li>
+</ul>
+<br>
+<h3><code class="inline-code">notebooks/benchmarks/Pathologist/cellposesam.ipynb</code></h3>
+<br>
+<p>安装和验证Cellpose依赖项，可能用于病理学家评估。</p>
+<br>
+<h3><code class="inline-code">notebooks/benchmarks/Pathologist/cellsam.ipynb</code></h3>
+<br>
+<p>安装和验证CellSAM依赖项，并加载模型进行推理。</p>
+<br>
+<ul>
+<li><code class="inline-code">cellSAM.get_model</code> (function) - 获取CellSAM模型实例。</li>
+<li><code class="inline-code">cellSAM.segment_cellular_image</code> (function) - 对细胞图像执行分割。</li>
+</ul>
+<br>
+<h3><code class="inline-code">notebooks/benchmarks/vitamin-p/flex-TTA.ipynb</code></h3>
+<br>
+<p>在PanNuke数据集上对VitaminPFlex模型进行测试时增强（TTA）评估。</p>
+<br>
+<ul>
+<li><code class="inline-code">CRC Dataset Package</code> (module) - 加载数据集配置，包括数据拆分和补丁索引构建。</li>
+</ul>
+<br>
+<h3><code class="inline-code">notebooks/convert-zarr-png.ipynb</code></h3>
+<br>
+<p>将Zarr格式存储的图像数据（HE或MIF模态）转换为PNG图像以便可视化。</p>
+<br>
+<ul>
+<li><code class="inline-code">zarr.open</code> (function) - 打开Zarr数组并读取数据块。</li>
+<li><code class="inline-code">PIL.Image</code> (class) - 将numpy数组转换为图像并保存为PNG。</li>
+</ul>
+<br>
+<h3><code class="inline-code">notebooks/data_preprocessing/TNBC.ipynb</code></h3>
+<br>
+<p>将TNBC数据集切片转换为Zarr格式，并按训练/验证/测试集进行拆分。</p>
+<br>
+<ul>
+<li><code class="inline-code">Zarr Data Conversion</code> (process) - 将图像切片和掩码转换为Zarr数组，并保存为tnbc_train/val/test目录。</li>
+</ul>
+<br>
+<h3><code class="inline-code">notebooks/data_preprocessing/Xenium_CRC.ipynb</code></h3>
+<br>
+<p>验证Xenium数据集文件夹结构，确保每个样本包含HE和MIF子文件夹及掩码。</p>
+<br>
+<ul>
+<li><code class="inline-code">verify_folder_structure</code> (function) - 检查根目录下样本文件夹的完整性。</li>
+</ul>
+<br>
+<h3><code class="inline-code">notebooks/data_preprocessing/dataset.ipynb</code></h3>
+<br>
+<p>加载和索引多个数据集（包括CRC、Xenium等）以构建训练、验证和测试加载器。</p>
+<br>
+<ul>
+<li><code class="inline-code">CRC Dataset Package</code> (module) - 配置和创建多数据集加载器，构建补丁索引。</li>
+</ul>
+<br>
+<h3><code class="inline-code">notebooks/figures/Figure_2f.ipynb</code></h3>
+<br>
+<p>生成用于论文图2f的可视化结果，可能涉及分割掩码的叠加显示。</p>
+<br>
+<h3><code class="inline-code">notebooks/inference-Syn.ipynb</code></h3>
+<br>
+<p>执行WSI推理，使用VitaminPDual模型生成合成MIF图像并进行细胞分割。</p>
+<br>
+<ul>
+<li><code class="inline-code">VitaminPDual</code> (class) - 双模态模型，包含H&amp;E和MIF编码器，支持合成MIF生成。</li>
+<li><code class="inline-code">WSIPredictor</code> (class) - 初始化预测器，处理WSI切片提取、重叠推理和结果聚合。</li>
+</ul>
+<br>
+<h3><code class="inline-code">notebooks/metrics-Instance.ipynb</code></h3>
+<br>
+<p>安装依赖项并计算实例分割指标（如Dice、AJI、PQ等）。</p>
+<br>
+<h3><code class="inline-code">notebooks/metricsSyn.ipynb</code></h3>
+<br>
+<p>安装依赖项并计算合成MIF生成相关的指标。</p>
+<br>
+<h3><code class="inline-code">notebooks/time_benchmarks/cellposesam.ipynb</code></h3>
+<br>
+<p>对Cellpose-SAM模型进行时间性能基准测试。</p>
+<br>
+<h3><code class="inline-code">notebooks/time_benchmarks/cellsam.ipynb</code></h3>
+<br>
+<p>对CellSAM模型进行时间性能基准测试。</p>
+<br>
+<ul>
+<li><code class="inline-code">cellSAM.get_model</code> (function) - 获取CellSAM模型。</li>
+<li><code class="inline-code">cellSAM.segment_cellular_image</code> (function) - 执行分割并测量时间。</li>
+</ul>
+<br>
+<h3><code class="inline-code">notebooks/time_benchmarks/vitamin-p-dual.ipynb</code></h3>
+<br>
+<p>VitaminPDual模型的时间基准测试（当前为空）。</p>
+<br>
+<h3><code class="inline-code">notebooks/time_benchmarks/vitaminp-flex.ipynb</code></h3>
+<br>
+<p>对VitaminPFlex模型进行时间基准测试，包含样本提取功能。</p>
+<br>
+<ul>
+<li><code class="inline-code">extract_region_from_ome_tiff</code> (function) - 从OME-TIFF文件中提取指定区域并保存为TIFF。</li>
+</ul>
+<br>
+<h3><code class="inline-code">notebooks/wsi.ipynb</code></h3>
+<br>
+<p>安装依赖项并执行WSI相关的处理任务。</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>VitaminPFlex</strong>: 一种基于Vision Transformer的分割架构，采用共享编码器和多个独立解码器的设计，适用于多任务或多模态病理图像分割。</li>
+<li><strong>VitaminPDual</strong>: 双模态模型，包含H&amp;E和MIF两个编码器，能够生成合成MIF图像，用于在仅有H&amp;E数据的情况下进行细胞分割。</li>
+<li><strong>Zarr数据格式</strong>: 用于高效存储和访问大规模病理图像及其掩码的数组格式，支持分块读取和并行处理。</li>
+<li><strong>WSI推理</strong>: 对全切片图像进行分块处理，通过重叠窗口预测并聚合结果，以处理超出显存容量的大尺寸图像。</li>
+<li><strong>基准对比</strong>: 将Vitamin-P框架与Cellpose-SAM、CellSAM等现有方法进行零样本或微调后的性能对比，评估Dice、AJI、PQ等指标。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">notebooks/data_preprocessing/dataset.ipynb</code> → <code class="inline-code">notebooks/benchmarks/vitamin-p/flex-TTA.ipynb</code>: dataset.ipynb构建的数据加载器被flex-TTA.ipynb用于模型评估。</li>
+<li><code class="inline-code">notebooks/Xenium/inference.ipynb</code> → <code class="inline-code">notebooks/data_preprocessing/Xenium_CRC.ipynb</code>: inference.ipynb依赖Xenium_CRC.ipynb验证的数据结构。</li>
+<li><code class="inline-code">notebooks/inference-Syn.ipynb</code> → <code class="inline-code">notebooks/data_preprocessing/dataset.ipynb</code>: inference-Syn.ipynb可能使用dataset.ipynb中定义的数据配置。</li>
+<li><code class="inline-code">notebooks/benchmarks/CellposeSAM/vitaminp-cellposesam.ipynb</code> → <code class="inline-code">notebooks/metrics-Instance.ipynb</code>: vitaminp-cellposesam.ipynb的计算结果可能需要metrics-Instance.ipynb中的指标进行汇总。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

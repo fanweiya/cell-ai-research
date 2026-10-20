@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>count-anything Wiki — config</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / count-anything Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>count-anything</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/data.html">data</a></li>
+<li><a href="../modules/count_anything.html">count_anything</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/config.html">config</a></li>
+<li><a href="../modules/sam3.html">sam3</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>config</h1>
+<br>
+<p>&gt; 定义文本引导跨域目标计数模型的训练、验证和测试配置参数。</p>
+<br>
+<p>该模块包含三个YAML配置文件，分别用于测试、训练和验证阶段。它们定义了数据路径、模型超参数、数据增强策略、损失函数配置以及训练阶段设置。三个文件结构高度相似，主要区别在于路径设置（如实验日志目录、预训练权重路径）和特定的训练/验证目标。配置文件通过路径指向数据注解文件，并详细指定了图像预处理流程（如随机缩放、裁剪、标准化）和复杂的损失函数组合（包括PDC点集损失、RSC框损失、RSC点损失和质量BCE损失）。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">config/count_anything_test_cloc.yaml</code></h3>
+<br>
+<p>配置测试阶段参数，使用测试集注解和特定实验目录。</p>
+<br>
+<h3><code class="inline-code">config/count_anything_train_cloc.yaml</code></h3>
+<br>
+<p>配置训练阶段参数，使用训练集和验证集注解，并指向预训练的SAM3权重。</p>
+<br>
+<h3><code class="inline-code">config/count_anything_val_cloc.yaml</code></h3>
+<br>
+<p>配置验证阶段参数，使用训练集和验证集注解，并指向已训练的模型检查点。</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>数据增强管道</strong>: 通过嵌套的Transform API定义，包含随机选择、缩放、裁剪/填充、张量转换和标准化，支持训练和验证的不同策略。</li>
+<li><strong>复合损失函数</strong>: 使用CountAnythingLossWrapper封装多种损失，包括PDC点集分类与定位损失、RSC边界框损失、RSC点损失以及RSC质量BCE损失，通过权重字典控制各部分贡献。</li>
+<li><strong>训练阶段控制</strong>: 通过scratch.training_stage参数指定为joint_counter_adaptation，启用分割和PDC分支，并设置分辨率和归一化参数。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">config/count_anything_train_cloc.yaml</code> → <code class="inline-code">config/count_anything_val_cloc.yaml</code>: 两者共享相同的数据注解路径和大部分模型配置，但训练配置包含预训练权重路径，而验证配置指向已训练的检查点。</li>
+<li><code class="inline-code">config/count_anything_test_cloc.yaml</code> → <code class="inline-code">config/count_anything_train_cloc.yaml</code>: 测试配置使用独立的测试集注解路径和实验日志目录，与训练配置在数据划分上分离。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

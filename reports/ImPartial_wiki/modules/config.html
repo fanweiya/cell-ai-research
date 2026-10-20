@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ImPartial Wiki — config</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / ImPartial Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>ImPartial</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/monailabel-app.html">monailabel-app</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/config.html">config</a></li>
+<li><a href="../modules/data.html">data</a></li>
+<li><a href="../modules/impartial.html">impartial</a></li>
+<li><a href="../modules/imagej-plugin.html">imagej-plugin</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>config</h1>
+<br>
+<p>&gt; 存储和管理深度学习训练、模型、数据及损失函数的配置参数。</p>
+<br>
+<p>该模块通过多个INI配置文件定义不同实验场景的超参数。每个文件对应特定的数据集或实验设置（如CPDMI、TissueNet、Vectra），包含训练循环参数（epochs, lr, batch_size）、损失函数权重（seg_fore, rec）、模型架构（depth, base）和数据路径。配置由主程序加载，用于动态初始化训练流程和模型结构。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">config/cpdmi_nc.ini</code></h3>
+<br>
+<p>定义CPDMI数据集上包含噪声和缺失标注的交互式分割实验配置，支持多尺度patch采样和特定输出通道数。</p>
+<br>
+<h3><code class="inline-code">config/cpdmi_no_rec.ini</code></h3>
+<br>
+<p>定义CPDMI数据集上关闭重建任务（rec=0.0）的基准实验配置，使用更大的batch size和worker数量。</p>
+<br>
+<h3><code class="inline-code">config/default.ini</code></h3>
+<br>
+<p>作为默认配置模板，定义基础训练参数和全标注数据集路径，用于快速启动实验。</p>
+<br>
+<h3><code class="inline-code">config/tissuenet_all.ini</code></h3>
+<br>
+<p>配置TissueNet全量数据集的训练参数，针对2通道图像和较小的patch size优化。</p>
+<br>
+<h3><code class="inline-code">config/tissuenet_orig_iterative.ini</code></h3>
+<br>
+<p>专为TissueNet迭代实验设计的配置，仅用于评估（rebuttal），不保存输出。</p>
+<br>
+<h3><code class="inline-code">config/vectra_2ch_nomc.ini</code></h3>
+<br>
+<p>配置Vectra 2通道数据集的实验，关闭MC Dropout（mcdrop_it=3但可能逻辑不同）并设置特定输出维度。</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>mcdrop_it</strong>: Monte Carlo Dropout迭代次数，用于不确定性估计。</li>
+<li><strong>num_patches_per_image</strong>: 每张图像采样的patch数量，控制数据增强和训练样本密度。</li>
+<li><strong>seg_fore/seg_back</strong>: 分割任务中前景和背景的损失权重，平衡类别不平衡。</li>
+<li><strong>rec_channels</strong>: 重建任务使用的输入通道索引，用于多模态数据融合。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">main.py</code> → <code class="inline-code">config/cpdmi_nc.ini</code>: 主程序加载特定INI文件以获取超参数并初始化训练器。</li>
+<li><code class="inline-code">train.py</code> → <code class="inline-code">config/default.ini</code>: 训练脚本读取默认配置作为基础，允许命令行参数覆盖部分设置。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

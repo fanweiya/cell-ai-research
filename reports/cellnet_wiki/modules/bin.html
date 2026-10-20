@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>cellnet Wiki — bin</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / cellnet Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>cellnet</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/bin.html">bin</a></li>
+<li><a href="../modules/cellnet.html">cellnet</a></li>
+<li><a href="../modules/baselines.html">baselines</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>bin</h1>
+<br>
+<p>&gt; 提供项目构建、提交、同步和测试的脚本工具集</p>
+<br>
+<p>该模块包含一系列 Shell 脚本，用于管理稀疏噪声点标注定位相差显微镜图像项目。它处理与高性能计算集群（HPC）的交互、环境配置、数据同步、作业提交以及发布流程。核心功能包括：配置不同集群（如 SCC、UTHPC）的资源参数，通过 rsync 同步数据，将 Jupyter Notebook 转换为可执行脚本并在集群上运行，以及自动化发布流程。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">bin/clean</code></h3>
+<br>
+<p>清理构建产物和临时文件</p>
+<br>
+<h3><code class="inline-code">bin/code-tunnel</code></h3>
+<br>
+<p>在 HPC 上安装并启动 VSCode Code Tunnel</p>
+<br>
+<h3><code class="inline-code">bin/data-sync</code></h3>
+<br>
+<p>在本地与 HPC 之间同步数据</p>
+<br>
+<h3><code class="inline-code">bin/imports.sh</code></h3>
+<br>
+<p>定义 HPC 集群参数和环境变量</p>
+<br>
+<h3><code class="inline-code">bin/install</code></h3>
+<br>
+<p>安装或更新项目依赖</p>
+<br>
+<h3><code class="inline-code">bin/job-ipynb</code></h3>
+<br>
+<p>执行 Jupyter Notebook 并管理输出</p>
+<br>
+<h3><code class="inline-code">bin/normalize_paths</code></h3>
+<br>
+<p>将文件夹中的文件名空格替换为下划线</p>
+<br>
+<h3><code class="inline-code">bin/release</code></h3>
+<br>
+<p>创建并发布模型版本</p>
+<br>
+<h3><code class="inline-code">bin/submit-job</code></h3>
+<br>
+<p>提交作业到本地或远程集群</p>
+<br>
+<h3><code class="inline-code">bin/test-release</code></h3>
+<br>
+<p>测试发布流程并验证结果</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>HPC 作业调度</strong>: 脚本支持多种作业调度系统（SLURM、LSF），通过 bin/imports.sh 中的变量定义资源请求（CPU、内存、GPU），并使用 sbatch 或 bsub 提交作业。</li>
+<li><strong>环境隔离</strong>: 使用 uv 和 conda/micromamba 管理 Python 环境，确保作业在隔离的虚拟环境中运行，避免依赖冲突。</li>
+<li><strong>远程执行</strong>: 通过 SSH 将作业转发到远程 HPC 集群执行，支持本地和远程两种模式，便于在本地开发时直接提交到集群。</li>
+<li><strong>数据同步</strong>: 使用 rsync 在本地和 HPC 之间同步数据和结果，支持 push 和 pull 操作，保持数据一致性。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">bin/data-sync</code> → <code class="inline-code">bin/imports.sh</code>: data-sync 导入 imports.sh 以获取 HPC 主机配置</li>
+<li><code class="inline-code">bin/submit-job</code> → <code class="inline-code">bin/imports.sh</code>: submit-job 导入 imports.sh 以获取集群作业参数</li>
+<li><code class="inline-code">bin/job-ipynb</code> → <code class="inline-code">bin/imports.sh</code>: job-ipynb 依赖 imports.sh 中的环境变量来配置 GPU 资源</li>
+<li><code class="inline-code">bin/test-release</code> → <code class="inline-code">bin/install</code>: test-release 调用 install 脚本进行环境安装</li>
+<li><code class="inline-code">bin/submit-job</code> → <code class="inline-code">bin/job-ipynb</code>: submit-job 调用 job-ipynb 来执行具体的 Notebook 作业</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

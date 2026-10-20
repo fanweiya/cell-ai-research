@@ -1,0 +1,50 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2607.19624v1",
+  "status": "done",
+  "design_motivation": "传统报告生成模型仅依赖图像-文本对进行训练，忽略了病理医生在诊断过程中高度选择性的视觉注意力机制。本文设计该算法旨在将人类专家的注意力轨迹作为辅助监督信号，通过注意力对齐损失（attention-alignment loss）强制模型关注与医生一致的诊断性区域，从而提升报告生成的准确性、可解释性及临床相关组件的识别能力。相比仅使用图像-文本监督的替代方案，该方法利用了医生扫描轨迹这一强语义线索，解决了模型可能关注无关背景或错误区域的问题。",
+  "loss_formula": "\\mathcal{L}_{align} = \\text{KL}(\\mathbf{a}_{model} \\parallel \\mathbf{a}_{pathologist}) + \\text{MSE}(\\mathbf{a}_{model}, \\mathbf{a}_{pathologist})",
+  "math_principle": "利用KL散度（Kullback-Leibler Divergence）和均方误差（MSE）来衡量模型生成的注意力分布与病理医生标注的注意力分布之间的差异。通过最小化这两个距离，迫使模型在推理过程中提取的图像token注意力权重在统计特性上与人类专家的视觉扫描路径保持一致，从而实现语义层面的对齐。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 3, H, W]"
+    },
+    {
+      "layer": "vision_encoder",
+      "shape": "[B, N, D]"
+    },
+    {
+      "layer": "attention_alignment",
+      "shape": "[B, N]"
+    },
+    {
+      "layer": "language_decoder",
+      "shape": "[B, T, V]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, T]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载包含多尺度视口轨迹、语音描述和光标运动的121张前列腺WSI多模态数据集",
+    "step2: 通过视觉编码器提取图像特征并生成初始注意力图",
+    "step3: 计算模型注意力与医生标注注意力之间的对齐损失",
+    "step4: 联合优化报告生成任务损失与注意力对齐损失",
+    "step5: 推理阶段提取模型注意力图以生成可解释的视觉证据"
+  ],
+  "baselines_compared": [
+    "HistGen (w/o alignment)",
+    "WSI-LLaVA (w/o alignment)"
+  ],
+  "key_results": {
+    "NLP_metrics_gain": "10.9%",
+    "clinical_component_accuracy_gain": "19.3%"
+  },
+  "confidence": 0.85,
+  "task_id": "2607.19624v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:43:16.944850",
+  "priority": 12,
+  "agent": "Agents-A1"
+}

@@ -1,0 +1,7 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "论文核心方法架构图，包含(a)WSI预处理与特征提取、(b)MIL框架、(c)ProtoPur原型纯度伪标签及伪标签生成模块的完整流程示意"
+  }
+}

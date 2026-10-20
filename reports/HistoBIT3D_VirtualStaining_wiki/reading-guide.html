@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HistoBIT3D_VirtualStaining Wiki — reading-guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / HistoBIT3D_VirtualStaining Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>HistoBIT3D_VirtualStaining</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/HistoBIT3D_Code.html">HistoBIT3D_Code</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Reading Guide</h1>
+<br>
+<p>本指南旨在帮助你系统性地理解 HistoBIT3D 项目，这是一个基于 GAN 的 3D 组织虚拟 H&amp;E 染色框架。建议从配置和入口点开始，逐步深入到核心逻辑和工具函数，以建立对整体架构的清晰认知。</p>
+<br>
+<h2>Step 1: 理解项目概览与环境依赖 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">README.md</code>, <code class="inline-code">HistoBIT3D_Code/requirements.txt</code>, <code class="inline-code">HistoBIT3D_Code/setup.py</code></p>
+<br>
+<p>首先通过 README.md 了解项目的整体目标、功能特性和使用方法。接着查看 requirements.txt 和 setup.py，明确项目依赖的第三方库、Python 版本要求以及安装方式，为后续代码阅读奠定环境基础。</p>
+<br>
+<h2>Step 2: 掌握核心配置结构 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">HistoBIT3D_Code/uvcgan2/config/config.py</code></p>
+<br>
+<p>阅读 config.py 以理解项目的配置管理方式。重点关注数据路径、模型超参数（如学习率、batch size）、训练策略和实验设置。这是理解模型行为的关键，因为大部分逻辑都围绕这些配置展开。</p>
+<br>
+<h2>Step 3: 探索数据预处理与重建流程 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">HistoBIT3D_Code/scripts/reconstruct_bit_vhe_from_metadata.py</code>, <code class="inline-code">HistoBIT3D_Code/scripts/downsize_right.py</code></p>
+<br>
+<p>了解数据如何被加载、预处理和重建。reconstruct_bit_vhe_from_metadata.py 展示了从元数据重建 3D 体积数据的核心逻辑，而 downsize_right.py 则涉及图像尺寸调整。理解数据流是掌握模型输入输出的前提。</p>
+<br>
+<h2>Step 4: 分析训练与微调脚本 (~25 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">HistoBIT3D_Code/scripts/pretrain_BIT2HE.py</code>, <code class="inline-code">HistoBIT3D_Code/scripts/resume_training_from_config_3D.py</code>, <code class="inline-code">HistoBIT3D_Code/scripts/finetune_from_checkpoint_3D.py</code></p>
+<br>
+<p>研究训练脚本以理解模型训练流程。pretrain_BIT2HE.py 展示预训练过程，resume_training_from_config_3D.py 涉及断点续训，finetune_from_checkpoint_3D.py 则关注微调策略。重点关注模型初始化、损失函数定义和优化器设置。</p>
+<br>
+<h2>Step 5: 深入评估与指标计算 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">HistoBIT3D_Code/scripts/eval_all_epochs_A2B_metrics.py</code>, <code class="inline-code">HistoBIT3D_Code/scripts/eval_fid.py</code>, <code class="inline-code">HistoBIT3D_Code/scripts/eval_il2_scores.py</code></p>
+<br>
+<p>学习如何评估模型性能。eval_all_epochs_A2B_metrics.py 包含全面的指标计算，eval_fid.py 专注于 FID 分数，eval_il2_scores.py 则计算 IL2 评分。理解这些评估方法有助于判断模型质量和改进方向。</p>
+<br>
+<h2>Step 6: 查看推理与辅助工具 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">HistoBIT3D_Code/scripts/run_inference_A2B.sh</code>, <code class="inline-code">HistoBIT3D_Code/scripts/print_model.py</code>, <code class="inline-code">HistoBIT3D_Code/scripts/fix_double_tif_suffix.py</code></p>
+<br>
+<p>了解模型推理流程和辅助工具。run_inference_A2B.sh 是推理脚本的入口，print_model.py 用于打印模型结构，fix_double_tif_suffix.py 处理文件名问题。这些工具在实际应用中非常实用。</p>
+<br>
+<h2>Step 7: 理解脚本封装与自动化 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">HistoBIT3D_Code/scripts/run_eval_all_epochs_A2B_metrics.sh</code>, <code class="inline-code">HistoBIT3D_Code/scripts/run_eval_all_epochs_A2B_metrics_style_TM.sh</code>, <code class="inline-code">HistoBIT3D_Code/scripts/run_eval_all_epochs_A2B_metrics_style_WSL.sh</code>, <code class="inline-code">HistoBIT3D_Code/scripts/run_finetune_from_checkpoint_3D_WSL.sh</code></p>
+<br>
+<p>分析 Shell 脚本如何封装和自动化执行流程。这些脚本通常调用 Python 脚本并设置环境变量，理解它们有助于掌握项目的实验工作流和不同场景下的配置差异。</p>
+<br>
+<h2>Tips</h2>
+<br>
+<ul>
+<li>在阅读代码时，优先关注函数签名和文档字符串，快速把握功能意图。</li>
+<li>结合配置文件和实际脚本，追踪数据从输入到输出的完整路径。</li>
+<li>遇到不理解的模块时，先查看其调用关系，再深入具体实现。</li>
+<li>利用 print_model.py 和配置信息，建立对模型架构的直观认识。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

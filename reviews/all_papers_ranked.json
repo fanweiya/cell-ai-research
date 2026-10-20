@@ -1,0 +1,3406 @@
+[
+ {
+  "id": "2607.20896",
+  "title": "HierarchicalDAEW：面向从 H&amp;E 组织学多切片空间基因表达预测的域感知边加权图卷积与证据不确定性方法",
+  "stat_score": 10,
+  "issues": [],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "we also evaluated prov-gigapath xu2024whole as an alternative encoder; uni outperformed it in ablation experiments despite gigapath’s larger parameter count, consistent with the observation that histo"
+  ]
+ },
+ {
+  "id": "2607.21190",
+  "title": "Physics-Informed Deep Learning Model for Cross-Modality Super-Resolution in Fluorescence Microscopy",
+  "stat_score": 10,
+  "issues": [],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "psf-guided models improved structural fidelity, reduced local deviations, and achieved closer agreement with sted references than non-psf baselines, particularly in frequency-domain analyses."
+  ]
+ },
+ {
+  "id": "2607.28868",
+  "title": "Physics-Aligned Self-Supervised Learning for Scientific Imaging",
+  "stat_score": 10,
+  "issues": [],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "physics-aligned augmentations generally improve performance for objectives relying on cross-view consistency (e."
+  ]
+ },
+ {
+  "id": "2608.11762",
+  "title": "A comparison of CNN architectures for Alzheimer&#x27;s disease detection in single-view MRI scans",
+  "stat_score": 10,
+  "issues": [],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "9400), outperforming the larger models in the same family: resnet50 (0."
+  ]
+ },
+ {
+  "id": "2608.18915",
+  "title": "Simple, Safe, and Overlooked: Reclaiming Sustainable Domain Generalization with Statistical Color Matching",
+  "stat_score": 10,
+  "issues": [],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "subsequent post-hoc two-tailed wilcoxon signed-rank tests further confirm that across all evaluated color spaces, mean-standard deviation matching yields statistically significant improvements over st"
+  ]
+ },
+ {
+  "id": "2511.23204",
+  "title": "Pathryoshka：通过嵌套嵌入的多教师知识蒸馏压缩病理学基础模型",
+  "stat_score": 9,
+  "issues": [
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "it can act as a knowledge agglomeration to create pathology fms that surpass the performance of individual teachers."
+  ]
+ },
+ {
+  "id": "2603.07066",
+  "title": "PolypSteer：通过免训练激活引导的反事实内窥镜合成",
+  "stat_score": 9,
+  "issues": [
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "2 downstream polyp detection in the first experiment, we assess whether polypsteer-generated augmentations improve downstream polyp detection."
+  ]
+ },
+ {
+  "id": "2605.18923",
+  "title": "From Division to Decision: Leveraging Temporal Cell-Stage Segmentation for Embryo Transferability Prediction",
+  "stat_score": 9,
+  "issues": [
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "introduction in vitro production (ivp) of bovine embryos is an assisted re- productive technique (art) that is used to improve genetic gain in farm animals."
+  ]
+ },
+ {
+  "id": "2607.00385",
+  "title": "MalariAI：一种面向致密疟疾血涂片的标签鲁棒解耦框架，用于通用细胞分割与可解释分期分类",
+  "stat_score": 9,
+  "issues": [
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "cross-dataset evaluation on mp-idb therefore provides an honest assessment of the pipeline’s out-of-distribution behavior without any parameter re-tuning, and simultaneously motivates the stage 1 adap"
+  ]
+ },
+ {
+  "id": "2608.06264",
+  "title": "OTLesMix：基于Wasserstein质心与最优传输图实现具有多样形状和位置合成病变的生成",
+  "stat_score": 9,
+  "issues": [
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "1 experimental setup to evaluate the effectiveness of otlesmix as a data augmentation technique to improve the training of a deep learning model, we apply the generation procedure described in section"
+  ]
+ },
+ {
+  "id": "2608.12035",
+  "title": "How Far from Clinical Deployment? Evaluating the Complete Unsupervised Domain Adaptation Pipeline in Medical Imaging",
+  "stat_score": 9,
+  "issues": [
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "), and surpasses targetonly for three."
+  ]
+ },
+ {
+  "id": "2608.12196",
+  "title": "M-Net：融合光谱特征与物理场算子用于医学图像分割的深度学习方法",
+  "stat_score": 9,
+  "issues": [
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "in medical imaging, physics priors have been applied to enhance segmentation confidence 24 and improve model robustness 25 ."
+  ]
+ },
+ {
+  "id": "2608.12658",
+  "title": "Inference-Time Orthogonal Seeding Enables Geometry-Aligned 3D Organ Segmentation for Slice-Propagation Methods",
+  "stat_score": 9,
+  "issues": [
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "orthogonal seeding achieves the best dice and ahd for every backbone, whereas the budget-matched three-axial control uses the same number of annotations but does not improve over a single axial seed."
+  ]
+ },
+ {
+  "id": "2608.16718",
+  "title": "CytoFormer：一种用于组织病理学细胞分类的分子监督细胞基础模型",
+  "stat_score": 9,
+  "issues": [
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "(f) active-learning learning curves (f1 for detecting normal epithelium versus all other cells) as a function of the number of annotated cells, averaged over five random subsets; cytoformer (bold) is "
+  ]
+ },
+ {
+  "id": "2608.16959",
+  "title": "MagViT：用于乳腺组织病理学的可解释多倍率Transformer，支持患者级模型选择",
+  "stat_score": 9,
+  "issues": [
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "unlike fixed averaging, this adaptive weighting improves robustness in heterogeneous samples and prevents dominance of noisy or less informative scales."
+  ]
+ },
+ {
+  "id": "2608.18166",
+  "title": "TractoGraphVLM：一种用于白质纤维束追踪的统一视觉-语言框架",
+  "stat_score": 9,
+  "issues": [
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "0} as seen in table 2 , graph-based encoders outperform non-graph baselines across all tasks in our comparison."
+  ]
+ },
+ {
+  "id": "2508.16085",
+  "title": "Ensemble learning of pathology foundation models for precision oncology",
+  "stat_score": 8,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "elf consistently achieved the highest performance across all tasks, surpassing the second-best model, titan, by an average of 2."
+  ]
+ },
+ {
+  "id": "2511.19759",
+  "title": "Vision-Language Enhanced Foundation Model for Semi-Supervised Medical Image Segmentation",
+  "stat_score": 8,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "dynamic weight scheduling the ema teacher is often unreliable early in training but improves as the student learns task-specific decision boundaries, whereas vessa provides stable template-guided pred"
+  ]
+ },
+ {
+  "id": "2604.20615",
+  "title": "Semi supervised GAN for smart microscopy, fast and data efficient cell cycle classification",
+  "stat_score": 8,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "4 method we introduce sgan, a semi-supervised deep learning framework for cell-cycle classification that exploits limited labelled data, abundant unlabelled data, and generated samples to improve deci"
+  ]
+ },
+ {
+  "id": "2606.28465",
+  "title": "SVC-Probe：一种用于评估空间基础模型嵌入扰动泛化性的框架",
+  "stat_score": 8,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "6%), outperforming convnext-tiny (87."
+  ]
+ },
+ {
+  "id": "2607.14163",
+  "title": "A vision foundation model for single-cell biology via spatial gene cartography",
+  "stat_score": 8,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "scvision outperformed the next-best model in balanced accuracy, scfoundation [ 23 ] (0."
+  ]
+ },
+ {
+  "id": "2607.20572",
+  "title": "Auditing pretraining contamination in single-cell foundation model benchmarks",
+  "stat_score": 8,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": []
+ },
+ {
+  "id": "2608.16669",
+  "title": "Concept-based explanation of gene expression prediction from H&amp;E images",
+  "stat_score": 8,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "recent studies have demonstrated increasingly accurate prediction of spatial ge from routine histology, while foundation models have substantially improved representation learning and generalization a"
+  ]
+ },
+ {
+  "id": "2608.17337",
+  "title": "Learning latent progression states from spatial heterogeneity in uterine histopathology",
+  "stat_score": 8,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "on tcga-ucec and tcga-ucs, spatie also improved or matched upfm across downstream tasks covering morphological diagnosis, gene prediction, and survival prediction (sec."
+  ]
+ },
+ {
+  "id": "2510.15042",
+  "title": "Comprehensive language-image pre-training for 3D medical image understanding",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "we train with the default clip objective, which outperforms a sigmoid loss [ 46 ] in our setting."
+  ]
+ },
+ {
+  "id": "2604.15271",
+  "title": "SegWithU：将不确定性作为扰动能量，用于单次前向传播的风险感知医学图像分割",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "temperature scaling learns a global scalar temperature on validation data and can improve probability scores, but it does not optimize spatial error ranking [8]."
+  ]
+ },
+ {
+  "id": "2604.26517",
+  "title": "MTCurv：基于深度学习的噪声荧光显微图像微管曲率直接映射",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "to further improve spatial coherence and reduce spurious predictions, we introduce a gradient-aware loss that complements the mean squared error by enforcing consistency in curvature variations [24, 2"
+  ]
+ },
+ {
+  "id": "2605.14717",
+  "title": "Towards Label-Free Single-Cell Phenotyping Using Multi-Task Learning",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "5 ) show that learnable fusion improves performance."
+  ]
+ },
+ {
+  "id": "2606.08093",
+  "title": "A Multimodal Agentic Pathology Co-pilot via Evidence Grounded Reasoning",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "this benchmark spans text-only clinical queries, multimodal roi interpretations, and complex gigapixel wsi diagnosis, across which pathpocket consistently outperforms state-of-the-art baselines."
+  ]
+ },
+ {
+  "id": "2606.23487",
+  "title": "CADRE：医学视觉语言模型的稳定、参数高效适配，兼具有界遗忘与先验漂移",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "cadre collapses neither an early modality nor a class: it achieves the best abnormal-class recall on the hardest modality, chest radiography ( 0."
+  ]
+ },
+ {
+  "id": "2607.07177",
+  "title": "Towards Accurate and Fast Clinical Body Composition: A Resource-Efficient Hierarchical Segmentation Framework for Multi-Source CT",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "as detailed in the comparative analysis (table 3), the proposed model consistently outpaced totalsegmentator across all evaluation metrics, yielding statistically significant improvements in both geom"
+  ]
+ },
+ {
+  "id": "2607.08379",
+  "title": "Classical Versus Deep Mirror-Symmetry Scoring: A Benchmark of Thirteen Methods",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": []
+ },
+ {
+  "id": "2607.23371",
+  "title": "Investigating the Visual Cues of CNNs for Vascular Segmentation: A Case Study in Microscopy and Fundus Imaging",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "the addition of border cues may significantly improve classification performance as it allows contrasting the texture of the vessel with its surrounding background."
+  ]
+ },
+ {
+  "id": "2607.28030",
+  "title": "MUL-T: Decoding Spatial Cellular Architecture in Multiplexed Tissue Images",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "across all tasks, the model outperforms classical baselines and achieves performance comparable to the foundation model."
+  ]
+ },
+ {
+  "id": "2608.07062",
+  "title": "Explanation Stability of Test-Time Adaptation in Computational Pathology: A Large-Scale Benchmark",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "a useful adaptation method should improve target-domain performance without moving attention toward irrelevant structures or away from diagnostically meaningful tissue."
+  ]
+ },
+ {
+  "id": "2608.07575",
+  "title": "Beyond Isotropic Assumptions: Continuity-Constrained Segmentation and GPU Morphometry for Nanoscale GBM Analysis",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "additional patch-level augmentations (gaussian blurring, random cropping, and random channel dropout) are each applied with a fixed probability to improve robustness to imaging variation."
+  ]
+ },
+ {
+  "id": "2608.09391",
+  "title": "CoInS-Net：一种用于联合医学图像插值与分割的连续位置感知网络",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "(22) this direction feeds intensity, texture, and morphological transition cues back into the segmentation branch, improving category recognition in low-contrast regions and enhancing boundary localiz"
+  ]
+ },
+ {
+  "id": "2608.09989",
+  "title": "Algorithmic statistics of retinal images",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "these improved error rates generally hovered between 0."
+  ]
+ },
+ {
+  "id": "2608.14757",
+  "title": "KHiM-Mamba：通过隐状态调制将病理知识注入 Mamba 以用于全切片图像分析",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "subsequent mamba-based methods further improve robustness and efficiency: mambamil [ 33 , 34 ] reduces the impact of noisy instances via sequence reordering, m3amba lowers scanning cost using a memory"
+  ]
+ },
+ {
+  "id": "2608.16110",
+  "title": "SUGFW+：一种不确定性引导的特征加权框架，用于医学图像分割中SAM的冷启动主动适应",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "38%, outperforming the best existing method fps (84."
+  ]
+ },
+ {
+  "id": "2608.18309",
+  "title": "XRF-to-Optical Field-of-View Localization with Vision Language Models",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "figure 3: representative outcomes from the four dataset–setting cells, including improvements and one small regression under challenging unconstrained search."
+  ]
+ },
+ {
+  "id": "2608.20229",
+  "title": "Prompt-Conditioned Channel Attention for Hierarchical Feature Modulation toward Anatomy-Agnostic Segmentation",
+  "stat_score": 7,
+  "issues": [
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "progressive insertion of pcca into deeper unetr stages improves dsc and reduces fnr with modest computational overhead, demonstrating that hierarchical prompt-guided modulation enhances feature discri"
+  ]
+ },
+ {
+  "id": "2601.17947",
+  "title": "FlowMorph：面向微流控视频无标记单细胞力学的物理一致性自监督方法",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "[ 12 , 4 , 18 , 9 ] flowmorph attains the highest silhouette iou and area-conservation rate and the lowest wall-violation rate and intra-cellular flow error; for example, it reduces wall violations by"
+  ]
+ },
+ {
+  "id": "2603.13377",
+  "title": "Deep Learning for BioImaging: What Are We Really Learning?",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "4 ), we observe that performance generally decreases or remains stable in deeper layers for biological recall, in contrast to the monotonic improvements typically observed on natural image benchmarks "
+  ]
+ },
+ {
+  "id": "2604.13479",
+  "title": "Learning Class Difficulty via Dynamic Focal Attention for Histopathology Segmentation",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "inflammatory improves + 15."
+  ]
+ },
+ {
+  "id": "2605.19692",
+  "title": "WBCAtt+: Fine-Grained Pixel-Level Morphological Annotations for White Blood Cell Images",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "3 cell structure-aware model in this section, we discuss how our segmentation annotations can serve as a valuable resource for improving cell attribute recognition by enabling a model inspired by path"
+  ]
+ },
+ {
+  "id": "2607.10406",
+  "title": "TVT-PAPD：面向自监督全切片图像分类的病理感知原型蒸馏",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "the background filtering criterion improves the expected signal-to-noise ratio of the retained patch set."
+  ]
+ },
+ {
+  "id": "2607.13116",
+  "title": "C-Norm：细胞分布归一化实现医学细胞图像精准识别",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "[ 25 ] proposed a deformable and global-context aware faster rcnn-fpn (dgca-rcnn) framework that incorporates deformable convolution layers into the fpn backbone to improve scalability across cell siz"
+  ]
+ },
+ {
+  "id": "2607.13508",
+  "title": "CDS: Counterfactual Directionality Score for Structured Interventions in Spatial Graphs",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "these results are consistent with the theoretical motivation for the structured intervention design (section 6 ) and suggest that preserving neighborhood structure improves the stability and specifici"
+  ]
+ },
+ {
+  "id": "2607.28007",
+  "title": "Beyond Classification: Pathology Foundation Models as Detection Encoders for Mitotic Figures",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "all models were trained for up to 100 epochs with validation-based early stopping: training terminated if the validation map failed to improve by at least 10 − 3 10^{-3} for 10 consecutive epochs (fas"
+  ]
+ },
+ {
+  "id": "2607.28125",
+  "title": "Towards Practical Algorithm Selection for Unsupervised Domain Adaptation in Medical Imaging",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "3%), improving over the best individual validator (class-ami, 81."
+  ]
+ },
+ {
+  "id": "2608.00442",
+  "title": "Beyond Static Anchors: Bounded Prototype Conditioning for Language-Free Medical Anomaly Detection",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "under k = 2 k=2 , recap achieves the best image-level auroc on all six datasets."
+  ]
+ },
+ {
+  "id": "2608.05733",
+  "title": "Multiparametric MRI Radiomics and Machine Learning Framework for Predicting Treatment Response in Glioblastoma",
+  "stat_score": 6,
+  "issues": [
+   "P0: 无标准差/置信区间（单点估计）"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "09), a sixteen-percentage-point absolute improvement in discrimination attributable entirely to more physiologically faithful feature extraction."
+  ]
+ },
+ {
+  "id": "2608.08336",
+  "title": "Circuit Fine-Tuning：面向计算高效的Transformer适配",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "near-zero initialization suppresses arbitrary high-confidence predictions and substantially reduces dependence on the particular probe draw and its influence on eap-ig circuit discovery and improves t"
+  ]
+ },
+ {
+  "id": "2608.11807",
+  "title": "CoDiR：面向半监督组织病理学分割的置信引导扩散精炼方法",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "for labeled images, the binary student prediction s s is supervised with the ground-truth mask using a combination of pixel-wise and region-level losses: ℒ sup = λ 1 ​ ℒ ce + λ 2 ​ ℒ dice + λ 3 ​ ℒ cl"
+  ]
+ },
+ {
+  "id": "2608.12766",
+  "title": "PatchGen：学习软性图像内预测子集以实现视觉泛化",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "figure 3 shows that, for natural images under identical backbones and hyperparameters, patchgen improves the reported averages over lp+ln baselines."
+  ]
+ },
+ {
+  "id": "2608.14309",
+  "title": "Spatial Message Passing in Language Space for Pathology Image Interpretation",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "the goal is to find a prompt that produces descriptions whose neighbor integration improves downstream tile interpretation: 𝐩 ∗ = arg ⁡ min 𝐩 ⁡ ℒ ⁡ ( 𝐩 ) , ℒ ⁡ ( 𝐩 ) = ∑ i ∈ 𝒯 eval ⁡ ( d i ( 1 ) ​ ( 𝐩"
+  ]
+ },
+ {
+  "id": "2608.14705",
+  "title": "On Cross-Validation for Hyperparameter Optimization of Deep Learning Image Classifiers",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "thus, the large reductions in aee observed on bham were not accompanied by comparably large improvements in final test performance."
+  ]
+ },
+ {
+  "id": "2608.14719",
+  "title": "DeCo-MIL：面向长尾全切片图像分析的去偏反事实推理",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "3 , deco-mil substantially improves tail-f1 while maintaining head-f1 comparable to strong baselines on all three datasets; it also improves medium-f1."
+  ]
+ },
+ {
+  "id": "2608.14759",
+  "title": "Test-Time Instance Selection for Improved Whole Slide Image Analysis",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "we then compute e ′ = mil ​ ( ℋ ′ ) ∈ ℝ d h e^{\\prime}=\\texttt{mil}(\\mathcal{h}^{\\prime})\\in\\mathbb{r}^{d_{\\text{h}}} , that maintains or even improves the slide-level prediction compared to using the"
+  ]
+ },
+ {
+  "id": "2608.16211",
+  "title": "BaT: Towards Self-Evolving Medical Research Agent with Stage Rubrics",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "2 figure 4: bat keeps improving across rounds, while grpo with one final reward saturates early."
+  ]
+ },
+ {
+  "id": "2608.16607",
+  "title": "Interactive Whole Slide Images for RL-based Tumour Segmentation",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "increasing s s shifts the reward towards improvements obtained at higher iou regimes, encouraging late-stage refinement."
+  ]
+ },
+ {
+  "id": "2608.18731",
+  "title": "A Few Cases Are All You Need: An Empirical Study of Annotation-Efficient LoRA Fine-Tuning of MedSAM3",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "although these models provide stronger medical representations, existing work mainly focuses on improving generalization and adaptation, while the number of expert-annotated cases needed for effective"
+  ]
+ },
+ {
+  "id": "2608.18759",
+  "title": "Beyond Predictive Fairness: Quantifying Attribution Consistency Across Demographic Groups in Diabetic Retinopathy Screening",
+  "stat_score": 6,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "neither subgroup size nor disease prevalence alone explains the observed differences: the asian subgroup achieved strong performance despite the lowest prevalence, and indian-origin patients outperfor"
+  ]
+ },
+ {
+  "id": "2605.26904",
+  "title": "SpCAST：实现快速可解释分析，以单细胞分辨率解码空间转录组学",
+  "stat_score": 5,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "built on this shared latent space, the classification branch predicts cell-type probabilities, whereas the reconstruction branch decodes 𝐇 st \\mathbf{h}_{\\mathrm{st}} to generate reconstruction-aware "
+  ]
+ },
+ {
+  "id": "2606.17809",
+  "title": "Million-scale multimodal pollen microscopy with expert-guided foundation models",
+  "stat_score": 5,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "per-region distillation models did not materially improve over their corresponding image-only regional baselines."
+  ]
+ },
+ {
+  "id": "2606.22890",
+  "title": "PHOEBI：一种用于相位差显微镜下细菌识别的开放世界基准",
+  "stat_score": 5,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "10 a + b ensemble averaging normalized scores of simplexunmix and protomatch (which share the same prototype representation) does not improve on simplexunmix alone: the best ensemble configuration (so"
+  ]
+ },
+ {
+  "id": "2608.00361",
+  "title": "Artificial Intelligence for the Characterization of Particles and Fibers by Optical Microscopy",
+  "stat_score": 5,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "as shown in figure 6a, in the first segment, only the head is trained, with validation accuracy initially improving and then stabilizing around 50% during a warm-up phase to seed stable weights (label"
+  ]
+ },
+ {
+  "id": "2608.06240",
+  "title": "PRISM: Distribution-Gated Flow Matching for Controllable Unpaired Image Translation",
+  "stat_score": 5,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "we take k k euler steps ( k = 4 k{=}4 in training, k = 16 k{=}16 at inference, with quality broadly stable across moderate k k , though additional steps do not consistently improve fid)."
+  ]
+ },
+ {
+  "id": "2608.08374",
+  "title": "Gated Spatial Redundancy Projection for Pathology Transformer Attentions",
+  "stat_score": 5,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "compared with the base na baseline, the mean c-index improves across all cohorts, although the magnitude of the improvement varies across datasets."
+  ]
+ },
+ {
+  "id": "2608.11617",
+  "title": "KANResDiff：通过Kolmogorov-Arnold网络学习局部残差扩散用于模糊医学图像分割",
+  "stat_score": 5,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "kanresdiff consistently achieves the best performance by reducing ged 16 \\text{ged}_{16} , ged 32 \\text{ged}_{32} , and ged 100 \\text{ged}_{100} by a maximum of 18."
+  ]
+ },
+ {
+  "id": "2608.12050",
+  "title": "Predicting Functions, Not Features: KANs with Function-Space Joint-Embedding Predictive Learning for Medical Image Segmentation",
+  "stat_score": 5,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "the attention kan block follows recent attention-enhanced kan designs such as kat ( 24 ) , while the boundary-guided fusion module is used to improve feature integration across scales."
+  ]
+ },
+ {
+  "id": "2608.14293",
+  "title": "Conditional Neural Optimal Transport for Predicting Cellular Phenotypes from Molecular Structure",
+  "stat_score": 5,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "[ 12 ] show that injecting unbalancedness improves unpaired domain translation, and realize it through an ot-based resampling heuristic: an unbalanced coupling π ^ τ \\hat{\\pi}_{\\tau} is estimated on e"
+  ]
+ },
+ {
+  "id": "2608.14355",
+  "title": "Disentangled Shared Representations Improve Morpho-Transcriptomic Integration",
+  "stat_score": 5,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "for g → \\rightarrow he reconstruction, disssl did not consistently improve over clip."
+  ]
+ },
+ {
+  "id": "2608.17421",
+  "title": "TEAMS：文本提示的时空双头 Mamba Snake",
+  "stat_score": 5,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "building upon this workflow, more recent snake/contour-based methods further focus on optimizing snake initialization and evolution procedures, for example: dance ( 35 ) enhances contour evolution wit"
+  ]
+ },
+ {
+  "id": "2608.17598",
+  "title": "SpurCon：用于缓解医学影像中虚假线索的加权监督对比学习",
+  "stat_score": 5,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "across all datasets, spurcon substantially outperforms prior methods in worst-group (wg) accuracy , demonstrating its effectiveness in mitigating spurious correlations."
+  ]
+ },
+ {
+  "id": "2411.15076",
+  "title": "RankByGene：基于跨模态排序一致性的基因引导组织病理表征学习",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "in doing so, the ranking consistency loss promotes a more comprehensive and stable cross-modal alignment, improving both local and global correspondences."
+  ]
+ },
+ {
+  "id": "2411.15122",
+  "title": "ReXrank：面向人工智能放射报告生成的公开排行榜",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   ", chexpertplus_chex_mimic) tend to outperform those trained on individual datasets, suggesting that a multi-dataset training approach helps bridge the distributional gap and enhances generalization."
+  ]
+ },
+ {
+  "id": "2508.21041",
+  "title": "Efficient Fine-Tuning of DINOv3 Pretrained on Natural Images for Atypical Mitotic Figure Classification",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "we describe the datasets used for training and evaluation, including the official midog 2025 data and three external sources added to improve domain diversity."
+  ]
+ },
+ {
+  "id": "2509.11218",
+  "title": "Geometrically Constrained and Token-Based Probabilistic Spatial Transformers",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "implementation details the experiments demonstrate both performance improvements and increased robustness of our stn compared to the vanilla classifier and other baseline."
+  ]
+ },
+ {
+  "id": "2510.09953",
+  "title": "J-RAS：基于对比检索增强联合优化的医学图像分割互适应方法",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "this fusion integrates contextual cues and anatomical priors, improving delineation in ambiguous regions."
+  ]
+ },
+ {
+  "id": "2601.06642",
+  "title": "Boosting Overlapping Organoid Instance Segmentation Using Pseudo-Label Unmixing and Synthesis-Assisted Learning",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "ssl endeavors to leverage the vast amount of unlabeled data to achieve improved performance, aiming to match or exceed the results of models trained on fully labeled datasets."
+  ]
+ },
+ {
+  "id": "2601.10250",
+  "title": "Cell Behavior Video Classification Challenge, a benchmark for computer vision methods in time-lapse microscopy",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "two main trends were observed: stable or slightly improved performances from validation to test evaluation (4 of 7 methods), or evident decline (3 of 7 methods)."
+  ]
+ },
+ {
+  "id": "2601.11645",
+  "title": "IMSAHLO：集成多尺度注意力与混合损失优化框架以实现鲁棒神经元脑细胞分割",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "photometric augmentations: to improve robustness against variations in image quality and intensity, photometric transformations were employed."
+  ]
+ },
+ {
+  "id": "2602.03685",
+  "title": "Universal One-third Time Scaling in Learning Peaked Distributions",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "if the optimizer can outperform the gradient flow, we may have faster loss scaling."
+  ]
+ },
+ {
+  "id": "2603.05202",
+  "title": "Semantic Class Distribution Learning for Debiasing Semi-Supervised Medical Image Segmentation",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "by minimizing ℒ p2e \\mathcal{l}_{\\mathrm{p2e}} , each proxy is encouraged to increase its similarity with class-relevant embeddings and decrease its similarity with class-irrelevant embeddings, thereb"
+  ]
+ },
+ {
+  "id": "2603.21206",
+  "title": "Boundary-Aware Instance Segmentation in Microscopy Imaging",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 2,
+  "citations_pass": 2,
+  "key_claims": [
+   "2 method our objective is to improve the separation of adjacent cells in dense microscopy images by predicting a continuous signed distance function (sdf) and optimizing a differentiable modified haus"
+  ]
+ },
+ {
+  "id": "2604.00243",
+  "title": "UCell：重新思考生物医学视觉模型的泛化性与可扩展性",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "despite the practical hurdle, the majority of the ongoing research still focuses on building bigger “foundation” models, whereas the alternative of improving the ability of small models has been under"
+  ]
+ },
+ {
+  "id": "2604.09370",
+  "title": "Cluster-First Labelling: An Automated Pipeline for Segmentation and Morphological Clustering in Histology Whole Slide Images",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "adjusting ε \\varepsilon or 𝚖𝚒𝚗 ​ _ ​ 𝚜𝚊𝚖𝚙𝚕𝚎𝚜 \\mathtt{min\\_samples} ) or incorporating spatial context could improve performance on challenging tissues."
+  ]
+ },
+ {
+  "id": "2604.10609",
+  "title": "Self-supervised Pretraining of Cell Segmentation Models",
+  "stat_score": 4,
+  "issues": [
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "while foundation model initialization improves fine-tuning performance, their representations are primarily optimized for natural-image object segmentation."
+  ]
+ },
+ {
+  "id": "2605.00941",
+  "title": "Uncertainty in a Single Pass: A Closed-Form Identity for One-Step Flow Matching",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "in contrast, our closed-form estimator consistently emphasizes object boundaries and fine-scale structures, improving the interpretability of spatial uncertainty patterns."
+  ]
+ },
+ {
+  "id": "2605.02942",
+  "title": "Intersectional Disentangling of Temporal and Acquisition Bias in Fetal Ultrasound",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": []
+ },
+ {
+  "id": "2605.08276",
+  "title": "Beyond ViT Tokens: Masked-Diffusion Pretrained Convolutional Pathology Foundation Model for Cell-Level Dense Prediction",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "as shown in table 3 , conditioning further improves performance, indicating that pfm features provide complementary semantic guidance rather than replacing masked-diffusion representation learning."
+  ]
+ },
+ {
+  "id": "2605.19491",
+  "title": "Thinking in Scales: Accelerating Gigapixel Pathology Image Analysis via Adaptive Continuous Reasoning",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "pathctm outperforms baselines in 7 out of 8 experimental settings,while only slightly trailing abmil on the mut dataset (conch)."
+  ]
+ },
+ {
+  "id": "2605.24128",
+  "title": "ImPartial：利用部分标注实现多通道全细胞分割",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 2,
+  "citations_pass": 2,
+  "key_claims": [
+   "this assumption introduces a level of quantization to the denoised image, with the resulting reconstruction loss serving to improve the segmentation objective."
+  ]
+ },
+ {
+  "id": "2605.29429",
+  "title": "One Click per Cell Type Suffices: Training-free Group Interaction for Cell Instance Segmentation",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "against all three groups, cop turns one click per type into instance masks that surpass every open-vocabulary and fully-supervised baseline on all three benchmarks, and with sam3 [ 2 ] it retains over"
+  ]
+ },
+ {
+  "id": "2606.07633",
+  "title": "AMN：一种用于细胞核分割的自适应多尺度融合网络，具备边界与不确定性建模能力",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "6869 , surpassing the strongest convolutional baseline, resu-net (0."
+  ]
+ },
+ {
+  "id": "2606.12286",
+  "title": "CellNet -- Localizing Cells using Sparse and Noisy Point Annotations",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "80, substantially outperforming the current version of cellnet (smape 30."
+  ]
+ },
+ {
+  "id": "2606.18523",
+  "title": "DART：一种面向实时活细胞图像分析的设计感知微流控芯片范式",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "in this regime, additional training data alone is unlikely to substantially improve alignment, as the observed 95th-percentile marker-detection error of 2."
+  ]
+ },
+ {
+  "id": "2606.21605",
+  "title": "",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "overall, the unetr models with sam-based initialization clearly outperform other models."
+  ]
+ },
+ {
+  "id": "2606.24817",
+  "title": "High-Fidelity Synthetic Transmission Electron Microscopy Image Generation Using Diffusion Probabilistic Models for Data-Limited Semiconductor Metrology",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "this data scarcity presents a fundamental challenge to the development of both conven- tional and ml-based analysis tools, despite growing evidence that synthetic data can improve downstream performan"
+  ]
+ },
+ {
+  "id": "2607.02133",
+  "title": "Quaternion Nondecimated Wavelet Descriptors for Multiclass Breast Histology Classification",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "the classifier therefore improves clearly over the 25% chance level for a balanced four-class problem, but the task remains difficult, as expected for a histopathology problem with adjacent diagnostic"
+  ]
+ },
+ {
+  "id": "2607.04353",
+  "title": "HASSL：面向单细胞显微成像的层级感知自监督学习框架",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "(4) resulting latent space: the learned embedding organizes cells into superclusters with clearer subclusters (illustrated for astrocytes, neurons, oligodendrocyte progenitor cells (opcs), and dead ce"
+  ]
+ },
+ {
+  "id": "2607.08297",
+  "title": "ARGUS：加速、鲁棒、通用且无监督的细胞追踪解决方案",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 2,
+  "citations_pass": 2,
+  "key_claims": [
+   "the resulting decomposition avoids a computationally expensive joint optimization over all detections while improving temporal consistency."
+  ]
+ },
+ {
+  "id": "2607.09166",
+  "title": "COAST：面向空间转录组学基因表达预测的上下文感知差分学习",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "we further analyzed per-dataset performance using radar charts and top-1 frequency rates, measuring how often a method achieves the best result among all competing models (fig."
+  ]
+ },
+ {
+  "id": "2607.09831",
+  "title": "Slide-Level Active Learning Reduces Annotation Burden in H&amp;E images",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "to improve segmentation performance on imbalanced and small tissue regions commonly observed in histopathology images, the segmentation model is trained using a combination of dice loss [ 30 ] and foc"
+  ]
+ },
+ {
+  "id": "2607.10684",
+  "title": "HyperBank：用于少样本球体显微成像分割的可微经典先验库",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "05, with early stopping after 12 epochs without support-loss improvement."
+  ]
+ },
+ {
+  "id": "2607.20584",
+  "title": "HistoFID：校准病理基础模型间的Fréchet距离评估",
+  "stat_score": 4,
+  "issues": [
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "we use the improved, manifold-based precision and recall [ 13 ] ."
+  ]
+ },
+ {
+  "id": "2607.21343",
+  "title": "M$^3$-Gen：基于临床与影像数据可解释地生成基因表达谱",
+  "stat_score": 4,
+  "issues": [
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "the model conditioned on the mean embedding, while simpler, achieves the best balance between precision and recall—maintaining a recall of around 86% without compromising precision—suggesting that it "
+  ]
+ },
+ {
+  "id": "2607.23258",
+  "title": "CAPT：一种支持跨数据集与跨物种迁移的钙离子群体动力学多任务连续自回归 Transformer",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "to improve robustness to imperfect autoregressive histories, we apply two lightweight corruptions to the input history while keeping the prediction targets unchanged."
+  ]
+ },
+ {
+  "id": "2607.26153",
+  "title": "A Hierarchical Framework for Graph Structure Learning in Histopathology Image Classification",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "overall, our method achieves the best performance on datasets i and iii and remains competitive on dataset ii."
+  ]
+ },
+ {
+  "id": "2607.29033",
+  "title": "SAM+D：基于深度路由 LoRA 与深度平移实现 SAM 家族模型参数高效维度提升",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 2,
+  "citations_pass": 2,
+  "key_claims": [
+   "[ hu2022lora ] that adapting both w q w_{q} and w v w_{v} outperforms other combinations—including higher-rank adaptation of a single matrix—under a fixed parameter budget, we apply drlora to these tw"
+  ]
+ },
+ {
+  "id": "2608.00405",
+  "title": "Gene Ontology-Guided Hierarchical Spatial Gene Expression Prediction from Histopathology Images",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "although these methods improve predictive performance by enriching histological signals, the gene decoding process relies on a flat structure."
+  ]
+ },
+ {
+  "id": "2608.05266",
+  "title": "Agentic self-driving microscopy benchmarks support qualification but do not necessarily generalize to unseen tasks",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "the three-agent topology did not provide a consistent improvement in pass rate and was not included in the subsequent broad configuration sweep."
+  ]
+ },
+ {
+  "id": "2608.05844",
+  "title": "Curia-MAE：面向三维医学图像分割的多模态多解剖部位掩码自编码器预训练",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "this section details the methodological improvements we add to the mae strategy for medical imaging proposed in [ revisitingmae ] ."
+  ]
+ },
+ {
+  "id": "2608.07340",
+  "title": "H2AL：基于配准的少样本医学图像分割的层次感知双曲聚合学习",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "such hierarchical embeddings are particularly beneficial for improving downstream registration and segmentation performance."
+  ]
+ },
+ {
+  "id": "2608.08566",
+  "title": "On-Device Multi-Species Malaria Detection with Uncertainty-Calibrated Slide-Level Aggregation",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "soft counting consistently outperforms the hard-count baseline: pearson r r improves at every k k (0."
+  ]
+ },
+ {
+  "id": "2608.09672",
+  "title": "MPISuperRes-PnP：一种用于磁粒子成像的超分辨率零样本即插即用重建算法",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "the reason is that these preprocessing steps are usually aimed at either improving the conditioning of the system in ( 1 ) or at discarding unreliable frequencies, that are deemed as such according to"
+  ]
+ },
+ {
+  "id": "2608.09914",
+  "title": "Overcoming Data Scarcity and Confidentiality in Hardware Assurance via Synthetic Generation",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "to achieve this, two key loss functions from the pix2pixhd framework were applied: an adversarial loss to ensure the realism of the output, and a feature matching loss to improve the output’s details "
+  ]
+ },
+ {
+  "id": "2608.11765",
+  "title": "ProBAG：原型引导的边界感知图扩散用于弱监督组织病理学分割",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "on bcss-wsss, probag improves over pbip by +4."
+  ]
+ },
+ {
+  "id": "2608.13660",
+  "title": "What to Preserve, Where to Adapt: A Depth-Wise Analysis of Forgetting in Continual Gynecological Image Segmentation",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "however, this improvement depends on storing samples from previously seen datasets, which may be impractical in medical settings due to privacy, storage, and data governance constraints."
+  ]
+ },
+ {
+  "id": "2608.14708",
+  "title": "PE-CSNet：一种具有可学习的基于图像块稀疏表征的等变网络架构",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "the results show that the proposed pe-csnet outperforms state-of-the-art cs methods in reconstruction quality and demonstrates stable empirical convergence, while maintaining fast computational speed."
+  ]
+ },
+ {
+  "id": "2608.14725",
+  "title": "Spatial Attention Noise Masking for Causally Sufficient Interpretability",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "however, our masking method surpasses it after approximately 20% of pixels have been removed or added."
+  ]
+ },
+ {
+  "id": "2608.14766",
+  "title": "Beyond Boundary Noise: Aggregated Aleatoric Uncertainty Fails to Capture Presence Ambiguity in 3D Lung Nodule Segmentation",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "using the predicted mask consistently improves both the unsupervised entropy-aggregation methods and the supervised disagreement-modelling baselines (prob-3dunet, ann-conf-3dunet)."
+  ]
+ },
+ {
+  "id": "2608.14778",
+  "title": "AMPLIFAI：一个用于肝脏病灶 LI-RADS 评估中临床推理基准测试的多期 CT 数据集",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "doo affiliation: department of electrical and computer engineering, university of maryland, college park, md 20742 abstract hepatocellular carcinoma (hcc) is the third leading cause of cancer-related "
+  ]
+ },
+ {
+  "id": "2608.14800",
+  "title": "",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "[ 9 ] employ a semi-fragile approach in dct with qim-dm and leverage dncnn and vdsr networks to improve recovery quality, but sacrifice full pixel-level fragility."
+  ]
+ },
+ {
+  "id": "2608.16377",
+  "title": "Adaptive Post-Processing Drives Instance-Level Detection in Stroke Lesion Segmentation",
+  "stat_score": 4,
+  "issues": [
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "adoption of viola2plus followed a rule set before we saw any results: adopt only if fold-0 dice improved by at least 0."
+  ]
+ },
+ {
+  "id": "2608.16810",
+  "title": "Unsupervised Learning of Cell Instances with Generative Routing Pyramids",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "among the unsupervised methods, generative routing pyramids obtains the best score on nearly every dataset and metric, improving panoptic quality over the strongest unsupervised baseline on all three "
+  ]
+ },
+ {
+  "id": "2608.18305",
+  "title": "Acquisition Geometry-Assisted Whole-Group Localization of X-ray Fluorescence Maps in Optical Microscopy Images",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "a natural concern is that the improvement above depends on the particular local similarity score rather than on acquisition geometry."
+  ]
+ },
+ {
+  "id": "2608.19032",
+  "title": "Counterfactual Contrastive Analysis",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "table 1 reports quantitative results, where our psp-based method, with or without f-space refinement ( -ref ), consistently outperforms all ca baselines on both reconstruction and swapping."
+  ]
+ },
+ {
+  "id": "2608.19078",
+  "title": "Subgroup performance analysis of adaptation strategies for chest X-ray foundation models",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "across all tasks, the best performance results are obtained using attention pooling , although the mlp also improves performance consistently over the no adapter baseline where linear decision heads w"
+  ]
+ },
+ {
+  "id": "2608.20144",
+  "title": "PelviNeXt：一种面向女性健康盆腔成像的模态无关混合网络",
+  "stat_score": 4,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "4 talking-heads multi-head self-attention (th-mhsa) the fused 512 × 7 × 7 512{\\times}7{\\times}7 map is flattened into 49 spatial tokens of dimension 512 and processed by a talking-heads self-attention"
+  ]
+ },
+ {
+  "id": "2601.23007",
+  "title": "Leveraging Multi-Rater Annotations to Calibrate Object Detectors in Microscopy Imaging",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "the ensemble then assigns a lower confidence to borderline cases, thereby improving model calibration."
+  ]
+ },
+ {
+  "id": "2602.23088",
+  "title": "Cytoarchitecture in Words: Weakly Supervised Vision-Language Modeling for Human Brain Microscopy",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "biomedical/medical fine-tuned variants did not consistently improve performance over their base models."
+  ]
+ },
+ {
+  "id": "2604.16104",
+  "title": "Dual-Modal Lung Cancer AI: Interpretable Radiology and Microscopy with Clinical Risk Integration",
+  "stat_score": 3,
+  "issues": [
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "additionally, the lc25000 dataset was incorporated to improve patch-level diversity [ 8 ] ."
+  ]
+ },
+ {
+  "id": "2605.00527",
+  "title": "Multi-frame Restoration for 10 Hz Lissajous Confocal Laser Endomicroscopy",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "7% accuracy, outperforming basicvsr++ and turtle by 11."
+  ]
+ },
+ {
+  "id": "2605.15383",
+  "title": "MorphoHELM：用于评估基于显微镜的形态学检测表征的全面基准",
+  "stat_score": 3,
+  "issues": [
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "we show that no existing model outperforms classic computer vision analytic strategies across all settings, which remain the strongest general use-case representations."
+  ]
+ },
+ {
+  "id": "2606.02080",
+  "title": "Agentic-J：一种用于生物显微图像分析的 AI 智能体",
+  "stat_score": 3,
+  "issues": [
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 2,
+  "citations_pass": 2,
+  "key_claims": [
+   "in general, the main features of agentic-j are highlighted below: • an accessible single-package system permits biologists to run complete bioimage analysis workflows in fiji through natural language "
+  ]
+ },
+ {
+  "id": "2606.02424",
+  "title": "GC-MoE：面向基于组织学的单细胞空间转录组学的基因组引导细胞类型特异性混合专家模型",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "methods that incorporate spatial context, such as “histogene” and “triplex”, show further improvements on some datasets, with “triplex” achieving the strongest baseline performance."
+  ]
+ },
+ {
+  "id": "2606.11846",
+  "title": "SheafStain：基于纤维丛理论的薛定谔桥用于实现空间与生物学一致性的虚拟染色",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "diffusion-based methods [ 8 , 16 ] have since replaced adversarial training with iterative denoising for improved fidelity; d-vst [ 4 ] employs a diffusion transformer to decouple tone control from pa"
+  ]
+ },
+ {
+  "id": "2607.07651",
+  "title": "Pic2Spec：基于生成建模从明场图像重构单细胞拉曼指纹",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "beyond spectral reconstruction, generated spectra retained functional molecular discrimination in bacterial systems, accurately resolving mutation-driven transgenic states and predicting green fluores"
+  ]
+ },
+ {
+  "id": "2607.11754",
+  "title": "Higher-Order Cell Tracking Transformer",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "this explains why gnn-based edge classification [ 2 ] has not surpassed simpler baselines: message passing aggregates over a topology that is uninformative by construction."
+  ]
+ },
+ {
+  "id": "2607.14410",
+  "title": "LATTICE：用于多模态空间组学整合的图自监督学习",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "do chromatin and histone features improve spatial organization when agreement with an rna-only reference decreases? 3."
+  ]
+ },
+ {
+  "id": "2607.22505",
+  "title": "Loom：基于局部邻域与全局轨迹的空间转录组学多区域分析",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "additionally, we included open-ended questions to obtain feedback on specific features and potential improvements related to spatiotemporal analysis tasks."
+  ]
+ },
+ {
+  "id": "2607.25497",
+  "title": "Beyond Counts: A Distributional Robustness Margin For Pathology Foundation Models",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": []
+ },
+ {
+  "id": "2607.27835",
+  "title": "SAFViT：面向基于视觉 Transformer 的细胞核分割与分类的空间注意力融合门控机制",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "471 ), outperforming the ungated cellvit baseline ( 0."
+  ]
+ },
+ {
+  "id": "2608.04885",
+  "title": "Evaluating the Diagnostic Robustness of Vision-Language Models Under Visual and Textual Perturbations",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": []
+ },
+ {
+  "id": "2608.08402",
+  "title": "Agentic AI 驱动的柔性光纤束内窥镜用于活体高分辨 NIR-II 荧光成像",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "it dynamically routes each input to suitable restoration experts via a vision-language model, facilitating image reconstruction with a fourfold resolution improvement beyond the nyquist- shannon sampl"
+  ]
+ },
+ {
+  "id": "2608.08575",
+  "title": "CDGC-Net：基于协同双尺度自注意力与分组通道建模的三维医学图像分割",
+  "stat_score": 3,
+  "issues": [
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "compared with nnformer, which achieved the next-highest mean dsc, cdgc-net improved the mean dsc by 0."
+  ]
+ },
+ {
+  "id": "2608.08648",
+  "title": "Agentic Visual Reasoning in Whole-Slide Pathology Images via Active Perception",
+  "stat_score": 3,
+  "issues": [
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "(4) thus, an observation receives a positive reward when it improves abnormality recognition."
+  ]
+ },
+ {
+  "id": "2608.09403",
+  "title": "One Model to Magnify Them All：通过条件归一化与连续放大倍数训练实现高效且尺度不变的计算病理",
+  "stat_score": 3,
+  "issues": [
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": []
+ },
+ {
+  "id": "2608.14710",
+  "title": "Path2ST：面向空间转录组学的层次化细胞-组织锚定跨模态转换",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "together, these parameters improve the biological realism and interpretability of generated expression profiles."
+  ]
+ },
+ {
+  "id": "2608.15353",
+  "title": "Decomposing Whole Slide Image Report Generation with Graph-Constrained Multiple Instance Learning Workflows",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "the improvement was positive for all organs ( + 0."
+  ]
+ },
+ {
+  "id": "2608.15537",
+  "title": "EA-LiteUNet：一种用于对边界敏感的皮肤镜图像分割的边缘自适应且资源高效的 U-Net",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "to improve boundary sensitivity, recent works have incorporated attention mechanisms, selective feature fusion, and boundary-guided supervision strategies9,10,11."
+  ]
+ },
+ {
+  "id": "2608.15915",
+  "title": "Comprehensive Benchmarking of Deep Learning Architectures for Lung Cancer Histopathology",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "[ 36 ] showed that fine-tuning consistently outperforms training from scratch in medical imaging."
+  ]
+ },
+ {
+  "id": "2608.18898",
+  "title": "Polarization controlled second harmonic generation imaging of stretched collagen fibrils reveals collagen deformation pathway in situ",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": []
+ },
+ {
+  "id": "2608.19813",
+  "title": "Energy-Mamba：一种用于医学图像分类的物理约束状态空间模型",
+  "stat_score": 3,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "energy-mamba instead resembles a ball rolling in a valley: the energy gradient continuously guides the trajectory toward stable, content-consistent representations, improving robustness to noise and i"
+  ]
+ },
+ {
+  "id": "2601.13021",
+  "title": "Enhancing Generalization in Sickle Cell Disease Diagnosis through Ensemble Methods and Feature Importance Analysis",
+  "stat_score": 2,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P1: 疑似将细胞数当作独立样本 n"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "during each iteration, the algorithm emphasizes instances previously misclassified, allowing subsequent weak learners to focus on the challenging samples and progressively improve the overall model ac"
+  ]
+ },
+ {
+  "id": "2605.12851",
+  "title": "PRISM：一种基于核周环的急性淋巴细胞白血病分类图像分割方法",
+  "stat_score": 2,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "as shown in table 3 , the prism -driven ensemble outperformed all the dl baselines in terms of accuracy and mcc ."
+  ]
+ },
+ {
+  "id": "2607.24364",
+  "title": "HistoGPA：一种面向基于组织学的空间基因表达预测的上下文条件基因先验注意力框架",
+  "stat_score": 2,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "287, corresponding to absolute improvements of 0."
+  ]
+ },
+ {
+  "id": "2606.11286",
+  "title": "FreeBridge：用于细胞转换动力学的变分薛定谔桥",
+  "stat_score": 1,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "freebridge achieves improved endpoint fidelity while maintaining lower intermediate support violations."
+  ]
+ },
+ {
+  "id": "2406.11868",
+  "title": "Ethical Framework for Responsible Foundational Models in Medical Imaging",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "as illustrated in figure 1 , the ethical considerations surrounding large-scale fm adoption in medical settings present both challenges and opportunities for systematic improvement."
+  ]
+ },
+ {
+  "id": "2506.11272",
+  "title": "Maximum-Entropy Model of Colored Noise in Superdiffusive Axonal Growth",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": []
+ },
+ {
+  "id": "2506.17137",
+  "title": "Towards Conditional Feature Alignment for Cross-Domain Counting",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "thus cfa is expected to improve adaptation when it reduces the within-condition discrepancy terms without increasing the conditional joint-error terms."
+  ]
+ },
+ {
+  "id": "2507.06185",
+  "title": "Hidden Prompts in Manuscripts Exploit AI-Assisted Peer Review",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "minor writing or clarity improvements 2."
+  ]
+ },
+ {
+  "id": "2507.09562",
+  "title": "Segment Anything Model中的提示工程：方法、应用与新兴挑战",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "consequently, the pursuit of automated prompt generation across these applications is driven by the need for greater precision, efficiency, and adaptability, aiming to reduce human intervention while "
+  ]
+ },
+ {
+  "id": "2601.12464",
+  "title": "Large-scale EM Benchmark for Multi-Organelle Instance Segmentation in the Wild",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "we referenced connected component labeling algorithms from the opencv [ opencv-python ] library and improved upon them to develop a 3d version."
+  ]
+ },
+ {
+  "id": "2601.17032",
+  "title": "Diagnosis Support of Sickle Cell Anemia by Classifying Red Blood Cell Shape in Peripheral Blood Images",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "46% in the initial segmentation of the cells, showing an improvement on the results presented in fernández et al."
+  ]
+ },
+ {
+  "id": "2601.17703",
+  "title": "An AI-enabled tool for quantifying overlapping red blood cell sickling dynamics in microfluidic assays",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": []
+ },
+ {
+  "id": "2602.00703",
+  "title": "StomataSeg: Semi-Supervised Instance Segmentation for Sorghum Stomatal Components",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "this pseudo-labelling and retraining process significantly improved model generalisation by exploiting unlabelled data while constraining noise propagation, and it also provides a scalable method for "
+  ]
+ },
+ {
+  "id": "2602.01069",
+  "title": "PDE-Constrained Optimization for Neural Image Segmentation with Physics Priors",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "2 pde-constrained optimization framework to stabilize the learning process and improve boundary fidelity, we adopt a pde-constrained optimization perspective."
+  ]
+ },
+ {
+  "id": "2602.04819",
+  "title": "XtraLight-MedMamba 用于肿瘤性管状腺瘤的分类",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "an inte- gration of the spatial and channel attention bridge (scab) module enhances multiscale feature extraction, while the fixed non-negative orthogonal classifier (fnoclassifier) enables substantia"
+  ]
+ },
+ {
+  "id": "2603.09245",
+  "title": "Bridging Object Detection and Segmentation with Polygon Detection Transformers",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "the straightforward migration to transformer architectures (+detr) improves map by 0."
+  ]
+ },
+ {
+  "id": "2603.14321",
+  "title": "Personalized Cell Segmentation: Benchmark and Framework for Reference-Guided Cell Type Segmentation",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "our percs-dino, trained specifically for the personalized cell segmentation task, surpasses both baselines and achieves the best performance on the percs test set, reaching ap of 73."
+  ]
+ },
+ {
+  "id": "2603.16160",
+  "title": "Segmentation-before-Staining Improves Structural Fidelity in Virtual IHC-to-Multiplex IF Translation",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 2,
+  "citations_pass": 2,
+  "key_claims": [
+   "1 soft structural conditioning for paired ihc-to-mif translation the task of improving structural reliability in virtual staining is formulated as an input-level conditioning problem rather than an ar"
+  ]
+ },
+ {
+  "id": "2603.17845",
+  "title": "Revisiting foundation models for cell instance segmentation",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 2,
+  "citations_pass": 2,
+  "key_claims": [
+   "on the other hand, segmentation via a dedicated decoder as implemented by cellposesam and μ \\mu sam foregoes potential improvements due to prompt-based segmentation."
+  ]
+ },
+ {
+  "id": "2604.12318",
+  "title": "Cell Instance Segmentation via Multi-Task Image-to-Image Schrödinger Bridge",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "cellvit demonstrated that leveraging sam pre-training can substantially improve performance in cell instance segmentation."
+  ]
+ },
+ {
+  "id": "2604.18225",
+  "title": "Is SAM3 ready for pathology segmentation?",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "besides, llm-generated vocabulary generally outperforms medical terminology, yielding improvements of up to 6."
+  ]
+ },
+ {
+  "id": "2604.23481",
+  "title": "Leveraging Spatial Transcriptomics as Alternative to Manual Annotations for Deep Learning-Based Nuclei Analysis",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "notably, the most significant improvement is observed in recall, which increased from 0."
+  ]
+ },
+ {
+  "id": "2604.23799",
+  "title": "VitaminP：跨模态学习实现从常规组织学图像进行全细胞分割",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 2,
+  "citations_pass": 2,
+  "key_claims": [
+   "vitaminp outperforms four state-of-the-art methods and generalizes to unseen datasets, including an in-house dataset spanning 24 rare cancer types."
+  ]
+ },
+ {
+  "id": "2605.03053",
+  "title": "Approaching human parity in the quality of automated organoid image segmentation",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "the results can be improved by either retraining organoid using images from related datasets, or by combining it with sam, an extremely powerful general purpose image segmentation code."
+  ]
+ },
+ {
+  "id": "2605.08566",
+  "title": "MicroDiffuse3D：用于三维显微成像恢复的基础模型",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "this improved architecture naturally processes 3d patch sequences."
+  ]
+ },
+ {
+  "id": "2605.22000",
+  "title": "Virtual 3D H&amp;E Staining from Phase-contrast Back-illumination Interference Tomography",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "vision transformers (vits) have shown improved modeling of long-range structural dependencies, such as relative nuclear arrangement and glandular organization, in virtual staining tasks [ 19 ] ."
+  ]
+ },
+ {
+  "id": "2605.22290",
+  "title": "Detection of Virus and Small Cell Patches in Foci Images Using Switchable Convolution and Feature Pyramid Networks",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "3 methodology the proposed model combines a feature pyramid network (fpn) with a switchable atrous convolution (sac) mechanism to improve multi-scale feature representation and adapt to objects with v"
+  ]
+ },
+ {
+  "id": "2605.22547",
+  "title": "MKG-CARE：基于多模态知识图谱的病例感知推理，用于可解释的医学影像诊断",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "early approaches are primarily based on convolutional neural networks (cnns), such as efficientnet ( 32 ) and convnext ( 20 ) , which improve performance through architectural scaling and optimization"
+  ]
+ },
+ {
+  "id": "2605.30846",
+  "title": "",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "extensive experiments show that count anything achieves strong counting accuracy and multi-domain generalization, substantially outperforming existing open-world counting methods."
+  ]
+ },
+ {
+  "id": "2606.07676",
+  "title": "Single-Cell Cross-Modal Transfer by Adversarial Fine-Tuning of Foundation Models",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "1 cross-modal translation scxm outperformed prior methods for unpaired translation across all three curated datasets, as shown in figure 3 , with median pearson correlation coefficient of 0."
+  ]
+ },
+ {
+  "id": "2606.10107",
+  "title": "Maximum Matching Accuracy: An Instance Segmentation Evaluation Metric Utilizing Globally Optimal Matching",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "0 after iou surpasses 0."
+  ]
+ },
+ {
+  "id": "2606.21913",
+  "title": "Rethinking the Adaptation of Vision Foundation Models for Efficient Cell Segmentation",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "cellvit [ 9 ] and sac [ 19 ] reduce the parameter cost while improving performance, yet still depend on encoder fine-tuning."
+  ]
+ },
+ {
+  "id": "2606.29463",
+  "title": "CellDETR：一种面向组织病理学图像的可扩展细胞表征学习检测引导框架",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "deformable detr [ 25 ] further improves detr by introducing deformable attention."
+  ]
+ },
+ {
+  "id": "2607.00802",
+  "title": "CellPrior-Net：面向 H&amp;E 全切片图像的先验引导细胞核检测与分类",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 2,
+  "citations_pass": 2,
+  "key_claims": [
+   "to improve model robustness and generalization, several data augmentation techniques were applied during training, including random horizontal and vertical flipping, random 90∘ rotations, color jitter"
+  ]
+ },
+ {
+  "id": "2607.03851",
+  "title": "ContiStain：面向持续多域虚拟 IHC 染色的跨域关系保持蒸馏",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "4 show seq-ft features scattered, while ours aligns closely with init, demonstrating improved cross-domain retention."
+  ]
+ },
+ {
+  "id": "2607.04020",
+  "title": "Paired Uterine Whole-Slide Images and Pathology Reports for Multimodal Computational Pathology",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": []
+ },
+ {
+  "id": "2607.04486",
+  "title": "LeukocyteCount：基于深度学习的白细胞自动识别与计数",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "879 we found that our model using yolov5 improved performance in detecting and counting wbcs when compared to the related work [10-14]."
+  ]
+ },
+ {
+  "id": "2607.04740",
+  "title": "DriftST：从 H&amp;E 组织学一步生成式推理空间转录组学",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "( 2026 ) proposed sinkhorn-drifting to improve training stability via entropic optimal transport."
+  ]
+ },
+ {
+  "id": "2607.05533",
+  "title": "Multi-Teacher Contrastive Distillation for Edge-Efficient Pathology Foundation Models",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "7m parameters, outperforming litefm-l on all three external metrics despite using 18 × \\times fewer parameters and 21 × \\times fewer gflops."
+  ]
+ },
+ {
+  "id": "2607.07240",
+  "title": "An Edge-aware Prompt-enhanced SAM for Ultrasound Image Segmentation",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "ep-sam leverages multi-level encoder features to enhance the synergy between sam’s image encoder and prompt encoder, improving the model’s ability to produce consistent and precise instance masks."
+  ]
+ },
+ {
+  "id": "2607.09526",
+  "title": "ALICE：从视觉、视觉 - 语言及全切片图像专家中学习通用病理基础模型",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "1 alice outperforms vision-only pfms in visual feature transfer figure 2: vision-only feature transfer performance of alice."
+  ]
+ },
+ {
+  "id": "2607.10783",
+  "title": "Toward Efficient Weakly Supervised Semantic Segmentation Using Only Low-Magnification Histopathological Images",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "24%, marginally surpassing the baseline of 68."
+  ]
+ },
+ {
+  "id": "2607.11175",
+  "title": "The Path to Self-Evolving Clinical Systems: Scaling Medical Agents from Assistance to Autonomy",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "2 foundation model improvement in medical agents when the update operator targets the model parameters themselves, θ t + 1 = improve θ ( θ 1 : t ; 𝒮 t ) \\theta_{t+1}=\\textsc{improve}_{\\theta}(\\theta_{"
+  ]
+ },
+ {
+  "id": "2607.11257",
+  "title": "LaGuadia：基于病理基础模型的语言引导自适应蒸馏",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "6538, outperforming all compared pathology foundation models."
+  ]
+ },
+ {
+  "id": "2607.12750",
+  "title": "CRC-HGD：一个用于结直肠癌分级的组织病理图像数据集",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "the global burden of crc has been rising steadily, with the number of new cases increasing from 916,583 in 1990 to over 2,194,143 in 2021, underscoring the urgent need for improved early detection and"
+  ]
+ },
+ {
+  "id": "2607.13601",
+  "title": "Video to All-in-focus Image Reconstruction Algorithm for Automated Microscopic Urinalysis",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "in future, we plan to improve our method by tracking cells among frames and develop an open-source web application for labs to use our technology."
+  ]
+ },
+ {
+  "id": "2607.19624",
+  "title": "Pathologist Attention-Aligned Report Generation for Prostate Histopathology",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "in table ˜ 1 , aligning pathologist attention achieves the best performance on both histgen and wsi-llava."
+  ]
+ },
+ {
+  "id": "2607.22712",
+  "title": "",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "although general-purpose methods have improved the generalization ability of image representation in recent years, their limited utilization of experimental background and biological context informati"
+  ]
+ },
+ {
+  "id": "2607.24093",
+  "title": "TCellAlign：基于命名法引导的多智能体工作流实现跨研究 T 细胞群体对齐",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "all paper-contextualized llm settings outperform the two fixed-nomenclature baselines on this evaluation set (table 2 )."
+  ]
+ },
+ {
+  "id": "2607.24702",
+  "title": "BayesClint：面向空间转录组学数据的贝叶斯多尺度聚类与多样本整合及特征选择",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "across all methods, an increase in the number of differentially expressed genes from p d = 40 p_{d}=40 to p d = 80 p_{d}=80 consistently improved clustering performance."
+  ]
+ },
+ {
+  "id": "2607.25393",
+  "title": "Towards Reliable Stain Transfer: An Iterative Data-Model Co-Optimization Framework Based on Multimodal Expert-Guided Assessment",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "3 confirms this trend, with models improving progressively across successive stages."
+  ]
+ },
+ {
+  "id": "2607.27856",
+  "title": "Benchmarking Foundation and Large Language Models for Few-Shot Medical Image Segmentation",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "across architectures, methods that directly adapt visual representations or mask generation generally outperform those relying on indirect semantic guidance."
+  ]
+ },
+ {
+  "id": "2607.28318",
+  "title": "PathView-Bench：多模态大语言模型能否实现对病理图像的细粒度多尺度理解？",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "5 (4b) [ 29 ] , to test whether broad medical specialization improves pathology visual understanding."
+  ]
+ },
+ {
+  "id": "2608.00893",
+  "title": "MBO Scheme for Local Chan--Vese Segmentation",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "since g k ∗ f − f g_{k}\\ast f-f corresponds to a frequency-weighted transformation of f f , the lcv model can be viewed as exploiting complementary spectral information, which improves the discriminat"
+  ]
+ },
+ {
+  "id": "2608.01370",
+  "title": "Understanding Synergistic Interactions among Pathology Foundation Models via Adaptive Fusion",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "to improve robustness, we apply random masking during training: 𝐄 mask = 𝐄 ⊙ 𝐌 , \\mathbf{e}_{\\text{mask}}=\\mathbf{e}\\odot\\mathbf{m}, (2) where 𝐌 ∈ { 0 , 1 } n × d \\mathbf{m}\\in\\{0,1\\}^{n\\times d} keep"
+  ]
+ },
+ {
+  "id": "2608.03107",
+  "title": "A Unified Resolution-Conditioned Framework for Orthogonal Line-Scanning Image Fusion",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "se-fdmf improves upon fdwf by replacing per-frequency averaging with maximum-magnitude selection and adding edge-aware sobel correction, achieving up to 8."
+  ]
+ },
+ {
+  "id": "2608.03322",
+  "title": "LocAnyMed：多模态医学影像的视觉 - 语言定位",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "as shown in table 2 , rationale supervision improves the cross-set f1@iou 0."
+  ]
+ },
+ {
+  "id": "2608.03508",
+  "title": "From Multi-Resolution Cells to Gigapixel Whole Slide Images Foundation Model for Computational Pathology",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "910 (a) patch-level zero-shot performance (a) (b) patch-level linear probe evaluation (a) (c) patch-level vqa (accuracy) (d) wsi-level zero-shot performance (ba) (e) wsi-level linear probe and wsmil ("
+  ]
+ },
+ {
+  "id": "2608.03664",
+  "title": "Morphology-Aware Implicit Super-Resolution Network for Pathological Images",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "results and discussion quantitative analysis of sr : table 1 shows that morph-isr achieves the best lpips and st-lpips across all three tcga cohorts, with the largest margins on tcga-luad: reductions "
+  ]
+ },
+ {
+  "id": "2608.05074",
+  "title": "Bag-of-Visual-Words for Spatial Mapping of Lung Adenocarcinoma Growth Patterns",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "the bovw pipeline using h-optimus-1 and h0-mini both peak at k = 16 k{=}16 , while uni2-h improves monotonically with k k , peaking at k = 18 k{=}18 , substantially below the other two encoders (table"
+  ]
+ },
+ {
+  "id": "2608.05226",
+  "title": "NeuroAdaptTrainer：一款基于 YOLO 的神经元分割、交互式校正与迁移学习 Fiji/ImageJ 插件",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "fluorescence improves visibility of live neurons at the cost of cell viability and longitudinal studies."
+  ]
+ },
+ {
+  "id": "2608.06659",
+  "title": "CellWorld：空间转录组学基础模型中的基因级重建到隐式细胞预测",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "as shown in table 2 , random masking outperforms block masking in eight of nine task-level comparisons; the only exception is region prediction at r = 0."
+  ]
+ },
+ {
+  "id": "2608.08366",
+  "title": "VOICE：一种融合直接预测与基于检索预测的原位单细胞基因表达的视觉-组学基础模型",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明",
+   "P1: 疑似将细胞数当作独立样本 n"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "compared with voice-7m, it improves every metric by 0."
+  ]
+ },
+ {
+  "id": "2608.08494",
+  "title": "Linguistically-Aligned and Visually-Grounded Preference Optimization for Clinically-Augmented Medical Report Generation",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "crucially, our dpo-clin outperforms competing methods in almost all metrics, showing the most significant improvements in report quality, particularly in ce and rrg-exclusive metrics that emphasize cl"
+  ]
+ },
+ {
+  "id": "2608.09636",
+  "title": "NeuroRefiner：面向三维荧光显微镜神经元分割的形态感知多智能体精细化",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "as a validation mechanism, the change validator acccepts only those refinements that yield an improvement over the original segmentation, as m ( t + 1 ) = merge ​ ( m ( t ) , { m i refined ∣ validator"
+  ]
+ },
+ {
+  "id": "2608.10657",
+  "title": "Retrieval-Augmented Vision Foundation Models for Robust Leukemia Cell Classification across Multiple Microscopy Datasets",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "this gained knowledge allows the model to understand the structure of images rather than memorizing patterns from specific tasks, greatly improving its generalization capability and allowing it to reu"
+  ]
+ },
+ {
+  "id": "2608.10846",
+  "title": "An Information Theory Analysis of Whole Slide Image Pathology AI and Diagnostic Field Selection AI Under Limited Resources",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "these methods have greatly improved the ability to extract diagnostic information from an entire whole slide image (wsi) [5–8]."
+  ]
+ },
+ {
+  "id": "2608.11317",
+  "title": "Clinical Feasibility of Low-Magnification Fluorescence Imaging for Breast Cancer Margin Detection Using Texture Analysis and Deep Learning",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "preliminary ablation experiments using weighted cross-entropy loss to address patch imbalance did not improve performance and yielded no consistent gains in sensitivity or specificity; therefore, the "
+  ]
+ },
+ {
+  "id": "2608.11335",
+  "title": "Dual-Domain Cross-Modal Decoding for Clinical Text-Guided Medical Image Segmentation",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "this design improves semantic alignment at low resolution and preserves fine details at high resolution."
+  ]
+ },
+ {
+  "id": "2608.11534",
+  "title": "CT-$\\Delta$Bench：面向视觉-语言模型的纵向三维医学影像差异报告基准",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "5-7b achieves the best rouge-l ( 0."
+  ]
+ },
+ {
+  "id": "2608.11954",
+  "title": "Causal inference for group-contaminated structured outcomes: observable quotients, lossless reduction and exact randomization inference",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": []
+ },
+ {
+  "id": "2608.13690",
+  "title": "MedPlex：面向临床导向医学分割的深度视觉-语言协同适配",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "these approaches improve coverage of the visual hierarchy, but most interactions remain unidirectional: textual representations guide visual features, while visual evidence does not update the textual"
+  ]
+ },
+ {
+  "id": "2608.13889",
+  "title": "Consensus-gated Multi-Agent Neural Architecture Search for Seismic Fault Segmentation",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "the search stops at a hard budget of 15 mutation runs or on a stagnation rule: once the last three completed runs all beat the baseline mean yet the running-best mean f1 has improved by less than 0."
+  ]
+ },
+ {
+  "id": "2608.14330",
+  "title": "Program-space Diffusion：基于程序空间扩散的形态学到转录组预测方法",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "to improve stability and mitigate sensitivity to initialization, we follow the consensus strategy of [ 6 ] and perform r = 20 r=20 independent nmf runs."
+  ]
+ },
+ {
+  "id": "2608.14655",
+  "title": "Diagnosing and Mitigating Perception-Decision Misalignment in Omni-LLMs via Modality Subspace Activation",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "by comparing the accuracy and cms metrics before and after applying msa, we can see that the cms of all models has improved."
+  ]
+ },
+ {
+  "id": "2608.14924",
+  "title": "PaSTel：通过多尺度分层生物先验对比预训练将组织学锚定于空间转录组学",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "2 , pastel consistently outperforms baselines across varying training data ratios, with largest gains observed in low-data regimes (e."
+  ]
+ },
+ {
+  "id": "2608.15195",
+  "title": "Beyond Natural-Image Foundation Models: Benchmarking Satellite Pretraining for Ophthalmic Image Analysis",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "dinov3-sat493m [ 27 ] , pretrained on satellite imagery, outperforms dinov3-lvd1689m, pretrained on natural images, on all vascular segmentation tasks, including arteries, veins, and their union, i."
+  ]
+ },
+ {
+  "id": "2608.16832",
+  "title": "What Matters is the Prompt: Prompt Sensitivity and Prompt Generation in Foundation Models for Lung Nodule Segmentation",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "combining point and box prompts does not generally improve segmentation and can slightly reduce performance in some cases compared with using only a box prompt."
+  ]
+ },
+ {
+  "id": "2608.17607",
+  "title": "PathoArgus：推进基于证据的长上下文视觉推理，覆盖千兆像素全切片及多切片病例上下文",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "86% qexact shows that improved evidence access does not establish consistent evidence-conditioned prediction."
+  ]
+ },
+ {
+  "id": "2608.17635",
+  "title": "MaLViL：用于医学图像分割的多轴低秩视觉-LSTM",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "66% dsc improvement over the previous best glm-sfnet [ 7 ] , and surpasses msa 2 net [ 14 ] and 2d d-lka net [ 2 ] by 0."
+  ]
+ },
+ {
+  "id": "2608.18095",
+  "title": "Backdoor Learning in Language Models and Vision-Language Models",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 0,
+  "citations_pass": 0,
+  "key_claims": [
+   "we quantify this phenomenon and develop an attention-based detector that significantly improves detection efficacy over existing methods."
+  ]
+ },
+ {
+  "id": "2608.19965",
+  "title": "Flow Matching Meets 3D Curvilinear Structure Segmentation in Medical Imaging",
+  "stat_score": 0,
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "citations_checked": 1,
+  "citations_pass": 1,
+  "key_claims": [
+   "during training, data augmentation is applied through random axis flips, affine transformations (scale variation up to 10% and rotations up to 10 ∘ 10^{\\circ} ), gamma intensity adjustments, and gauss"
+  ]
+ }
+]

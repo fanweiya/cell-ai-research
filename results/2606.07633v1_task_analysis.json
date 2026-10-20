@@ -1,0 +1,19 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2606.07633v1",
+  "status": "done",
+  "task_family": "cell_segmentation",
+  "input": "H&E stained histopathology images",
+  "output": "Pixel-wise classification and segmentation masks for nuclei subtypes with boundary and uncertainty maps",
+  "notable": "Adaptive dual-encoder fusion (CNN + Swin Transformer), uncertainty-aware loss, boundary detection head, cross-domain generalization on CoNIC and MoNuSeg datasets",
+  "task_type": [
+    "segmentation",
+    "detection",
+    "counting"
+  ],
+  "confidence": 0.95,
+  "task_id": "2606.07633v1-task_analysis-v1",
+  "run_at": "2026-07-24T09:10:34.295962",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

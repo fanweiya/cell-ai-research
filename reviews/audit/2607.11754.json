@@ -1,0 +1,50 @@
+{
+ "id": "2607.11754",
+ "chars": 24984,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": true,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 3
+ },
+ "key_claims": [
+  "this explains why gnn-based edge classification [ 2 ] has not surpassed simpler baselines: message passing aggregates over a topology that is uninformative by construction.",
+  "the variable appearance probability is consistently beneficial, improving clb in every paired comparison (rows 1 → \\to 2, 3 → \\to 4, 5 → \\to 6).",
+  "35 ) using only 19-dimensional hand-crafted input features, outperforming the best trackastra variant (general, sam2."
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "Segment Anything",
+   "doi": null
+  },
+  {
+   "title": "DINOv2: Learning Robust Visual Features without Supervision",
+   "doi": null
+  },
+  {
+   "title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+   "doi": "10.1007/978-3-319-24574-4_28"
+  }
+ ],
+ "citation_results": [
+  {
+   "title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+   "doi": "10.1007/978-3-319-24574-4_28",
+   "verdict": "PASS",
+   "confirmed_n": 3
+  }
+ ]
+}

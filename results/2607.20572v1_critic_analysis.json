@@ -1,0 +1,23 @@
+{
+  "task": "critic_analysis",
+  "paper_id": "2607.20572v1",
+  "status": "done",
+  "claimed_contribution": "提出 scContam 框架，实现单细胞基础模型预训练污染的逐细胞审计；定义 Signal A 统计量检测细胞是否在预训练语料中；验证污染对 scIB 基准（ASW 指标）的偏差影响；证明现有基准（PBMC 3k, 胰腺胰岛）存在污染，而 AIDA v2 和 Tahoe-100M 未受污染。",
+  "actual_contribution": "成功构建了基于 MinHash 和基因集指纹的审计工具，能够以计算可行方式估算细胞与预训练语料的 Jaccard 相似性；通过控制实验（过拟合程度）验证了 MIA 检测的敏感性；在胰腺胰岛数据集上通过供体匹配设计，证实了污染确实导致 ASW 指标虚高；指出了不同架构（基因 token vs 蛋白 token）对污染敏感度的差异。",
+  "weakness": [
+    "弱点 1：方法缺陷 - Signal A 仅基于基因集指纹的 Jaccard 相似性，忽略了 scRNA-seq 数据中关键的基因表达量分布和细胞状态连续性，可能导致假阳性（相似基因集但不同细胞状态）或假阴性（表达谱差异大但基因集重叠）。",
+    "弱点 2：实验不足 - 缺乏对非预训练语料中细胞被误判为污染的详细错误分析；未测试 Signal A 在不同测序平台（10x, Smart-seq2）或批次效应下的鲁棒性。",
+    "弱点 3：对比不充分 - 仅对比了三种模型，且对 scGPT 和 UCE 的审计依赖于 CELLxGENE Census 的公开声明而非直接语料访问，存在代理偏差；未与 NLP 领域更先进的成员推理攻击（如 MIA-GAN）进行横向对比。"
+  ],
+  "missing_experiments": [
+    "缺少消融实验：验证 Signal A 中基因集选择策略（如高变基因 vs 全基因）对审计准确性的影响。",
+    "缺少基线对比：引入基于模型梯度的成员推理方法作为强基线，对比 Signal A 在检测细微污染（非完全匹配）时的能力。",
+    "缺少跨架构泛化实验：测试 Signal A 在未被审计的 scFM（如 scBERT, CellBERT）上的适用性。"
+  ],
+  "overclaim": "论文声称 Signal A 是 'tractable per-cell audit'，但实际上该方法仅能检测基于基因集重叠的粗粒度污染，无法检测经过扰动或微调的细胞嵌入，且对非预训练语料中的细胞存在误报风险，因此 'audit' 一词可能暗示了过高的确定性。",
+  "confidence": 0.85,
+  "task_id": "2607.20572v1-critic_analysis-v1",
+  "run_at": "2026-08-06T11:42:37.623905",
+  "priority": 13,
+  "agent": "Agents-A1"
+}

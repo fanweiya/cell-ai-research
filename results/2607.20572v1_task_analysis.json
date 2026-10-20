@@ -1,0 +1,18 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2607.20572v1",
+  "status": "done",
+  "task_family": "benchmark",
+  "input": "single-cell RNA sequencing (scRNA-seq) data and pretraining corpora",
+  "output": "per-cell contamination audit scores and benchmark bias analysis",
+  "notable": "Focuses on auditing pretraining contamination in single-cell foundation model benchmarks using Signal A and membership inference, rather than direct cell analysis tasks",
+  "task_type": [
+    "benchmark",
+    "foundation_model"
+  ],
+  "confidence": 0.9,
+  "task_id": "2607.20572v1-task_analysis-v1",
+  "run_at": "2026-08-06T11:41:35.285676",
+  "priority": 13,
+  "agent": "Agents-A1"
+}

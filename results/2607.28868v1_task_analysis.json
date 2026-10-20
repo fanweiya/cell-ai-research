@@ -1,0 +1,19 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2607.28868v1",
+  "status": "done",
+  "task_family": "benchmark",
+  "input": "Scientific imaging data (real-space electron microscopy images, reciprocal-space 4D-STEM diffraction patterns)",
+  "output": "Self-supervised representations, classification labels, crystal orientation quaternions",
+  "notable": "Focuses on physics-aligned data augmentation design for scientific self-supervised learning, evaluating across multiple SSL paradigms (DINOv2, SimCLR, MAE, VICRegL, I-JEPA) on classification and regression tasks.",
+  "task_type": [
+    "benchmark",
+    "embedding",
+    "multimodal"
+  ],
+  "confidence": 0.85,
+  "task_id": "2607.28868v1-task_analysis-v1",
+  "run_at": "2026-08-06T11:47:08.028102",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

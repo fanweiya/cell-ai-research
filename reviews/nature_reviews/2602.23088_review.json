@@ -1,0 +1,58 @@
+{
+  "paper_id": "2602.23088",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种基于检索与增强（retrieve and enrich）策略的细胞图像-文本生成方法，旨在通过结合CytoNet和大型语言模型（LLM）生成具有细胞结构描述的图像注释。方法上具有创新性，特别是在缺乏专家标注的情况下，利用文献知识构建合成监督信号。实验设计合理，评估指标具有针对性，但泛化性和引用真实性方面存在可质疑之处。整体而言，论文在方法论和应用层面具有潜力，但需进一步验证。",
+  "strengths": [
+    "提出了一种新颖的弱监督策略，结合了细胞图像与神经解剖文献，用于生成图像描述，适用于标注稀缺的生物医学图像领域。",
+    "实验设计系统，包括QA基准构建、模型选择、生成文本的多角度评估，展示了方法的可行性。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "论文声称使用CytoNet预测的标签作为监督信号，无需人工标注。",
+      "concern": "标签完全依赖CytoNet预测，可能引入系统性噪声，影响生成文本的准确性，但论文未充分讨论标签错误传播的影响。",
+      "why_it_matters": "如果CytoNet本身存在分类错误，合成数据的质量将下降，进而影响模型训练和评估结果的可信度。",
+      "resolution_test": "应提供CytoNet在图像 patches 上的分类准确率，或与人工标注的小样本进行对比，以评估标签质量。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "statistics",
+      "claim_pointer": "论文声称生成的描述在label-masked discriminability测试中达到68.6%的准确率。",
+      "concern": "未说明Qwen3-Next是否在测试中使用了外部知识，可能影响该指标的可信度。",
+      "why_it_matters": "如果模型依赖其内部知识而非生成文本内容进行判断，该测试将无法真实反映生成文本的判别能力。",
+      "resolution_test": "应控制实验，例如冻结模型权重或使用无预训练知识的模型进行相同测试。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "论文声称方法可推广到其他生物医学图像领域。",
+      "concern": "实验仅基于BigBrain数据集，未评估跨样本、跨脑区或跨病理状态的泛化能力。",
+      "why_it_matters": "缺乏跨样本验证限制了方法在实际生物医学研究中的适用性。",
+      "resolution_test": "应在多个脑样本或不同组织类型（如肝脏、肿瘤）上进行迁移实验，验证模型的泛化能力。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "citation",
+      "claim_pointer": "论文引用了大量LLM和视觉-语言模型相关文献，但部分引用缺乏上下文支持。",
+      "concern": "例如引用Llama-3-8B [20] 和Qwen3-4b [33] 时未说明其在生物医学任务中的适用性，仅基于参数量和可用性。",
+      "why_it_matters": "这可能误导读者认为这些模型天然适合生物医学任务，而实际上需要更多证据支持。",
+      "resolution_test": "应补充对所选LLM在生物医学任务中的已有表现分析，或引用相关研究支持模型选择的合理性。"
+    }
+  ],
+  "assessment_boundaries": [
+    "无法评估生成文本在实际科研场景中的实用性，因缺乏专家主观评估。",
+    "无法验证模型在其他组织类型（如肝脏、肿瘤）上的表现，因未提供跨域实验数据。",
+    "无法验证所使用的文献检索与语句提取流程是否具有可重复性，因未提供完整语料库或提取代码。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

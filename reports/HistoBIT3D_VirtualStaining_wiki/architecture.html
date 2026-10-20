@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HistoBIT3D_VirtualStaining Wiki — architecture</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / HistoBIT3D_VirtualStaining Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>HistoBIT3D_VirtualStaining</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/HistoBIT3D_Code.html">HistoBIT3D_Code</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>架构</h1>
+<br>
+<p><strong>类型：</strong> 流水线</p>
+<br>
+<p>这是一个基于 UVCGANv2 框架构建的深度学习图像到图像翻译流水线，专门针对 3D 虚拟组织病理学染色而设计。它采用模块化结构，将配置、数据加载、模型训练和评估分离为独立的组件。</p>
+<br>
+<h2>组件图</h2>
+<br>
+<pre class="code-block"><code class="language-mermaid">graph TD
+  Config[配置系统] --&gt; Core[核心框架]
+  Data[数据流水线] --&gt; Core
+  Core --&gt; Train[训练脚本]
+  Core --&gt; Eval[评估与推理]
+  Train --&gt; Data
+  Eval --&gt; Data
+  Utils[工具脚本] --&gt; Data
+  Utils --&gt; Eval</code></pre>
+<br>
+<h2>组件</h2>
+<br>
+<h3>核心框架</h3>
+<br>
+<p>提供基础的 GAN 实现，包括网络架构、损失函数和训练循环。</p>
+<br>
+<p>文件：<code class="inline-code">uvcgan2/__init__.py</code>，<code class="inline-code">uvcgan2/base/networks.py</code>，<code class="inline-code">uvcgan2/base/losses.py</code>，<code class="inline-code">uvcgan2/cgan/uvcgan2.py</code>，<code class="inline-code">uvcgan2/cgan/uvcgan2_3D_emb_sub_stylefusion.py</code>，<code class="inline-code">uvcgan2/train/train.py</code></p>
+<br>
+<h3>配置系统</h3>
+<br>
+<p>通过分层配置对象管理超参数和数据集设置。</p>
+<br>
+<p>文件：<code class="inline-code">uvcgan2/config/config.py</code>，<code class="inline-code">uvcgan2/config/data_config.py</code>，<code class="inline-code">uvcgan2/config/model_config.py</code></p>
+<br>
+<h3>数据流水线</h3>
+<br>
+<p>处理图像加载、预处理以及成对和无配对训练的数据集管理。</p>
+<br>
+<p>文件：<code class="inline-code">uvcgan2/data/datasets/image_domain_folder.py</code>，<code class="inline-code">uvcgan2/data/transforms.py</code>，<code class="inline-code">uvcgan2/data/loader_zipper.py</code></p>
+<br>
+<h3>训练脚本</h3>
+<br>
+<p>用于预训练、微调以及使用特定模型变体恢复训练的入口点。</p>
+<br>
+<p>文件：<code class="inline-code">scripts/pretrain_BIT2HE.py</code>，<code class="inline-code">scripts/finetune_from_checkpoint_3D.py</code>，<code class="inline-code">scripts/resume_training_from_config_3D.py</code></p>
+<br>
+<h3>评估与推理</h3>
+<br>
+<p>执行模型推理、指标计算（PSNR、SSIM、FID）以及图像翻译。</p>
+<br>
+<p>文件：<code class="inline-code">scripts/translate_A2B.py</code>，<code class="inline-code">scripts/eval_all_epochs_A2B_metrics.py</code>，<code class="inline-code">scripts/eval_fid.py</code>，<code class="inline-code">scripts/translate_images_3D.py</code></p>
+<br>
+<h3>工具脚本</h3>
+<br>
+<p>支持数据准备、重建和文件管理。</p>
+<br>
+<p>文件：<code class="inline-code">scripts/downsize_right.py</code>，<code class="inline-code">scripts/reconstruct_bit_vhe_from_metadata.py</code>，<code class="inline-code">scripts/fix_double_tif_suffix.py</code></p>
+<br>
+<h2>序列图</h2>
+<br>
+<pre class="code-block"><code class="language-mermaid">sequenceDiagram
+  participant User
+  participant Script
+  participant Config
+  participant Core
+  participant Data
+  User-&gt;&gt;Script: 运行训练脚本
+  Script-&gt;&gt;Config: 加载配置
+  Script-&gt;&gt;Data: 初始化数据加载器
+  Script-&gt;&gt;Core: 启动训练循环
+  Core-&gt;&gt;Data: 获取批次
+  Data--&gt;&gt;Core: 返回图像
+  Core-&gt;&gt;Core: 计算损失
+  Core-&gt;&gt;Core: 更新权重</code></pre>
+<br>
+<h2>数据流</h2>
+<br>
+<p>流水线始于配置加载，该配置定义了数据集路径和模型超参数。随后，数据加载器获取并预处理图像对（BIT 和 H&amp;E），并将其输入 GAN 核心以进行训练或推理。在训练过程中，生成器创建合成图像，判别器对其进行评估，而指标则在评估阶段单独计算。</p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "显微镜图像展示了化石孢粉（Palynomorphs）样本，右侧插图通过蓝色标记点展示了检测算法识别出的目标对象分布，属于实验结果或检测效果可视化。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "显微镜下化石花粉形态（Palynomorphs）的检测结果可视化，蓝色圆圈标记了算法识别出的目标对象。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 7,
+    "caption": "显微镜下的化石孢粉（Palynomorphs）样本图像，展示了待检测的微小颗粒与杂质，属于论文中的实验数据或样本展示。"
+  }
+}

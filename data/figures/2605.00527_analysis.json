@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "利萨茹（Lissajous）共聚焦激光内窥镜扫描轨迹或原始成像图"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "利萨茹（Lissajous）扫描轨迹图像，展示了共焦激光内窥镜的网格状扫描图案与成像基础。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 6,
+    "caption": "Lissajous扫描轨迹图案示意图，展示共振扫描的利萨如曲线覆盖模式"
+  }
+}

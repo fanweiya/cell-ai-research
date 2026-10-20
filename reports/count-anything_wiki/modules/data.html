@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>count-anything Wiki — data</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / count-anything Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>count-anything</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/data.html">data</a></li>
+<li><a href="../modules/count_anything.html">count_anything</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/config.html">config</a></li>
+<li><a href="../modules/sam3.html">sam3</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>data</h1>
+<br>
+<p>&gt; CLOC 数据集准备、转换、重建和审计的完整工具链</p>
+<br>
+<p>该模块负责将多个源数据集转换为 CLOC 统一格式，处理受版权限制的派生图像重建，并提供流式审计工具以确保标注路径的完整性。核心流程包括：下载原始数据集 -&gt; 运行转换脚本生成统一图像 -&gt; 根据配方重建增强图像（裁剪、高分辨率、拼接） -&gt; 审计所有路径和结构。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">data/tools/convert_all_sources.py</code></h3>
+<br>
+<p>总入口脚本，按 manifests/conversion_manifest.json 定义顺序执行所有源图像转换步骤</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 解析参数，加载转换清单，执行干跑或实际转换，生成报告</li>
+<li><code class="inline-code">render_command</code> (function) - 将清单中的命令模板渲染为实际可执行命令，处理{workspace}等占位符和--overwrite标志</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/rebuild_restricted_derived_images.py</code></h3>
+<br>
+<p>总入口脚本，按 manifests/restricted_derived_rebuild_manifest.json 执行受限制派生图像的重建</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 解析重建清单，验证依赖文件，执行重建步骤并生成报告</li>
+<li><code class="inline-code">expand_command</code> (function) - 将重建步骤的命令模板展开为实际命令，处理{overwrite_flag}、{verify_flag}、{path_prefix_args}等占位符</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/audit_annotation_image_paths.py</code></h3>
+<br>
+<p>流式检查 split JSON 中 image_path 的磁盘存在性，避免加载数 GB 的大文件</p>
+<br>
+<ul>
+<li><code class="inline-code">scan_split</code> (function) - 逐行解析 JSON，提取 image_path 和 image_from，统计存在/缺失数量并按来源分组</li>
+<li><code class="inline-code">iter_top_level_record_blobs</code> (function) - 生成器，从大 JSON 文件中流式产出顶层记录块，避免内存溢出</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/auditors/audit_original_image_paths.py</code></h3>
+<br>
+<p>专门审计状态为 original 的图像路径存在性</p>
+<br>
+<ul>
+<li><code class="inline-code">scan_split</code> (function) - 过滤 status 为 original 的记录，检查路径存在性并生成报告</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/auditors/audit_stitched_release_closure.py</code></h3>
+<br>
+<p>审计拼接增强图像的发布闭包，检查哪些记录被重建配方覆盖且输出存在</p>
+<br>
+<ul>
+<li><code class="inline-code">iter_stitched_records</code> (function) - 从 split JSON 中流式提取 status 为 stitched 的记录</li>
+<li><code class="inline-code">iter_stitched_record_summaries</code> (function) - 快速扫描 stitched 记录的元数据（image_path, image_from, modality），避免解析大数组</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/auditors/check_source_dataset_layout.py</code></h3>
+<br>
+<p>验证用户下载的源数据集目录结构是否符合重建配方的预期</p>
+<br>
+<ul>
+<li><code class="inline-code">check_dataset_layout</code> (function) - 根据预定义的结构检查规则（如 Cityscapes 需要 leftImg8bit 目录）验证数据集根目录</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/auditors/verify_annotation_paths_by_filter.py</code></h3>
+<br>
+<p>按前缀和来源过滤后，流式验证特定图像路径的存在性</p>
+<br>
+<ul>
+<li><code class="inline-code">scan_split</code> (function) - 支持--prefix和--source参数，仅检查匹配条件的记录</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/auditors/verify_objects365_patch_sample.py</code></h3>
+<br>
+<p>针对 Objects365 的 patch 结构进行抽样验证，无需下载完整数据集</p>
+<br>
+<ul>
+<li><code class="inline-code">iter_objects365_paths</code> (function) - 从 split JSON 中提取 Objects365 的图像路径</li>
+<li><code class="inline-code">patch_key</code> (function) - 从路径提取 patch 键（如 train/patch0）用于分组抽样</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/converters/convert_brifiseg_3channels_to_unified_images.py</code></h3>
+<br>
+<p>将 BriFiSeg 的三通道 nii.gz 数据合并为 RGB PNG</p>
+<br>
+<ul>
+<li><code class="inline-code">render_three_channels</code> (function) - 加载三个通道的 nii.gz 数据，归一化到 0-255 并堆叠为 RGB 数组</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/converters/convert_cellbindb_tif_to_images_png.py</code></h3>
+<br>
+<p>将 CellBinDB 的 TIFF 图像转换为 RGB PNG</p>
+<br>
+<ul>
+<li><code class="inline-code">discover_records</code> (function) - 扫描 source_root 下所有 *-img.tif 文件，生成转换记录</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/converters/convert_conic_npy_to_images_png.py</code></h3>
+<br>
+<p>将 CoNIC 的 images.npy 数组导出为 PNG</p>
+<br>
+<ul>
+<li><code class="inline-code">load_patch_names</code> (function) - 解析 patch_info.csv 获取图像名称</li>
+<li><code class="inline-code">save_png</code> (function) - 将 numpy 数组保存为 PNG 文件</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/converters/convert_deepbacs_tif_to_pngimages.py</code></h3>
+<br>
+<p>根据标注引用，将 DeepBacs 的 TIFF 转换为 PNG</p>
+<br>
+<ul>
+<li><code class="inline-code">iter_deepbacs_annotation_paths</code> (function) - 流式扫描标注 JSON，提取 DeepBacs 图像路径</li>
+<li><code class="inline-code">normalize_to_uint8_rgb</code> (function) - 将 TIFF 转换为 RGB，对 16 位图像进行 min-max 归一化</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/converters/convert_livecell_tif_to_images_png.py</code></h3>
+<br>
+<p>根据标注引用，将 LIVECell 的 TIFF 转换为 PNG</p>
+<br>
+<ul>
+<li><code class="inline-code">iter_livecell_annotation_paths</code> (function) - 流式扫描标注 JSON，提取 LIVECell 图像路径</li>
+<li><code class="inline-code">source_for_target</code> (function) - 根据目标 PNG 路径反推源 TIFF 路径</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/converters/convert_monusac_tif_to_png_images.py</code></h3>
+<br>
+<p>将 MoNuSAC 的 TIFF 转换为 PNG</p>
+<br>
+<ul>
+<li><code class="inline-code">convert_one</code> (function) - 处理 RGBA TIFF，可选择是否反转通道顺序以匹配历史 CLOC 数据</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/converters/convert_monuseg_tif_to_png.py</code></h3>
+<br>
+<p>将 MoNuSeg 的 TIFF 转换为 PNG</p>
+<br>
+<ul>
+<li><code class="inline-code">iter_tiffs</code> (function) - 扫描 MoNuSeg 训练和测试数据集中的所有 TIFF 文件</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/converters/convert_nuinsseg_tissue_images_to_png.py</code></h3>
+<br>
+<p>将 NuInsSeg 的组织图像转换为 RGB PNG</p>
+<br>
+<ul>
+<li><code class="inline-code">discover_records</code> (function) - 扫描每个器官目录下的 tissue images 文件夹</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/converters/convert_soybean_pod_bmp_to_png.py</code></h3>
+<br>
+<p>将 Soybean Pod 的 BMP 图像转换为 PNG</p>
+<br>
+<ul>
+<li><code class="inline-code">image_equal</code> (function) - 比较两张图像像素是否完全相同，用于验证</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/rebuilders/rebuild_cropped_from_recipe.py</code></h3>
+<br>
+<p>根据配方重建裁剪增强图像</p>
+<br>
+<ul>
+<li><code class="inline-code">crop_from_source_image</code> (function) - 从源图像裁剪并填充到最小尺寸 384x384</li>
+<li><code class="inline-code">output_path_for_entry</code> (function) - 根据配方条目推断输出图像在 augmented/ 目录下的路径</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/rebuilders/rebuild_high_resolution_from_recipe.py</code></h3>
+<br>
+<p>根据配方重建高分辨率派生图像</p>
+<br>
+<ul>
+<li><code class="inline-code">rebuild_entry</code> (function) - 根据策略（grid/cropped/zoomed）处理源图像</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/rebuilders/rebuild_stitched_from_recipe.py</code></h3>
+<br>
+<p>根据配方重建拼接/马赛克图像</p>
+<br>
+<ul>
+<li><code class="inline-code">rebuild_one</code> (function) - 创建画布，按配方拼接多个 patch 图像</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/tools/recipes/rebuild_objects365_high_resolution.py</code></h3>
+<br>
+<p>Objects365 高分辨率图像重建脚本，支持生成配方和实际重建两种模式</p>
+<br>
+<ul>
+<li><code class="inline-code">grid_cells</code> (function) - 计算图像网格切割方案</li>
+<li><code class="inline-code">collect_targets</code> (function) - 从标注 JSON 中收集高分辨率记录</li>
+</ul>
+<br>
+<h3><code class="inline-code">data/manifests/conversion_manifest.json</code></h3>
+<br>
+<p>定义所有源数据集转换步骤的清单</p>
+<br>
+<h3><code class="inline-code">data/manifests/restricted_derived_rebuild_manifest.json</code></h3>
+<br>
+<p>定义受限制派生图像重建步骤的清单</p>
+<br>
+<h3><code class="inline-code">data/tools/downloaders/download_objects365_patches_no_proxy.sh</code></h3>
+<br>
+<p>下载 Objects365 图像 patch 的 shell 脚本</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>流式 JSON 解析</strong>:</li>
+<li><strong>配方驱动重建</strong>:</li>
+<li><strong>路径前缀映射</strong>:</li>
+<li><strong>受限制图像发布</strong>:</li>
+<li><strong>验证与报告</strong>:</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">data/tools/convert_all_sources.py</code> → <code class="inline-code">data/manifests/conversion_manifest.json</code>: 转换总脚本读取转换清单，按顺序调用各数据集的转换脚本</li>
+<li><code class="inline-code">data/tools/rebuild_restricted_derived_images.py</code> → <code class="inline-code">data/manifests/restricted_derived_rebuild_manifest.json</code>: 重建总脚本读取重建清单，按顺序调用各增强类型的重建脚本</li>
+<li><code class="inline-code">data/tools/auditors/audit_annotation_image_paths.py</code> → <code class="inline-code">data/annotations/*_split.json</code>: 审计脚本直接扫描标注 JSON 文件，检查其中 image_path 的磁盘存在性</li>
+<li><code class="inline-code">data/tools/converters/convert_deepbacs_tif_to_pngimages.py</code> → <code class="inline-code">data/annotations/*_split.json</code>: DeepBacs 转换脚本读取标注以确定需要转换的 TIFF 文件，避免全量转换</li>
+<li><code class="inline-code">data/tools/converters/convert_livecell_tif_to_images_png.py</code> → <code class="inline-code">data/annotations/*_split.json</code>: LIVECell 转换脚本读取标注以确定需要转换的 TIFF 文件</li>
+<li><code class="inline-code">data/tools/rebuilders/rebuild_cropped_from_recipe.py</code> → <code class="inline-code">data/tools/recipes/*.json</code>: 裁剪重建脚本读取配方 JSON，获取裁剪参数和源路径</li>
+<li><code class="inline-code">data/tools/rebuilders/rebuild_high_resolution_from_recipe.py</code> → <code class="inline-code">data/tools/recipes/*.json</code>: 高分辨率重建脚本读取配方 JSON，获取源路径和处理策略</li>
+<li><code class="inline-code">data/tools/rebuilders/rebuild_stitched_from_recipe.py</code> → <code class="inline-code">data/tools/recipes/*.json</code>: 拼接重建脚本读取配方 JSON，获取 patch 信息和拼接参数</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

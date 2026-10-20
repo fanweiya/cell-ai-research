@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "论文核心架构图：AMN网络流程，双编码器（Swin Transformer + ResNet-50 CNN）自适应融合后接FPN解码器和多任务头（分割、边界、分类、不确定性）"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "单层金字塔自适应多尺度融合模块流程图：Swin与CNN特征经ConvBnReLU后拼接，通过自适应池化和全连接层生成门控系数α，加权融合为256通道特征图"
+  },
+  "2": {
+    "relevant": true,
+    "score": 6,
+    "caption": "AMN模型训练曲线图：损失下降与验证Dice/F1上升过程"
+  }
+}

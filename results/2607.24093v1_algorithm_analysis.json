@@ -1,0 +1,54 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2607.24093v1",
+  "status": "done",
+  "design_motivation": "TCellAlign 旨在解决跨研究 T 细胞亚群标签异构性问题。传统方法依赖表达谱直接推断细胞身份，或依赖预定义本体（如 Cell Ontology）进行刚性映射。TCellAlign 采用多智能体工作流，结合文献检索、信息提取、命名法引导映射和基于证据的裁决，不假设研究特定标签符合预定义概念，而是提取并推理标签背后的生物学上下文。相比直接预测，它通过结构化分解（四个维度、七个原子槽）实现细粒度对齐，并通过迭代 refinement 仅在证据不足时保留未决状态，确保可追溯性和生物学可解释性。",
+  "loss_formula": "无传统可微分损失函数；采用基于证据一致性的启发式裁决机制。",
+  "math_principle": "基于集合论和逻辑约束的符号推理：将细胞标签分解为原子槽，通过多智能体协作验证每个槽的映射是否符合文献证据和命名法约束。使用确定性渲染函数将结构化表示转换为最终对齐标签。评估指标包括 Adjusted Mutual Information (AMI) 和 Merge F1，后者直接评估生物学等价标签的合并正确性。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[N, text]"
+    },
+    {
+      "layer": "extraction",
+      "shape": "[N, 7]"
+    },
+    {
+      "layer": "mapping",
+      "shape": "[N, 7]"
+    },
+    {
+      "layer": "judge",
+      "shape": "[N, 7]"
+    },
+    {
+      "layer": "output",
+      "shape": "[N, aligned_label]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 构建基准数据集（44 项研究，链接论文与单细胞数据集）",
+    "step2: 信息提取智能体从论文中提取 T 细胞标签",
+    "step3: 映射智能体将标签映射到命名法原子槽",
+    "step4: 裁决智能体基于证据验证每个槽",
+    "step5: 迭代 refinement：仅返回不一致的槽进行修正",
+    "step6: 确定性渲染生成最终对齐标签"
+  ],
+  "baselines_compared": [
+    "Levenshtein",
+    "PubMedBERT",
+    "TCellAlign-GPT",
+    "TCellAlign-DS"
+  ],
+  "key_results": {
+    "benchmark_studies": "44",
+    "metrics": "AMI, Merge F1, MergeConsistency",
+    "performance": "Superior evaluation performance across healthy, cancer, infectious, and inflammatory contexts"
+  },
+  "confidence": 0.95,
+  "task_id": "2607.24093v1-algorithm_analysis-v1",
+  "run_at": "2026-08-06T11:44:50.931162",
+  "priority": 11,
+  "agent": "Agents-A1"
+}

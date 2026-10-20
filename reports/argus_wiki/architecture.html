@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>argus Wiki — architecture</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / argus Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>argus</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/src.html">src</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/notebooks.html">notebooks</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>架构</h1>
+<br>
+<p><strong>类型：</strong> 流水线</p>
+<br>
+<p>ARGUS 是一个用于显微镜数据细胞追踪的模块化流水线框架，整合了预处理、检测、追踪和可视化组件。每个阶段均可独立使用，或作为完整工作流的一部分，Jupyter 笔记本则提供交互式探索功能。</p>
+<br>
+<h2>组件图</h2>
+<br>
+<pre class="code-block"><code class="language-mermaid">graph TD
+  预处理 --&gt; 检测
+  检测 --&gt; 追踪
+  追踪 --&gt; 可视化
+  笔记本 --&gt; 预处理
+  笔记本 --&gt; 检测
+  笔记本 --&gt; 追踪
+  笔记本 --&gt; 可视化</code></pre>
+<br>
+<h2>组件</h2>
+<br>
+<h3>预处理</h3>
+<br>
+<p>显微镜图像的降噪与亮度校正</p>
+<br>
+<p>文件：<code class="inline-code">src/algo_funcs.py</code>，<code class="inline-code">src/utils.py</code></p>
+<br>
+<h3>检测</h3>
+<br>
+<p>利用局部最大值和质心估计识别细胞位置</p>
+<br>
+<p>文件：<code class="inline-code">src/algo_funcs.py</code></p>
+<br>
+<h3>追踪</h3>
+<br>
+<p>通过光流和基于距离的关联跨帧链接细胞检测</p>
+<br>
+<p>文件：<code class="inline-code">src/algo_funcs.py</code>，<code class="inline-code">src/ctc_reformat.py</code></p>
+<br>
+<h3>可视化</h3>
+<br>
+<p>生成叠加图、MSD 分析以及追踪结果的视频输出</p>
+<br>
+<p>文件：<code class="inline-code">src/display_funcs.py</code>，<code class="inline-code">src/parameter_scan.py</code></p>
+<br>
+<h3>笔记本</h3>
+<br>
+<p>用于演示和分析的交互式 Jupyter 笔记本</p>
+<br>
+<p>文件：<code class="inline-code">notebooks/compute_cell_paths.ipynb</code>，<code class="inline-code">notebooks/format_tracks_for_CTC.ipynb</code></p>
+<br>
+<h2>序列图</h2>
+<br>
+<pre class="code-block"><code class="language-mermaid">sequenceDiagram
+  participant 用户
+  participant 笔记本
+  participant 预处理
+  participant 检测
+  participant 追踪
+  participant 可视化
+  用户-&gt;&gt;笔记本：加载数据
+  笔记本-&gt;&gt;预处理：应用降噪
+  预处理--&gt;&gt;笔记本：清洗后的图像
+  笔记本-&gt;&gt;检测：查找细胞
+  检测--&gt;&gt;笔记本：细胞位置
+  笔记本-&gt;&gt;追踪：链接位置
+  追踪--&gt;&gt;笔记本：轨迹
+  笔记本-&gt;&gt;可视化：生成输出
+  可视化--&gt;&gt;用户：结果</code></pre>
+<br>
+<h2>数据流</h2>
+<br>
+<p>原始显微镜图像首先进入预处理阶段进行降噪和校正。随后，跨帧链接检测到的细胞位置以生成轨迹，最终通过叠加图、MSD 分析和视频生成进行可视化。</p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2604.26517v1",
+  "status": "done",
+  "design_motivation": "现有方法依赖分割流程，对分割错误敏感且在噪声大、对比度低时失效。MTCurv设计为端到端的分割无关回归框架，直接输出曲率图，避免分割误差传播，利用合成数据与注意力残差U-Net提升鲁棒性。",
+  "loss_formula": "\\mathcal{L} = \\mathcal{L}_{MSE}(\\hat{y}, y) + \\lambda \\| \\nabla \\hat{y} - \\nabla y \\|_2",
+  "math_principle": "将曲率估计重构为像素级回归问题。损失函数结合均方误差（MSE）保证数值准确性，并引入梯度一致性项（Gradient Consistency Term）以约束预测曲率图的局部空间变化，减少高频噪声和幻觉，增强几何结构的连续性。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 1, H, W]"
+    },
+    {
+      "layer": "encoder",
+      "shape": "[B, C, H/4, W/4]"
+    },
+    {
+      "layer": "decoder",
+      "shape": "[B, C, H, W]"
+    },
+    {
+      "layer": "output",
+      "shape": "[B, 1, H, W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载合成数据集，包含带像素级曲率标注的噪声荧光显微图像",
+    "step2: 前向传播通过注意力残差U-Net生成曲率预测图",
+    "step3: 计算MSE损失与梯度一致性损失之和",
+    "step4: 反向传播更新网络参数",
+    "step5: 在验证集上评估Spearman相关系数等指标"
+  ],
+  "baselines_compared": [
+    "传统分割后曲率计算",
+    "基于CNN的分割方法"
+  ],
+  "key_results": {
+    "Spearman_correlation": "0.89",
+    "MSE": "0.012"
+  },
+  "confidence": 0.85,
+  "task_id": "2604.26517v1-algorithm_analysis-v1",
+  "run_at": "2026-07-24T09:12:26.579861",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

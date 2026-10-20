@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "该图展示了OT-CFM与TP-DATE（本文方法）在动态数据分布变换中的轨迹对比，属于核心实验结果可视化。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "展示了不同时间点（t0, t0.5, t1）下细胞或组织结构的动态变化与形态演化，属于核心数据可视化。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "展示了基于最优传输（Optimal Transport）的脑切片图像配准与插值过程，呈现了从t0到t1的形态动态变化及对应的彩色区域对应关系。"
+  }
+}

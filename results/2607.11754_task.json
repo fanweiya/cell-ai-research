@@ -1,0 +1,19 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2607.11754",
+  "status": "done",
+  "task_family": "cell_tracking",
+  "input": "Time-lapse microscopy images",
+  "output": "Cell trajectories and identities across frames",
+  "notable": "Higher-Order Cell Tracking Transformer for long-term cell tracking",
+  "task_type": [
+    "tracking",
+    "detection",
+    "segmentation"
+  ],
+  "confidence": 0.95,
+  "task_id": "2607.11754-task_analysis-v1",
+  "run_at": "2026-07-18T09:31:14.359105",
+  "priority": 12,
+  "agent": "Agents-A1"
+}

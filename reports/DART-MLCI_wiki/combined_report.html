@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DART-MLCI Wiki — combined_report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / DART-MLCI Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>dart-mlci</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/scripts.html">scripts</a></li>
+<li><a href="modules/dart_experiment.html">dart_experiment</a></li>
+<li><a href="modules/docs.html">docs</a></li>
+<li><a href="modules/artifacts.html">artifacts</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/dart_mlci.html">dart_mlci</a></li>
+<li><a href="modules/tests.html">tests</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>DART-MLCI — 综合分析报告</h1>
+<br>
+<ul>
+<li><strong>GitHub</strong>: SMLCI/DART-MLCI</li>
+<li><strong>评分</strong>: 9.0/10</li>
+<li><strong>分析时间</strong>: 2026-07-15T18:24:34.502318</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2>CodeGraph 知识图谱分析</h2>
+<br>
+<br>
+<h2>RepoWiki 文档生成</h2>
+<br>
+<ul>
+<li>✅ 扫描成功</li>
+<li>📁 Wiki 目录: <code class="inline-code">/mnt/c/workspace/cell-ai-research/reports/DART-MLCI_wiki</code></li>
+<li>📄 生成文件:</li>
+<li>architecture.md</li>
+<li>dependencies.md</li>
+<li>index.md</li>
+<li>reading-guide.md</li>
+<li>_sidebar.md</li>
+<li>modules/.codegraph.md</li>
+<li>modules/.github.md</li>
+<li>modules/artifacts.md</li>
+<li>modules/dart_experiment.md</li>
+<li>modules/dart_mlci.md</li>
+<li>输出: Project: dart-mlci</li>
+</ul>
+<p>Files:   145</p>
+<p>Lines:   57,789</p>
+<p>Languages</p>
+<p>┏━━━━━━━━━━━━┳━━━━━━━┓</p>
+<p>┃ Language   ┃ Files ┃</p>
+<p>┡━━━━━━━━━━━━╇━━━━━━━┩</p>
+<p>│ python     │   103 │</p>
+<p>│ json       │    12 │</p>
+<p>│ markdown   │    10 │</p>
+<p>│ shell      │     7 │</p>
+<p>│ yaml       │     5 │</p>
+<p>│ unknown    │     5 │</p>
+<p>│ dockerfile │     1 │</p>
+<p>│ toml       │     1 │</p>
+<p>│ text       │     1 │</p>
+<p>└────────────┴───────┘</p>
+<p>dart-mlci/</p>
+<p>├── ⚙️ Dockerfile (dockerfile)</p>
+<p>├── ⚙️ README.md (markdown)</p>
+<p>├── 📁 dart_mlci/</p>
+<p>│   ├── ⚙️ config.py (python)</p>
+<p>│   └── 📄 api/main.py (python)</p>
+<p>├── ⚙️ docker-compose.yml (yaml)</p>
+<p>├── ⚙️ pyproject.toml (toml)</p>
+<p>├── ⚙️ requirements.txt (text)</p>
+<p>├── 📁 scripts/</p>
+<p>│   ├── 📄 analyze_growth.py (python)</p>
+<p>│   ├── 📄 batch_masking.py (python)</p>
+<p>│   ├── 📄 benchmark.py (python)</p>
+<p>│   ├── 📄 calibrate_map.py (python)</p>
+<p>│   ├── 📄 calibrate_pixel_scale.py (python)</p>
+<p>│   ├── 📄 generate_chip_config.py (python)</p>
+<p>│   ├── 📄 generate_dart_frame_video.py (python)</p>
+<p>│   ├── 📄 generate_golden_files.py (python)</p>
+<p>│   ├── 📄 generate_sak_videos.py (python)</p>
+<p>│   ├── 📄 ma</p>
+<br>
+<h2>原有子代理分析报告</h2>
+<br>
+<pre class="code-block"><code class="language-">现在我已经收集了足够的信息来分析这个仓库。让我创建结构化报告：
+
+## DART-MLCI 项目深度分析报告
+
+### 1. 项目概述
+
+**DART-MLCI** (Design-Aware and Real-Time capable Microfluidic Live-Cell Image analysis) 是一个用于高通量微流控活细胞图像实时分析的软件系统，源自论文 **"DART: A design-aware microfluidic chip paradigm for real-time live-cell image analysis"** (arXiv:2606.18523, 2026)。
+
+**核心问题**：高通量微流控活细胞成像产生大量单细胞数据，但定位包含特定细胞群的区域 (ROI) 以及去除周围微流控结构的操作是半自动的，随着ROI数量增加而变得繁琐，阻碍了实时图像分析。
+
+**解决方案**：通过嵌入式的标记物(fiducial markers)和深度学习标记检测，将CAD蓝图与物理芯片对齐，实现：
+- **Fine alignment** (掩膜流水线)：标记物检测、配对匹配、旋转校正、多边形掩膜、ROI裁剪
+- **Coarse alignment** (映射校准)：芯片蓝图与显微镜平台坐标的仿射对齐
+
+### 2. 架构分析
+
+**目录结构**：</code></pre>
+<p>DART-MLCI/</p>
+<p>├── dart_mlci/              # 核心Python包</p>
+<p>│   ├── __init__.py         # 公开API</p>
+<p>│   ├── detection.py        # YOLO标记检测模型</p>
+<p>│   ├── match.py            # 标记物匹配算法</p>
+<p>│   ├── pipeline.py         # 步骤式处理流水线</p>
+<p>│   ├── chip.py             # 芯片配置和结构库</p>
+<p>│   ├── mask.py             # 掩膜操作和ROI多边形</p>
+<p>│   ├── rotation.py         # 图像和标记物旋转</p>
+<p>│   ├── map.py              # 芯片蓝图映射</p>
+<p>│   ├── calibration/        # 校准模块</p>
+<p>│   ├── registration/       # 图像配准模块</p>
+<p>│   └── api/                # FastAPI服务</p>
+<p>├── tests/                  # 测试套件</p>
+<p>├── artifacts/              # 示例数据和模型</p>
+<p>├── scripts/                # 处理脚本</p>
+<p>└── docs/                   # 文档</p>
+<pre class="code-block"><code class="language-">
+**关键依赖**：
+- **Ultralytics YOLO**：标记物检测
+- **OpenCV + Kornia**：图像旋转和变换
+- **Shapely + Rasterio**：几何处理和 masks
+- **PyTorch**：深度学习
+- **FastAPI**：REST API
+
+### 3. 核心算法
+
+**标记检测** (`detection.py`)：
+- 使用YOLO模型检测两种标记：cross和circle
+- 置信度过滤和边界框中心提取
+
+**标记匹配** (`match.py`)：
+- 通过线性分配算法将检测到的cross和circle标记配对
+- 计算匹配距离与期望距离的误差，容忍度设置为5像素
+- 考虑置信度加权
+
+**旋转估计** (`rotation.py`)：
+- 计算成对标记方向向量与蓝图方向向量的夹角
+- 使用带符号角度 (`signed_angle_between`) 获取-180°~180°范围
+- 多对标记时取平均，并检查角度一致性
+
+**图像旋转**：
+- 支持CPU (OpenCV) 和 GPU (Kornia) 两种路径
+- 自动扩展边界以容纳旋转后的完整图像
+
+**掩膜应用** (`mask.py`)：
+- 基于匹配标记将ROI多边形定位到图像
+- 选择距离图像边界最远的ROI
+- 支持旋转-free模式，通过旋转多边形而非图像来节省计算
+
+**芯片配置** (`chip.py`)：
+- 统一JSON格式描述芯片设计： chamber多边形、标记位置、蓝图映射
+- 从GeoJSON坐标缩放到像素坐标
+
+### 4. 代码质量
+
+**优点**：
+- ✅ 模块化设计清晰，各模块职责单一
+- ✅ 类型注解完善，使用dataclass
+- ✅ 单元测试覆盖核心逻辑
+- ✅ 遵循PEP8，使用ruff格式化
+- ✅ 详细的文档字符串
+- ✅ 版本控制和CI/CD完善
+
+**不足**：
+- ⚠️ 部分函数过于通用化，存在双路径（GPU/CPU）可能引入复杂性
+- ⚠️ 一些硬编码的坐标转换逻辑在`calibration/core.py`中需要仔细观察
+- ⚠️ 缺少集成测试（标记为integration，默认不运行）
+
+### 5. 可复现性
+
+**非常优秀**：
+- ✅ `pyproject.toml` 明确声明依赖
+- ✅ `Dockerfile` 完整，包含CUDA版本控制
+- ✅ `reproduce.sh` 脚本自动化实验复现
+- ✅ 自动下载模型和示例数据（~40MB）
+- ✅ 详细的配置文档 (`docs/configuration.md`, `docs/CHIP_CONFIG.md`)
+- ✅ 支持PyPI安装 (`pip install dart-mlci`)
+
+**安装**：</code></pre>
+<p>pip install ".[dev]"       # 核心 + 开发依赖</p>
+<p>pip install ".[api]"       # API服务</p>
+<p>pip install ".[segmentation]"  # 分割模型依赖</p>
+<pre class="code-block"><code class="language-">
+### 6. 与高通量细胞图像分析项目 (YOLO+SAM) 的相关性
+
+**可直接复用的模块**：
+
+1. **标记检测框架** (`MarkerDetectionModel`)：
+   - YOLO模型的封装和推理接口
+   - 可替换为你的YOLO检测器
+
+2. **标记匹配算法** (`match_markers`)：
+   - 适用于需要根据模板匹配成对标记物的场景
+   - 线性分配 + 距离约束
+
+3. **芯片配置系统** (`ChipStructureLibrary`)：
+   - 统一的JSON配置描述芯片蓝图
+   - 支持从几何坐标到像素坐标的转换
+
+4. **流水线架构** (`pipeline.py` 中的Step类)：
+   - 链式调用设计 (`detect → match → rotate → mask`)
+   - 缓存机制 (`ChamberPipelineCache`) 避免重复初始化
+
+5. **掩膜生成** (`apply_mask`)：
+   - 基于多边形</code></pre>
+<br>
+<p>&gt; 完整报告: <a href="DART-MLCI.html">reports/DART-MLCI.md</a></p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

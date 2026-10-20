@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "方法流程图：展示缩略图生成、掩膜对应及噪声注入的两步数据增强流程"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "肾脏测试集上不同点击次数下两种微调策略的平均DSC分数对比柱状图，含Box prompt基线"
+  },
+  "2": {
+    "relevant": true,
+    "score": 7,
+    "caption": "两个场景下有/无SAS增强的超声数据t-SNE特征分布对比可视化"
+  }
+}

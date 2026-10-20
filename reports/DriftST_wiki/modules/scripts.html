@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DriftST Wiki — scripts</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / DriftST Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>DriftST</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/process.html">process</a></li>
+<li><a href="../modules/src.html">src</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>scripts</h1>
+<br>
+<p>&gt; 提供从H&amp;E组织切片推断空间转录组的一站式训练与预处理脚本</p>
+<br>
+<p>该模块包含三个核心Shell脚本，用于自动化执行DriftST模型的数据预处理和训练流程。脚本封装了参数配置、数据集路径管理、模型训练调用及日志记录，支持Spot-level（HEST风格）和Cell-level（Xenium）两种数据格式，并集成WandB实验跟踪。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">scripts/run_spot_level_train.sh</code></h3>
+<br>
+<p>处理并训练基于Spot-level的HEST风格数据集（如her2st, prad, kidney）</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (shell script) - 解析命令行参数（数据集、fold、跳过预处理等），设置环境变量，调用preprocess_spot_level.py进行数据预处理，然后启动train.py进行模型训练。支持多数据集配置和WandB离线模式。</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/run_xenium_cell_level_preprocess.sh</code></h3>
+<br>
+<p>准备默认的Xenium乳腺癌处理数据集</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (shell script) - 执行两个Python脚本：select_xenium_cell_level_genes.py用于选择基因列表，preprocess_xenium_cell_level.py用于将原始Xenium数据转换为模型输入格式。支持指定滑片（slides）和测试滑片（test_slide）。</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/run_xenium_cell_level_train.sh</code></h3>
+<br>
+<p>在Xenium乳腺癌处理数据集上训练DriftST模型</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (shell script) - 循环遍历指定的folds，为每个fold创建实验目录，计算空间可变基因（SVG）排名（基于Moran's I），构建训练参数列表并调用train.py。支持邻居信息、快照保存、WandB配置等高级选项。</li>
+</ul>
+<br>
+<h3><code class="inline-code">scripts/run_xenium_coad_cell_level_train.sh</code></h3>
+<br>
+<p>在Xenium COAD数据集上训练DriftST模型</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (shell script) - 设置特定环境变量（OUTPUT_DIR, EXP_DIR, SVG_SLIDE）后，直接调用run_xenium_cell_level_train.sh脚本，复用其训练逻辑以适配COAD数据集。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>Fold交叉验证</strong>: 脚本通过FOLD参数支持K折交叉验证，从splits.json中读取测试滑片，确保模型在不同数据划分上的泛化能力。</li>
+<li><strong>WandB实验跟踪</strong>: 集成Weights &amp; Biases，支持在线/离线模式，自动记录训练指标和超参数配置。</li>
+<li><strong>空间可变基因（SVG）</strong>: 基于Moran's I统计量计算基因的空间表达模式，用于筛选具有空间信息的基因作为模型输入。</li>
+<li><strong>DriftST模型训练</strong>: 核心训练流程，包含门控机制（use_gate）、漂移步长（drift_step）、银行大小（bank_size）等超参数，用于从H&amp;E图像推断空间转录组。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">scripts/run_spot_level_train.sh</code> → <code class="inline-code">process/preprocess_spot_level.py</code>: run_spot_level_train.sh调用preprocess_spot_level.py执行Spot-level数据的预处理步骤。</li>
+<li><code class="inline-code">scripts/run_spot_level_train.sh</code> → <code class="inline-code">train.py</code>: run_spot_level_train.sh最终调用train.py执行模型训练任务。</li>
+<li><code class="inline-code">scripts/run_xenium_cell_level_preprocess.sh</code> → <code class="inline-code">process/select_xenium_cell_level_genes.py</code>: run_xenium_cell_level_preprocess.sh调用select_xenium_cell_level_genes.py生成基因列表。</li>
+<li><code class="inline-code">scripts/run_xenium_cell_level_preprocess.sh</code> → <code class="inline-code">process/preprocess_xenium_cell_level.py</code>: run_xenium_cell_level_preprocess.sh调用preprocess_xenium_cell_level.py完成Xenium细胞级数据的预处理。</li>
+<li><code class="inline-code">scripts/run_xenium_cell_level_train.sh</code> → <code class="inline-code">process/compute_spatial_variable_genes.py</code>: run_xenium_cell_level_train.sh在训练前调用compute_spatial_variable_genes.py计算空间可变基因排名。</li>
+<li><code class="inline-code">scripts/run_xenium_cell_level_train.sh</code> → <code class="inline-code">train.py</code>: run_xenium_cell_level_train.sh循环调用train.py对每个fold进行训练。</li>
+<li><code class="inline-code">scripts/run_xenium_coad_cell_level_train.sh</code> → <code class="inline-code">scripts/run_xenium_cell_level_train.sh</code>: run_xenium_coad_cell_level_train.sh作为封装层，调用run_xenium_cell_level_train.sh处理COAD数据集。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DriftST Wiki — reading-guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / DriftST Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>DriftST</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/process.html">process</a></li>
+<li><a href="modules/src.html">src</a></li>
+<li><a href="modules/scripts.html">scripts</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Reading Guide</h1>
+<br>
+<p>本指南旨在帮助你快速理解 DriftST 项目，该框架用于从 H&amp;E 组织切片推断空间转录组数据。建议按照从宏观配置到核心逻辑，再到具体实现的顺序阅读，重点关注数据流向和模型训练机制。</p>
+<br>
+<h2>Step 1: 项目概览与环境配置 (~5 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">README.md</code>, <code class="inline-code">requirements.txt</code>, <code class="inline-code">environment.yml</code></p>
+<br>
+<p>首先了解项目的整体目标、依赖库和运行环境。README 提供项目背景和使用说明，requirements 和 environment 文件定义了运行所需的 Python 包版本，确保后续代码执行环境一致。</p>
+<br>
+<h2>Step 2: 入口脚本与工作流程 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">scripts/run_spot_level_train.sh</code>, <code class="inline-code">scripts/run_xenium_cell_level_preprocess.sh</code>, <code class="inline-code">scripts/run_xenium_cell_level_train.sh</code></p>
+<br>
+<p>查看这些 Shell 脚本以理解项目的完整工作流程。重点关注它们如何调用 Python 模块、传递参数以及处理数据路径，这将帮助你建立对训练和预处理流程的宏观认识。</p>
+<br>
+<h2>Step 3: 数据预处理核心流程 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">process/preprocess_spot_level.py</code>, <code class="inline-code">process/preprocess_xenium_cell_level.py</code></p>
+<br>
+<p>深入阅读这两个文件，理解原始数据如何被清洗、转换和标准化。注意数据加载方式、特征工程步骤以及如何处理 H&amp;E 图像与空间转录组数据的对齐问题。</p>
+<br>
+<h2>Step 4: 特征选择与基因筛选 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">process/select_xenium_cell_level_genes.py</code>, <code class="inline-code">process/select_xenium_cell_level_hvg.py</code>, <code class="inline-code">process/generate_xenium_cell_level_splits.py</code></p>
+<br>
+<p>了解项目如何筛选高变基因（HVG）和空间变量基因。这些步骤对模型性能至关重要，注意特征选择的统计方法和数据分集策略。</p>
+<br>
+<h2>Step 5: 核心数据加载与模型架构 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">src/dataset.py</code>, <code class="inline-code">src/model.py</code></p>
+<br>
+<p>dataset.py 定义了数据加载器，model.py 实现了神经网络架构。重点关注数据如何被组织成批次、模型的结构设计以及前向传播逻辑，这是理解模型行为的基础。</p>
+<br>
+<h2>Step 6: 漂移训练机制 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">src/drift_step.py</code></p>
+<br>
+<p>这是项目的核心创新点。理解漂移步（drift step）如何实现从 H&amp;E 到空间转录组的映射，注意其中的优化目标和梯度更新机制。</p>
+<br>
+<h2>Step 7: 评估与后处理 (~10 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">src/evaluation.py</code>, <code class="inline-code">src/postprocess.py</code></p>
+<br>
+<p>了解模型如何被评估以及输出结果如何被处理。关注评估指标的选择和后处理步骤，如结果可视化或格式转换。</p>
+<br>
+<h2>Tips</h2>
+<br>
+<ul>
+<li>在阅读代码时，先关注函数签名和主要逻辑流程，再深入细节实现。</li>
+<li>结合入口脚本和核心代码，追踪数据从输入到输出的完整路径。</li>
+<li>遇到不理解的数学公式或算法时，先参考 README 中的理论说明。</li>
+<li>使用调试器或添加打印语句来观察数据在模型中的流动。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

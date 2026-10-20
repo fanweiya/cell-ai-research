@@ -1,0 +1,56 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2605.12851v1",
+  "status": "done",
+  "design_motivation": "针对急性淋巴细胞白血病（ALL）外周血涂片分析中对比度低、细胞质外观变异大导致传统膜分割困难的问题。现有深度学习方法依赖重型架构和大量训练，泛化性差。PRISM 旨在将高维计算机视觉任务转化为轻量级表格机器学习问题，实现低延迟推理，适用于仅 CPU 的资源受限临床环境，同时通过多尺度区域特征提取和集成堆叠提升可解释性和鲁棒性。",
+  "loss_formula": "N/A (基于传统机器学习的集成堆叠，无端到端可微分损失函数)",
+  "math_principle": "利用细胞核的嗜碱性，将图像投影到 CIELAB 和 HSV 空间计算自定义染色评分图，结合高斯平滑和 Otsu 阈值分割获取核掩膜。通过拓扑启发式过滤去除伪影，提取形态学、拓扑、染色统计、空间梯度及纹理等多域特征，构建高维特征向量。使用 Level-0 基分类器（如 RF, SVM, LogReg）和 Level-1 元分类器（SVM）进行堆叠集成，通过 5 折分层交叉验证优化模型。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 3, 256, 256]"
+    },
+    {
+      "layer": "preprocessing",
+      "shape": "[B, 3, 256, 256]"
+    },
+    {
+      "layer": "feature_extraction",
+      "shape": "[B, N_features]"
+    },
+    {
+      "layer": "stacking_ensemble",
+      "shape": "[B, C]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 图像标准化 (256x256) 并转换至 CIELAB/HSV 空间",
+    "step2: 计算染色评分图，高斯平滑，Otsu 阈值分割，拓扑过滤获取核掩膜",
+    "step3: 基于核掩膜定义拓扑域，提取形态学、染色、纹理等特征向量",
+    "step4: 使用 5 折分层交叉验证训练 Level-0 基分类器 (RF, SVM, LogReg 等)",
+    "step5: 使用 Level-1 元分类器 (SVM) 对基分类器输出进行堆叠集成",
+    "step6: 评估敏感性、特异性、MCC 及平衡准确率"
+  ],
+  "baselines_compared": [
+    "ResNet-18",
+    "VGG16",
+    "DenseNet-121",
+    "EfficientNet-B0",
+    "Swin Transformer",
+    "MobileNet",
+    "ShuffleNet",
+    "Cellpose",
+    "SAM"
+  ],
+  "key_results": {
+    "macro_accuracy": "98.46%",
+    "balanced_accuracy": "98.46%",
+    "inference_device": "CPU-only",
+    "optimal_config": "ET + SVM + LogReg"
+  },
+  "confidence": 0.85,
+  "task_id": "2605.12851v1-algorithm_analysis-v1",
+  "run_at": "2026-07-24T09:11:34.297756",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

@@ -1,0 +1,58 @@
+{
+  "paper_id": "2608.14800",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种基于三角内容感知置换（TCA）的新型脆弱水印方法，旨在解决现有方法在零误报率（FPR）、位级敏感性、块大小灵活性、任意图像尺寸兼容性以及对JPEG压缩的完全脆弱性等方面的不足。实验结果显示，该方法在17种攻击下实现了完美的检测性能（TPR=100%，FPR=0%，FNR=0%），并在盐椒噪声攻击下表现出接近完美的性能。方法在理论层面具有创新性，尤其在内容依赖性和置换机制方面。然而，论文在统计验证、引用真实性和泛化性方面存在严重问题，需要进一步澄清和补充。",
+  "strengths": [
+    "提出了基于TCA的纯置换机制，实现了位级敏感性和零FPR，理论设计具有创新性。",
+    "实验设计全面，覆盖了18种攻击类型，并在多个指标上表现优异，包括PSNR和SSIM等视觉质量指标。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "论文声称TCA置换是内容依赖的、具有雪崩效应且与输入维度无关",
+      "concern": "缺乏对TCA算法的详细描述和数学定义，无法验证其是否真正具备所声称的三个关键属性。",
+      "why_it_matters": "方法的核心创新是TCA，但缺乏具体实现细节，导致方法不可复现，影响科学性和可信度。",
+      "resolution_test": "需要补充TCA算法的数学定义、伪代码或流程图，并提供理论证明其内容依赖性、雪崩效应和维度无关性。"
+    },
+    {
+      "id": "S-M2",
+      "severity": "major",
+      "blocking": true,
+      "axis": "statistics",
+      "claim_pointer": "论文声称在17种攻击下实现了TPR=100%，FPR=0%，FNR=0%",
+      "concern": "未提供统计显著性检验或置信区间，无法判断结果的稳健性。",
+      "why_it_matters": "缺乏统计验证可能导致结果被高估，影响结论的可信度。",
+      "resolution_test": "应补充对每种攻击的统计显著性检验（如t检验或bootstrap方法）以及置信区间分析。"
+    },
+    {
+      "id": "S-M3",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "论文声称方法可推广到不同颜色空间和位深度",
+      "concern": "实验仅在512×512的8位灰度图像上进行，未测试彩色图像或12/16位图像。",
+      "why_it_matters": "未验证泛化能力，无法确认方法是否真正适用于不同颜色空间和位深度。",
+      "resolution_test": "应补充在彩色图像（如RGB、YUV）和高比特深度图像（如12位、16位）上的实验结果。"
+    },
+    {
+      "id": "S-M4",
+      "severity": "major",
+      "blocking": true,
+      "axis": "citation",
+      "claim_pointer": "引用了文献[11]作为TCA的理论基础",
+      "concern": "文献[11]未在参考文献列表中出现，引用真实性存疑。",
+      "why_it_matters": "缺失关键文献引用，影响方法的可信性和学术规范性。",
+      "resolution_test": "需补充文献[11]的完整引用信息或删除相关引用声明。"
+    }
+  ],
+  "assessment_boundaries": [
+    "未提供代码或算法实现细节，无法验证方法的可复现性。",
+    "未讨论与深度学习方法的对比实验，无法评估其在现代AI驱动的篡改检测中的竞争力。",
+    "未提供对不同图像内容（如纹理丰富 vs 平滑区域）的局部性能分析。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

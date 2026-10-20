@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "GET模型的核心架构图，展示了包含编码器、解码器、ETN模块及详细组件（如MBC、SSA、注意力机制）的医学图像分割网络流程。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "展示了多种医学影像（超声、病理、内窥镜等）的生成式分割结果对比图"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心实验结果图：三个子图对比模型参数量与DSC、IoU、HD95指标，突出GET(Ours)与其他分割方法的性能对比"
+  }
+}

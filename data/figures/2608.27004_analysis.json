@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "MVC-Bench基准总览环形图，展示三大医学影像模态（视网膜、病理、胸片）下的数据集、骨干模型与校准方法组成"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "展示了不同模型在多个指标上的性能对比热力图，属于核心实验结果可视化。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "各医疗视觉语言模型骨干网络在ECE-t校准指标上的柱状图对比（Mean与Std ECE）"
+  }
+}

@@ -1,0 +1,33 @@
+{
+ "id": "2508.16085",
+ "chars": 60000,
+ "statistics": {
+  "checks": {
+   "has_p_value": true,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": true,
+   "has_fdr": true,
+   "mentions_ablation": true,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "score": 8
+ },
+ "key_claims": [
+  "elf consistently achieved the highest performance across all tasks, surpassing the second-best model, titan, by an average of 2.",
+  "795) (30 cls), outperforming titan by around 1% ( p < p< 0.",
+  "the improvements in classification performance were more notable for challenging tasks."
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+   "doi": null
+  }
+ ],
+ "citation_results": []
+}

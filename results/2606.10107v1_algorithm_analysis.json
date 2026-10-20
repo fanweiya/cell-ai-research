@@ -1,0 +1,58 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2606.10107v1",
+  "status": "done",
+  "design_motivation": "现有实例分割评估指标（如AP@50, PQ, SEG, AJI）存在三个核心缺陷：1) 依赖硬IoU阈值导致评分不连续且对微小变化不敏感；2) 采用贪婪或一对多匹配导致对应关系非最优且依赖顺序；3) 基于对象的归一化在物体大小变化时扭曲分数。MMA旨在通过全局最优匹配、连续重叠评分和像素级全局归一化来解决这些问题，提供更稳定、敏感且可解释的评估。",
+  "loss_formula": "MMA = \\frac{\\sum_{(i,j) \\in \\mathcal{M}^*} |G_i \\cap P_j|}{|\\bigcup_{i} G_i \\cup \\bigcup_{j} P_j|}",
+  "math_principle": "MMA将实例匹配建模为最大权二分图匹配问题（Maximum Bipartite Matching），其中节点为预测掩码和真实掩码，边权重为两者交集的像素面积。通过匈牙利算法等求解全局最优匹配\\mathcal{M}^*，最大化总交集面积。分子为最优匹配下所有交集像素面积之和，分母为所有真实和预测像素的并集基数（全局归一化），确保每个像素仅被计数一次。",
+  "tensor_flow": [
+    {
+      "layer": "input_masks_gt",
+      "shape": "[N, H, W]"
+    },
+    {
+      "layer": "input_masks_pred",
+      "shape": "[N, H, W]"
+    },
+    {
+      "layer": "iou_matrix",
+      "shape": "[N_gt, N_pred]"
+    },
+    {
+      "layer": "matching_graph",
+      "shape": "Bipartite Graph"
+    },
+    {
+      "layer": "optimal_matching",
+      "shape": "[K, 2]"
+    },
+    {
+      "layer": "mma_score",
+      "shape": "[1]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 准备Ground Truth和预测的实例分割掩码",
+    "step2: 计算所有GT与预测掩码之间的IoU矩阵",
+    "step3: 构建二分图并求解最大权匹配",
+    "step4: 计算匹配交集总面积与全局并集面积",
+    "step5: 输出MMA分数"
+  ],
+  "baselines_compared": [
+    "AP@50",
+    "PQ",
+    "SEG",
+    "AJI",
+    "MMA-Greedy"
+  ],
+  "key_results": {
+    "stability": "MMA在渐进式损坏测试中表现出最强的稳定性，避免阈值驱动的突变",
+    "sensitivity": "MMA对重叠质量下降和假阳性积累均保持高敏感度",
+    "ranking_disagreement": "MMA与基线指标在模型排名上存在高达50%的Top-1不一致性"
+  },
+  "confidence": 0.95,
+  "task_id": "2606.10107v1-algorithm_analysis-v1",
+  "run_at": "2026-07-24T09:10:23.494673",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

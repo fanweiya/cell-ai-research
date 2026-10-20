@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreeBridge Wiki — combined_report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / FreeBridge Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>FreeBridge</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/data_prep.html">data_prep</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/configs.html">configs</a></li>
+<li><a href="modules/scripts.html">scripts</a></li>
+<li><a href="modules/freebridge.html">freebridge</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>FreeBridge — 综合分析报告</h1>
+<br>
+<ul>
+<li><strong>GitHub</strong>: Y-Research-SBU/FreeBridge</li>
+<li><strong>评分</strong>: 7.5/10</li>
+<li><strong>分析时间</strong>: 2026-07-15T18:25:16.429420</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2>CodeGraph 知识图谱分析</h2>
+<br>
+<br>
+<h2>RepoWiki 文档生成</h2>
+<br>
+<ul>
+<li>✅ 扫描成功</li>
+<li>📁 Wiki 目录: <code class="inline-code">/mnt/c/workspace/cell-ai-research/reports/FreeBridge_wiki</code></li>
+<li>📄 生成文件:</li>
+<li>architecture.md</li>
+<li>dependencies.md</li>
+<li>index.md</li>
+<li>reading-guide.md</li>
+<li>_sidebar.md</li>
+<li>modules/.codegraph.md</li>
+<li>modules/configs.md</li>
+<li>modules/data_prep.md</li>
+<li>modules/freebridge.md</li>
+<li>modules/root.md</li>
+<li>输出: Project: FreeBridge</li>
+</ul>
+<p>Files:   43</p>
+<p>Lines:   8,335</p>
+<p>Languages</p>
+<p>┏━━━━━━━━━━┳━━━━━━━┓</p>
+<p>┃ Language ┃ Files ┃</p>
+<p>┡━━━━━━━━━━╇━━━━━━━┩</p>
+<p>│ python   │    32 │</p>
+<p>│ markdown │     3 │</p>
+<p>│ yaml     │     3 │</p>
+<p>│ shell    │     2 │</p>
+<p>│ unknown  │     2 │</p>
+<p>│ html     │     1 │</p>
+<p>└──────────┴───────┘</p>
+<p>FreeBridge/</p>
+<p>├── ⚙️ README.md (markdown)</p>
+<p>├── ⚙️ setup.py (python)</p>
+<p>├── 📁 scripts/</p>
+<p>│   └── 📄 train.sh (shell)</p>
+<p>├── 📁 .codegraph/</p>
+<p>│   └── 📄 .gitignore (unknown)</p>
+<p>├── 📄 .gitignore (unknown)</p>
+<p>├── 📄 CONTRIBUTING.md (markdown)</p>
+<p>├── 📄 LICENSE.md (markdown)</p>
+<p>├── 📁 configs/</p>
+<p>│   ├── 📄 experiment/bbbc021.yaml (yaml)</p>
+<p>│   └── 📄 train.yaml (yaml)</p>
+<p>├── 📁 data_prep/</p>
+<p>│   ├── 📄 __init__.py (python)</p>
+<p>│   ├── 📄 build_bbbc021_endpoints.py (python)</p>
+<p>│   ├── 📄 cellvae_adapter.py (python)</p>
+<p>│   ├── 📄 crop_bbbc021_singlecell.py (python)</p>
+<p>│   ├── 📄 export_latents_from_vae.py (python)</p>
+<p>│   ├── 📄 export_latents_mu.py (python)</p>
+<p>│   ├── 📄 finetune_decoder_lpips.py (python)</p>
+<p>│   ├── 📄 gen_cells.py (python)</p>
+<p>│   ├── 📄 make_split.py (python)</p>
+<p>│   ├── 📄 run_week.s</p>
+<br>
+<h2>原有子代理分析报告</h2>
+<br>
+<pre class="code-block"><code class="language-">现在我已经收集了足够的信息来生成分析报告。让我整理一下：
+
+## **项目概述**
+
+**FreeBridge** 是一个基于 **变分 Schrödinger 桥梁（Variational Schrödinger Bridges）** 的方法，用于从**仅端点数据**中建模单细胞扰动响应。论文发表在 **MICCAI 2026** (arXiv:2606.11286)。
+
+**主要解决的问题**：
+- 单细胞图像分析中，只有处理前（对照）和处理后（扰动）两种端点状态，无法获得细胞随时间变化的轨迹
+- 需要推断生物学合理的连续扰动轨迹
+- 确保生成的中间状态保持在观测到的细胞形态流形上
+
+**核心理念**：将自由能与流形约束结合，使用经验支持成本（empirical support cost）来约束中间状态在控制与扰动端点构成的流形上。
+
+---
+
+## **架构分析**
+
+### 目录结构</code></pre>
+<p>FreeBridge/</p>
+<p>├── configs/              # Hydra配置</p>
+<p>│   ├── experiment/       # 实验配置模板</p>
+<p>│   └── train.yaml        # 主配置</p>
+<p>├── data_prep/            # 数据预处理脚本</p>
+<p>│   ├── crop_bbbc021_singlecell.py   # 细胞图像裁剪</p>
+<p>│   ├── train_vae_full.py             # 训练VAE编解码器</p>
+<p>│   ├── export_latents_from_vae.py    # 导出VAE潜在变量</p>
+<p>│   ├── build_bbbc021_endpoints.py    # 构建端点数据集</p>
+<p>│   └── ...</p>
+<p>├── freebridge/           # 核心算法代码</p>
+<p>│   ├── pl_model.py          # Lightning训练模块（主流程）</p>
+<p>│   ├── sde.py               # SDE求解器</p>
+<p>│   ├── state_cost.py        # 状态成本函数（核心创新）</p>
+<p>│   ├── dataset.py           # 数据集和采样器</p>
+<p>│   ├── gaussian_path.py     # 高斯路径建模</p>
+<p>│   ├── match_loss.py        # 匹配损失函数</p>
+<p>│   ├── network.py           # 神经网络构建</p>
+<p>│   ├── unet.py              # UNet网络（图像任务）</p>
+<p>│   └── ...</p>
+<p>├── scripts/           # 训练脚本</p>
+<p>├── train.py         # 训练入口</p>
+<p>└── sample_bbbc021_latents.py  # 推理采样脚本</p>
+<pre class="code-block"><code class="language-">
+### 核心模块关系
+1. **数据流**：原始细胞图像 → VAE编码 → 潜在端点 → 桥梁匹配训练
+2. **训练流程**（Lightning模块）：
+   - M-step：桥匹配损失训练漂移网络
+   - R-step（验证步）：拟合高斯路径（带支持成本）
+   - 交替优化
+
+### 依赖
+- PyTorch Lightning **1.x** (1.8.5.post0) - 注意：不支持2.x
+- Hydra 1.2.x (配置管理)
+- PyTorch 2.0.1 + CUDA 11.7
+- 常用科学计算库：numpy, scipy, torchmetrics等
+
+---
+
+## **核心算法实现原理**
+
+### **1. 自由Bridge 核心公式（Schrödinger Bridge）**
+</code></pre>
+<p>漂移 = 基础漂移 + 桥梁漂移</p>
+<p>free drift + diffusion drift</p>
+<pre class="code-block"><code class="language-">
+在 `pl_model.py` 中，核心是交替优化：
+
+**M-step（训练步）**：桥匹配损失</code></pre>
+<h1>match_loss.bm_loss() - 给定时钟，学习与桥漂移</h1>
+<p>loss = (pred_vt - vt)²</p>
+<pre class="code-block"><code class="language-">或者使用**熵作用匹配（EAM）**：</code></pre>
+<h1>match_loss.eam_loss_trajs()</h1>
+<h1>更精确，但计算量大</h1>
+<pre class="code-block"><code class="language-">
+**R-step（R-step）**：高斯路径拟合（带支持成本）</code></pre>
+<h1>gaussian_path.fit()</h1>
+<h1>优化样条系数，最小化：cost_s (支持成本) + cost_c (桥成本)</h1>
+<pre class="code-block"><code class="language-">
+### **2. 经验支持成本（Empirical Support Cost） - 核心创新**
+
+在 `state_cost.py` 的 `EmpiricalSupportStateCost` 类中实现：
+</code></pre>
+<p>V_t(z) = λ * d_emp(z)²</p>
+<pre class="code-block"><code class="language-">
+其中 `d_emp(z)` 是点 z 到**当前小批量端点集合**（控制+扰动）的欧氏距离。这确保了中间状态不会偏离观测到的细胞形态流形。
+
+特性：
+- 使用当前批量端点作为支持集（`support_bank`）
+- 支持分块计算（chunked cdist）避免内存爆炸
+- λ 可调节：0 退化为 CellFlux 基线，0.5 最佳
+
+### **3. 高斯路径建模**
+
+在 `gaussian_path.py` 的 `EndPointGaussianPath` 类：
+</code></pre>
+<p>路径 = 均值样条 (EndPointSpline) + 标准差样条 (StdSpline)</p>
+<pre class="code-block"><code class="language-">
+- 均值路径：描述从对照到扰动的趋势
+- 标准差路径：伴随扩散系数
+- 支持事件化采样：`sample_xt()` 生成路径的分布表示
+
+### **4. SDE 数值积分**
+
+在 `sde.py` 的 `sdeint` 函数：</code></pre>
+<h1>forward Euler-Maruyama</h1>
+<p>x + u*dt + g*dW</p>
+<pre class="code-block"><code class="language-">从源分布采样正向积分得到目标；或反向积分。
+
+### **5. 数据流**
+
+1. VAE编码器将细胞图像编码为64维潜在向量
+2. 控制p0和扰动p1作为独立端点分布
+3. 训练中交替进行M/R步
+4. R步后，用拟合的高斯路径更新训练数据
+
+---
+
+## **代码质量评估**
+
+### **优点**
+1. **结构清晰**：模块职责明确，separation of concerns优秀
+2. **Lightning 1.x 兼容**：良好的版本兼容性处理（try/except多个版本）
+3. **松弛的边界检查**：在关键数学计算前均有shape验证
+4. **记忆管理**：注意使用detach、gc.collect()、cuda.empty_cache()
+5. **HPC友好**：支持多GPU DDP、SLURM集成
+
+### **待改进**
+1. **文档不足**：
+   - 代码注释偏少，数学公式需对照论文
+ </code></pre>
+<br>
+<p>&gt; 完整报告: <a href="FreeBridge.html">reports/FreeBridge.md</a></p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

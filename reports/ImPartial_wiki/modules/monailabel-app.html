@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ImPartial Wiki — monailabel-app</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / ImPartial Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>ImPartial</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/monailabel-app.html">monailabel-app</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/config.html">config</a></li>
+<li><a href="../modules/data.html">data</a></li>
+<li><a href="../modules/impartial.html">impartial</a></li>
+<li><a href="../modules/imagej-plugin.html">imagej-plugin</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>monailabel-app</h1>
+<br>
+<p>&gt; 基于部分标注的交互式实例分割深度学习框架</p>
+<br>
+<p>该模块实现了ImPartial交互式分割应用，集成在Monai Label框架中。它支持使用部分标注（scribbles）进行细胞分割和阈值处理，通过混合损失函数（分割损失、重建损失、正则化损失）训练模型，并提供推理接口。核心功能包括数据加载、模型配置、训练流程和推理引擎。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">api/main.py</code></h3>
+<br>
+<p>Monai Label应用的主入口，初始化Impartial应用并加载模型配置。</p>
+<br>
+<ul>
+<li><code class="inline-code">Impartial</code> (class) - 继承自MONAILabelApp，负责初始化数据源、推理任务和训练任务。</li>
+<li><code class="inline-code">init_datastore</code> (method) - 返回LocalDatastore实例，管理图像和标注数据。</li>
+<li><code class="inline-code">init_infers</code> (method) - 初始化推理任务字典，加载预训练模型。</li>
+<li><code class="inline-code">init_trainers</code> (method) - 初始化训练任务字典，配置训练流程。</li>
+</ul>
+<br>
+<h3><code class="inline-code">Impartial_classes.py</code></h3>
+<br>
+<p>定义ImPartial配置类，包含网络结构、训练参数和损失函数设置。</p>
+<br>
+<ul>
+<li><code class="inline-code">ImPartialConfig</code> (class) - 继承argparse.Namespace，存储所有超参数，如UNet深度、批量大小、损失权重等。</li>
+</ul>
+<br>
+<h3><code class="inline-code">Impartial_dataloaders.py</code></h3>
+<br>
+<p>实现数据加载逻辑，包括补丁采样和盲点处理。</p>
+<br>
+<ul>
+<li><code class="inline-code">sample_patches</code> (function) - 从图像和标注中随机采样补丁，优先选择包含scribbles的区域。</li>
+<li><code class="inline-code">compute_probability_map</code> (function) - 计算每个像素被采样的概率，基于scribbles分布。</li>
+<li><code class="inline-code">random_crop</code> (function) - 根据概率图随机裁剪图像和标注补丁。</li>
+<li><code class="inline-code">blind_spot_patch</code> (function) - 对输入图像应用盲点掩码，用于重建损失训练。</li>
+</ul>
+<br>
+<h3><code class="inline-code">Impartial_functions.py</code></h3>
+<br>
+<p>提供损失计算和输出处理函数。</p>
+<br>
+<ul>
+<li><code class="inline-code">compute_impartial_losses</code> (function) - 计算混合损失，包括前景分割、背景分割、重建和正则化损失。</li>
+<li><code class="inline-code">save_outputs</code> (function) - 将模型输出保存为PNG图像。</li>
+</ul>
+<br>
+<h3><code class="inline-code">api/lib/configs/__init__.py</code></h3>
+<br>
+<p>定义不同通道数的配置类，继承自ImPartialConfig。</p>
+<br>
+<ul>
+<li><code class="inline-code">Vectra2Ch</code> (class) - 针对2通道Vectra数据集的配置。</li>
+<li><code class="inline-code">Config_CH1</code> (class) - 1通道配置。</li>
+<li><code class="inline-code">Config_CH2</code> (class) - 2通道配置。</li>
+<li><code class="inline-code">Config_CH3</code> (class) - 3通道配置。</li>
+</ul>
+<br>
+<h3><code class="inline-code">api/lib/configs/impartial.py</code></h3>
+<br>
+<p>实现TaskConfig接口，配置网络、推理和训练任务。</p>
+<br>
+<ul>
+<li><code class="inline-code">Impartial</code> (class) - TaskConfig实现，初始化UNet网络并返回推理和训练任务。</li>
+<li><code class="inline-code">init</code> (method) - 设置标签、模型路径和network实例。</li>
+<li><code class="inline-code">infer</code> (method) - 返回InferTask实例。</li>
+<li><code class="inline-code">trainer</code> (method) - 返回TrainTask实例。</li>
+</ul>
+<br>
+<h3><code class="inline-code">api/lib/infers/impartial.py</code></h3>
+<br>
+<p>实现推理引擎，处理图像加载、预处理、模型推理和后处理。</p>
+<br>
+<ul>
+<li><code class="inline-code">Impartial</code> (class) - 继承BasicInferTask，实现图像读取、补丁推理和结果聚合。</li>
+<li><code class="inline-code">pre_transforms</code> (method) - 定义推理前的预处理步骤，如加载图像、归一化。</li>
+<li><code class="inline-code">post_transforms</code> (method) - 定义推理后的后处理步骤，如输出解析、熵计算。</li>
+<li><code class="inline-code">writer</code> (method) - 将推理结果写入ZIP文件。</li>
+</ul>
+<br>
+<h3><code class="inline-code">api/lib/trainers/impartial.py</code></h3>
+<br>
+<p>实现训练引擎，管理数据预处理、训练循环和验证。</p>
+<br>
+<ul>
+<li><code class="inline-code">Impartial</code> (class) - 继承BasicTrainTask，实现训练和验证逻辑。</li>
+<li><code class="inline-code">pre_process</code> (method) - 预处理数据列表，归一化图像并转换标注为scribbles。</li>
+<li><code class="inline-code">train_pre_transforms</code> (method) - 训练前的增强变换，如盲点补丁、随机翻转。</li>
+<li><code class="inline-code">loss_function</code> (method) - 返回ImpartialLoss实例，计算混合损失。</li>
+</ul>
+<br>
+<h3><code class="inline-code">api/lib/transforms.py</code></h3>
+<br>
+<p>提供自定义Monai Transform类，用于数据增强和输出处理。</p>
+<br>
+<ul>
+<li><code class="inline-code">PercentileNormalization</code> (class) - 基于百分位的图像归一化变换。</li>
+<li><code class="inline-code">SampleImage</code> (class) - 采样图像补丁的变换。</li>
+<li><code class="inline-code">BlindSpotPatch</code> (class) - 应用盲点掩码的变换。</li>
+<li><code class="inline-code">GetImpartialOutputs</code> (class) - 解析模型输出为任务特定的格式。</li>
+</ul>
+<br>
+<h3><code class="inline-code">test.py</code></h3>
+<br>
+<p>测试脚本，批量推理并评估模型性能。</p>
+<br>
+<ul>
+<li><code class="inline-code">infer</code> (function) - 调用API对单张图像进行推理。</li>
+<li><code class="inline-code">main</code> (function) - 遍历图像目录，批量推理并计算性能指标。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>部分标注（Scribbles）</strong>: 用户仅提供少量像素级标注（scribbles），模型通过重建和分割任务学习完整分割。</li>
+<li><strong>混合损失函数</strong>: 结合分割损失（foreground/background）、重建损失和正则化损失，提升模型泛化能力。</li>
+<li><strong>补丁采样策略</strong>: 优先采样包含scribbles的图像区域，加速收敛并提高标注效率。</li>
+<li><strong>盲点掩码（Blind Spot）</strong>: 在重建任务中随机遮蔽部分像素，迫使模型学习上下文信息。</li>
+<li><strong>Monai Label集成</strong>: 通过TaskConfig接口实现与Monai Label平台的无缝对接，支持交互式标注和模型训练。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">api/main.py</code> → <code class="inline-code">api/lib/configs/impartial.py</code>: main.py导入Impartial类并实例化应用。</li>
+<li><code class="inline-code">api/lib/configs/impartial.py</code> → <code class="inline-code">api/lib/configs/__init__.py</code>: impartial.py导入Config_CH1/2/3等配置类。</li>
+<li><code class="inline-code">api/lib/configs/impartial.py</code> → <code class="inline-code">api/lib/infers/impartial.py</code>: impartial.py创建InferTask实例。</li>
+<li><code class="inline-code">api/lib/configs/impartial.py</code> → <code class="inline-code">api/lib/trainers/impartial.py</code>: impartial.py创建TrainTask实例。</li>
+<li><code class="inline-code">api/lib/trainers/impartial.py</code> → <code class="inline-code">Impartial_dataloaders.py</code>: 训练器导入sample_patches和blind_spot_patch函数。</li>
+<li><code class="inline-code">api/lib/trainers/impartial.py</code> → <code class="inline-code">Impartial_functions.py</code>: 训练器导入compute_impartial_losses函数。</li>
+<li><code class="inline-code">api/lib/trainers/impartial.py</code> → <code class="inline-code">api/lib/transforms.py</code>: 训练器使用BlindSpotPatch和GetImpartialOutputs变换。</li>
+<li><code class="inline-code">api/lib/infers/impartial.py</code> → <code class="inline-code">api/lib/transforms.py</code>: 推理器使用GetImpartialOutputs等变换。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

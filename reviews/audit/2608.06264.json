@@ -1,0 +1,40 @@
+{
+ "id": "2608.06264",
+ "chars": 30221,
+ "statistics": {
+  "checks": {
+   "has_p_value": true,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": true,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": false,
+   "mentions_dataset_split": false,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 9
+ },
+ "key_claims": [
+  "1 experimental setup to evaluate the effectiveness of otlesmix as a data augmentation technique to improve the training of a deep learning model, we apply the generation procedure described in section",
+  "both models are evaluated solely on real-world data to assess the impact of using partially synthesized data during training and determine whether or not this improves the downstream segmentation perf",
+  "on every dataset, otlesmix outperforms all concurrent methods, increasing dsc by 0."
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+   "doi": "10.1007/978-3-319-24574-4_28"
+  }
+ ],
+ "citation_results": [
+  {
+   "title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+   "doi": "10.1007/978-3-319-24574-4_28",
+   "verdict": "PASS",
+   "confirmed_n": 3
+  }
+ ]
+}

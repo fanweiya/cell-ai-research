@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心图：(a) 与 nnWNet 的定性分割对比图，展示更少背景误检和更精确病灶；(b) 多尺度、Prior-based、SAM-based 方法与本文 FreNet 的流程对比架构图。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文整体方法架构图：展示基于SAM与IPNN的视觉先验注入、FDM/SLM双域特征重构及top-down解码器的医学病灶分割框架，含t-SNE特征可视化"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法架构图：展示基于坐标编码器、先验条件器和隐式解码器的视觉先验特征重配置模块流程"
+  }
+}

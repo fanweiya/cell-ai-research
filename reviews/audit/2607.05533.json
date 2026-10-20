@@ -1,0 +1,35 @@
+{
+ "id": "2607.05533",
+ "chars": 14799,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": false,
+   "has_std": false,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": false,
+   "has_fdr": false,
+   "mentions_ablation": false,
+   "mentions_dataset_split": false,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P0: 无标准差/置信区间（单点估计）",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "score": 0
+ },
+ "key_claims": [
+  "7m parameters, outperforming litefm-l on all three external metrics despite using 18 × \\times fewer parameters and 21 × \\times fewer gflops.",
+  "9 improves over litefm-l while using 18 × \\times fewer parameters, 21 × \\times fewer gflops, and 12.",
+  "9 improves over litefm-l with 18 × \\times fewer parameters, mucoedge-r0."
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+   "doi": null
+  }
+ ],
+ "citation_results": []
+}

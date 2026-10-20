@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "跨模态医学图像分割方法的训练与测试流程架构图，包含低级特征提取、生成模型和分割模型。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "跨模态医学图像分割方法在肝脏和心脏数据集上的对比结果图，展示不同方法的分割效果与真实标签比较。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "跨模态医学图像分割的生成与分割两阶段结果对比图：展示MRI到CT的生成图像（FreUNet、SwinUNet、DDPM、GAN对比）及分割结果（UNet、3DUNet、FreUNet、SwinUNet与Ground Truth对比）"
+  }
+}

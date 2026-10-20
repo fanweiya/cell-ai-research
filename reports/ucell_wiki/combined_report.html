@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ucell Wiki — combined_report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / ucell Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>ucell</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/ucell.html">ucell</a></li>
+<li><a href="modules/dead_neuron_analysis.html">dead_neuron_analysis</a></li>
+<li><a href="modules/tests.html">tests</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>ucell — 综合分析报告</h1>
+<br>
+<ul>
+<li><strong>GitHub</strong>: jiyuuchc/ucell</li>
+<li><strong>评分</strong>: ?/10</li>
+<li><strong>分析时间</strong>: 2026-07-15T18:35:59.419423</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2>CodeGraph 知识图谱分析</h2>
+<br>
+<br>
+<h2>RepoWiki 文档生成</h2>
+<br>
+<ul>
+<li>✅ 扫描成功</li>
+<li>📁 Wiki 目录: <code class="inline-code">/mnt/c/workspace/cell-ai-research/reports/ucell_wiki</code></li>
+<li>📄 生成文件:</li>
+<li>architecture.md</li>
+<li>dependencies.md</li>
+<li>index.md</li>
+<li>reading-guide.md</li>
+<li>_sidebar.md</li>
+<li>modules/.codegraph.md</li>
+<li>modules/dead_neuron_analysis.md</li>
+<li>modules/root.md</li>
+<li>modules/tests.md</li>
+<li>modules/ucell.md</li>
+<li>输出: Project: ucell</li>
+</ul>
+<p>Files:   21</p>
+<p>Lines:   4,727</p>
+<p>Languages</p>
+<p>┏━━━━━━━━━━┳━━━━━━━┓</p>
+<p>┃ Language ┃ Files ┃</p>
+<p>┡━━━━━━━━━━╇━━━━━━━┩</p>
+<p>│ python   │    15 │</p>
+<p>│ markdown │     3 │</p>
+<p>│ unknown  │     2 │</p>
+<p>│ toml     │     1 │</p>
+<p>└──────────┴───────┘</p>
+<p>ucell/</p>
+<p>├── ⚙️ README.md (markdown)</p>
+<p>├── ⚙️ config.py (python)</p>
+<p>├── 📁 dead_neuron_analysis/</p>
+<p>│   ├── ⚙️ README.md (markdown)</p>
+<p>│   ├── 📄 analyze_neurons_advanced.py (python)</p>
+<p>│   └── 📄 detect_dead_neurons.py (python)</p>
+<p>├── ⚙️ pyproject.toml (toml)</p>
+<p>├── 📁 .codegraph/</p>
+<p>│   └── 📄 .gitignore (unknown)</p>
+<p>├── 📄 .gitignore (unknown)</p>
+<p>├── 📄 data.py (python)</p>
+<p>├── 📄 eval.py (python)</p>
+<p>├── 📄 few_shot_adapt.py (python)</p>
+<p>├── 📄 lora.md (markdown)</p>
+<p>├── 📄 predict.py (python)</p>
+<p>├── 📁 tests/</p>
+<p>│   └── 📄 test_checkpoint_loading.py (python)</p>
+<p>├── 📄 train.py (python)</p>
+<p>└── 📁 ucell/</p>
+<p>├── 📄 dynamics.py (python)</p>
+<p>├── 📄 frm.py (python)</p>
+<p>├── 📄 layers.py (python)</p>
+<p>├── 📄 lora.py (python)</p>
+<p>├── 📄 metrics.py (python)</p>
+<p>└── 📄 utils.py (python)</p>
+<p>⠼ Done!</p>
+<br>
+<p>Wiki generated: /mnt/c/workspace/cell-ai-researc</p>
+<br>
+<h2>原有子代理分析报告</h2>
+<br>
+<pre class="code-block"><code class="language-">现在我已经充分了解了这个仓库。让我开始撰写分析报告：
+
+## 项目概述
+
+**UCell** 是一个递归式轻量级细胞分割模型，论文来源为 *arXiv:2604.00243* "UCell: rethinking generalizability and scaling of bio-medical vision models"。该项目致力于解决生物医学图像中细胞分割的泛化性挑战——传统模型在不同数据集间表现差异大，而 UCell 通过递归状态空间架构，仅用 **1000 万至 3000 万参数** 就达到了接近大模型的分割效果，在少样本和跨数据集场景下表现出强大的泛化能力。
+
+## 架构分析
+
+### 目录结构</code></pre>
+<p>ucell/</p>
+<p>├── README.md           # 项目说明和快速开始</p>
+<p>├── config.py           # 模型配置和训练参数</p>
+<p>├── data.py             # 数据加载和预处理</p>
+<p>├── train.py            # 训练脚本</p>
+<p>├── predict.py          # 推理脚本</p>
+<p>├── eval.py             # 评估脚本</p>
+<p>├── few_shot_adapt.py   # 少样本适应流水线</p>
+<p>├── pyproject.toml      # Python 项目依赖</p>
+<p>└── ucell/              # 核心代码包</p>
+<p>├── frm.py          # Frame Reconstruction Machine 核心架构</p>
+<p>├── layers.py       # 自定义注意力层和激活函数</p>
+<p>├── dynamics.py     # 流形动力学和 mask 提取</p>
+<p>├── lora.py         # LoRA 适配器实现</p>
+<p>├── metrics.py      # 评估指标计算</p>
+<p>└── utils.py        # 工具函数</p>
+<pre class="code-block"><code class="language-">
+### 主要模块依赖关系
+- **FRM (FrmWrapper/FRM)**: 基于 Transformer 递归状态空间模型，采用 RoPE 位置和 SwiGLU 激活
+- **Data Pipeline**: 基于 HuggingFace Datasets + TorchVision transforms
+- **Training**: Lightning Fabric + Weights &amp; Biases
+- **Dynamics**: 基于扩散流的 mask 提取算法
+
+### 依赖关系
+- 核心依赖：torch, einops, scikit-image, fastremap, ml_collections, tqdm
+- 训练依赖：lightning, wandb, torchvision, datasets
+
+## 核心算法
+
+### 1. FRM 递归状态空间架构
+
+UCell 的核心创新在于 **FRM (Frame Reconstruction Machine)**，这是一个递归式轻量网络：
+</code></pre>
+<p>class FRM(nn.Module):</p>
+<p>def __init__(self, config):</p>
+<h1>关键参数：hidden_size=1024, depth=2, num_heads=16</h1>
+<h1>状态长度：seq_len+(num_z_tokens=64)</h1>
+<br>
+<p>def _input_embeddings(self, image, task_id):</p>
+<h1>Patch embedding + 位置编码 (RoPE) + 任务编码</h1>
+<h1>将图像分块为 tokens，每组 patch_size=8 的图像块映射为向量</h1>
+<br>
+<p>def forward(self, z, batch):</p>
+<h1>递归状态更新：经过 H_cycles 次宏观循环</h1>
+<h1>每次宏观循环包含 L_cycles=7 或 21 次微观循环</h1>
+<h1>状态 z 在递归中不断细化，实现类似深度学习展开的效果</h1>
+<pre class="code-block"><code class="language-">
+**关键设计**：
+- **递归机制**：通过反复应用相同的 Transformer 层，模拟 RNN 的状态更新，在推理时逐步细化分割结果
+- **任务嵌入**：支持多任务学习，通过 task_id 区分不同成像模态
+- **门控线性单元**：使用 SwiGLU 替代传统 FFN，提升表达能力
+
+### 2. Patch-based 图像分块处理
+</code></pre>
+<p>self.patch_emb = nn.Conv2d(3, hidden_size, kernel_size=8, stride=8)</p>
+<p>self.lm_head = nn.ConvTranspose2d(hidden_size, 3, kernel_size=8, stride=8)</p>
+<pre class="code-block"><code class="language-">- 图像被划分为 8×8 补丁，每个补丁视为一个 token
+- 输出层使用转置卷积将隐藏状态映射回像素级预测
+
+### 3. 流形动力学 (Dynamics) 分割
+
+模型输出 **flow (2 通道)** 和 **cell_prob (1 通道)**，通过经典动力学方法提取 masks：
+</code></pre>
+<p>def compute_masks(dP, cellprob, ...):</p>
+<h1>从细胞概率掩码中采样像素点</h1>
+<p>p_final = follow_flows(dP * (cellprob &gt; threshold) / 5., inds=inds, niter=200)</p>
+<p>mask = get_masks_torch(p_final, inds, dP.shape[1:])</p>
+<pre class="code-block"><code class="language-">
+**核心思想**：
+- 将 flow 场视为像素的运动向量场
+- 从细胞概率高的区域开始，沿 flow 方向积分
+- 收敛的像素形成细胞实例 mask
+
+### 4. 少样本适配
+
+`few_shot_adapt.py` 提供完整的少样本微调流水线：
+1. 从验证集采样 N 个样本构造训练集
+2. LoRA 微调（rank=16）
+3. 在验证集推理并评估
+4. 输出分割质量报告
+
+## 代码质量
+
+### 优点
+1. **模块化清晰**：core (ucell/) 与 scripts 分离良好
+2. **蜡度测试**：完整的 pytest 测试覆盖 checkpoint 加载、LoRA 适配等关键路径
+3. **文档完整**：每个函数有 docstring，README 提供使用示例
+4. **类型提示**：Python 3.11+ 类型注解，提升可维护性
+
+### 待改进
+1. **中文支持缺失**：测试和文档均为英文
+2. **依赖版本未锁定**：pyproject.toml 未指定具体版本
+3. **日志系统不完善**：缺少结构化日志输出
+
+### 测试覆盖
+- 核心模块有单</code></pre>
+<br>
+<p>&gt; 完整报告: <a href="ucell.html">reports/ucell.md</a></p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

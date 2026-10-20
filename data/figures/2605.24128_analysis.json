@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "ImPartial方法整体流程图：展示数据与标注采样器、基于U-Net的训练及因子分解、以及模型输出的前景/边界/熵图等结果，是论文的核心架构与方法示意图"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法对比图：展示ImPartial与Ground Truth及Mesmer、Cellpose、CellSAM、Celltype等方法在多个样本上的分割结果及F1分数对比"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "论文实验结果图：三行展示输入多通道显微图像、真值分割、预测分割（含F1分数）及熵图，体现模型在部分标注下的全细胞分割效果。"
+  }
+}

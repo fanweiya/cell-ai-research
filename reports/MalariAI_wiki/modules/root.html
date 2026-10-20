@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MalariAI Wiki — root</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / MalariAI Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>MalariAI</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/Phase3-PipelineB.html">Phase3-PipelineB</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/Phase4-WebApp.html">Phase4-WebApp</a></li>
+<li><a href="../modules/Phase2-BaselineA.html">Phase2-BaselineA</a></li>
+<li><a href="../modules/results.html">results</a></li>
+<li><a href="../modules/Phase1-EDA.html">Phase1-EDA</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/data.html">data</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>root</h1>
+<br>
+<p>&gt; MalariAI 项目的根目录，包含核心算法实现、数据预处理、模型训练与推理、以及 Web 应用部署的完整代码结构。</p>
+<br>
+<p>该模块实现了疟疾血涂片细胞分割与分期分类的端到端系统。核心采用两阶段解耦架构：第一阶段基于距离变换引导的分水岭算法进行无监督细胞分割（Stage 1 v2 引入 CLAHE 和分辨率感知峰值检测）；第二阶段使用 EfficientNet-B0 配合 Focal Loss 进行多类感染阶段分类，并利用 Grad-CAM++ 生成可解释性热力图。系统支持 NIH BBBC041 和 MP-IDB 数据集，具备跨数据集零样本泛化能力。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">README.md</code></h3>
+<br>
+<p>项目文档，阐述研究背景、方法创新、实验结果及部署链接。</p>
+<br>
+<h3><code class="inline-code">.gitignore</code></h3>
+<br>
+<p>定义 Git 忽略规则，排除虚拟环境、数据集、模型权重及内部文档，仅保留代码与论文源文件。</p>
+<br>
+<h3><code class="inline-code">Phase1-Stage1/segment.py</code></h3>
+<br>
+<p>实现分水岭分割算法，包含距离变换、峰值检测及细胞实例提取逻辑。</p>
+<br>
+<ul>
+<li><code class="inline-code">distance_transform_watershed</code> (function) - 执行距离变换并应用分水岭算法分割重叠细胞</li>
+<li><code class="inline-code">clahe_normalization</code> (function) - 应用限制对比度自适应直方图均衡化增强图像对比度</li>
+</ul>
+<br>
+<h3><code class="inline-code">Phase2-Stage2/classify.py</code></h3>
+<br>
+<p>加载 EfficientNet-B0 模型进行细胞分期分类，集成 Focal Loss 处理类别不平衡。</p>
+<br>
+<ul>
+<li><code class="inline-code">EfficientNetB0Classifier</code> (class) - 基于 EfficientNet-B0 的分类器，支持 Focal Loss 训练</li>
+<li><code class="inline-code">predict_stage</code> (function) - 对分割后的细胞 ROI 进行感染阶段预测</li>
+</ul>
+<br>
+<h3><code class="inline-code">Phase2-Stage2/explain.py</code></h3>
+<br>
+<p>利用 Grad-CAM++ 生成分类决策的空间注意力热力图，提供可解释性证据。</p>
+<br>
+<ul>
+<li><code class="inline-code">generate_gradcam_pp</code> (function) - 计算并可视化 Grad-CAM++ 热力图</li>
+</ul>
+<br>
+<h3><code class="inline-code">Phase3-PipelineB/evaluate.py</code></h3>
+<br>
+<p>执行端到端评估，计算分割召回率、分类准确率及跨数据集泛化性能。</p>
+<br>
+<ul>
+<li><code class="inline-code">compute_metrics</code> (function) - 计算 IoU、Centroid-in-box、mAP 等关键指标</li>
+</ul>
+<br>
+<h3><code class="inline-code">Phase4-WebApp/app.py</code></h3>
+<br>
+<p>构建 Flask Web 应用，提供用户上传血涂片图像并获取分割与分类结果的交互界面。</p>
+<br>
+<ul>
+<li><code class="inline-code">upload_and_process</code> (function) - 处理上传图像并返回分割掩码与分类结果</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>Annotation-Agnostic Segmentation</strong>: 第一阶段分水岭算法不依赖标注数据，通过距离变换自动分离重叠细胞，解决标注不完整问题。</li>
+<li><strong>Focal Loss</strong>: 在第二阶段分类中用于缓解红血球与寄生虫细胞间严重的类别不平衡（537:1）。</li>
+<li><strong>Grad-CAM++</strong>: 为每个细胞的分类预测生成空间注意力图，提供临床可解释的视觉证据。</li>
+<li><strong>Cross-Dataset Zero-Shot</strong>: 在 MP-IDB 数据集上无需重新训练即可验证模型泛化能力，证明算法对不同染色和实验室条件的鲁棒性。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">Phase3-PipelineB/evaluate.py</code> → <code class="inline-code">Phase1-Stage1/segment.py</code>: 调用分割模块获取细胞实例以评估分割性能</li>
+<li><code class="inline-code">Phase3-PipelineB/evaluate.py</code> → <code class="inline-code">Phase2-Stage2/classify.py</code>: 调用分类模块对分割出的细胞进行分期预测</li>
+<li><code class="inline-code">Phase2-Stage2/explain.py</code> → <code class="inline-code">Phase2-Stage2/classify.py</code>: 依赖分类模型的特征图生成可解释性热力图</li>
+<li><code class="inline-code">Phase4-WebApp/app.py</code> → <code class="inline-code">Phase1-Stage1/segment.py</code>: 在 Web 端集成分割算法处理用户上传图像</li>
+<li><code class="inline-code">Phase4-WebApp/app.py</code> → <code class="inline-code">Phase2-Stage2/classify.py</code>: 在 Web 端集成分类模型输出诊断结果</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>micro-sam Wiki — reading-guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / micro-sam Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>micro-sam</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/doc.html">doc</a></li>
+<li><a href="modules/test.html">test</a></li>
+<li><a href="modules/finetuning.html">finetuning</a></li>
+<li><a href="modules/workshops.html">workshops</a></li>
+<li><a href="modules/examples.html">examples</a></li>
+<li><a href="modules/development.html">development</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/deployment.html">deployment</a></li>
+<li><a href="modules/notebooks.html">notebooks</a></li>
+<li><a href="modules/scripts.html">scripts</a></li>
+<li><a href="modules/micro_sam.html">micro_sam</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Reading Guide</h1>
+<br>
+<p>本指南旨在帮助开发者快速理解 micro-sam 代码库的架构与核心功能。建议从项目配置和文档入手，建立宏观认知，随后深入核心模块 micro_sam 和 finetuning，最后通过示例和测试验证理解。</p>
+<br>
+<h2>Step 1: 理解项目概览与安装配置 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">README.md</code>, <code class="inline-code">pyproject.toml</code>, <code class="inline-code">setup.cfg</code>, <code class="inline-code">development/README.md</code></p>
+<br>
+<p>首先阅读 README.md 了解项目目标、核心功能及快速开始指南。接着查看 pyproject.toml 和 setup.cfg 理解依赖管理、项目结构和构建配置。development/README.md 将揭示开发环境设置和贡献指南。</p>
+<br>
+<h2>Step 2: 掌握核心库架构 (micro_sam) (~30 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">micro_sam/__init__.py</code>, <code class="inline-code">micro_sam/util.py</code>, <code class="inline-code">micro_sam/segment.py</code>, <code class="inline-code">micro_sam/models.py</code></p>
+<br>
+<p>进入核心模块，查看 __init__.py 了解库的导出接口。重点阅读 util.py 理解通用工具函数，segment.py 掌握分割逻辑，models.py 了解模型加载与集成方式。这是理解 SAM 如何被适配到显微图像的关键。</p>
+<br>
+<h2>Step 3: 探索微调与评估流程 (finetuning) (~25 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">finetuning/README.md</code>, <code class="inline-code">finetuning/generalists/training/</code>, <code class="inline-code">finetuning/evaluation/</code></p>
+<br>
+<p>阅读 finetuning/README.md 了解微调的整体工作流。然后深入 generalists/training 目录查看训练脚本，理解如何自定义训练参数和数据加载。最后查看 evaluation 目录，了解模型性能评估指标和脚本。</p>
+<br>
+<h2>Step 4: 学习示例与交互式应用 (~20 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">examples/README.md</code>, <code class="inline-code">examples/interactive_segmentation.py</code>, <code class="inline-code">notebooks/</code></p>
+<br>
+<p>通过 examples/README.md 了解可用的示例类型。运行或阅读 interactive_segmentation.py 等脚本，学习如何在实际场景中调用库进行交互式标注和自动分割。notebooks 提供了更详细的交互式教程，适合快速上手。</p>
+<br>
+<h2>Step 5: 理解测试与质量保证 (~15 min)</h2>
+<br>
+<p><strong>Files:</strong> <code class="inline-code">test/test_micro_sam.py</code>, <code class="inline-code">test/test_finetuning.py</code></p>
+<br>
+<p>查看测试文件以反向理解核心功能的使用方式。test_micro_sam.py 展示了库 API 的正确用法，test_finetuning.py 则验证了微调流程的完整性。这有助于发现潜在的使用陷阱和边界条件。</p>
+<br>
+<h2>Tips</h2>
+<br>
+<ul>
+<li>先运行示例脚本再阅读代码，建立直观感受</li>
+<li>遇到不理解的函数时，查看其调用链和测试用例</li>
+<li>关注 micro_sam 和 finetuning 两个核心目录的依赖关系</li>
+<li>利用 notebooks 进行交互式学习，边运行边理解</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

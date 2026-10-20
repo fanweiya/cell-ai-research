@@ -1,0 +1,57 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2604.20615v3",
+  "status": "done",
+  "design_motivation": "针对智能显微镜实时分析中标注数据稀缺且需快速响应的痛点，设计半监督生成对抗网络（SGAN）。相比传统全监督方法（依赖大量标注）和纯无监督方法（精度不足），SGAN利用少量标注数据、大量未标注数据及生成样本，通过共享特征提取器同时优化分类与判别任务，实现数据高效且鲁棒的细胞周期分类。",
+  "loss_formula": "L_total = L_sup + L_unsup + L_gen\n其中：\nL_sup = -Σ y_i log(p_i) (稀疏分类交叉熵)\nL_unsup = -[log(D_real) + log(1 - D_fake)] (二元交叉熵)\nL_gen = -log(D_fake) (生成器对抗损失)",
+  "math_principle": "基于流形假设，利用GAN的对抗训练机制，使判别器的共享特征提取器同时学习区分真实/合成样本的判别能力和基于少量标签的分类能力。通过多任务学习，未标注数据通过生成器间接参与优化，修正决策边界，提升特征表示的泛化性。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B, 1, 64, 64]"
+    },
+    {
+      "layer": "shared_conv_backbone",
+      "shape": "[B, 256, 4, 4]"
+    },
+    {
+      "layer": "supervised_head",
+      "shape": "[B, 5]"
+    },
+    {
+      "layer": "unsupervised_head",
+      "shape": "[B, 1]"
+    },
+    {
+      "layer": "generator_output",
+      "shape": "[B, 1, 64, 64]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载少量标注图像和大量未标注图像，生成合成样本",
+    "step2: 共享特征提取器处理输入，分别输出分类 logits 和真实/伪造判别分数",
+    "step3: 计算监督损失（标注数据）、无监督损失（真实/合成数据）和生成器损失",
+    "step4: 联合优化判别器（最大化分类与判别损失）和生成器（最小化判别损失）",
+    "step5: 迭代训练直至验证集准确率收敛，保存最佳模型"
+  ],
+  "baselines_compared": [
+    "MobileNetV2 (Transfer Learning)",
+    "InceptionV3",
+    "Siamese Networks",
+    "Wavelet Scattering Networks",
+    "SPARSE",
+    "Triple-GAN"
+  ],
+  "key_results": {
+    "Mitocheck_Accuracy": "93%",
+    "CellCognition_5Class_Accuracy": "95.68%",
+    "CellCognition_8Class_Accuracy": "92.73%",
+    "Homemade_Zeiss_Accuracy": "92.41%",
+    "Inference_Time": "109.7 ms/cell"
+  },
+  "confidence": 0.92,
+  "task_id": "2604.20615v3-algorithm_analysis-v1",
+  "run_at": "2026-07-24T09:12:55.590773",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

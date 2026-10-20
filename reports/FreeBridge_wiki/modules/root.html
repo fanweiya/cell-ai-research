@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreeBridge Wiki — root</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / FreeBridge Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>FreeBridge</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/data_prep.html">data_prep</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/freebridge.html">freebridge</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>root</h1>
+<br>
+<p>&gt; FreeBridge 项目的根目录，提供单细胞扰动响应建模的完整环境配置、训练入口、采样脚本及项目文档。</p>
+<br>
+<p>该目录包含 FreeBridge 项目的核心基础设施。setup.py 定义包结构；environment.yml 指定 PyTorch 2.0.1 及依赖库（如 hydra-core, pytorch-lightning, torchdiffeq, geomloss）；.gitignore 排除模型权重、中间数据及日志。README.md 阐述基于 Schrödinger Bridges 的无轨迹单细胞状态转移方法。index.html 为项目展示页面。sample_bbbc021_latents.py 用于从训练好的 checkpoint 前向采样目标潜变量；train.py 为基于 Hydra 和 PyTorch Lightning 的主训练入口，负责初始化 FreeBridgeLitModule、配置分布式环境及保存检查点。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">setup.py</code></h3>
+<br>
+<p>定义 Python 包 'freebridge' 的安装元数据。</p>
+<br>
+<ul>
+<li><code class="inline-code">setuptools.setup</code> (function) - 配置包名、版本、描述及自动发现 packages。</li>
+</ul>
+<br>
+<h3><code class="inline-code">environment.yml</code></h3>
+<br>
+<p>定义 conda 环境依赖，确保复现性。</p>
+<br>
+<ul>
+<li><code class="inline-code">dependencies</code> (list) - 包含 Python 3.9, PyTorch 2.0.1, CUDA 11.7 及 hydra, lightning, torchdiffeq 等关键库。</li>
+</ul>
+<br>
+<h3><code class="inline-code">sample_bbbc021_latents.py</code></h3>
+<br>
+<p>从训练好的模型 checkpoint 采样生成目标细胞潜变量。</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 解析命令行参数，加载模型与配置，从源分布采样初始状态，调用 model.sample 进行前向传输，保存生成的潜变量到 .npy 文件。</li>
+<li><code class="inline-code">restore_model</code> (function) - 从 freebridge.utils 导入，用于从 checkpoint 恢复模型实例和配置。</li>
+<li><code class="inline-code">get_dist_boundary</code> (function) - 从 freebridge.dataset 导入，获取源 (p0) 和目标 (p1) 分布的边界数据。</li>
+</ul>
+<br>
+<h3><code class="inline-code">train.py</code></h3>
+<br>
+<p>主训练脚本，集成 Hydra 配置管理与 PyTorch Lightning。</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - Hydra 入口函数。设置随机种子，初始化设备，获取分布边界 (get_dist_boundary)，实例化 FreeBridgeLitModule，可选记录边界可视化，启动 Lightning Trainer 进行训练。</li>
+<li><code class="inline-code">seed_all</code> (function) - 跨 Lightning 版本兼容的随机种子设置。</li>
+<li><code class="inline-code">maybe_slurm_plugin</code> (function) - 检测并配置 SLURM 环境插件以支持分布式训练。</li>
+<li><code class="inline-code">should_log_boundary</code> (function) - 根据配置决定是否需要记录边界可视化日志。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>Schrödinger Bridge</strong>: 一种随机最优传输框架，用于在源分布（对照细胞）和目标分布（扰动细胞）之间构建随机漂移，实现无轨迹数据下的状态转移建模。</li>
+<li><strong>Support Cost</strong>: 几何惩罚项，强制中间状态保持在观测到的形态流形上，防止生成不符合生物形态的细胞。</li>
+<li><strong>Endpoint-only Data</strong>: 模型仅利用终点（t=0 和 t=1）的细胞状态数据，无需中间时间步的轨迹观测。</li>
+<li><strong>Hydra + PyTorch Lightning</strong>: 项目采用 Hydra 管理超参数配置，PyTorch Lightning 封装训练循环，支持多 GPU 和 SLURM 集群部署。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">train.py</code> → <code class="inline-code">freebridge.pl_model</code>: train.py 导入 FreeBridgeLitModule 以构建 Lightning 模块。</li>
+<li><code class="inline-code">train.py</code> → <code class="inline-code">freebridge.dataset</code>: train.py 调用 get_dist_boundary 获取训练所需的数据分布。</li>
+<li><code class="inline-code">sample_bbbc021_latents.py</code> → <code class="inline-code">freebridge.utils</code>: sample 脚本调用 restore_model 加载模型权重和配置。</li>
+<li><code class="inline-code">sample_bbbc021_latents.py</code> → <code class="inline-code">freebridge.dataset</code>: sample 脚本调用 get_dist_boundary 获取源分布以生成初始样本。</li>
+<li><code class="inline-code">train.py</code> → <code class="inline-code">sample_bbbc021_latents.py</code>: train.py 生成 checkpoint，sample 脚本消费该 checkpoint 进行推理采样。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

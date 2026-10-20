@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MorphoHELM Wiki — root</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / MorphoHELM Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>MorphoHELM</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/feature-extraction.html">feature-extraction</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/data_installation.html">data_installation</a></li>
+<li><a href="../modules/data-preprocessing.html">data-preprocessing</a></li>
+<li><a href="../modules/huggingface_loader.html">huggingface_loader</a></li>
+<li><a href="../modules/raw_to_huggingface.html">raw_to_huggingface</a></li>
+<li><a href="../modules/data.html">data</a></li>
+<li><a href="../modules/benchmarks.html">benchmarks</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>root</h1>
+<br>
+<p>&gt; MorphoHELM Cell Painting 基准测试与特征提取流水线的根模块，提供项目文档、依赖配置及元数据管理。</p>
+<br>
+<p>该模块作为整个项目的入口和配置中心，包含项目说明、依赖列表、版本控制配置及合规文档。它定义了从数据下载、预处理、转换为 HuggingFace 格式、推理、聚合、标准化到基准测试和生成图表的完整流水线。核心功能包括通过 <code class="inline-code">data_installation/download_illum_corrected.py</code> 下载并校正 CPG0016 和 BBBC036 数据集的图像，生成 uint8 PNG 格式的输出，并管理相关的元数据缓存。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">README.md</code></h3>
+<br>
+<p>项目主文档，描述流水线步骤、安装指南、命令行参数及数据集细节。</p>
+<br>
+<ul>
+<li><code class="inline-code">download_illum_corrected.py</code> (script) - 用户-facing 的数据下载脚本，支持 CPG0016 和 BBBC036 数据集，执行光照校正并保存为 uint8 PNG。</li>
+</ul>
+<br>
+<h3><code class="inline-code">requirements.txt</code></h3>
+<br>
+<p>定义项目所需的 Python 依赖包，包括核心库、ML 框架及本地 HuggingFace 加载器。</p>
+<br>
+<ul>
+<li><code class="inline-code">huggingface_loader</code> (local_package) - 本地 HuggingFace 加载器包，通过 -e 方式安装。</li>
+</ul>
+<br>
+<h3><code class="inline-code">.gitattributes</code></h3>
+<br>
+<p>配置 Git LFS 以存储大型二进制基准资产（如 .parquet, .pt, .pth 文件）。</p>
+<br>
+<h3><code class="inline-code">.gitignore</code></h3>
+<br>
+<p>定义 Git 忽略规则，排除 Python 缓存、环境文件、日志、临时输出及未版本化的中间数据产品。</p>
+<br>
+<h3><code class="inline-code">CODE_OF_CONDUCT.md</code></h3>
+<br>
+<p>项目行为准则，采用 Microsoft 开源行为准则。</p>
+<br>
+<h3><code class="inline-code">LICENSE</code></h3>
+<br>
+<p>项目许可证，采用 MIT License。</p>
+<br>
+<h3><code class="inline-code">SECURITY.md</code></h3>
+<br>
+<p>安全策略文档，指导如何报告安全漏洞。</p>
+<br>
+<h3><code class="inline-code">SUPPORT.md</code></h3>
+<br>
+<p>项目支持文档，说明如何提交问题及获取帮助。</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>光照校正 (Illumination Correction)</strong>: 预处理阶段的核心步骤，用于校正图像的光照不均匀性，输出为全尺寸 uint8 PNG 图像。</li>
+<li><strong>数据集 (CPG0016 &amp; BBBC036)</strong>: 项目支持的两个主要细胞成像数据集，具有不同的目录结构和图像命名规范。</li>
+<li><strong>HuggingFace 格式转换</strong>: 将预处理后的图像和元数据转换为 HuggingFace Datasets 格式，以便后续推理和特征提取。</li>
+<li><strong>基准测试流水线</strong>: 从数据下载到生成图表的完整自动化流程，包含推理、聚合、标准化和质量控制步骤。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">README.md</code> → <code class="inline-code">data_installation/download_illum_corrected.py</code>: README 描述了 download_illum_corrected.py 的用法和参数，该脚本是数据下载和预处理的核心入口。</li>
+<li><code class="inline-code">requirements.txt</code> → <code class="inline-code">huggingface_loader/</code>: requirements.txt 通过 -e 标志本地安装 huggingface_loader 包，该包用于将预处理后的数据转换为 HuggingFace 格式。</li>
+<li><code class="inline-code">.gitattributes</code> → <code class="inline-code">data/main_paper_inputs</code>: .gitattributes 配置 Git LFS 以版本控制 data/main_paper_inputs 等目录下的基准输入文件。</li>
+<li><code class="inline-code">.gitignore</code> → <code class="inline-code">data/corrected_images</code>: .gitignore 忽略 data/corrected_images 等中间数据产品，这些文件由流水线生成且应在本地重新生成。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

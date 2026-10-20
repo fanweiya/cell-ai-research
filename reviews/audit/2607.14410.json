@@ -1,0 +1,35 @@
+{
+ "id": "2607.14410",
+ "chars": 34585,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": true,
+   "mentions_dataset_split": false,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 3
+ },
+ "key_claims": [
+  "do chromatin and histone features improve spatial organization when agreement with an rna-only reference decreases? 3.",
+  "adding projected scmultiome rna to visium rna improves ari, nmi, spatial contiguity, silhouette, and mus.",
+  "this supports the claim that full multimodal inputs improve spatial coherence and multimodal neighborhood structure, even when rna-reference agreement is not maximal."
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+   "doi": null
+  }
+ ],
+ "citation_results": []
+}

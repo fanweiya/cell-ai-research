@@ -1,0 +1,57 @@
+{
+  "paper_id": "2608.04885",
+  "task": "single_review",
+  "overall_assessment": "该论文探讨了视觉语言模型（VLMs）在脑部MRI图像中区分胶质母细胞瘤（GBM）和脑转移瘤（MET）任务中的诊断鲁棒性，特别是在视觉和文本扰动下的稳定性。论文设计了详尽的扰动实验框架，包括视觉顺序扰动、文本提示扰动和证据缺失测试，揭示了当前VLM在医学影像任务中的关键缺陷，如诊断不稳定性、空间推理问题和证据缺失下的过度承诺。论文方法严谨，实验设计合理，但存在一些方法论和统计报告方面的不足，影响了结论的可信度和可复现性。",
+  "strengths": [
+    "提出了一个系统性的扰动评估框架，用于测试VLM在医学影像任务中的诊断稳定性。",
+    "通过证据缺失实验揭示了模型在缺乏关键视觉证据时仍做出确定性诊断的问题，具有临床安全意义。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "所有模型查询均在温度=0下执行，以最小化采样引起的变异性。",
+      "concern": "虽然固定温度为0可以减少随机性，但未说明是否对模型输出进行人工验证或是否存在多个解码路径影响结果的一致性。",
+      "why_it_matters": "某些模型在温度=0时仍可能因解码策略或上下文窗口限制产生不一致输出，影响扰动实验的可靠性。",
+      "resolution_test": "应提供模型输出的重复性测试结果，例如在相同输入下多次运行是否产生相同诊断结果。"
+    },
+    {
+      "id": "S-M2",
+      "severity": "major",
+      "blocking": true,
+      "axis": "statistics",
+      "claim_pointer": "Flip Rate (%) 被定义为模型决策与基线预测不同的受试者百分比。",
+      "concern": "未报告Flip Rate的置信区间或统计显著性检验，无法判断不同模型之间的差异是否具有统计意义。",
+      "why_it_matters": "缺乏统计显著性分析会削弱模型间比较的可信度，可能掩盖实际性能差异。",
+      "resolution_test": "应补充Flip Rate的95%置信区间，并进行适当的统计检验（如McNemar检验）以比较模型间的显著差异。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "generalizability",
+      "claim_pointer": "使用了90名受试者的脑MRI数据集，严格平衡GBM和MET病例。",
+      "concern": "样本量较小，且仅限于GBM与MET的鉴别，泛化性受限。",
+      "why_it_matters": "小样本和单一任务限制了结论在其他医学影像任务或疾病类别中的适用性。",
+      "resolution_test": "应讨论模型在其他医学影像任务（如肺部CT或乳腺X光）中的潜在适用性，并建议未来研究扩展数据集和任务范围。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "citation",
+      "claim_pointer": "引用了Cha et al. (2007) 来支持GBM与MET的视觉相似性。",
+      "concern": "未提供具体文献引用内容，无法验证其与当前任务的相关性。",
+      "why_it_matters": "缺乏文献内容的简要说明，可能影响读者对引用合理性的判断。",
+      "resolution_test": "应在引用后简要说明Cha et al. (2007) 的研究内容及其与当前任务的相关性。"
+    }
+  ],
+  "assessment_boundaries": [
+    "未提供模型的具体输入格式细节（如图像分辨率、预处理方式），无法评估输入标准化对结果的影响。",
+    "未说明模型是否接受过医学影像微调或训练，影响对模型能力来源的判断。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

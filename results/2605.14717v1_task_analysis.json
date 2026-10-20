@@ -1,0 +1,19 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2605.14717v1",
+  "status": "done",
+  "task_family": "multimodal",
+  "input": "Label-free Differential Phase Contrast (DPC) images",
+  "output": "WBC classification labels and continuous protein-expression regression values, plus LLM-generated biological summaries",
+  "notable": "Combines multi-task learning (classification + regression) with a hybrid CNN-ViT architecture and an LLM for interpretability; focuses on label-free morpho-molecular inference",
+  "task_type": [
+    "multimodal",
+    "virtual_staining",
+    "foundation_model"
+  ],
+  "confidence": 0.85,
+  "task_id": "2605.14717v1-task_analysis-v1",
+  "run_at": "2026-07-24T09:11:13.377928",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

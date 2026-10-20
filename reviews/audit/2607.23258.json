@@ -1,0 +1,34 @@
+{
+ "id": "2607.23258",
+ "chars": 45412,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": false,
+   "has_significance_test": false,
+   "has_fdr": false,
+   "mentions_ablation": true,
+   "mentions_dataset_split": true,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P1: 未报告多随机种子/重复实验"
+  ],
+  "score": 4
+ },
+ "key_claims": [
+  "to improve robustness to imperfect autoregressive histories, we apply two lightweight corruptions to the input history while keeping the prediction targets unchanged.",
+  "1 performance on the pretraining dataset we first evaluate whether capt can improve the source-domain performance.",
+  "capt outperforms both poco and calm on held-in and held-out sessions (figure 2 b, c), indicating that continuous autoregressive modeling provides a strong alternative to discrete-token autoregression "
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+   "doi": null
+  }
+ ],
+ "citation_results": []
+}

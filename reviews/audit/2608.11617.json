@@ -1,0 +1,45 @@
+{
+ "id": "2608.11617",
+ "chars": 31170,
+ "statistics": {
+  "checks": {
+   "has_p_value": false,
+   "has_ci": true,
+   "has_std": true,
+   "has_seeds_or_repeats": true,
+   "has_significance_test": true,
+   "has_fdr": false,
+   "mentions_ablation": true,
+   "mentions_dataset_split": false,
+   "cell_count_as_n_risk": false
+  },
+  "issues": [
+   "P0: 全文无 p 值 / 显著性检验",
+   "P2: 有检验但未见多重比较校正说明"
+  ],
+  "score": 5
+ },
+ "key_claims": [
+  "kanresdiff consistently achieves the best performance by reducing ged 16 \\text{ged}_{16} , ged 32 \\text{ged}_{32} , and ged 100 \\text{ged}_{100} by a maximum of 18.",
+  "7\\% improvement in hm-iou 32 further demonstrates the superior fidelity of the generated samples from kanresdiff.",
+  "introducing ite and rsb both lead to consistent improvements across all metrics, indicating the effectiveness of innovative components."
+ ],
+ "ref_spotcheck_targets": [
+  {
+   "title": "Segment Anything",
+   "doi": null
+  },
+  {
+   "title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+   "doi": "10.1007/978-3-319-24574-4_28"
+  }
+ ],
+ "citation_results": [
+  {
+   "title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+   "doi": "10.1007/978-3-319-24574-4_28",
+   "verdict": "PASS",
+   "confirmed_n": 3
+  }
+ ]
+}

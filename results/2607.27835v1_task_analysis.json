@@ -1,0 +1,18 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2607.27835v1",
+  "status": "done",
+  "task_family": "cell_segmentation",
+  "input": "H&E stained histopathology images",
+  "output": "Nucleus instance segmentation masks and multi-class classification labels",
+  "notable": "Proposes SAFViT with Spatial Attention Fusion Gating for nucleus segmentation and classification, achieving highest mPQ on PanNuke dataset",
+  "task_type": [
+    "segmentation",
+    "detection"
+  ],
+  "confidence": 0.95,
+  "task_id": "2607.27835v1-task_analysis-v1",
+  "run_at": "2026-08-06T11:47:18.226191",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

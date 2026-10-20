@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VitaminP Wiki — vitaminp</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / VitaminP Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>VitaminP</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/vitaminp.html">vitaminp</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/dataset.html">dataset</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/metrics.html">metrics</a></li>
+<li><a href="../modules/postprocessing.html">postprocessing</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>vitaminp</h1>
+<br>
+<p>&gt; 基于Vision Transformer的病理细胞分割与合成框架</p>
+<br>
+<p>Vitamin-P 是一个完整的病理图像分析框架，核心功能包括：1) 使用 DINOv2 作为骨干网络的双编码器 U-Net 模型，支持 H&amp;E 和 MIF 图像的细胞核与细胞分割；2) 基于 Pix2Pix 的 GAN 模型，用于从 H&amp;E 图像合成 MIF 图像；3) 针对全切片图像 (WSI) 的流式推理系统，包含 Tile 处理、重叠清洗和 GPU 加速的后处理。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">vitaminp/__init__.py</code></h3>
+<br>
+<p>模块入口，导出所有公共 API</p>
+<br>
+<ul>
+<li><code class="inline-code">VitaminPDual</code> (class) - 双编码器模型，同时处理 H&amp;E 和 MIF 图像</li>
+<li><code class="inline-code">load_model</code> (function) - 从 HuggingFace 加载预训练模型权重</li>
+<li><code class="inline-code">available_models</code> (function) - 获取可用模型列表</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/models.py</code></h3>
+<br>
+<p>定义核心分割模型架构</p>
+<br>
+<ul>
+<li><code class="inline-code">VitaminPDual</code> (class) - 双编码器 U-Net，包含 H&amp;E 和 MIF 两个独立编码器及共享解码器</li>
+<li><code class="inline-code">VitaminPSyn</code> (class) - 合成 MIF 分割模型，基于 Dual 架构但仅使用 H&amp;E 输入</li>
+<li><code class="inline-code">VitaminPFlex</code> (class) - 灵活多通道模型，支持不同输入组合</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/backbone.py</code></h3>
+<br>
+<p>DINOv2 骨干网络封装</p>
+<br>
+<ul>
+<li><code class="inline-code">DINOv2Backbone</code> (class) - 提取 DINOv2 的多尺度特征，支持 3 通道 (H&amp;E) 和 2 通道 (MIF) 输入</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/blocks.py</code></h3>
+<br>
+<p>模型构建块，包含卷积模块和注意力机制</p>
+<br>
+<ul>
+<li><code class="inline-code">ConvBlock</code> (class) - 双卷积块，包含 GroupNorm、GELU 和 SE 通道注意力</li>
+<li><code class="inline-code">SELayer</code> (class) - Squeeze-and-Excitation 通道注意力层</li>
+<li><code class="inline-code">ASPP</code> (class) - 空洞空间金字塔池化，捕获多尺度上下文</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/losses.py</code></h3>
+<br>
+<p>定义分割和 HV 图预测的损失函数</p>
+<br>
+<ul>
+<li><code class="inline-code">DiceFocalLoss</code> (class) - Dice 损失与 Focal 损失的组合，用于分割任务</li>
+<li><code class="inline-code">HVLoss</code> (class) - HoVer-Net 风格的损失，结合 MSE 和 MSGE 用于距离图预测</li>
+<li><code class="inline-code">MSGELossMaps</code> (class) - 均方梯度误差损失，强制细胞边界分离</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/trainer.py</code></h3>
+<br>
+<p>模型训练器，管理训练循环和验证</p>
+<br>
+<ul>
+<li><code class="inline-code">VitaminPTrainer</code> (class) - 训练主类，集成优化器、调度器和 W&amp;B 日志</li>
+<li><code class="inline-code">TestEvaluator</code> (class) - 测试集评估器，计算 Dice、IoU 和 PQ 指标</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/utils.py</code></h3>
+<br>
+<p>通用工具函数，包括预处理和指标计算</p>
+<br>
+<ul>
+<li><code class="inline-code">SimplePreprocessing</code> (class) - 图像预处理，支持百分位归一化和颜色增强</li>
+<li><code class="inline-code">compute_dice</code> (function) - 计算 Dice 系数</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/pretrained.py</code></h3>
+<br>
+<p>预训练模型加载与缓存管理</p>
+<br>
+<ul>
+<li><code class="inline-code">load_model</code> (function) - 自动从 HuggingFace 下载并加载模型权重</li>
+<li><code class="inline-code">MODEL_REGISTRY</code> (dict) - 模型名称到 HuggingFace 文件名的映射表</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/gan/__init__.py</code></h3>
+<br>
+<p>GAN 模块入口</p>
+<br>
+<ul>
+<li><code class="inline-code">Pix2PixTrainer</code> (class) - Pix2Pix GAN 训练器</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/gan/models.py</code></h3>
+<br>
+<p>GAN 生成器和判别器架构</p>
+<br>
+<ul>
+<li><code class="inline-code">Pix2PixGenerator</code> (class) - U-Net 生成器，支持注意力门和残差块</li>
+<li><code class="inline-code">PatchGANDiscriminator</code> (class) - PatchGAN 判别器，使用谱归一化</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/gan/losses.py</code></h3>
+<br>
+<p>GAN 损失函数</p>
+<br>
+<ul>
+<li><code class="inline-code">GANLoss</code> (class) - GAN 对抗损失</li>
+<li><code class="inline-code">PerceptualLoss</code> (class) - 基于 VGG 的感知损失</li>
+<li><code class="inline-code">SSIMLoss</code> (class) - 结构相似性损失</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/gan/augmentations.py</code></h3>
+<br>
+<p>配对数据增强，确保 H&amp;E 和 MIF 同步变换</p>
+<br>
+<ul>
+<li><code class="inline-code">PairedGANAugmentation</code> (class) - 对 H&amp;E 和 MIF 图像应用相同的几何变换</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/inference/__init__.py</code></h3>
+<br>
+<p>推理模块入口</p>
+<br>
+<ul>
+<li><code class="inline-code">WSIPredictor</code> (class) - 全切片图像预测器</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/inference/predictor.py</code></h3>
+<br>
+<p>WSI 预测主逻辑，协调 Tile 处理、GAN 合成和结果导出</p>
+<br>
+<ul>
+<li><code class="inline-code">WSIPredictor</code> (class) - 高层预测接口，支持真实 MIF 和合成 MIF 模式</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/inference/tile_processor.py</code></h3>
+<br>
+<p>Tile 级别的流式处理</p>
+<br>
+<ul>
+<li><code class="inline-code">TileProcessor</code> (class) - 将大图像切分为 Tile 并逐个处理，避免内存溢出</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/inference/wsi_handler.py</code></h3>
+<br>
+<p>多格式 WSI 文件加载器</p>
+<br>
+<ul>
+<li><code class="inline-code">MultiFormatImageLoader</code> (class) - 支持 SVS、NDPI、OME-TIFF 等格式的加载</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/inference/channel_config.py</code></h3>
+<br>
+<p>MIF 通道配置，定义核与膜通道的选择与组合</p>
+<br>
+<ul>
+<li><code class="inline-code">ChannelConfig</code> (class) - 配置 MIF 图像的核通道和膜通道（支持单通道或多通道组合）</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/inference/overlap_cleaner.py</code></h3>
+<br>
+<p>去除重叠 Tile 产生的重复检测</p>
+<br>
+<ul>
+<li><code class="inline-code">OverlapCleaner</code> (class) - 基于 Shapely 的 IoU 去重算法</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/inference/postprocessing.py</code></h3>
+<br>
+<p>GPU 加速的实例分割后处理</p>
+<br>
+<ul>
+<li><code class="inline-code">process_model_outputs</code> (function) - 使用 HoVer-Net 方法从 HV 图提取细胞实例</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/inference/constrained_watershed.py</code></h3>
+<br>
+<p>HV 约束的水墨分割算法</p>
+<br>
+<ul>
+<li><code class="inline-code">apply_hv_constrained_watershed</code> (function) - 基于核种子和 HV 边界的约束分水岭分割</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/inference/utils.py</code></h3>
+<br>
+<p>推理工具函数，包括日志和结果导出</p>
+<br>
+<ul>
+<li><code class="inline-code">ResultExporter</code> (class) - 将检测结果导出为 JSON 或 GeoJSON 格式</li>
+<li><code class="inline-code">setup_logger</code> (function) - 配置日志记录器</li>
+</ul>
+<br>
+<h3><code class="inline-code">vitaminp/postprocessing/__init__.py</code></h3>
+<br>
+<p>后处理模块入口</p>
+<br>
+<h3><code class="inline-code">vitaminp/postprocessing/hv_postprocess.py</code></h3>
+<br>
+<p>HV 图后处理核心算法</p>
+<br>
+<ul>
+<li><code class="inline-code">HVPostProcessor</code> (class) - GPU 加速的 HV 图实例分割处理器</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>DINOv2 Backbone</strong>: 使用 DINOv2 视觉 Transformer 作为特征提取器，支持不同尺寸 (small/base/large/giant) 和输入通道数 (3 或 2)。通过修改第一个卷积层适配不同模态。</li>
+<li><strong>Dual Encoder Architecture</strong>: VitaminPDual 模型包含两个独立的编码器分别处理 H&amp;E 和 MIF 图像，在浅层特征后融合，然后通过共享的深层编码器和四个独立的解码器分支输出核与细胞的分割结果。</li>
+<li><strong>HoVer-Net Style HV Maps</strong>: 模型预测水平和垂直距离图 (HV maps)，用于通过分水岭算法分离紧密接触的细胞。结合 MSGE 损失强制边界清晰。</li>
+<li><strong>Synthetic MIF Generation</strong>: 使用 Pix2Pix GAN 从 H&amp;E 图像生成合成 MIF 图像，使模型仅需 H&amp;E 输入即可进行多模态分割推理。采用感知损失和 SSIM 损失提升质量。</li>
+<li><strong>WSI Streaming Inference</strong>: 针对全切片图像 (WSI) 的内存优化策略。将图像切分为 512x512 的 Tile，逐个加载、推理、后处理，最后合并结果并去除边界重叠。</li>
+<li><strong>GPU-Accelerated Postprocessing</strong>: 使用 CuPy 加速距离变换、连通域标记等后处理步骤，显著加快从 HV 图到实例 mask 的转换速度。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">vitaminp/models.py</code> → <code class="inline-code">vitaminp/backbone.py</code>: 模型使用 DINOv2Backbone 作为特征提取器</li>
+<li><code class="inline-code">vitaminp/models.py</code> → <code class="inline-code">vitaminp/blocks.py</code>: 模型解码器使用 ConvBlock 和 ASPP 等构建块</li>
+<li><code class="inline-code">vitaminp/trainer.py</code> → <code class="inline-code">vitaminp/losses.py</code>: 训练器使用 DiceFocalLoss 和 HVLoss 计算损失</li>
+<li><code class="inline-code">vitaminp/inference/predictor.py</code> → <code class="inline-code">vitaminp/gan/models.py</code>: 预测器在需要时调用 GAN 生成器合成 MIF 图像</li>
+<li><code class="inline-code">vitaminp/inference/predictor.py</code> → <code class="inline-code">vitaminp/inference/tile_processor.py</code>: 预测器通过 TileProcessor 流式处理大图像</li>
+<li><code class="inline-code">vitaminp/inference/tile_processor.py</code> → <code class="inline-code">vitaminp/inference/wsi_handler.py</code>: TileProcessor 使用 MultiFormatImageLoader 读取图像块</li>
+<li><code class="inline-code">vitaminp/inference/predictor.py</code> → <code class="inline-code">vitaminp/inference/postprocessing.py</code>: 预测器对每个 Tile 的模型输出进行后处理以提取实例</li>
+<li><code class="inline-code">vitaminp/inference/predictor.py</code> → <code class="inline-code">vitaminp/inference/overlap_cleaner.py</code>: 预测器在收集所有 Tile 结果后调用 OverlapCleaner 去重</li>
+<li><code class="inline-code">vitaminp/inference/predictor.py</code> → <code class="inline-code">vitaminp/inference/channel_config.py</code>: 预测器使用 ChannelConfig 处理 MIF 通道选择</li>
+<li><code class="inline-code">vitaminp/pretrained.py</code> → <code class="inline-code">vitaminp/models.py</code>: 预训练加载器实例化 models.py 中的模型类并加载权重</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

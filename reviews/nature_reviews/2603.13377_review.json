@@ -1,0 +1,57 @@
+{
+  "paper_id": "2603.13377",
+  "task": "single_review",
+  "overall_assessment": "该论文探讨了显微镜成像基础模型在细胞分割任务中的表现，特别关注预训练与未训练模型的对比。论文方法论严谨，实验设计全面，涵盖了多种模型架构和评估基准。然而，论文在统计报告和引用真实性方面存在一些问题，可能影响其结论的可信度。总体而言，论文为领域提供了有价值的见解，但在方法透明度和结果解释方面需要进一步改进。",
+  "strengths": [
+    "实验设计全面，涵盖了多种模型架构和评估基准，包括自然图像和显微镜图像。",
+    "对未训练模型的分析提供了对模型架构和低级特征对性能影响的深入理解。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "未训练模型在RxRx3-core任务上表现与预训练模型相当",
+      "concern": "论文声称未训练模型在某些任务上表现与预训练模型相当，但缺乏对未训练模型性能稳定性的详细分析。",
+      "why_it_matters": "未训练模型的性能可能受到随机初始化的影响，缺乏稳定性分析可能影响结论的可靠性。",
+      "resolution_test": "需要提供未训练模型在不同随机种子下的性能分布，以验证其稳定性。"
+    },
+    {
+      "id": "S-M2",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "statistics",
+      "claim_pointer": "不同模型在JUMP-CP任务上的性能比较",
+      "concern": "论文未提供统计显著性检验来支持模型性能差异的结论。",
+      "why_it_matters": "缺乏统计显著性检验可能导致对模型性能差异的误判。",
+      "resolution_test": "需要提供统计检验（如t检验）的结果，以验证模型性能差异的显著性。"
+    },
+    {
+      "id": "S-M3",
+      "severity": "major",
+      "blocking": true,
+      "axis": "citation",
+      "claim_pointer": "引用了多个未发表或未公开的模型",
+      "concern": "论文引用了多个未发表或未公开的模型（如MAE-L/8、MAE-G/8），但未提供足够的信息来验证这些模型的有效性。",
+      "why_it_matters": "引用未发表或未公开的模型可能影响论文的可重复性和结论的可信度。",
+      "resolution_test": "需要提供这些模型的详细信息或公开访问方式，以便其他研究人员验证其有效性。"
+    },
+    {
+      "id": "S-M4",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "generalizability",
+      "claim_pointer": "模型在不同数据集上的泛化能力",
+      "concern": "论文未提供足够的证据来支持模型在不同数据集上的泛化能力。",
+      "why_it_matters": "缺乏泛化能力的证据可能限制模型的实际应用。",
+      "resolution_test": "需要提供模型在更多独立数据集上的性能评估结果。"
+    }
+  ],
+  "assessment_boundaries": [
+    "无法评估模型在未提及的其他任务上的表现。",
+    "无法验证未公开模型（如MAE-L/8、MAE-G/8）的具体实现细节。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

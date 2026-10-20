@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>cellnet Wiki — baselines</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / cellnet Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>cellnet</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/bin.html">bin</a></li>
+<li><a href="../modules/cellnet.html">cellnet</a></li>
+<li><a href="../modules/baselines.html">baselines</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>baselines</h1>
+<br>
+<p>&gt; 实现Cellpose-SAM基线模型，用于在相差显微镜图像中通过稀疏噪声点标注定位细胞。</p>
+<br>
+<p>该模块加载预训练的Cellpose模型，对相差显微镜图像进行细胞分割，并将分割结果转换为细胞中心点，最后与真实标注的稀疏点进行比较以评估性能。流程包括：图像读取与预处理、模型推理、可视化分割结果、将掩码转换为中心点、计算sMAPE、MAE、精确率、召回率和F1分数。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">baselines/cpsam.py</code></h3>
+<br>
+<p>执行Cellpose-SAM基线流程：加载图像、运行模型推理、可视化分割掩码和预测点、计算评估指标。</p>
+<br>
+<ul>
+<li><code class="inline-code">models.CellposeModel</code> (class) - Cellpose预训练模型类，用于加载模型权重并执行细胞分割推理。</li>
+<li><code class="inline-code">model.eval</code> (function) - 执行模型推理，返回预测的掩码(masks_pred)、流场(flows)和风格向量(styles)。</li>
+<li><code class="inline-code">io.imread</code> (function) - 从文件读取图像数据。</li>
+<li><code class="inline-code">plotting.image</code> (function) - 在matplotlib轴上显示图像。</li>
+<li><code class="inline-code">plotting.points</code> (function) - 在轴上绘制预测的细胞中心点。</li>
+<li><code class="inline-code">utils.outlines_list</code> (function) - 从流场数据中提取细胞轮廓的坐标列表。</li>
+<li><code class="inline-code">masks2centers</code> (function) - 将细胞分割掩码转换为细胞中心点坐标。</li>
+<li><code class="inline-code">sMAPE_MAE</code> (function) - 计算预测中心点与真实标注点之间的对称平均百分比误差(sMAPE)和平均绝对误差(MAE)。</li>
+<li><code class="inline-code">prec_rec_f1</code> (function) - 基于距离阈值计算精确率(Precision)、召回率(Recall)和F1分数。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>Cellpose-SAM基线</strong>: 使用Cellpose模型进行细胞分割，并将分割结果转换为点标注，作为后续稀疏点定位算法的对比基线。</li>
+<li><strong>掩码转中心点</strong>: 将细胞分割得到的像素级掩码转换为单个坐标点，以便与稀疏点标注进行直接比较。</li>
+<li><strong>点标注评估指标</strong>: 使用sMAPE、MAE、精确率、召回率和F1分数来量化预测细胞中心点与真实标注点之间的匹配程度。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">baselines/cpsam.py</code> → <code class="inline-code">cellpose.models</code>: 导入Cellpose模型类以加载和运行预训练模型。</li>
+<li><code class="inline-code">baselines/cpsam.py</code> → <code class="inline-code">cellpose.io</code>: 导入图像读取工具函数。</li>
+<li><code class="inline-code">baselines/cpsam.py</code> → <code class="inline-code">cellpose.utils</code>: 导入提取细胞轮廓的工具函数。</li>
+<li><code class="inline-code">baselines/cpsam.py</code> → <code class="inline-code">cellnet.plot</code>: 导入自定义绘图模块用于可视化分割结果和预测点。</li>
+<li><code class="inline-code">baselines/cpsam.py</code> → <code class="inline-code">cellnet.data</code>: 导入masks2centers函数，将分割掩码转换为细胞中心点。</li>
+<li><code class="inline-code">baselines/cpsam.py</code> → <code class="inline-code">cellnet.evaluate</code>: 导入评估函数sMAPE_MAE和prec_rec_f1，用于量化预测性能。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

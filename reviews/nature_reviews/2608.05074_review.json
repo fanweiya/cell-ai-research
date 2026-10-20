@@ -1,0 +1,58 @@
+{
+  "paper_id": "2608.05074",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种基于弱监督的视觉词袋（BoVW）方法，用于在全切片图像（WSI）上进行肺腺癌（LUAD）生长模式的空间映射和分类。方法利用无监督学习构建模式原型，并通过Jensen-Shannon散度（JSD）实现分类，整体设计合理，且在肿瘤/健康分类和组织学分级任务中表现出接近监督方法的性能。然而，论文在统计验证、泛化能力讨论和引用方面存在不足。",
+  "strengths": [
+    "提出了一种无需像素级或tile级标注的弱监督空间映射框架，具有临床应用潜力。",
+    "在组织学分级任务中优于监督SVM基线，表明BoVW表示保留了空间异质性信息。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "BoVW pipeline achieves near-parity with a directly supervised method for tumor detection",
+      "concern": "论文未明确说明监督基线是否使用相同特征空间进行公平比较，例如是否使用相同的tile embedding提取器。",
+      "why_it_matters": "如果监督基线使用了额外的可训练参数或不同的特征提取方式，则无法公平比较性能差异。",
+      "resolution_test": "应补充监督基线模型的详细架构，包括是否使用相同的冻结编码器和特征池化方式。"
+    },
+    {
+      "id": "S-S1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "statistics",
+      "claim_pointer": "The BoVW pipeline achieves higher balanced accuracy than the supervised SVM baseline for all three encoders",
+      "concern": "高年级样本数量远少于低年级（68 vs 19），但论文未使用适当的统计检验（如置换检验）来评估显著性。",
+      "why_it_matters": "在类别不平衡的情况下，仅报告性能提升而无统计显著性可能误导读者。",
+      "resolution_test": "应补充统计显著性检验结果，如基于置换的p值，以确认提升是否具有统计意义。"
+    },
+    {
+      "id": "S-G1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "generalizability",
+      "claim_pointer": "The pipeline recovers plausible pattern organisation",
+      "concern": "仅通过视觉检查评估空间映射质量，缺乏定量指标或病理学家评估。",
+      "why_it_matters": "视觉评估主观性强，无法证明方法在临床标准下的可靠性。",
+      "resolution_test": "应提供定量指标（如与病理专家标注的IoU）或引用未来病理评估结果。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "citation",
+      "claim_pointer": "Acinar and Papillary patterns are architecturally similar [17]",
+      "concern": "引用文献[17]未在参考文献列表中出现，影响引用真实性。",
+      "why_it_matters": "缺失引用文献会削弱学术严谨性，并影响读者进一步查阅依据。",
+      "resolution_test": "应补充文献[17]的完整参考信息。"
+    }
+  ],
+  "assessment_boundaries": [
+    "未提供代码或数据访问权限，无法验证实现细节。",
+    "未说明模型在不同组织或染色条件下的泛化能力。",
+    "未讨论模型在其他癌症类型或组织病理学任务中的适用性。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

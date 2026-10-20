@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wbcattplus Wiki — subagent_report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / wbcattplus Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>wbcattplus</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/Mask2Former.html">Mask2Former</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/utils.html">utils</a></li>
+<li><a href="modules/configs.html">configs</a></li>
+<li><a href="modules/results.html">results</a></li>
+<li><a href="modules/dataset_txt.html">dataset_txt</a></li>
+<li><a href="modules/.codegraph.html">.codegraph</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <p>Now I have enough information to create a comprehensive analysis report. Let me structure the report:</p>
+<br>
+<h2>项目概述</h2>
+<br>
+<p><strong>WBCAtt+</strong> 是一个专注于白细胞（White Blood Cell, WBC）图像细粒度像素级形态标注的数据集和基线模型仓库。相关论文发表于 *Medical Image Analysis* 2026 (arXiv: 2605.19692)。</p>
+<br>
+<h3>核心贡献</h3>
+<ul>
+<li><strong>数据集</strong>：包含 11 类形态属性和 5 类像素级细胞成分标注的 10k+ 白细胞图像</li>
+<li><strong>属性识别基线</strong>：针对 11 个形态属性的多任务学习框架</li>
+<li><strong>语义分割基线</strong>：基于 MMSegmentation 的 FCN、SegFormer、Swin、ConvNeXt 等模型</li>
+<li><strong>可解释 AI 应用</strong>：支持 counterfactual example generation 等可解释性分析</li>
+</ul>
+<br>
+<h3>解决的问题</h3>
+<p>传统白细胞数据集仅标注细胞类别，缺乏病理学家用于诊断解释的详细形态特征。WBCAtt+ 填补了这一空白，提供了全面的形态特征标注。</p>
+<br>
+<p>---</p>
+<br>
+<h2>架构分析</h2>
+<br>
+<h3>目录结构</h3>
+<pre class="code-block"><code class="language-">wbcattplus/
+├── Mask2Former/              # 基于 detectron2 的 Mask2Former 实现
+├── configs/                  # 语义分割模型配置文件
+│   ├── fcn.yaml
+│   ├── segformer.yaml
+│   ├── swin.yaml
+│   ├── convnext.yaml
+│   └── bmcseg_adapt.yaml
+├── data/                     # 数据集目录
+│   ├── PBC/                  # 主要数据集
+│   └── BM/                   # 骨 marrow 细胞域适应数据集
+├── dataset_txt/              # 标注文件 (CSV/YAML)
+├── results/                  # 实验结果表格
+├── utils/                    # 工具模块
+├── att_dataset_seg.py        # 属性预测数据集
+├── modelsseg.py              # 属性预测模型架构
+├── train_att.py              # 属性预测训练脚本
+├── main_seg.py               # 语义分割训练脚本
+├── main_adapt.py             # 域适应训练脚本
+├── predict_att.py            # 属性预测脚本
+└── evaluation_loop.py        # 评估脚本</code></pre>
+<br>
+<h3>主要模块依赖</h3>
+<ul>
+<li><strong>核心框架</strong>：PyTorch 2.2.2, Lightning 2.2.1</li>
+<li><strong>分割库</strong>：MMSegmentation 1.2.2, mmcv 2.1.0, mmengine 0.10.4</li>
+<li><strong>工具库</strong>：pandas, scikit-learn, opencv-python, kornia, torchmetrics</li>
+<li><strong>可视化</strong>：tensorboard, matplotlib, tqdm</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2>核心算法</h2>
+<br>
+<h3>1. 属性预测架构 (<code class="inline-code">modelsseg.py</code>)</h3>
+<br>
+<p><strong>核心创新</strong>：结合语义分割掩码的细胞结构感知属性识别</p>
+<br>
+<pre class="code-block"><code class="language-python">class SegBasedAggLayer(nn.Module):
+    # 支持多种聚合方式：max, ave, concat, wave, sa_plain
+    # sa_plain: 采用 scaled dot-product attention 机制</code></pre>
+<br>
+<p><strong>实现原理</strong>：</p>
+<ul>
+<li>对 6 个分割类别（背景 + 5 种细胞成分）分别提取特征</li>
+<li>通过聚合层融合各成分特征</li>
+<li>聚合方式包括：</li>
+<li><strong>max/ave</strong>：简单统计聚合</li>
+<li><strong>wave</strong>：可学习加权平均</li>
+<li><strong>sa_plain</strong>：transformer 风格的点积注意力</li>
+<li><strong>sa_plain_ln</strong>：带层归一化的注意力</li>
+</ul>
+<br>
+<p><strong>属性预测头</strong>：单一线性层输出所有属性类别</p>
+<br>
+<h3>2. 多任务损失 (<code class="inline-code">multi_task_loss.py</code>)</h3>
+<ul>
+<li>对 11 个形态属性分别计算 CrossEntropyLoss</li>
+<li>等权重平均（weight = 1/11）</li>
+<li>支持标签平滑（label_smoothing=0.05）</li>
+</ul>
+<br>
+<h3>3. 语义分割 (<code class="inline-code">main_seg.py</code>)</h3>
+<ul>
+<li>基于 Lightning 框架</li>
+<li>支持多种 backbone：ResNet, Swin Transformer, SegFormer, ConvNeXt</li>
+<li>使用 MMSegmentation 的 UPerNet 架构</li>
+<li>指标：mIOU (排除背景类)</li>
+</ul>
+<br>
+<h3>4. 域适应 (<code class="inline-code">main_adapt.py</code>)</h3>
+<ul>
+<li>针对骨 marrow 细胞的无监督域适应</li>
+<li>包含梯度反转层 (GradientReversalLayer)</li>
+<li>使用未标注的目标域数据进行对抗训练</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2>代码质量</h2>
+<br>
+<h3>优点</h3>
+<ul>
+<li><strong>结构清晰</strong>：模块化设计，训练/评估/预测分离</li>
+<li><strong>可复现性强</strong>：完整的配置文件和种子设置</li>
+<li><strong>文档友好</strong>：README详尽，包含安装和训练指令</li>
+<li><strong>实验追踪</strong>：自动记录git状态、超参数、指标</li>
+</ul>
+<br>
+<h3>不足</h3>
+<ul>
+<li><strong>测试覆盖不足</strong>：缺少单元测试和集成测试</li>
+<li><strong>类型注解稀疏</strong>：Python 类型提示较少</li>
+<li><strong>硬编码较多</strong>：如分割类别数 6、图像尺寸 360x360 等</li>
+<li><strong>异常处理薄弱</strong>：对数据缺失、格式错误等情况处理不足</li>
+</ul>
+<br>
+<h3>可读性</h3>
+<ul>
+<li>变量命名较为直观</li>
+<li>核心逻辑有注释说明</li>
+<li>但部分实现细节缺乏文档字符串</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2>可复现性</h2>
+<br>
+<h3>环境配置完整 ✅</h3>
+<ul>
+<li><code class="inline-code">environment.yml</code> 提供精确的依赖版本</li>
+<li>明确的 CUDA 12.1、Python 3.9.18 要求</li>
+<li>安装脚本详细</li>
+</ul>
+<br>
+<h3>使用说明完善 ✅</h3>
+<ul>
+<li>README 包含数据下载链接</li>
+<li>训练命令示例齐全</li>
+<li>配置文件模板完整</li>
+</ul>
+<br>
+<h3>关键依赖</h3>
+<ul>
+<li><strong>需手动下载数据集</strong>：HuggingFace 链接提供</li>
+<li><strong>依赖外部模型</strong>：预训练权重从 OpenMMLab 下载</li>
+</ul>
+<br>
+<h3>建议改进</h3>
+<ul>
+<li>添加 <code class="inline-code">setup.py</code> 或 <code class="inline-code">pyproject.toml</code></li>
+<li>提供 Dockerfile</li>
+<li>简化依赖安装流程</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2>与高通量细胞图像分析项目的相关性</h2>
+<br>
+<h3>可直接复用的模块 🟢</h3>
+<br>
+<h4>1. 语义分割管线</h4>
+<ul>
+<li><strong>代码</strong>：<code class="inline-code">utils/semantic_segmentation/*.py</code></li>
+<li><strong>可复用点</strong>：</li>
+<li>完整的 U-Net + slicing 实现</li>
+<li>模型训练、验证、预测流程</li>
+<li>支持多种 backbone (ResNet, Swin, etc.)</li>
+<li>切割推理 (slicing inference) 机制</li>
+</ul>
+<br>
+<h4>2. 属性预测架构</h4>
+<ul>
+<li><strong>代码</strong>：<code class="inline-code">modelsseg.py</code> 中的 <code class="inline-code">SegBasedAggLayer</code></li>
+<li><strong>可复用点</strong>：</li>
+<li>基于分割掩码的特征聚合机制</li>
+<li>多任务学习框架（11 个属性 → 可适配为多标签分类）</li>
+<li>注意力聚合层（sa_plain）可借鉴</li>
+</ul>
+<br>
+<h4>3. 数据加载与增强</h4>
+<ul>
+<li><strong>代码</strong>：<code class="inline-code">att_dataset_seg.py</code>, <code class="inline-code">utils/transforms.py</code></li>
+<li><strong>可复用点</strong>：</li>
+<li>细胞图像专用的增强策略（随机翻转、裁剪）</li>
+<li>掩码与图像同步变换</li>
+<li>CSV 标注文件解析</li>
+</ul>
+<br>
+<h3>可参考的设计模式 🟡</h3>
+<br>
+<h4>1. 多任务学习</h4>
+<ul>
+<li>单一线性层输出多个属性</li>
+<li>等权重多任务损失</li>
+<li>适用于同时预测细胞分类 + 形态特征</li>
+</ul>
+<br>
+<h4>2. 域适应策略</h4>
+<ul>
+<li><strong>代码</strong>：<code class="inline-code">main_adapt.py</code></li>
+<li><strong>参考点</strong>：</li>
+<li>梯度反转层（Domain-Adversarial Training）</li>
+<li>针对数据分布差异的无监督适应</li>
+</ul>
+<br>
+<h4>3. 实验管理</h4>
+<ul>
+<li>自动参数记录（<code class="inline-code">utils/save_args</code>）</li>
+<li>Git 状态追踪</li>
+<li>TensorBoard 日志集成</li>
+</ul>
+<br>
+<h3>YOLO+SAM 管线适配建议 🔵</h3>
+<br>
+<h4>1. 分割模块集成</h4>
+<ul>
+<li>保留现有 <code class="inline-code">prediction.py</code> 的切片推理机制</li>
+<li>可替换 backbone：将 Swin/SegFormer 替换为 YOLOv8-seg 或 SAM</li>
+<li>注意输出格式对齐（掩码到 one-hot 编码）</li>
+</ul>
+<br>
+<h4>2. 属性头设计</h4>
+<ul>
+<li>参考 <code class="inline-code">SegBasedAggLayer</code> 的注意力机制</li>
+<li>应用于 YOLO 特征图或 SAM mask prompts</li>
+<li>可探索：Mask-based attention for cell attributes</li>
+</ul>
+<br>
+<h4>3. 数据集扩展</h4>
+<ul>
+<li>11 个形态属性分类方案可直接复用</li>
+<li>CSV 标注格式易于扩展</li>
+<li>支持多标签分类（如 granule_type, granule_colour）</li>
+</ul>
+<br>
+<h3>潜在挑战 ⚠️</h3>
+<ul>
+<li><strong>模型复杂度</strong>：MMSegmentation 较重，YOLO 更轻量适合高通量</li>
+<li><strong>实时性</strong>：当前 batch_size 较小（2-32），需优化推理速度</li>
+<li><strong>依赖冲突</strong>：MMSegmentation 有较强版本要求</li>
+</ul>
+<br>
+<p>---</p>
+<br>
+<h2>综合评分：7.5/10</h2>
+<br>
+<h3>评分理由</h3>
+<ul>
+<li><strong>创新性与实用性</strong>：9/10（首个细粒度 WBC 形态标注数据集，极具价值）</li>
+<li><strong>代码质量</strong>：7/10（结构清晰但测试不足）</li>
+<li><strong>可复现性</strong>：8/10（环境配置完整，数据集需手动下载）</li>
+<li><strong>可维护性</strong>：6/10（硬编码较多，缺少单元测试）</li>
+<li><strong>文档完整性</strong>：8/10（README 详尽，但接口文档缺失）</li>
+</ul>
+<br>
+<h3>建议优先部署模块</h3>
+<ul>
+<li><code class="inline-code">att_dataset_seg.py</code> - 数据加载与增强</li>
+<li><code class="inline-code">modelsseg.py</code> - 属性预测头设计</li>
+<li><code class="inline-code">evaluation_loop.py</code> - 多任务评估协议</li>
+<li><code class="inline-code">main_seg.py</code> - 分割训练管线（可裁剪）</li>
+</ul>
+<br>
+<h3>后续改进方向</h3>
+<ul>
+<li>集成到 ONNX 推理以加速</li>
+<li>支持更多缩放策略（不死板依赖 360x360）</li>
+<li>添加 API 接口方便与 YOLO+SAM 管线对接</li>
+</ul>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

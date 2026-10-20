@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic-J Wiki — subagent_report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / Agentic-J Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>imagentj</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/skills.html">skills</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/user_guide.html">user_guide</a></li>
+<li><a href="modules/docs.html">docs</a></li>
+<li><a href="modules/config.html">config</a></li>
+<li><a href="modules/scripts.html">scripts</a></li>
+<li><a href="modules/qdrant_data.html">qdrant_data</a></li>
+<li><a href="modules/patch_stardist.html">patch_stardist</a></li>
+<li><a href="modules/data.html">data</a></li>
+<li><a href="modules/imagentj.html">imagentj</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <p>现在我已经收集了足够的信息来分析这个仓库。让我开始编写结构化报告。</p>
+<br>
+<h2>项目概述</h2>
+<br>
+<p>Agentic-J 是一个由 AI 驱动的多智能体系统，专为生物显微镜图像分析设计。该项目来自论文 <strong>"Agentic-J: An AI Agent for Biological Microscopy Image Analysis"</strong> (arXiv:2606.02080，2026年6月)。</p>
+<br>
+<p><strong>核心问题</strong>：生物图像分析需要整合多种异构工具、编程环境和领域知识，这对研究者构成了巨大挑战。Agentic-J 通过将多智能体系统与 ImageJ/Fiji 封装进 Docker 容器，将自然语言请求转化为可追溯的分割、追踪、定量、质量检查和报告流程。</p>
+<br>
+<p><strong>主要特点</strong>：</p>
+<ul>
+<li>容器化部署（Docker），提供 noVNC 远程桌面界面</li>
+<li>多智能体协作架构（ supervisor + 专用 subagents）</li>
+<li>基于 RAG 的持续学习机制（记录错误和解决方案）</li>
+<li>完整的状态追踪（state ledger）确保可复现性</li>
+<li>支持 30+  Fiji 插件（StarDist、Cellpose、TrackMate 等）</li>
+</ul>
+<br>
+<h2>架构分析</h2>
+<br>
+<h3>目录结构</h3>
+<pre class="code-block"><code class="language-">Agentic-J/
+├── src/imagentj/           # 核心 Python 包
+│   ├── agents.py           # 智能体定义和协调
+│   ├── imagej_context.py   # ImageJ/Fiji 初始化
+│   ├── prompts.py          # 系统提示词
+│   ├── tracker.py          # 使用指标跟踪
+│   ├── tools/              # 工具实现
+│   │   ├── state_ledger.py # 状态账本（核心持久化机制）
+│   │   ├── script_tools.py # 脚本执行和错误处理
+│   │   ├── rag_tools.py    # RAG 检索和持久化
+│   │   └── ...
+│   └── rag/                # RAG 系统
+├── skills/                 # 插件文档包（200+ SKILL.md 文件）
+├── bundled_jars/           # 离线 JAR 依赖
+├── data/                   # 数据和输出目录
+├── models/                 # Cellpose 模型
+├── Dockerfile              # 容器构建
+├── docker-compose.yml      # 容器编排
+└── environment.yml         # Conda 环境</code></pre>
+<br>
+<h3>主要模块</h3>
+<ul>
+<li><strong>Supervisor Agent</strong>：中央协调者，负责任务分解和阶段控制</li>
+<li><strong>Coder Agent</strong>：生成 ImageJ/Fiji Groovy 脚本</li>
+<li><strong>Debugger Agent</strong>：修复失败的脚本</li>
+<li><strong>Data Analyst Agent</strong>：Python 统计分析</li>
+<li><strong>QA Reporter Agent</strong>：质量检查</li>
+<li><strong>Plugin Manager Agent</strong>：插件推荐和安装</li>
+<li><strong>State Ledger</strong>：JSON 形态的项目状态持久化</li>
+<li><strong>RAG 系统</strong>：基于 Qdrant 的文档、错误和经验检索</li>
+</ul>
+<br>
+<h3>依赖关系</h3>
+<ul>
+<li><strong>Java/Fiji</strong>： ImageJ/Fiji 作为分析引擎</li>
+<li><strong>Python 3.10/3.11/3.13</strong>：多个 Conda 环境（cellpose, stardist, cellpose4）</li>
+<li><strong>LLM</strong>： OpenAI GPT-5 系列或 OpenRouter</li>
+<li><strong>向量数据库</strong>：Qdrant（存储在 Git LFS 中）</li>
+<li><strong>Docker</strong>：容器化部署</li>
+</ul>
+<br>
+<h2>核心算法</h2>
+<br>
+<h3>1. 智能体协作模式</h3>
+<p>采用 <strong>Supervisor-Subagent 架构</strong>：</p>
+<ul>
+<li>Supervisor 接收用户请求，分解为 Pipeline Plan</li>
+<li>通过 State Ledger 记录每个阶段的执行状态</li>
+<li>根据阶段进度调用相应的 subagent 工具</li>
+</ul>
+<br>
+<h3>2. 状态管理（State Ledger）</h3>
+<p>使用 <code class="inline-code">state_ledger.json</code> 实现<strong>可追溯的流水线</strong>：</p>
+<pre class="code-block"><code class="language-json">{
+  "scientific_goal": "...",
+  "completed_steps": [
+    {"phase": "2", "step": "thresholding", "status": "completed", 
+     "script_path": "...", "outputs": ["mask.tif"]}
+  ],
+  "key_decisions": [...],
+  "image_metadata": {...}
+}</code></pre>
+<ul>
+<li>原子写入保证数据完整性</li>
+<li>紧凑格式（~800 tokens）适合 LLM 上下文</li>
+<li>跨会话持久化</li>
+</ul>
+<br>
+<h3>3. 脚本执行与错误处理</h3>
+<p><code class="inline-code">script_tools.py</code> 实现了<strong>健壮的 Groovy 执行环境</strong>：</p>
+<ul>
+<li>实时监控 ImageJ 窗口（错误对话框、结果表、信息窗口）</li>
+<li>自动分类窗口内容：ERROR/RESULTS/INFO</li>
+<li>失败时自动关闭新窗口，支持重试</li>
+<li>捕获 IJ.log、STDOUT、STDERR 多源输出</li>
+</ul>
+<br>
+<h3>4. RAG 持续学习</h3>
+<p><strong>三种向量集合</strong>：</p>
+<ul>
+<li><strong>Docs</strong>：BioimageAnalysisDocs（静态文档）</li>
+<li><strong>Mistakes</strong>：codingerrors_and_solutions（错误→修复规则）</li>
+<li><strong>Recipes</strong>：code_recipes（可复用脚本模板）</li>
+</ul>
+<br>
+<p><strong>关键设计</strong>：</p>
+<ul>
+<li>仅嵌入<strong>症状描述</strong>（rule），代码存储在 metadata 中</li>
+<li>检索时应用<strong>和相关性阈值</strong>，避免噪声</li>
+<li><strong>去重机制</strong>：相似经验合并 <code class="inline-code">times_seen</code> 计数</li>
+</ul>
+<br>
+<h3>5. 插件推荐机制</h3>
+<p>Plugin Manager 使用 <code class="inline-code">SkillsMiddleware</code> 扫描 <code class="inline-code">skills/</code> 目录，根据科学任务推荐最佳插件，并强制 Coder 使用推荐插件。</p>
+<br>
+<h2>代码质量</h2>
+<br>
+<h3>优点</h3>
+<ul>
+<li><strong>模块化设计</strong>：工具包（<code class="inline-code">tools/</code>）职责清晰，每个工具都有明确的 <code class="inline-code">WHEN TO USE</code> 说明</li>
+<li><strong>文档完整性</strong>：200+ SKILL.md 文件覆盖所有 Fiji 插件，用户指南详尽</li>
+<li><strong>错误处理</strong>：完善的错误分类、捕获和修复机制</li>
+<li><strong>可测试性</strong>：状态账本、RAG 系统等核心组件易于独立验证</li>
+<li><strong>原子操作</strong>：文件写入使用临时文件 + <code class="inline-code">os.replace</code> 保证一致性</li>
+</ul>
+<br>
+<h3>待改进项</h3>
+<ul>
+<li><strong>测试覆盖</strong>：未见明显的单元测试（可能因容器化测试复杂性）</li>
+<li><strong>类型注解</strong>：Python 代码类型提示较少</li>
+<li><strong>依赖管理</strong>：主要依赖 Docker 环境，本地开发可能遇到配置问题</li>
+</ul>
+<br>
+<h3>可读性</h3>
+<ul>
+<li>variabel 命名清晰（如 <code class="inline-code">state_ledger.py</code> 中的 <code class="inline-code">_ledger_path</code>）</li>
+<li>注释详细，尤其是工具文档字符串</li>
+<li>代码结构符合 LangChain 最佳实践</li>
+</ul>
+<br>
+<h2>可复现性</h2>
+<br>
+<p><strong>非常优秀</strong>，体现在：</p>
+<br>
+<ul>
+<li><strong>Docker 化</strong>：完整容器定义，所有依赖固化在镜像中</li>
+<li>32GB 磁盘需求，~8GB RAM</li>
+<li>预下载 Fiji、预装 30+ 插件、预放 Cellpose 模型</li>
+<li>ARM64/X86_64 双架构支持</li>
+</ul>
+<br>
+<ul>
+<li><strong>离线能力</strong>：</li>
+<li><code class="inline-code">bundled_jars/</code> 包含无法从 Maven 获取的 JAR</li>
+<li><code class="inline-code">bundled_cache/</code> 预冲洗发 Maven 依赖</li>
+<li>模型下载到容器内路径</li>
+</ul>
+<br>
+<ul>
+<li><strong>数据持久化</strong>：</li>
+<li>使用 Git LFS 存储 Qdrant 向量数据库</li>
+<li>State Ledger 记录完整分析历史</li>
+<li><code class="inline-code">scripts/archive/</code> 自动归档历史版本</li>
+</ul>
+<br>
+<ul>
+<li><strong>使用说明</strong>：</li>
+<li><code class="inline-code">README.md</code> 提供快速开始</li>
+<li><code class="inline-code">user_guide/</code> 覆盖所有使用场景</li>
+<li><code class="inline-code">.env.template</code> 配置引导</li>
+</ul>
+<br>
+<p><strong>潜在问题</strong>：需要 OpenAI API key，部分网络受限环境可能无法初始化。</p>
+<br>
+<h2>与你项目的相关性</h2>
+<br>
+<h3>可直接复用的模块</h3>
+<br>
+<ul>
+<li><strong>状态账本（state_ledger.py）</strong></li>
+<li>✅ 完全可移植到你的 YOLO+SAM 管线</li>
+<li>记录每一步的输入/输出/参数</li>
+<li>支持中断后恢复</li>
+</ul>
+<br>
+<ul>
+<li><strong>脚本执行框架（script_tools.py）</strong></li>
+<li>✅ 健壮的脚本执行和错误处理</li>
+<li>窗口分类和错误捕获机制</li>
+<li>支持重试和自动清理</li>
+</ul>
+<br>
+<ul>
+<li><strong>RAG 持续学习系统（rag_tools.py）</strong></li>
+<li>✅ 错误→修复规则的 Lingchen 记录</li>
+<li>可复用脚本模板管理</li>
+<li>Qdrant 向量检索实现</li>
+</ul>
+<br>
+<ul>
+<li><strong>插件推荐机制</strong></li>
+<li>🔶 可适配为你的模型/算法选择器</li>
+<li>基于任务推荐最佳模型（YOLO vs SAM vs 组合）</li>
+</ul>
+<br>
+<ul>
+<li><strong>Docker 化策略</strong></li>
+<li>✅ 容器化 ImageJ + Python 环境的经验</li>
+<li>ARM64/X86 双架构支持</li>
+<li>离线依赖打包</li>
+</ul>
+<br>
+<h3>需调整适配的部分</h3>
+<br>
+<ul>
+<li><strong>多智能体协调</strong></li>
+<li>你的项目可能不需要 6 个 subagent</li>
+<li>但 Supervisor-Subagent 模式可用于流程控制</li>
+</ul>
+<br>
+<ul>
+<li><strong>Prompt 工程</strong></li>
+<li><code class="inline-code">prompts.py</code> 中的系统提示词可借鉴</li>
+<li>特别是针对图像分析任务的 task formatting</li>
+</ul>
+<br>
+<ul>
+<li><strong>量化分析管线</strong></li>
+<li>Python 数据分析 agent 可直接用于你的结果处理</li>
+<li>统计检验和图表生成能力</li>
+</ul>
+<br>
+<h3>评分建议</h3>
+<p>你的项目可参考 Agentic-J 的 <strong>State Ledger + RAG 系统</strong> 构建可复现、可追溯的分析管线，无需完全复制其复杂架构。</p>
+<br>
+<p>---</p>
+<br>
+<h2>总评分：8.5/10</h2>
+<br>
+<p><strong>扣分项</strong>：</p>
+<ul>
+<li>缺少单元测试（-1）</li>
+<li>类型注解不足（-0.5）</li>
+<li>依赖外部 LLM API（-0.5）</li>
+</ul>
+<br>
+<p><strong>亮点</strong>：</p>
+<ul>
+<li>✅ 优秀的工程化设计（容器化、RAG、状态管理）</li>
+<li>✅ 详尽的文档和用户指南</li>
+<li>✅ 完整的错误处理和修复机制</li>
+<li>✅ 高度可复现ity</li>
+</ul>
+<br>
+<p>这个项目的架构思想（特别是 State Ledger 和 RAG 持续学习）对你的高通量细胞图像分析项目有重要参考价值，建议重点借鉴其<strong>可追溯性设计</strong>和<strong>错误知识沉淀机制</strong>。</p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

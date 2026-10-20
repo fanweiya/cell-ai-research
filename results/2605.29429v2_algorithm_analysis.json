@@ -1,0 +1,58 @@
+{
+  "task": "algorithm_analysis",
+  "paper_id": "2605.29429v2",
+  "status": "done",
+  "design_motivation": "现有细胞实例分割模型在分布外细胞类型上性能下降严重，而交互式基础模型（如SAM）虽能解决此问题但需每实例提示，成本过高。替代方案如伪提示生成存在精度与泛化性权衡。本文设计Group Prompting与Chain-of-Prompts (CoP)旨在通过单次点击实现同类型所有实例分割，解决多尺度特征在空间精度与类型选择性间的权衡问题，并克服单步传播对相似度阈值敏感导致的误报或漏报。",
+  "loss_formula": "无监督训练，无显式损失函数公式",
+  "math_principle": "利用特征相似性在同类细胞间的一致性，通过多尺度特征门控（HSG）筛选高置信度细胞，再基于图像坐标距离而非特征空间距离进行递归提示选择（FPR），确保新提示探索未覆盖区域且避免特征漂移，实现单点击传播至所有同类实例。",
+  "tensor_flow": [
+    {
+      "layer": "input",
+      "shape": "[B,3,H,W]"
+    },
+    {
+      "layer": "sam_encoder",
+      "shape": "[B,256,H/16,W/16]"
+    },
+    {
+      "layer": "multi_scale_features",
+      "shape": "[B,256,H/16,W/16] + [B,256,H/32,W/32]"
+    },
+    {
+      "layer": "similarity_gating",
+      "shape": "[B,1,H/16,W/16]"
+    },
+    {
+      "layer": "prompt_selection",
+      "shape": "[K,2]"
+    },
+    {
+      "layer": "mask_output",
+      "shape": "[B,1,H,W]"
+    }
+  ],
+  "training_pipeline": [
+    "step1: 加载预训练SAM3编码器与EVA-02-CLIP-E特征提取器",
+    "step2: 输入组织图像，提取多尺度特征",
+    "step3: 基于单点提示计算特征相似性，执行HSG门控筛选高可靠细胞",
+    "step4: 在图像坐标空间计算距离，执行FPR选择新提示点",
+    "step5: 递归传播提示直至覆盖所有同类细胞",
+    "step6: 输出分割掩码"
+  ],
+  "baselines_compared": [
+    "Cellpose",
+    "SAM",
+    "OpenWorldSAM",
+    "G-DINO",
+    "SSA"
+  ],
+  "key_results": {
+    "performance_retention": "在三个细胞类型标注数据集上保留超过90%的每实例性能",
+    "benchmark_count": "在11个基准测试上评估"
+  },
+  "confidence": 0.85,
+  "task_id": "2605.29429v2-algorithm_analysis-v1",
+  "run_at": "2026-07-19T09:04:15.575083",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "多面板实验结果图：展示scRNA-seq签名分类、bulk与spot水平分类方法，以及CRC样本中iCMS2的空间异质性堆叠条形图可视化"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法架构图：展示从H&E图像预测基因表达的模型流程（encoder+gene heads）及基于概念的原型定位与逐层相关性传播解释机制"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "多面板实验结果图：展示基因表达概念分解（A）、各概念的spot分布（B）、H&E图像与病理注释（C）、分型评估表（D-E）、以及概念测量的空间预测可视化（F-G）"
+  }
+}

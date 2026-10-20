@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wbcattplus Wiki — root</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / wbcattplus Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>wbcattplus</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/Mask2Former.html">Mask2Former</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/utils.html">utils</a></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/results.html">results</a></li>
+<li><a href="../modules/dataset_txt.html">dataset_txt</a></li>
+<li><a href="../modules/.codegraph.html">.codegraph</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>root</h1>
+<br>
+<p>&gt; 实现白细胞图像细粒度像素级形态标注与分割的完整训练、评估与预测流程</p>
+<br>
+<p>该模块提供WBCAtt+数据集的复现代码，包含属性预测基线训练、语义分割模型训练、多任务损失计算、模型评估及预测功能。核心流程包括：使用AttDatasetSeg加载图像与分割掩码，通过SegBasedAggLayer聚合分割特征，利用MultiTaskLoss计算多任务损失，最终通过evaluate和predict模块进行模型评估与属性预测。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">att_dataset_seg.py</code></h3>
+<br>
+<p>定义AttDatasetSeg数据集类，负责加载图像、分割掩码及属性标注，并应用数据增强</p>
+<br>
+<ul>
+<li><code class="inline-code">AttDatasetSeg</code> (class) - 继承自torch.utils.data.Dataset，整合图像、分割掩码和属性标注，支持随机裁剪、翻转等增强操作</li>
+<li><code class="inline-code">create_attribute_encoders</code> (method) - 为每个属性列创建值到索引的映射字典</li>
+<li><code class="inline-code">__getitem__</code> (method) - 返回单个样本的图像、掩码、属性标签及索引</li>
+</ul>
+<br>
+<h3><code class="inline-code">modelsseg.py</code></h3>
+<br>
+<p>定义基于分割的聚合层和属性预测模型</p>
+<br>
+<ul>
+<li><code class="inline-code">SegBasedAggLayer</code> (class) - 根据分割掩码提取图像特征并进行聚合（平均、最大、加权、注意力等），输出统一特征表示</li>
+<li><code class="inline-code">forward</code> (method) - 执行前向传播，对每个分割类别应用掩码并编码，然后聚合特征</li>
+<li><code class="inline-code">AttributePredictorSeg</code> (class) - 属性预测模型，结合分割聚合层和分类头</li>
+</ul>
+<br>
+<h3><code class="inline-code">multi_task_loss.py</code></h3>
+<br>
+<p>实现多任务损失计算模块，支持加权组合多个任务损失</p>
+<br>
+<ul>
+<li><code class="inline-code">MultiTaskLoss</code> (class) - 接收多个损失函数及其权重，计算总损失或返回各任务损失字典</li>
+<li><code class="inline-code">forward</code> (method) - 遍历输出与目标，应用对应损失函数并加权求和</li>
+</ul>
+<br>
+<h3><code class="inline-code">evaluation_loop.py</code></h3>
+<br>
+<p>提供模型评估函数，计算多种分类指标</p>
+<br>
+<ul>
+<li><code class="inline-code">evaluate</code> (function) - 在验证/测试集上运行模型，计算准确率、F1、精确率、召回率等指标</li>
+<li><code class="inline-code">metrics</code> (variable) - 定义多个评估指标的lambda函数，包括acc、f1_macro、pre_macro等</li>
+</ul>
+<br>
+<h3><code class="inline-code">train_att.py</code></h3>
+<br>
+<p>训练属性预测基线模型的主脚本</p>
+<br>
+<ul>
+<li><code class="inline-code">setup_args</code> (function) - 解析命令行参数，配置数据集路径、模型结构、训练超参数等</li>
+<li><code class="inline-code">main</code> (function) - 执行训练流程，包括数据加载、模型构建、训练循环、验证与保存</li>
+</ul>
+<br>
+<h3><code class="inline-code">predict_att.py</code></h3>
+<br>
+<p>加载训练好的模型并对新数据进行属性预测</p>
+<br>
+<ul>
+<li><code class="inline-code">setup_args</code> (function) - 解析预测任务所需的参数，如模型路径、输入CSV、输出目录等</li>
+<li><code class="inline-code">main</code> (function) - 加载模型权重，对输入图像进行推理，保存预测结果到CSV</li>
+</ul>
+<br>
+<h3><code class="inline-code">main_seg.py</code></h3>
+<br>
+<p>训练和测试语义分割模型的主脚本，基于PyTorch Lightning和MMSegmentation</p>
+<br>
+<ul>
+<li><code class="inline-code">cli_main</code> (function) - 初始化LightningCLI，支持fit和test命令，加载配置文件训练或测试分割模型</li>
+<li><code class="inline-code">JPEGCompressionTransform</code> (class) - 模拟JPEG压缩的数据增强变换</li>
+<li><code class="inline-code">SynchronizedRandomFlips</code> (class) - 同步对图像和掩码进行随机水平/垂直翻转</li>
+</ul>
+<br>
+<h3><code class="inline-code">predict_seg.py</code></h3>
+<br>
+<p>对图像进行分割预测并保存掩码结果</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 加载分割模型，读取输入CSV，对每张图像生成分割掩码并保存</li>
+</ul>
+<br>
+<h3><code class="inline-code">main_adapt.py</code></h3>
+<br>
+<p>用于模型适配的脚本，包含数据增强和Lightning模块定义</p>
+<br>
+<ul>
+<li><code class="inline-code">JPEGCompressionTransform</code> (class) - 与main_seg.py中定义相同，用于模拟压缩噪声</li>
+<li><code class="inline-code">SynchronizedRandomFlips</code> (class) - 同步翻转图像和掩码</li>
+</ul>
+<br>
+<h3><code class="inline-code">README.md</code></h3>
+<br>
+<p>项目说明文档，包含数据集介绍、环境配置、训练与测试命令</p>
+<br>
+<h3><code class="inline-code">environment.yml</code></h3>
+<br>
+<p>定义项目依赖的conda环境配置文件</p>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>分割引导的属性预测</strong>: 利用语义分割掩码将图像按细胞结构区域（如细胞核、细胞质）分割，分别编码后聚合，再输入分类器进行多属性预测</li>
+<li><strong>多任务学习</strong>: 同时预测多个形态学属性（如细胞大小、核质比、颗粒类型等），使用MultiTaskLoss加权组合各属性损失</li>
+<li><strong>特征聚合策略</strong>: 支持多种聚合方式：无聚合（仅全图）、拼接、最大池化、平均池化、加权平均、自注意力聚合</li>
+<li><strong>PyTorch Lightning集成</strong>: 训练脚本基于LightningCLI构建，支持配置驱动的训练流程和模块化模型定义</li>
+<li><strong>MMSegmentation后端</strong>: 语义分割模型使用MMSegmentation框架，支持FCN、SegFormer、Swin、ConvNext等架构</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">train_att.py</code> → <code class="inline-code">att_dataset_seg.py</code>: train_att.py导入AttDatasetSeg用于构建训练和验证数据加载器</li>
+<li><code class="inline-code">train_att.py</code> → <code class="inline-code">modelsseg.py</code>: train_att.py导入AttributePredictorSeg和SegBasedAggLayer定义模型结构</li>
+<li><code class="inline-code">train_att.py</code> → <code class="inline-code">multi_task_loss.py</code>: train_att.py导入MultiTaskLoss作为训练过程中的损失函数</li>
+<li><code class="inline-code">train_att.py</code> → <code class="inline-code">evaluation_loop.py</code>: train_att.py导入evaluate函数在验证集上评估模型性能</li>
+<li><code class="inline-code">predict_att.py</code> → <code class="inline-code">att_dataset_seg.py</code>: predict_att.py导入AttDatasetSeg加载待预测数据</li>
+<li><code class="inline-code">predict_att.py</code> → <code class="inline-code">modelsseg.py</code>: predict_att.py导入AttributePredictorSeg和SegBasedAggLayer加载模型权重</li>
+<li><code class="inline-code">predict_att.py</code> → <code class="inline-code">evaluation_loop.py</code>: predict_att.py可能复用evaluate或predict函数进行推理</li>
+<li><code class="inline-code">main_seg.py</code> → <code class="inline-code">att_dataset_seg.py</code>: main_seg.py可能使用AttDatasetSeg或类似数据集类处理分割任务</li>
+<li><code class="inline-code">main_seg.py</code> → <code class="inline-code">main_adapt.py</code>: main_seg.py和main_adapt.py共享JPEGCompressionTransform和SynchronizedRandomFlips等增强类</li>
+<li><code class="inline-code">predict_seg.py</code> → <code class="inline-code">main_seg.py</code>: predict_seg.py导入main_seg的cli_main来初始化分割模型</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

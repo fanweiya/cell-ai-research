@@ -1,0 +1,47 @@
+{
+  "paper_id": "2606.10107",
+  "task": "single_review",
+  "overall_assessment": "该论文提出了一种新的细胞实例分割评估指标MMA，旨在解决现有指标（如AP@50、SEG、AJI、PQ）的局限性。MMA通过全局最优的一对一匹配策略和像素级归一化方法，避免了传统指标对阈值的依赖性和非最优匹配问题。论文在合成数据、渐进式干扰测试和模型排名比较方面进行了充分实验，展示了MMA在稳定性、连续性和公平性方面的优势。然而，论文在方法论的理论分析和泛化性方面存在不足，尤其是在真实生物数据上的泛化能力缺乏充分验证。",
+  "strengths": [
+    "MMA通过最大二分图匹配实现全局最优的一对一匹配，解决了传统指标中贪婪匹配导致的次优问题。",
+    "论文通过合成失败案例、渐进式干扰测试和模型排名比较，系统评估了MMA与现有指标的差异，实验设计严谨且具有说服力。"
+  ],
+  "concerns": [
+    {
+      "id": "S-M1",
+      "severity": "major",
+      "blocking": true,
+      "axis": "methodology",
+      "claim_pointer": "MMA通过最大二分图匹配实现全局最优匹配，优于现有指标。",
+      "concern": "论文未提供MMA匹配策略的理论保证，例如在不同图结构下的匹配稳定性或计算复杂度分析。",
+      "why_it_matters": "缺乏理论分析可能影响MMA在大规模或复杂数据上的可信度，无法证明其在所有情况下都能找到全局最优解。",
+      "resolution_test": "需要补充MMA匹配策略的理论分析，包括其在不同图结构下的匹配稳定性、计算复杂度以及收敛性证明。"
+    },
+    {
+      "id": "S-M2",
+      "severity": "major",
+      "blocking": true,
+      "axis": "generalizability",
+      "claim_pointer": "MMA适用于生物显微图像的细胞分割评估。",
+      "concern": "论文仅在LIVECell数据集上进行实验，缺乏在其他细胞类型或显微成像模态（如荧光、相位对比）上的验证。",
+      "why_it_matters": "缺乏跨数据集验证可能限制MMA在实际生物医学应用中的泛化能力。",
+      "resolution_test": "需要在多个细胞类型和成像模态的数据集上进行实验，以验证MMA的泛化性和鲁棒性。"
+    },
+    {
+      "id": "S-C1",
+      "severity": "minor",
+      "blocking": false,
+      "axis": "citation",
+      "claim_pointer": "引用了NetworkX库用于最大二分图匹配。",
+      "concern": "引用格式不完整，未提供具体文献或版本信息。",
+      "why_it_matters": "不完整的引用可能影响读者查找原始资料，降低论文的学术严谨性。",
+      "resolution_test": "补充完整的文献引用或官方文档链接，确保引用格式符合学术规范。"
+    }
+  ],
+  "assessment_boundaries": [
+    "论文未提供MMA在不同细胞检测与计数任务中的具体性能指标（如F1-score、MAE等），无法评估其在任务层面的实际提升。",
+    "未讨论MMA是否适用于非细胞类的实例分割任务，其设计是否具有任务特异性。"
+  ],
+  "recommendation_posture": "Major Revision",
+  "confidence": 0.8
+}

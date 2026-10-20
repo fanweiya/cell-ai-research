@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VitaminP Wiki — metrics</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / VitaminP Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>VitaminP</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/configs.html">configs</a></li>
+<li><a href="../modules/vitaminp.html">vitaminp</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/dataset.html">dataset</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/metrics.html">metrics</a></li>
+<li><a href="../modules/postprocessing.html">postprocessing</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>metrics</h1>
+<br>
+<p>&gt; 提供病理细胞分割任务的二值分割和实例分割评估指标计算及工具函数</p>
+<br>
+<p>该模块专注于评估基于Vision Transformer的病理细胞分割框架的性能。它包含两类核心指标：针对像素级二值掩码的分割指标（如Dice、IoU）和针对实例级分割的指标（如PQ、AJI）。模块通过优化算法（如匈牙利算法）高效计算实例匹配，并提供批量处理、结果聚合和打印等实用工具，支持HE和MIF两种染色图像中细胞核与细胞的全方位评估。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">metrics/__init__.py</code></h3>
+<br>
+<p>模块入口，导出所有公共接口，包括二值分割指标、实例分割指标和工具函数</p>
+<br>
+<ul>
+<li><code class="inline-code">dice_coefficient</code> (function) - 计算二值分割的Dice系数</li>
+<li><code class="inline-code">panoptic_quality</code> (function) - 计算实例分割的Panoptic Quality (PQ)</li>
+<li><code class="inline-code">compute_all_metrics</code> (function) - 计算单个样本的所有指标并返回字典</li>
+</ul>
+<br>
+<h3><code class="inline-code">metrics/segmentation.py</code></h3>
+<br>
+<p>实现像素级二值分割评估指标，用于评估细胞核或细胞的二值掩码预测</p>
+<br>
+<ul>
+<li><code class="inline-code">dice_coefficient</code> (function) - 计算预测与真实掩码的Dice相似系数</li>
+<li><code class="inline-code">iou_score</code> (function) - 计算预测与真实掩码的交并比(IoU)</li>
+<li><code class="inline-code">precision_score</code> (function) - 计算精确率</li>
+<li><code class="inline-code">recall_score</code> (function) - 计算召回率</li>
+<li><code class="inline-code">f1_score</code> (function) - 计算F1分数</li>
+<li><code class="inline-code">pixel_accuracy</code> (function) - 计算像素准确率</li>
+<li><code class="inline-code">batch_dice_coefficient</code> (function) - 对批次中的每个样本单独计算Dice系数</li>
+</ul>
+<br>
+<h3><code class="inline-code">metrics/instance.py</code></h3>
+<br>
+<p>实现实例分割评估指标，核心是计算PQ、AJI等指标，处理实例ID匹配问题</p>
+<br>
+<ul>
+<li><code class="inline-code">remap_label</code> (function) - 将实例ID重映射为连续整数，优化后续计算性能</li>
+<li><code class="inline-code">get_fast_pq</code> (function) - 快速计算Panoptic Quality (PQ)、Detection Quality (DQ)和Segmentation Quality (SQ)</li>
+<li><code class="inline-code">panoptic_quality</code> (function) - 计算完整的PQ指标</li>
+<li><code class="inline-code">aggregated_jaccard_index</code> (function) - 计算聚合Jaccard指数(AJI)</li>
+<li><code class="inline-code">aggregated_jaccard_index_plus</code> (function) - 计算改进的聚合Jaccard指数(AJI+)</li>
+<li><code class="inline-code">get_fast_aji</code> (function) - 快速计算AJI</li>
+</ul>
+<br>
+<h3><code class="inline-code">metrics/utils.py</code></h3>
+<br>
+<p>提供指标计算的辅助函数，包括批量处理、多任务指标聚合和结果格式化输出</p>
+<br>
+<ul>
+<li><code class="inline-code">compute_all_metrics</code> (function) - 对单个样本计算所有二值和实例指标</li>
+<li><code class="inline-code">compute_batch_metrics</code> (function) - 遍历批次中的每个样本，计算四个任务（HE/MIF的核/细胞）的指标并求平均</li>
+<li><code class="inline-code">aggregate_metrics</code> (function) - 聚合多个样本的指标统计信息</li>
+<li><code class="inline-code">print_metrics</code> (function) - 格式化打印指标结果</li>
+<li><code class="inline-code">compute_overall_metrics</code> (function) - 计算整体平均指标</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>Panoptic Quality (PQ)</strong>: 实例分割的核心指标，结合了检测质量(DQ)和分割质量(SQ)，公式为PQ = TP * SQ / (TP + 0.5*FP + 0.5*FN)</li>
+<li><strong>实例ID重映射</strong>: 通过remap_label函数将非连续的实例ID转换为连续整数，提高匈牙利算法匹配的效率</li>
+<li><strong>匈牙利算法匹配</strong>: 使用scipy.optimize.linear_sum_assignment基于IoU矩阵进行最优实例匹配，确定真阳性(TP)</li>
+<li><strong>批量指标计算</strong>: 支持对包含多个样本的批次进行循环计算，并自动对HE和MIF两种染色下的细胞核和细胞四个任务分别统计</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">metrics/__init__.py</code> → <code class="inline-code">metrics/segmentation.py</code>: __init__.py从segmentation.py导入二值分割指标函数</li>
+<li><code class="inline-code">metrics/__init__.py</code> → <code class="inline-code">metrics/instance.py</code>: __init__.py从instance.py导入实例分割指标函数</li>
+<li><code class="inline-code">metrics/__init__.py</code> → <code class="inline-code">metrics/utils.py</code>: __init__.py从utils.py导入工具函数</li>
+<li><code class="inline-code">metrics/utils.py</code> → <code class="inline-code">metrics/segmentation.py</code>: utils.py在compute_all_metrics和compute_batch_metrics中调用segmentation.py的指标函数</li>
+<li><code class="inline-code">metrics/utils.py</code> → <code class="inline-code">metrics/instance.py</code>: utils.py在compute_all_metrics和compute_batch_metrics中调用instance.py的指标函数</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

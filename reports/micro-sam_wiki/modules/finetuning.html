@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>micro-sam Wiki — finetuning</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / micro-sam Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>micro-sam</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/doc.html">doc</a></li>
+<li><a href="../modules/test.html">test</a></li>
+<li><a href="../modules/finetuning.html">finetuning</a></li>
+<li><a href="../modules/workshops.html">workshops</a></li>
+<li><a href="../modules/examples.html">examples</a></li>
+<li><a href="../modules/development.html">development</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/deployment.html">deployment</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../modules/scripts.html">scripts</a></li>
+<li><a href="../modules/micro_sam.html">micro_sam</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+<li><a href="../dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>finetuning</h1>
+<br>
+<p>&gt; 提供针对显微镜图像的微调、推理和评估脚本，用于将Segment Anything模型适配到特定生物医学数据集。</p>
+<br>
+<p>该模块包含用于微调Segment Anything (SAM) 模型以适用于显微镜图像的代码，分为通用模型（Generalists）和专用模型（Specialists）两大类。通用模型在多个数据集上联合训练以增强泛化能力，而专用模型则针对特定数据集（如LIVECell, DeepBacs, CREMI等）进行微调。模块还包含完整的评估流程，支持自动掩码生成(AMG)、自动实例分割(AIS)和迭代提示交互分割。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">finetuning/livecell_finetuning.py</code></h3>
+<br>
+<p>针对LIVECell数据集微调SAM的专用脚本。</p>
+<br>
+<ul>
+<li><code class="inline-code">get_dataloaders</code> (function) - 使用torch_em获取LIVECell的训练和验证数据加载器。</li>
+<li><code class="inline-code">finetune_livecell</code> (function) - 执行微调的核心函数，配置模型、优化器并调用sam_training.train_sam。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/livecell_inference.py</code></h3>
+<br>
+<p>在LIVECell测试集上运行推理的脚本。</p>
+<br>
+<ul>
+<li><code class="inline-code">run_livecell_inference</code> (function) - 执行LIVECell的推理流程。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/run_all_finetuning.py</code></h3>
+<br>
+<p>批量提交多个微调实验的脚本（通过Slurm）。</p>
+<br>
+<ul>
+<li><code class="inline-code">submit_slurm</code> (function) - 根据实验名称和模型类型生成并提交Slurm作业。</li>
+<li><code class="inline-code">write_batch_script</code> (function) - 生成包含SBATCH指令和Python命令的批处理脚本。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/evaluation/util.py</code></h3>
+<br>
+<p>评估模块的通用工具函数，包括路径获取、数据集下载和模型加载。</p>
+<br>
+<ul>
+<li><code class="inline-code">get_paths</code> (function) - 根据数据集名称和分割类型获取图像和标签路径。</li>
+<li><code class="inline-code">get_default_arguments</code> (function) - 解析评估脚本的通用命令行参数。</li>
+<li><code class="inline-code">download_all_datasets</code> (function) - 自动下载评估所需的数据集。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/evaluation/precompute_embeddings.py</code></h3>
+<br>
+<p>预计算图像嵌入（Image Embeddings），供后续推理使用。</p>
+<br>
+<ul>
+<li><code class="inline-code">main</code> (function) - 加载模型并对验证集和测试集预计算嵌入。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/evaluation/evaluate_amg.py</code></h3>
+<br>
+<p>运行自动掩码生成(AMG)评估。</p>
+<br>
+<ul>
+<li><code class="inline-code">run_amg_inference</code> (function) - 调用micro_sam的AMG推理函数。</li>
+<li><code class="inline-code">eval_amg</code> (function) - 计算并保存AMG的评估指标。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/evaluation/evaluate_instance_segmentation.py</code></h3>
+<br>
+<p>运行自动实例分割(AIS)评估，使用附加的解码器。</p>
+<br>
+<ul>
+<li><code class="inline-code">run_instance_segmentation_with_decoder_inference</code> (function) - 调用带有解码器的实例分割推理函数。</li>
+<li><code class="inline-code">eval_instance_segmentation_with_decoder</code> (function) - 计算并保存AIS的评估指标。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/evaluation/iterative_prompting.py</code></h3>
+<br>
+<p>运行迭代提示交互分割评估。</p>
+<br>
+<ul>
+<li><code class="inline-code">_run_iterative_prompting</code> (function) - 执行迭代提示推理，支持从点或框开始。</li>
+<li><code class="inline-code">_evaluate_iterative_prompting</code> (function) - 评估迭代提示的结果。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/evaluation/cellpose_baseline.py</code></h3>
+<br>
+<p>运行CellPose基准测试脚本。</p>
+<br>
+<ul>
+<li><code class="inline-code">run_cellpose_segmentation</code> (function) - 对指定数据集运行CellPose分割。</li>
+<li><code class="inline-code">evaluate_dataset</code> (function) - 评估CellPose分割结果。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/generalists/training/light_microscopy/train_lm_generalist.py</code></h3>
+<br>
+<p>在多个光显微镜数据集上微调SAM通用模型的脚本。</p>
+<br>
+<ul>
+<li><code class="inline-code">finetune_lm_generalist</code> (function) - 配置并启动光显微镜通用模型的训练流程。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/generalists/training/light_microscopy/obtain_lm_datasets.py</code></h3>
+<br>
+<p>构建光显微镜通用模型的联合数据加载器。</p>
+<br>
+<ul>
+<li><code class="inline-code">get_concat_lm_datasets</code> (function) - 组合多个光显微镜数据集（如LiveCell, EmbedSeg等）形成训练集。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/generalists/training/electron_microscopy/mito_nuc/train_mito_nuc_em_generalist.py</code></h3>
+<br>
+<p>在多个电子显微镜数据集（线粒体和细胞核）上微调SAM通用模型的脚本。</p>
+<br>
+<ul>
+<li><code class="inline-code">finetune_mito_nuc_em_generalist</code> (function) - 配置并启动EM通用模型的训练流程。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/generalists/training/electron_microscopy/mito_nuc/obtain_mito_nuc_em_datasets.py</code></h3>
+<br>
+<p>构建EM通用模型的数据加载器。</p>
+<br>
+<ul>
+<li><code class="inline-code">get_concat_mito_nuc_datasets</code> (function) - 组合MitoEM和Platynereis等EM数据集。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/specialists/training/light_microscopy/deepbacs_finetuning.py</code></h3>
+<br>
+<p>针对DeepBacs数据集微调SAM的专用脚本。</p>
+<br>
+<ul>
+<li><code class="inline-code">finetune_deepbacs</code> (function) - 执行DeepBacs数据集的微调，包含UNETR解码器。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/specialists/training/light_microscopy/tissuenet_finetuning.py</code></h3>
+<br>
+<p>针对TissueNet数据集微调SAM的专用脚本。</p>
+<br>
+<ul>
+<li><code class="inline-code">finetune_tissuenet</code> (function) - 执行TissueNet数据集的微调。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/specialists/training/electron_microscopy/boundaries/cremi_finetuning.py</code></h3>
+<br>
+<p>针对CREMI数据集（边界分割）微调SAM的专用脚本。</p>
+<br>
+<ul>
+<li><code class="inline-code">finetune_cremi</code> (function) - 执行CREMI数据集的微调。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/specialists/training/electron_microscopy/organelles/asem_finetuning.py</code></h3>
+<br>
+<p>针对ASEM数据集（细胞器分割）微调SAM的专用脚本。</p>
+<br>
+<ul>
+<li><code class="inline-code">finetune_asem</code> (function) - 执行ASEM数据集的微调。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/specialists/resource-efficient/covid_if_finetuning.py</code></h3>
+<br>
+<p>在有限资源下针对COVID-IF数据集微调SAM的脚本。</p>
+<br>
+<ul>
+<li><code class="inline-code">finetune_covid_if</code> (function) - 支持不同GPU/CPU资源配置和LoRA微调的COVID-IF训练。</li>
+</ul>
+<br>
+<h3><code class="inline-code">finetuning/specialists/resource-efficient/run_resource_efficient_finetuning.py</code></h3>
+<br>
+<p>批量提交资源受限环境下的微调实验脚本。</p>
+<br>
+<ul>
+<li><code class="inline-code">write_batch_sript</code> (function) - 生成针对不同硬件配置（GTX1080, V100, CPU等）的Slurm脚本。</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>通用模型 (Generalist Models)</strong>: 在多个相关数据集上联合训练的SAM模型，旨在提高对不同显微镜图像域的泛化能力。例如光显微镜通用模型和电子显微镜通用模型。</li>
+<li><strong>专用模型 (Specialist Models)</strong>: 针对单个特定数据集（如LIVECell, DeepBacs）微调的SAM模型，通常在该数据集上能达到更高的性能。</li>
+<li><strong>自动掩码生成 (AMG)</strong>: Segment Anything的原始功能，无需提示即可生成大量候选掩码。</li>
+<li><strong>自动实例分割 (AIS)</strong>: micro-sam的扩展功能，通过添加UNETR解码器，直接从图像预测实例分割掩码，无需用户提示。</li>
+<li><strong>迭代提示 (Iterative Prompting)</strong>: 交互式分割方法，用户通过放置正/负点或框来引导模型，模型自动迭代添加提示以优化分割结果。</li>
+<li><strong>资源高效微调 (Resource Efficient Finetuning)</strong>: 针对显存或计算资源受限环境设计的微调策略，包括使用更小的模型(vit_t)、冻结部分网络、减少批次大小和LoRA技术。</li>
+<li><strong>UNETR解码器</strong>: 用于自动实例分割的附加解码器，基于SAM的图像编码器构建，输出实例分割所需的距离图。</li>
+<li><strong>Slurm作业提交</strong>: 模块中大量使用Slurm脚本（.sbatch文件）来在集群上并行提交训练和评估任务。</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">finetuning/livecell_finetuning.py</code> → <code class="inline-code">micro_sam.training</code>: 导入micro_sam.training模块以获取可训练的SAM模型和训练器。</li>
+<li><code class="inline-code">finetuning/evaluation/evaluate_amg.py</code> → <code class="inline-code">micro_sam.evaluation.inference</code>: 调用run_amg函数执行自动掩码生成推理。</li>
+<li><code class="inline-code">finetuning/evaluation/evaluate_instance_segmentation.py</code> → <code class="inline-code">micro_sam.evaluation.inference</code>: 调用run_instance_segmentation_with_decoder函数执行实例分割推理。</li>
+<li><code class="inline-code">finetuning/evaluation/iterative_prompting.py</code> → <code class="inline-code">micro_sam.evaluation.inference</code>: 调用run_inference_with_iterative_prompting函数执行迭代提示推理。</li>
+<li><code class="inline-code">finetuning/generalists/training/light_microscopy/train_lm_generalist.py</code> → <code class="inline-code">finetuning/generalists/training/light_microscopy/obtain_lm_datasets.py</code>: 导入obtain_lm_datasets.py以获取联合光显微镜数据集加载器。</li>
+<li><code class="inline-code">finetuning/evaluation/util.py</code> → <code class="inline-code">micro_sam.evaluation.livecell</code>: 导入livecell模块中的路径获取函数。</li>
+<li><code class="inline-code">finetuning/specialists/training/light_microscopy/deepbacs_finetuning.py</code> → <code class="inline-code">torch_em.data.datasets</code>: 使用torch_em获取DeepBacs数据集加载器。</li>
+<li><code class="inline-code">finetuning/run_all_finetuning.py</code> → <code class="inline-code">finetuning/livecell_finetuning.py</code>: 作为顶层脚本，调用各个具体的微调脚本（如livecell_finetuning.py）。</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "task": "task_analysis",
+  "paper_id": "2607.29033v1",
+  "status": "done",
+  "task_family": "cell_segmentation / cell_tracking / spatial_biology",
+  "input": "3D volumetric medical images (CT scans) and 3D+T spatiotemporal microscopy videos",
+  "output": "3D volumetric segmentation masks and 3D+T spatiotemporal cell tracking masks",
+  "notable": "Lifts 2D foundation models (SAM/SAM2) to 3D/3D+T via parameter-efficient modules (DRLoRA, DSM) without architectural changes",
+  "task_type": [
+    "segmentation",
+    "tracking",
+    "foundation_model"
+  ],
+  "confidence": 0.9,
+  "task_id": "2607.29033v1-task_analysis-v1",
+  "run_at": "2026-08-06T11:47:05.305596",
+  "priority": 5,
+  "agent": "Agents-A1"
+}

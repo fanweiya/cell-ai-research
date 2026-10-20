@@ -1,0 +1,12 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "BBBC036数据集MoA几率比(odds-ratio)分布对比图，展示三种不同计算方法（背景插补、Haldane-Anscombe校正、对数变换后校正）的结果分布直方图，为论文实验结果/方法对比图。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "论文核心实验结果图：比较多种模型（CLOOME、CellProfiler、DINOv2等）在不同蛋白通路数据库上的基因显著富集比例和top 1%相似基因的几何平均 odds ratio"
+  }
+}

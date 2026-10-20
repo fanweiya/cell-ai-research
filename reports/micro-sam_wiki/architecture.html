@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>micro-sam Wiki — architecture</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / micro-sam Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>micro-sam</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/doc.html">doc</a></li>
+<li><a href="modules/test.html">test</a></li>
+<li><a href="modules/finetuning.html">finetuning</a></li>
+<li><a href="modules/workshops.html">workshops</a></li>
+<li><a href="modules/examples.html">examples</a></li>
+<li><a href="modules/development.html">development</a></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/deployment.html">deployment</a></li>
+<li><a href="modules/notebooks.html">notebooks</a></li>
+<li><a href="modules/scripts.html">scripts</a></li>
+<li><a href="modules/micro_sam.html">micro_sam</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>架构</h1>
+<br>
+<p><strong>类型：</strong> 库</p>
+<br>
+<p>micro-sam 是一个基于 Segment Anything 构建的 Python 库，用于显微图像的分割与跟踪。它既提供了用于交互式标注的 napari 插件，也提供了用于自动分割、微调与评估的命令行工具。</p>
+<br>
+<h2>组件图</h2>
+<br>
+<pre class="code-block"><code class="language-mermaid">graph TD
+  core_library --&gt; napari_plugin
+  core_library --&gt; cli_tools
+  core_library --&gt; finetuning_module
+  examples_and_docs --&gt; core_library
+  examples_and_docs --&gt; napari_plugin
+  examples_and_docs --&gt; finetuning_module
+  cli_tools --&gt; core_library
+  napari_plugin --&gt; core_library
+  finetuning_module --&gt; core_library</code></pre>
+<br>
+<h2>组件</h2>
+<br>
+<h3>core_library</h3>
+<br>
+<p>提供分割与跟踪功能的核心 Python 库</p>
+<br>
+<p>文件：<code class="inline-code">micro_sam/__init__.py</code>、<code class="inline-code">micro_sam/automatic_segmentation.py</code>、<code class="inline-code">micro_sam/precompute_state.py</code>、<code class="inline-code">micro_sam/training/training.py</code>、<code class="inline-code">micro_sam/evaluation/evaluation.py</code></p>
+<br>
+<h3>napari_plugin</h3>
+<br>
+<p>用于在 napari 中进行 2D、3D 及跟踪交互式标注的工具</p>
+<br>
+<p>文件：<code class="inline-code">micro_sam/sam_annotator/annotator_2d.py</code>、<code class="inline-code">micro_sam/sam_annotator/annotator_3d.py</code>、<code class="inline-code">micro_sam/sam_annotator/annotator_tracking.py</code>、<code class="inline-code">micro_sam/sam_annotator/image_series_annotator.py</code></p>
+<br>
+<h3>cli_tools</h3>
+<br>
+<p>用于批量处理与自动化的命令行界面</p>
+<br>
+<p>文件：<code class="inline-code">micro_sam/cli_tools.py</code>、<code class="inline-code">scripts/apg_experiments/*.py</code>、<code class="inline-code">scripts/model_export/*.py</code></p>
+<br>
+<h3>finetuning_module</h3>
+<br>
+<p>面向显微数据的模型微调与评估模块</p>
+<br>
+<p>文件：<code class="inline-code">finetuning/livecell_finetuning.py</code>、<code class="inline-code">finetuning/evaluation/*.py</code>、<code class="inline-code">finetuning/generalists/training/*.py</code>、<code class="inline-code">finetuning/specialists/training/*.py</code></p>
+<br>
+<h3>examples_and_docs</h3>
+<br>
+<p>面向用户的示例脚本、笔记本与文档</p>
+<br>
+<p>文件：<code class="inline-code">examples/*.py</code>、<code class="inline-code">notebooks/*.ipynb</code>、<code class="inline-code">doc/*.md</code>、<code class="inline-code">workshops/*/README.md</code></p>
+<br>
+<h2>序列图</h2>
+<br>
+<pre class="code-block"><code class="language-mermaid">sequenceDiagram
+  participant User
+  participant CLI
+  participant Library
+  participant Napari
+  User-&gt;&gt;CLI: 运行标注工具
+  CLI-&gt;&gt;Library: 加载模型与数据
+  Library--&gt;&gt;CLI: 返回分割结果
+  CLI--&gt;&gt;User: 显示结果
+  User-&gt;&gt;Napari: 与插件交互
+  Napari-&gt;&gt;Library: 请求分割
+  Library--&gt;&gt;Napari: 返回掩膜
+  Napari--&gt;&gt;User: 在查看器中显示掩膜</code></pre>
+<br>
+<h2>数据流</h2>
+<br>
+<p>用户输入（图像、提示）通过 CLI 或 napari 插件流入核心库，核心库利用预计算嵌入和 SAM 模型对其进行处理。结果（分割掩膜、跟踪结果）会返回给用户界面或保存至文件。微调工作流遵循类似模式，但涉及训练数据与评估指标。</p>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

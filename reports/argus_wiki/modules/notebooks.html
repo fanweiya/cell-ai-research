@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>argus Wiki — notebooks</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / argus Wiki</div>
+  <a href="../../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>argus</h1>
+<br>
+<ul>
+<li><a href="../index.html">Overview</a></li>
+<li><a href="../architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="../modules/src.html">src</a></li>
+<li><a href="../modules/root.html">root</a></li>
+<li><a href="../modules/notebooks.html">notebooks</a></li>
+<li><a href="../reading-guide.html">Reading Guide</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>notebooks</h1>
+<br>
+<p>&gt; 提供时间分辨显微图像细胞追踪的交互式实验与评估流程</p>
+<br>
+<p>notebooks 模块包含两个核心 Jupyter Notebook，分别负责细胞轨迹的计算与 CTC 指标评估。compute_cell_paths.ipynb 用于从原始图像序列中恢复细胞位置并生成轨迹，依赖 src 模块中的算法函数；format_tracks_for_CTC.ipynb 则加载预测轨迹，将其转换为 CTC 评估工具所需格式，并计算 DET、SEG、TRA 三项指标。两个 notebook 均通过 sys.path 动态导入 src 模块，实现数据读取、预处理、轨迹生成与结果验证的完整工作流。</p>
+<br>
+<h2>Files</h2>
+<br>
+<h3><code class="inline-code">notebooks/compute_cell_paths.ipynb</code></h3>
+<br>
+<p>读取时间序列显微图像，执行细胞分割与追踪，生成细胞轨迹数据</p>
+<br>
+<ul>
+<li><code class="inline-code">algo.read_images</code> (function) - 按指定模式读取图像序列，支持灰度与彩色通道处理</li>
+<li><code class="inline-code">algo.batch_rescale_rgb_to_255</code> (function) - 将图像批量归一化至 [0,255] 范围</li>
+<li><code class="inline-code">IMAGE_PATHS_PATTERN</code> (variable) - 定义图像文件路径的通配符模式，需包含前导零的时间编号</li>
+<li><code class="inline-code">IMAGE_CHANNEL</code> (variable) - 指定用于分析的图像通道（0=红，1=绿，2=蓝）</li>
+</ul>
+<br>
+<h3><code class="inline-code">notebooks/format_tracks_for_CTC.ipynb</code></h3>
+<br>
+<p>将追踪结果转换为 CTC 评估格式并计算检测、分割与追踪指标</p>
+<br>
+<ul>
+<li><code class="inline-code">ctc_metrics.evaluate_sequence</code> (function) - 执行 CTC 指标评估，返回 DET、SEG、TRA 评分</li>
+<li><code class="inline-code">ctc_metrics.validate_sequence</code> (function) - 验证轨迹数据格式是否符合 CTC 要求</li>
+<li><code class="inline-code">GRAPH_OUTPUT_PATH</code> (variable) - 存储预测轨迹图的输出目录</li>
+</ul>
+<br>
+<h2>Key Concepts</h2>
+<br>
+<ul>
+<li><strong>CTC 指标评估</strong>: 采用 Cell Tracking Challenge 标准，通过 DET（检测）、SEG（分割）、TRA（追踪）三项量化追踪性能</li>
+<li><strong>时间序列图像模式匹配</strong>: 使用通配符模式（如 t*.tif）加载按时间顺序编号的图像序列，要求编号含前导零以确保正确排序</li>
+<li><strong>模块动态加载</strong>: 通过修改 sys.path 将 src 目录加入导入路径，使 notebook 能访问核心算法与工具模块</li>
+</ul>
+<br>
+<h2>Internal Relationships</h2>
+<br>
+<ul>
+<li><code class="inline-code">notebooks/compute_cell_paths.ipynb</code> → <code class="inline-code">src/algo_funcs.py</code>: 导入 algo_funcs 模块以调用图像读取、预处理及追踪算法函数</li>
+<li><code class="inline-code">notebooks/format_tracks_for_CTC.ipynb</code> → <code class="inline-code">src/ctc_metrics.py</code>: 导入 ctc_metrics 模块以验证和评估追踪结果</li>
+<li><code class="inline-code">notebooks/compute_cell_paths.ipynb</code> → <code class="inline-code">notebooks/format_tracks_for_CTC.ipynb</code>: 前者生成的轨迹数据是后者评估的输入来源</li>
+</ul>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>

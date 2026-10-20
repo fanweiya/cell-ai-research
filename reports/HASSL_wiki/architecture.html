@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HASSL Wiki — architecture</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-h: #cbd5e1;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --accent: #4f46e5;
+  --accent-l: #e0e7ff;
+  --accent-d: #3730a3;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar li {
+  font-size: 14px;
+}
+
+.sidebar a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+}
+
+.sidebar h1, .sidebar h2, .sidebar h3, .sidebar h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.sidebar h1:first-child, .sidebar h2:first-child, .sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.markdown-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.markdown-body h1 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.markdown-body h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 16px;
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 16px;
+  padding-left: 20px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent-d);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-brand">🔬 Cell AI Console / HASSL Wiki</div>
+  <a href="../../index.html" class="back-btn">返回主控制台</a>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h1>HASSL</h1>
+<br>
+<ul>
+<li><a href="index.html">Overview</a></li>
+<li><a href="architecture.html">Architecture</a></li>
+<li><strong>Modules</strong></li>
+<li><a href="modules/root.html">root</a></li>
+<li><a href="modules/notebooks.html">notebooks</a></li>
+<li><a href="modules/docs.html">docs</a></li>
+<li><a href="modules/dinov3.html">dinov3</a></li>
+<li><a href="reading-guide.html">Reading Guide</a></li>
+<li><a href="dependencies.html">Dependencies</a></li>
+</ul>
+<br>
+  </aside>
+  
+  <main class="content-area">
+    <article class="markdown-body">
+      <h1>Architecture</h1>
+<br>
+<p><strong>Type:</strong> framework</p>
+<br>
+<p>HASSL is a hierarchy-aware self-supervised learning framework built on top of DINOv3 for single cell microscopy. It uses a modular architecture with separate components for training, evaluation, data handling, and model definitions, following a typical PyTorch-based deep learning framework structure.</p>
+<br>
+<h2>Component Diagram</h2>
+<br>
+<pre class="code-block"><code class="language-mermaid">graph TD
+  训练核心 --&gt; 模型架构
+  训练核心 --&gt; 数据处理
+  训练核心 --&gt; 分布式支持
+  评估模块 --&gt; 模型架构
+  评估模块 --&gt; 数据处理
+  工具函数 --&gt; 训练核心
+  工具函数 --&gt; 评估模块
+  工具函数 --&gt; 分布式支持</code></pre>
+<br>
+<h2>Components</h2>
+<br>
+<h3>训练核心</h3>
+<br>
+<p>负责模型训练流程、损失计算和优化器管理</p>
+<br>
+<p>Files: <code class="inline-code">dinov3/train/train.py</code>, <code class="inline-code">dinov3/train/ssl_meta_arch.py</code>, <code class="inline-code">dinov3/loss/</code></p>
+<br>
+<h3>模型架构</h3>
+<br>
+<p>定义和加载各种神经网络模型</p>
+<br>
+<p>Files: <code class="inline-code">dinov3/models/</code>, <code class="inline-code">dinov3/layers/</code></p>
+<br>
+<h3>数据处理</h3>
+<br>
+<p>处理图像数据加载、增强和批处理</p>
+<br>
+<p>Files: <code class="inline-code">dinov3/data/</code>, <code class="inline-code">dinov3/configs/</code></p>
+<br>
+<h3>评估模块</h3>
+<br>
+<p>提供多种评估任务如KNN、线性探测、分割和检测</p>
+<br>
+<p>Files: <code class="inline-code">dinov3/eval/</code></p>
+<br>
+<h3>分布式支持</h3>
+<br>
+<p>管理多GPU分布式训练</p>
+<br>
+<p>Files: <code class="inline-code">dinov3/distributed/</code>, <code class="inline-code">dinov3/fsdp/</code></p>
+<br>
+<h3>工具函数</h3>
+<br>
+<p>提供日志、配置、检查点等通用功能</p>
+<br>
+<p>Files: <code class="inline-code">dinov3/logging/</code>, <code class="inline-code">dinov3/configs/config.py</code>, <code class="inline-code">dinov3/checkpointer/</code></p>
+<br>
+<h2>Sequence Diagram</h2>
+<br>
+<pre class="code-block"><code class="language-mermaid">sequenceDiagram
+  participant 用户
+  participant 配置系统
+  participant 训练核心
+  participant 模型架构
+  participant 数据处理
+  participant 分布式支持
+  用户-&gt;&gt;配置系统: 加载配置文件
+  配置系统-&gt;&gt;训练核心: 传递配置
+  训练核心-&gt;&gt;数据处理: 获取训练批次
+  数据处理-&gt;&gt;训练核心: 返回数据
+  训练核心-&gt;&gt;模型架构: 前向传播
+  模型架构-&gt;&gt;训练核心: 返回特征
+  训练核心-&gt;&gt;分布式支持: 同步梯度
+  分布式支持-&gt;&gt;训练核心: 返回同步梯度
+  训练核心-&gt;&gt;训练核心: 计算损失并更新参数</code></pre>
+<br>
+<h2>Data Flow</h2>
+<br>
+<p>配置系统读取YAML配置文件并转换为OmegaConf对象，训练核心根据配置初始化模型和数据加载器。训练过程中，数据处理模块加载图像批次并应用增强，模型架构执行前向传播生成特征表示。分布式支持模块在多GPU环境下同步梯度和参数，最终通过检查点模块保存训练状态。</p>
+<br>
+    </article>
+  </main>
+</div>
+
+</body>
+</html>
