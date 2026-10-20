@@ -41657,6 +41657,601 @@
         "verified_at": "2026-10-19T01:20:05.682150Z",
         "verification": "arxiv_atom_exact_id_and_title"
       }
+    },
+    {
+      "arxiv_id": "2610.24773v1",
+      "title": "Evidence Field: Adaptive Covering Programs for Medical Imaging",
+      "published_date": "2026-10-17",
+      "authors": [
+        "Isarar Siddique",
+        "Raiyan Siddique",
+        "Arshi Niyaz",
+        "Jamyang Ugyen Tshomo",
+        "Atish Raza"
+      ],
+      "categories": [
+        "eess.IV",
+        "cs.AI",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "task_type": [
+        "classification",
+        "reconstruction",
+        "histopathology"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/isararsiddique/evidence-field",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "cs> is incorrect. IX-F Public reproduction artifact https://github.com/isararsiddique/evidence-field : code/reader",
+          "relation_signal": "paper_title_match",
+          "provenance_source": "https://arxiv.org/html/2610.24773v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Medical image classifiers typically return predictions without a native contract for independently reconstructing their spatial decision computation. Evidence Field is a trainable spatial-program architecture that jointly produces class scores, selected covering programs and signed evidence. Its encoder combines absolute and image-relative response fields with associative spatial moments and learned characteristic sums. A typed classifier scores individual regions and parent-conditioned multiplicative groups; a covering recursion selects scale, partition and composition. We establish exact one-fold coverage, optimality within the registered grammar, a bound relating smooth training to hard inference, signed-score conservation and class-centred offset invariance. Direct contractions and their adjoint specify arithmetic and storage scaling on two- and three-dimensional grids. Native output records bind inputs, parameters, supports, types and contextual dependencies to individual and ensemble predictions. In a separately reported histopathology application, patient-separated training and evaluation across held-out centres provide empirical evidence for the architecture. Trained mechanism and corrected-loss comparisons distinguish predictive effects from implementation correctness; independent readers reconstruct descriptors, routes, scores and probability mixtures. The principal contribution is a coupled representation, decision and evidence architecture whose selected computation can be reproduced independently.",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "isararsiddique/evidence-field",
+        "repository_url": "https://github.com/isararsiddique/evidence-field",
+        "analyzed_at": "2026-10-20T01:20:52.128789+00:00",
+        "architecture": "# isararsiddique/evidence-field\n**Stars**: 0 | **Language**: Python\n**Description**: This repository contains research implementation and audited reproduction artifacts for &#x27;Evidence Field: Adaptive Covering Programs for Medical Imaging&#x27;. It focuses on image-relative encoding, typed covering programs, and independently replayable medical-image predictions. The project includes code for reproducing experiments, detailed documentation on artifacts, and instructions for running provided examples.\n\n\n## Directory Tree\n```\n.gitignore\nREADME.md\napplication_artifacts\napplication_artifacts/Histopathology_Application.part00.b64\napplication_artifacts/Histopathology_Application.part01.b64\napplication_artifacts/Histopathology_Application.part02.b64\napplication_artifacts/Histopathology_Application.part03.b64\napplication_artifacts/Histopathology_Application.part04.b64\napplication_artifacts/Histopathology_Application.part05.b64\napplication_artifacts/Histopathology_Application.part06.b64\napplication_artifacts/Histopathology_Application.part07.b64\napplication_artifacts/Manifest.json\napplications\napplications/histopathology\napplications/histopathology/README.md\napplications/histopathology/predict_histopathology.py\napplications/histopathology/render_evidence.py\napplications/histopathology/requirements.txt\napplications/histopathology/serve_histopathology.py\nartifacts\nartifacts/Manifest.json\nartifacts/reproduction.part000.b64\nartifacts/reproduction.part001.b64\nartifacts/reproduction.part002.b64\nartifacts/reproduction.part003.b64\nartifacts/reproduction.part004.b64\nartifacts/reproduction.part005.b64\nartifacts/reproduction.part006.b64\nartifacts/reproduction.part007.b64\nartifacts/reproduction.part008.b64\nartifacts/reproduction.part009.b64\nartifacts/reproduction.part010.b64\nartifacts/reproduction.part011.b64\nartifacts/reproduction.part012.b64\nartifacts/reproduction.part013.b64\nartifacts/reproduction.part014.b64\nartifacts/reproduction.part015.b64\nartifacts/reproduction.part016.b64\nartifacts/reproduction.part017.b64\nartifacts/reproduction.part018.b64\nartifacts/reproduction.part019.b64\nartifacts/reproduction.part020.b64\nartifacts/reproduction.part021.b64\nartifacts/reproduction.part022.b64\nartifacts/reproduction.part023.b64\nartifacts/reproduction.part024.b64\nartifacts/reproduction.part025.b64\nartifacts/reproduction.part026.b64\nartifacts/reproduction.part027.b64\nartifacts/reproduction.part028.b64\nartifacts/reproduction.part029.b64\nartifacts/reproduction.part030.b64\nartifacts/reproduction.part031.b64\nartifacts/reproduction.part032.b64\nartifacts/reproduction.part033.b64\nartifacts/reproduction.part034.b64\nartifacts/reproduction.part035.b64\nartifacts/reproduction.part036.b64\nartifacts/reproduction.part037.b64\nartifacts/reproduction.part038.b64\ndownload_artifacts.py\ndownload_histopathology_application.py\npaper\npaper/Evidence_Field_Architecture.pdf\npaper/Evidence_Field_Architecture_Source.zip\nreproduction\nreproduction/Worked_Evidence_Example.json\nreproduction/configuration\nreproduction/configuration/All_Primary_Training_Receipts.json\nreproduction/configuration/Ensemble_Settings.json\nreproduction/configuration/input_receipt.json\nreproduction/configuration/source_checkpoint_lock.json\nreproduction/model_code\nreproduction/model_code/locked_model_source\nreproduction/provenance\nreproduction/provenance/Omitted_Large_Metadata_Hashes.json\nreproduction/provenance/Source_Provenance.json\nreproduction/provenance/mirror_tree.json\nreproduction/provenance/preparation_audit.json\nreproduction/provenance/prepare_full_camelyon.py\nreproduction/provenance/prepare_internal_split.py\nreproduction/provenance/prepare_study.py\nreproduction/provenance/prior_patient_partition.json\nreproduction/reader\nreproduction/reader/extended_evidence_diagnostics.py\nreproduction/reproduce_example.py\nreproduction/requirements-reader.txt\nverification\nverification/Cloud_Original_Checkpoint_Comparison.json\nverification/GitHub_Paper_Publication_Verification.json\nverification/Histopathology_Model_Demo_Verification.json\nverification/Histopathology_Visible_Output_Verification.json\nverification/Trained_Model_Functional_Verification.json\nverification/Trained_Model_Functional_Verification.md\n```",
+        "project_structure": "## Directory Tree\n```\n.gitignore\nREADME.md\napplication_artifacts\napplication_artifacts/Histopathology_Application.part00.b64\napplication_artifacts/Histopathology_Application.part01.b64\napplication_artifacts/Histopathology_Application.part02.b64\napplication_artifacts/Histopathology_Application.part03.b64\napplication_artifacts/Histopathology_Application.part04.b64\napplication_artifacts/Histopathology_Application.part05.b64\napplication_artifacts/Histopathology_Application.part06.b64\napplication_artifacts/Histopathology_Application.part07.b64\napplication_artifacts/Manifest.json\napplications\napplications/histopathology\napplications/histopathology/README.md\napplications/histopathology/predict_histopathology.py\napplications/histopathology/render_evidence.py\napplications/histopathology/requirements.txt\napplications/histopathology/serve_histopathology.py\nartifacts\nartifacts/Manifest.json\nartifacts/reproduction.part000.b64\nartifacts/reproduction.part001.b64\nartifacts/reproduction.part002.b64\nartifacts/reproduction.part003.b64\nartifacts/reproduction.part004.b64\nartifacts/reproduction.part005.b64\nartifacts/reproduction.part006.b64\nartifacts/reproduction.part007.b64\nartifacts/reproduction.part008.b64\nartifacts/reproduction.part009.b64\nartifacts/reproduction.part010.b64\nartifacts/reproduction.part011.b64\nartifacts/reproduction.part012.b64\nartifacts/reproduction.part013.b64\nartifacts/reproduction.part014.b64\nartifacts/reproduction.part015.b64\nartifacts/reproduction.part016.b64\nartifacts/reproduction.part017.b64\nartifacts/reproduction.part018.b64\nartifacts/reproduction.part019.b64\nartifacts/reproduction.part020.b64\nartifacts/reproduction.part021.b64\nartifacts/reproduction.part022.b64\nartifacts/reproduction.part023.b64\nartifacts/reproduction.part024.b64\nartifacts/reproduction.part025.b64\nartifacts/reproduction.part026.b64\nartifacts/reproduction.part027.b64\nartifacts/reproduction.part028.b64\nartifacts/reproduction.part029.b64\nartifacts/reproduction.part030.b64\nartifacts/reproduction.part031.b64\nartifacts/reproduction.part032.b64\nartifacts/reproduction.part033.b64\nartifacts/reproduction.part034.b64\nartifacts/reproduction.part035.b64\nartifacts/reproduction.part036.b64\nartifacts/reproduction.part037.b64\nartifacts/reproduction.part038.b64\ndownload_artifacts.py\ndownload_histopathology_application.py\npaper\npaper/Evidence_Field_Architecture.pdf\npaper/Evidence_Field_Architecture_Source.zip\nreproduction\nreproduction/Worked_Evidence_Example.json\nreproduction/configuration\nreproduction/configuration/All_Primary_Training_Receipts.json\nreproduction/configuration/Ensemble_Settings.json\nreproduction/configuration/input_receipt.json\nreproduction/configuration/source_checkpoint_lock.json\nreproduction/model_code\nreproduction/model_code/locked_model_source\nreproduction/model_code/locked_model_source/evidence_field\nreproduction/model_code/locked_model_source/evidence_field/__init__.py\nreproduction/model_code/locked_model_source/evidence_field/adaptive_controls.py\nreproduction/model_code/locked_model_source/evidence_field/adaptive_encoder.py\nreproduction/model_code/locked_model_source/evidence_field/adaptive_program.py\nreproduction/model_code/locked_model_source/evidence_field/adaptive_replay.py\nreproduction/model_code/locked_model_source/evidence_field/baselines.py\nreproduction/model_code/locked_model_source/evidence_field/bounded_program.py\nreproduction/model_code/locked_model_source/evidence_field/calibration.py\nreproduction/model_code/locked_model_source/evidence_field/comparison_baselines.py\nreproduction/model_code/locked_model_source/evidence_field/contracted_moments.py\nreproduction/model_code/locked_model_source/evidence_field/dense_program.py\nreproduction/model_code/locked_model_source/evidence_field/encoder.py\nreproduction/model_code/locked_model_source/evidence_field/encoder_replay.py\nreproduction/model_code/locked_model_source/evidence_field/evidence_analysis.py\nreproduction/model_code/locked_model_source/evidence_field/gate.py\nreproduction/model_code/locked_model_source/evidence_field/geometry.py\nreproduction/model_code/locked_model_source/evidence_field/hospital.py\nreproduction/model_code/locked_model_source/evidence_field/medical_input.py\nreproduction/model_code/locked_model_source/evidence_field/medical_input_replay.py\nreproduction/model_code/locked_model_source/evidence_field/model.py\nreproduction/model_code/locked_model_source/evidence_field/observation.py\nreproduction/model_code/locked_model_source/evidence_field/probability_mixture.py\nreproduction/model_code/locked_model_source/evidence_field/replay.py\nreproduction/model_code/locked_model_source/evidence_field/stable_program.py\nreproduction/model_code/locked_model_source/evidence_field/structural_field.py\nreproduction/model_code/locked_model_source/evidence_field/structural_replay.py\nreproduction/model_code/locked_model_source/evidence_field/study_evidence.py\nreproduction/model_code/locked_model_source/evidence_field/trust.py\nreproduction/model_code/locked_model_source/evidence_field/vector_program.py\nreproduction/model_code/locked_model_source/evidence_field/verification.py\nreproduction/provenance\nreproduction/provenance/Omitted_Large_Metadata_Hashes.json\nreproduction/provenance/Source_Provenance.json\nreproduction/provenance/mirror_tree.json\nreproduction/provenance/preparation_audit.json\nreproduction/provenance/prepare_full_camelyon.py\nreproduction/provenance/prepare_internal_split.py\nreproduction/provenance/prepare_study.py\nreproduction/provenance/prior_patient_partition.json\nreproduction/reader\nreproduction/reader/extended_evidence_diagnostics.py\nreproduction/reproduce_example.py\nreproduction/requirements-reader.txt\nverification\nverification/Cloud_Original_Checkpoint_Comparison.json\nverification/GitHub_Paper_Publication_Verification.json\nverification/Histopathology_Model_Demo_Verification.json\nverification/Histopathology_Visible_Output_Verification.json\nverification/Trained_Model_Functional_Verification.json\nverification/Trained_Model_Functional_Verification.md\n```",
+        "key_files": [
+          "README.md",
+          "applications/histopathology/README.md",
+          "reproduction/model_code/locked_model_source/evidence_field/model.py",
+          "verification/Trained_Model_Functional_Verification.md",
+          "verification/Trained_Model_Functional_Verification.json",
+          "download_artifacts.py",
+          "download_histopathology_application.py",
+          "reproduction/reproduce_example.py",
+          "reproduction/provenance/prepare_study.py",
+          "applications/histopathology/render_evidence.py",
+          "reproduction/provenance/prepare_full_camelyon.py",
+          "reproduction/provenance/prepare_internal_split.py",
+          "applications/histopathology/serve_histopathology.py",
+          "reproduction/reader/extended_evidence_diagnostics.py",
+          "applications/histopathology/predict_histopathology.py",
+          "reproduction/model_code/locked_model_source/evidence_field/gate.py",
+          "reproduction/model_code/locked_model_source/evidence_field/trust.py",
+          "reproduction/model_code/locked_model_source/evidence_field/replay.py",
+          "reproduction/model_code/locked_model_source/evidence_field/encoder.py",
+          "reproduction/model_code/locked_model_source/evidence_field/__init__.py",
+          "reproduction/model_code/locked_model_source/evidence_field/geometry.py",
+          "reproduction/model_code/locked_model_source/evidence_field/hospital.py",
+          "reproduction/model_code/locked_model_source/evidence_field/baselines.py",
+          "reproduction/model_code/locked_model_source/evidence_field/calibration.py",
+          "reproduction/model_code/locked_model_source/evidence_field/observation.py",
+          "reproduction/model_code/locked_model_source/evidence_field/verification.py",
+          "reproduction/model_code/locked_model_source/evidence_field/dense_program.py",
+          "applications/histopathology/requirements.txt"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 40,
+          "selected_file_count": 28,
+          "selected_code_file_count": 23,
+          "languages_by_extension": {
+            "py": 40
+          },
+          "tests_present": false,
+          "test_files": [],
+          "manifest_files": [
+            "applications/histopathology/requirements.txt",
+            "README.md",
+            "applications/histopathology/README.md"
+          ],
+          "read_errors": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2610.24773v1_gread.json"
+      },
+      "discovered_at": "2026-10-20T01:20:32.781798Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.24773",
+        "verified_at": "2026-10-20T01:20:32.781798Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.24546v1",
+      "title": "Cross-polarization pairing for label-free few-shot thin-section classification",
+      "published_date": "2026-10-17",
+      "authors": [
+        "Bingchen Yan"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "classification"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Few-shot classifiers of rock thin sections are meta-trained on many rock types that a petrographer has identified slide by slide, and this identification is the costly step that new collections lack. We study few-shot recognition of unseen rock types when no training slide is identified, and the only information available is what the microscope records anyway: which slide an image comes from, and whether it was taken in plane-polarized (PPL) or cross-polarized (XPL) light. We first show why generic unsupervised pseudo-tasks fit this setting poorly: the positives they find without labels are either wrong or near-duplicates of the anchor, so they teach the model little. Polarized-light microscopy provides positives that avoid both problems. The PPL and XPL views of one field show the same grains, so they are correct by construction, yet they look very different. We propose cross-polarization pairing (XPP), which treats each slide as a pseudo-class and pairs its PPL and XPL views of the same field location, so that matching must rely on grain shape and texture rather than on colour. On the Nanjing University collection of 108 rock types, with support and query images taken from different slides, XPP is the best label-free method on average over three random splits, and matches a supervised model trained on 78 identified rock types. Controls show that colour augmentation and other acquisition positives do not reproduce the gain. We also show that the image-level protocol of earlier work is saturated, and propose a cross-slide protocol in its place.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-20T01:20:32.781798Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.24546",
+        "verified_at": "2026-10-20T01:20:32.781798Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.24381v1",
+      "title": "Learning from the Right Regions: Class-Conditioned Explanation Guidance for Medical Imaging",
+      "published_date": "2026-10-17",
+      "authors": [
+        "Zubair Faruqui",
+        "Rahul Dubey"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "task_type": [
+        "classification"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Deep neural networks can achieve strong predictive performance in medical imaging while relying on regions unrelated to the predicted finding. Explanation-guided learning can address this problem, but multi-label classification introduces a key challenge: multiple abnormalities may coexist in an image, requiring each prediction to align with its corresponding spatial evidence. We propose a class-conditioned explanation-guided learning framework that constructs a separate explanation for each positive class and penalizes evidence outside its class-specific annotated regions. We instantiate the framework using Gradient-weighted Class Activation Mapping (Grad-CAM) and evaluate it on 14 abnormalities using EfficientNet-B1, ViT-B/16, ViT-B/32, and Swin-B. Explanation guidance substantially improves annotation alignment across all architectures: All-Saliency Precision increases from 0.140 to 0.625, 0.052 to 0.551, 0.060 to 0.403, and 0.095 to 0.570, respectively. These improvements are accompanied by smaller, architecture-dependent changes in classification performance. Our results show that class-conditioned explanation guidance can substantially improve where multi-label classifiers concentrate their explanatory evidence while largely preserving predictive performance.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-20T01:20:32.781798Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.24381",
+        "verified_at": "2026-10-20T01:20:32.781798Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.23475v1",
+      "title": "TAN: A Size- and Form-Adaptive Masked-Convolution Encoder for Tissue Graphs",
+      "published_date": "2026-10-16",
+      "authors": [
+        "Jan Herschel",
+        "Anselm von Gladiss"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "segmentation",
+        "classification",
+        "histopathology"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/jherschel94/tan",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "g; on BRACS it is close to ResNet18 but behind UNI and CTransPath. An unmasked twin reaches similar accuracy (nominally lower on BACH, higher on BRACS) at more than twice the FLOPs. Whether pretraining or a better superpixel size closes the BRACS gap remains open. Code: https://github.com/jherschel94/tan Compliance",
+          "relation_signal": "explicit_code_statement",
+          "provenance_source": "https://arxiv.org/html/2610.23475v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Tissue graphs represent histology images as graphs over tissue-conforming superpixels, which keeps homogeneous tissue regions intact instead of cutting them into rectangular patches. To embed superpixels, current encoders crop them to bounding boxes and then pad, resize, or mask them, so background or fill values can leak into the node features. This matters in practice, and especially in medical imaging, where a prediction should depend on the tissue and not on an arbitrary preprocessing choice: on BACH, changing only the fill of the masked region shifts the accuracy of frozen encoders by up to 6 percentage points, larger than the differences among the four best encoders under mean fill, and the preferred fill differs between datasets, so it cannot be fixed once and for all. We present TAN (Tissue-Aware Network), a compact convolutional encoder (0.41M parameters) that processes each superpixel at its native shape and extent and excludes background from every operation, which makes its embeddings exactly invariant to the fill by construction. Under identical masks and an identical graph classifier, TAN's accuracy on BACH is not significantly different from that of the 303M-parameter foundation model UNI (81.1% vs. 80.7-82.6%, depending on the fill), with ~740x fewer parameters, ~1,190x fewer FLOPs, and no pretraining. On BRACS, TAN is close to a ResNet18 trained under the same protocol and trails the histopathology foundation models. An ablation with TAN's architecture but standard processing of fill-padded crops shows that masking keeps accuracy similar (nominally higher on BACH, lower on BRACS, within noise) at less than half the FLOPs.",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "jherschel94/tan",
+        "repository_url": "https://github.com/jherschel94/tan",
+        "analyzed_at": "2026-10-20T01:21:09.625444+00:00",
+        "architecture": "# jherschel94/tan\n**Stars**: 0 | **Language**: Python\n**Description**: This repository contains the code and experimental setup for the TAN (Tissue-Aware Network) model, a masked-convolution encoder designed for superpixel tissue graphs. It includes implementations for training and comparing TAN against other node encoders like ResNet18, CTransPath, and UNI on the BACH and BRACS datasets. The project also features significance testing, FLOP counts, and detailed ablation studies, such as a TAN-unmasked version. The repository is structured to facilitate the construction of tissue graphs, extraction of node embeddings using various encoders, and subsequent classification using a GAT (Graph Attention Network) or Random Forest baseline. It also provides scripts for performance evaluation, statistical analysis, and visualization related to the TAN model&#x27;s background-invariant properties.\n\n\n## Directory Tree\n```\nLICENSE\nREADME.md\nbracs_class_distribution.py\nbuild_bach_graphs.py\nbuild_bracs_graphs.py\ncheck_node_survival.py\ncompare_all_encoders.py\ncount_flops.py\ncount_model_parameters.py\nfoundation_encoders.py\ngather_bracs_results.py\nmain.py\nmake_tan_figure.py\nrepeated_cv_comparison.py\nrepeated_cv_comparison_adaptivecnn.py\nrepeated_cv_comparison_scratchcnn.py\nrepeated_cv_comparison_tan.py\nrepeated_cv_comparison_tanunmasked.py\nrequirements.txt\nscratch_cnn.py\nstats_utils.py\ntan_unmasked.py\ntissue_aware_network.py\ntrain_adaptive_cnn.py\ntrain_eval_bracs_official_split.py\ntrain_gnn_kfold.py\ntrain_rf_baseline.py\ntrain_scratch_cnn.py\ntrain_tan_bracs_save.py\ntrain_tan_extractor.py\n```",
+        "project_structure": "## Directory Tree\n```\nLICENSE\nREADME.md\nbracs_class_distribution.py\nbuild_bach_graphs.py\nbuild_bracs_graphs.py\ncheck_node_survival.py\ncompare_all_encoders.py\ncount_flops.py\ncount_model_parameters.py\nfoundation_encoders.py\ngather_bracs_results.py\nmain.py\nmake_tan_figure.py\nrepeated_cv_comparison.py\nrepeated_cv_comparison_adaptivecnn.py\nrepeated_cv_comparison_scratchcnn.py\nrepeated_cv_comparison_tan.py\nrepeated_cv_comparison_tanunmasked.py\nrequirements.txt\nscratch_cnn.py\nstats_utils.py\ntan_unmasked.py\ntissue_aware_network.py\ntrain_adaptive_cnn.py\ntrain_eval_bracs_official_split.py\ntrain_gnn_kfold.py\ntrain_rf_baseline.py\ntrain_scratch_cnn.py\ntrain_tan_bracs_save.py\ntrain_tan_extractor.py\n```",
+        "key_files": [
+          "main.py",
+          "README.md",
+          "tissue_aware_network.py",
+          "count_model_parameters.py",
+          "tan_unmasked.py",
+          "make_tan_figure.py",
+          "train_tan_extractor.py",
+          "train_tan_bracs_save.py",
+          "repeated_cv_comparison_tan.py",
+          "repeated_cv_comparison_tanunmasked.py",
+          "LICENSE",
+          "count_flops.py",
+          "scratch_cnn.py",
+          "stats_utils.py",
+          "train_gnn_kfold.py",
+          "build_bach_graphs.py",
+          "train_rf_baseline.py",
+          "train_scratch_cnn.py",
+          "build_bracs_graphs.py",
+          "train_adaptive_cnn.py",
+          "check_node_survival.py",
+          "foundation_encoders.py",
+          "compare_all_encoders.py",
+          "gather_bracs_results.py",
+          "repeated_cv_comparison.py",
+          "bracs_class_distribution.py",
+          "train_eval_bracs_official_split.py",
+          "requirements.txt"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 27,
+          "selected_file_count": 28,
+          "selected_code_file_count": 25,
+          "languages_by_extension": {
+            "py": 27
+          },
+          "tests_present": false,
+          "test_files": [],
+          "manifest_files": [
+            "README.md",
+            "requirements.txt",
+            "LICENSE"
+          ],
+          "read_errors": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2610.23475v1_gread.json"
+      },
+      "discovered_at": "2026-10-20T01:20:32.781798Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.23475",
+        "verified_at": "2026-10-20T01:20:32.781798Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.23408v1",
+      "title": "LithoWorld: An Endpoint World Model for Lithography Process-Window Recovery",
+      "published_date": "2026-10-16",
+      "authors": [
+        "Botong Zhao",
+        "Fang Yu",
+        "Xinyuan Chen",
+        "Yue Lu"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "cell_imaging"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Lithography process drift can move a fabricated pattern outside its process window, producing unqualified scanning electron microscopy (SEM) morphology. We present LithoWorld, an endpoint world model for SEM-guided parameter recovery. Interior representative targets jointly determine qualified reference appearance and correction supervision. A causal predictive branch aligns currentimage features with endpoint representations, while a conditional flow policy generates a two-dimensional correction as an action chunk. The model learns from 173 groups of measured SEMs organized as focus-exposure maps, preserving unmeasured cells as unknown. On 200 test pairs from the 73-group subset, LithoWorld achieves 88.5% qualified-region success and 46.0% interior success, exceeding the strongest comparison method by 2.5 and 6.0 percentage points, respectively. Ablations separate the effects of target selection, endpoint alignment, and output parameterization. Qualitative SEM retrieval illustrates recovery to qualified interiors without requiring exact reference-coordinate matching.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-20T01:20:32.781798Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.23408",
+        "verified_at": "2026-10-20T01:20:32.781798Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.24023v1",
+      "title": "ProtoGTX: Prototype-Aligned Graph Transformer for Explainable Whole-Slide Image Analysis",
+      "published_date": "2026-10-16",
+      "authors": [
+        "Iori Azuma",
+        "Hiroyuki Kusuhara",
+        "Tadahaya Mizuno"
+      ],
+      "categories": [
+        "eess.IV",
+        "cs.CV",
+        "q-bio.QM"
+      ],
+      "task_type": [
+        "detection",
+        "classification",
+        "histopathology"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/mizuno-group/ProtoGTX",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "orms fragmented patch-level prototype assignments into more coherent tissue regions. In BRACS, prototype maps also co-localize with pathologist annotations and regions relevant to slide-level prediction. These results demonstrate that ProtoGTX provides complementary semantic and spatial explanations while retaining a prototype vocabulary that can be defined independently of the predictive model. Code is available at https://github.com/mizuno-group/ProtoGTX.\"/> <meta name=\"twitter:title",
+          "relation_signal": "explicit_code_statement",
+          "provenance_source": "https://arxiv.org/abs/2610.24023v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Deep learning has achieved strong performance in computational pathology, but explaining whole-slide image (WSI) predictions remains challenging. Existing explanation methods often highlight important regions without identifying their morphological patterns, leaving a gap between patch-level computational evidence and slide-level pathological interpretation. We propose ProtoGTX, a graph-based framework that combines spatial contextualization with a flexible morphological prototype vocabulary. ProtoGTX separates the reference prototypes used to define morphological concepts from the predictive model: the reference vocabulary can be generated from training data by unsupervised clustering or supplied externally, and remains fixed during classifier training. Patch features are first contextualized over a spatial graph, after which learnable prototypes representing morphological concepts are optimized through cross-attention. Their slide-level activation profile is aligned with the morphological composition induced by the fixed reference prototype bank. On the CPTAC and BRACS datasets, ProtoGTX outperforms the evaluated MIL, prototype-based, and graph-based baselines, with particularly pronounced improvements on BRACS. Qualitative analyses further show that spatial contextualization transforms fragmented patch-level prototype assignments into more coherent tissue regions. In BRACS, prototype maps also co-localize with pathologist annotations and regions relevant to slide-level prediction. These results demonstrate that ProtoGTX provides complementary semantic and spatial explanations while retaining a prototype vocabulary that can be defined independently of the predictive model. Code is available at https://github.com/mizuno-group/ProtoGTX.",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "mizuno-group/ProtoGTX",
+        "repository_url": "https://github.com/mizuno-group/ProtoGTX",
+        "analyzed_at": "2026-10-20T01:21:34.084405+00:00",
+        "architecture": "# mizuno-group/ProtoGTX\n**Stars**: 1 | **Language**: Python\n**Description**: ProtoGTX is a Graph Transformer model for interpretable computational pathology that analyzes Whole Slide Images (WSI) by representing them as spatial graphs. It leverages patch-level relations and prototype learning to provide high-performance diagnostic predictions with transparent explanations. The repository includes core architecture, graph building modules, dataset loaders, visualization utilities for interpretability maps (GraphCAM &amp; Prototype), and example tutorials.\n\n\n## Directory Tree\n```\n.gitattributes\n.gitignore\nLICENSE\nREADME.md\nconfig_train.yml\ndataset_module\ndataset_module/graph_dataset.py\nexample\nexample/1_build_grid_graphs.ipynb\nexample/2_define_prototype_features.ipynb\nexample/3_prediction_evaluation.ipynb\nexample/results\nexample/results/GraphCAM\nexample/results/GraphCAM_vis\nexample/results/Prototype_vis\nexample/results/model_checkpoint.pth\ngraph_builder\ngraph_builder/build_grid_graphs.py\nprotogtx\nprotogtx/ConceptGraphTransformer.py\nprotogtx/ViT.py\nprotogtx/gcn.py\nprotogtx/helper.py\nprotogtx/layers.py\nprotogtx/utils\nprotogtx/utils/metrics.py\nsplits\nsplits/BRACS\nsplits/BRACS/split_0\nsplits/BRACS/split_1\nsplits/BRACS/split_2\nsplits/BRACS/split_3\nsplits/BRACS/split_4\nsplits/CPTAC\nsplits/CPTAC/graphs\nsplits/CPTAC/split_0\nsplits/CPTAC/split_1\nsplits/CPTAC/split_2\nsplits/CPTAC/split_3\nsplits/CPTAC/split_4\ntrain.py\nvisualization\nvisualization/graphcam_vis_utils.py\nvisualization/proto_vis_utils.py\n```",
+        "project_structure": "## Directory Tree\n```\n.gitattributes\n.gitignore\nLICENSE\nREADME.md\nconfig_train.yml\ndataset_module\ndataset_module/graph_dataset.py\nexample\nexample/1_build_grid_graphs.ipynb\nexample/2_define_prototype_features.ipynb\nexample/3_prediction_evaluation.ipynb\nexample/results\nexample/results/GraphCAM\nexample/results/GraphCAM/cam_0.pt\nexample/results/GraphCAM/cam_1.pt\nexample/results/GraphCAM/cam_2.pt\nexample/results/GraphCAM/prob.pt\nexample/results/GraphCAM/s_matrix.pt\nexample/results/GraphCAM/s_matrix_ori.pt\nexample/results/GraphCAM_vis\nexample/results/GraphCAM_vis/C3N-01416-23\nexample/results/GraphCAM_vis/C3N-01416-23/C3N-01416-23_luad_all_types_cam_all.png\nexample/results/GraphCAM_vis/C3N-01416-23/C3N-01416-23_luad_all_types_ori.png\nexample/results/GraphCAM_vis/C3N-01416-23/C3N-01416-23_luad_cam_0.png\nexample/results/GraphCAM_vis/C3N-01416-23/C3N-01416-23_luad_cam_1.png\nexample/results/GraphCAM_vis/C3N-01416-23/C3N-01416-23_luad_cam_2.png\nexample/results/Prototype_vis\nexample/results/Prototype_vis/C3N-01416-23_prototype_assignment.png\nexample/results/Prototype_vis/C3N-01416-23_prototype_proportions.png\nexample/results/model_checkpoint.pth\ngraph_builder\ngraph_builder/build_grid_graphs.py\nprotogtx\nprotogtx/ConceptGraphTransformer.py\nprotogtx/ViT.py\nprotogtx/gcn.py\nprotogtx/helper.py\nprotogtx/layers.py\nprotogtx/utils\nprotogtx/utils/metrics.py\nsplits\nsplits/BRACS\nsplits/BRACS/split_0\nsplits/BRACS/split_0/test.csv\nsplits/BRACS/split_0/test_set.txt\nsplits/BRACS/split_0/train.csv\nsplits/BRACS/split_0/train_set.txt\nsplits/BRACS/split_0/val.csv\nsplits/BRACS/split_0/val_set.txt\nsplits/BRACS/split_1\nsplits/BRACS/split_1/test.csv\nsplits/BRACS/split_1/test_set.txt\nsplits/BRACS/split_1/train.csv\nsplits/BRACS/split_1/train_set.txt\nsplits/BRACS/split_1/val.csv\nsplits/BRACS/split_1/val_set.txt\nsplits/BRACS/split_2\nsplits/BRACS/split_2/test.csv\nsplits/BRACS/split_2/test_set.txt\nsplits/BRACS/split_2/train.csv\nsplits/BRACS/split_2/train_set.txt\nsplits/BRACS/split_2/val.csv\nsplits/BRACS/split_2/val_set.txt\nsplits/BRACS/split_3\nsplits/BRACS/split_3/test.csv\nsplits/BRACS/split_3/test_set.txt\nsplits/BRACS/split_3/train.csv\nsplits/BRACS/split_3/train_set.txt\nsplits/BRACS/split_3/val.csv\nsplits/BRACS/split_3/val_set.txt\nsplits/BRACS/split_4\nsplits/BRACS/split_4/test.csv\nsplits/BRACS/split_4/test_set.txt\nsplits/BRACS/split_4/train.csv\nsplits/BRACS/split_4/train_set.txt\nsplits/BRACS/split_4/val.csv\nsplits/BRACS/split_4/val_set.txt\nsplits/CPTAC\nsplits/CPTAC/graphs\nsplits/CPTAC/graphs/C3L-00001-21\nsplits/CPTAC/graphs/C3L-00001-21/adj_s_C3L-00001-21.pt\nsplits/CPTAC/graphs/C3L-00001-21/features_C3L-00001-21.pt\nsplits/CPTAC/graphs/C3L-00001-26\nsplits/CPTAC/graphs/C3L-00001-26/adj_s_C3L-00001-26.pt\nsplits/CPTAC/graphs/C3L-00001-26/features_C3L-00001-26.pt\nsplits/CPTAC/graphs/C3L-00009-21\nsplits/CPTAC/graphs/C3L-00009-21/adj_s_C3L-00009-21.pt\nsplits/CPTAC/graphs/C3L-00009-21/features_C3L-00009-21.pt\nsplits/CPTAC/graphs/readme.txt\nsplits/CPTAC/split_0\nsplits/CPTAC/split_0/expl_16x16\nsplits/CPTAC/split_0/expl_16x16/2f2e5477-42a4-4906-a943-bf7f80_D1_D1_expl.pt\nsplits/CPTAC/split_0/expl_16x16/5a84eae1-197e-4463-ad65-59becc_D1_D1_expl.pt\nsplits/CPTAC/split_0/expl_16x16/93e30fd5-e57e-4503-a175-863c7d_D1_D1_expl.pt\nsplits/CPTAC/split_0/expl_16x16/9f905736-f662-41d6-b3ac-16758d_D1_D1_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00001-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00001-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00009-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00009-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00080-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00080-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00081-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00081-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00083-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00083-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00093-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00093-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00094-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00094-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00095-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00095-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00095-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00095-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00140-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00140-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00140-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00144-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00144-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00263-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00263-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00263-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00263-24_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00263-25_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00263-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00263-27_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00279-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00279-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00279-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00279-24_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00279-25_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00279-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00368-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00368-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00368-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00412-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00412-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00415-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00415-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00415-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00422-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00422-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00422-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00422-24_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00422-25_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00422-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00444-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00444-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00444-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00444-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00444-27_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00444-28_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00445-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00445-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00445-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00445-24_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00445-25_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00445-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00446-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00446-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00446-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00446-24_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00446-25_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00446-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00446-27_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00503-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00503-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00503-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00503-25_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00510-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00510-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00510-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00510-24_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00510-25_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00510-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00568-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00568-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00568-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00568-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00603-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00603-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00603-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00604-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00604-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00604-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00604-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00893-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00893-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00893-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00893-24_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00893-25_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00893-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00904-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00904-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00904-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00913-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00913-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00913-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00913-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00923-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00923-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00927-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00927-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00927-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00927-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00965-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00965-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00965-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00965-24_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00965-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00965-27_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00973-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00973-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00973-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00973-24_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00973-25_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00973-27_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00973-28_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00993-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00993-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00993-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00993-24_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00993-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-00993-27_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01000-24_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01000-25_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01000-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01285-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01285-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01285-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01285-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01330-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01330-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01330-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01330-24_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01330-25_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01330-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01455-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01455-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01455-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01455-24_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01455-25_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01455-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01606-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01606-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01632-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01632-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01632-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01632-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01663-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01663-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01682-21_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01682-22_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01682-23_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01682-24_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01683-26_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01683-27_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01683-28_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01683-29_expl.pt\nsplits/CPTAC/split_0/expl_16x16/C3L-01838-23_expl.pt\nspli",
+        "key_files": [
+          "train.py",
+          "README.md",
+          "LICENSE",
+          "protogtx/ViT.py",
+          "protogtx/gcn.py",
+          "protogtx/helper.py",
+          "protogtx/layers.py",
+          "dataset_module/graph_dataset.py",
+          "visualization/proto_vis_utils.py",
+          "graph_builder/build_grid_graphs.py",
+          "protogtx/ConceptGraphTransformer.py",
+          "visualization/graphcam_vis_utils.py",
+          "example/2_define_prototype_features.ipynb",
+          "protogtx/utils/metrics.py",
+          "config_train.yml",
+          "splits/CPTAC/graphs/readme.txt",
+          "splits/BRACS/split_0/test_set.txt",
+          "splits/BRACS/split_1/test_set.txt",
+          "splits/BRACS/split_2/test_set.txt",
+          "splits/BRACS/split_3/test_set.txt",
+          "splits/BRACS/split_4/test_set.txt",
+          "splits/CPTAC/split_0/test_set.txt",
+          "splits/CPTAC/split_1/test_set.txt",
+          "splits/CPTAC/split_2/test_set.txt",
+          "splits/CPTAC/split_3/test_set.txt",
+          "splits/CPTAC/split_4/test_set.txt",
+          "example/1_build_grid_graphs.ipynb",
+          "example/3_prediction_evaluation.ipynb"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 14,
+          "selected_file_count": 28,
+          "selected_code_file_count": 14,
+          "languages_by_extension": {
+            "ipynb": 3,
+            "py": 11
+          },
+          "tests_present": true,
+          "test_files": [
+            "splits/BRACS/split_0/test_set.txt",
+            "splits/CPTAC/split_4/test_set.txt",
+            "splits/BRACS/split_4/test_set.txt",
+            "splits/CPTAC/split_1/test_set.txt",
+            "splits/CPTAC/split_2/test_set.txt",
+            "splits/CPTAC/split_3/test_set.txt",
+            "splits/BRACS/split_1/test_set.txt",
+            "splits/CPTAC/split_0/test_set.txt",
+            "splits/BRACS/split_3/test_set.txt",
+            "splits/BRACS/split_2/test_set.txt"
+          ],
+          "manifest_files": [
+            "README.md",
+            "LICENSE"
+          ],
+          "read_errors": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2610.24023v1_gread.json"
+      },
+      "discovered_at": "2026-10-20T01:20:32.781798Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.24023",
+        "verified_at": "2026-10-20T01:20:32.781798Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
     }
   ]
 }

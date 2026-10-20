@@ -10486,5 +10486,254 @@
     "confidence": 0.95,
     "version": 3,
     "generated_at": "2026-10-19T09:25:34.422488"
+  },
+  "2610.23475v1": {
+    "summary": "该仓库是论文《TAN: A Size- and Form-Adaptive Masked-Convolution Encoder for Tissue Graphs》的完整算法与实验实现代码，专注于计算病理组织学图像的超像素图节点特征编码。核心提出了基于掩模卷积（SolidConv）、掩模GroupNorm以及多头掩模注意力池化的Tissue-Aware Network (TAN)，用于消除背景填充对节点特征提取的干扰，并包含与ResNet18、CTransPath、UNI及GAT下游分类器的完整对比管道。仓库覆盖度高，包含从图构建、特征提取到交叉验证全流程源码。",
+    "repository_kind": "implementation",
+    "architecture": "数据流从病理切片图像构建开始：输入WSI/RoI图像，经由SLIC超像素分割生成图结构，提取每个超像素的原生尺寸RGB图像块及对应二值掩模（tan_crops与tan_masks）。核心编码器TissueAwareNetwork接收非规则形状的图像与掩模，依次经过4个由SolidConv（仅对3x3领域全有效的像素进行卷积运算）、MaskedGroupNorm、LeakyReLU、Dropout组成的阶段以及MaskedMaxPool2d下采样，最终通过MultiHeadAttentionPooling加权汇聚生成节点嵌入向量。提取的超像素特征作为节点属性构建PyTorch Geometric图，输入到SuperpixelGAT/GNN中进行图级组织学分类预测。",
+    "call_chain": "build_bach_graphs.py / build_bracs_graphs.py (SLIC分割构建含掩模和图像块的图pickle) → train_tan_extractor.py / repeated_cv_comparison_tan.py (加载pickle，SizeBatchSampler尺寸排序分批与pad_collate对齐，训练TissueAwareNetwork提取节点特征) → train_gnn_kfold.py (SuperpixelGNN分类) → stats_utils.py / compare_all_encoders.py (Nadeau-Bengio校正t检验与Holm-Bonferroni多重假设检验，输出统计显著性与评估指标)",
+    "core_modules": [
+      {
+        "name": "TissueAwareNetwork",
+        "role": "形状自适应掩模卷积特征编码器主体，由4层SolidConv和MaskedMaxPool2d串联，末端接掩模注意力池化与分类头",
+        "evidence": "tissue_aware_network.py:TissueAwareNetwork"
+      },
+      {
+        "name": "SolidConv & MaskedGroupNorm",
+        "role": "掩模有效区域卷积算子与特征归一化，通过unfold提取局部邻域并使用掩模筛选纯组织像素，避免背景伪影扩散",
+        "evidence": "tissue_aware_network.py:SolidConv, tissue_aware_network.py:MaskedGroupNorm"
+      },
+      {
+        "name": "MultiHeadAttentionPooling",
+        "role": "节点级多头掩模自注意力池化，对超像素内各空间位置赋予权重并规避全无效掩模边界情况",
+        "evidence": "tissue_aware_network.py:MultiHeadAttentionPooling"
+      },
+      {
+        "name": "TANUnmasked",
+        "role": "消融实验模型，保持与TAN等价参数量的同时使用标准卷积与填色填充，用于量化无掩模背景侵入影响",
+        "evidence": "tan_unmasked.py:TANUnmasked"
+      },
+      {
+        "name": "SuperpixelGraphPipeline",
+        "role": "基于SLIC的超像素图构建、邻接边构建与传统形态/纹理特征提取",
+        "evidence": "main.py:build_superpixel_graph, main.py:graph_to_arrays"
+      }
+    ],
+    "dependencies": [
+      "Python 3.9",
+      "PyTorch >= 2.0 (requirements声明为2.8.0 snapshot版本)",
+      "torchvision",
+      "torch_geometric (PyG)",
+      "scikit-image",
+      "scipy",
+      "networkx",
+      "pandas",
+      "timm",
+      "BACH (ICIAR 2018) 与 BRACS 原始病理数据集 (非仓库自带，需外部下载)",
+      "预训练基础模型权重 (UNI需HuggingFace鉴权，CTransPath需手动下载torchscript_model.pt)"
+    ],
+    "reproduction_readiness": "ready",
+    "reproduction_notes": "最短复现路径：1. 准备BACH或BRACS原生图像数据；2. 运行 `python build_bach_graphs.py <BACH_PATH> --out bach_graphs_tan_raw.pkl --n-superpixels 800 --tan-crops` 构建图缓存；3. 运行 `python repeated_cv_comparison_tan.py bach_graphs_tan_raw.pkl --n-splits 5 --n-repeats 1` 触发端到端自监督/弱监督训练与评估。注意预训练模型CTransPath和UNI需手动配置模型权重与HF Token；由于全分辨率超像素处理生成大量图像块，构建的pkl缓存体积较大，需要足够的磁盘空间及内存（README建议48GB以上）。",
+    "issues": [
+      {
+        "severity": "low",
+        "finding": "MaskedGroupNorm 在超像素有效像素极少时，denom采用n_valid_pixels * cpg + self.eps，当输入全为零掩模时依靠eps防除以零，方差通过clamp(min=0.0)保底，但极端病态超像素可能引入极大梯度",
+        "evidence": [
+          "tissue_aware_network.py:MaskedGroupNorm.forward"
+        ],
+        "impact": "在极其微小或被腐蚀殆尽的超像素斑块上可能产生异常激活值或数值下溢，但模型在池化层和SolidConv中做了保护",
+        "confidence": 0.8
+      },
+      {
+        "severity": "low",
+        "finding": "README中给出的requirements包含非常具体的特定驱动/本地构建snapshot版本（如 torch 2.8.0 属于远期/开发预览或内部标记版本），直接pip install可能因源中不存在该精准版本而中断",
+        "evidence": [
+          "README.md:pip install -r requirements.txt",
+          "requirements.txt"
+        ],
+        "impact": "在新环境安装依赖时可能需要对PyTorch等库的版本约束进行适度放宽",
+        "confidence": 0.85
+      }
+    ],
+    "static_limitations": [
+      "未实际加载并执行模型的前向/反向传播，无法确认在特定GPU硬件上的CUDA显存消耗与SolidConv的unfold算子实际运行耗时",
+      "未下载BACH/BRACS数据集，无法验证不同分辨率病理图像在SLIC分割下的空边界或超小超像素边界情况对下游GAT的实际收敛影响",
+      "无法通过静态代码确认Nadeau-Bengio校正t检验与Wilcoxon检验在下游实验输出的定量差异与论文宣称结果是否绝对吻合"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-10-20T09:25:02.144891"
+  },
+  "2610.24773v1": {
+    "summary": "该仓库是计算病理与医学影像算法 Evidence Field（EF，自适应覆盖规划）的推理复现与审计工件库。仓库实现了基于图像相对特征、层次几何覆盖规划与多模型集成的预测与可解释性重构，核心模型参数量较小（每成员约 10,550 参数）。虽然完整的大规模训练集与全队列评估被排除，但仓库内置了完整的基于 Base64 分片打包的模型权重、工件解包工具、离线样例独立重放校验器以及病理推理渲染接口，属于具备可执行推理与验证工件的完整实现（implementation）。",
+    "repository_kind": "implementation",
+    "architecture": "架构分为模型推理端与独立纯数值校验端。在推理端，输入 96x96x3 的 RGB 淋巴结病理 Patch 经归一化转为 CHW 浮点张量，由 DenseOpticalProgram / EvidenceField（包含 FieldEncoder、几何结构剖分与参数化映射）计算节点与配对的 Signed Margin 响应，随后利用自适应树/层级覆盖规划算法进行最优路由组合得到 logits。在后处理与解释端，输出支持将各计算单元的分值均匀投影到空间网格生成肿瘤判定边际图，并提供无需 PyTorch 的独立 NumPy/SciPy 重放验证器，对 6 个类别程序与概率混合进行闭式代数重构与 SHA256 指纹核验。",
+    "call_chain": "download_artifacts.py / download_histopathology_application.py (拼合解压 Base64 工件) → applications/histopathology/predict_histopathology.py 或 reproduction/reproduce_example.py (读取 example_input.npy / 图像输入) → EvidenceField.descriptors() (几何尺度特征构建) → EvidenceField.scored() (计算节点与配对打分) → EvidenceField.compose() (动态规划覆盖最优路径决策) → scipy.special.softmax 概率集成 / render_evidence.py (导出 HTML、PNG 可视化边际与 verification.json)",
+    "core_modules": [
+      {
+        "name": "EvidenceField",
+        "role": "网络模型主干，执行输入特征度量提取、层级几何剖分特征拼接、节点与节点对打分及覆盖动态规划",
+        "evidence": "reproduction/model_code/locked_model_source/evidence_field/model.py:EvidenceField"
+      },
+      {
+        "name": "reproduce_example",
+        "role": "离线独立验证与推理主入口，验证 SHA256 工件完整性，并利用纯 NumPy/SciPy 独立重构验证或 PyTorch 模型前向推理",
+        "evidence": "reproduction/reproduce_example.py:independent/model_check"
+      },
+      {
+        "name": "render_evidence",
+        "role": "可解释性渲染与结果生成器，将树覆盖单位分值投影回像素空间生成 Margin 热图与审计报告",
+        "evidence": "applications/histopathology/render_evidence.py:create_report"
+      },
+      {
+        "name": "prepare_study / prepare_full_camelyon",
+        "role": "CAMELYON17 数据集中心分割、患者去重与数据处理协议生成工具",
+        "evidence": "reproduction/provenance/prepare_study.py:run"
+      }
+    ],
+    "dependencies": [
+      "Python 3.12",
+      "PyTorch == 2.7.0 (用于 --with-model 或实际模型前向)",
+      "NumPy",
+      "SciPy",
+      "Pillow (PIL)",
+      "pyarrow (用于 CAMELYON 数据准备脚本)",
+      "外部工件：依赖 download_artifacts.py / download_histopathology_application.py 解码本地 b64 分片工件或远程下载补全"
+    ],
+    "reproduction_readiness": "ready",
+    "reproduction_notes": "单样本及推理验证路径完备：1. 运行 `python download_artifacts.py` 或 `python download_histopathology_application.py` 将仓库内置的 .b64 切片还原为二进制检查点与样例文件；2. 安装依赖 `pip install numpy scipy`，执行 `python reproduction/reproduce_example.py` 即可在无 PyTorch 环境下独立完成数值代数与逻辑重放；3. 安装 torch 后可加 `--with-model` 运行模型推理验证。但请注意，若要复现完整 CAMELYON17 训练与全队列指标，依赖外部镜像 parquet 与海量原始切片，相关训练数据未包含在仓库中。",
+    "issues": [
+      {
+        "severity": "medium",
+        "finding": "README 与脚本中的运行路径指引存在目录结构差异",
+        "evidence": [
+          "README.md:python Evidence_Field_Reproduction/reproduce_example.py",
+          "download_artifacts.py:q=P/'Evidence_Field_Reproduction'",
+          "reproduction/reproduce_example.py:P = Path(__file__).resolve().parent"
+        ],
+        "impact": "用户若直接在 git clone 的根目录下运行仓库内现有的 `reproduction/reproduce_example.py`，会与由 `download_artifacts.py` 解压生成的 `Evidence_Field_Reproduction/` 产生路径或依赖混淆，需注意执行的工作目录。",
+        "confidence": 0.85
+      },
+      {
+        "severity": "low",
+        "finding": "模型前向与输入接口对图像尺寸有强硬编码约束（96x96 RGB），且无内置缩放适配",
+        "evidence": [
+          "reproduction/model_code/locked_model_source/evidence_field/model.py:layout",
+          "applications/histopathology/render_evidence.py:fields = np.zeros((2, 96, 96))",
+          "applications/histopathology/render_evidence.py:displayed = margin * 9216"
+        ],
+        "impact": "无法直接处理任意尺寸病理切片或 WSI 大图，非 96x96 输入在渲染或覆盖阶段会触发维度不匹配断言或异常。",
+        "confidence": 0.95
+      }
+    ],
+    "static_limitations": [
+      "Base64 切片数据和解压生成的二进制 checkpoint 内部权重未被静态解码执行，无法验证权重在不同操作系统或极端浮点环境下的精确数值一致性",
+      "没有执行全套 CAMELYON17 预处理脚本（涉及 Parquet 读取与磁盘 I/O），无法静态评估数据准备脚本在大规模真实数据集上的运行性能"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-10-20T09:24:51.382403"
+  },
+  "2610.24023v1": {
+    "summary": "ProtoGTX 是一个面向全视野数字切片（WSI）计算病理分类与可解释性分析的 Graph Transformer 实现。仓库包含空间网格图构建、基于原型（Prototypes）的交叉注意力机制、MinCut 池化与 Transformer 分类主干，以及双模态解释（GraphCAM 与原型分布可视化）模块。代码主体结构相对完整，但缺乏明确的依赖清单并存在多处未处理的硬编码集群绝对路径。",
+    "repository_kind": "implementation",
+    "architecture": "数据流从 WSI 提取的 Patch 级特征（.h5）开始，由 graph_builder 构建基于 8 邻域的局部网格邻接矩阵并保存为 PyTorch 张量。在分类训练与推理阶段，ConceptGraphDataset 加载 patch 特征、空间邻接矩阵及预先计算的原型解释张量（expl.pt）。模型 Classifier 首先经由 GCNBlock 进行局部图特征聚合，随后输入 CrossAttention 与可学习的概念原型参数进行交叉注意力交互，再通过线性映射与 dense_mincut_pool 进行图粗化聚类，最后送入 VisionTransformer 进行整体图级分类与 GraphCAM 归因图提取。",
+    "call_chain": "train.py:main → dataset_module/graph_dataset.py:ConceptGraphDataset.__getitem__ → protogtx/helper.py:Trainer.train(preparefeatureLabel) → protogtx/ConceptGraphTransformer.py:Classifier.forward(conv1 → concept_transformer → dense_mincut_pool → transformer) → protogtx/utils/metrics.py:ConfusionMatrix.update → 输出分类预测、损失与 GraphCAM 热力图",
+    "core_modules": [
+      {
+        "name": "图构建器 (Graph Builder)",
+        "role": "读取 Patch 坐标与特征，基于 8 邻域网格距离构建稀疏或稠密邻接矩阵并执行 QC",
+        "evidence": "graph_builder/build_grid_graphs.py:CLAMGraphBuilder"
+      },
+      {
+        "name": "概念图转换器 (Concept Graph Transformer)",
+        "role": "核心模型架构，融合 GCN 特征提取、原型交叉注意力、MinCut 节点聚类与 ViT 分类主干",
+        "evidence": "protogtx/ConceptGraphTransformer.py:Classifier"
+      },
+      {
+        "name": "交叉注意力与可解释层 (Cross Attention & Explainability Layers)",
+        "role": "计算 patch 特征与原型概念之间的 cross-attention，提供逐层相关性传播（LRP）和 CAM 计算",
+        "evidence": "protogtx/layers.py:CrossAttention, protogtx/layers.py:RelProp"
+      },
+      {
+        "name": "数据集读取模块 (Dataset Module)",
+        "role": "解析 WSI 的图特征文件、解释张量及空间拓扑邻接矩阵",
+        "evidence": "dataset_module/graph_dataset.py:ConceptGraphDataset"
+      },
+      {
+        "name": "训练评估执行器 (Helper & Trainer)",
+        "role": "组织 mini-batch 的图 padding 填充、前向反向传播及混淆矩阵指标评估",
+        "evidence": "protogtx/helper.py:Trainer, protogtx/helper.py:preparefeatureLabel"
+      }
+    ],
+    "dependencies": [
+      "Python >= 3.8",
+      "PyTorch (torch, torchvision)",
+      "PyTorch Geometric (torch_geometric.nn.dense_mincut_pool)",
+      "OpenSlide (openslide-python)",
+      "OpenCV (opencv-python)",
+      "einops",
+      "h5py",
+      "numpy",
+      "pandas",
+      "seaborn",
+      "matplotlib",
+      "tqdm",
+      "PyYAML",
+      "TensorBoard",
+      "预提取的 WSI Patch 特征（.h5）、分块坐标及预计算的原型解释文件（_expl.pt）"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "最短复现路径为准备具备 patch 特征与已配准 expl.pt 的数据集，按 config_train.yml 指定路径并执行 `python train.py --config config_train.yml`。但目前仓库缺少 requirements.txt 或 environment.yml，同时默认参数 `--config config.yaml` 与现有 `config_train.yml` 命名不一致；此外部分脚本与 Notebook 深度依赖外部开源包 PANTHER 及硬编码路径，需要手动修复配置和输入输出路径方能正常执行。",
+    "issues": [
+      {
+        "severity": "high",
+        "finding": "训练入口默认配置文件路径与仓库实际配置文件名不一致",
+        "evidence": [
+          "train.py:parser.add_argument('--config', type=str, default='config.yaml')",
+          "config_train.yml"
+        ],
+        "impact": "若直接运行 `python train.py` 而不显式传参 `--config config_train.yml`，将因找不到 `config.yaml` 导致 FileNotFoundError 启动失败。",
+        "confidence": 0.95
+      },
+      {
+        "severity": "high",
+        "finding": "脚本和 Notebook 中存在大量硬编码集群绝对路径及外部私有仓库依赖",
+        "evidence": [
+          "visualization/proto_vis_utils.py:BASE_DIR = '/workspace/cluster/HDD/azuma/Pathology_Graph'",
+          "visualization/proto_vis_utils.py:sys.path.append(BASE_DIR+'/github/PathoGraphX')",
+          "example/2_define_prototype_features.ipynb:/workspace/HDDX/Pathology_Graph/github/PANTHER/src/utils/proto_utils.py"
+        ],
+        "impact": "可解释性独立执行脚本与部分原型生成 notebook 依赖外部特定环境及目录，直接运行时将报路径不存在或模块导入错误。",
+        "confidence": 0.9
+      },
+      {
+        "severity": "medium",
+        "finding": "缺少标准依赖声明文件（如 requirements.txt 或 pyproject.toml）",
+        "evidence": [
+          "README.md",
+          "LICENSE"
+        ],
+        "impact": "因依赖 torch_geometric 及特定 OpenSlide/PyTorch 组合，用户难以快速配置版本兼容的运行环境。",
+        "confidence": 0.9
+      },
+      {
+        "severity": "low",
+        "finding": "图构建过程中存在宽泛的裸异常捕获",
+        "evidence": [
+          "graph_builder/build_grid_graphs.py:except:"
+        ],
+        "impact": "在读取特征或 QC 异常时，裸 except 会静默捕获所有异常（包括内存中断或系统退出信号），增加排错难度。",
+        "confidence": 0.85
+      }
+    ],
+    "static_limitations": [
+      "代码未经实际环境运行，无法验证 PyTorch 与 torch_geometric.nn.dense_mincut_pool 的运行时版本兼容性与显存占用表现。",
+      "静态分析无法验证论文中报告的分类准确率与双模态热力图的生成精度。",
+      "无法断定 example/results/model_checkpoint.pth 预训练权重能否与仓库内所有分片脚本无缝适配。"
+    ],
+    "confidence": 0.88,
+    "version": 3,
+    "generated_at": "2026-10-20T09:25:07.470868"
   }
 }
