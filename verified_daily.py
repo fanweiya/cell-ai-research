@@ -444,12 +444,29 @@ def revalidate_unprovenanced_repositories(database: list[dict], evidence: dict) 
             continue
         if old.get("provenance") in {"paper_code_statement", "paper_identity_match", "manual_verified"}:
             continue
-        fresh = discover_github_from_paper(
-            str(paper.get("arxiv_id") or ""),
-            evidence,
-            paper_title=str(paper.get("title") or ""),
-            paper_abstract=str(paper.get("abstract") or paper.get("abstract_summary") or ""),
-        )
+        arxiv_id = str(paper.get("arxiv_id") or "").strip()
+        clean_id = re.sub(r"v\d+$", "", arxiv_id)
+        if not ID_RE.fullmatch(clean_id) and not ID_RE.fullmatch(arxiv_id):
+            evidence.setdefault("page_errors", []).append({
+                "arxiv_id": arxiv_id,
+                "url": str(old.get("url") or ""),
+                "error": f"Invalid or non-arXiv identifier: {arxiv_id!r}",
+            })
+            continue
+        try:
+            fresh = discover_github_from_paper(
+                arxiv_id,
+                evidence,
+                paper_title=str(paper.get("title") or ""),
+                paper_abstract=str(paper.get("abstract") or paper.get("abstract_summary") or ""),
+            )
+        except ValueError as exc:
+            evidence.setdefault("page_errors", []).append({
+                "arxiv_id": arxiv_id,
+                "url": str(old.get("url") or ""),
+                "error": str(exc),
+            })
+            continue
         if fresh.get("provenance_status") == "source_unavailable":
             continue
 

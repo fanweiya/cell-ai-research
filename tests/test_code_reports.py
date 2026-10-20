@@ -273,6 +273,7 @@ class CodeReportTests(unittest.TestCase):
 
     def test_revalidate_does_not_match_repository_to_abstract_words(self):
         paper = {
+            "arxiv_id": "2608.00001v1",
             "title": "A Novel Architecture for Segmentation",
             "abstract": "We build an atlas of cell images and benchmark on large collections.",
             "status": {
@@ -284,6 +285,27 @@ class CodeReportTests(unittest.TestCase):
             self.assertEqual(repaired, 1)
             self.assertNotEqual(paper["status"]["github"].get("provenance"), "paper_identity_match")
             self.assertNotEqual(paper["status"]["github"].get("url"), "https://github.com/thirdparty/atlas")
+
+    def test_revalidate_isolates_invalid_arxiv_id_per_paper(self):
+        bad_paper = {
+            "arxiv_id": "../../etc/passwd",
+            "title": "Bad Paper",
+            "status": {
+                "github": {"url": "https://github.com/foo/bar", "has_code": True}
+            },
+        }
+        good_paper = {
+            "arxiv_id": "2608.12345v1",
+            "title": "Good Paper",
+            "status": {
+                "github": {"url": "https://github.com/foo/good", "has_code": True}
+            },
+        }
+        evidence = {"page_errors": []}
+        with patch.object(verified_daily, "discover_github_from_paper", return_value={"provenance_status": "source_unavailable"}):
+            verified_daily.revalidate_unprovenanced_repositories([bad_paper, good_paper], evidence)
+            self.assertEqual(len(evidence["page_errors"]), 1)
+            self.assertEqual(evidence["page_errors"][0]["arxiv_id"], "../../etc/passwd")
 
 
 if __name__ == "__main__":
