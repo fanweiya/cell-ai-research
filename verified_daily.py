@@ -17,6 +17,8 @@ from urllib.parse import quote
 
 if sys.platform != "win32":
     import fcntl
+else:
+    import msvcrt
 
 PROJECT = Path(os.environ.get("CELL_AI_PROJECT", str(Path(__file__).resolve().parent)))
 DB_PATH = PROJECT / "papers.json"
@@ -134,12 +136,12 @@ def _repository_matches_title(repo: str, paper_title: str) -> bool:
 
     repo_key = normalized(repo)
     title_key = normalized(paper_title)
-    if len(repo_key) >= 5 and (repo_key in title_key or title_key in repo_key):
+    if len(repo_key) >= 5 and len(title_key) >= 5 and (repo_key in title_key or title_key in repo_key):
         return True
     title_head = re.split(r"[:,;]", paper_title, maxsplit=1)[0]
     words = re.findall(r"[A-Za-z0-9]+", title_head)
     acronym = "".join(word[0] for word in words if word).lower()
-    return len(repo_key) >= 4 and repo_key == acronym
+    return len(repo_key) >= 4 and len(acronym) >= 4 and repo_key == acronym
 
 
 def official_github_candidates(body: str, paper_title: str = "") -> list[dict]:
@@ -165,13 +167,12 @@ def official_github_candidates(body: str, paper_title: str = "") -> list[dict]:
             continue
         seen.add(url.lower())
 
-        prefix = decoded[max(0, match.start() - 700):match.start()]
-        # A reference-list entry can itself say "source code is available";
-        # that still describes the cited work, not the current paper.
-        last_bib = prefix.lower().rfind("ltx_bibitem")
-        last_close = prefix.lower().rfind("</li")
-        if last_bib > last_close:
-            continue
+        # Check if match is inside a bibliography entry (ltx_bibitem)
+        last_bib = decoded[:match.start()].lower().rfind("ltx_bibitem")
+        if last_bib != -1:
+            last_close = decoded[last_bib:match.start()].lower().rfind("</li")
+            if last_close == -1:
+                continue
 
         raw_context = decoded[max(0, match.start() - 420):min(len(decoded), match.end() + 120)]
         context = clean_text(re.sub(r"<[^>]+>", " ", raw_context))
@@ -186,10 +187,19 @@ def official_github_candidates(body: str, paper_title: str = "") -> list[dict]:
             "relation_signal": "explicit_code_statement" if explicit_statement else "paper_title_match",
         })
     for match in GITHUB_PAGES_RE.finditer(decoded):
-        owner, repo = match.group(1), match.group(2)
+        owner = match.group(1)
+        repo = match.group(2).removesuffix(".git").rstrip(".,;:'\")]>}")
+        if (owner.lower(), repo.lower()) in IGNORED_GITHUB_REPOSITORIES:
+            continue
         url = f"https://github.com/{owner}/{repo}"
         if url.lower() in seen or not _repository_matches_title(repo, paper_title):
             continue
+
+        # Check if Pages link is inside bibliography
+        last_bib = decoded[:match.start()].lower().rfind("ltx_bibitem")
+        if last_bib != -1 and decoded[last_bib:match.start()].lower().rfind("</li") == -1:
+            continue
+
         raw_context = decoded[max(0, match.start() - 260):min(len(decoded), match.end() + 80)]
         context = clean_text(re.sub(r"<[^>]+>", " ", raw_context))
         if "project page" not in context.lower() and "code" not in context.lower():
@@ -249,7 +259,7 @@ def parse_rss(xml_text: str) -> list[dict]:
         try:
             published = parsedate_to_datetime(raw_date).astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
         except (TypeError, ValueError):
-            published = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+            continue
         creator = clean_text(node.findtext("dc:creator", default="", namespaces=dc))
         entries.append({
             "arxiv_id": raw_id,
@@ -309,6 +319,10 @@ def discover_github_from_paper(
     paper_abstract: str = "",
 ) -> dict:
     """Resolve paper-repository provenance without touching the repository."""
+    clean_id = re.sub(r"v\d+$", "", arxiv_id)
+    if not ID_RE.fullmatch(clean_id) and not ID_RE.fullmatch(arxiv_id):
+        raise ValueError(f"Unsafe or invalid arXiv identifier: {arxiv_id}")
+
     pages = [f"https://arxiv.org/html/{arxiv_id}", f"https://arxiv.org/abs/{arxiv_id}"]
     body = ""
     source_url = ""
@@ -322,8 +336,10 @@ def discover_github_from_paper(
         except Exception as exc:
             evidence["page_errors"].append({"arxiv_id": arxiv_id, "url": page, "error": str(exc)[:300]})
     if not body:
-        clean_id = re.sub(r"v\d+$", "", arxiv_id)
-        context_path = PROJECT / "data" / "paper_context" / f"{clean_id}.txt"
+        context_dir = (PROJECT / "data" / "paper_context").resolve()
+        context_path = (context_dir / f"{clean_id}.txt").resolve()
+        if not context_path.is_relative_to(context_dir):
+            raise ValueError(f"Directory traversal detected in paper context path: {arxiv_id}")
         try:
             body = context_path.read_text(encoding="utf-8")
             source_url = str(context_path)
@@ -448,11 +464,8 @@ def revalidate_unprovenanced_repositories(database: list[dict], evidence: dict) 
             continue
 
         old_match = GITHUB_RE.fullmatch(str(old.get("url") or "").rstrip("/"))
-        identity_text = " ".join((
-            str(paper.get("title") or ""),
-            str(paper.get("abstract") or paper.get("abstract_summary") or ""),
-        ))
-        if not fresh_url and old_match and _repository_matches_title(old_match.group(2), identity_text):
+        paper_title = str(paper.get("title") or "").strip()
+        if not fresh_url and old_match and paper_title and _repository_matches_title(old_match.group(2), paper_title):
             old["provenance"] = "paper_identity_match"
             old["provenance_status"] = "verified"
             old["relation_signal"] = "paper_identity_match"
@@ -518,9 +531,15 @@ def sanitize_ignored_repositories(database: list[dict]) -> int:
 def remote_code_analysis(github: dict, arxiv_id: str, evidence: dict) -> tuple[dict | None, str | None]:
     if not github.get("has_code") or not github.get("url"):
         return None, None
+    clean_id = re.sub(r"v\d+$", "", arxiv_id)
+    if not ID_RE.fullmatch(clean_id) and not ID_RE.fullmatch(arxiv_id):
+        raise ValueError(f"Unsafe or invalid arXiv identifier: {arxiv_id}")
+    results_dir = (PROJECT / "results").resolve()
+    output_path = (results_dir / f"{arxiv_id}_gread.json").resolve()
+    if not output_path.is_relative_to(results_dir):
+        raise ValueError(f"Directory traversal detected in gread results path: {arxiv_id}")
     try:
         data = collect_repository(github["url"])
-        output_path = PROJECT / "results" / f"{arxiv_id}_gread.json"
         atomic_json(output_path, data)
         evidence["gread_analyses"].append({
             "arxiv_id": arxiv_id,
@@ -677,11 +696,22 @@ def render_report(evidence: dict, added: list[dict]) -> str:
 def main() -> int:
     now = datetime.now(timezone.utc)
     EVIDENCE_DIR.mkdir(parents=True, exist_ok=True)
-    with LOCK_PATH.open("w", encoding="utf-8") as lock:
+    with LOCK_PATH.open("a+", encoding="utf-8") as lock:
         if sys.platform != "win32":
             try:
                 fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-            except BlockingIOError:
+            except (BlockingIOError, OSError):
+                print("[SILENT]")
+                return 0
+        else:
+            try:
+                lock.seek(0)
+                if lock.tell() == 0 and lock.read(1) == "":
+                    lock.write(" ")
+                    lock.flush()
+                lock.seek(0)
+                msvcrt.locking(lock.fileno(), msvcrt.LK_NBLCK, 1)
+            except OSError:
                 print("[SILENT]")
                 return 0
 

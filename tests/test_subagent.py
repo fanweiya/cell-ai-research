@@ -52,6 +52,22 @@ class SubagentTests(unittest.TestCase):
             with self.assertRaises(RuntimeError):
                 subagent.load_input("2607.04353")
 
+    def test_subagent_error_does_not_write_output_and_exits_nonzero(self):
+        output_file = PROJECT / "tests" / "_temp_result_should_not_exist.json"
+        if output_file.exists():
+            output_file.unlink()
+        try:
+            with patch("subagent.call_a1", return_value={"error": "endpoint failure"}), \
+                 patch("subagent.load_input", return_value="paper content"), \
+                 patch("sys.argv", ["subagent.py", "--task", "task_analysis", "--paper_id", "2607.99999",
+                                    "--input", "2607.99999", "--output", str(output_file)]):
+                exit_code = subagent.main()
+                self.assertEqual(exit_code, 1)
+                self.assertFalse(output_file.exists())
+        finally:
+            if output_file.exists():
+                output_file.unlink()
+
 
 if __name__ == "__main__":
     unittest.main()

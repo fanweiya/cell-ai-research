@@ -4,6 +4,7 @@ import argparse
 import json
 import os
 import re
+import sys
 import urllib.error
 import urllib.request
 from datetime import datetime
@@ -400,6 +401,11 @@ def main():
     prompt = build_prompt(args.task, args.paper_id, input_content)
     result = call_a1(prompt, timeout=args.timeout, retries=args.retry)
 
+    if not isinstance(result, dict) or "error" in result:
+        err_msg = result.get("error") if isinstance(result, dict) else "Unknown subagent failure"
+        print(f"Subagent execution failed for {args.paper_id} [{args.task}]: {err_msg}", file=sys.stderr)
+        return 1
+
     result["task"] = args.task
     result["paper_id"] = args.paper_id
     result["task_id"] = f"{args.paper_id}-{args.task}-v1"
@@ -416,7 +422,8 @@ def main():
     temp_path.replace(output_path)
 
     print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

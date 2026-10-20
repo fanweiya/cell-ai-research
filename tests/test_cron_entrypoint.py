@@ -56,6 +56,23 @@ class CronEntrypointTests(unittest.TestCase):
         evidence['site_updated'] = False
         self.assertEqual(verified_daily.render_report(evidence, []), '[SILENT]')
 
+    def test_scan_existing_results_ignores_error_and_corrupt_files(self):
+        import backfill_analysis
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_dir = Path(tmp)
+            valid = tmp_dir / "2609.00001v1_task_analysis.json"
+            valid.write_text(json.dumps({"status": "done", "task": "task_analysis"}))
+            err_file = tmp_dir / "2609.00002v1_task_analysis.json"
+            err_file.write_text(json.dumps({"error": "network failure", "task": "task_analysis"}))
+            corrupt = tmp_dir / "2609.00003v1_task_analysis.json"
+            corrupt.write_text("{corrupt json")
+
+            with patch.object(backfill_analysis, "RESULTS_DIR", tmp_dir):
+                res = backfill_analysis.scan_existing_results()
+                self.assertIn("2609.00001v1", res)
+                self.assertNotIn("2609.00002v1", res)
+                self.assertNotIn("2609.00003v1", res)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -226,6 +226,65 @@ class CodeReportTests(unittest.TestCase):
         self.assertTrue(record["status"]["github"]["repository_found"])
         self.assertEqual(record["status"]["code_analysis"], "skipped")
 
+    def test_repository_matches_title_rejects_empty_or_too_short_title(self):
+        self.assertFalse(verified_daily._repository_matches_title("my-repo", ""))
+        self.assertFalse(verified_daily._repository_matches_title("my-repo", "AI"))
+        self.assertFalse(verified_daily._repository_matches_title("cells", "细胞图像分割模型"))
+
+    def test_bibliography_with_long_author_list_is_rejected(self):
+        long_authors = " ".join(f"Author{i} Surname{i}," for i in range(80))
+        html = f"""
+        <li class="ltx_bibitem"><span class="ltx_bibblock">{long_authors}
+        Source code is available at https://github.com/ultralytics/yolov8.</span></li>
+        """
+        self.assertEqual(verified_daily.official_github_candidates(html), [])
+
+    def test_github_pages_filters_ignored_repos(self):
+        html = """
+        <p>Project page at https://arxiv.github.io/html_feedback with code available.</p>
+        """
+        candidates = verified_daily.official_github_candidates(html, paper_title="Feedback Project")
+        self.assertEqual(candidates, [])
+
+    def test_path_traversal_arxiv_id_raises_value_error(self):
+        with self.assertRaises(ValueError):
+            verified_daily.discover_github_from_paper("../../etc/passwd", {"page_errors": []})
+
+        with self.assertRaises(ValueError):
+            verified_daily.remote_code_analysis(
+                {"has_code": True, "url": "https://github.com/org/repo"},
+                "../../escape",
+                {"gread_analyses": []},
+            )
+
+    def test_rss_corrupt_pubdate_is_skipped(self):
+        xml = """<rss version="2.0">
+        <channel>
+          <item>
+            <link>https://arxiv.org/abs/2609.12345</link>
+            <title>Valid Paper</title>
+            <description>Valid abstract</description>
+            <pubDate>not-a-valid-date</pubDate>
+          </item>
+        </channel>
+        </rss>"""
+        entries = verified_daily.parse_feed(xml)
+        self.assertEqual(entries, [])
+
+    def test_revalidate_does_not_match_repository_to_abstract_words(self):
+        paper = {
+            "title": "A Novel Architecture for Segmentation",
+            "abstract": "We build an atlas of cell images and benchmark on large collections.",
+            "status": {
+                "github": {"url": "https://github.com/thirdparty/atlas", "has_code": True}
+            },
+        }
+        with patch.object(verified_daily, "discover_github_from_paper", return_value={"provenance_status": "none"}):
+            repaired = verified_daily.revalidate_unprovenanced_repositories([paper], {})
+            self.assertEqual(repaired, 1)
+            self.assertNotEqual(paper["status"]["github"].get("provenance"), "paper_identity_match")
+            self.assertNotEqual(paper["status"]["github"].get("url"), "https://github.com/thirdparty/atlas")
+
 
 if __name__ == "__main__":
     unittest.main()

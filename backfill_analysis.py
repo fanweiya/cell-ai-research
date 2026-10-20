@@ -35,7 +35,17 @@ def scan_existing_results():
         if stage not in ("task_analysis", "algorithm_analysis", "critic_analysis",
                          "code_analysis", "reproduction", "relevance_analysis"):
             continue
-        paper_stages.setdefault(pid, {})[stage] = os.path.join(RESULTS_DIR, f)
+        file_path = os.path.join(RESULTS_DIR, f)
+        try:
+            with open(file_path, "r", encoding="utf-8") as rf:
+                content = json.load(rf)
+            if not isinstance(content, dict) or "error" in content:
+                continue
+            if content.get("status") not in ("done", "passed", "completed"):
+                continue
+        except (json.JSONDecodeError, OSError):
+            continue
+        paper_stages.setdefault(pid, {})[stage] = file_path
     return paper_stages
 
 
@@ -127,6 +137,10 @@ def main():
                     print(f"    ✓ done ({time.time()-t0:.0f}s)")
                 else:
                     fail += 1
+                    try:
+                        os.unlink(output)
+                    except OSError:
+                        pass
                     print(f"    ✗ 结果文件无 done 状态: {data.get('status')}")
             else:
                 fail += 1
