@@ -18,3 +18,12 @@ class TextRenderTests(unittest.TestCase):
     def test_math_preserved_and_code_escapes(self):
         self.assertEqual(render_prose(r'$\mathrm{\Phi}$'), r'$\mathrm{\Phi}$')
         self.assertIn('<code>plots.py</code>', render_prose(r'需要 \`plots.py\` 和 collate\_fn', code=True))
+
+    def test_markdown_link_with_parentheses(self):
+        rendered = render_prose('[Wikipedia](https://en.wikipedia.org/wiki/ResNet_(neural_network))')
+        self.assertIn('href="https://en.wikipedia.org/wiki/ResNet_(neural_network)"', rendered)
+        self.assertIn('>Wikipedia</a>', rendered)
+
+    def test_nested_latex_commands(self):
+        rendered = render_prose(r'We propose \textbf{\textsc{CellNet}} architecture.')
+        self.assertIn('We propose CellNet architecture.', rendered)

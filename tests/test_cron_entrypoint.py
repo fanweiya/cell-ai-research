@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import contextlib
 import io
 import json
@@ -9,7 +11,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import Mock, patch
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'hermes-cron' / 'cell_ai_research_daily'))
+PROJECT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(PROJECT))
+
 import verified_daily
 
 
@@ -43,7 +47,7 @@ class CronEntrypointTests(unittest.TestCase):
                 self.assertFalse((root/'.site-update-pending.json').exists())
                 runner.reset_mock()
                 self.assertEqual(verified_daily.main(), 0)
-                self.assertEqual(runner.call_count, 1)  # silent backfill only, no build/publish
+                self.assertEqual(runner.call_count, 1)
 
     def test_successful_retry_is_reported_but_unchanged_day_stays_silent(self):
         evidence = {'errors': [], 'run_date': '2026-09-09', 'index_status': '复用上次已生成页面',
@@ -51,3 +55,7 @@ class CronEntrypointTests(unittest.TestCase):
         self.assertIn('Cloudflare 发布：已发布', verified_daily.render_report(evidence, []))
         evidence['site_updated'] = False
         self.assertEqual(verified_daily.render_report(evidence, []), '[SILENT]')
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,39 +1,25 @@
-#!/usr/bin/env python3
-"""
-subagent.py — Cell AI Research 子Agent 调度器
-通过 Agents-A1 API 调用专用子Agent，输入输出均为JSON文件。
+from __future__ import annotations
 
-用法:
-    python3 subagent.py --task code_analysis --paper_id 2607.04353 --input https://github.com/owner/repo --output results/2607.04353_code.json
-    python3 subagent.py --task algorithm_analysis --paper_id 2607.04353 --input papers/2607.04353.pdf --output results/2607.04353_algo.json
-    python3 subagent.py --task reproduction --paper_id 2607.04353 --input results/2607.04353_code.json --output results/2607.04353_repro.json
-
-参数:
-    --task      : code_analysis / algorithm_analysis / reproduction
-    --paper_id  : arXiv ID
-    --input     : arXiv ID、GitHub URL（由 gread 远程读取）或前序结果JSON
-    --output    : 输出JSON文件路径
-    --priority  : 优先级（可选，默认5）
-"""
-
-import sys
+import argparse
 import json
-import subprocess
 import os
 import re
-import argparse
+import urllib.error
+import urllib.request
 from datetime import datetime
+from pathlib import Path
+from pypdf import PdfReader
 
 A1_API = os.environ.get('A1_API_URL', "http://10.0.0.240:8080/v1/chat/completions")
 A1_KEY = os.environ.get('A1_API_KEY', 'cell-ai')
 A1_MODEL = os.environ.get('A1_MODEL', "stable")
 FALLBACK_A1_API = os.environ.get('FALLBACK_A1_API_URL', A1_API)
 FALLBACK_A1_MODEL = os.environ.get('FALLBACK_A1_MODEL', "fast")
-WORKDIR = "/mnt/c/workspace/cell-ai-research"
+WORKDIR = Path(os.environ.get("CELL_AI_WORKDIR", str(Path(__file__).resolve().parent)))
 
 
 def load_input(path: str) -> str:
-    """加载输入内容；GitHub 仓库只能通过 gread 远程读取，禁止本地 clone。"""
+    """Load input content; GitHub repositories are inspected via gread only."""
     if re.match(r'^https?://github\.com/', path):
         try:
             from gread_remote import as_analysis_context, collect_repository
@@ -45,158 +31,165 @@ def load_input(path: str) -> str:
                 "error": str(exc),
                 "instruction": "Do not fall back to a local clone.",
             }, ensure_ascii=False)
-    full_path = os.path.join(WORKDIR, path) if not path.startswith("/") else path
-    if os.path.isfile(full_path):
-        with open(full_path, 'r', errors='replace') as f:
-            content = f.read()
-        return content[:5000]
-    elif os.path.isdir(full_path):
-        # 列出目录结构
+    target_path = Path(path)
+    full_path = target_path if target_path.is_absolute() else WORKDIR / target_path
+    if full_path.is_file():
+        if full_path.suffix.lower() == ".pdf":
+            reader = PdfReader(str(full_path))
+            pages = [page.extract_text() or "" for page in reader.pages]
+            content = "\n\n".join(p for p in pages if p).strip()
+            if not content:
+                raise ValueError(f"Extracted empty text from PDF: {full_path}")
+            return content[:200000]
+        return full_path.read_text(encoding="utf-8", errors="replace")[:200000]
+    elif full_path.is_dir():
         lines = []
         for root, dirs, files in os.walk(full_path):
             dirs[:] = [d for d in dirs if d not in ['.git', '.codegraph', '__pycache__', 'node_modules', '.github', 'dist', 'build']]
-            level = root.replace(full_path, '').count(os.sep)
-            indent = '  ' * level
-            lines.append(f"{indent}{os.path.basename(root)}/")
-            subindent = '  ' * (level + 1)
+            level = Path(root).relative_to(full_path).parts
+            indent = '  ' * len(level)
+            lines.append(f"{indent}{Path(root).name}/")
+            subindent = '  ' * (len(level) + 1)
             for file in files[:20]:
                 lines.append(f"{subindent}{file}")
-            if level > 3:
+            if len(level) > 3:
                 dirs.clear()
         return "\n".join(lines[:50])
     elif re.match(r'^\d{4}\.\d{5}', path):
-        # 是 arXiv ID，从 HTML 页面获取内容，智能提取正文
         arxiv_id = path.strip()
+        html = ""
+        fetch_err = None
         try:
-            result = subprocess.run(
-                ["curl", "-sL", f"https://arxiv.org/html/{arxiv_id}"],
-                capture_output=True, text=True, timeout=30
+            req = urllib.request.Request(
+                f"https://arxiv.org/html/{arxiv_id}",
+                headers={"User-Agent": "cell-ai-research/2.0"},
             )
-            if result.returncode == 0 and result.stdout:
-                html = result.stdout
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                html = resp.read().decode("utf-8", errors="replace")
+        except Exception as exc:
+            fetch_err = exc
 
-                # 检查是否为 "No HTML" 错误页面
-                if "No HTML for" in html or "HTML is not available" in html:
-                    # 降级到 abs 页面
-                    result2 = subprocess.run(
-                        ["curl", "-sL", f"https://arxiv.org/abs/{arxiv_id}"],
-                        capture_output=True, text=True, timeout=30
-                    )
-                    if result2.returncode == 0 and result2.stdout:
-                        return _extract_abs_text(result2.stdout)
-                    return path[:3000]
+        if not html or "No HTML for" in html or "HTML is not available" in html:
+            try:
+                abs_req = urllib.request.Request(
+                    f"https://arxiv.org/abs/{arxiv_id}",
+                    headers={"User-Agent": "cell-ai-research/2.0"},
+                )
+                with urllib.request.urlopen(abs_req, timeout=30) as resp:
+                    abs_html = resp.read().decode("utf-8", errors="replace")
+                abs_text = _extract_abs_text(abs_html)
+                if abs_text:
+                    return abs_text
+            except Exception as abs_exc:
+                raise RuntimeError(f"Failed to fetch arXiv paper {arxiv_id}: HTML error ({fetch_err}), ABS error ({abs_exc})")
+            raise RuntimeError(f"Failed to fetch arXiv paper {arxiv_id}: empty abstract from abs page")
 
-                # 提取论文正文（<article> 或 <body> 内的文本）
-                text = _extract_article_text(html)
-                if len(text) > 1000:
-                    return text
-                return html[:50000]
-        except:
-            pass
-        return path[:3000]
+        text = _extract_article_text(html)
+        if len(text) > 1000:
+            return text
+        if html:
+            return html[:50000]
+        raise RuntimeError(f"Failed to extract paper text for arXiv ID {arxiv_id}")
 
     else:
         return path[:3000]
 
 
 def _extract_article_text(html: str) -> str:
-    """从 arXiv HTML 页面提取论文正文文本"""
-    import re
-    # 策略1：找 <article> 标签（arXiv HTML 论文的主体）
+    """Extract paper body text from arXiv HTML."""
     match = re.search(r'<article[^>]*>(.*?)</article>', html, re.DOTALL)
     if match:
         body = match.group(1)
     else:
-        # 策略2：找 <body> 标签
         match = re.search(r'<body[^>]*>(.*?)</body>', html, re.DOTALL)
         body = match.group(1) if match else html
 
-    # 去除脚本和样式
     body = re.sub(r'<script[^>]*>.*?</script>', '', body, flags=re.DOTALL)
     body = re.sub(r'<style[^>]*>.*?</style>', '', body, flags=re.DOTALL)
 
-    # 提取所有段落、标题、列表项的文本
-    text_parts = re.findall(r'<(?:p|h\d|li|td|th|caption|div[^>]*class="[^"]*section[^"]*"[^>]*|div[^>]*class="[^"]*abstract[^"]*"[^>]*|div[^>]*class="[^"]*keywords[^"]*"[^>]*|h\d+)[^>]*>(.*?)</(?:p|h\d|li|td|th|caption|div|/?)', body, re.DOTALL)
+    text_parts = re.findall(
+        r'<(?:p|h[1-6]|li|td|th|caption|div[^>]*class="[^"]*(?:section|abstract|keywords)[^"]*")[^>]*>(.*?)</(?:p|h[1-6]|li|td|th|caption|div)>',
+        body,
+        re.DOTALL,
+    )
 
-    # 解析每个部分，提取纯文本
     lines = []
     for part in text_parts:
-        # 去除所有标签
         clean = re.sub(r'<[^>]+>', '', part)
-        # 去除多余空白
         clean = re.sub(r'\s+', ' ', clean).strip()
         if clean and len(clean) > 10:
             lines.append(clean)
 
     result = '\n\n'.join(lines)
-    return result[:200000]  # 限制在 200K 字符（A1 上下文 262K tokens）
+    return result[:200000]
 
 
 def _extract_abs_text(html: str) -> str:
-    """从 arXiv abs 页面提取文本"""
-    import re
-    # 提取标题
+    """Extract paper abstract text from arXiv abs page."""
     title_match = re.search(r'<h1 class="title[^"]*"[^>]*>(.*?)</h1>', html, re.DOTALL)
     title = re.sub(r'<[^>]+>', '', title_match.group(1)).strip() if title_match else ''
 
-    # 提取作者
     authors_match = re.search(r'<div class="authors[^"]*"[^>]*>(.*?)</div>', html, re.DOTALL)
     authors = re.sub(r'<[^>]+>', '', authors_match.group(1)).strip() if authors_match else ''
 
-    # 提取摘要
     abstract_match = re.search(r'<blockquote class="abstract[^"]*"[^>]*>(.*?)</blockquote>', html, re.DOTALL)
     abstract = re.sub(r'<[^>]+>', '', abstract_match.group(1)).strip() if abstract_match else ''
 
-    # 提取分类/关键词
     subjects_match = re.search(r'<div class="metatable[^"]*"[^>]*>(.*?)</div>', html, re.DOTALL)
     subjects = re.sub(r'<[^>]+>', '', subjects_match.group(1)).strip() if subjects_match else ''
 
     parts = [p for p in [title, authors, abstract, subjects] if p]
     return '\n\n'.join(parts) if parts else html[:20000]
 
-def call_a1(prompt: str, max_tokens: int = 8192) -> dict:
+
+def call_a1(prompt: str, max_tokens: int = 8192, timeout: int = 180, retries: int = 0) -> dict:
     """Call the 8080 stable route and fall back to its fast route."""
     endpoints = [
         (A1_API, A1_MODEL),
         (FALLBACK_A1_API, FALLBACK_A1_MODEL),
     ]
-    
+
     last_error = None
-    for api_url, model in endpoints:
-        payload = {
-            "model": model,
-            "messages": [{"role": "user", "content": prompt}],
-            "max_tokens": max_tokens,
-            "temperature": 0.1,
-            "response_format": {"type": "json_object"}
-        }
-        cmd = [
-            "curl", "-s", api_url,
-            "-H", "Content-Type: application/json",
-            "-H", f"Authorization: Bearer {A1_KEY}",
-            "-d", json.dumps(payload)
-        ]
-        try:
-            result = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
-            if result.returncode != 0:
-                last_error = f"curl failed on {api_url}: {result.stderr}"
-                continue
-            data = json.loads(result.stdout)
-            if "choices" not in data or not data["choices"]:
-                last_error = f"Invalid API response structure from {api_url}: {result.stdout[:200]}"
-                continue
-            content = data["choices"][0]["message"]["content"]
-            # 尝试解析为JSON
+    for _ in range(retries + 1):
+        for api_url, model in endpoints:
+            payload = {
+                "model": model,
+                "messages": [{"role": "user", "content": prompt}],
+                "max_tokens": max_tokens,
+                "temperature": 0.1,
+                "response_format": {"type": "json_object"}
+            }
+            req_data = json.dumps(payload).encode("utf-8")
+            req = urllib.request.Request(
+                api_url,
+                data=req_data,
+                headers={
+                    "Content-Type": "application/json",
+                    "Authorization": f"Bearer {A1_KEY}",
+                },
+                method="POST",
+            )
             try:
-                return json.loads(content)
-            except json.JSONDecodeError:
-                return {"raw_result": content}
-        except subprocess.TimeoutExpired:
-            last_error = f"timeout after 180s on {api_url}"
-            continue
-        except Exception as e:
-            last_error = str(e)
-            continue
+                with urllib.request.urlopen(req, timeout=timeout) as response:
+                    res_body = response.read().decode("utf-8", errors="replace")
+                data = json.loads(res_body)
+                if "choices" not in data or not data["choices"]:
+                    last_error = f"Invalid API response structure from {api_url}: {res_body[:200]}"
+                    continue
+                content = data["choices"][0]["message"]["content"]
+                try:
+                    return json.loads(content)
+                except json.JSONDecodeError:
+                    return {"raw_result": content}
+            except urllib.error.URLError as exc:
+                last_error = f"Request failed on {api_url}: {exc}"
+                continue
+            except TimeoutError:
+                last_error = f"timeout after {timeout}s on {api_url}"
+                continue
+            except Exception as exc:
+                last_error = f"{api_url}: {exc}"
+                continue
 
     return {"error": last_error or "All endpoints failed"}
 
@@ -405,9 +398,8 @@ def main():
 
     input_content = load_input(args.input)
     prompt = build_prompt(args.task, args.paper_id, input_content)
-    result = call_a1(prompt)
+    result = call_a1(prompt, timeout=args.timeout, retries=args.retry)
 
-    # 添加元数据
     result["task"] = args.task
     result["paper_id"] = args.paper_id
     result["task_id"] = f"{args.paper_id}-{args.task}-v1"
@@ -415,13 +407,14 @@ def main():
     result["priority"] = args.priority
     result["agent"] = A1_MODEL
 
-    # 写入输出文件
-    output_path = args.output if args.output.startswith("/") else os.path.join(WORKDIR, args.output)
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
+    out_file = Path(args.output)
+    output_path = out_file if out_file.is_absolute() else WORKDIR / out_file
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    temp_path = output_path.with_suffix(f"{output_path.suffix}.tmp")
+    with open(temp_path, "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
+    temp_path.replace(output_path)
 
-    # 也输出到stdout（主Agent可以读取）
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
 

@@ -604,15 +604,20 @@ def translate_and_summarize(papers, translations, force=False):
 # ============================================================
 def _load_translations():
     if TRANSLATIONS_CACHE.exists():
-        with open(TRANSLATIONS_CACHE, "r", encoding="utf-8") as f:
-            return json.load(f)
+        try:
+            with open(TRANSLATIONS_CACHE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except (OSError, json.JSONDecodeError):
+            return {}
     return {}
 
 
 def _save_translations(translations):
     TRANSLATIONS_CACHE.parent.mkdir(parents=True, exist_ok=True)
-    with open(TRANSLATIONS_CACHE, "w", encoding="utf-8") as f:
+    temp_file = TRANSLATIONS_CACHE.with_suffix(f".tmp.{os.getpid()}")
+    with open(temp_file, "w", encoding="utf-8") as f:
         json.dump(translations, f, ensure_ascii=False, indent=2)
+    temp_file.replace(TRANSLATIONS_CACHE)
 
 
 def _load_code_summaries():
@@ -627,8 +632,10 @@ def _load_code_summaries():
 
 def _save_code_summaries(summaries):
     CODE_SUMMARY_CACHE.parent.mkdir(parents=True, exist_ok=True)
-    with open(CODE_SUMMARY_CACHE, "w", encoding="utf-8") as f:
+    temp_file = CODE_SUMMARY_CACHE.with_suffix(f".tmp.{os.getpid()}")
+    with open(temp_file, "w", encoding="utf-8") as f:
         json.dump(summaries, f, ensure_ascii=False, indent=2)
+    temp_file.replace(CODE_SUMMARY_CACHE)
 
 
 def _load_gread_result(code_analysis):
@@ -3308,7 +3315,8 @@ def _process_inline_markdown(text):
         p = match.group(2)
         if p.endswith(".md"):
             p = p[:-3] + ".html"
-        return f'<a href="{p}">{t}</a>'
+        p_safe = html_mod.escape(p, quote=True)
+        return f'<a href="{p_safe}">{t}</a>'
     text = re.sub(r"\[(.*?)\]\((.*?)\)", repl_link, text)
     return text
 
@@ -3329,7 +3337,8 @@ def render_markdown(md_content, is_sidebar=False):
             if in_code_block:
                 code_text = "\n".join(code_content)
                 code_text = code_text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-                html_lines.append(f'<pre class="code-block"><code class="language-{code_lang}">{code_text}</code></pre>')
+                safe_lang = html_mod.escape(re.sub(r'[^a-zA-Z0-9_+-]', '', code_lang), quote=True)
+                html_lines.append(f'<pre class="code-block"><code class="language-{safe_lang}">{code_text}</code></pre>')
                 in_code_block = False
                 code_content = []
             else:

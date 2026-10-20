@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-"""Read and inspect GitHub repositories through the public gread HTTP API.
-
-The collector deliberately never clones a repository.  It performs a bounded,
-multi-pass static inspection instead: repository overview, deep tree, generic
-symbol/risk searches, ranked source selection, and batched source reads.
-"""
-
 from __future__ import annotations
 
 import argparse
@@ -14,7 +6,7 @@ import re
 import urllib.request
 from collections import Counter
 from datetime import datetime, timezone
-from pathlib import PurePosixPath
+from pathlib import Path, PurePosixPath
 from typing import Any
 from urllib.parse import urlencode
 
@@ -61,11 +53,11 @@ def repository_name(url: str) -> str:
     return f"{match.group(1)}/{match.group(2)}"
 
 
-def _get(path: str, params: dict[str, Any], timeout: int = 90) -> str:
+def _get(path: str, params: dict[str, Any], timeout: int = 25, retries: int = 2) -> str:
     normalized = {
         key: (str(value).lower() if isinstance(value, bool) else value)
         for key, value in params.items()
-        if value not in (None, "")
+        if value is not None
     }
     url = f"{GREAD_API_URL}{path}?{urlencode(normalized)}"
     request = urllib.request.Request(
@@ -73,8 +65,16 @@ def _get(path: str, params: dict[str, Any], timeout: int = 90) -> str:
         headers={"Accept": "text/markdown, text/plain", "User-Agent": "cell-ai-research/2.0"},
         method="GET",
     )
-    with urllib.request.urlopen(request, timeout=timeout) as response:
-        return response.read().decode("utf-8", errors="replace").strip()
+    last_exc: Exception | None = None
+    for _ in range(retries):
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                return response.read().decode("utf-8", errors="replace").strip()
+        except Exception as exc:
+            last_exc = exc
+    if last_exc:
+        raise last_exc
+    return ""
 
 
 def _tree_paths(tree: str) -> set[str]:
@@ -88,7 +88,7 @@ def _tree_paths(tree: str) -> set[str]:
             continue
         if not in_fence or not line or line.startswith("## "):
             continue
-        path = line.lstrip("./")
+        path = re.sub(r"^\.?/", "", line)
         pure = PurePosixPath(path)
         if any(part in EXCLUDED_PARTS for part in pure.parts):
             continue
@@ -104,7 +104,7 @@ def _search_paths(searches: list[str]) -> set[str]:
     pattern = re.compile(r"(?:^|\n)(?:HEAD:)?([^:\n]+):\d+(?::|-)" )
     for search in searches:
         for path in pattern.findall(search or ""):
-            path = path.strip().lstrip("./")
+            path = re.sub(r"^\.?/", "", path.strip())
             pure = PurePosixPath(path)
             if not any(part in EXCLUDED_PARTS for part in pure.parts):
                 paths.add(path)
@@ -160,9 +160,10 @@ def _candidate_paths(tree: str, searches: list[str], repository: str = "") -> li
         lambda p: "test" in PurePosixPath(p).stem.lower() or "tests" in PurePosixPath(p).parts,
         lambda p: PurePosixPath(p).name.lower() in MANIFEST_NAMES,
     ):
-        extra = next((path for path in ranked if predicate(path) and path not in selected), None)
-        if extra and selected:
-            selected[-1] = extra
+        if not any(predicate(p) for p in selected):
+            extra = next((path for path in ranked if predicate(path) and path not in selected), None)
+            if extra and selected:
+                selected[-1] = extra
     return sorted(set(selected), key=lambda path: _path_score(path, repository, search_hits))
 
 
@@ -185,7 +186,7 @@ def _read_paths(name: str, paths: list[str], batch_size: int = 8) -> tuple[str, 
     return "\n\n".join(chunk for chunk in chunks if chunk), errors
 
 
-def _coverage(paths: set[str], selected: list[str], read_errors: list[str]) -> dict[str, Any]:
+def _coverage(paths: set[str], selected: list[str], read_errors: list[str], warnings: list[str] | None = None) -> dict[str, Any]:
     code_files = sorted(path for path in paths if PurePosixPath(path).suffix.lower() in CODE_EXTENSIONS)
     selected_code = [path for path in selected if PurePosixPath(path).suffix.lower() in CODE_EXTENSIONS]
     languages = Counter(PurePosixPath(path).suffix.lower().lstrip(".") for path in code_files)
@@ -203,6 +204,7 @@ def _coverage(paths: set[str], selected: list[str], read_errors: list[str]) -> d
         "test_files": tests[:20],
         "manifest_files": manifests[:20],
         "read_errors": read_errors,
+        "warnings": list(warnings or []),
         "limitations": [
             "Static remote inspection only; files were not executed.",
             "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction.",
@@ -212,8 +214,17 @@ def _coverage(paths: set[str], selected: list[str], read_errors: list[str]) -> d
 
 def collect_repository(url: str) -> dict[str, Any]:
     name = repository_name(url)
-    overview = _get("/repo", {"name": name})
-    tree = _get("/tree", {"name": name, "dir": "", "depth": 8, "limit": 400})
+    warnings: list[str] = []
+    try:
+        overview = _get("/repo", {"name": name})
+    except Exception as exc:
+        overview = ""
+        warnings.append(f"Failed to fetch overview: {exc}")
+    try:
+        tree = _get("/tree", {"name": name, "dir": "", "depth": 8, "limit": 400})
+    except Exception as exc:
+        tree = ""
+        warnings.append(f"Failed to fetch directory tree: {exc}")
     searches: list[str] = []
     search_errors: list[str] = []
     for query in SEARCH_QUERIES:
@@ -229,10 +240,13 @@ def collect_repository(url: str) -> dict[str, Any]:
             searches.append("")
             search_errors.append(f"{query}: {exc}")
 
+    tree_discovered = _tree_paths(tree)
+    if not tree_discovered:
+        warnings.append("Directory tree is empty or yielded no matching paths")
     paths = _candidate_paths(tree, searches, repository=name)
     files, read_errors = _read_paths(name, paths)
-    all_paths = _tree_paths(tree) | _search_paths(searches)
-    coverage = _coverage(all_paths, paths, read_errors)
+    all_paths = tree_discovered | _search_paths(searches)
+    coverage = _coverage(all_paths, paths, read_errors, warnings=warnings)
     coverage["search_errors"] = search_errors
     return {
         "source": "gread",
@@ -278,7 +292,9 @@ def main() -> int:
     data = collect_repository(args.url)
     rendered = json.dumps(data, ensure_ascii=False, indent=2)
     if args.output:
-        with open(args.output, "w", encoding="utf-8") as handle:
+        out_path = Path(args.output)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_path, "w", encoding="utf-8") as handle:
             handle.write(rendered + "\n")
     else:
         print(rendered)

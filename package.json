@@ -1,0 +1,12 @@
+{
+  "name": "cell-ai-research",
+  "version": "2.0.0",
+  "description": "Evidence-backed tracking, discovery, and reproducible benchmarking of Cell AI literature and implementations.",
+  "scripts": {
+    "test": "node --test tests/*.test.cjs"
+  },
+  "devDependencies": {
+    "jsdom": "^24.0.0"
+  },
+  "private": true
+}

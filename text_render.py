@@ -1,17 +1,36 @@
-"""Small safe formatter for cached prose; raw HTML is always escaped."""
 import html
 import re
 
-_TOKEN = re.compile(r'\[([^\]\n]+)\]\((https?://[^\s<>]+?)\)|`([^`\n]+)`|https?://[^\s<>`]+')
+_TOKEN = re.compile(r'\[([^\]\n]+)\]\((https?://(?:[^\s()<>]|\([^\s()<>]+\))+)\)|`([^`\n]+)`|https?://(?:[^\s()<>]|\([^\s()<>]+\))+')
 
 _HREF = re.compile(r'\\href\{\s*(https?://[^\s{}]+?)\s*\}(?:\{([^{}]*)\})?')
-_TEXTCMD = re.compile(r'\\(?:textbf|textit|emph|textsc|texttt|text|mbox|textrm|ours|footnote)\{([^{}]*)\}')
+_TEXTCMD_PREFIX = re.compile(r'\\(?:textbf|textit|emph|textsc|texttt|text|mbox|textrm|ours|footnote)\{')
 _ESCAPED = re.compile(r'\\([%&#_])')
 
 
-def _clean_latex(text):
-    """Strip LaTeX macros that leak in from arXiv abstracts before HTML rendering."""
+def _strip_nested_commands(text):
+    while True:
+        m = _TEXTCMD_PREFIX.search(text)
+        if not m:
+            break
+        start = m.start()
+        pos = m.end()
+        depth = 1
+        while pos < len(text) and depth > 0:
+            if text[pos] == '{':
+                depth += 1
+            elif text[pos] == '}':
+                depth -= 1
+            pos += 1
+        if depth == 0:
+            inner_content = text[m.end():pos - 1]
+            text = text[:start] + inner_content + text[pos:]
+        else:
+            break
+    return text
 
+
+def _clean_latex(text):
     def _href(m):
         url, label = m.group(1), (m.group(2) or '').strip() or m.group(1)
         if label.lower() in ('link', 'url', 'here', 'this', '链接', '项目主页'):
@@ -19,7 +38,7 @@ def _clean_latex(text):
         return '[{}]({})'.format(label, url)
 
     text = _HREF.sub(_href, text)
-    text = _TEXTCMD.sub(r'\1', text)
+    text = _strip_nested_commands(text)
     text = _ESCAPED.sub(r'\1', text)
     return text
 

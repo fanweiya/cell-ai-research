@@ -1,4 +1,3 @@
-"""Finish a daily update; keep failed build/publish work pending for the next run."""
 import json
 
 
@@ -15,7 +14,11 @@ def update_site(evidence, changed, project, pending_path, run, build_command):
         mark_site_pending(pending_path)
     if not pending_path.exists():
         return
-    state = json.loads(pending_path.read_text(encoding='utf-8'))
+    try:
+        raw_state = json.loads(pending_path.read_text(encoding='utf-8'))
+        state = raw_state if isinstance(raw_state, dict) else {}
+    except (json.JSONDecodeError, OSError, ValueError):
+        state = {'needs_build': True}
     if state.get('needs_build', True):
         try:
             result = run(build_command, timeout=900)
@@ -40,4 +43,4 @@ def update_site(evidence, changed, project, pending_path, run, build_command):
         return
     evidence['publish_status'] = '已发布'
     evidence['site_updated'] = True
-    pending_path.unlink()
+    pending_path.unlink(missing_ok=True)

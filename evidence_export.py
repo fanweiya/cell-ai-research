@@ -1,6 +1,6 @@
-"""Publish cached paper text as versioned static evidence, without model calls."""
 import hashlib
 import json
+import os
 import re
 
 
@@ -9,13 +9,15 @@ def export_evidence(papers, context_dir, output_dir):
     manifest = {}
     for paper in papers:
         pid = paper.get('arxiv_id', '')
-        # Mirror the context-cache filename convention; never follow record paths.
-        if not re.fullmatch(r'[A-Za-z0-9._:-]+', pid):
+        if not isinstance(pid, str) or not re.fullmatch(r'[A-Za-z0-9._:-]+', pid):
             continue
         source = context_dir / f'{re.sub(r"v[0-9]+$", "", pid)}.txt'
         if not source.is_file():
             continue
-        text = source.read_text(encoding='utf-8').strip()
+        try:
+            text = source.read_text(encoding='utf-8').strip()
+        except (OSError, UnicodeDecodeError):
+            continue
         if not text:
             continue
         chunks = []
@@ -35,6 +37,8 @@ def export_evidence(papers, context_dir, output_dir):
         name = f'{digest}.json'
         target = output_dir / name
         if not target.exists():
-            target.write_text(payload, encoding='utf-8')
+            temp_target = target.with_suffix(f'.tmp.{os.getpid()}')
+            temp_target.write_text(payload, encoding='utf-8')
+            temp_target.replace(target)
         manifest[pid] = f'data/evidence/{name}'
     return manifest

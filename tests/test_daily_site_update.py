@@ -48,6 +48,16 @@ class SiteUpdateTests(unittest.TestCase):
             self.assertEqual(runner.call_args.args[0][0], 'bash')
             self.assertEqual(evidence['publish_status'], '已发布')
 
+    def test_corrupt_pending_file_recovers_to_rebuild(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            pending = root / 'pending.json'
+            pending.write_text('not valid json {[[')
+            runner = Mock(return_value=subprocess.CompletedProcess([], 0, '', ''))
+            evidence = self.exercise(False, runner, root)
+            self.assertEqual(runner.call_count, 2)
+            self.assertEqual(evidence['publish_status'], '已发布')
+
     def test_timeout_is_recorded_and_pending_is_retained(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

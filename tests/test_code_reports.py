@@ -1,17 +1,16 @@
+from __future__ import annotations
+
 import json
 import sys
 import unittest
+from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import patch
-
 
 PROJECT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT))
 
 import generate_index
-
-CRON_PROJECT = PROJECT.parent / "hermes-cron" / "cell_ai_research_daily"
-sys.path.insert(0, str(CRON_PROJECT))
 import verified_daily
 
 
@@ -207,8 +206,6 @@ class CodeReportTests(unittest.TestCase):
         self.assertNotIn("复现通过", result)
 
     def test_placeholder_repository_is_not_marked_as_published_code(self):
-        from datetime import datetime, timezone
-
         record = verified_daily.make_record(
             {
                 "arxiv_id": "2608.00001v1",

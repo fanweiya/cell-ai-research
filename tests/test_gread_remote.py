@@ -89,6 +89,44 @@ HEAD:src/run.py:3:def main():
         self.assertFalse(coverage["has_implementation"])
         self.assertEqual(coverage["repository_kind"], "placeholder_or_docs_only")
 
+    def test_tree_paths_retains_dot_files(self):
+        tree = """```
+./.env
+./.python-version
+./src/app.py
+```"""
+        paths = gread_remote._tree_paths(tree)
+        self.assertIn(".env", paths)
+        self.assertIn(".python-version", paths)
+        self.assertIn("src/app.py", paths)
+
+    def test_candidate_paths_does_not_replace_when_category_already_selected(self):
+        tree = """```
+tests/test_a.py
+tests/test_b.py
+src/core_model.py
+```"""
+        paths = gread_remote._candidate_paths(tree, [], repository="org/model")
+        self.assertIn("tests/test_a.py", paths)
+        self.assertIn("src/core_model.py", paths)
+
+    def test_collect_repository_handles_tree_failure_with_warning(self):
+        def fake_get(path, params, timeout=25, retries=2):
+            del timeout, retries
+            if path == "/repo":
+                return "# Repo"
+            if path == "/tree":
+                raise RuntimeError("Tree network timeout")
+            if path == "/grep":
+                return ""
+            if path == "/read":
+                return ""
+            self.fail(f"unexpected endpoint {path}")
+
+        with patch.object(gread_remote, "_get", side_effect=fake_get):
+            data = gread_remote.collect_repository("https://github.com/org/model")
+        self.assertIn("Failed to fetch directory tree", data["coverage"]["warnings"][0])
+
 
 if __name__ == "__main__":
     unittest.main()

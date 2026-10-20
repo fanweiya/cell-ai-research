@@ -41,9 +41,11 @@ echo "Publishing $file_count files ($site_size) to Cloudflare Pages project '$PR
 
 cd "$ROOT_DIR"
 WRANGLER_BIN="$HOME/.cf-pages-publisher/node_modules/.bin/wrangler"
-NODE_BIN_DIR="$(find "$HOME/.nvm/versions/node" -mindepth 2 -maxdepth 2 -type d -name bin 2>/dev/null | sort -V | tail -n 1)"
-if [[ -n "$NODE_BIN_DIR" ]]; then
-  export PATH="$NODE_BIN_DIR:$PATH"
+if [[ -d "$HOME/.nvm/versions/node" ]]; then
+  NODE_BIN_DIR="$(find "$HOME/.nvm/versions/node" -mindepth 2 -maxdepth 2 -type d -name bin 2>/dev/null | sort -V | tail -n 1 || true)"
+  if [[ -n "$NODE_BIN_DIR" ]]; then
+    export PATH="$NODE_BIN_DIR:$PATH"
+  fi
 fi
 if [[ ! -x "$WRANGLER_BIN" ]]; then
   echo "WSL Wrangler not found at $WRANGLER_BIN." >&2

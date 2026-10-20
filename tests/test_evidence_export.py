@@ -23,3 +23,19 @@ class EvidenceExportTests(unittest.TestCase):
             self.assertIn('testv1', versioned)
             (cache / 'test.txt').write_text(text + ' updated', encoding='utf-8')
             self.assertNotEqual(manifest, export_evidence(records, cache, out))
+
+    def test_null_or_numeric_arxiv_id_and_non_utf8_isolation(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            cache, out = root / 'cache', root / 'out'
+            cache.mkdir()
+            (cache / 'valid.txt').write_text('valid content', encoding='utf-8')
+            (cache / 'bad.txt').write_bytes(b'\x80\x81\xff\xfe')
+            records = [
+                {'arxiv_id': None},
+                {'arxiv_id': 12345},
+                {'arxiv_id': 'bad'},
+                {'arxiv_id': 'valid'}
+            ]
+            manifest = export_evidence(records, cache, out)
+            self.assertEqual(list(manifest), ['valid'])
