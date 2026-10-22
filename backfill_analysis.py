@@ -27,7 +27,7 @@ def scan_existing_results():
         if not f.endswith(".json"):
             continue
         base = f[:-5]
-        m = re.match(r"((?:\d{4}\.\d{4,5}|biorxiv:\S+?)v\d+)_(.+)", base)
+        m = re.match(r"((?:\d{4}\.\d{4,5}|biorxiv:\S+?)(?:v\d+)?)_(.+)", base)
         if not m:
             continue
         pid = m.group(1)

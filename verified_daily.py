@@ -810,16 +810,22 @@ def main() -> int:
             # 静默回填：把 results/*.json 里已完成的 task/algorithm/critic 分析
             # 结果合并回 papers.json 状态（不触发 LLM），供索引展示"已完成"。
             before_backfill = hashlib.sha256(DB_PATH.read_bytes()).hexdigest()
+            backfill_timeout = False
+            backfill = None
             try:
                 backfill = run([
                     sys.executable, str(PROJECT / "backfill_analysis.py"),
                     "--silent-only",
                 ], timeout=90)
+            except subprocess.TimeoutExpired:
+                backfill_timeout = True
             finally:
                 backfill_changed = before_backfill != hashlib.sha256(DB_PATH.read_bytes()).hexdigest()
                 if backfill_changed:
                     mark_site_pending(EVIDENCE_DIR / ".site-update-pending.json")
-            if backfill.returncode == 0:
+            if backfill_timeout or backfill is None:
+                evidence["errors"].append("backfill_analysis.py: timed out after 90s")
+            elif backfill.returncode == 0:
                 evidence["analysis_backfilled"] = True
             else:
                 evidence["errors"].append("backfill_analysis.py: " + clean_text(backfill.stderr or backfill.stdout)[:500])

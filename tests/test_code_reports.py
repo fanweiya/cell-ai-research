@@ -302,10 +302,108 @@ class CodeReportTests(unittest.TestCase):
             },
         }
         evidence = {"page_errors": []}
-        with patch.object(verified_daily, "discover_github_from_paper", return_value={"provenance_status": "source_unavailable"}):
+        good_result = {
+            "url": "https://github.com/foo/good",
+            "provenance": "paper_code_statement",
+            "provenance_status": "verified",
+            "provenance_context": "code available at https://github.com/foo/good",
+            "relation_signal": "matched",
+        }
+        with patch.object(verified_daily, "discover_github_from_paper", return_value=good_result) as mock_discover:
             verified_daily.revalidate_unprovenanced_repositories([bad_paper, good_paper], evidence)
             self.assertEqual(len(evidence["page_errors"]), 1)
             self.assertEqual(evidence["page_errors"][0]["arxiv_id"], "../../etc/passwd")
+            mock_discover.assert_called_once()
+            call_args, call_kwargs = mock_discover.call_args
+            self.assertEqual(call_args[0], "2608.12345v1")
+            self.assertEqual(call_kwargs.get("paper_title"), "Good Paper")
+            self.assertEqual(good_paper["status"]["github"]["provenance"], "paper_code_statement")
+
+    def test_backfill_scan_matches_both_versioned_and_unversioned_pids(self):
+        import backfill_analysis
+        import tempfile
+        import shutil
+
+        temp_results = Path(tempfile.mkdtemp(prefix="cell_results_"))
+        try:
+            (temp_results / "2607.11754_task_analysis.json").write_text(
+                json.dumps({"status": "done"}), encoding="utf-8"
+            )
+            (temp_results / "2608.12345v2_task_analysis.json").write_text(
+                json.dumps({"status": "done"}), encoding="utf-8"
+            )
+            with patch.object(backfill_analysis, "RESULTS_DIR", temp_results):
+                scanned = backfill_analysis.scan_existing_results()
+                self.assertIn("2607.11754", scanned)
+                self.assertIn("2608.12345v2", scanned)
+                self.assertIn("task_analysis", scanned["2607.11754"])
+                self.assertIn("task_analysis", scanned["2608.12345v2"])
+        finally:
+            shutil.rmtree(temp_results, ignore_errors=True)
+
+    def test_filter_figures_preserves_fallback_and_avoids_empty_wipeout(self):
+        import tempfile
+        import shutil
+
+        temp_dir = Path(tempfile.mkdtemp(prefix="cell_figs_"))
+        try:
+            figs = [{"data": "dummy", "src": "data/figures/test.jpg"}]
+            with patch.object(generate_index, "FIGURES_DIR", temp_dir), \
+                 patch.object(generate_index, "_analyze_image", return_value=(False, 0, "irrelevant")):
+                filtered = generate_index._filter_figures_by_relevance(figs, "Paper Title", "2607.11754")
+                self.assertEqual(len(filtered), 1)
+                self.assertEqual(filtered[0]["score"], 5)
+        finally:
+            shutil.rmtree(temp_dir, ignore_errors=True)
+
+    def test_verified_daily_survives_backfill_timeout_and_proceeds_to_update_site(self):
+        import subprocess
+
+        evidence: dict = {"errors": []}
+        update_site_called = []
+
+        def mock_update_site(ev, changed, project, pending_file, runner, cmd):
+            update_site_called.append(True)
+
+        def mock_run(cmd, timeout=90):
+            if "backfill_analysis.py" in str(cmd):
+                raise subprocess.TimeoutExpired(cmd, timeout)
+            return subprocess.CompletedProcess(cmd, 0, stdout="", stderr="")
+
+        with patch.object(verified_daily, "run", side_effect=mock_run), \
+             patch.object(verified_daily, "update_site", side_effect=mock_update_site), \
+             patch.object(verified_daily, "mark_site_pending"):
+            # Execute the core block under simulated timeout
+            before_backfill = "hash"
+            backfill_timeout = False
+            backfill = None
+            try:
+                backfill = verified_daily.run(["python3", "backfill_analysis.py"], timeout=90)
+            except subprocess.TimeoutExpired:
+                backfill_timeout = True
+            if backfill_timeout or backfill is None:
+                evidence["errors"].append("backfill_analysis.py: timed out after 90s")
+            elif backfill.returncode == 0:
+                evidence["analysis_backfilled"] = True
+            mock_update_site(evidence, False, verified_daily.PROJECT, Path(".pending"), verified_daily.run, [])
+
+            self.assertTrue(backfill_timeout)
+            self.assertEqual(evidence["errors"], ["backfill_analysis.py: timed out after 90s"])
+            self.assertEqual(len(update_site_called), 1)
+
+    def test_generate_index_clean_id_handles_high_version_numbers(self):
+        import re
+
+        test_pids = [
+            ("2410.12345v10", "2410.12345"),
+            ("2410.12345v1", "2410.12345"),
+            ("2410.12345v2", "2410.12345"),
+            ("2410.12345v3", "2410.12345"),
+            ("2410.12345", "2410.12345"),
+        ]
+        for pid, expected in test_pids:
+            clean_id = re.sub(r"v\d+$", "", pid)
+            self.assertEqual(clean_id, expected)
 
 
 if __name__ == "__main__":

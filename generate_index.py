@@ -976,7 +976,7 @@ def _safe_figure_extension(rel_path, image_format):
 
 def _extract_figures_for_paper(pid, papers_map, force=False):
     """从 arXiv HTML 页面提取论文原图，并保留分析用缩略图。"""
-    clean_id = pid.replace("v1", "").replace("v2", "").replace("v3", "")
+    clean_id = re.sub(r"v\d+$", "", pid)
     if pid.startswith("biorxiv:"):
         clean_id = pid.replace("biorxiv:", "").split("/")[-1]
 
@@ -1013,7 +1013,6 @@ def _extract_figures_for_paper(pid, papers_map, force=False):
     except:
         return []
 
-    import re
     from PIL import Image
 
     # 从 HTML 中提取论文图片
@@ -1108,7 +1107,7 @@ def extract_all_figures(papers, force=False):
 
     for i, p in enumerate(papers):
         pid = p.get("arxiv_id", f"unknown_{i}")
-        clean_id = pid.replace("v1", "").replace("v2", "").replace("v3", "")
+        clean_id = re.sub(r"v\d+$", "", pid)
         if pid.startswith("biorxiv:"):
             clean_id = pid.replace("biorxiv:", "").split("/")[-1]
 
@@ -1135,9 +1134,8 @@ def extract_all_figures(papers, force=False):
             if figs:
                 title = p.get("title", "")
                 print(f"  [{i+1}/{total}] Analyzing figures: {clean_id} ({len(figs)} images)...")
-                _filter_figures_by_relevance(figs, title, pid)
+                filtered = _filter_figures_by_relevance(figs, title, pid)
                 # Save filtered figures back
-                filtered = _load_figures_filtered(pid)
                 with open(cache_file, "w") as f:
                     json.dump(filtered, f)
                 analyzed += 1
@@ -1193,7 +1191,7 @@ def _filter_figures_by_relevance(figures, paper_title, pid):
     if not figures:
         return figures
 
-    clean_id = pid.replace("v1", "").replace("v2", "").replace("v3", "")
+    clean_id = re.sub(r"v\d+$", "", pid)
     if pid.startswith("biorxiv:"):
         clean_id = pid.replace("biorxiv:", "").split("/")[-1]
 
@@ -1243,7 +1241,7 @@ def _filter_figures_by_relevance(figures, paper_title, pid):
 
 def _load_figures_filtered(pid):
     """加载缓存图片并应用分析过滤"""
-    clean_id = pid.replace("v1", "").replace("v2", "").replace("v3", "")
+    clean_id = re.sub(r"v\d+$", "", pid)
     if pid.startswith("biorxiv:"):
         clean_id = pid.replace("biorxiv:", "").split("/")[-1]
     cache_file = FIGURES_DIR / f"{clean_id}.json"
@@ -1276,7 +1274,7 @@ def _load_figures_filtered(pid):
 
 def _load_figures(pid):
     """加载已缓存的图片"""
-    clean_id = pid.replace("v1", "").replace("v2", "").replace("v3", "")
+    clean_id = re.sub(r"v\d+$", "", pid)
     if pid.startswith("biorxiv:"):
         clean_id = pid.replace("biorxiv:", "").split("/")[-1]
     cache_file = FIGURES_DIR / f"{clean_id}.json"
@@ -1562,7 +1560,7 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
         teaser = _esc((teaser_text.split("。", 1)[0] + "。" if "。" in teaser_text else teaser_text)[:180])
 
         # Link
-        clean_id = pid.replace("v1", "").replace("v2", "").replace("v3", "").replace("biorxiv:", "")
+        clean_id = re.sub(r"v\d+$", "", pid).replace("biorxiv:", "")
         if pid.startswith("biorxiv:"):
             link = f"https://doi.org/{clean_id}"
             link_kind = "论文页面"
