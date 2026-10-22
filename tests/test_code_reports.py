@@ -347,12 +347,47 @@ class CodeReportTests(unittest.TestCase):
 
         temp_dir = Path(tempfile.mkdtemp(prefix="cell_figs_"))
         try:
-            figs = [{"data": "dummy", "src": "data/figures/test.jpg"}]
+            # 模拟 3 张原图，其中第 1 张不相关、第 2、3 张相关
+            figs = [
+                {"data": "img0", "src": "data/figures/fig0.jpg"},
+                {"data": "img1", "src": "data/figures/fig1.jpg"},
+                {"data": "img2", "src": "data/figures/fig2.jpg"},
+            ]
+
+            def mock_analyze(b64_data, title):
+                return (b64_data != "img0", 8 if b64_data != "img0" else 0, "cap")
+
+            pid = "2607.11754"
+            with patch.object(generate_index, "FIGURES_DIR", temp_dir), \
+                 patch.object(generate_index, "_analyze_image", side_effect=mock_analyze):
+                # 首次过滤：保留第 2、3 张
+                filtered = generate_index._filter_figures_by_relevance(figs, "Title", pid)
+                self.assertEqual(len(filtered), 2)
+
+                # 模拟 extract_all_figures 将过滤结果写回 cache
+                cache_file = temp_dir / "2607.11754.json"
+                with open(cache_file, "w") as f:
+                    json.dump(filtered, f)
+
+                # 读路径：_load_figures_filtered 不应二次误杀
+                loaded = generate_index._load_figures_filtered(pid)
+                self.assertEqual(len(loaded), 2)
+
+            # 全不相关场景
+            figs_all_bad = [{"data": "bad", "src": "data/figures/bad.jpg"}]
+            pid2 = "2607.99999"
             with patch.object(generate_index, "FIGURES_DIR", temp_dir), \
                  patch.object(generate_index, "_analyze_image", return_value=(False, 0, "irrelevant")):
-                filtered = generate_index._filter_figures_by_relevance(figs, "Paper Title", "2607.11754")
-                self.assertEqual(len(filtered), 1)
-                self.assertEqual(filtered[0]["score"], 5)
+                filtered2 = generate_index._filter_figures_by_relevance(figs_all_bad, "Title", pid2)
+                self.assertEqual(len(filtered2), 1)
+                self.assertEqual(filtered2[0]["score"], 5)
+
+                cache_file2 = temp_dir / "2607.99999.json"
+                with open(cache_file2, "w") as f:
+                    json.dump(filtered2, f)
+
+                loaded2 = generate_index._load_figures_filtered(pid2)
+                self.assertEqual(len(loaded2), 1)
         finally:
             shutil.rmtree(temp_dir, ignore_errors=True)
 

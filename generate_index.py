@@ -1198,20 +1198,10 @@ def _filter_figures_by_relevance(figures, paper_title, pid):
     # Check analysis cache
     analysis_file = FIGURES_DIR / f"{clean_id}_analysis.json"
     if analysis_file.exists():
-        try:
-            with open(analysis_file, "r") as f:
-                analysis = json.load(f)
-            # Apply cached analysis
-            filtered = []
-            for i, fig in enumerate(figures):
-                key = str(i)
-                if key in analysis and analysis[key].get("relevant", True):
-                    fig["caption"] = analysis[key].get("caption", "")
-                    fig["score"] = analysis[key].get("score", 5)
-                    filtered.append(fig)
-            return filtered if filtered else figures[:1]  # 至少保留1张
-        except:
-            pass
+        # extract 阶段已将过滤结果写回缓存文件并调用了本函数，
+        # 再次调用时传入的 figures 已是过滤后的子集，
+        # 直接返回，保底至少保留 1 张。
+        return figures
 
     # Analyze each image
     analysis = {}
@@ -1256,19 +1246,10 @@ def _load_figures_filtered(pid):
             return []
 
     if analysis_file.exists():
-        try:
-            with open(analysis_file) as f:
-                analysis = json.load(f)
-            filtered = []
-            for i, fig in enumerate(figures):
-                key = str(i)
-                if key in analysis and analysis[key].get("relevant", True):
-                    fig["caption"] = analysis[key].get("caption", "")
-                    fig["score"] = analysis[key].get("score", 5)
-                    filtered.append(fig)
-            return filtered if filtered else []
-        except:
-            pass
+        # extract 阶段已将过滤结果（含兜底）写回 cache_file，
+        # 缓存中的下标与 analysis 的原始下标不再对应，
+        # 直接返回缓存内容，保底至少保留 1 张。
+        return figures if figures else []
     return figures
 
 
