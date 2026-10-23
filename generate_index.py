@@ -1574,6 +1574,7 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
         jev_badge_html = ""
         jev_review_html = ""
         jev_score = 0.0
+        card_jev_attr = ""
         paradigm_zh = ""
         if isinstance(jev, dict) and (jev.get("composite_priority") is not None or jev.get("scores")):
             scores = jev.get("scores") or {}
@@ -1590,18 +1591,20 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
             code_st = _esc(jev.get("code_status") or "未提供代码")
 
             # Badge display: composite score if all 4 dims available, otherwise preliminary or unrated
+            card_jev_attr = ""
             if comp_score is not None:
                 jev_score = float(comp_score)
+                card_jev_attr = f"{jev_score:.2f}"
                 level_cls = "jev-gold" if jev_score >= 6.0 else "jev-blue" if jev_score >= 5.0 else "jev-gray"
                 jev_badge_html = f'''<div class="jev-pill {level_cls}" title="四维证据充分 · 综合得分: {jev_score}/10 · 核心机制: {paradigm_zh}">
   <span class="jev-spark">⚡</span>
   <span>{jev_score}</span>
 </div>'''
             elif prelim_score is not None:
-                jev_score = float(prelim_score)
-                jev_badge_html = f'''<div class="jev-pill jev-gray" title="部分证据不足 · 摘要初评参考: {jev_score}/10">
+                prelim_val = float(prelim_score)
+                jev_badge_html = f'''<div class="jev-pill jev-gray" title="部分证据不足 · 摘要初评参考: {prelim_val}/10">
   <span class="jev-spark">⚡</span>
-  <span>初评 {jev_score}</span>
+  <span>初评 {prelim_val}</span>
 </div>'''
             else:
                 jev_badge_html = '''<div class="jev-pill jev-gray" title="核心证据不足 · 未评分">
@@ -1744,7 +1747,7 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
 </details>'''
 
         card = f"""
-<div class="card" tabindex="-1" id="paper-{_esc(pid)}" data-paper-id="{_esc(pid)}" data-code="{'1' if has_code_flag else '0'}" data-jev="{jev_score}" data-date="{_esc(date)}">
+<div class="card" tabindex="-1" id="paper-{_esc(pid)}" data-paper-id="{_esc(pid)}" data-code="{'1' if has_code_flag else '0'}" data-jev="{card_jev_attr}" data-date="{_esc(date)}">
   <div class="ch">
     <div class="ct">
       <div class="tzh">{title_zh}</div>

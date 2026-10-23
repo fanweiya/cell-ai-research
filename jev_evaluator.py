@@ -167,7 +167,8 @@ def extract_evidence(paper: dict, context_dir: Path = Path("/mnt/c/workspace/cel
             "method": [r"\b(?:proposed\s+method|methodology|methods|our\s+approach|architecture)\b"],
             "experiment": [r"\b(?:experiments?|experimental\s+setup|evaluation\s+protocol|datasets?\s+and\s+evaluation)\b"],
             "results": [r"\b(?:results?|ablation\s+studies?|quantitative\s+results)\b"],
-            "conclusion": [r"\b(?:conclusion|discussion|biological\s+implications?)\b"]
+            "conclusion": [r"\b(?:conclusion|discussion|biological\s+implications?)\b"],
+            "reproducibility": [r"\b(?:code\s+(?:and\s+data\s+)?availability|data\s+availability|reproducibility\s+statement|software\s+availability|implementation\s+details?)\b"]
         }
         for sec, pats in sec_patterns.items():
             for pat in pats:
@@ -181,12 +182,12 @@ def extract_evidence(paper: dict, context_dir: Path = Path("/mnt/c/workspace/cel
     if code_details.get("url"):
         sources.append(f"github:{code_details['url']}")
 
-    # Check evidence sufficiency per dimension
+    # Check evidence sufficiency per dimension strictly based on extracted evidence
     sufficiency = {
         "methodological_novelty": bool(evidence_snippets.get("abstract") or evidence_snippets.get("method")),
-        "technical_soundness": bool(evidence_snippets.get("experiment") or evidence_snippets.get("results") or has_full_text),
+        "technical_soundness": bool(evidence_snippets.get("experiment") or evidence_snippets.get("results")),
         "biological_utility": bool(evidence_snippets.get("abstract") or evidence_snippets.get("conclusion")),
-        "reproducibility_readiness": bool(code_status in ("实现已确认", "作者声明") or has_full_text)
+        "reproducibility_readiness": bool(code_status in ("实现已确认", "作者声明") or evidence_snippets.get("reproducibility"))
     }
 
     evidence_text = (
@@ -197,7 +198,8 @@ def extract_evidence(paper: dict, context_dir: Path = Path("/mnt/c/workspace/cel
         f"[Method Evidence]\n{evidence_snippets.get('method', 'Full text method section not extracted')}\n\n"
         f"[Experimental Evidence]\n{evidence_snippets.get('experiment', 'Full text experimental setup not extracted')}\n\n"
         f"[Results & Ablation Evidence]\n{evidence_snippets.get('results', 'Full text results/ablations not extracted')}\n\n"
-        f"[Conclusion & Biological Implications]\n{evidence_snippets.get('conclusion', 'Full text conclusion not extracted')}"
+        f"[Conclusion & Biological Implications]\n{evidence_snippets.get('conclusion', 'Full text conclusion not extracted')}\n\n"
+        f"[Reproducibility & Implementation Materials]\n{evidence_snippets.get('reproducibility', 'Full text reproducibility materials not extracted')}"
     )
 
     evidence_hash = hashlib.sha256(evidence_text.encode("utf-8")).hexdigest()
@@ -266,8 +268,9 @@ def build_evaluation_payload(paper: dict, evidence_info: dict) -> tuple[dict, li
     return payload, asked_dimensions
 
 
-def evaluate_single_paper(paper: dict, api_key: str, retries: int = 3) -> dict:
-    evidence_info = extract_evidence(paper)
+def evaluate_single_paper(paper: dict, api_key: str, retries: int = 3, evidence_info: dict | None = None) -> dict:
+    if evidence_info is None:
+        evidence_info = extract_evidence(paper)
     payload, asked_dims = build_evaluation_payload(paper, evidence_info)
 
     body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
@@ -388,16 +391,17 @@ def run_batch_evaluation(
 
     papers = db.get("database", [])
     
-    # Filter candidates
+    # Filter candidates: check force, rule_version, and evidence_hash
     candidates = []
     for p in papers:
         if p.get("relevance") != "passed":
             continue
         ev = p.get("jev_evaluation")
-        # If not force and already evaluated with current rule_version, skip
-        if not force and ev and ev.get("rule_version") == RULE_VERSION:
+        curr_ev_info = extract_evidence(p)
+        # If not force and already evaluated with current rule_version AND identical evidence_hash, skip
+        if not force and ev and ev.get("rule_version") == RULE_VERSION and ev.get("evidence_hash") == curr_ev_info["evidence_hash"]:
             continue
-        candidates.append(p)
+        candidates.append((p, curr_ev_info))
 
     if limit:
         candidates = candidates[:limit]
@@ -411,15 +415,16 @@ def run_batch_evaluation(
     failed_count = 0
     save_batch_size = 10
 
-    def process_item(item):
+    def process_item(item_tuple):
+        item, ev_info = item_tuple
         try:
-            ev = evaluate_single_paper(item, api_key)
+            ev = evaluate_single_paper(item, api_key, evidence_info=ev_info)
             return item, ev, None
         except Exception as exc:
             return item, None, exc
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-        futures = {executor.submit(process_item, p): p for p in candidates}
+        futures = {executor.submit(process_item, cand): cand[0] for cand in candidates}
         for future in concurrent.futures.as_completed(futures):
             item, ev, exc = future.result()
             if ev:
@@ -436,9 +441,8 @@ def run_batch_evaluation(
                     # Priority is strictly integer without arbitrary code +2
                     item["priority"] = int(round(comp))
                 else:
-                    prelim = ev["abstract_preliminary_score"]
-                    item["research_score"] = round(prelim, 1) if prelim is not None else None
-                    item["priority"] = int(round(prelim)) if prelim is not None else 5
+                    item["research_score"] = None
+                    item["priority"] = 0
 
                 evaluated_count += 1
                 if evaluated_count % 5 == 0 or evaluated_count == total_candidates:

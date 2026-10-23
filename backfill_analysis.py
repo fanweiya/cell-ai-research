@@ -97,18 +97,22 @@ def main():
             continue
         pid = paper["arxiv_id"]
         status = paper.setdefault("status", {})
+        jev = paper.get("jev_evaluation") or {}
+        comp_score = jev.get("composite_priority")
+        raw_score = float(comp_score) if comp_score is not None else 0.0
+        prio = paper.get("priority") if isinstance(paper.get("priority"), int) else int(round(raw_score))
         for stage in stages_order:
             if needs_analysis(paper, stage, existing) == "run" and status.get(stage) == "pending":
-                prio = paper.get("priority") or 5
-                todo.append((pid, stage, prio))
+                todo.append((pid, stage, prio, raw_score))
 
-    todo.sort(key=lambda x: (-x[2], stages_order.index(x[1])))
+    # Sort primarily by raw composite score descending, then stage order
+    todo.sort(key=lambda x: (-x[3], stages_order.index(x[1]), pid))
 
     if dry_run:
         print(f"[dry-run] 可静默回填: {backfilled}")
         print(f"[dry-run] 需要补跑: {len(todo)} 个任务")
-        for pid, stage, prio in todo[:20]:
-            print(f"  {pid} {stage} (priority={prio})")
+        for pid, stage, prio, raw_score in todo[:20]:
+            print(f"  {pid} {stage} (score={raw_score:.2f}, priority={prio})")
         return
 
     save_papers_atomic(papers_data)
@@ -116,7 +120,7 @@ def main():
 
     print(f"需要补跑 {len(todo)} 个分析任务（串行执行）")
     ok = fail = 0
-    for i, (pid, stage, prio) in enumerate(todo, 1):
+    for i, (pid, stage, prio, raw_score) in enumerate(todo, 1):
         output = os.path.join(RESULTS_DIR, f"{pid}_{stage}.json")
         cmd = [PY, str(SUBAGENT), "--task", stage, "--paper_id", pid,
                "--input", pid, "--output", output, "--priority", str(prio),
