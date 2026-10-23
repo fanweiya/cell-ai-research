@@ -1586,15 +1586,22 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
             model_name = _esc(jev.get("model") or "jev-1.14.0")
 
             level_cls = "jev-gold" if jev_score >= 6.0 else "jev-blue" if jev_score >= 5.0 else "jev-gray"
-            jev_badge_html = f'''<div class="jev-pill {level_cls}" title="审稿决策综合得分: {jev_score}/10 · 核心机制: {paradigm_zh}">
+            jev_badge_html = f'''<div class="jev-pill {level_cls}" title="摘要初评综合得分: {jev_score}/10 · 核心机制: {paradigm_zh}">
   <span class="jev-spark">⚡</span>
   <span>{jev_score}</span>
 </div>'''
             if paradigm_zh:
                 tags += f'<span class="tag tag-paradigm">🧬 {paradigm_zh}</span>'
 
+            # Confidence check across scalar radar dimensions
+            confidences = jev.get("confidences") or {}
+            low_conf_dims = [dim for dim, conf in confidences.items() if isinstance(conf, (int, float)) and conf < 0.5]
+            conf_warning_html = ""
+            if low_conf_dims:
+                conf_warning_html = '<div class="jev-note" style="margin-top:6px;font-size:0.8em;color:var(--text-muted, #888);">⚠️ 注：受限于摘要与标题文本长度，部分维度置信度偏低（&lt;0.5），本评分仅作初筛参考。</div>'
+
             jev_review_html = f'''<div class="sec jev-sec">
-  <div class="sec-h">⚡ 审稿决策评估 (System One · 四维指标)</div>
+  <div class="sec-h">⚡ 摘要初评参考 (System One · 四维指标)</div>
   <div class="jev-panel">
     <div class="jev-grid">
       <div class="jev-row">
@@ -1620,9 +1627,10 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
     </div>
     <div class="jev-foot">
       <span>核心范式：<strong>{paradigm_zh}</strong></span>
-      <span>综合推荐分：<strong>{jev_score} / 10</strong></span>
+      <span>初评综合分：<strong>{jev_score} / 10</strong></span>
       <span class="jev-model">评分模型 <code>{model_name}</code></span>
     </div>
+    {conf_warning_html}
   </div>
 </div>'''
 
@@ -3033,7 +3041,7 @@ body {{
       <div class="filter-buttons">
         <button class="fbtn active" onclick="doFilter('all', this)">全部 ({total})</button>
         <button class="fbtn" onclick="doFilter('code', this)">💻 有代码 ({has_code})</button>
-        <button class="fbtn" onclick="doFilter('jev', this)">⚡ 创新前列 ({has_jev_high})</button>
+        <button class="fbtn" onclick="doFilter('jev', this)">⚡ 创新初选 ({has_jev_high})</button>
       </div>
       <div class="month-filter">
         <select class="month-select" id="monthSelect" onchange="doMonthFilter(this.value)">

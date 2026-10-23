@@ -218,7 +218,7 @@ def run_batch_evaluation(db_path: str = "/mnt/c/workspace/cell-ai-research/paper
     api_key = get_secret("TYPESAFE_API_KEY")
     if not api_key:
         print("[Error] TYPESAFE_API_KEY is not available.", file=sys.stderr)
-        return 0
+        raise RuntimeError("TYPESAFE_API_KEY is not available")
 
     with open(db_path, "r", encoding="utf-8") as f:
         db = json.load(f)
@@ -257,8 +257,8 @@ def run_batch_evaluation(db_path: str = "/mnt/c/workspace/cell-ai-research/paper
                 item["jev_evaluation"] = ev
                 # Also synchronize top-level priority and research score
                 item["research_score"] = round(ev["composite_priority"], 1)
-                bonus_code = 2.0 if item.get("has_code") else 0.0
-                item["priority"] = round(ev["composite_priority"] + bonus_code, 1)
+                bonus_code = 2 if item.get("has_code") else 0
+                item["priority"] = int(round(ev["composite_priority"])) + bonus_code
                 evaluated_count += 1
                 if evaluated_count % 5 == 0 or evaluated_count == total_candidates:
                     print(f"[{evaluated_count}/{total_candidates}] Evaluated {item.get('arxiv_id')} -> {ev['composite_priority']}/10 ({ev['paradigm_label_zh']})")
@@ -284,4 +284,4 @@ if __name__ == "__main__":
     parser.add_argument("--workers", type=int, default=6, help="Concurrent workers")
     args = parser.parse_args()
 
-    run_batch_evaluation(max_workers=args.workers, force=args.force, limit=args.limit)
+    count = run_batch_evaluation(max_workers=args.workers, force=args.force, limit=args.limit)

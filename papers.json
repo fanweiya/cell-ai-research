@@ -11,7 +11,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": 4,
-      "priority": 6.5,
+      "priority": 6,
       "bonus": [
         "new_architecture"
       ],
@@ -262,7 +262,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": 2,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [
         "new_architecture",
         "foundation"
@@ -361,7 +361,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": 3,
-      "priority": 7.2,
+      "priority": 7,
       "bonus": [
         "new_architecture",
         "foundation"
@@ -479,7 +479,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": 3,
-      "priority": 6.8,
+      "priority": 7,
       "bonus": [
         "foundation"
       ],
@@ -671,7 +671,7 @@
       "relevance": "passed",
       "research_score": 2.9,
       "engineering_score": 2,
-      "priority": 2.9,
+      "priority": 3,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -753,7 +753,7 @@
       "relevance": "passed",
       "research_score": 5.4,
       "engineering_score": 2,
-      "priority": 7.4,
+      "priority": 7,
       "bonus": [
         "new_architecture"
       ],
@@ -842,7 +842,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": 3,
-      "priority": 7.1,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -955,7 +955,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": 3,
-      "priority": 6.3,
+      "priority": 6,
       "bonus": [
         "segmentation_or_detection",
         "new_architecture"
@@ -1077,7 +1077,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": 2,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [
         "foundation"
       ],
@@ -1176,7 +1176,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": 2,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [
         "benchmark",
         "open_source"
@@ -1262,7 +1262,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": 4,
-      "priority": 6.4,
+      "priority": 6,
       "bonus": [
         "foundation",
         "segmentation_or_detection",
@@ -1387,7 +1387,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": 3,
-      "priority": 6.9,
+      "priority": 7,
       "bonus": [
         "new_architecture"
       ],
@@ -1485,7 +1485,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": 2,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [
         "new_architecture",
         "foundation"
@@ -1573,7 +1573,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": 3,
-      "priority": 6.8,
+      "priority": 7,
       "bonus": [
         "segmentation_or_detection"
       ],
@@ -1805,7 +1805,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": 3,
-      "priority": 7.3,
+      "priority": 7,
       "bonus": [
         "new_architecture"
       ],
@@ -2134,7 +2134,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": 2,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -2215,7 +2215,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": 2,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [
         "foundation",
         "new_architecture"
@@ -2301,7 +2301,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": 3,
-      "priority": 6.4,
+      "priority": 6,
       "bonus": [
         "new_architecture"
       ],
@@ -2416,7 +2416,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": 2,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [
         "segmentation_or_detection",
         "new_architecture"
@@ -2502,7 +2502,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": 3,
-      "priority": 6.4,
+      "priority": 6,
       "bonus": [
         "foundation"
       ],
@@ -2808,7 +2808,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": 3,
-      "priority": 7.3,
+      "priority": 7,
       "bonus": [
         "segmentation_or_detection"
       ],
@@ -3039,7 +3039,7 @@
       "relevance": "passed",
       "research_score": 3.6,
       "engineering_score": 2,
-      "priority": 3.6,
+      "priority": 4,
       "bonus": [
         "benchmark"
       ],
@@ -3123,7 +3123,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": 3,
-      "priority": 7.2,
+      "priority": 7,
       "bonus": [
         "segmentation_or_detection",
         "new_architecture"
@@ -3248,7 +3248,7 @@
       "relevance": "passed",
       "research_score": 4.1,
       "engineering_score": 2,
-      "priority": 4.1,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -3328,7 +3328,7 @@
       "relevance": "passed",
       "research_score": 5.4,
       "engineering_score": 3,
-      "priority": 7.4,
+      "priority": 7,
       "bonus": [
         "new_architecture"
       ],
@@ -3420,7 +3420,7 @@
       "relevance": "passed",
       "research_score": 3.9,
       "engineering_score": 3,
-      "priority": 5.9,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -3509,7 +3509,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": 2,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [
         "segmentation_or_detection"
       ],
@@ -3591,7 +3591,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": 3,
-      "priority": 6.8,
+      "priority": 7,
       "bonus": [
         "foundation"
       ],
@@ -3685,7 +3685,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": 3,
-      "priority": 6.7,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -3795,7 +3795,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": 2,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -3877,7 +3877,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": 2,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [
         "foundation"
       ],
@@ -3961,7 +3961,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": 2,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [
         "new_architecture"
       ],
@@ -4044,7 +4044,7 @@
       "relevance": "passed",
       "research_score": 3.8,
       "engineering_score": 2,
-      "priority": 3.8,
+      "priority": 4,
       "bonus": [
         "benchmark"
       ],
@@ -4125,7 +4125,7 @@
       "relevance": "passed",
       "research_score": 4.1,
       "engineering_score": 2,
-      "priority": 4.1,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -4205,7 +4205,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": 2,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [
         "segmentation_or_detection"
       ],
@@ -4286,7 +4286,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": 3,
-      "priority": 7.5,
+      "priority": 8,
       "bonus": [
         "segmentation_or_detection"
       ],
@@ -4402,7 +4402,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": 2,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [
         "new_architecture"
       ],
@@ -4487,7 +4487,7 @@
       "relevance": "passed",
       "research_score": 2.5,
       "engineering_score": 2,
-      "priority": 2.5,
+      "priority": 2,
       "bonus": [
         "foundation",
         "segmentation_or_detection",
@@ -4574,7 +4574,7 @@
       "relevance": "passed",
       "research_score": 3.7,
       "engineering_score": 2,
-      "priority": 3.7,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -4656,7 +4656,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": 2,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [
         "segmentation_or_detection",
         "new_architecture"
@@ -4741,7 +4741,7 @@
       "relevance": "passed",
       "research_score": 4.1,
       "engineering_score": 2,
-      "priority": 4.1,
+      "priority": 4,
       "bonus": [
         "foundation",
         "segmentation_or_detection"
@@ -4826,7 +4826,7 @@
       "relevance": "passed",
       "research_score": 4.1,
       "engineering_score": 2,
-      "priority": 4.1,
+      "priority": 4,
       "bonus": [
         "segmentation_or_detection"
       ],
@@ -4910,7 +4910,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": 3,
-      "priority": 6.6,
+      "priority": 7,
       "bonus": [
         "foundation",
         "segmentation_or_detection"
@@ -5027,7 +5027,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": 3,
-      "priority": 6.5,
+      "priority": 6,
       "bonus": [
         "segmentation_or_detection",
         "new_architecture"
@@ -5142,7 +5142,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": 3,
-      "priority": 6.8,
+      "priority": 7,
       "bonus": [
         "foundation",
         "segmentation_or_detection"
@@ -5415,7 +5415,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": 2,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [
         "segmentation_or_detection"
       ],
@@ -5497,7 +5497,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": 2,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [
         "segmentation_or_detection",
         "new_architecture"
@@ -5583,7 +5583,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": 2,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [
         "segmentation_or_detection",
         "new_architecture"
@@ -5667,7 +5667,7 @@
       "relevance": "passed",
       "research_score": 3.7,
       "engineering_score": 2,
-      "priority": 3.7,
+      "priority": 4,
       "bonus": [
         "segmentation_or_detection"
       ],
@@ -5750,7 +5750,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": 2,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [
         "benchmark"
       ],
@@ -5831,7 +5831,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": 2,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [
         "new_architecture"
       ],
@@ -5912,7 +5912,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": 2,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -5991,7 +5991,7 @@
       "relevance": "passed",
       "research_score": 3.1,
       "engineering_score": 2,
-      "priority": 3.1,
+      "priority": 3,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -6072,7 +6072,7 @@
       "relevance": "passed",
       "research_score": 3.5,
       "engineering_score": 2,
-      "priority": 3.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -6154,7 +6154,7 @@
       "relevance": "passed",
       "research_score": 3.7,
       "engineering_score": 2,
-      "priority": 3.7,
+      "priority": 4,
       "bonus": [
         "benchmark"
       ],
@@ -6235,7 +6235,7 @@
       "relevance": "passed",
       "research_score": 3.8,
       "engineering_score": 3,
-      "priority": 5.8,
+      "priority": 6,
       "bonus": [
         "benchmark"
       ],
@@ -6327,7 +6327,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": 2,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [
         "segmentation_or_detection"
       ],
@@ -6408,7 +6408,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": 2,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [
         "segmentation_or_detection"
       ],
@@ -6490,7 +6490,7 @@
       "relevance": "passed",
       "research_score": 5.7,
       "engineering_score": 2,
-      "priority": 5.7,
+      "priority": 6,
       "status": {
         "discovery": "done",
         "relevance_analysis": "done",
@@ -6564,7 +6564,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": 2,
-      "priority": 5.5,
+      "priority": 6,
       "status": {
         "discovery": "done",
         "relevance_analysis": "done",
@@ -6638,7 +6638,7 @@
       "relevance": "passed",
       "research_score": 3.7,
       "engineering_score": 2,
-      "priority": 3.7,
+      "priority": 4,
       "status": {
         "discovery": "done",
         "relevance_analysis": "done",
@@ -6712,7 +6712,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": 2,
-      "priority": 5.2,
+      "priority": 5,
       "status": {
         "discovery": "done",
         "relevance_analysis": "done",
@@ -6785,7 +6785,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": 2,
-      "priority": 4.6,
+      "priority": 5,
       "status": {
         "discovery": "done",
         "relevance_analysis": "done",
@@ -6861,7 +6861,7 @@
       "relevance_notes": "cell tracking transformer for lineage reconstruction; Cell Tracking Challenge; deep learning-based; confidence=0.95",
       "research_score": 5.4,
       "engineering_score": 2,
-      "priority": 5.4,
+      "priority": 5,
       "bonus": [
         "new_architecture"
       ],
@@ -6947,7 +6947,7 @@
       "relevance_notes": "medical cell image recognition (TCT/cervical); YOLOv12+DINOv3; cell population distribution; confidence=0.92",
       "research_score": 5.0,
       "engineering_score": 2,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [
         "open_source"
       ],
@@ -7037,7 +7037,7 @@
       "relevance_notes": "spheroid microscopy segmentation; few-shot; classical priors; cell biology; confidence=0.92",
       "research_score": 4.1,
       "engineering_score": 2,
-      "priority": 4.1,
+      "priority": 4,
       "bonus": [
         "segmentation_or_detection"
       ],
@@ -7122,7 +7122,7 @@
       "relevance_notes": "histopathology WSI segmentation; weakly supervised; cell/tissue-level; accepted MAPR 2026; confidence=0.85",
       "research_score": 4.8,
       "engineering_score": 2,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [
         "open_source"
       ],
@@ -7211,7 +7211,7 @@
       "relevance_notes": "microscopic urinalysis cell detection; all-in-focus reconstruction; deep learning; confidence=0.82",
       "research_score": 4.1,
       "engineering_score": 2,
-      "priority": 4.1,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -7350,7 +7350,7 @@
       "relevance_notes": "histopathology segmentation of H&E WSIs; active learning for annotation-efficient training; tissue-level but involves cellular structures; accepted confidence=0.80",
       "research_score": 4.8,
       "engineering_score": 2,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [
         "new_architecture"
       ],
@@ -7499,7 +7499,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": 2,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [
         "new_architecture",
         "self_supervised"
@@ -7591,7 +7591,7 @@
       "relevance": "passed",
       "research_score": 4.1,
       "engineering_score": 3,
-      "priority": 4.1,
+      "priority": 4,
       "bonus": [
         "foundation",
         "new_architecture",
@@ -7678,7 +7678,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": 3,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [
         "new_architecture",
         "foundation",
@@ -7765,7 +7765,7 @@
       "relevance": "passed",
       "research_score": 4.1,
       "engineering_score": 3,
-      "priority": 4.1,
+      "priority": 4,
       "bonus": [
         "foundation",
         "benchmark",
@@ -7851,7 +7851,7 @@
       "relevance": "passed",
       "research_score": 4.1,
       "engineering_score": 2,
-      "priority": 4.1,
+      "priority": 4,
       "bonus": [
         "new_architecture"
       ],
@@ -7935,7 +7935,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": 3,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [
         "foundation",
         "multimodal"
@@ -8010,7 +8010,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": 4,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [
         "new_architecture",
         "physics_informed"
@@ -8085,7 +8085,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": 5,
-      "priority": 5.3,
+      "priority": 5,
       "bonus": [
         "benchmark",
         "evaluation"
@@ -8161,7 +8161,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": 3,
-      "priority": 7.3,
+      "priority": 7,
       "bonus": [
         "benchmark",
         "foundation"
@@ -8240,7 +8240,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": 4,
-      "priority": 7.5,
+      "priority": 8,
       "bonus": [
         "new_architecture",
         "spatial"
@@ -8321,7 +8321,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": 4,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [
         "new_architecture",
         "multimodal"
@@ -8397,7 +8397,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": 3,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [
         "new_architecture",
         "multi_agent"
@@ -8473,7 +8473,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": 4,
-      "priority": 5.5,
+      "priority": 6,
       "bonus": [
         "foundation",
         "cross_dataset"
@@ -8548,7 +8548,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": 4,
-      "priority": 6.9,
+      "priority": 7,
       "bonus": [
         "interpretability"
       ],
@@ -8626,7 +8626,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": 3,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [
         "new_architecture",
         "foundation"
@@ -8702,7 +8702,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": 3,
-      "priority": 4.9,
+      "priority": 5,
       "bonus": [
         "new_architecture",
         "foundation"
@@ -8781,7 +8781,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": 3,
-      "priority": 4.9,
+      "priority": 5,
       "bonus": [
         "new_architecture"
       ],
@@ -8856,7 +8856,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": 3,
-      "priority": 6.5,
+      "priority": 6,
       "bonus": [
         "new_architecture"
       ],
@@ -8936,7 +8936,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": 6,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [
         "benchmark",
         "new_metric"
@@ -9026,7 +9026,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": 7,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [
         "new_approach"
       ],
@@ -9115,7 +9115,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": 4,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [
         "new_architecture"
       ],
@@ -9221,7 +9221,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -9304,7 +9304,7 @@
       "relevance": "passed",
       "research_score": 6.0,
       "engineering_score": null,
-      "priority": 8.0,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -9418,7 +9418,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": null,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -9500,7 +9500,7 @@
       "relevance": "passed",
       "research_score": 5.6,
       "engineering_score": null,
-      "priority": 7.6,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -9595,7 +9595,7 @@
       "relevance": "passed",
       "research_score": 5.8,
       "engineering_score": null,
-      "priority": 7.8,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -9703,7 +9703,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -9786,7 +9786,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -9879,7 +9879,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -9962,7 +9962,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 6.8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -10064,7 +10064,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -10146,7 +10146,7 @@
       "relevance": "passed",
       "research_score": 5.6,
       "engineering_score": null,
-      "priority": 5.6,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -10224,7 +10224,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 5.5,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -10309,7 +10309,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 7.5,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -10407,7 +10407,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -10487,7 +10487,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -10564,7 +10564,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 7.5,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -10671,7 +10671,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": null,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -10751,7 +10751,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -10831,7 +10831,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -10911,7 +10911,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -10995,7 +10995,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 7.1,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -11102,7 +11102,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 6.8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -11201,7 +11201,7 @@
       "relevance": "passed",
       "research_score": 6.4,
       "engineering_score": null,
-      "priority": 8.4,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -11353,7 +11353,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 7.3,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -11510,7 +11510,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 7.1,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -11657,7 +11657,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -11749,7 +11749,7 @@
       "relevance": "passed",
       "research_score": 5.8,
       "engineering_score": null,
-      "priority": 7.8,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -11890,7 +11890,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": null,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -11971,7 +11971,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 5.3,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -12057,7 +12057,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -12145,7 +12145,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 7.5,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -12320,7 +12320,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 7.2,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -12468,7 +12468,7 @@
       "relevance": "passed",
       "research_score": 5.7,
       "engineering_score": null,
-      "priority": 5.7,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -12550,7 +12550,7 @@
       "relevance": "passed",
       "research_score": 5.6,
       "engineering_score": null,
-      "priority": 7.6,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -12731,7 +12731,7 @@
       "relevance": "passed",
       "research_score": 5.6,
       "engineering_score": null,
-      "priority": 5.6,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -12814,7 +12814,7 @@
       "relevance": "passed",
       "research_score": 4.1,
       "engineering_score": null,
-      "priority": 4.1,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -12895,7 +12895,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -12979,7 +12979,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": null,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -13064,7 +13064,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 5.3,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -13189,7 +13189,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": null,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -13270,7 +13270,7 @@
       "relevance": "passed",
       "research_score": 5.6,
       "engineering_score": null,
-      "priority": 7.6,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -13428,7 +13428,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -13507,7 +13507,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": null,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -13589,7 +13589,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": null,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -13694,7 +13694,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 7.5,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -13846,7 +13846,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 6.8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -14007,7 +14007,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 7.5,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -14206,7 +14206,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -14331,7 +14331,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -14416,7 +14416,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 7.2,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -14576,7 +14576,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 5.5,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -14689,7 +14689,7 @@
       "relevance": "passed",
       "research_score": 2.0,
       "engineering_score": null,
-      "priority": 2.0,
+      "priority": 2,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -14771,7 +14771,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -14853,7 +14853,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": null,
-      "priority": 6.4,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -14994,7 +14994,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": null,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -15073,7 +15073,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -15161,7 +15161,7 @@
       "relevance": "passed",
       "research_score": 5.9,
       "engineering_score": null,
-      "priority": 7.9,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -15319,7 +15319,7 @@
       "relevance": "passed",
       "research_score": 5.9,
       "engineering_score": null,
-      "priority": 7.9,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -15472,7 +15472,7 @@
       "relevance": "passed",
       "research_score": 5.4,
       "engineering_score": null,
-      "priority": 7.4,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -15617,7 +15617,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": null,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -15697,7 +15697,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -15780,7 +15780,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 5.3,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -15906,7 +15906,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 7.5,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -16060,7 +16060,7 @@
       "relevance": "passed",
       "research_score": 3.4,
       "engineering_score": null,
-      "priority": 3.4,
+      "priority": 3,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -16143,7 +16143,7 @@
       "relevance": "passed",
       "research_score": 5.7,
       "engineering_score": null,
-      "priority": 7.7,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -16323,7 +16323,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": null,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -16404,7 +16404,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": null,
-      "priority": 4.9,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -16486,7 +16486,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -16579,7 +16579,7 @@
       "relevance": "passed",
       "research_score": 5.8,
       "engineering_score": null,
-      "priority": 7.8,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -16730,7 +16730,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": null,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -16825,7 +16825,7 @@
       "relevance": "passed",
       "research_score": 3.8,
       "engineering_score": null,
-      "priority": 3.8,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -16910,7 +16910,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -16990,7 +16990,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 7.2,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -17148,7 +17148,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -17229,7 +17229,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 7.5,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -17387,7 +17387,7 @@
       "relevance": "passed",
       "research_score": 2.6,
       "engineering_score": null,
-      "priority": 2.6,
+      "priority": 3,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -17469,7 +17469,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -17551,7 +17551,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 6.8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -17686,7 +17686,7 @@
       "relevance": "passed",
       "research_score": 3.8,
       "engineering_score": null,
-      "priority": 3.8,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -17768,7 +17768,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 5.3,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -17854,7 +17854,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -17934,7 +17934,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -18016,7 +18016,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -18096,7 +18096,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": null,
-      "priority": 4.9,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -18183,7 +18183,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": null,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -18262,7 +18262,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -18345,7 +18345,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -18425,7 +18425,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -18507,7 +18507,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": null,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -18588,7 +18588,7 @@
       "relevance": "passed",
       "research_score": 6.0,
       "engineering_score": null,
-      "priority": 8.0,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -18723,7 +18723,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -18804,7 +18804,7 @@
       "relevance": "passed",
       "research_score": 3.8,
       "engineering_score": null,
-      "priority": 3.8,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -18890,7 +18890,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": null,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -18973,7 +18973,7 @@
       "relevance": "passed",
       "research_score": 5.4,
       "engineering_score": null,
-      "priority": 7.4,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -19132,7 +19132,7 @@
       "relevance": "passed",
       "research_score": 5.4,
       "engineering_score": null,
-      "priority": 5.4,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -19216,7 +19216,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -19301,7 +19301,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -19387,7 +19387,7 @@
       "relevance": "passed",
       "research_score": 5.9,
       "engineering_score": null,
-      "priority": 7.9,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -19547,7 +19547,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -19632,7 +19632,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": null,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -19717,7 +19717,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 7.0,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -19880,7 +19880,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": null,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -19963,7 +19963,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -20046,7 +20046,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -20137,7 +20137,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 5.3,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -20221,7 +20221,7 @@
       "relevance": "passed",
       "research_score": 6.4,
       "engineering_score": null,
-      "priority": 8.4,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -20359,7 +20359,7 @@
       "relevance": "passed",
       "research_score": 6.1,
       "engineering_score": null,
-      "priority": 8.1,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -20533,7 +20533,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": null,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -20617,7 +20617,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": null,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -20698,7 +20698,7 @@
       "relevance": "passed",
       "research_score": 3.9,
       "engineering_score": null,
-      "priority": 3.9,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -20784,7 +20784,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -20870,7 +20870,7 @@
       "relevance": "passed",
       "research_score": 3.7,
       "engineering_score": null,
-      "priority": 3.7,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -20951,7 +20951,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": null,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -21050,7 +21050,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -21133,7 +21133,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -21221,7 +21221,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": null,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -21323,7 +21323,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 5.3,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -21415,7 +21415,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -21497,7 +21497,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -21577,7 +21577,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -21659,7 +21659,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 5.3,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -21749,7 +21749,7 @@
       "relevance": "passed",
       "research_score": 4.1,
       "engineering_score": null,
-      "priority": 4.1,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -21830,7 +21830,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -21915,7 +21915,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 7.5,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -22084,7 +22084,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -22165,7 +22165,7 @@
       "relevance": "passed",
       "research_score": 2.2,
       "engineering_score": null,
-      "priority": 2.2,
+      "priority": 2,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -22246,7 +22246,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -22333,7 +22333,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -22420,7 +22420,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -22502,7 +22502,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -22584,7 +22584,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": null,
-      "priority": 4.9,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -22669,7 +22669,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 5.5,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -22791,7 +22791,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 6.5,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -22965,7 +22965,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": null,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -23044,7 +23044,7 @@
       "relevance": "passed",
       "research_score": 2.9,
       "engineering_score": null,
-      "priority": 2.9,
+      "priority": 3,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -23124,7 +23124,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": null,
-      "priority": 4.9,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -23251,7 +23251,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -23335,7 +23335,7 @@
       "relevance": "passed",
       "research_score": 5.4,
       "engineering_score": null,
-      "priority": 5.4,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -23426,7 +23426,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": null,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -23506,7 +23506,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": null,
-      "priority": 4.9,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -23588,7 +23588,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": null,
-      "priority": 4.9,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -23673,7 +23673,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -23757,7 +23757,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -23881,7 +23881,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 6.6,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -24024,7 +24024,7 @@
       "relevance": "passed",
       "research_score": 5.8,
       "engineering_score": null,
-      "priority": 7.8,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -24163,7 +24163,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -24248,7 +24248,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -24372,7 +24372,7 @@
       "relevance": "passed",
       "research_score": 5.4,
       "engineering_score": null,
-      "priority": 5.4,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -24452,7 +24452,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 7.0,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -24584,7 +24584,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 6.7,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -24716,7 +24716,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -24804,7 +24804,7 @@
       "relevance": "passed",
       "research_score": 5.6,
       "engineering_score": null,
-      "priority": 7.6,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -24956,7 +24956,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 7.0,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -25147,7 +25147,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -25269,7 +25269,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -25353,7 +25353,7 @@
       "relevance": "passed",
       "research_score": 5.9,
       "engineering_score": null,
-      "priority": 5.9,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -25442,7 +25442,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": null,
-      "priority": 4.9,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -25522,7 +25522,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -25602,7 +25602,7 @@
       "relevance": "passed",
       "research_score": 5.6,
       "engineering_score": null,
-      "priority": 7.6,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -25761,7 +25761,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 7.2,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -25910,7 +25910,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 6.7,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -26045,7 +26045,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -26128,7 +26128,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": null,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -26209,7 +26209,7 @@
       "relevance": "passed",
       "research_score": 3.9,
       "engineering_score": null,
-      "priority": 3.9,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -26292,7 +26292,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -26371,7 +26371,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": null,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -26456,7 +26456,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": null,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -26542,7 +26542,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 7.3,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -26713,7 +26713,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 5.3,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -26801,7 +26801,7 @@
       "relevance": "passed",
       "research_score": 5.4,
       "engineering_score": null,
-      "priority": 5.4,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -26883,7 +26883,7 @@
       "relevance": "passed",
       "research_score": 5.7,
       "engineering_score": null,
-      "priority": 7.7,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -27017,7 +27017,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -27103,7 +27103,7 @@
       "relevance": "passed",
       "research_score": 5.4,
       "engineering_score": null,
-      "priority": 7.4,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -27259,7 +27259,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -27341,7 +27341,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -27435,7 +27435,7 @@
       "relevance": "passed",
       "research_score": 3.8,
       "engineering_score": null,
-      "priority": 3.8,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -27515,7 +27515,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -27599,7 +27599,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -27690,7 +27690,7 @@
       "relevance": "passed",
       "research_score": 3.8,
       "engineering_score": null,
-      "priority": 3.8,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -27777,7 +27777,7 @@
       "relevance": "passed",
       "research_score": 3.4,
       "engineering_score": null,
-      "priority": 3.4,
+      "priority": 3,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -27861,7 +27861,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -27941,7 +27941,7 @@
       "relevance": "passed",
       "research_score": 3.6,
       "engineering_score": null,
-      "priority": 3.6,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -28024,7 +28024,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 7.3,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -28199,7 +28199,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -28284,7 +28284,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 6.8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -28445,7 +28445,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 7.0,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -28590,7 +28590,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 6.7,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -28754,7 +28754,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -28835,7 +28835,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 6.7,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -29021,7 +29021,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -29105,7 +29105,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 7.0,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -29236,7 +29236,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -29324,7 +29324,7 @@
       "relevance": "passed",
       "research_score": 3.8,
       "engineering_score": null,
-      "priority": 5.8,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -29469,7 +29469,7 @@
       "relevance": "passed",
       "research_score": 5.4,
       "engineering_score": null,
-      "priority": 7.4,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -29628,7 +29628,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -29757,7 +29757,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -29841,7 +29841,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -29974,7 +29974,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -30060,7 +30060,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -30139,7 +30139,7 @@
       "relevance": "passed",
       "research_score": 3.3,
       "engineering_score": null,
-      "priority": 3.3,
+      "priority": 3,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -30233,7 +30233,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 7.2,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -30395,7 +30395,7 @@
       "relevance": "passed",
       "research_score": 5.4,
       "engineering_score": null,
-      "priority": 7.4,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -30535,7 +30535,7 @@
       "relevance": "passed",
       "research_score": 6.2,
       "engineering_score": null,
-      "priority": 8.2,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -30689,7 +30689,7 @@
       "relevance": "passed",
       "research_score": 3.5,
       "engineering_score": null,
-      "priority": 3.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -30775,7 +30775,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": null,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -30862,7 +30862,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 7.0,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -31019,7 +31019,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 7.1,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -31181,7 +31181,7 @@
       "relevance": "passed",
       "research_score": 2.6,
       "engineering_score": null,
-      "priority": 2.6,
+      "priority": 3,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -31262,7 +31262,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 6.7,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -31430,7 +31430,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": null,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -31510,7 +31510,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -31592,7 +31592,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 7.0,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -31747,7 +31747,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -31839,7 +31839,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -31919,7 +31919,7 @@
       "relevance": "passed",
       "research_score": 6.3,
       "engineering_score": null,
-      "priority": 8.3,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -32094,7 +32094,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -32175,7 +32175,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 7.3,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -32332,7 +32332,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": null,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -32414,7 +32414,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -32499,7 +32499,7 @@
       "relevance": "passed",
       "research_score": 5.4,
       "engineering_score": null,
-      "priority": 5.4,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -32587,7 +32587,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -32669,7 +32669,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": null,
-      "priority": 6.0,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -32825,7 +32825,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -32908,7 +32908,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -32997,7 +32997,7 @@
       "relevance": "passed",
       "research_score": 3.2,
       "engineering_score": null,
-      "priority": 3.2,
+      "priority": 3,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -33080,7 +33080,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -33165,7 +33165,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -33252,7 +33252,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -33337,7 +33337,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 5.3,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -33426,7 +33426,7 @@
       "relevance": "passed",
       "research_score": 5.8,
       "engineering_score": null,
-      "priority": 7.8,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -33597,7 +33597,7 @@
       "relevance": "passed",
       "research_score": 5.6,
       "engineering_score": null,
-      "priority": 7.6,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -33748,7 +33748,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 5.3,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -33827,7 +33827,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 7.5,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -33995,7 +33995,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 7.0,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -34151,7 +34151,7 @@
       "relevance": "passed",
       "research_score": 5.8,
       "engineering_score": null,
-      "priority": 7.8,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -34308,7 +34308,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 7.0,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -34470,7 +34470,7 @@
       "relevance": "passed",
       "research_score": 5.7,
       "engineering_score": null,
-      "priority": 7.7,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -34624,7 +34624,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -34711,7 +34711,7 @@
       "relevance": "passed",
       "research_score": 3.6,
       "engineering_score": null,
-      "priority": 3.6,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -34794,7 +34794,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": null,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -34878,7 +34878,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -34962,7 +34962,7 @@
       "relevance": "passed",
       "research_score": 3.9,
       "engineering_score": null,
-      "priority": 3.9,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -35050,7 +35050,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -35178,7 +35178,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 6.8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -35338,7 +35338,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 6.5,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -35492,7 +35492,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -35582,7 +35582,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -35661,7 +35661,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -35742,7 +35742,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 5.5,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -35828,7 +35828,7 @@
       "relevance": "passed",
       "research_score": 3.9,
       "engineering_score": null,
-      "priority": 3.9,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -35914,7 +35914,7 @@
       "relevance": "passed",
       "research_score": 4.1,
       "engineering_score": null,
-      "priority": 4.1,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -35998,7 +35998,7 @@
       "relevance": "passed",
       "research_score": 3.9,
       "engineering_score": null,
-      "priority": 3.9,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -36120,7 +36120,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -36204,7 +36204,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": null,
-      "priority": 4.9,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -36285,7 +36285,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -36373,7 +36373,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -36459,7 +36459,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 6.7,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -36588,7 +36588,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 7.5,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -36730,7 +36730,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -36814,7 +36814,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 7.2,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -36973,7 +36973,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -37056,7 +37056,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -37147,7 +37147,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -37276,7 +37276,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -37363,7 +37363,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 5.5,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -37450,7 +37450,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": null,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -37534,7 +37534,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 7.5,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -37687,7 +37687,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 5.3,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -37769,7 +37769,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -37851,7 +37851,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -37930,7 +37930,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": null,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -38015,7 +38015,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": null,
-      "priority": 4.9,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -38100,7 +38100,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -38184,7 +38184,7 @@
       "relevance": "passed",
       "research_score": 3.9,
       "engineering_score": null,
-      "priority": 3.9,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -38266,7 +38266,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": null,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -38355,7 +38355,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": null,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -38435,7 +38435,7 @@
       "relevance": "passed",
       "research_score": 5.4,
       "engineering_score": null,
-      "priority": 5.4,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -38518,7 +38518,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 7.0,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -38682,7 +38682,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -38770,7 +38770,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 7.2,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -38920,7 +38920,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 5.5,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -39008,7 +39008,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 7.0,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -39200,7 +39200,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -39278,7 +39278,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -39362,7 +39362,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -39451,7 +39451,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -39530,7 +39530,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 6.6,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -39701,7 +39701,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 5.5,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -39780,7 +39780,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -39871,7 +39871,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -39955,7 +39955,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 6.8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -40115,7 +40115,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -40201,7 +40201,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -40288,7 +40288,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -40367,7 +40367,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 6.8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -40528,7 +40528,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -40613,7 +40613,7 @@
       "relevance": "passed",
       "research_score": 4.1,
       "engineering_score": null,
-      "priority": 4.1,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -40694,7 +40694,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 5.5,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -40780,7 +40780,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 7.3,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -40943,7 +40943,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -41034,7 +41034,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -41124,7 +41124,7 @@
       "relevance": "passed",
       "research_score": 5.4,
       "engineering_score": null,
-      "priority": 5.4,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -41204,7 +41204,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -41298,7 +41298,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 6.8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -41451,7 +41451,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -41534,7 +41534,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -41614,7 +41614,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 7.5,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -41771,7 +41771,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -41854,7 +41854,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -41983,7 +41983,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": null,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -42063,7 +42063,7 @@
       "relevance": "passed",
       "research_score": 2.8,
       "engineering_score": null,
-      "priority": 2.8,
+      "priority": 3,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -42148,7 +42148,7 @@
       "relevance": "passed",
       "research_score": 5.9,
       "engineering_score": null,
-      "priority": 5.9,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -42231,7 +42231,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -42354,7 +42354,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -42434,7 +42434,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -42515,7 +42515,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -42603,7 +42603,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": null,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -42684,7 +42684,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": null,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -42771,7 +42771,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -42852,7 +42852,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -42938,7 +42938,7 @@
       "relevance": "passed",
       "research_score": 5.7,
       "engineering_score": null,
-      "priority": 5.7,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -43060,7 +43060,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 7.1,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -43221,7 +43221,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 5.3,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -43308,7 +43308,7 @@
       "relevance": "passed",
       "research_score": 5.9,
       "engineering_score": null,
-      "priority": 7.9,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -43475,7 +43475,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -43557,7 +43557,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -43640,7 +43640,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -43726,7 +43726,7 @@
       "relevance": "passed",
       "research_score": 3.6,
       "engineering_score": null,
-      "priority": 3.6,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -43810,7 +43810,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 5.5,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -43893,7 +43893,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -43981,7 +43981,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -44066,7 +44066,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -44165,7 +44165,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 5.5,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -44245,7 +44245,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -44328,7 +44328,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": null,
-      "priority": 4.9,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -44415,7 +44415,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -44499,7 +44499,7 @@
       "relevance": "passed",
       "research_score": 5.8,
       "engineering_score": null,
-      "priority": 7.8,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -44651,7 +44651,7 @@
       "relevance": "passed",
       "research_score": 3.7,
       "engineering_score": null,
-      "priority": 3.7,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -44732,7 +44732,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -44815,7 +44815,7 @@
       "relevance": "passed",
       "research_score": 6.4,
       "engineering_score": null,
-      "priority": 8.4,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -44981,7 +44981,7 @@
       "relevance": "passed",
       "research_score": 5.4,
       "engineering_score": null,
-      "priority": 7.4,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -45145,7 +45145,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -45227,7 +45227,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -45309,7 +45309,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 6.7,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -45471,7 +45471,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 6.6,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -45656,7 +45656,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": null,
-      "priority": 4.9,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -45750,7 +45750,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -45832,7 +45832,7 @@
       "relevance": "passed",
       "research_score": 3.2,
       "engineering_score": null,
-      "priority": 3.2,
+      "priority": 3,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -45914,7 +45914,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -45996,7 +45996,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": null,
-      "priority": 6.0,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -46139,7 +46139,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -46220,7 +46220,7 @@
       "relevance": "passed",
       "research_score": 4.4,
       "engineering_score": null,
-      "priority": 4.4,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -46306,7 +46306,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -46390,7 +46390,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -46474,7 +46474,7 @@
       "relevance": "passed",
       "research_score": 6.0,
       "engineering_score": null,
-      "priority": 6.0,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -46596,7 +46596,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 7.1,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -46767,7 +46767,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -46853,7 +46853,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -46933,7 +46933,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -47035,7 +47035,7 @@
       "relevance": "passed",
       "research_score": 6.2,
       "engineering_score": null,
-      "priority": 6.2,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -47118,7 +47118,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 7.5,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -47283,7 +47283,7 @@
       "relevance": "passed",
       "research_score": 5.7,
       "engineering_score": null,
-      "priority": 7.7,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -47451,7 +47451,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": null,
-      "priority": 4.9,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -47534,7 +47534,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": null,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -47615,7 +47615,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -47696,7 +47696,7 @@
       "relevance": "passed",
       "research_score": 6.2,
       "engineering_score": null,
-      "priority": 8.2,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -47827,7 +47827,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -47913,7 +47913,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 5.3,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -47993,7 +47993,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -48076,7 +48076,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 5.5,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -48160,7 +48160,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -48241,7 +48241,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -48322,7 +48322,7 @@
       "relevance": "passed",
       "research_score": 5.1,
       "engineering_score": null,
-      "priority": 5.1,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -48406,7 +48406,7 @@
       "relevance": "passed",
       "research_score": 5.7,
       "engineering_score": null,
-      "priority": 7.7,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -48554,7 +48554,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 5.0,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -48635,7 +48635,7 @@
       "relevance": "passed",
       "research_score": 6.1,
       "engineering_score": null,
-      "priority": 8.1,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -48800,7 +48800,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": null,
-      "priority": 6.9,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -48959,7 +48959,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -49046,7 +49046,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 5.3,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -49137,7 +49137,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -49223,7 +49223,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 7.3,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -49379,7 +49379,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 7.3,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -49548,7 +49548,7 @@
       "relevance": "passed",
       "research_score": 5.4,
       "engineering_score": null,
-      "priority": 5.4,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -49631,7 +49631,7 @@
       "relevance": "passed",
       "research_score": 5.8,
       "engineering_score": null,
-      "priority": 7.8,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -49785,7 +49785,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -49868,7 +49868,7 @@
       "relevance": "passed",
       "research_score": 5.6,
       "engineering_score": null,
-      "priority": 7.6,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -50029,7 +50029,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": null,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -50120,7 +50120,7 @@
       "relevance": "passed",
       "research_score": 3.2,
       "engineering_score": null,
-      "priority": 3.2,
+      "priority": 3,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -50208,7 +50208,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -50292,7 +50292,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -50379,7 +50379,7 @@
       "relevance": "passed",
       "research_score": 4.9,
       "engineering_score": null,
-      "priority": 4.9,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -50469,7 +50469,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": null,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -50553,7 +50553,7 @@
       "relevance": "passed",
       "research_score": 6.3,
       "engineering_score": null,
-      "priority": 8.3,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -50709,7 +50709,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -50790,7 +50790,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -50872,7 +50872,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 6.7,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -51039,7 +51039,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -51127,7 +51127,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 5.5,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -51207,7 +51207,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -51299,7 +51299,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 6.8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -51483,7 +51483,7 @@
       "relevance": "passed",
       "research_score": 5.6,
       "engineering_score": null,
-      "priority": 7.6,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -51632,7 +51632,7 @@
       "relevance": "passed",
       "research_score": 4.2,
       "engineering_score": null,
-      "priority": 4.2,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -51712,7 +51712,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -51793,7 +51793,7 @@
       "relevance": "passed",
       "research_score": 5.6,
       "engineering_score": null,
-      "priority": 7.6,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -51945,7 +51945,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -52029,7 +52029,7 @@
       "relevance": "passed",
       "research_score": 5.7,
       "engineering_score": null,
-      "priority": 7.7,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -52194,7 +52194,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 6.3,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -52324,7 +52324,7 @@
       "relevance": "passed",
       "research_score": 6.0,
       "engineering_score": null,
-      "priority": 6.0,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -52407,7 +52407,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 6.8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -52558,7 +52558,7 @@
       "relevance": "passed",
       "research_score": 5.0,
       "engineering_score": null,
-      "priority": 7.0,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -52704,7 +52704,7 @@
       "relevance": "passed",
       "research_score": 4.0,
       "engineering_score": null,
-      "priority": 4.0,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -52789,7 +52789,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 5.3,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -52871,7 +52871,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 7.3,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -53024,7 +53024,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -53110,7 +53110,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -53190,7 +53190,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 7.2,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -53350,7 +53350,7 @@
       "relevance": "passed",
       "research_score": 3.5,
       "engineering_score": null,
-      "priority": 3.5,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -53432,7 +53432,7 @@
       "relevance": "passed",
       "research_score": 3.3,
       "engineering_score": null,
-      "priority": 3.3,
+      "priority": 3,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -53520,7 +53520,7 @@
       "relevance": "passed",
       "research_score": 5.4,
       "engineering_score": null,
-      "priority": 5.4,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -53604,7 +53604,7 @@
       "relevance": "passed",
       "research_score": 4.7,
       "engineering_score": null,
-      "priority": 4.7,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -53687,7 +53687,7 @@
       "relevance": "passed",
       "research_score": 5.6,
       "engineering_score": null,
-      "priority": 7.6,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -53824,7 +53824,7 @@
       "relevance": "passed",
       "research_score": 5.3,
       "engineering_score": null,
-      "priority": 5.3,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -53907,7 +53907,7 @@
       "relevance": "passed",
       "research_score": 5.6,
       "engineering_score": null,
-      "priority": 5.6,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -53988,7 +53988,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -54081,7 +54081,7 @@
       "relevance": "passed",
       "research_score": 4.8,
       "engineering_score": null,
-      "priority": 4.8,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -54167,7 +54167,7 @@
       "relevance": "passed",
       "research_score": 5.7,
       "engineering_score": null,
-      "priority": 5.7,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -54247,7 +54247,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -54332,7 +54332,7 @@
       "relevance": "passed",
       "research_score": 4.3,
       "engineering_score": null,
-      "priority": 4.3,
+      "priority": 4,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -54420,7 +54420,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 7.5,
+      "priority": 8,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -54574,7 +54574,7 @@
       "relevance": "passed",
       "research_score": 5.6,
       "engineering_score": null,
-      "priority": 5.6,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -54660,7 +54660,7 @@
       "relevance": "passed",
       "research_score": 5.2,
       "engineering_score": null,
-      "priority": 5.2,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -54745,7 +54745,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 5.5,
+      "priority": 6,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -54831,7 +54831,7 @@
       "relevance": "passed",
       "research_score": 4.6,
       "engineering_score": null,
-      "priority": 4.6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",

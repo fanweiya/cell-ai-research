@@ -20,7 +20,7 @@ function initPaperList() {
     const decoder = document.createElement('textarea'); decoder.innerHTML = p.authors || '';
     const template = card.querySelector('template');
     card.searchText = [p.id, p.title_en, p.title_zh, p.abstract, p.abstract_zh,
-      p.key_points, decoder.value, ...(p.task_types || []), p.paradigm || '', (p.jev_score ? 'jev' : ''), template?.content.textContent || ''].join(' ').toLocaleLowerCase();
+      p.key_points, decoder.value, ...(p.task_types || []), p.paradigm || '', (p.jev_score ? '评分' : ''), template?.content.textContent || ''].join(' ').toLocaleLowerCase();
     paperList.byId.set(card.dataset.paperId, card);
   });
   initPaperRail();
