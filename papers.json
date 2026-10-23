@@ -9,9 +9,9 @@
         "video"
       ],
       "relevance": "passed",
-      "research_score": 4.2,
+      "research_score": null,
       "engineering_score": 4,
-      "priority": 4,
+      "priority": 0,
       "bonus": [
         "new_architecture"
       ],
@@ -106,7 +106,7 @@
       "abstract": "Background and Objective: Quantitative analysis of cell dynamics is central to modern biological research, providing critical insights into immune cell interactions, disease progression, and drug mechanisms. Automated cell tracking in time-lapse microscopy remains challenging due to noise, morphological variations, overlapping cells, and dynamic events such as divisions and fusions.   Methods: We present ARGUS, a framework for Accelerated, Robust, General, and Unsupervised Cell Tracking Solutions. ARGUS combines adaptive cell detection, dense Farneback optical-flow prediction, frame-to-frame linear assignment, and a sequence-level tracklet-refinement step that reconnects trajectory fragments across short temporal gaps.   Results: On publicly available Cell Tracking Challenge datasets, ARGUS achieved detection accuracy of 0.905-0.971 and tracking accuracy of 0.897-0.964, with runtimes within 1 minute (5-6 seconds for 3 frames).   Conclusions: ARGUS is a modular, interpretable framework that can be adapted to different imaging modalities and biological applications without training data or GPU infrastructure. The implementation is publicly available at https://github.com/Gitinc/argus",
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:38.917934+00:00",
+        "evaluated_at": "2026-10-23T02:27:19.495733+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "14cfaed84e025ec82519a3a1d11aa1f12eed2039e2cf5b947377a22475d7c8f1",
         "evidence_sources": [
@@ -120,30 +120,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 3.95,
-          "technical_soundness": 3.6,
-          "biological_utility": 5.99,
-          "reproducibility_readiness": 2.71
+          "methodological_novelty": 4.08,
+          "technical_soundness": 3.7,
+          "biological_utility": 5.97,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.52,
-          "technical_soundness": 0.67,
-          "biological_utility": 0.75,
-          "reproducibility_readiness": 0.73
+          "methodological_novelty": 0.56,
+          "technical_soundness": 0.66,
+          "biological_utility": 0.76,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "incremental_baseline",
         "paradigm_label_zh": "常规方法迁移",
-        "paradigm_confidence": 0.98,
-        "composite_priority": 4.19,
-        "abstract_preliminary_score": 4.87,
+        "paradigm_confidence": 0.99,
+        "composite_priority": null,
+        "abstract_preliminary_score": 4.93,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 2.95,
-            "confidence": 0.52,
+            "score": 3.08,
+            "confidence": 0.56,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -157,12 +157,12 @@
               "9": "10: Groundbreaking paradigm shift establishing new foundational standard"
             },
             "probabilities": {
-              "0": 0.05,
-              "1": 0.03,
-              "2": 0.33,
-              "3": 0.19,
-              "4": 0.34,
-              "5": 0.06,
+              "0": 0.04,
+              "1": 0.02,
+              "2": 0.3,
+              "3": 0.2,
+              "4": 0.36,
+              "5": 0.08,
               "6": 0.0,
               "7": 0.0,
               "8": 0.0,
@@ -171,8 +171,8 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 2.6,
-            "confidence": 0.67,
+            "score": 2.7,
+            "confidence": 0.66,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -188,10 +188,10 @@
             "probabilities": {
               "0": 0.04,
               "1": 0.07,
-              "2": 0.35,
-              "3": 0.38,
-              "4": 0.12,
-              "5": 0.03,
+              "2": 0.32,
+              "3": 0.37,
+              "4": 0.15,
+              "5": 0.04,
               "6": 0.01,
               "7": 0.0,
               "8": 0.0,
@@ -200,8 +200,8 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 4.99,
-            "confidence": 0.75,
+            "score": 4.97,
+            "confidence": 0.76,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -220,55 +220,26 @@
               "2": 0.0,
               "3": 0.07,
               "4": 0.16,
-              "5": 0.45,
-              "6": 0.31,
+              "5": 0.48,
+              "6": 0.28,
               "7": 0.01,
               "8": 0.0,
               "9": 0.0
             }
           },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.71,
-            "confidence": 0.73,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.57,
-              "2": 0.28,
-              "3": 0.09,
-              "4": 0.03,
-              "5": 0.01,
-              "6": 0.0,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
-            }
-          },
           "primary_paradigm": {
             "type": "choice",
             "choice": "incremental_baseline",
-            "confidence": 0.98,
+            "confidence": 0.99,
             "probabilities": {
               "physical_amortization": 0.0,
               "multimodal_foundation": 0.0,
               "cross_scale_spatial_omics": 0.0,
-              "synthetic_to_real": 0.01,
+              "synthetic_to_real": 0.0,
               "mechanistic_interpretability": 0.0,
               "efficient_architecture": 0.01,
               "agentic_evaluation": 0.0,
-              "incremental_baseline": 0.98
+              "incremental_baseline": 0.99
             }
           }
         }
@@ -696,9 +667,9 @@
         "virtual_imaging"
       ],
       "relevance": "passed",
-      "research_score": 5.7,
+      "research_score": null,
       "engineering_score": 3,
-      "priority": 6,
+      "priority": 0,
       "bonus": [
         "new_architecture",
         "foundation"
@@ -786,7 +757,7 @@
       "has_code": true,
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:38.919053+00:00",
+        "evaluated_at": "2026-10-23T02:27:19.474317+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "f0e0ca644fec2dd7318f0d2e514cfc269780c90e77d83f5592ca8d8f8c76e22d",
         "evidence_sources": [
@@ -800,29 +771,29 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 6.19,
-          "technical_soundness": 4.89,
+          "methodological_novelty": 6.17,
+          "technical_soundness": 4.9,
           "biological_utility": 7.56,
-          "reproducibility_readiness": 2.68
+          "reproducibility_readiness": null
         },
         "confidences": {
           "methodological_novelty": 0.81,
-          "technical_soundness": 0.73,
-          "biological_utility": 0.8,
-          "reproducibility_readiness": 0.73
+          "technical_soundness": 0.75,
+          "biological_utility": 0.81,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "cross_scale_spatial_omics",
         "paradigm_label_zh": "跨尺度空间组学",
         "paradigm_confidence": 0.98,
-        "composite_priority": 5.68,
-        "abstract_preliminary_score": 6.81,
+        "composite_priority": null,
+        "abstract_preliminary_score": 6.8,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 5.19,
+            "score": 5.17,
             "confidence": 0.81,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
@@ -842,8 +813,8 @@
               "2": 0.0,
               "3": 0.04,
               "4": 0.06,
-              "5": 0.6,
-              "6": 0.26,
+              "5": 0.61,
+              "6": 0.25,
               "7": 0.04,
               "8": 0.0,
               "9": 0.0
@@ -851,8 +822,8 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 3.89,
-            "confidence": 0.73,
+            "score": 3.9,
+            "confidence": 0.75,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -867,11 +838,11 @@
             },
             "probabilities": {
               "0": 0.0,
-              "1": 0.01,
-              "2": 0.06,
-              "3": 0.27,
-              "4": 0.45,
-              "5": 0.16,
+              "1": 0.0,
+              "2": 0.05,
+              "3": 0.26,
+              "4": 0.47000000000000003,
+              "5": 0.17,
               "6": 0.05,
               "7": 0.0,
               "8": 0.0,
@@ -881,7 +852,7 @@
           "biological_utility": {
             "type": "score",
             "score": 6.56,
-            "confidence": 0.8,
+            "confidence": 0.81,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -900,40 +871,11 @@
               "2": 0.0,
               "3": 0.01,
               "4": 0.0,
-              "5": 0.07,
+              "5": 0.06,
               "6": 0.29,
-              "7": 0.59,
-              "8": 0.04,
+              "7": 0.61,
+              "8": 0.03,
               "9": 0.0
-            }
-          },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.68,
-            "confidence": 0.73,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.6,
-              "2": 0.24,
-              "3": 0.1,
-              "4": 0.02,
-              "5": 0.01,
-              "6": 0.01,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
             }
           },
           "primary_paradigm": {
@@ -983,9 +925,9 @@
         "self_supervised"
       ],
       "relevance": "passed",
-      "research_score": 4.7,
+      "research_score": null,
       "engineering_score": 3,
-      "priority": 5,
+      "priority": 0,
       "bonus": [
         "foundation"
       ],
@@ -1147,7 +1089,7 @@
       "critic_confidence": 0.8,
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:38.898287+00:00",
+        "evaluated_at": "2026-10-23T02:27:19.491266+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "770aec302772b6f9fddf47301c8b767dcb15b880e1fef8151240471f8c52f0c8",
         "evidence_sources": [
@@ -1161,30 +1103,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 6.08,
-          "technical_soundness": 3.2,
-          "biological_utility": 5.61,
-          "reproducibility_readiness": 2.73
+          "methodological_novelty": 6.05,
+          "technical_soundness": 3.17,
+          "biological_utility": 5.7,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.85,
-          "technical_soundness": 0.62,
-          "biological_utility": 0.69,
-          "reproducibility_readiness": 0.71
+          "methodological_novelty": 0.86,
+          "technical_soundness": 0.64,
+          "biological_utility": 0.71,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "incremental_baseline",
         "paradigm_label_zh": "常规方法迁移",
-        "paradigm_confidence": 0.83,
-        "composite_priority": 4.74,
-        "abstract_preliminary_score": 5.87,
+        "paradigm_confidence": 0.82,
+        "composite_priority": null,
+        "abstract_preliminary_score": 5.89,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 5.08,
-            "confidence": 0.85,
+            "score": 5.05,
+            "confidence": 0.86,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -1202,9 +1144,9 @@
               "1": 0.0,
               "2": 0.0,
               "3": 0.03,
-              "4": 0.07,
-              "5": 0.67,
-              "6": 0.22,
+              "4": 0.08,
+              "5": 0.69,
+              "6": 0.19,
               "7": 0.01,
               "8": 0.0,
               "9": 0.0
@@ -1212,8 +1154,8 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 2.2,
-            "confidence": 0.62,
+            "score": 2.17,
+            "confidence": 0.64,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -1227,12 +1169,12 @@
               "9": "10: Exemplary technical soundness with zero data leakage, exhaustive baselines, and statistical rigor"
             },
             "probabilities": {
-              "0": 0.14,
-              "1": 0.1,
-              "2": 0.43,
-              "3": 0.2,
-              "4": 0.07,
-              "5": 0.04,
+              "0": 0.13,
+              "1": 0.12,
+              "2": 0.45,
+              "3": 0.19,
+              "4": 0.06,
+              "5": 0.03,
               "6": 0.01,
               "7": 0.0,
               "8": 0.0,
@@ -1241,8 +1183,8 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 4.61,
-            "confidence": 0.69,
+            "score": 4.7,
+            "confidence": 0.71,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -1258,58 +1200,29 @@
             "probabilities": {
               "0": 0.0,
               "1": 0.0,
-              "2": 0.03,
-              "3": 0.15,
-              "4": 0.19,
-              "5": 0.45,
-              "6": 0.17,
+              "2": 0.02,
+              "3": 0.14,
+              "4": 0.17,
+              "5": 0.47,
+              "6": 0.19,
               "7": 0.01,
               "8": 0.0,
               "9": 0.0
             }
           },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.73,
-            "confidence": 0.71,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.58,
-              "2": 0.25,
-              "3": 0.1,
-              "4": 0.03,
-              "5": 0.01,
-              "6": 0.01,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
-            }
-          },
           "primary_paradigm": {
             "type": "choice",
             "choice": "incremental_baseline",
-            "confidence": 0.83,
+            "confidence": 0.82,
             "probabilities": {
               "physical_amortization": 0.0,
-              "multimodal_foundation": 0.08,
-              "cross_scale_spatial_omics": 0.01,
+              "multimodal_foundation": 0.07,
+              "cross_scale_spatial_omics": 0.02,
               "synthetic_to_real": 0.0,
-              "mechanistic_interpretability": 0.02,
+              "mechanistic_interpretability": 0.03,
               "efficient_architecture": 0.04,
               "agentic_evaluation": 0.0,
-              "incremental_baseline": 0.85
+              "incremental_baseline": 0.84
             }
           }
         }
@@ -2888,9 +2801,9 @@
         "foundation_models"
       ],
       "relevance": "passed",
-      "research_score": 5.2,
+      "research_score": null,
       "engineering_score": 4,
-      "priority": 5,
+      "priority": 0,
       "bonus": [
         "foundation",
         "segmentation_or_detection",
@@ -2985,7 +2898,7 @@
       "abstract": "Cell segmentation is critical for computational pathology and biomedical discovery. While recent Vision Foundation Models (VFMs) have demonstrated remarkable universal feature representations, unlocking their full potential for cellular imaging is currently bottlenecked by resource-intensive adaptation paradigms. Existing methods typically rely on fine-tuning heavy visual encoders, leading to extensive computational overhead and a dependency on large-scale annotations. To address this, we propose the EffiCell-Seg framework for highly efficient cell segmentation without re-training the visual encoder. Our core insight is that pretrained VFMs intrinsically encode complementary structural priors: global saliency for localizing potential cells, and local morphological patterns for delineating cellular structures. To harness these priors, we devise a Cell Structure Prompt Encoder (CSP-Encoder) that synthesizes semantic-aware saliency and principal morphological features from frozen VFM representations into explicit structural prior maps. Moreover, we propose a Synergistic Mask Decoder (SM-Decoder) that enforces contextual consistency by jointly predicting geometric distance fields and semantic maps via mutual cross-guidance. Extensive experiments demonstrate that EffiCell-Seg outperforms state-of-the-art methods across diverse cell imaging modalities while requiring only ~5M trainable parameters, over 130x fewer than fully fine-tuned VFM counterparts. The code is available at https://github.com/xq141839/EffiCell-Seg.",
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:39.003560+00:00",
+        "evaluated_at": "2026-10-23T02:27:19.490724+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "e19482b6b01a6ba1bee97e3584c6e558336f693c1118b893ddd204a1354e8811",
         "evidence_sources": [
@@ -2999,29 +2912,29 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 6.06,
-          "technical_soundness": 4.27,
-          "biological_utility": 6.34,
-          "reproducibility_readiness": 2.74
+          "methodological_novelty": 6.11,
+          "technical_soundness": 4.38,
+          "biological_utility": 6.32,
+          "reproducibility_readiness": null
         },
         "confidences": {
           "methodological_novelty": 0.88,
-          "technical_soundness": 0.76,
+          "technical_soundness": 0.74,
           "biological_utility": 0.8,
-          "reproducibility_readiness": 0.7
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "efficient_architecture",
         "paradigm_label_zh": "轻量架构与蒸馏",
-        "paradigm_confidence": 0.67,
-        "composite_priority": 5.18,
-        "abstract_preliminary_score": 6.19,
+        "paradigm_confidence": 0.61,
+        "composite_priority": null,
+        "abstract_preliminary_score": 6.2,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 5.06,
+            "score": 5.11,
             "confidence": 0.88,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
@@ -3039,10 +2952,10 @@
               "0": 0.0,
               "1": 0.0,
               "2": 0.0,
-              "3": 0.03,
-              "4": 0.06,
+              "3": 0.02,
+              "4": 0.05,
               "5": 0.73,
-              "6": 0.18,
+              "6": 0.2,
               "7": 0.0,
               "8": 0.0,
               "9": 0.0
@@ -3050,8 +2963,8 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 3.27,
-            "confidence": 0.76,
+            "score": 3.38,
+            "confidence": 0.74,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -3067,10 +2980,10 @@
             "probabilities": {
               "0": 0.0,
               "1": 0.0,
-              "2": 0.15,
-              "3": 0.47000000000000003,
-              "4": 0.33,
-              "5": 0.04,
+              "2": 0.13,
+              "3": 0.43,
+              "4": 0.37,
+              "5": 0.06,
               "6": 0.01,
               "7": 0.0,
               "8": 0.0,
@@ -3079,7 +2992,7 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 5.34,
+            "score": 5.32,
             "confidence": 0.8,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
@@ -3098,56 +3011,27 @@
               "1": 0.0,
               "2": 0.0,
               "3": 0.01,
-              "4": 0.06,
+              "4": 0.07,
               "5": 0.52,
-              "6": 0.39,
+              "6": 0.38,
               "7": 0.02,
               "8": 0.0,
               "9": 0.0
             }
           },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.74,
-            "confidence": 0.7,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.56,
-              "2": 0.27,
-              "3": 0.09,
-              "4": 0.04,
-              "5": 0.01,
-              "6": 0.01,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
-            }
-          },
           "primary_paradigm": {
             "type": "choice",
             "choice": "efficient_architecture",
-            "confidence": 0.67,
+            "confidence": 0.61,
             "probabilities": {
               "physical_amortization": 0.0,
               "multimodal_foundation": 0.05,
               "cross_scale_spatial_omics": 0.0,
               "synthetic_to_real": 0.0,
               "mechanistic_interpretability": 0.0,
-              "efficient_architecture": 0.71,
+              "efficient_architecture": 0.66,
               "agentic_evaluation": 0.0,
-              "incremental_baseline": 0.24
+              "incremental_baseline": 0.29
             }
           }
         }
@@ -3705,9 +3589,9 @@
         "segmentation"
       ],
       "relevance": "passed",
-      "research_score": 3.6,
+      "research_score": null,
       "engineering_score": 3,
-      "priority": 4,
+      "priority": 0,
       "bonus": [
         "segmentation_or_detection"
       ],
@@ -3909,7 +3793,7 @@
       "critic_confidence": 0.8,
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:39.309148+00:00",
+        "evaluated_at": "2026-10-23T02:27:19.505388+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "c6f3088777a95bde8e89bf69fe22e75ec6e372c6507fd6f1d4a43eb82e9c81fe",
         "evidence_sources": [
@@ -3923,30 +3807,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 3.79,
-          "technical_soundness": 2.94,
+          "methodological_novelty": 3.84,
+          "technical_soundness": 2.92,
           "biological_utility": 4.63,
-          "reproducibility_readiness": 2.65
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.61,
-          "technical_soundness": 0.84,
-          "biological_utility": 0.69,
-          "reproducibility_readiness": 0.75
+          "methodological_novelty": 0.59,
+          "technical_soundness": 0.82,
+          "biological_utility": 0.7,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "incremental_baseline",
         "paradigm_label_zh": "常规方法迁移",
-        "paradigm_confidence": 0.9,
-        "composite_priority": 3.62,
-        "abstract_preliminary_score": 4.17,
+        "paradigm_confidence": 0.92,
+        "composite_priority": null,
+        "abstract_preliminary_score": 4.2,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 2.79,
-            "confidence": 0.61,
+            "score": 2.84,
+            "confidence": 0.59,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -3962,9 +3846,9 @@
             "probabilities": {
               "0": 0.03,
               "1": 0.05,
-              "2": 0.39,
-              "3": 0.23,
-              "4": 0.26,
+              "2": 0.35,
+              "3": 0.26,
+              "4": 0.27,
               "5": 0.04,
               "6": 0.0,
               "7": 0.0,
@@ -3974,8 +3858,8 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 1.94,
-            "confidence": 0.84,
+            "score": 1.92,
+            "confidence": 0.82,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -3990,9 +3874,9 @@
             },
             "probabilities": {
               "0": 0.01,
-              "1": 0.22,
-              "2": 0.62,
-              "3": 0.14,
+              "1": 0.25,
+              "2": 0.58,
+              "3": 0.15,
               "4": 0.01,
               "5": 0.0,
               "6": 0.0,
@@ -4004,7 +3888,7 @@
           "biological_utility": {
             "type": "score",
             "score": 3.63,
-            "confidence": 0.69,
+            "confidence": 0.7,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -4022,56 +3906,27 @@
               "1": 0.01,
               "2": 0.05,
               "3": 0.55,
-              "4": 0.15,
-              "5": 0.18,
+              "4": 0.17,
+              "5": 0.16,
               "6": 0.05,
               "7": 0.01,
               "8": 0.0,
               "9": 0.0
             }
           },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.65,
-            "confidence": 0.75,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.6,
-              "2": 0.27,
-              "3": 0.08,
-              "4": 0.02,
-              "5": 0.01,
-              "6": 0.0,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
-            }
-          },
           "primary_paradigm": {
             "type": "choice",
             "choice": "incremental_baseline",
-            "confidence": 0.9,
+            "confidence": 0.92,
             "probabilities": {
-              "physical_amortization": 0.03,
+              "physical_amortization": 0.02,
               "multimodal_foundation": 0.0,
               "cross_scale_spatial_omics": 0.0,
               "synthetic_to_real": 0.01,
               "mechanistic_interpretability": 0.0,
-              "efficient_architecture": 0.05,
+              "efficient_architecture": 0.04,
               "agentic_evaluation": 0.0,
-              "incremental_baseline": 0.91
+              "incremental_baseline": 0.93
             }
           }
         }
@@ -5049,9 +4904,9 @@
         "video"
       ],
       "relevance": "passed",
-      "research_score": 4.2,
+      "research_score": null,
       "engineering_score": 3,
-      "priority": 4,
+      "priority": 0,
       "bonus": [
         "new_architecture"
       ],
@@ -5136,7 +4991,7 @@
       "critic_confidence": 0.8,
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:39.353785+00:00",
+        "evaluated_at": "2026-10-23T02:27:19.490016+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "17cb3a74c6cf54e8220b99c6dcf8eb0126d2d183f12c08a18a71cbfbf28f45d5",
         "evidence_sources": [
@@ -5150,25 +5005,25 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
           "methodological_novelty": 5.67,
-          "technical_soundness": 1.75,
-          "biological_utility": 5.56,
-          "reproducibility_readiness": 2.91
+          "technical_soundness": 1.74,
+          "biological_utility": 5.6,
+          "reproducibility_readiness": null
         },
         "confidences": {
           "methodological_novelty": 0.83,
-          "technical_soundness": 0.73,
+          "technical_soundness": 0.71,
           "biological_utility": 0.65,
-          "reproducibility_readiness": 0.64
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "agentic_evaluation",
         "paradigm_label_zh": "智能体系统评测",
         "paradigm_confidence": 0.93,
-        "composite_priority": 4.25,
-        "abstract_preliminary_score": 5.62,
+        "composite_priority": null,
+        "abstract_preliminary_score": 5.64,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
@@ -5191,8 +5046,8 @@
               "1": 0.0,
               "2": 0.01,
               "3": 0.07,
-              "4": 0.21,
-              "5": 0.66,
+              "4": 0.2,
+              "5": 0.67,
               "6": 0.05,
               "7": 0.0,
               "8": 0.0,
@@ -5201,8 +5056,8 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 0.75,
-            "confidence": 0.73,
+            "score": 0.74,
+            "confidence": 0.71,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -5220,17 +5075,17 @@
               "1": 0.11,
               "2": 0.23,
               "3": 0.02,
-              "4": 0.01,
+              "4": 0.0,
               "5": 0.0,
               "6": 0.0,
               "7": 0.0,
               "8": 0.0,
-              "9": 0.0
+              "9": 0.01
             }
           },
           "biological_utility": {
             "type": "score",
-            "score": 4.56,
+            "score": 4.6,
             "confidence": 0.65,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
@@ -5248,42 +5103,13 @@
               "0": 0.0,
               "1": 0.0,
               "2": 0.02,
-              "3": 0.11,
-              "4": 0.36,
-              "5": 0.3,
+              "3": 0.1,
+              "4": 0.35,
+              "5": 0.32,
               "6": 0.21,
               "7": 0.0,
               "8": 0.0,
               "9": 0.0
-            }
-          },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.91,
-            "confidence": 0.64,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.54,
-              "2": 0.2,
-              "3": 0.14,
-              "4": 0.08,
-              "5": 0.02,
-              "6": 0.0,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
             }
           },
           "primary_paradigm": {
@@ -5297,7 +5123,7 @@
               "synthetic_to_real": 0.0,
               "mechanistic_interpretability": 0.0,
               "efficient_architecture": 0.0,
-              "agentic_evaluation": 0.94,
+              "agentic_evaluation": 0.9400000000000001,
               "incremental_baseline": 0.06
             }
           }
@@ -5558,9 +5384,9 @@
         "detection"
       ],
       "relevance": "passed",
-      "research_score": 4.5,
+      "research_score": null,
       "engineering_score": 3,
-      "priority": 5,
+      "priority": 0,
       "bonus": [
         "foundation"
       ],
@@ -5836,7 +5662,7 @@
       "critic_confidence": 0.8,
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:39.306580+00:00",
+        "evaluated_at": "2026-10-23T02:27:19.874181+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "0cfc7a06fa9108772c412a48afc2e4d1730b605978ed3da2217275ec05621e82",
         "evidence_sources": [
@@ -5850,29 +5676,29 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 5.96,
+          "methodological_novelty": 5.93,
           "technical_soundness": 3.62,
-          "biological_utility": 4.52,
-          "reproducibility_readiness": 2.57
+          "biological_utility": 4.42,
+          "reproducibility_readiness": null
         },
         "confidences": {
           "methodological_novelty": 0.83,
-          "technical_soundness": 0.58,
-          "biological_utility": 0.44,
-          "reproducibility_readiness": 0.79
+          "technical_soundness": 0.57,
+          "biological_utility": 0.47,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "multimodal_foundation",
         "paradigm_label_zh": "显微多模态基础模型",
         "paradigm_confidence": 0.68,
-        "composite_priority": 4.51,
-        "abstract_preliminary_score": 5.31,
+        "composite_priority": null,
+        "abstract_preliminary_score": 5.25,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 4.96,
+            "score": 4.93,
             "confidence": 0.83,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
@@ -5892,8 +5718,8 @@
               "2": 0.01,
               "3": 0.04,
               "4": 0.13,
-              "5": 0.64,
-              "6": 0.17,
+              "5": 0.65,
+              "6": 0.16,
               "7": 0.01,
               "8": 0.0,
               "9": 0.0
@@ -5902,7 +5728,7 @@
           "technical_soundness": {
             "type": "score",
             "score": 2.62,
-            "confidence": 0.58,
+            "confidence": 0.57,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -5917,12 +5743,12 @@
             },
             "probabilities": {
               "0": 0.07,
-              "1": 0.08,
+              "1": 0.07,
               "2": 0.4,
               "3": 0.25,
-              "4": 0.11,
-              "5": 0.05,
-              "6": 0.02,
+              "4": 0.1,
+              "5": 0.06,
+              "6": 0.03,
               "7": 0.01,
               "8": 0.0,
               "9": 0.01
@@ -5930,8 +5756,8 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 3.52,
-            "confidence": 0.44,
+            "score": 3.42,
+            "confidence": 0.47,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -5946,43 +5772,14 @@
             },
             "probabilities": {
               "0": 0.07,
-              "1": 0.04,
+              "1": 0.05,
               "2": 0.14,
-              "3": 0.24,
+              "3": 0.26,
               "4": 0.19,
-              "5": 0.23,
-              "6": 0.06,
-              "7": 0.02,
+              "5": 0.22,
+              "6": 0.05,
+              "7": 0.01,
               "8": 0.01,
-              "9": 0.0
-            }
-          },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.57,
-            "confidence": 0.79,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.68,
-              "2": 0.17,
-              "3": 0.07,
-              "4": 0.04,
-              "5": 0.01,
-              "6": 0.01,
-              "7": 0.0,
-              "8": 0.0,
               "9": 0.0
             }
           },
@@ -6627,9 +6424,9 @@
         "segmentation"
       ],
       "relevance": "passed",
-      "research_score": 5.5,
+      "research_score": null,
       "engineering_score": 3,
-      "priority": 6,
+      "priority": 0,
       "bonus": [
         "segmentation_or_detection",
         "new_architecture"
@@ -6725,7 +6522,7 @@
       "abstract": "Accurate cell segmentation in pathology images typically requires dense pixel-wise annotations, which are costly and time-consuming to obtain. This challenge is especially important for emerging biological imaging modalities and multiplexed datasets with variable channel configurations, where expert-labeled data are scarce. In this work, we introduce ImPartial, a deep learning framework designed to achieve state-of-the-art segmentation performance in low-annotation regimes using sparse scribbles and limited supervision. ImPartial augments the segmentation objective via self-supervised multi-channel quantized imputation. This approach leverages the observation that perfect pixel-wise reconstruction or denoising of the image is not needed for accurate segmentation, and thus, introduces a self-supervised classification objective that better aligns with the overall segmentation goal. We demonstrate that ImPartial achieves performance at par with fully supervised models while requiring substantially fewer annotations. Extensive experiments on benchmark multiplexed cellular imaging and single-plex clinical brightfield immunohistochemistry datasets show consistent improvements over strong baselines with only partial annotations. All benchmark datasets and code are available via our Github: https://github.com/nadeemlab/ImPartial.",
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:39.339024+00:00",
+        "evaluated_at": "2026-10-23T02:27:19.870385+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "21a022a8703e800674c245c805f4e22ecdfeb4c17d2f8de8c33a28a12aca3bb5",
         "evidence_sources": [
@@ -6739,30 +6536,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 6.33,
-          "technical_soundness": 4.48,
-          "biological_utility": 7.25,
-          "reproducibility_readiness": 2.71
+          "methodological_novelty": 6.35,
+          "technical_soundness": 4.41,
+          "biological_utility": 7.29,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.78,
-          "technical_soundness": 0.67,
-          "biological_utility": 0.81,
-          "reproducibility_readiness": 0.74
+          "methodological_novelty": 0.75,
+          "technical_soundness": 0.69,
+          "biological_utility": 0.77,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "incremental_baseline",
         "paradigm_label_zh": "常规方法迁移",
-        "paradigm_confidence": 0.68,
-        "composite_priority": 5.55,
-        "abstract_preliminary_score": 6.74,
+        "paradigm_confidence": 0.7,
+        "composite_priority": null,
+        "abstract_preliminary_score": 6.77,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 5.33,
-            "confidence": 0.78,
+            "score": 5.35,
+            "confidence": 0.75,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -6779,19 +6576,19 @@
               "0": 0.0,
               "1": 0.0,
               "2": 0.0,
-              "3": 0.01,
-              "4": 0.08,
-              "5": 0.5,
-              "6": 0.38,
-              "7": 0.03,
+              "3": 0.02,
+              "4": 0.09,
+              "5": 0.44,
+              "6": 0.41,
+              "7": 0.04,
               "8": 0.0,
               "9": 0.0
             }
           },
           "technical_soundness": {
             "type": "score",
-            "score": 3.48,
-            "confidence": 0.67,
+            "score": 3.41,
+            "confidence": 0.69,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -6807,10 +6604,10 @@
             "probabilities": {
               "0": 0.01,
               "1": 0.01,
-              "2": 0.14,
-              "3": 0.37,
-              "4": 0.34,
-              "5": 0.1,
+              "2": 0.15,
+              "3": 0.4,
+              "4": 0.32,
+              "5": 0.08,
               "6": 0.03,
               "7": 0.0,
               "8": 0.0,
@@ -6819,8 +6616,8 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 6.25,
-            "confidence": 0.81,
+            "score": 6.29,
+            "confidence": 0.77,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -6837,57 +6634,28 @@
               "0": 0.0,
               "1": 0.0,
               "2": 0.0,
-              "3": 0.0,
+              "3": 0.01,
               "4": 0.01,
               "5": 0.09,
-              "6": 0.54,
-              "7": 0.35,
-              "8": 0.01,
-              "9": 0.0
-            }
-          },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.71,
-            "confidence": 0.74,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.56,
-              "2": 0.27,
-              "3": 0.1,
-              "4": 0.04,
-              "5": 0.01,
-              "6": 0.0,
-              "7": 0.0,
-              "8": 0.0,
+              "6": 0.47,
+              "7": 0.4,
+              "8": 0.02,
               "9": 0.0
             }
           },
           "primary_paradigm": {
             "type": "choice",
             "choice": "incremental_baseline",
-            "confidence": 0.68,
+            "confidence": 0.7,
             "probabilities": {
-              "physical_amortization": 0.22,
+              "physical_amortization": 0.18,
               "multimodal_foundation": 0.01,
               "cross_scale_spatial_omics": 0.01,
-              "synthetic_to_real": 0.01,
+              "synthetic_to_real": 0.02,
               "mechanistic_interpretability": 0.01,
-              "efficient_architecture": 0.02,
+              "efficient_architecture": 0.03,
               "agentic_evaluation": 0.0,
-              "incremental_baseline": 0.72
+              "incremental_baseline": 0.74
             }
           }
         }
@@ -9834,9 +9602,9 @@
         "segmentation"
       ],
       "relevance": "passed",
-      "research_score": 5.4,
+      "research_score": null,
       "engineering_score": 3,
-      "priority": 5,
+      "priority": 0,
       "bonus": [
         "segmentation_or_detection"
       ],
@@ -9922,7 +9690,7 @@
       "critic_confidence": 0.8,
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:39.856603+00:00",
+        "evaluated_at": "2026-10-23T02:27:19.884428+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "f8b0456efcf8cf0a180a6a09b228edcfb883dc20c4e6ce8c57a92603355c5969",
         "evidence_sources": [
@@ -9936,30 +9704,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 6.49,
-          "technical_soundness": 3.06,
+          "methodological_novelty": 6.4,
+          "technical_soundness": 3.08,
           "biological_utility": 7.57,
-          "reproducibility_readiness": 2.87
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.78,
-          "technical_soundness": 0.67,
-          "biological_utility": 0.76,
-          "reproducibility_readiness": 0.62
+          "methodological_novelty": 0.8,
+          "technical_soundness": 0.66,
+          "biological_utility": 0.75,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "multimodal_foundation",
         "paradigm_label_zh": "显微多模态基础模型",
-        "paradigm_confidence": 0.75,
-        "composite_priority": 5.36,
-        "abstract_preliminary_score": 6.98,
+        "paradigm_confidence": 0.78,
+        "composite_priority": null,
+        "abstract_preliminary_score": 6.93,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 5.49,
-            "confidence": 0.78,
+            "score": 5.4,
+            "confidence": 0.8,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -9976,19 +9744,19 @@
               "0": 0.0,
               "1": 0.0,
               "2": 0.0,
-              "3": 0.0,
-              "4": 0.03,
-              "5": 0.46,
-              "6": 0.48,
-              "7": 0.03,
+              "3": 0.01,
+              "4": 0.04,
+              "5": 0.52,
+              "6": 0.41,
+              "7": 0.02,
               "8": 0.0,
               "9": 0.0
             }
           },
           "technical_soundness": {
             "type": "score",
-            "score": 2.06,
-            "confidence": 0.67,
+            "score": 2.08,
+            "confidence": 0.66,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -10003,8 +9771,8 @@
             },
             "probabilities": {
               "0": 0.14,
-              "1": 0.09,
-              "2": 0.54,
+              "1": 0.1,
+              "2": 0.53,
               "3": 0.14,
               "4": 0.03,
               "5": 0.02,
@@ -10017,7 +9785,7 @@
           "biological_utility": {
             "type": "score",
             "score": 6.57,
-            "confidence": 0.76,
+            "confidence": 0.75,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -10037,49 +9805,20 @@
               "3": 0.0,
               "4": 0.0,
               "5": 0.05,
-              "6": 0.39,
-              "7": 0.45,
-              "8": 0.11,
+              "6": 0.4,
+              "7": 0.43,
+              "8": 0.12,
               "9": 0.0
-            }
-          },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.87,
-            "confidence": 0.62,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.54,
-              "2": 0.21,
-              "3": 0.12,
-              "4": 0.07,
-              "5": 0.02,
-              "6": 0.01,
-              "7": 0.01,
-              "8": 0.0,
-              "9": 0.01
             }
           },
           "primary_paradigm": {
             "type": "choice",
             "choice": "multimodal_foundation",
-            "confidence": 0.75,
+            "confidence": 0.78,
             "probabilities": {
               "physical_amortization": 0.0,
-              "multimodal_foundation": 0.78,
-              "cross_scale_spatial_omics": 0.22,
+              "multimodal_foundation": 0.81,
+              "cross_scale_spatial_omics": 0.19,
               "synthetic_to_real": 0.0,
               "mechanistic_interpretability": 0.0,
               "efficient_architecture": 0.0,
@@ -11490,9 +11229,9 @@
         "foundation_models"
       ],
       "relevance": "passed",
-      "research_score": 5.0,
+      "research_score": null,
       "engineering_score": 3,
-      "priority": 5,
+      "priority": 0,
       "bonus": [
         "foundation",
         "segmentation_or_detection"
@@ -11580,7 +11319,7 @@
       "pipeline_blocked_reason": null,
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:40.113881+00:00",
+        "evaluated_at": "2026-10-23T02:27:19.869785+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "a900606c8d460588e64442c3555b149585f3c8c6ce67fe3531af6b7e38dd294c",
         "evidence_sources": [
@@ -11594,30 +11333,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 5.66,
-          "technical_soundness": 3.91,
-          "biological_utility": 6.69,
-          "reproducibility_readiness": 2.73
+          "methodological_novelty": 5.76,
+          "technical_soundness": 3.87,
+          "biological_utility": 6.73,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.73,
-          "technical_soundness": 0.58,
-          "biological_utility": 0.74,
-          "reproducibility_readiness": 0.7
+          "methodological_novelty": 0.75,
+          "technical_soundness": 0.6,
+          "biological_utility": 0.76,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "efficient_architecture",
         "paradigm_label_zh": "轻量架构与蒸馏",
-        "paradigm_confidence": 0.92,
-        "composite_priority": 5.04,
-        "abstract_preliminary_score": 6.12,
+        "paradigm_confidence": 0.91,
+        "composite_priority": null,
+        "abstract_preliminary_score": 6.2,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 4.66,
-            "confidence": 0.73,
+            "score": 4.76,
+            "confidence": 0.75,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -11634,10 +11373,10 @@
               "0": 0.0,
               "1": 0.0,
               "2": 0.02,
-              "3": 0.13,
-              "4": 0.18,
-              "5": 0.5,
-              "6": 0.16,
+              "3": 0.11,
+              "4": 0.15,
+              "5": 0.53,
+              "6": 0.18,
               "7": 0.01,
               "8": 0.0,
               "9": 0.0
@@ -11645,8 +11384,8 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 2.91,
-            "confidence": 0.58,
+            "score": 2.87,
+            "confidence": 0.6,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -11661,11 +11400,11 @@
             },
             "probabilities": {
               "0": 0.02,
-              "1": 0.03,
-              "2": 0.39,
-              "3": 0.29,
+              "1": 0.04,
+              "2": 0.41,
+              "3": 0.27,
               "4": 0.17,
-              "5": 0.06,
+              "5": 0.05,
               "6": 0.03,
               "7": 0.01,
               "8": 0.0,
@@ -11674,8 +11413,8 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 5.69,
-            "confidence": 0.74,
+            "score": 5.73,
+            "confidence": 0.76,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -11693,56 +11432,27 @@
               "1": 0.0,
               "2": 0.0,
               "3": 0.01,
-              "4": 0.06,
-              "5": 0.31,
-              "6": 0.46,
-              "7": 0.14,
-              "8": 0.02,
+              "4": 0.05,
+              "5": 0.3,
+              "6": 0.48,
+              "7": 0.15,
+              "8": 0.01,
               "9": 0.0
-            }
-          },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.73,
-            "confidence": 0.7,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.55,
-              "2": 0.29,
-              "3": 0.08,
-              "4": 0.04,
-              "5": 0.01,
-              "6": 0.01,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
             }
           },
           "primary_paradigm": {
             "type": "choice",
             "choice": "efficient_architecture",
-            "confidence": 0.92,
+            "confidence": 0.91,
             "probabilities": {
               "physical_amortization": 0.0,
               "multimodal_foundation": 0.0,
               "cross_scale_spatial_omics": 0.0,
               "synthetic_to_real": 0.0,
               "mechanistic_interpretability": 0.0,
-              "efficient_architecture": 0.93,
+              "efficient_architecture": 0.92,
               "agentic_evaluation": 0.0,
-              "incremental_baseline": 0.07
+              "incremental_baseline": 0.08
             }
           }
         }
@@ -12060,9 +11770,9 @@
         "foundation_models"
       ],
       "relevance": "passed",
-      "research_score": 4.5,
+      "research_score": null,
       "engineering_score": 3,
-      "priority": 4,
+      "priority": 0,
       "bonus": [
         "foundation",
         "segmentation_or_detection"
@@ -12304,7 +12014,7 @@
       "critic_confidence": 0.8,
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:40.134690+00:00",
+        "evaluated_at": "2026-10-23T02:27:19.907252+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "0ea53a4eb80682d8df541b61a0f4109d666bddd9de557283eece8f34a9e6814f",
         "evidence_sources": [
@@ -12318,30 +12028,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 4.2,
-          "technical_soundness": 3.65,
-          "biological_utility": 6.57,
-          "reproducibility_readiness": 3.14
+          "methodological_novelty": 4.26,
+          "technical_soundness": 3.68,
+          "biological_utility": 6.58,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.51,
-          "technical_soundness": 0.65,
-          "biological_utility": 0.77,
-          "reproducibility_readiness": 0.5
+          "methodological_novelty": 0.49,
+          "technical_soundness": 0.66,
+          "biological_utility": 0.76,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "incremental_baseline",
         "paradigm_label_zh": "常规方法迁移",
         "paradigm_confidence": 0.98,
-        "composite_priority": 4.5,
-        "abstract_preliminary_score": 5.27,
+        "composite_priority": null,
+        "abstract_preliminary_score": 5.3,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 3.2,
-            "confidence": 0.51,
+            "score": 3.26,
+            "confidence": 0.49,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -12357,10 +12067,10 @@
             "probabilities": {
               "0": 0.0,
               "1": 0.01,
-              "2": 0.45,
-              "3": 0.09,
-              "4": 0.24,
-              "5": 0.2,
+              "2": 0.43,
+              "3": 0.1,
+              "4": 0.23,
+              "5": 0.22,
               "6": 0.01,
               "7": 0.0,
               "8": 0.0,
@@ -12369,8 +12079,8 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 2.65,
-            "confidence": 0.65,
+            "score": 2.68,
+            "confidence": 0.66,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -12385,9 +12095,9 @@
             },
             "probabilities": {
               "0": 0.04,
-              "1": 0.06,
-              "2": 0.4,
-              "3": 0.33,
+              "1": 0.05,
+              "2": 0.42,
+              "3": 0.32,
               "4": 0.11,
               "5": 0.05,
               "6": 0.01,
@@ -12398,8 +12108,8 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 5.57,
-            "confidence": 0.77,
+            "score": 5.58,
+            "confidence": 0.76,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -12419,39 +12129,10 @@
               "3": 0.01,
               "4": 0.05,
               "5": 0.36,
-              "6": 0.52,
+              "6": 0.51,
               "7": 0.04,
-              "8": 0.02,
+              "8": 0.03,
               "9": 0.0
-            }
-          },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 2.14,
-            "confidence": 0.5,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.45,
-              "2": 0.21,
-              "3": 0.16,
-              "4": 0.09,
-              "5": 0.03,
-              "6": 0.02,
-              "7": 0.01,
-              "8": 0.01,
-              "9": 0.01
             }
           },
           "primary_paradigm": {
@@ -14828,9 +14509,9 @@
         "benchmark"
       ],
       "relevance": "passed",
-      "research_score": 4.3,
+      "research_score": null,
       "engineering_score": 3,
-      "priority": 4,
+      "priority": 0,
       "bonus": [
         "benchmark"
       ],
@@ -14893,7 +14574,7 @@
       "task_confidence": 0.9,
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:40.488289+00:00",
+        "evaluated_at": "2026-10-23T02:27:19.911854+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "4beda049a2bd0486a5cd549660abe69830dcf76ee8645c97aa6ba87a10c91284",
         "evidence_sources": [
@@ -14907,30 +14588,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 3.74,
-          "technical_soundness": 5.24,
-          "biological_utility": 5.2,
-          "reproducibility_readiness": 2.63
+          "methodological_novelty": 3.66,
+          "technical_soundness": 5.23,
+          "biological_utility": 5.23,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.4,
+          "methodological_novelty": 0.38,
           "technical_soundness": 0.76,
           "biological_utility": 0.58,
-          "reproducibility_readiness": 0.73
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "incremental_baseline",
         "paradigm_label_zh": "常规方法迁移",
-        "paradigm_confidence": 0.57,
-        "composite_priority": 4.31,
-        "abstract_preliminary_score": 4.4,
+        "paradigm_confidence": 0.58,
+        "composite_priority": null,
+        "abstract_preliminary_score": 4.37,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 2.74,
-            "confidence": 0.4,
+            "score": 2.66,
+            "confidence": 0.38,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -14944,11 +14625,11 @@
               "9": "10: Groundbreaking paradigm shift establishing new foundational standard"
             },
             "probabilities": {
-              "0": 0.24,
+              "0": 0.26,
               "1": 0.06,
-              "2": 0.1,
+              "2": 0.09,
               "3": 0.06,
-              "4": 0.45,
+              "4": 0.44,
               "5": 0.08,
               "6": 0.01,
               "7": 0.0,
@@ -14958,7 +14639,7 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 4.24,
+            "score": 4.23,
             "confidence": 0.76,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
@@ -14977,7 +14658,7 @@
               "1": 0.0,
               "2": 0.02,
               "3": 0.13,
-              "4": 0.47,
+              "4": 0.47000000000000003,
               "5": 0.35,
               "6": 0.02,
               "7": 0.01,
@@ -14987,7 +14668,7 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 4.2,
+            "score": 4.23,
             "confidence": 0.58,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
@@ -15005,48 +14686,19 @@
               "0": 0.0,
               "1": 0.01,
               "2": 0.06,
-              "3": 0.26,
+              "3": 0.25,
               "4": 0.21,
-              "5": 0.35,
-              "6": 0.11,
+              "5": 0.34,
+              "6": 0.13,
               "7": 0.0,
               "8": 0.0,
               "9": 0.0
             }
           },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.63,
-            "confidence": 0.73,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.02,
-              "1": 0.59,
-              "2": 0.26,
-              "3": 0.07,
-              "4": 0.03,
-              "5": 0.01,
-              "6": 0.01,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
-            }
-          },
           "primary_paradigm": {
             "type": "choice",
             "choice": "incremental_baseline",
-            "confidence": 0.57,
+            "confidence": 0.58,
             "probabilities": {
               "physical_amortization": 0.0,
               "multimodal_foundation": 0.0,
@@ -15054,8 +14706,8 @@
               "synthetic_to_real": 0.0,
               "mechanistic_interpretability": 0.0,
               "efficient_architecture": 0.0,
-              "agentic_evaluation": 0.38,
-              "incremental_baseline": 0.62
+              "agentic_evaluation": 0.37,
+              "incremental_baseline": 0.63
             }
           }
         }
@@ -16879,9 +16531,9 @@
       ],
       "relevance": "passed",
       "relevance_notes": "medical cell image recognition (TCT/cervical); YOLOv12+DINOv3; cell population distribution; confidence=0.92",
-      "research_score": 4.8,
+      "research_score": null,
       "engineering_score": 2,
-      "priority": 5,
+      "priority": 0,
       "bonus": [
         "open_source"
       ],
@@ -16939,7 +16591,7 @@
       "source": "arxiv",
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:40.870647+00:00",
+        "evaluated_at": "2026-10-23T02:27:20.239164+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "440bc5058a0c32c4b54ff0090524280eddd083a71536b90c5964945ec66083a3",
         "evidence_sources": [
@@ -16953,30 +16605,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 5.76,
-          "technical_soundness": 3.04,
-          "biological_utility": 6.34,
-          "reproducibility_readiness": 2.63
+          "methodological_novelty": 5.67,
+          "technical_soundness": 3.02,
+          "biological_utility": 6.28,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.81,
-          "technical_soundness": 0.75,
+          "methodological_novelty": 0.77,
+          "technical_soundness": 0.74,
           "biological_utility": 0.77,
-          "reproducibility_readiness": 0.78
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "incremental_baseline",
         "paradigm_label_zh": "常规方法迁移",
-        "paradigm_confidence": 0.66,
-        "composite_priority": 4.76,
-        "abstract_preliminary_score": 6.02,
+        "paradigm_confidence": 0.68,
+        "composite_priority": null,
+        "abstract_preliminary_score": 5.94,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 4.76,
-            "confidence": 0.81,
+            "score": 4.67,
+            "confidence": 0.77,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -16990,22 +16642,22 @@
               "9": "10: Groundbreaking paradigm shift establishing new foundational standard"
             },
             "probabilities": {
-              "0": 0.0,
+              "0": 0.01,
               "1": 0.0,
-              "2": 0.03,
+              "2": 0.04,
               "3": 0.05,
-              "4": 0.16,
-              "5": 0.64,
-              "6": 0.12,
-              "7": 0.0,
+              "4": 0.18,
+              "5": 0.6,
+              "6": 0.11,
+              "7": 0.01,
               "8": 0.0,
               "9": 0.0
             }
           },
           "technical_soundness": {
             "type": "score",
-            "score": 2.04,
-            "confidence": 0.75,
+            "score": 2.02,
+            "confidence": 0.74,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -17020,8 +16672,8 @@
             },
             "probabilities": {
               "0": 0.07,
-              "1": 0.17,
-              "2": 0.48,
+              "1": 0.18,
+              "2": 0.47,
               "3": 0.25,
               "4": 0.02,
               "5": 0.01,
@@ -17033,7 +16685,7 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 5.34,
+            "score": 5.28,
             "confidence": 0.77,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
@@ -17051,40 +16703,11 @@
               "0": 0.0,
               "1": 0.0,
               "2": 0.01,
-              "3": 0.02,
-              "4": 0.04,
+              "3": 0.03,
+              "4": 0.05,
               "5": 0.51,
-              "6": 0.38,
-              "7": 0.04,
-              "8": 0.0,
-              "9": 0.0
-            }
-          },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.63,
-            "confidence": 0.78,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.56,
-              "2": 0.32,
-              "3": 0.08,
-              "4": 0.01,
-              "5": 0.01,
-              "6": 0.0,
-              "7": 0.0,
+              "6": 0.37,
+              "7": 0.03,
               "8": 0.0,
               "9": 0.0
             }
@@ -17092,16 +16715,16 @@
           "primary_paradigm": {
             "type": "choice",
             "choice": "incremental_baseline",
-            "confidence": 0.66,
+            "confidence": 0.68,
             "probabilities": {
               "physical_amortization": 0.0,
-              "multimodal_foundation": 0.04,
+              "multimodal_foundation": 0.03,
               "cross_scale_spatial_omics": 0.0,
-              "synthetic_to_real": 0.25,
+              "synthetic_to_real": 0.24,
               "mechanistic_interpretability": 0.0,
               "efficient_architecture": 0.01,
               "agentic_evaluation": 0.0,
-              "incremental_baseline": 0.7
+              "incremental_baseline": 0.72
             }
           }
         }
@@ -17391,9 +17014,9 @@
       ],
       "relevance": "passed",
       "relevance_notes": "histopathology WSI segmentation; weakly supervised; cell/tissue-level; accepted MAPR 2026; confidence=0.85",
-      "research_score": 4.3,
+      "research_score": null,
       "engineering_score": 2,
-      "priority": 4,
+      "priority": 0,
       "bonus": [
         "open_source"
       ],
@@ -17451,7 +17074,7 @@
       "source": "arxiv",
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:40.869529+00:00",
+        "evaluated_at": "2026-10-23T02:27:20.218032+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "42e3f2e9c079cf76b178b4df338accab8c0d469db199754c10af352d99b7d598",
         "evidence_sources": [
@@ -17465,30 +17088,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 3.27,
-          "technical_soundness": 4.81,
-          "biological_utility": 6.14,
-          "reproducibility_readiness": 2.58
+          "methodological_novelty": 3.26,
+          "technical_soundness": 4.78,
+          "biological_utility": 6.16,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.44,
+          "methodological_novelty": 0.45,
           "technical_soundness": 0.74,
-          "biological_utility": 0.74,
-          "reproducibility_readiness": 0.76
+          "biological_utility": 0.73,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "incremental_baseline",
         "paradigm_label_zh": "常规方法迁移",
         "paradigm_confidence": 0.97,
-        "composite_priority": 4.27,
-        "abstract_preliminary_score": 4.56,
+        "composite_priority": null,
+        "abstract_preliminary_score": 4.57,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 2.27,
-            "confidence": 0.44,
+            "score": 2.26,
+            "confidence": 0.45,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -17504,9 +17127,9 @@
             "probabilities": {
               "0": 0.09,
               "1": 0.29000000000000004,
-              "2": 0.26,
+              "2": 0.27,
               "3": 0.1,
-              "4": 0.19,
+              "4": 0.18,
               "5": 0.07,
               "6": 0.0,
               "7": 0.0,
@@ -17516,7 +17139,7 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 3.81,
+            "score": 3.78,
             "confidence": 0.74,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
@@ -17533,10 +17156,10 @@
             "probabilities": {
               "0": 0.0,
               "1": 0.0,
-              "2": 0.04,
-              "3": 0.34,
-              "4": 0.39,
-              "5": 0.2,
+              "2": 0.05,
+              "3": 0.33,
+              "4": 0.42,
+              "5": 0.18,
               "6": 0.02,
               "7": 0.0,
               "8": 0.0,
@@ -17545,8 +17168,8 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 5.14,
-            "confidence": 0.74,
+            "score": 5.16,
+            "confidence": 0.73,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -17565,40 +17188,11 @@
               "2": 0.01,
               "3": 0.08,
               "4": 0.07,
-              "5": 0.52,
-              "6": 0.24,
-              "7": 0.08,
+              "5": 0.5,
+              "6": 0.27,
+              "7": 0.07,
               "8": 0.0,
               "9": 0.0
-            }
-          },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.58,
-            "confidence": 0.76,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.62,
-              "2": 0.25,
-              "3": 0.08,
-              "4": 0.02,
-              "5": 0.01,
-              "6": 0.0,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
             }
           },
           "primary_paradigm": {
@@ -21305,9 +20899,9 @@
         "microscopy"
       ],
       "relevance": "passed",
-      "research_score": 4.1,
+      "research_score": null,
       "engineering_score": 4,
-      "priority": 4,
+      "priority": 0,
       "bonus": [
         "interpretability"
       ],
@@ -21355,7 +20949,7 @@
       "critic_analysis_result": null,
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:41.344453+00:00",
+        "evaluated_at": "2026-10-23T02:27:20.251203+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "122e3aa4ecaaf09df41d7b681d05d5cb083b78f6af597ace181cab79bb87bf5a",
         "evidence_sources": [
@@ -21369,30 +20963,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 4.48,
-          "technical_soundness": 4.13,
-          "biological_utility": 4.41,
-          "reproducibility_readiness": 2.64
+          "methodological_novelty": 4.44,
+          "technical_soundness": 4.14,
+          "biological_utility": 4.51,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.58,
-          "technical_soundness": 0.69,
-          "biological_utility": 0.71,
-          "reproducibility_readiness": 0.74
+          "methodological_novelty": 0.56,
+          "technical_soundness": 0.68,
+          "biological_utility": 0.69,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "mechanistic_interpretability",
         "paradigm_label_zh": "机制级可解释性",
         "paradigm_confidence": 0.85,
-        "composite_priority": 4.1,
-        "abstract_preliminary_score": 4.45,
+        "composite_priority": null,
+        "abstract_preliminary_score": 4.47,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 3.48,
-            "confidence": 0.58,
+            "score": 3.44,
+            "confidence": 0.56,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -21406,11 +21000,11 @@
               "9": "10: Groundbreaking paradigm shift establishing new foundational standard"
             },
             "probabilities": {
-              "0": 0.02,
-              "1": 0.03,
-              "2": 0.24,
-              "3": 0.13,
-              "4": 0.34,
+              "0": 0.03,
+              "1": 0.04,
+              "2": 0.23,
+              "3": 0.14,
+              "4": 0.32,
               "5": 0.22,
               "6": 0.02,
               "7": 0.0,
@@ -21420,8 +21014,8 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 3.13,
-            "confidence": 0.69,
+            "score": 3.14,
+            "confidence": 0.68,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -21438,9 +21032,9 @@
               "0": 0.01,
               "1": 0.03,
               "2": 0.24,
-              "3": 0.43,
+              "3": 0.42,
               "4": 0.17,
-              "5": 0.09,
+              "5": 0.1,
               "6": 0.03,
               "7": 0.0,
               "8": 0.0,
@@ -21449,8 +21043,8 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 3.41,
-            "confidence": 0.71,
+            "score": 3.51,
+            "confidence": 0.69,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -21466,43 +21060,14 @@
             "probabilities": {
               "0": 0.0,
               "1": 0.01,
-              "2": 0.14,
-              "3": 0.5,
-              "4": 0.17,
-              "5": 0.15,
+              "2": 0.12,
+              "3": 0.47000000000000003,
+              "4": 0.2,
+              "5": 0.17,
               "6": 0.03,
               "7": 0.0,
               "8": 0.0,
               "9": 0.0
-            }
-          },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.64,
-            "confidence": 0.74,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.57,
-              "2": 0.3,
-              "3": 0.07,
-              "4": 0.03,
-              "5": 0.01,
-              "6": 0.0,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
             }
           },
           "primary_paradigm": {
@@ -22228,9 +21793,9 @@
         "generative"
       ],
       "relevance": "passed",
-      "research_score": 4.3,
+      "research_score": null,
       "engineering_score": 3,
-      "priority": 4,
+      "priority": 0,
       "bonus": [
         "new_architecture"
       ],
@@ -22280,7 +21845,7 @@
       "has_code": true,
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:41.677699+00:00",
+        "evaluated_at": "2026-10-23T02:27:20.357199+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "7b01ff87148f33d4420ac1d061948884a68356e0832ce886be901f345ed6fa6f",
         "evidence_sources": [
@@ -22294,30 +21859,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 5.46,
-          "technical_soundness": 3.15,
-          "biological_utility": 4.88,
-          "reproducibility_readiness": 2.67
+          "methodological_novelty": 5.47,
+          "technical_soundness": 3.13,
+          "biological_utility": 4.93,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.77,
+          "methodological_novelty": 0.78,
           "technical_soundness": 0.86,
           "biological_utility": 0.5,
-          "reproducibility_readiness": 0.74
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "multimodal_foundation",
         "paradigm_label_zh": "显微多模态基础模型",
-        "paradigm_confidence": 0.62,
-        "composite_priority": 4.32,
-        "abstract_preliminary_score": 5.2,
+        "paradigm_confidence": 0.6,
+        "composite_priority": null,
+        "abstract_preliminary_score": 5.23,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 4.46,
-            "confidence": 0.77,
+            "score": 4.47,
+            "confidence": 0.78,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -22334,9 +21899,9 @@
               "0": 0.0,
               "1": 0.0,
               "2": 0.01,
-              "3": 0.11,
-              "4": 0.3,
-              "5": 0.56,
+              "3": 0.09,
+              "4": 0.32,
+              "5": 0.55,
               "6": 0.02,
               "7": 0.0,
               "8": 0.0,
@@ -22345,7 +21910,7 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 2.15,
+            "score": 2.13,
             "confidence": 0.86,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
@@ -22361,9 +21926,9 @@
             },
             "probabilities": {
               "0": 0.03,
-              "1": 0.06,
+              "1": 0.07,
               "2": 0.71,
-              "3": 0.18,
+              "3": 0.17,
               "4": 0.02,
               "5": 0.0,
               "6": 0.0,
@@ -22374,7 +21939,7 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 3.88,
+            "score": 3.93,
             "confidence": 0.5,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
@@ -22392,8 +21957,8 @@
               "0": 0.0,
               "1": 0.01,
               "2": 0.16,
-              "3": 0.4,
-              "4": 0.07,
+              "3": 0.39,
+              "4": 0.08,
               "5": 0.16,
               "6": 0.12,
               "7": 0.08,
@@ -22401,43 +21966,14 @@
               "9": 0.0
             }
           },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.67,
-            "confidence": 0.74,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.59,
-              "2": 0.27,
-              "3": 0.09,
-              "4": 0.02,
-              "5": 0.01,
-              "6": 0.0,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
-            }
-          },
           "primary_paradigm": {
             "type": "choice",
             "choice": "multimodal_foundation",
-            "confidence": 0.62,
+            "confidence": 0.6,
             "probabilities": {
               "physical_amortization": 0.0,
-              "multimodal_foundation": 0.67,
-              "cross_scale_spatial_omics": 0.26,
+              "multimodal_foundation": 0.65,
+              "cross_scale_spatial_omics": 0.28,
               "synthetic_to_real": 0.0,
               "mechanistic_interpretability": 0.04,
               "efficient_architecture": 0.0,
@@ -24228,9 +23764,9 @@
         "classification"
       ],
       "relevance": "passed",
-      "research_score": 5.5,
+      "research_score": null,
       "engineering_score": null,
-      "priority": 5,
+      "priority": 0,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -24299,7 +23835,7 @@
       },
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:41.707255+00:00",
+        "evaluated_at": "2026-10-23T02:27:20.266646+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "1d5febf29a57b9433f632af805ffffe6d264f340098bfc6c3a5d6f4a43a04b64",
         "evidence_sources": [
@@ -24313,29 +23849,29 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 6.29,
-          "technical_soundness": 5.86,
-          "biological_utility": 5.69,
-          "reproducibility_readiness": 2.61
+          "methodological_novelty": 6.28,
+          "technical_soundness": 5.91,
+          "biological_utility": 5.76,
+          "reproducibility_readiness": null
         },
         "confidences": {
           "methodological_novelty": 0.87,
-          "technical_soundness": 0.77,
-          "biological_utility": 0.6,
-          "reproducibility_readiness": 0.75
+          "technical_soundness": 0.78,
+          "biological_utility": 0.62,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "physical_amortization",
         "paradigm_label_zh": "物理先验融合",
-        "paradigm_confidence": 0.42,
-        "composite_priority": 5.48,
-        "abstract_preliminary_score": 6.02,
+        "paradigm_confidence": 0.39,
+        "composite_priority": null,
+        "abstract_preliminary_score": 6.05,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 5.29,
+            "score": 5.28,
             "confidence": 0.87,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
@@ -24355,8 +23891,8 @@
               "2": 0.0,
               "3": 0.0,
               "4": 0.01,
-              "5": 0.68,
-              "6": 0.3,
+              "5": 0.6900000000000001,
+              "6": 0.29,
               "7": 0.01,
               "8": 0.0,
               "9": 0.0
@@ -24364,8 +23900,8 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 4.86,
-            "confidence": 0.77,
+            "score": 4.91,
+            "confidence": 0.78,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -24382,9 +23918,9 @@
               "0": 0.0,
               "1": 0.0,
               "2": 0.01,
-              "3": 0.06,
-              "4": 0.2,
-              "5": 0.51,
+              "3": 0.05,
+              "4": 0.18,
+              "5": 0.54,
               "6": 0.21,
               "7": 0.01,
               "8": 0.0,
@@ -24393,8 +23929,8 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 4.69,
-            "confidence": 0.6,
+            "score": 4.76,
+            "confidence": 0.62,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -24410,54 +23946,25 @@
             "probabilities": {
               "0": 0.0,
               "1": 0.0,
-              "2": 0.1,
-              "3": 0.12,
-              "4": 0.1,
-              "5": 0.39,
-              "6": 0.24,
+              "2": 0.09,
+              "3": 0.1,
+              "4": 0.11,
+              "5": 0.4,
+              "6": 0.25,
               "7": 0.04,
               "8": 0.01,
               "9": 0.0
             }
           },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.61,
-            "confidence": 0.75,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.62,
-              "2": 0.26,
-              "3": 0.06,
-              "4": 0.02,
-              "5": 0.01,
-              "6": 0.01,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
-            }
-          },
           "primary_paradigm": {
             "type": "choice",
             "choice": "physical_amortization",
-            "confidence": 0.42,
+            "confidence": 0.39,
             "probabilities": {
-              "physical_amortization": 0.49,
+              "physical_amortization": 0.47000000000000003,
               "multimodal_foundation": 0.0,
               "cross_scale_spatial_omics": 0.0,
-              "synthetic_to_real": 0.06,
+              "synthetic_to_real": 0.08,
               "mechanistic_interpretability": 0.0,
               "efficient_architecture": 0.0,
               "agentic_evaluation": 0.0,
@@ -25210,9 +24717,9 @@
         "histopathology"
       ],
       "relevance": "passed",
-      "research_score": 4.9,
+      "research_score": null,
       "engineering_score": null,
-      "priority": 5,
+      "priority": 0,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -25270,7 +24777,7 @@
       },
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:42.010715+00:00",
+        "evaluated_at": "2026-10-23T02:27:20.289936+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "c5668ddfdbbfb217864942a5256c17d3ef88eb566ebe963fcec9a8d04df21272",
         "evidence_sources": [
@@ -25284,30 +24791,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 4.97,
-          "technical_soundness": 5.11,
-          "biological_utility": 5.81,
-          "reproducibility_readiness": 2.72
+          "methodological_novelty": 4.9,
+          "technical_soundness": 5.17,
+          "biological_utility": 5.86,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.6,
+          "methodological_novelty": 0.62,
           "technical_soundness": 0.82,
-          "biological_utility": 0.83,
-          "reproducibility_readiness": 0.71
+          "biological_utility": 0.85,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "incremental_baseline",
         "paradigm_label_zh": "常规方法迁移",
         "paradigm_confidence": 0.98,
-        "composite_priority": 4.88,
-        "abstract_preliminary_score": 5.35,
+        "composite_priority": null,
+        "abstract_preliminary_score": 5.33,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 3.97,
-            "confidence": 0.6,
+            "score": 3.9,
+            "confidence": 0.62,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -25323,11 +24830,11 @@
             "probabilities": {
               "0": 0.0,
               "1": 0.0,
-              "2": 0.02,
-              "3": 0.37,
+              "2": 0.03,
+              "3": 0.39,
               "4": 0.27,
-              "5": 0.31,
-              "6": 0.03,
+              "5": 0.29,
+              "6": 0.02,
               "7": 0.0,
               "8": 0.0,
               "9": 0.0
@@ -25335,7 +24842,7 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 4.11,
+            "score": 4.17,
             "confidence": 0.82,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
@@ -25353,9 +24860,9 @@
               "0": 0.0,
               "1": 0.0,
               "2": 0.01,
-              "3": 0.15,
+              "3": 0.13,
               "4": 0.55,
-              "5": 0.28,
+              "5": 0.31,
               "6": 0.0,
               "7": 0.0,
               "8": 0.0,
@@ -25364,8 +24871,8 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 4.81,
-            "confidence": 0.83,
+            "score": 4.86,
+            "confidence": 0.85,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -25382,42 +24889,13 @@
               "0": 0.0,
               "1": 0.0,
               "2": 0.01,
-              "3": 0.07,
-              "4": 0.14,
-              "5": 0.67,
+              "3": 0.06,
+              "4": 0.12,
+              "5": 0.7,
               "6": 0.11,
               "7": 0.0,
               "8": 0.0,
               "9": 0.0
-            }
-          },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.72,
-            "confidence": 0.71,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.52,
-              "2": 0.33,
-              "3": 0.09,
-              "4": 0.03,
-              "5": 0.01,
-              "6": 0.0,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
             }
           },
           "primary_paradigm": {
@@ -28059,9 +27537,9 @@
         "detection"
       ],
       "relevance": "passed",
-      "research_score": 4.6,
+      "research_score": null,
       "engineering_score": null,
-      "priority": 5,
+      "priority": 0,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -28125,7 +27603,7 @@
       },
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:42.376069+00:00",
+        "evaluated_at": "2026-10-23T02:27:20.610658+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "fbb1cf3730122672e50ea1ca8d60a2eff163f66f075bab6f9bff85c44cff62ba",
         "evidence_sources": [
@@ -28139,30 +27617,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 5.08,
-          "technical_soundness": 3.04,
-          "biological_utility": 6.49,
-          "reproducibility_readiness": 2.9
+          "methodological_novelty": 5.05,
+          "technical_soundness": 3.05,
+          "biological_utility": 6.48,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.83,
+          "methodological_novelty": 0.82,
           "technical_soundness": 0.79,
           "biological_utility": 0.79,
-          "reproducibility_readiness": 0.63
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "incremental_baseline",
         "paradigm_label_zh": "常规方法迁移",
-        "paradigm_confidence": 0.92,
-        "composite_priority": 4.6,
-        "abstract_preliminary_score": 5.71,
+        "paradigm_confidence": 0.93,
+        "composite_priority": null,
+        "abstract_preliminary_score": 5.69,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 4.08,
-            "confidence": 0.83,
+            "score": 4.05,
+            "confidence": 0.82,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -28178,9 +27656,9 @@
             "probabilities": {
               "0": 0.0,
               "1": 0.0,
-              "2": 0.06,
+              "2": 0.07,
               "3": 0.05,
-              "4": 0.64,
+              "4": 0.63,
               "5": 0.25,
               "6": 0.0,
               "7": 0.0,
@@ -28190,7 +27668,7 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 2.04,
+            "score": 2.05,
             "confidence": 0.79,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
@@ -28206,8 +27684,8 @@
             },
             "probabilities": {
               "0": 0.07,
-              "1": 0.12,
-              "2": 0.58,
+              "1": 0.11,
+              "2": 0.59,
               "3": 0.2,
               "4": 0.02,
               "5": 0.01,
@@ -28219,7 +27697,7 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 5.49,
+            "score": 5.48,
             "confidence": 0.79,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
@@ -28238,47 +27716,18 @@
               "1": 0.0,
               "2": 0.0,
               "3": 0.0,
-              "4": 0.05,
-              "5": 0.41,
-              "6": 0.53,
+              "4": 0.04,
+              "5": 0.43,
+              "6": 0.52,
               "7": 0.01,
               "8": 0.0,
               "9": 0.0
             }
           },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.9,
-            "confidence": 0.63,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.53,
-              "2": 0.2,
-              "3": 0.16,
-              "4": 0.06,
-              "5": 0.02,
-              "6": 0.01,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
-            }
-          },
           "primary_paradigm": {
             "type": "choice",
             "choice": "incremental_baseline",
-            "confidence": 0.92,
+            "confidence": 0.93,
             "probabilities": {
               "physical_amortization": 0.0,
               "multimodal_foundation": 0.0,
@@ -28286,8 +27735,8 @@
               "synthetic_to_real": 0.0,
               "mechanistic_interpretability": 0.0,
               "efficient_architecture": 0.0,
-              "agentic_evaluation": 0.07,
-              "incremental_baseline": 0.93
+              "agentic_evaluation": 0.06,
+              "incremental_baseline": 0.94
             }
           }
         }
@@ -56790,9 +56239,9 @@
         "histopathology"
       ],
       "relevance": "passed",
-      "research_score": 5.2,
+      "research_score": null,
       "engineering_score": null,
-      "priority": 5,
+      "priority": 0,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -56877,7 +56326,7 @@
       },
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:45.761736+00:00",
+        "evaluated_at": "2026-10-23T02:27:20.637436+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "78a077cd1f86c6e5c0059dce74e4cb1e00b16a747025304e88ab0ecb4ecdcc54",
         "evidence_sources": [
@@ -56891,30 +56340,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 5.2,
-          "technical_soundness": 5.35,
-          "biological_utility": 6.37,
-          "reproducibility_readiness": 2.71
+          "methodological_novelty": 5.23,
+          "technical_soundness": 5.33,
+          "biological_utility": 6.38,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.63,
-          "technical_soundness": 0.5,
-          "biological_utility": 0.71,
-          "reproducibility_readiness": 0.73
+          "methodological_novelty": 0.64,
+          "technical_soundness": 0.3,
+          "biological_utility": 0.72,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "synthetic_to_real",
         "paradigm_label_zh": "仿真向真实迁移",
         "paradigm_confidence": 0.63,
-        "composite_priority": 5.16,
-        "abstract_preliminary_score": 5.73,
+        "composite_priority": null,
+        "abstract_preliminary_score": 5.75,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 4.2,
-            "confidence": 0.63,
+            "score": 4.23,
+            "confidence": 0.64,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -56929,12 +56378,12 @@
             },
             "probabilities": {
               "0": 0.01,
-              "1": 0.04,
+              "1": 0.03,
               "2": 0.08,
               "3": 0.05,
-              "4": 0.33,
+              "4": 0.32,
               "5": 0.44,
-              "6": 0.05,
+              "6": 0.07,
               "7": 0.0,
               "8": 0.0,
               "9": 0.0
@@ -56942,8 +56391,8 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 4.35,
-            "confidence": 0.5,
+            "score": 4.33,
+            "confidence": 0.3,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -56959,11 +56408,11 @@
             "probabilities": {
               "0": 0.01,
               "1": 0.02,
-              "2": 0.08,
+              "2": 0.09,
               "3": 0.2,
-              "4": 0.21,
+              "4": 0.19,
               "5": 0.23,
-              "6": 0.23,
+              "6": 0.24,
               "7": 0.02,
               "8": 0.0,
               "9": 0.0
@@ -56971,8 +56420,8 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 5.37,
-            "confidence": 0.71,
+            "score": 5.38,
+            "confidence": 0.72,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -56989,42 +56438,13 @@
               "0": 0.0,
               "1": 0.01,
               "2": 0.01,
-              "3": 0.03,
+              "3": 0.02,
               "4": 0.06,
-              "5": 0.5,
+              "5": 0.51,
               "6": 0.27,
               "7": 0.09,
               "8": 0.03,
               "9": 0.0
-            }
-          },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.71,
-            "confidence": 0.73,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.59,
-              "2": 0.27,
-              "3": 0.06,
-              "4": 0.05,
-              "5": 0.01,
-              "6": 0.0,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
             }
           },
           "primary_paradigm": {
@@ -57039,7 +56459,7 @@
               "mechanistic_interpretability": 0.0,
               "efficient_architecture": 0.02,
               "agentic_evaluation": 0.0,
-              "incremental_baseline": 0.28
+              "incremental_baseline": 0.29
             }
           }
         }
@@ -57890,9 +57310,9 @@
         "cell_imaging"
       ],
       "relevance": "passed",
-      "research_score": 4.5,
+      "research_score": null,
       "engineering_score": null,
-      "priority": 4,
+      "priority": 0,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -57975,7 +57395,7 @@
       },
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:45.839188+00:00",
+        "evaluated_at": "2026-10-23T02:27:20.823753+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "ee3cf90e7be36202a03dc61e12496507ef309861542e44da0bcf4f7e6670a534",
         "evidence_sources": [
@@ -57989,30 +57409,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 5.62,
-          "technical_soundness": 3.87,
+          "methodological_novelty": 5.59,
+          "technical_soundness": 3.88,
           "biological_utility": 4.53,
-          "reproducibility_readiness": 2.81
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.78,
-          "technical_soundness": 0.8,
-          "biological_utility": 0.52,
-          "reproducibility_readiness": 0.69
+          "methodological_novelty": 0.77,
+          "technical_soundness": 0.82,
+          "biological_utility": 0.49,
+          "reproducibility_readiness": null
         },
-        "primary_paradigm": "incremental_baseline",
-        "paradigm_label_zh": "常规方法迁移",
-        "paradigm_confidence": 0.46,
-        "composite_priority": 4.49,
-        "abstract_preliminary_score": 5.13,
+        "primary_paradigm": "mechanistic_interpretability",
+        "paradigm_label_zh": "机制级可解释性",
+        "paradigm_confidence": 0.44,
+        "composite_priority": null,
+        "abstract_preliminary_score": 5.11,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 4.62,
-            "confidence": 0.78,
+            "score": 4.59,
+            "confidence": 0.77,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -58029,9 +57449,9 @@
               "0": 0.0,
               "1": 0.0,
               "2": 0.01,
-              "3": 0.06,
-              "4": 0.3,
-              "5": 0.54,
+              "3": 0.07,
+              "4": 0.31,
+              "5": 0.52,
               "6": 0.09,
               "7": 0.0,
               "8": 0.0,
@@ -58040,8 +57460,8 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 2.87,
-            "confidence": 0.8,
+            "score": 2.88,
+            "confidence": 0.82,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -58057,9 +57477,9 @@
             "probabilities": {
               "0": 0.0,
               "1": 0.01,
-              "2": 0.29,
-              "3": 0.54,
-              "4": 0.14,
+              "2": 0.27,
+              "3": 0.56,
+              "4": 0.13,
               "5": 0.02,
               "6": 0.0,
               "7": 0.0,
@@ -58070,7 +57490,7 @@
           "biological_utility": {
             "type": "score",
             "score": 3.53,
-            "confidence": 0.52,
+            "confidence": 0.49,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -58087,57 +57507,28 @@
               "0": 0.05,
               "1": 0.03,
               "2": 0.16,
-              "3": 0.29,
-              "4": 0.17,
-              "5": 0.24,
+              "3": 0.28,
+              "4": 0.15,
+              "5": 0.26,
               "6": 0.05,
               "7": 0.01,
-              "8": 0.0,
+              "8": 0.01,
               "9": 0.0
-            }
-          },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.81,
-            "confidence": 0.69,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.54,
-              "2": 0.25,
-              "3": 0.14,
-              "4": 0.04,
-              "5": 0.01,
-              "6": 0.0,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
             }
           },
           "primary_paradigm": {
             "type": "choice",
-            "choice": "incremental_baseline",
-            "confidence": 0.46,
+            "choice": "mechanistic_interpretability",
+            "confidence": 0.44,
             "probabilities": {
               "physical_amortization": 0.0,
               "multimodal_foundation": 0.0,
               "cross_scale_spatial_omics": 0.0,
               "synthetic_to_real": 0.0,
-              "mechanistic_interpretability": 0.43,
+              "mechanistic_interpretability": 0.51,
               "efficient_architecture": 0.0,
               "agentic_evaluation": 0.04,
-              "incremental_baseline": 0.53
+              "incremental_baseline": 0.45
             }
           }
         }
@@ -59613,9 +59004,9 @@
         "detection"
       ],
       "relevance": "passed",
-      "research_score": 5.2,
+      "research_score": null,
       "engineering_score": null,
-      "priority": 5,
+      "priority": 0,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -59698,7 +59089,7 @@
       },
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:46.131285+00:00",
+        "evaluated_at": "2026-10-23T02:27:20.791880+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "72a7f3ccaca81daf56171105964157131c113a776c17cf75261b8ce5286619a3",
         "evidence_sources": [
@@ -59712,30 +59103,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 5.84,
-          "technical_soundness": 5.43,
-          "biological_utility": 5.42,
-          "reproducibility_readiness": 2.73
+          "methodological_novelty": 5.89,
+          "technical_soundness": 5.39,
+          "biological_utility": 5.5,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.79,
+          "methodological_novelty": 0.8,
           "technical_soundness": 0.69,
-          "biological_utility": 0.58,
-          "reproducibility_readiness": 0.7
+          "biological_utility": 0.6,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "incremental_baseline",
         "paradigm_label_zh": "常规方法迁移",
         "paradigm_confidence": 0.86,
-        "composite_priority": 5.17,
-        "abstract_preliminary_score": 5.65,
+        "composite_priority": null,
+        "abstract_preliminary_score": 5.71,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 4.84,
-            "confidence": 0.79,
+            "score": 4.89,
+            "confidence": 0.8,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -59752,10 +59143,10 @@
               "0": 0.0,
               "1": 0.0,
               "2": 0.0,
-              "3": 0.1,
-              "4": 0.13,
-              "5": 0.58,
-              "6": 0.18,
+              "3": 0.09,
+              "4": 0.12,
+              "5": 0.59,
+              "6": 0.19,
               "7": 0.01,
               "8": 0.0,
               "9": 0.0
@@ -59763,7 +59154,7 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 4.43,
+            "score": 4.39,
             "confidence": 0.69,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
@@ -59780,11 +59171,11 @@
             "probabilities": {
               "0": 0.0,
               "1": 0.01,
-              "2": 0.02,
-              "3": 0.14,
-              "4": 0.3,
-              "5": 0.44,
-              "6": 0.09,
+              "2": 0.01,
+              "3": 0.16,
+              "4": 0.31,
+              "5": 0.43,
+              "6": 0.08,
               "7": 0.0,
               "8": 0.0,
               "9": 0.0
@@ -59792,8 +59183,8 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 4.42,
-            "confidence": 0.58,
+            "score": 4.5,
+            "confidence": 0.6,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -59807,44 +59198,15 @@
               "9": "10: Redefines scientific imaging capability across biological sciences"
             },
             "probabilities": {
-              "0": 0.03,
+              "0": 0.02,
               "1": 0.03,
               "2": 0.06,
-              "3": 0.12,
+              "3": 0.11,
               "4": 0.12,
-              "5": 0.46,
-              "6": 0.14,
+              "5": 0.47,
+              "6": 0.15,
               "7": 0.02,
               "8": 0.01,
-              "9": 0.01
-            }
-          },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.73,
-            "confidence": 0.7,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.55,
-              "2": 0.28,
-              "3": 0.1,
-              "4": 0.03,
-              "5": 0.01,
-              "6": 0.01,
-              "7": 0.0,
-              "8": 0.0,
               "9": 0.01
             }
           },
@@ -60750,9 +60112,9 @@
         "histopathology"
       ],
       "relevance": "passed",
-      "research_score": 5.3,
+      "research_score": null,
       "engineering_score": null,
-      "priority": 5,
+      "priority": 0,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -60835,7 +60197,7 @@
       },
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:46.204604+00:00",
+        "evaluated_at": "2026-10-23T02:27:20.788165+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "fe31b0796b5a38c234bbd2151313a6e0cc372212ad395725e042be25f7986821",
         "evidence_sources": [
@@ -60849,30 +60211,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 6.82,
-          "technical_soundness": 4.29,
-          "biological_utility": 5.69,
-          "reproducibility_readiness": 2.69
+          "methodological_novelty": 6.89,
+          "technical_soundness": 4.3,
+          "biological_utility": 5.72,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.8,
-          "technical_soundness": 0.75,
+          "methodological_novelty": 0.82,
+          "technical_soundness": 0.77,
           "biological_utility": 0.46,
-          "reproducibility_readiness": 0.71
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "incremental_baseline",
         "paradigm_label_zh": "常规方法迁移",
-        "paradigm_confidence": 0.75,
-        "composite_priority": 5.29,
-        "abstract_preliminary_score": 6.31,
+        "paradigm_confidence": 0.76,
+        "composite_priority": null,
+        "abstract_preliminary_score": 6.36,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 5.82,
-            "confidence": 0.8,
+            "score": 5.89,
+            "confidence": 0.82,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -60891,17 +60253,17 @@
               "2": 0.0,
               "3": 0.0,
               "4": 0.02,
-              "5": 0.28,
-              "6": 0.52,
-              "7": 0.17,
+              "5": 0.23,
+              "6": 0.55,
+              "7": 0.19,
               "8": 0.0,
               "9": 0.0
             }
           },
           "technical_soundness": {
             "type": "score",
-            "score": 3.29,
-            "confidence": 0.75,
+            "score": 3.3,
+            "confidence": 0.77,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -60916,11 +60278,11 @@
             },
             "probabilities": {
               "0": 0.0,
-              "1": 0.01,
-              "2": 0.16,
-              "3": 0.44,
+              "1": 0.0,
+              "2": 0.15,
+              "3": 0.47000000000000003,
               "4": 0.33,
-              "5": 0.06,
+              "5": 0.05,
               "6": 0.0,
               "7": 0.0,
               "8": 0.0,
@@ -60929,7 +60291,7 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 4.69,
+            "score": 4.72,
             "confidence": 0.46,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
@@ -60946,49 +60308,20 @@
             "probabilities": {
               "0": 0.0,
               "1": 0.0,
-              "2": 0.19,
-              "3": 0.09,
+              "2": 0.18,
+              "3": 0.1,
               "4": 0.03,
-              "5": 0.22,
-              "6": 0.43,
+              "5": 0.23,
+              "6": 0.42,
               "7": 0.04,
               "8": 0.0,
               "9": 0.0
             }
           },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.69,
-            "confidence": 0.71,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.56,
-              "2": 0.29,
-              "3": 0.08,
-              "4": 0.03,
-              "5": 0.01,
-              "6": 0.01,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
-            }
-          },
           "primary_paradigm": {
             "type": "choice",
             "choice": "incremental_baseline",
-            "confidence": 0.75,
+            "confidence": 0.76,
             "probabilities": {
               "physical_amortization": 0.08,
               "multimodal_foundation": 0.0,
@@ -60996,8 +60329,8 @@
               "synthetic_to_real": 0.08,
               "mechanistic_interpretability": 0.0,
               "efficient_architecture": 0.01,
-              "agentic_evaluation": 0.05,
-              "incremental_baseline": 0.78
+              "agentic_evaluation": 0.04,
+              "incremental_baseline": 0.79
             }
           }
         }
@@ -62830,9 +62163,9 @@
         "detection"
       ],
       "relevance": "passed",
-      "research_score": 5.4,
+      "research_score": null,
       "engineering_score": null,
-      "priority": 5,
+      "priority": 0,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -62915,7 +62248,7 @@
       },
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:46.459611+00:00",
+        "evaluated_at": "2026-10-23T02:27:20.729473+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "4e851a22650abcf905dc6bf4f205c31f32c03c35e5d68fd8c9926817889ddaf8",
         "evidence_sources": [
@@ -62929,30 +62262,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 6.59,
-          "technical_soundness": 5.15,
-          "biological_utility": 5.43,
-          "reproducibility_readiness": 2.75
+          "methodological_novelty": 6.57,
+          "technical_soundness": 5.16,
+          "biological_utility": 5.41,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.8,
+          "methodological_novelty": 0.78,
           "technical_soundness": 0.76,
-          "biological_utility": 0.56,
-          "reproducibility_readiness": 0.7
+          "biological_utility": 0.55,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "incremental_baseline",
         "paradigm_label_zh": "常规方法迁移",
-        "paradigm_confidence": 0.77,
-        "composite_priority": 5.36,
-        "abstract_preliminary_score": 6.07,
+        "paradigm_confidence": 0.74,
+        "composite_priority": null,
+        "abstract_preliminary_score": 6.05,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 5.59,
-            "confidence": 0.8,
+            "score": 5.57,
+            "confidence": 0.78,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -62971,16 +62304,16 @@
               "2": 0.0,
               "3": 0.01,
               "4": 0.02,
-              "5": 0.4,
-              "6": 0.53,
-              "7": 0.04,
+              "5": 0.42,
+              "6": 0.5,
+              "7": 0.05,
               "8": 0.0,
               "9": 0.0
             }
           },
           "technical_soundness": {
             "type": "score",
-            "score": 4.15,
+            "score": 4.16,
             "confidence": 0.76,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
@@ -62999,8 +62332,8 @@
               "1": 0.0,
               "2": 0.03,
               "3": 0.16,
-              "4": 0.49,
-              "5": 0.28,
+              "4": 0.48,
+              "5": 0.29,
               "6": 0.03,
               "7": 0.01,
               "8": 0.0,
@@ -63009,8 +62342,8 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 4.43,
-            "confidence": 0.56,
+            "score": 4.41,
+            "confidence": 0.55,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -63026,58 +62359,29 @@
             "probabilities": {
               "0": 0.01,
               "1": 0.01,
-              "2": 0.06,
+              "2": 0.07,
               "3": 0.2,
               "4": 0.16,
-              "5": 0.37,
+              "5": 0.36,
               "6": 0.13,
               "7": 0.05,
               "8": 0.01,
               "9": 0.0
             }
           },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.75,
-            "confidence": 0.7,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.54,
-              "2": 0.3,
-              "3": 0.09,
-              "4": 0.03,
-              "5": 0.01,
-              "6": 0.01,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
-            }
-          },
           "primary_paradigm": {
             "type": "choice",
             "choice": "incremental_baseline",
-            "confidence": 0.77,
+            "confidence": 0.74,
             "probabilities": {
               "physical_amortization": 0.01,
               "multimodal_foundation": 0.01,
               "cross_scale_spatial_omics": 0.0,
               "synthetic_to_real": 0.07,
               "mechanistic_interpretability": 0.02,
-              "efficient_architecture": 0.09,
+              "efficient_architecture": 0.12,
               "agentic_evaluation": 0.0,
-              "incremental_baseline": 0.8
+              "incremental_baseline": 0.77
             }
           }
         }
@@ -86732,9 +86036,9 @@
         "segmentation"
       ],
       "relevance": "passed",
-      "research_score": 4.7,
+      "research_score": null,
       "engineering_score": null,
-      "priority": 5,
+      "priority": 0,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -86817,7 +86121,7 @@
       },
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:49.281181+00:00",
+        "evaluated_at": "2026-10-23T02:27:21.001872+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "c8ec20166c8c5d97120083ee91152c0ffcb56c72fe9476018c3b0bb6e338e7d0",
         "evidence_sources": [
@@ -86831,29 +86135,29 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 6.0,
-          "technical_soundness": 3.45,
+          "methodological_novelty": 5.99,
+          "technical_soundness": 3.41,
           "biological_utility": 5.26,
-          "reproducibility_readiness": 2.48
+          "reproducibility_readiness": null
         },
         "confidences": {
           "methodological_novelty": 0.76,
           "technical_soundness": 0.79,
-          "biological_utility": 0.6,
-          "reproducibility_readiness": 0.8
+          "biological_utility": 0.61,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "incremental_baseline",
         "paradigm_label_zh": "常规方法迁移",
         "paradigm_confidence": 0.44,
-        "composite_priority": 4.65,
-        "abstract_preliminary_score": 5.67,
+        "composite_priority": null,
+        "abstract_preliminary_score": 5.66,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 5.0,
+            "score": 4.99,
             "confidence": 0.76,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
@@ -86871,9 +86175,9 @@
               "0": 0.0,
               "1": 0.0,
               "2": 0.01,
-              "3": 0.08,
+              "3": 0.09,
               "4": 0.1,
-              "5": 0.54,
+              "5": 0.53,
               "6": 0.24,
               "7": 0.03,
               "8": 0.0,
@@ -86882,7 +86186,7 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 2.45,
+            "score": 2.41,
             "confidence": 0.79,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
@@ -86898,9 +86202,9 @@
             },
             "probabilities": {
               "0": 0.01,
-              "1": 0.05,
-              "2": 0.54,
-              "3": 0.33,
+              "1": 0.06,
+              "2": 0.56,
+              "3": 0.31,
               "4": 0.05,
               "5": 0.01,
               "6": 0.0,
@@ -86912,7 +86216,7 @@
           "biological_utility": {
             "type": "score",
             "score": 4.26,
-            "confidence": 0.6,
+            "confidence": 0.61,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -86929,42 +86233,13 @@
               "0": 0.03,
               "1": 0.02,
               "2": 0.09,
-              "3": 0.15000000000000002,
-              "4": 0.08,
-              "5": 0.52,
-              "6": 0.1,
+              "3": 0.14,
+              "4": 0.09,
+              "5": 0.54,
+              "6": 0.08,
               "7": 0.01,
               "8": 0.0,
               "9": 0.0
-            }
-          },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.48,
-            "confidence": 0.8,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.69,
-              "2": 0.22,
-              "3": 0.04,
-              "4": 0.02,
-              "5": 0.01,
-              "6": 0.0,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.01
             }
           },
           "primary_paradigm": {
@@ -89050,9 +88325,9 @@
         "classification"
       ],
       "relevance": "passed",
-      "research_score": 2.9,
+      "research_score": null,
       "engineering_score": null,
-      "priority": 3,
+      "priority": 0,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -89136,7 +88411,7 @@
       },
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:49.509441+00:00",
+        "evaluated_at": "2026-10-23T02:27:21.035903+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "aed9118febf2b2d74dbe304561d2932e1ca1ef6f98ddd126be48e5274fed7835",
         "evidence_sources": [
@@ -89150,30 +88425,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 3.13,
-          "technical_soundness": 3.96,
-          "biological_utility": 1.64,
-          "reproducibility_readiness": 2.61
+          "methodological_novelty": 2.97,
+          "technical_soundness": 3.89,
+          "biological_utility": 1.6,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.14,
-          "technical_soundness": 0.79,
+          "methodological_novelty": 0.2,
+          "technical_soundness": 0.78,
           "biological_utility": 0.76,
-          "reproducibility_readiness": 0.78
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "incremental_baseline",
         "paradigm_label_zh": "常规方法迁移",
-        "paradigm_confidence": 0.87,
-        "composite_priority": 2.89,
-        "abstract_preliminary_score": 2.46,
+        "paradigm_confidence": 0.84,
+        "composite_priority": null,
+        "abstract_preliminary_score": 2.35,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 2.13,
-            "confidence": 0.14,
+            "score": 1.97,
+            "confidence": 0.2,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -89187,22 +88462,22 @@
               "9": "10: Groundbreaking paradigm shift establishing new foundational standard"
             },
             "probabilities": {
-              "0": 0.49,
+              "0": 0.52,
               "1": 0.05,
               "2": 0.03,
-              "3": 0.06,
-              "4": 0.16,
+              "3": 0.05,
+              "4": 0.15,
               "5": 0.11,
               "6": 0.06,
               "7": 0.02,
-              "8": 0.01,
+              "8": 0.0,
               "9": 0.01
             }
           },
           "technical_soundness": {
             "type": "score",
-            "score": 2.96,
-            "confidence": 0.79,
+            "score": 2.89,
+            "confidence": 0.78,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -89218,9 +88493,9 @@
             "probabilities": {
               "0": 0.0,
               "1": 0.01,
-              "2": 0.28,
-              "3": 0.51,
-              "4": 0.18,
+              "2": 0.32,
+              "3": 0.49,
+              "4": 0.16,
               "5": 0.02,
               "6": 0.0,
               "7": 0.0,
@@ -89230,7 +88505,7 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 0.64,
+            "score": 0.6,
             "confidence": 0.76,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
@@ -89250,46 +88525,17 @@
               "2": 0.04,
               "3": 0.01,
               "4": 0.01,
-              "5": 0.060000000000000005,
+              "5": 0.06,
               "6": 0.01,
               "7": 0.0,
               "8": 0.0,
               "9": 0.01
             }
           },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.61,
-            "confidence": 0.78,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.59,
-              "2": 0.3,
-              "3": 0.07,
-              "4": 0.02,
-              "5": 0.01,
-              "6": 0.0,
-              "7": 0.0,
-              "8": 0.0,
-              "9": 0.0
-            }
-          },
           "primary_paradigm": {
             "type": "choice",
             "choice": "incremental_baseline",
-            "confidence": 0.87,
+            "confidence": 0.84,
             "probabilities": {
               "physical_amortization": 0.0,
               "multimodal_foundation": 0.0,
@@ -89297,8 +88543,8 @@
               "synthetic_to_real": 0.0,
               "mechanistic_interpretability": 0.0,
               "efficient_architecture": 0.0,
-              "agentic_evaluation": 0.11,
-              "incremental_baseline": 0.89
+              "agentic_evaluation": 0.14,
+              "incremental_baseline": 0.86
             }
           }
         }
@@ -103685,9 +102931,9 @@
         "cell_imaging"
       ],
       "relevance": "passed",
-      "research_score": 4.5,
+      "research_score": null,
       "engineering_score": null,
-      "priority": 4,
+      "priority": 0,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -103777,7 +103023,7 @@
       },
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:51.306172+00:00",
+        "evaluated_at": "2026-10-23T02:27:21.085953+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "e7f0c5c67e9ef0b9e7b648714abf21373f100c118bbe3e34cf4dfc19dcb21b03",
         "evidence_sources": [
@@ -103791,29 +103037,29 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 6.5,
-          "technical_soundness": 3.28,
-          "biological_utility": 4.03,
-          "reproducibility_readiness": 2.63
+          "methodological_novelty": 6.49,
+          "technical_soundness": 3.25,
+          "biological_utility": 3.94,
+          "reproducibility_readiness": null
         },
         "confidences": {
           "methodological_novelty": 0.8,
-          "technical_soundness": 0.83,
-          "biological_utility": 0.26,
-          "reproducibility_readiness": 0.72
+          "technical_soundness": 0.84,
+          "biological_utility": 0.06,
+          "reproducibility_readiness": null
         },
         "primary_paradigm": "agentic_evaluation",
         "paradigm_label_zh": "智能体系统评测",
-        "paradigm_confidence": 0.81,
-        "composite_priority": 4.5,
-        "abstract_preliminary_score": 5.39,
+        "paradigm_confidence": 0.79,
+        "composite_priority": null,
+        "abstract_preliminary_score": 5.34,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 5.5,
+            "score": 5.49,
             "confidence": 0.8,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
@@ -103833,8 +103079,8 @@
               "2": 0.0,
               "3": 0.0,
               "4": 0.03,
-              "5": 0.43,
-              "6": 0.53,
+              "5": 0.44,
+              "6": 0.52,
               "7": 0.01,
               "8": 0.0,
               "9": 0.0
@@ -103842,8 +103088,8 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 2.28,
-            "confidence": 0.83,
+            "score": 2.25,
+            "confidence": 0.84,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -103859,9 +103105,9 @@
             "probabilities": {
               "0": 0.03,
               "1": 0.04,
-              "2": 0.66,
-              "3": 0.22,
-              "4": 0.04,
+              "2": 0.68,
+              "3": 0.21,
+              "4": 0.03,
               "5": 0.01,
               "6": 0.0,
               "7": 0.0,
@@ -103871,8 +103117,8 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 3.03,
-            "confidence": 0.26,
+            "score": 2.94,
+            "confidence": 0.06,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -103886,43 +103132,14 @@
               "9": "10: Redefines scientific imaging capability across biological sciences"
             },
             "probabilities": {
-              "0": 0.18,
-              "1": 0.06,
-              "2": 0.22,
+              "0": 0.2,
+              "1": 0.05,
+              "2": 0.21,
               "3": 0.15,
-              "4": 0.06,
-              "5": 0.22,
+              "4": 0.05,
+              "5": 0.23,
               "6": 0.07,
               "7": 0.02,
-              "8": 0.01,
-              "9": 0.01
-            }
-          },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.63,
-            "confidence": 0.72,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.65,
-              "2": 0.21,
-              "3": 0.06,
-              "4": 0.02,
-              "5": 0.01,
-              "6": 0.01,
-              "7": 0.01,
               "8": 0.01,
               "9": 0.01
             }
@@ -103930,7 +103147,7 @@
           "primary_paradigm": {
             "type": "choice",
             "choice": "agentic_evaluation",
-            "confidence": 0.81,
+            "confidence": 0.79,
             "probabilities": {
               "physical_amortization": 0.0,
               "multimodal_foundation": 0.01,
@@ -103938,8 +103155,8 @@
               "synthetic_to_real": 0.01,
               "mechanistic_interpretability": 0.0,
               "efficient_architecture": 0.0,
-              "agentic_evaluation": 0.83,
-              "incremental_baseline": 0.15
+              "agentic_evaluation": 0.82,
+              "incremental_baseline": 0.16
             }
           }
         }
@@ -135781,9 +134998,9 @@
         "reconstruction"
       ],
       "relevance": "passed",
-      "research_score": 5.0,
+      "research_score": null,
       "engineering_score": null,
-      "priority": 5,
+      "priority": 0,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -135869,7 +135086,7 @@
       },
       "jev_evaluation": {
         "rule_version": "2026.10.v2",
-        "evaluated_at": "2026-10-23T02:11:55.216322+00:00",
+        "evaluated_at": "2026-10-23T02:27:21.179730+00:00",
         "model": "jev-1.14.0",
         "evidence_hash": "37f195adc105c3e332f8ecdc4f21b350a9e089eb5aff5bb9ccf8a60dc141bb89",
         "evidence_sources": [
@@ -135883,30 +135100,30 @@
           "methodological_novelty": true,
           "technical_soundness": true,
           "biological_utility": true,
-          "reproducibility_readiness": true
+          "reproducibility_readiness": false
         },
         "scores": {
-          "methodological_novelty": 6.07,
-          "technical_soundness": 3.72,
-          "biological_utility": 6.17,
-          "reproducibility_readiness": 2.55
+          "methodological_novelty": 6.05,
+          "technical_soundness": 3.74,
+          "biological_utility": 6.14,
+          "reproducibility_readiness": null
         },
         "confidences": {
-          "methodological_novelty": 0.87,
-          "technical_soundness": 0.65,
-          "biological_utility": 0.64,
-          "reproducibility_readiness": 0.79
+          "methodological_novelty": 0.88,
+          "technical_soundness": 0.67,
+          "biological_utility": 0.66,
+          "reproducibility_readiness": null
         },
-        "primary_paradigm": "physical_amortization",
-        "paradigm_label_zh": "物理先验融合",
+        "primary_paradigm": "incremental_baseline",
+        "paradigm_label_zh": "常规方法迁移",
         "paradigm_confidence": 0.37,
-        "composite_priority": 4.98,
-        "abstract_preliminary_score": 6.12,
+        "composite_priority": null,
+        "abstract_preliminary_score": 6.09,
         "raw_answers": {
           "methodological_novelty": {
             "type": "score",
-            "score": 5.07,
-            "confidence": 0.87,
+            "score": 5.05,
+            "confidence": 0.88,
             "legend": {
               "0": "1: Routine baseline application with standard tooling",
               "1": "2: Very minor baseline adjustment without methodological change",
@@ -135924,9 +135141,9 @@
               "1": 0.0,
               "2": 0.0,
               "3": 0.01,
-              "4": 0.1,
-              "5": 0.69,
-              "6": 0.19,
+              "4": 0.09,
+              "5": 0.73,
+              "6": 0.16,
               "7": 0.01,
               "8": 0.0,
               "9": 0.0
@@ -135934,8 +135151,8 @@
           },
           "technical_soundness": {
             "type": "score",
-            "score": 2.72,
-            "confidence": 0.65,
+            "score": 2.74,
+            "confidence": 0.67,
             "legend": {
               "0": "1: Lacks baseline comparisons or contains fatal methodological flaws",
               "1": "2: Very weak experimental validation with questionable claims",
@@ -135951,10 +135168,10 @@
             "probabilities": {
               "0": 0.05,
               "1": 0.04,
-              "2": 0.35,
-              "3": 0.36,
-              "4": 0.13,
-              "5": 0.05,
+              "2": 0.33,
+              "3": 0.4,
+              "4": 0.12,
+              "5": 0.04,
               "6": 0.02,
               "7": 0.0,
               "8": 0.0,
@@ -135963,8 +135180,8 @@
           },
           "biological_utility": {
             "type": "score",
-            "score": 5.17,
-            "confidence": 0.64,
+            "score": 5.14,
+            "confidence": 0.66,
             "legend": {
               "0": "1: Negligible practical relevance to real biological research",
               "1": "2: Artificial toy setup disconnected from real laboratory needs",
@@ -135983,55 +135200,26 @@
               "2": 0.03,
               "3": 0.06,
               "4": 0.06,
-              "5": 0.45,
+              "5": 0.47,
               "6": 0.26,
-              "7": 0.09,
+              "7": 0.07,
               "8": 0.02,
-              "9": 0.01
-            }
-          },
-          "reproducibility_readiness": {
-            "type": "score",
-            "score": 1.55,
-            "confidence": 0.79,
-            "legend": {
-              "0": "1: Proprietary code and private data, completely non-reproducible",
-              "1": "2: Stated availability but no accessible repository or instructions found",
-              "2": "3: Minimal skeleton repository lacking preprocessing or model weights",
-              "3": "4: Partial codebase with complex undocumented dependencies",
-              "4": "5: Complete code provided with basic environment instructions",
-              "5": "6: Runnable implementation with documented reproduction steps and data preparation",
-              "6": "7: Well-structured repository with pretrained weights, sample data, and reproduction scripts",
-              "7": "8: Clean modular codebase with verified source implementation and automated smoke tests",
-              "8": "9: Fully documented open-source scientific package with tutorials and verified pipelines",
-              "9": "10: Gold-standard open reproducibility with one-click end-to-end containerized pipelines"
-            },
-            "probabilities": {
-              "0": 0.01,
-              "1": 0.67,
-              "2": 0.22,
-              "3": 0.06,
-              "4": 0.02,
-              "5": 0.01,
-              "6": 0.0,
-              "7": 0.0,
-              "8": 0.0,
               "9": 0.01
             }
           },
           "primary_paradigm": {
             "type": "choice",
-            "choice": "physical_amortization",
+            "choice": "incremental_baseline",
             "confidence": 0.37,
             "probabilities": {
-              "physical_amortization": 0.45,
+              "physical_amortization": 0.44,
               "multimodal_foundation": 0.01,
               "cross_scale_spatial_omics": 0.0,
               "synthetic_to_real": 0.08,
               "mechanistic_interpretability": 0.01,
               "efficient_architecture": 0.01,
               "agentic_evaluation": 0.0,
-              "incremental_baseline": 0.44
+              "incremental_baseline": 0.45
             }
           }
         }

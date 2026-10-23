@@ -187,7 +187,7 @@ def extract_evidence(paper: dict, context_dir: Path = Path("/mnt/c/workspace/cel
         "methodological_novelty": bool(evidence_snippets.get("abstract") or evidence_snippets.get("method")),
         "technical_soundness": bool(evidence_snippets.get("experiment") or evidence_snippets.get("results")),
         "biological_utility": bool(evidence_snippets.get("abstract") or evidence_snippets.get("conclusion")),
-        "reproducibility_readiness": bool(code_status in ("实现已确认", "作者声明") or evidence_snippets.get("reproducibility"))
+        "reproducibility_readiness": bool(code_status == "实现已确认" or evidence_snippets.get("reproducibility"))
     }
 
     evidence_text = (
@@ -398,8 +398,14 @@ def run_batch_evaluation(
             continue
         ev = p.get("jev_evaluation")
         curr_ev_info = extract_evidence(p)
-        # If not force and already evaluated with current rule_version AND identical evidence_hash, skip
-        if not force and ev and ev.get("rule_version") == RULE_VERSION and ev.get("evidence_hash") == curr_ev_info["evidence_hash"]:
+        # If not force and already evaluated with current rule_version, identical evidence_hash and identical sufficiency, skip
+        if (
+            not force
+            and ev
+            and ev.get("rule_version") == RULE_VERSION
+            and ev.get("evidence_hash") == curr_ev_info["evidence_hash"]
+            and ev.get("evidence_sufficiency") == curr_ev_info["evidence_sufficiency"]
+        ):
             continue
         candidates.append((p, curr_ev_info))
 
