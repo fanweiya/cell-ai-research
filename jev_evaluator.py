@@ -243,6 +243,7 @@ def run_batch_evaluation(db_path: str = "/mnt/c/workspace/cell-ai-research/paper
         return 0
 
     evaluated_count = 0
+    failed_count = 0
     save_batch_size = 10
 
     def process_item(item):
@@ -267,12 +268,16 @@ def run_batch_evaluation(db_path: str = "/mnt/c/workspace/cell-ai-research/paper
                 if evaluated_count % save_batch_size == 0:
                     with open(db_path, "w", encoding="utf-8") as out_f:
                         json.dump(db, out_f, ensure_ascii=False, indent=2)
+            else:
+                failed_count += 1
 
     # Final writeback
     with open(db_path, "w", encoding="utf-8") as out_f:
         json.dump(db, out_f, ensure_ascii=False, indent=2)
 
-    print(f"Successfully evaluated and updated {evaluated_count} papers.")
+    print(f"Successfully evaluated and updated {evaluated_count} papers (failed: {failed_count}).")
+    if failed_count > 0:
+        raise RuntimeError(f"Jev evaluation failed for {failed_count}/{total_candidates} papers")
     return evaluated_count
 
 

@@ -1,0 +1,12 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "该图展示了论文提出的RELIEF模型整体架构，包含文本引导跳跃细化适配器(TSRA)和可靠性引导解码注意力块(RDAB)的详细结构。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "定性分割结果对比图：在Kvasir-SEG、MosMedData+、QaTa-COV19数据集上比较BiCLIP、LViT、ProLearn与RELiF方法及真实标注"
+  }
+}

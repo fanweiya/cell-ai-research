@@ -11342,5 +11342,165 @@
     "confidence": 0.85,
     "version": 3,
     "generated_at": "2026-10-22T09:27:21.631154"
+  },
+  "2610.28985": {
+    "summary": "MedBOE 旨在实现从全身医学影像基于优化估计完整患者人体模型。当前仓库仅包含项目说明与许可证文件，明确标注为占位仓库（Placeholder），尚未开源任何算法、模型或数据处理代码。",
+    "repository_kind": "placeholder",
+    "architecture": "无法确认。仓库中没有任何代码实现、配置管线或数据流定义。",
+    "call_chain": "无法确认",
+    "core_modules": [],
+    "dependencies": [
+      "无法确认（未提供 requirements.txt、pyproject.toml 或任何环境依赖文件）"
+    ],
+    "reproduction_readiness": "placeholder",
+    "reproduction_notes": "当前仓库处于占位状态，README 明确说明代码将在论文接收后发布。目前无任何代码、配置文件或测试数据，无法进行任何复现尝试。",
+    "issues": [
+      {
+        "severity": "blocker",
+        "finding": "仓库未公开任何源代码实现，仅为论文录用前的占位符",
+        "evidence": [
+          "README.md:3-4"
+        ],
+        "impact": "无法进行代码执行、算法评估、接口集成或复现论文结果",
+        "confidence": 1.0
+      }
+    ],
+    "static_limitations": [
+      "由于仓库不存在任何代码文件，无法评估其模型架构、优化算法实现、第三方库依赖及输入输出规范",
+      "仅进行了 gread 静态分析，未执行代码，不能确认运行时兼容性或论文指标。"
+    ],
+    "confidence": 1.0,
+    "version": 3,
+    "generated_at": "2026-10-23T09:24:11.001815"
+  },
+  "2610.28118": {
+    "summary": "RELiF 是一个基于 PyTorch 与 PyTorch Lightning 的多模态医学图像分割框架，利用预训练视觉模型（如 ConvNeXt）与医学文本编码器（如 BiomedVLP-CXR-BERT）结合 RFG 与 TSRA 模块进行引导分割。仓库提供了完整的端到端训练和评估代码及模型组件定义，属于包含可修复工程问题的实现仓库。",
+    "repository_kind": "implementation",
+    "architecture": "数据流输入为医学图像及对应的文本描述。在 utils/dataset.py 中，文本被 BiomedVLP-CXR-BERT 提取每层 hidden_states，与经 MONAI 几何/强度增强的图像组成批次。模型主干 RELiF (utils/model.py) 以 ConvNeXt (VisionModel) 提取 4 级多尺度特征，并通过多层 Decoder (utils/layers.py) 逐步上采样。每个解码级通过 RDAB 融合深层文本嵌入与视觉特征，通过 TextGuidedBoundarySkipAdapter 将全局文本语义门控注入高分辨率跳跃连接特征，最终通过 SubpixelUpsample 和 UnetOutBlock 输出单通道分割概率图，损失由 SEU_Loss (Dice + 2D FFT 频域损失 + 熵不确定度) 监督。",
+    "call_chain": "train.py (入口 main) → utils.config.load_cfg_from_cfg_file → utils.dataset.data (加载图像、标签并经 BiomedVLP-CXR-BERT 生成文本 embeddings) → DataLoader → pl.Trainer.fit → engine.wrapper.RELiF_Wrapper.training_step → RELiF.forward (VisionModel 提取特征 → Decoder/RDAB/TextGuidedBoundarySkipAdapter 逐层多尺度融合上采样 → SubpixelUpsample) → engine.loss.SEU_Loss (计算 Dice + FFT + Entropy) → 输出分割预测并更新权重",
+    "core_modules": [
+      {
+        "name": "RELiF",
+        "role": "多模态分割网络核心，串联视觉编码器、多尺度跳跃连接与跨模态文本引导解码器",
+        "evidence": "utils/model.py:RELiF"
+      },
+      {
+        "name": "RELiF_Wrapper",
+        "role": "PyTorch Lightning 封装器，组织前向推理、SEU_Loss 损失计算、优化器与评价指标收集",
+        "evidence": "engine/wrapper.py:RELiF_Wrapper"
+      },
+      {
+        "name": "TextGuidedBoundarySkipAdapter",
+        "role": "TSRA 模块，基于全局文本均值特征生成通道门控，自适应微调浅层高分辨率跳跃特征",
+        "evidence": "utils/layers.py:TextGuidedBoundarySkipAdapter"
+      },
+      {
+        "name": "RDAB",
+        "role": "深层特征跨模态交互模块，包含自注意力、文本-图像交叉注意力及可靠性引导门控 (RFG)",
+        "evidence": "utils/layers.py:RDAB"
+      },
+      {
+        "name": "SEU_Loss",
+        "role": "多任务复合损失函数，包含软 Dice 损失、2D 傅里叶变换频谱幅度误差与基于熵的不确定度约束",
+        "evidence": "engine/loss.py:SEU_Loss"
+      },
+      {
+        "name": "data",
+        "role": "多模态医学分割数据集加载器，负责图像转换与在线/离线 BERT 词嵌入抽取",
+        "evidence": "utils/dataset.py:data"
+      }
+    ],
+    "dependencies": [
+      "PyTorch (torch, torchvision)",
+      "PyTorch Lightning (pytorch-lightning==1.9.3)",
+      "HuggingFace Transformers (transformers, tokenizers)",
+      "MONAI (monai)",
+      "mamba-ssm (utils/mamba.py 中导入 selective_scan_fn，需 CUDA 编译环境)",
+      "einops",
+      "torchmetrics",
+      "pandas, openpyxl, pillow, scipy",
+      "外部预训练模型权重：microsoft/BiomedVLP-CXR-BERT-specialized、facebook/convnext-tiny-224",
+      "外部数据集：Medical-2D (QaTa_COV19 / MosMedData+ / Kvasir_SEG) 及 Excel 格式文本标注"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "直接运行 README 中的命令会遇到硬编码路径和 GPU 编号报错。需要在 config/training.yaml 中将作者个人开发机路径 (/home/asosoft/Seivan/...) 替换为本地实际数据路径，将 train.py 和 evaluate.py 中的硬编码权重路径及 GPU 设备参数修改适配本地环境，并安装包含 CUDA 编译支持的 mamba-ssm 扩展。",
+    "issues": [
+      {
+        "severity": "blocker",
+        "finding": "配置文件包含作者本地绝对路径，直接运行报路径不存在错误",
+        "evidence": [
+          "config/training.yaml:DATA.train_csv_path",
+          "config/training.yaml:DATA.train_root_path"
+        ],
+        "impact": "用户克隆后直接运行 train.py 将由于无法定位 Excel 与图片目录导致 FileNotFoundError",
+        "confidence": 1.0
+      },
+      {
+        "severity": "blocker",
+        "finding": "evaluate.py 中写死了不可用的权重文件绝对路径",
+        "evidence": [
+          "evaluate.py:36"
+        ],
+        "impact": "代码中固定加载 /home/asosoft/Seivan/RELiF/RESULTS/kvasir_polyp_RELiF/best_test_model.ckpt，未通过 config 或命令行参数动态获取，直接执行 evaluate.py 必然崩溃",
+        "confidence": 1.0
+      },
+      {
+        "severity": "high",
+        "finding": "GPU 设备编号写死为非通用卡号，单卡或设备号不符环境下报错",
+        "evidence": [
+          "train.py:140",
+          "config/training.yaml:TRAIN.device"
+        ],
+        "impact": "train.py 在 pl.Trainer 中硬编码 devices=[1]，在单 GPU（仅有 cuda:0）设备上会导致 CUDA invalid device ordinal 异常",
+        "confidence": 0.95
+      },
+      {
+        "severity": "high",
+        "finding": "Dataset 中重复多次在 CPU/单样本上调用 BERT 前向推理，且存在冗余无损后处理逻辑",
+        "evidence": [
+          "utils/dataset.py:37-52",
+          "utils/dataset.py:59-65"
+        ],
+        "impact": "在 DataLoader 的 __getitem__ 中加载整个 BERT 进行前向传播，使得 DataLoader worker 显存/内存开销急剧增加且速度极慢；此外将 Tensor 转为 PIL 再转回 Tensor 阈值化的操作存在不必要的开销",
+        "confidence": 0.9
+      },
+      {
+        "severity": "medium",
+        "finding": "层定义中隐式调用命令行参数解析，破坏模块解耦",
+        "evidence": [
+          "utils/layers.py:TextGuidedBoundarySkipAdapter.__init__",
+          "utils/layers.py:get_parser"
+        ],
+        "impact": "模型子模块初始化时直接调用 get_parser() 读取 ./config/training.yaml 获取 res_scale，导致模型无法独立以模块形式被外部库导入或脱离配置文件初始化",
+        "confidence": 0.95
+      },
+      {
+        "severity": "medium",
+        "finding": "SEU_Loss 中不确定度熵损失在单通道 Sigmoid 场景下的计算维度存在偏差",
+        "evidence": [
+          "engine/loss.py:46-48"
+        ],
+        "impact": "prediction 为 [B, 1, H, W] 时，对 dim=1 求 sum 得到的是 -p*log(p)，而非完整的二分类香农熵 -(p*log(p) + (1-p)*log(1-p))，可能导致熵不确定度正则项行为与预期不符",
+        "confidence": 0.85
+      },
+      {
+        "severity": "low",
+        "finding": "依赖清单 requirements.txt 包含大量未过滤的个人环境脏依赖",
+        "evidence": [
+          "requirements.txt"
+        ],
+        "impact": "包含 telegram, faster-whisper, jupyter 等无关包，并固定了特定补丁版本与多版本 CUDA 运行时依赖，增加用户配置环境的冲突风险",
+        "confidence": 0.9
+      }
+    ],
+    "static_limitations": [
+      "未实际下载 Hugging Face 权重与 Kaggle 医学数据集，无法验证 BiomedVLP-CXR-BERT 与 ConvNeXt-Tiny 的实际特征对齐及数值收敛表现",
+      "未编译执行 mamba_ssm，无法验证 selective_scan_fn 在当前 PyTorch 2.9+ 版本的实际编译运行兼容性",
+      "无法动态核验训练 200 epochs 后的实际测试 Dice/MIoU 指标是否与论文公布数值完全一致",
+      "仅进行了 gread 静态分析，未执行代码，不能确认运行时兼容性或论文指标。"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-10-23T09:24:21.383916"
   }
 }

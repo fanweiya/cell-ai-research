@@ -11,7 +11,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": 4,
-      "priority": 6,
+      "priority": 7,
       "bonus": [
         "new_architecture"
       ],
@@ -4487,7 +4487,7 @@
       "relevance": "passed",
       "research_score": 2.5,
       "engineering_score": 2,
-      "priority": 2,
+      "priority": 3,
       "bonus": [
         "foundation",
         "segmentation_or_detection",
@@ -5027,7 +5027,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": 3,
-      "priority": 6,
+      "priority": 7,
       "bonus": [
         "segmentation_or_detection",
         "new_architecture"
@@ -8473,7 +8473,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": 4,
-      "priority": 6,
+      "priority": 5,
       "bonus": [
         "foundation",
         "cross_dataset"
@@ -8856,7 +8856,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": 3,
-      "priority": 6,
+      "priority": 7,
       "bonus": [
         "new_architecture"
       ],
@@ -9026,7 +9026,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": 7,
-      "priority": 4,
+      "priority": 5,
       "bonus": [
         "new_approach"
       ],
@@ -10564,7 +10564,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -12145,7 +12145,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -12895,7 +12895,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -14576,7 +14576,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -17229,7 +17229,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -21915,7 +21915,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -33080,7 +33080,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -34878,7 +34878,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -36588,7 +36588,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -37534,7 +37534,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -39701,7 +39701,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -40694,7 +40694,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -41614,7 +41614,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -42434,7 +42434,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -43640,7 +43640,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -43810,7 +43810,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -44165,7 +44165,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 6,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -47118,7 +47118,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -47827,7 +47827,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -51945,7 +51945,7 @@
       "relevance": "passed",
       "research_score": 4.5,
       "engineering_score": null,
-      "priority": 4,
+      "priority": 5,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -54420,7 +54420,7 @@
       "relevance": "passed",
       "research_score": 5.5,
       "engineering_score": null,
-      "priority": 8,
+      "priority": 7,
       "bonus": [],
       "status": {
         "discovery": "done",
@@ -54891,6 +54891,668 @@
         "paradigm_label_zh": "常规方法迁移",
         "paradigm_confidence": 0.89,
         "composite_priority": 4.63
+      }
+    },
+    {
+      "arxiv_id": "2610.28985",
+      "title": "MedBOE: Optimization-Based Estimation of Complete Patient Body Models from Whole-Body Medical Imaging",
+      "published_date": "2026-10-22",
+      "authors": [
+        "Hoijoon Jung",
+        "Yuhao Wei",
+        "Mingxiao Tu",
+        "Younhyun Jung",
+        "Michael Fulham",
+        "Jinman Kim"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "segmentation",
+        "reconstruction"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "https://github.com/Joon-Jung/MedBOE",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "he state-of-the-art methods adapted from the multimedia domain, demonstrating MedBOE’s high accuracy in complete patient body model estimation and BHM derivation. MedBOE achieved the best overall performance among evaluated methods, and MedBOE-derived BHMs were within 2% error, suggesting low percentage errors for downstream analyses. The MedBOE source code and optimization weights are publicly available at https://github.com/Joon-Jung/MedBOE . <s",
+          "relation_signal": "explicit_code_statement",
+          "provenance_source": "https://arxiv.org/html/2610.28985",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "placeholder_or_docs_only"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "True whole-body medical imaging captures a patient from head to toe and provides comprehensive anatomical and/or functional information. This coverage enables reconstruction of the external body surface, yielding patient body models. However, scanner geometry (e.g., bore diameter), patient characteristics, and positioning can leave body regions missing (e.g., lateral arms/torso, hands, forearms, elbows), producing incomplete patient body models. Such incompleteness limits downstream medical analyses, including derivation of body-habitus metrics (BHMs), such as body volume and surface area, for injected radiotracer activity regimens, cardiometabolic risk assessment, and computational anatomical modeling for medical imaging simulation and radiation dosimetry. We present the Medical Body model Optimization-based Estimator (MedBOE), an automated, training-free framework for estimating complete patient body models from whole-body images with missing body regions. Our innovation is to leverage the Skinned Multi-Person Linear (SMPL) template, a parametric body mesh representing a broad range of body shapes and poses, in medical imaging. MedBOE aligns the SMPL template to the incomplete patient body models via attribute-guided optimization and estimates missing body regions through geometrically and volumetrically constrained deformation. We evaluated MedBOE using two public datasets: AutoPET (91 whole-body PET-CT images) and Human Implicit Tissues (HIT; 40 whole-body segmentations from MRI images). MedBOE achieved the best overall volumetric and geometric performance among evaluated methods. BHMs derived from MedBOE were within 2% error, suggesting low percentage errors for downstream analyses. MedBOE offers an automated, training-free method for estimating complete patient body models from whole-body images with missing body regions.",
+      "has_code": false,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "Joon-Jung/MedBOE",
+        "repository_url": "https://github.com/Joon-Jung/MedBOE",
+        "analyzed_at": "2026-10-23T01:21:34.503292+00:00",
+        "architecture": "# Joon-Jung/MedBOE\n**Stars**: 0 | **Language**: \n**Description**: This repository contains the official code for MedBOE, a system that uses optimization-based estimation to create complete patient body models from whole-body medical imaging. The code will be released after the manuscript is accepted.\n\n\n## Directory Tree\n```\nLICENSE\nREADME.md\n```",
+        "project_structure": "## Directory Tree\n```\nLICENSE\nREADME.md\n```",
+        "key_files": [
+          "README.md",
+          "LICENSE"
+        ],
+        "source_coverage": {
+          "repository_kind": "placeholder_or_docs_only",
+          "has_implementation": false,
+          "code_file_count_in_tree": 0,
+          "selected_file_count": 2,
+          "selected_code_file_count": 0,
+          "languages_by_extension": {},
+          "tests_present": false,
+          "test_files": [],
+          "manifest_files": [
+            "LICENSE",
+            "README.md"
+          ],
+          "read_errors": [],
+          "warnings": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": false,
+        "repository_kind": "placeholder_or_docs_only",
+        "result_file": "results/2610.28985_gread.json"
+      },
+      "discovered_at": "2026-10-23T01:20:00.594817Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://arxiv.org/abs/2610.28985",
+        "verified_at": "2026-10-23T01:20:00.594817Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.29665",
+      "title": "Learning to Reason Like a Cytopathologist:Clinically Grounded Multiscale Evidential Learning for Cervical Cytology",
+      "published_date": "2026-10-22",
+      "authors": [
+        "Ajeet Kumar Singh",
+        "Nehal Mishra",
+        "Anurag Tripathi",
+        "Santanu Chaudhury",
+        "Dorien Herremans"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "classification"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Cervical cytology presents a fundamentally ambiguous diagnostic landscape, where equivocal categories such as Atypical Squamous Cells of Undetermined Significance (ASC-US) occupy a morphological grey zone that is definitional. For clinical decision support, the goal extends beyond assigning a definitive label to every sample: cases must also be distinguished by whether the available evidence supports a confident decision or warrants further consideration, a distinction conventional classification models are not designed to explicitly represent. We propose a multiscale evidential framework that models cervical cytology along an ordinal disease continuum using clinically grounded soft anchors, representing progression from benign reactive changes to precancerous lesions and malignancy. Three biologically motivated spatial contexts--nuclear morphology, cytoplasmic characteristics, and neighbourhood cellular architecture--are independently encoded using a shared frozen DINOv2 backbone, preserving inter-scale disagreement that early fusion may obscure. Calibrated predictions are transformed into Dempster--Shafer belief masses and fused with reliability discounting, allowing conflicting evidence and insufficient support to remain explicitly uncommitted rather than forcing a decision. The fused belief state drives interpretable routing that separates confidently classified cases from those with irreducible evidential insufficiency, enabling clinically meaningful triage. Across two independent publicly available conventional cytology datasets, RIVA and CRIC Cervix, the framework generalises consistently, with uncertainty strongly associated with diagnostic difficulty: incorrect predictions carry 1.94x-4.13x higher uncertainty than correct ones.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-23T01:20:00.594817Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://arxiv.org/abs/2610.29665",
+        "verified_at": "2026-10-23T01:20:00.594817Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.29746",
+      "title": "LEAF-Mamba: Feature Adaptation and Fusion for Whole Slide Image Analysis",
+      "published_date": "2026-10-22",
+      "authors": [
+        "Lubin Gan",
+        "Jing Zhang",
+        "Mingjun Ma",
+        "Linhao Qu",
+        "Dachun Kai",
+        "Xiaoyan Sun"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "classification",
+        "reconstruction",
+        "histopathology"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Whole slide image (WSI) analysis enables computational diagnosis and prognosis, but gigapixel images and limited annotations make slide-level learning challenging. Multiple instance learning addresses this task by aggregating patch representations from frozen pretrained encoders. Recently, Mamba has enabled efficient modeling of long patch sequences. However, task supervision alone does not explicitly constrain information recovery during feature adaptation, while Mamba couples local processing with long-range propagation rather than retaining separate representations for fusion. Motivated by these challenges, we introduce LEAF-Mamba, a framework that jointly addresses latent evidence adaptation and fusion for frozen-feature WSI analysis. A reconstruction-regularized adapter learns compact, task-specific representations while reconstructing the input features. Parallel Mamba and convolutional streams then capture long-range dependencies and sequence-local interactions, with an input-dependent gate modulating their joint representation before slide-level pooling. Experiments across feature extractors demonstrate improved average performance over strong MIL baselines in both diagnostic classification and survival prediction. Component analyses further support the contributions of adaptation and fusion. These findings highlight the value of jointly designing feature transformation and contextual aggregation to translate pretrained representations into effective slide-level predictions.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-23T01:20:00.594817Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://arxiv.org/abs/2610.29746",
+        "verified_at": "2026-10-23T01:20:00.594817Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.29881",
+      "title": "Expandable Modality Experts for Medical Vision-Language Learning",
+      "published_date": "2026-10-22",
+      "authors": [
+        "DM BAPPY",
+        "Eunsu Kim",
+        "Hanjoo Lee",
+        "Sung Hak Lee",
+        "Sangjeong Ahn"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "segmentation",
+        "classification",
+        "histopathology"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Learning across medical imaging modalities requires making use of images without paired text and accommodating new domains while retaining existing representations. We propose a medical vision-language technique built around an expandable bank of modality experts. Its Multiway Transformer combines shared visual computation with deterministically routed feed-forward experts and a separate text pathway. A modality-aware visual tokenizer supplies targets for masked pretraining on 19.4 million unpaired image rows across seven modalities; contrastive alignment then uses 3.23 million image-text pairs. Additional fundus and optical coherence tomography experts learn from paired data while the original image and text embedding paths remain frozen. With a ViT-Large backbone, the proposed technique achieves the best or tied-best result in 24 of 25 benchmark settings across nine modalities: 10 of 11 zero-shot classification benchmarks, all 10 linear probes, and all four retrieval benchmarks. Mean balanced accuracy is 0.674 for zero-shot classification and 0.856 for linear probing, and mean bidirectional retrieval recall is 20.70%. A separate three-seed sequential experiment with matched adaptation data yields fundus and OCT retrieval gains of 14.95 and 9.31 percentage points, with no measured loss on preceding fundus or pathology tasks. The preservation argument requires unchanged existing computation paths and inference conditions, and feature-identity checks verify retention on evaluated inputs. The proposed technique provides a modular approach to learning and expanding medical vision-language representations.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-23T01:20:00.594817Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://arxiv.org/abs/2610.29881",
+        "verified_at": "2026-10-23T01:20:00.594817Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.30104",
+      "title": "BatchBench: Benchmarking AI Robustness to Batch Effects and Domain Shift in Biomedical Images - A JUMP Cell Painting Leaderboard",
+      "published_date": "2026-10-22",
+      "authors": [
+        "Sonja Topf",
+        "Ana Sanchez-Fernandez",
+        "G\\\"unter Klambauer"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "task_type": [
+        "cell_imaging"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Despite recent advances, current AI systems remain highly susceptible to domain shifts, particularly in biomedical imaging, where images are usually acquired under substantially different experimental conditions. Although recent domain adaptation methods have made substantial progress, significant performance gaps under domain shift persist. To measure progress in this regard, we introduce BatchBench, a leaderboard that evaluates and compares the robustness of AI systems on biomedical images from unseen experimental batches and data sources. BatchBench is built on JUMP-CP, one of the largest publicly available biomedical imaging datasets. Generated using the Cell Painting assay, JUMP-CP exhibits pronounced batch effects and domain shifts, making it a challenging testbed for evaluating robustness to distributional changes.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-23T01:20:00.594817Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://arxiv.org/abs/2610.30104",
+        "verified_at": "2026-10-23T01:20:00.594817Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2509.16886",
+      "title": "SAM-DCE: Decoupled Context Enhancement for Prompt-Free Medical Image Segmentation",
+      "published_date": "2026-10-22",
+      "authors": [
+        "Yingzhen Hu",
+        "Yiheng Zhong",
+        "Aijing Yang",
+        "Georges El Fakhri",
+        "Xiaofeng Liu"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "segmentation"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "The Segment Anything Model (SAM) is a promising foundation model for medical image segmentation, but its prompt-driven design is not directly suitable for fully automatic multi-class anatomical segmentation. Without manual point, box, or mask prompts, SAM faces a dual over-smoothing problem: deep image features may lose fine local structural evidence, while mask tokens may become semantically ambiguous. We propose SAM-DCE, a decoupled context enhancement framework for prompt-free medical image segmentation. SAM-DCE introduces Spatial Representation Compensation (SRC) to recover anatomical evidence from intermediate ViT features and Semantic Token Calibration (STC) to improve the category consistency of foreground mask tokens. Rather than replacing the pretrained decoder or fusing output masks, SAM-DCE refines the spatial and semantic representations before recombining them through SAM's original token-to-mask mechanism. On the Synapse multi-organ CT segmentation dataset, SAM-DCE achieved a mean Dice score of 83.86\\% and an HD95 of 16.04 mm, outperforming the representative CNN-, Transformer-, and SAM-based baselines evaluated here. Ablation experiments further showed that SRC and STC provide complementary improvements, supporting the proposed spatial--semantic factorization for prompt-free SAM adaptation.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-23T01:20:00.594817Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://arxiv.org/abs/2509.16886",
+        "verified_at": "2026-10-23T01:20:00.594817Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2601.06209",
+      "title": "Active Learning under Simulated Class Imbalance and Label Shift in Binary Semantic Segmentation",
+      "published_date": "2026-10-22",
+      "authors": [
+        "Julien Combes (SVH",
+        "Michelin)",
+        "Jean-Fran\\c{c}ois Coeurjolly (SVH)",
+        "Alexandre Derville (Michelin)"
+      ],
+      "categories": [
+        "cs.CV",
+        "stat.ML"
+      ],
+      "task_type": [
+        "segmentation"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "The aim of Active Learning is to select the most informative samples from an unlabelled set of data. This is useful in cases where the amount of data is large and labelling is expensive, such as in machine vision or medical imaging. Two particularities of machine vision are first, that most of the images produced are free of defects, and second, that the amount of images produced is so big that we cannot store all acquired images. This results, on the one hand, in a strong class imbalance in defect distribution and, on the other hand, in a potential label shift caused by limited storage. To understand how these two forms of imbalance affect active learning algorithms, we propose a simulation study based on two open-source datasets. Our contribution is not a new acquisition strategy but a controlled and reproducible protocol that synthetically constructs datasets in which the levels of class imbalance and label shift are fixed and vary independently. Four standard active learning selection strategies are compared: random sampling, entropy-based selection, core-set selection and an imbalance aware strategy called galaxy sampling. We empirically find that active learning, and in particular the entropy-based and core-set selections, remains competitive with and typically superior to random sampling even for highly imbalanced datasets, and we quantify the loss of efficiency that occurs under a strong label shift.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-23T01:20:00.594817Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://arxiv.org/abs/2601.06209",
+        "verified_at": "2026-10-23T01:20:00.594817Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2605.24771",
+      "title": "From Theory to Decision Rule: Calibrating the Noisy-Label Crossover for Vision-Language Model Weak Supervision Across Three Medical-Imaging Benchmarks",
+      "published_date": "2026-10-22",
+      "authors": [
+        "Bruce Changlong Xu",
+        "Jose K. James",
+        "Alexander J. Ryu"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "task_type": [
+        "classification",
+        "histopathology"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "In medical imaging, small sets of expert labels are often combined with zero-shot pseudo-labels from a vision-language model (VLM). When the expert-labeled set is very small, the extra pseudo-labels reduce variance and improve accuracy. Once a classifier trained on expert labels alone reaches the accuracy of the weak labeler, however, adding pseudo-labels lowers test performance. We measure where this crossover occurs on PatchCamelyon histopathology, ISIC 2019 dermoscopy, and NIH ChestX-ray14 radiography using pseudo-labels from BiomedCLIP and PubMedCLIP across six student architectures ($8\\mathrm{M}$ to $89\\mathrm{M}$ parameters). Weak labels stop helping after $20$--$50$ expert labels on ISIC 2019, about $100$ on PatchCamelyon, and $250$--$500$ on NIH ChestX-ray14. Above those budgets, adding $10{,}000$ pseudo-labels reduces test macro-AUC by up to $0.14$ points with BiomedCLIP ($0.23$ with PubMedCLIP) on ISIC 2019, $0.10$ on PatchCamelyon, and $0.08$ on NIH ChestX-ray14. Across the six student architectures, the weak-label ceiling stays within a $0.024$ AUC range ($0.841$--$0.865$), indicating that the VLM labeler, rather than student size, limits performance. Comparing VLM pseudo-labels with random label flips at the same error rate shows that systematic VLM mistakes yield $0.09$--$0.20$ lower AUC than random noise on PatchCamelyon and ISIC 2019, but $0.03$--$0.04$ higher AUC on 15-class NIH ChestX-ray14, where per-finding crossovers also span more than a $20\\times$ range. A simple bias-variance rule estimated from the weak labeler's validation accuracy and small expert-only runs predicts whether pseudo-labels will help or hurt in all $30$ statistically significant settings ($39/42$ overall).",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-23T01:20:00.594817Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://arxiv.org/abs/2605.24771",
+        "verified_at": "2026-10-23T01:20:00.594817Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.28118",
+      "title": "Reliability-Guided Vision-Language Decoding with Text-Aware Skip Refinement for Medical Image Segmentation",
+      "published_date": "2026-10-22",
+      "authors": [
+        "Sivan Talaei",
+        "Fatemeh Daneshfar",
+        "Abdulhady Abas Abdullah",
+        "Mourad Oussalah"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "segmentation"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/SeivanTalaie/RELiF",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "ging characteristics and target appearances. Additional analyses examine efficiency and stability. The complementary uncertainty representation derived from the reliability response also shows an association with prediction difficulty, with higher uncertainty values occurring more frequently in pixels associated with segmentation errors. Code: https://github.com/SeivanTalaie/RELiF . Index Terms: Medical ima",
+          "relation_signal": "explicit_code_statement",
+          "provenance_source": "https://arxiv.org/html/2610.28118",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Medical image segmentation remains challenging when targets exhibit limited visual distinction, irregular structure, or substantial variation across imaging modalities. Medical text can reduce this ambiguity, but indiscriminate fusion may introduce unreliable guidance. We present RELiF, a vision--language framework that integrates text through reliability-guided decoding. Its Reliability-guided Fusion Gate (RFG) adaptively controls cross-modal updates, while the Text-guided Skip Refinement Adapter (TSRA) refines high-resolution features using text guidance. RELiF is evaluated on radiographic, CT, and endoscopic segmentation tasks, where it shows competitive performance across diverse imaging characteristics and target appearances. Additional analyses examine efficiency and stability. The complementary uncertainty representation derived from the reliability response also shows an association with prediction difficulty, with higher uncertainty values occurring more frequently in pixels associated with segmentation errors. Code: https://github.com/SeivanTalaie/RELiF.",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "SeivanTalaie/RELiF",
+        "repository_url": "https://github.com/SeivanTalaie/RELiF",
+        "analyzed_at": "2026-10-23T01:21:54.349733+00:00",
+        "architecture": "# SeivanTalaie/RELiF\n**Stars**: 0 | **Language**: Python\n**Description**: This repository contains the official implementation of RELiF (Reliability-Guided Vision-Language Decoding with Text-Aware Skip Refinement), a framework for medical image segmentation. It incorporates a Reliability-guided Fusion Gate (RFG) and a Text-guided Skip Refinement Adapter (TSRA) to enhance reliability when using textual guidance. The repository includes code for training and evaluation, environment setup, and instructions for dataset preparation.\n\n\n## Directory Tree\n```\n.gitignore\nREADME.md\nassets\nassets/RELiF.png\nconfig\nconfig/training.yaml\nengine\nengine/loss.py\nengine/wrapper.py\nevaluate.py\nrequirements.txt\ntrain.py\nutils\nutils/config.py\nutils/dataset.py\nutils/layers.py\nutils/mamba.py\nutils/model.py\n```",
+        "project_structure": "## Directory Tree\n```\n.gitignore\nREADME.md\nassets\nassets/RELiF.png\nconfig\nconfig/training.yaml\nengine\nengine/loss.py\nengine/wrapper.py\nevaluate.py\nrequirements.txt\ntrain.py\nutils\nutils/config.py\nutils/dataset.py\nutils/layers.py\nutils/mamba.py\nutils/model.py\n```",
+        "key_files": [
+          "config/training.yaml",
+          "train.py",
+          "evaluate.py",
+          "README.md",
+          "utils/model.py",
+          "engine/loss.py",
+          "utils/mamba.py",
+          "utils/config.py",
+          "utils/layers.py",
+          "utils/dataset.py",
+          "engine/wrapper.py",
+          "requirements.txt"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 9,
+          "selected_file_count": 12,
+          "selected_code_file_count": 9,
+          "languages_by_extension": {
+            "py": 9
+          },
+          "tests_present": false,
+          "test_files": [],
+          "manifest_files": [
+            "requirements.txt",
+            "README.md"
+          ],
+          "read_errors": [],
+          "warnings": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2610.28118_gread.json"
+      },
+      "discovered_at": "2026-10-23T01:20:00.594817Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://arxiv.org/abs/2610.28118",
+        "verified_at": "2026-10-23T01:20:00.594817Z",
+        "verification": "arxiv_atom_exact_id_and_title"
       }
     }
   ]

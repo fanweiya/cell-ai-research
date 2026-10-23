@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "该图展示了论文提出的两阶段训练框架与模块化扩展方法的整体架构，包含数据准备、阶段一掩码预训练、阶段二图文对齐及新专家模块整合等核心流程。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "实验结果折线图：展示各基线方法在扩展适配（+Fundus、+OCT）后PathGen检索召回率的变化，提出方法（独立专家组装）保持性能不衰减"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "X-ray图文检索的定性对比图，展示各基线（BMC、LoRA、ConceptCLIP、UniMed-CLIP等）与所提方法在专家融合前后的检索结果与排名变化"
+  }
+}

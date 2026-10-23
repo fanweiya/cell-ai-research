@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "论文核心方法架构图：展示多尺度patch提取、冻结DINOv2骨干、独立尺度MLP头、概率校准与DST证据融合及最终输出分类的完整流程"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "各细胞类别（NILM至SCC）的Transition score分布图（ridgeline图），展示方法对不同病变类别的判别得分分布，属实验结果可视化"
+  },
+  "2": {
+    "relevant": true,
+    "score": 7,
+    "caption": "各类别（NILM至SCC）转换分数的 ridgeline 分布图，展示随病变严重程度分数分布右移的数据可视化"
+  }
+}
