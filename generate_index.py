@@ -1575,62 +1575,84 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
         jev_review_html = ""
         jev_score = 0.0
         paradigm_zh = ""
-        if isinstance(jev, dict) and jev.get("composite_priority"):
-            jev_score = float(jev.get("composite_priority") or 0.0)
+        if isinstance(jev, dict) and (jev.get("composite_priority") is not None or jev.get("scores")):
             scores = jev.get("scores") or {}
-            nov = float(scores.get("methodological_novelty") or 0.0)
-            sou = float(scores.get("technical_soundness") or 0.0)
-            uti = float(scores.get("biological_utility") or 0.0)
-            rep = float(scores.get("reproducibility_readiness") or 0.0)
+            confidences = jev.get("confidences") or {}
+            nov = scores.get("methodological_novelty")
+            sou = scores.get("technical_soundness")
+            uti = scores.get("biological_utility")
+            rep = scores.get("reproducibility_readiness")
+            
+            comp_score = jev.get("composite_priority")
+            prelim_score = jev.get("abstract_preliminary_score")
             paradigm_zh = _esc(jev.get("paradigm_label_zh") or "")
             model_name = _esc(jev.get("model") or "jev-1.14.0")
+            code_st = _esc(jev.get("code_status") or "未提供代码")
 
-            level_cls = "jev-gold" if jev_score >= 6.0 else "jev-blue" if jev_score >= 5.0 else "jev-gray"
-            jev_badge_html = f'''<div class="jev-pill {level_cls}" title="摘要初评综合得分: {jev_score}/10 · 核心机制: {paradigm_zh}">
+            # Badge display: composite score if all 4 dims available, otherwise preliminary or unrated
+            if comp_score is not None:
+                jev_score = float(comp_score)
+                level_cls = "jev-gold" if jev_score >= 6.0 else "jev-blue" if jev_score >= 5.0 else "jev-gray"
+                jev_badge_html = f'''<div class="jev-pill {level_cls}" title="四维证据充分 · 综合得分: {jev_score}/10 · 核心机制: {paradigm_zh}">
   <span class="jev-spark">⚡</span>
   <span>{jev_score}</span>
 </div>'''
+            elif prelim_score is not None:
+                jev_score = float(prelim_score)
+                jev_badge_html = f'''<div class="jev-pill jev-gray" title="部分证据不足 · 摘要初评参考: {jev_score}/10">
+  <span class="jev-spark">⚡</span>
+  <span>初评 {jev_score}</span>
+</div>'''
+            else:
+                jev_badge_html = '''<div class="jev-pill jev-gray" title="核心证据不足 · 未评分">
+  <span class="jev-spark">⚡</span>
+  <span>未评分</span>
+</div>'''
+
             if paradigm_zh:
                 tags += f'<span class="tag tag-paradigm">🧬 {paradigm_zh}</span>'
 
-            # Confidence check across scalar radar dimensions
-            confidences = jev.get("confidences") or {}
-            low_conf_dims = [dim for dim, conf in confidences.items() if isinstance(conf, (int, float)) and conf < 0.5]
-            conf_warning_html = ""
-            if low_conf_dims:
-                conf_warning_html = '<div class="jev-note" style="margin-top:6px;font-size:0.8em;color:var(--text-muted, #888);">⚠️ 注：受限于摘要与标题文本长度，部分维度置信度偏低（&lt;0.5），本评分仅作初筛参考。</div>'
+            # Build rows with sufficiency indication
+            def render_radar_row(label, val, conf, is_suff):
+                if not is_suff or val is None:
+                    return f'''<div class="jev-row unrated">
+        <span class="jev-lbl">{label}</span>
+        <div class="jev-track"><div class="jev-fill null"></div></div>
+        <span class="jev-val muted">未评分 (证据不足)</span>
+      </div>'''
+                fill_w = min(100, int(val * 10))
+                conf_str = f" · 置信度: {conf}" if conf is not None else ""
+                conf_disagree = ' <span class="conf-tip" title="模型对评分等级存在分歧">⚠️ 分歧度高</span>' if (conf is not None and conf < 0.5) else ""
+                return f'''<div class="jev-row" title="得分: {val}/10{conf_str}">
+        <span class="jev-lbl">{label}{conf_disagree}</span>
+        <div class="jev-track"><div class="jev-fill" style="width: {fill_w}%;"></div></div>
+        <span class="jev-val">{val}</span>
+      </div>'''
+
+            sufficiency = jev.get("evidence_sufficiency") or {}
+            row_nov = render_radar_row("💡 方法新颖性", nov, confidences.get("methodological_novelty"), sufficiency.get("methodological_novelty", True))
+            row_sou = render_radar_row("🛡️ 技术严谨性", sou, confidences.get("technical_soundness"), sufficiency.get("technical_soundness", True))
+            row_uti = render_radar_row("🔬 生物学实用价值", uti, confidences.get("biological_utility"), sufficiency.get("biological_utility", True))
+            row_rep = render_radar_row("📦 可复现性", rep, confidences.get("reproducibility_readiness"), sufficiency.get("reproducibility_readiness", True))
+
+            # Status description
+            evidence_status_desc = "全部证据充分" if comp_score is not None else "部分证据不足，综合分未生成"
 
             jev_review_html = f'''<div class="sec jev-sec">
-  <div class="sec-h">⚡ 摘要初评参考 (System One · 四维指标)</div>
+  <div class="sec-h">⚡ 审稿四维决策评估 (证据状态：{evidence_status_desc})</div>
   <div class="jev-panel">
     <div class="jev-grid">
-      <div class="jev-row">
-        <span class="jev-lbl">💡 方法新颖性</span>
-        <div class="jev-track"><div class="jev-fill nov" style="width: {min(100, int(nov*10))}%;"></div></div>
-        <span class="jev-val">{nov}</span>
-      </div>
-      <div class="jev-row">
-        <span class="jev-lbl">🛡️ 技术严谨性</span>
-        <div class="jev-track"><div class="jev-fill sou" style="width: {min(100, int(sou*10))}%;"></div></div>
-        <span class="jev-val">{sou}</span>
-      </div>
-      <div class="jev-row">
-        <span class="jev-lbl">🔬 生物学实用价值</span>
-        <div class="jev-track"><div class="jev-fill uti" style="width: {min(100, int(uti*10))}%;"></div></div>
-        <span class="jev-val">{uti}</span>
-      </div>
-      <div class="jev-row">
-        <span class="jev-lbl">📦 可复现性</span>
-        <div class="jev-track"><div class="jev-fill rep" style="width: {min(100, int(rep*10))}%;"></div></div>
-        <span class="jev-val">{rep}</span>
-      </div>
+      {row_nov}
+      {row_sou}
+      {row_uti}
+      {row_rep}
     </div>
     <div class="jev-foot">
+      <span>代码状态：<strong>{code_st}</strong></span>
       <span>核心范式：<strong>{paradigm_zh}</strong></span>
-      <span>初评综合分：<strong>{jev_score} / 10</strong></span>
+      <span>综合分：<strong>{f"{comp_score} / 10" if comp_score is not None else "未评分"}</strong></span>
       <span class="jev-model">评分模型 <code>{model_name}</code></span>
     </div>
-    {conf_warning_html}
   </div>
 </div>'''
 
@@ -3041,7 +3063,7 @@ body {{
       <div class="filter-buttons">
         <button class="fbtn active" onclick="doFilter('all', this)">全部 ({total})</button>
         <button class="fbtn" onclick="doFilter('code', this)">💻 有代码 ({has_code})</button>
-        <button class="fbtn" onclick="doFilter('jev', this)">⚡ 创新初选 ({has_jev_high})</button>
+        <button class="fbtn" onclick="doFilter('jev', this)">⚡ 综合分 ≥ 5.5 ({has_jev_high})</button>
       </div>
       <div class="month-filter">
         <select class="month-select" id="monthSelect" onchange="doMonthFilter(this.value)">
