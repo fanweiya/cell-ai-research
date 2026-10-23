@@ -1,0 +1,12 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心图示，包含三组实验/模拟结果：(a)微管交叉处似然拟合与Hessian脊检测的方向估计对比，(b)双模糊叠加模型的示意，(c)X射线光栅光谱的几何分析，展示了在严重模糊条件下连接几何的鲁棒性。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心结果图：统计比较Likelihood fit与Hessian ridge detector检测到的junction最小角度分布及配对差异，并附典型junction放大示例"
+  }
+}

@@ -829,8 +829,27 @@ def main() -> int:
                 evidence["analysis_backfilled"] = True
             else:
                 evidence["errors"].append("backfill_analysis.py: " + clean_text(backfill.stderr or backfill.stdout)[:500])
+
+            # Jev 增量决策评分
+            before_jev = hashlib.sha256(DB_PATH.read_bytes()).hexdigest()
+            jev_changed = False
+            try:
+                jev_res = run([
+                    sys.executable, str(PROJECT / "jev_evaluator.py"),
+                ], timeout=180)
+                if jev_res.returncode == 0:
+                    evidence["jev_evaluated"] = True
+                else:
+                    evidence["errors"].append("jev_evaluator.py: " + clean_text(jev_res.stderr or jev_res.stdout)[:500])
+            except subprocess.TimeoutExpired:
+                evidence["errors"].append("jev_evaluator.py: timed out after 180s")
+            finally:
+                jev_changed = before_jev != hashlib.sha256(DB_PATH.read_bytes()).hexdigest()
+                if jev_changed:
+                    mark_site_pending(EVIDENCE_DIR / ".site-update-pending.json")
+
             update_site(
-                evidence, bool(added or evidence["sanitized_github_links"] or backfill_changed),
+                evidence, bool(added or evidence["sanitized_github_links"] or backfill_changed or jev_changed),
                 PROJECT, EVIDENCE_DIR / ".site-update-pending.json", run,
                 index_build_command(sys.executable),
             )

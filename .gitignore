@@ -13,6 +13,9 @@ __pycache__/
 data/figures/originals/
 
 # Log files and run logs
+*.png
+*.jpg
+*.jpeg
 logs/
 *.log
 

@@ -66,5 +66,116 @@
   .cs { gap:5px; } .cs span { padding:3px 6px; }
   .card .ch { flex-wrap:wrap; gap:10px; }
   .card .ct { flex-basis:100%; }
-  .card .cd { flex-direction:row; align-items:center; flex-wrap:wrap; }
+  .card .cd { flex-direction:row; align-items:center; flex-wrap:wrap; gap:8px; }
+}
+
+/* ===== Jev System One Review Badges & Radar ===== */
+.jev-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  margin-top: 6px;
+  cursor: help;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.jev-pill.jev-gold {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  color: #ffffff;
+  border: 1px solid #047857;
+}
+.jev-pill.jev-blue {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  color: #ffffff;
+  border: 1px solid #1d4ed8;
+}
+.jev-pill.jev-gray {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+.jev-spark { font-size: 11px; }
+
+.card .tag.tag-paradigm {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+  font-weight: 600;
+}
+
+.jev-sec {
+  background: var(--surface-alt, #f8fafc);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin: 10px 0;
+}
+.jev-sec .sec-h {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text, #1e293b);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.jev-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.jev-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 40px;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+.jev-lbl {
+  color: var(--text-secondary, #475569);
+  white-space: nowrap;
+}
+.jev-track {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.jev-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+.jev-fill.nov { background: #3b82f6; }
+.jev-fill.sou { background: #10b981; }
+.jev-fill.uti { background: #8b5cf6; }
+.jev-fill.rep { background: #f59e0b; }
+.jev-val {
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  text-align: right;
+  color: var(--text, #1e293b);
+}
+.jev-foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border, #cbd5e1);
+  font-size: 12px;
+  color: var(--text-secondary, #475569);
+}
+.jev-foot strong {
+  color: var(--text, #1e293b);
+}
+.jev-foot code {
+  font-size: 11px;
+  padding: 1px 4px;
+  background: #e2e8f0;
+  border-radius: 3px;
 }

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "AdaptMIL与基线方法在Top-K注意力分布上的对比实验结果图"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "训练损失曲线图，展示源域交叉熵损失与域适应MMD损失随训练轮次的变化趋势"
+  },
+  "2": {
+    "relevant": true,
+    "score": 10,
+    "caption": "AdaptMIL方法架构图，展示源域和目标域病理切片通过PFM、投影层、均值池化和分类器的流程，以及领域适应损失L_DA和交叉熵损失L_CE"
+  }
+}

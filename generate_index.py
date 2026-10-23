@@ -1467,12 +1467,15 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
     has_code = 0
     has_html = 0
     has_figs = 0
+    has_jev_high = 0
 
     for p in papers:
         if _is_code_ready(p):
             has_code += 1
         if _normalize_status(p.get("status", {}).get("html")) == "done":
             has_html += 1
+        if float(p.get("jev_evaluation", {}).get("composite_priority") or 0) >= 5.5:
+            has_jev_high += 1
 
     # 按年月统计（用于侧栏年月筛选下拉）
     month_counts = {}
@@ -1566,6 +1569,63 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
         for b in (bonus if isinstance(bonus, list) else []):
             tags += f'<span class="tag tb">+{_esc(b)}</span>'
 
+        # Jev System One evaluation parsing
+        jev = p.get("jev_evaluation") or {}
+        jev_badge_html = ""
+        jev_review_html = ""
+        jev_score = 0.0
+        paradigm_zh = ""
+        if isinstance(jev, dict) and jev.get("composite_priority"):
+            jev_score = float(jev.get("composite_priority") or 0.0)
+            scores = jev.get("scores") or {}
+            nov = float(scores.get("methodological_novelty") or 0.0)
+            sou = float(scores.get("technical_soundness") or 0.0)
+            uti = float(scores.get("biological_utility") or 0.0)
+            rep = float(scores.get("reproducibility_readiness") or 0.0)
+            paradigm_zh = _esc(jev.get("paradigm_label_zh") or "")
+            model_name = _esc(jev.get("model") or "jev-1.14.0")
+
+            level_cls = "jev-gold" if jev_score >= 6.0 else "jev-blue" if jev_score >= 5.0 else "jev-gray"
+            jev_badge_html = f'''<div class="jev-pill {level_cls}" title="审稿决策综合得分: {jev_score}/10 · 核心机制: {paradigm_zh}">
+  <span class="jev-spark">⚡</span>
+  <span>{jev_score}</span>
+</div>'''
+            if paradigm_zh:
+                tags += f'<span class="tag tag-paradigm">🧬 {paradigm_zh}</span>'
+
+            jev_review_html = f'''<div class="sec jev-sec">
+  <div class="sec-h">⚡ 审稿决策评估 (System One · 四维指标)</div>
+  <div class="jev-panel">
+    <div class="jev-grid">
+      <div class="jev-row">
+        <span class="jev-lbl">💡 方法新颖性</span>
+        <div class="jev-track"><div class="jev-fill nov" style="width: {min(100, int(nov*10))}%;"></div></div>
+        <span class="jev-val">{nov}</span>
+      </div>
+      <div class="jev-row">
+        <span class="jev-lbl">🛡️ 技术严谨性</span>
+        <div class="jev-track"><div class="jev-fill sou" style="width: {min(100, int(sou*10))}%;"></div></div>
+        <span class="jev-val">{sou}</span>
+      </div>
+      <div class="jev-row">
+        <span class="jev-lbl">🔬 生物学实用价值</span>
+        <div class="jev-track"><div class="jev-fill uti" style="width: {min(100, int(uti*10))}%;"></div></div>
+        <span class="jev-val">{uti}</span>
+      </div>
+      <div class="jev-row">
+        <span class="jev-lbl">📦 可复现性</span>
+        <div class="jev-track"><div class="jev-fill rep" style="width: {min(100, int(rep*10))}%;"></div></div>
+        <span class="jev-val">{rep}</span>
+      </div>
+    </div>
+    <div class="jev-foot">
+      <span>核心范式：<strong>{paradigm_zh}</strong></span>
+      <span>综合推荐分：<strong>{jev_score} / 10</strong></span>
+      <span class="jev-model">评分模型 <code>{model_name}</code></span>
+    </div>
+  </div>
+</div>'''
+
         code_html = ""
         if has_code_flag and github_url:
             code_html = f'<a href="{_esc(github_url)}" target="_blank" class="cb" onclick="event.stopPropagation()">💻 GitHub</a>'
@@ -1654,7 +1714,7 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
 </details>'''
 
         card = f"""
-<div class="card" tabindex="-1" id="paper-{_esc(pid)}" data-paper-id="{_esc(pid)}" data-code="{'1' if has_code_flag else '0'}" data-date="{_esc(date)}">
+<div class="card" tabindex="-1" id="paper-{_esc(pid)}" data-paper-id="{_esc(pid)}" data-code="{'1' if has_code_flag else '0'}" data-jev="{jev_score}" data-date="{_esc(date)}">
   <div class="ch">
     <div class="ct">
       <div class="tzh">{title_zh}</div>
@@ -1663,6 +1723,7 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
     </div>
     <div class="cd">
       <span class="date">{date}</span>
+      {jev_badge_html}
     </div>
   </div>
   <div class="cm">
@@ -1680,6 +1741,7 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
     <summary>展开论文详情</summary>
     <template><div class="detail">
     <div class="cs">{status_html}</div>
+    {jev_review_html}
     {kp_html}
     {repo_html}
     {figs_html}
@@ -1704,6 +1766,8 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
             "research_score": r_score,
             "engineering_score": e_score,
             "priority": priority,
+            "jev_score": jev_score,
+            "paradigm": paradigm_zh,
             "has_code": has_code_flag,
             "github_url": github_url,
             "framework": framework,
@@ -2969,6 +3033,7 @@ body {{
       <div class="filter-buttons">
         <button class="fbtn active" onclick="doFilter('all', this)">全部 ({total})</button>
         <button class="fbtn" onclick="doFilter('code', this)">💻 有代码 ({has_code})</button>
+        <button class="fbtn" onclick="doFilter('jev', this)">⚡ 创新前列 ({has_jev_high})</button>
       </div>
       <div class="month-filter">
         <select class="month-select" id="monthSelect" onchange="doMonthFilter(this.value)">

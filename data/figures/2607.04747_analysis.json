@@ -1,0 +1,7 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "MergeSurv 方法总览架构图：WSI 任务级提示嵌入、阶段1 微调、阶段2 模型合并、阶段3 推理及图例"
+  }
+}

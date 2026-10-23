@@ -20,7 +20,7 @@ function initPaperList() {
     const decoder = document.createElement('textarea'); decoder.innerHTML = p.authors || '';
     const template = card.querySelector('template');
     card.searchText = [p.id, p.title_en, p.title_zh, p.abstract, p.abstract_zh,
-      p.key_points, decoder.value, ...(p.task_types || []), template?.content.textContent || ''].join(' ').toLocaleLowerCase();
+      p.key_points, decoder.value, ...(p.task_types || []), p.paradigm || '', (p.jev_score ? 'jev' : ''), template?.content.textContent || ''].join(' ').toLocaleLowerCase();
     paperList.byId.set(card.dataset.paperId, card);
   });
   initPaperRail();
@@ -48,8 +48,9 @@ function applyPaperFilters() {
   paperList.timer = null;
   const query = (document.getElementById('searchInput')?.value || '').trim().toLocaleLowerCase();
   paperList.matches = paperList.cards.filter(card => {
-    const filter = activeFilter === 'code' ? card.dataset.code === '1'
-      : true;
+    let filter = true;
+    if (activeFilter === 'code') filter = card.dataset.code === '1';
+    else if (activeFilter === 'jev') filter = parseFloat(card.dataset.jev || '0') >= 5.5;
     return (!query || card.searchText.includes(query)) && filter
       && (activeMonth === 'all' || card.dataset.date.slice(0,7) === activeMonth);
   });

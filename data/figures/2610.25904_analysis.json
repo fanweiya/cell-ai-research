@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "论文核心架构图，展示FastVim与Virchow2基础模型的多尺度特征融合流程，包括编码器、知识蒸馏、Mamba融合模块及最终的patch级Gleason分级预测。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "Gleason分级任务的混淆矩阵，展示模型在Normal、Stroma、Gleason 3/4/5类别上的分类性能"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "实验结果对比图：比较 Mamba 与 patch-level attention 两种基础分类器在多个 patch 尺度（256/512/1024 px）下的 Gleason 分级性能，展示了 Balanced accuracy、Macro F1 和 Gleason 5 F1 等指标，并包含 CONCH 消融结果。"
+  }
+}

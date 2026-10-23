@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "扩散模型核心原理示意图，展示3D医学图像的前向SDE加噪（从数据x₀到噪声x_T）与反向SDE去噪重构过程，包含DDPM公式"
+  },
+  "1": {
+    "relevant": true,
+    "score": 5,
+    "caption": "医学CT影像图（心脏轴位扫描）"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "胸部CT轴位灰度切片，作为3D扩散模型医学影像输入/数据可视化示例"
+  }
+}

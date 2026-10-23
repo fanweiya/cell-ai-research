@@ -10735,5 +10735,612 @@
     "confidence": 0.88,
     "version": 3,
     "generated_at": "2026-10-20T09:25:07.470868"
+  },
+  "2610.23858": {
+    "summary": "该仓库实现了名为 I²-Med 的免微调医疗视觉语言模型推理期 logits 动态校准方法，核心逻辑集中在 main.py 单文件中。代码基于 Qwen2-VL 生成流程，通过挂载自定义 LogitsProcessor，利用 BioMedCLIP 等预训练多模态编码器评估滑动窗口内文本与图像的语义对齐度并动态惩罚偏离视觉的 token 分数。整体属于极小规模的单脚本原型实现，缺乏测试用例、依赖声明和配套样例数据。",
+    "repository_kind": "implementation",
+    "architecture": "架构由三部分组成：主干多模态生成模型（Qwen2VLForConditionalGeneration）、外部图像-文本语义对齐编码器（BioMedCLIP，通过 Transformers 或 open_clip 包装）以及自定义的 LogitsProcessor（DLCLogitsProcessor）。在逐 token 自回归解码循环中，DLCLogitsProcessor 拦截当前步候选词的 logits，截取最近滑动窗口内的生成文本与 top-k 候选 token 拼接，计算文本片段与输入图像的 CLIP 余弦相似度，若相似度低于历史滑动缓冲基线，则按差异比例对对应 token 的 logit 施加动态惩罚，从而在推理期降低视觉幻觉。",
+    "call_chain": "run.sh (入口) → main.py:main() → load_models() (加载 Qwen2-VL 与 CLIP 模型) → 遍历测试数据集 → run_raw_batch() (基线生成) 与 run_dlc() (校准生成) → DLCLogitsProcessor.__call__() (计算多模态相似度并校准 top-k logits) → 写入 jsonl 结果文件",
+    "core_modules": [
+      {
+        "name": "DLCLogitsProcessor",
+        "role": "继承 HuggingFace LogitsProcessor，在解码步对滑动窗口文本和候选 token 计算 CLIP 图像余弦相似度，计算惩罚项动态调整 logits",
+        "evidence": "main.py:DLCLogitsProcessor"
+      },
+      {
+        "name": "OpenClipProcessorAdapter / OpenClipWrapper",
+        "role": "针对 open_clip 模型与 HuggingFace Processor 接口不一致提供的适配层与特征提取包装类",
+        "evidence": "main.py:OpenClipProcessorAdapter, main.py:load_models.OpenClipWrapper"
+      },
+      {
+        "name": "run_dlc",
+        "role": "提取图像的 CLIP 特征，实例化 DLCLogitsProcessor 并传入 model.generate 驱动校准生成",
+        "evidence": "main.py:run_dlc"
+      },
+      {
+        "name": "main / run_raw_batch",
+        "role": "解析命令行参数、加载数据，并行执行常规原始推理与 DLC 实验对照输出",
+        "evidence": "main.py:main, main.py:run_raw_batch"
+      }
+    ],
+    "dependencies": [
+      "torch",
+      "torchvision",
+      "transformers",
+      "qwen_vl_utils",
+      "open_clip_torch (备选 CLIP 加载分支)",
+      "Pillow",
+      "tqdm",
+      "Med-R1 / Qwen2-VL 权重文件",
+      "microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224 权重文件",
+      "测试数据集 JSON 文件（需包含 image、problem，可选 solution 字段）"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "最短复现路径为安装 PyTorch、Transformers、qwen_vl_utils、open-clip-torch，准备包含 image 与 problem 字段的 test.json，下载 Med-R1 与 BioMedCLIP 权重，并修复 run.sh 中的命令行语法错误后运行 `bash run.sh`。阻碍主要在于无 requirements.txt、run.sh 包含破坏换行的空格语法错误、缺少现成的 test.json 示例，以及代码中存在针对 llava 分支直接跳过的未完成兼容逻辑。",
+    "issues": [
+      {
+        "severity": "high",
+        "finding": "run.sh 脚本在换行反斜杠后存在多余空格，导致脚本执行直接报错",
+        "evidence": [
+          "run.sh:1",
+          "run.sh:3"
+        ],
+        "impact": "用户直接执行 `bash run.sh` 会导致 bash 解析参数失败或将后续参数作为独立命令执行而报错中断。",
+        "confidence": 0.95
+      },
+      {
+        "severity": "medium",
+        "finding": "仓库未提供 requirements.txt 或 pyproject.toml 声明环境依赖版本",
+        "evidence": [
+          "README.md",
+          "main.py:20"
+        ],
+        "impact": "用户难以获知确切的 torch、transformers、qwen_vl_utils 等库兼容版本，尤其 qwen_vl_utils 为第三方非标准核心依赖，未显式提示安装会导致 ImportError。",
+        "confidence": 0.9
+      },
+      {
+        "severity": "medium",
+        "finding": "缺少样例输入数据文件 test.json，且未提供数据转换脚本",
+        "evidence": [
+          "run.sh:1",
+          "main.py:420"
+        ],
+        "impact": "无法开箱即用验证脚本连通性，必须根据 main.py 中的字段预期手动伪造或下载转换 OmniMedVQA 数据。",
+        "confidence": 0.85
+      },
+      {
+        "severity": "low",
+        "finding": "DLCLogitsProcessor 内部硬编码若 model_type 为 'llava' 则完全旁路不作任何校准",
+        "evidence": [
+          "main.py:DLCLogitsProcessor.__call__"
+        ],
+        "impact": "代码对外参数虽然支持或提及扩展，但若传入 llava 类型则静默失效，属于残留的未实现分支逻辑。",
+        "confidence": 0.85
+      }
+    ],
+    "static_limitations": [
+      "静态分析无法验证 BioMedCLIP 与 Qwen2-VL 在单一 GPU（如 40GB A100）上共同常驻推理时的显存占用与吞吐表现。",
+      "main.py 中部核心算法惩罚项公式的具体计算由于摘录预算限制未完整覆盖，无法逐行验证其数值稳定性与防止 NaN/Inf 的边界处理。",
+      "无法通过静态代码确认该校准策略在 OmniMedVQA 评测集上是否真能达到 README 宣称的准确率提升。"
+    ],
+    "confidence": 0.88,
+    "version": 3,
+    "generated_at": "2026-10-21T09:32:57.286025"
+  },
+  "2610.23988": {
+    "summary": "该仓库实现了医疗多模态大语言模型（MedGemma、Gemma 等）在胸片、眼底、皮肤镜及结直肠病理组织切片图像任务上的分类校准与评测框架。其核心思想是通过单次前向传播提取 'yes' 和 'no' 的 token log-probabilities 进行归一化打分，以替代文本生成概率并支持自适应阈值调整。仓库不仅提供了数据加载与 vLLM 推理代码，还包含已跑完的 pickle 离线预测缓存、评测统计脚本和论文制表制图程序，属于具备完整评测闭环的实现。",
+    "repository_kind": "implementation",
+    "architecture": "代码分为推理端与评测端。推理端由 runLLM.py 调用各数据集类（如 ChexpertDataset、G1020、HAM10000 等）组装图像与模板 Prompt，通过 VLLMModel 封装的 vLLM 引擎提取单 token（yes/no）logits 以及 JSON constrained decoding 生成的文本置信度，将验证集与测试集预测保存为 output/ 目录下的 pickle 文件；评测端由 eval.py 读取离线 pickle，计算二分类/多分类 AUROC、Bootstrap 95% 置信区间及验证集最佳 Youden 阈值，最终通过 tableCreator.py、supplementTables.py 和 plotThresholds.py 导出 LaTeX 表格与 SVG 图像。",
+    "call_chain": "runLLM.py:main -> getDataset() -> DataLoader -> VLLMModel.getRawLogProbs() / VLLMModel.__call__() -> output/eval_<model>_<dataset>.pkl -> eval.py:evalFile() -> logProbsToNormYesProb() / evalOneLabel() -> evalOutput/*_results.csv -> tableCreator.py / plotThresholds.py",
+    "core_modules": [
+      {
+        "name": "VLLMModel",
+        "role": "封装 vLLM 实例与 xgrammar 结构化解码，负责多模态 Prompt 构造及提取指定 token (yes/no) 的 logprob",
+        "evidence": "VLLMModel.py:VLLMModel"
+      },
+      {
+        "name": "runLLM",
+        "role": "推理总入口，调度 4 种模型与 6 类医疗影像数据集，批量生成 log-probabilities 与 JSON 格式置信度并持久化",
+        "evidence": "runLLM.py:execEval"
+      },
+      {
+        "name": "eval",
+        "role": "评测与统计核心，通过多进程 Bootstrap 重采样计算各类指标及 Youden J 最佳操作阈值",
+        "evidence": "eval.py:evalFile"
+      },
+      {
+        "name": "tableCreator & plotThresholds",
+        "role": "论文结果重现脚本，解析评测 CSV 生成 LaTeX 报告表格及最佳阈值偏差柱状图",
+        "evidence": "tableCreator.py:createTabLine, plotThresholds.py:plotThresholds"
+      },
+      {
+        "name": "Medical Dataset Adaptors",
+        "role": "针对 CheXpert、MIMIC、G1020、HAM10000、DERM12345、NCT-CRC-HE-100K 的统一图像载入、中心方块裁剪与二分类问答 Prompt 格式化",
+        "evidence": "ChexpertDataset.py:ClassificationChexpertDataset, HAM10000.py:HAM10000, NCT_CRC_HE_100K.py:NCT_CRC_HE_100K"
+      }
+    ],
+    "dependencies": [
+      "Python 3.12.3",
+      "vllm==0.9.2 及 xgrammar",
+      "transformers",
+      "torch & torchvision",
+      "scikit-learn",
+      "matplotlib",
+      "Pillow",
+      "psutil",
+      "开源医疗影像数据集 (CheXpert/CheXlocalize, MIMIC-CXR-JPG, HAM10000, DERM12345, NCT-CRC-HE-100K, G1020) 需手动挂载至 data/ 目录"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "若仅复现论文图表，仓库提供了预先生成的 output/ 目录 pkl 文件，直接执行 python3 tableCreator.py 和 python3 plotThresholds.py 即可复现；但若要从头重跑推理（runLLM.py），存在硬编码阻碍：VLLMModel.py 中存在硬编码路径 CACHE_PATH = '/path/to/the/huggingface/home' 和占位符 USED_TOKEN = '[YOUR HUGGINGFACE TOKEN GOES HERE]'，且 eval.py 中第 989 行使用了 Linux 特有的 parent.nice(19) 并伴有打字错误的注释，推理代码必须经过源码路径修改与可用 GPU 环境配置后才能运行。",
+    "issues": [
+      {
+        "severity": "blocker",
+        "finding": "VLLMModel.py 包含硬编码的无效路径与 HuggingFace Token 占位符",
+        "evidence": [
+          "VLLMModel.py:CACHE_PATH = \"/path/to/the/huggingface/home\"",
+          "VLLMModel.py:USED_TOKEN = \"[YOUR HUGGINGFACE TOKEN GOES HERE]\""
+        ],
+        "impact": "从头运行 runLLM.py 时若不手动修改源码替换路径和 Token，会导致 HuggingFace 缓存目录错误或模型鉴权失败无法下载权重。",
+        "confidence": 0.98
+      },
+      {
+        "severity": "medium",
+        "finding": "平台兼容性硬编码：eval.py 在非 Linux 平台可能抛出 PermissionError/ValueError",
+        "evidence": [
+          "eval.py:parent = psutil.Process()",
+          "eval.py:parent.nice(19)"
+        ],
+        "impact": "在 Windows 或特定 UNIX 权限受限环境下直接运行 eval.py 可能会因进程 nice 值设置而崩溃。",
+        "confidence": 0.9
+      }
+    ],
+    "static_limitations": [
+      "未下载真实多模态权重与影像数据，无法验证 vLLM 对 MedGemma 在单张 H100 上的 KV 缓存实际开销与张量并行行为。",
+      "output/ 目录内预计算 pickle 文件的内部张量结构是否与当前最新源码完全匹配未经过二进制加载测试。",
+      "仅进行了 gread 静态分析，未执行代码，不能确认运行时兼容性或论文指标。"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-10-21T09:32:58.131799"
+  },
+  "2610.25488": {
+    "summary": "该仓库为基于 nnU-Net v2 框架的 3D 医学影像分割模型 SlimFormer++ 及其自注意力变体（SlimFormerPlusPlus_Attention）的开源实现。仓库提供了单文件形式的模型与 Trainer 实现、环境静态检查脚本、安装注入脚本、预测辅助 Shell 脚本以及测试用例。整体结构完整，涵盖权重下载与校验逻辑，属于面向科研使用的完整实现。",
+    "repository_kind": "implementation",
+    "architecture": "网络依托 nnU-Net v2 的 Trainer 体系进行集成。输入通常为 3D 单通道或多通道医学体数据（如 NIfTI 格式）。模型主体结合了 MedNeXt 卷积模块、窗口分区（8x8x8）、SelectiveMixer（基于 Mamba-SSM 状态空间模型的序列混合）或 WindowSelfAttention（多头自注意力机制），并在瓶颈层引入结合多尺度/跳跃连接的混合模块。上采样阶段采用定制的 AlignedMedNeXtUpBlock 确保特征对齐，输出对应类别数的预测 logits。",
+    "call_chain": "nnUNetv2 CLI (nnUNetv2_train 或 predict.sh 调用 nnUNetv2_predict) → install.py 动态注入的 nnUNetTrainer_SlimFormerPlusPlus 实例 → build_network_architecture 构造模型 → window_partition 分块 → SelectiveMixer / WindowSelfAttention 与 MedNeXtBlock 特征提取 → AlignedMedNeXtUpBlock 精确上采样 → UnetOutBlock 输出体素分类 Logits",
+    "core_modules": [
+      {
+        "name": "SelectiveMixer",
+        "role": "基于 Mamba SSM 的局部窗口序列特征混合器，对去 CLS 后的全 token 序列做一维状态空间扫描与投影",
+        "evidence": "nnUNetTrainer_SlimFormerPlusPlus.py:class SelectiveMixer"
+      },
+      {
+        "name": "WindowSelfAttention",
+        "role": "注意力变体下的多头自注意力窗口混合模块，替代 Mamba 模块避免对 mamba_ssm/causal_conv1d 的编译依赖",
+        "evidence": "nnUNetTrainer_SlimFormerPlusPlus_Attention.py:class WindowSelfAttention"
+      },
+      {
+        "name": "AlignedMedNeXtUpBlock",
+        "role": "自适应目标尺度的 MedNeXt 卷积转置上采样模块，防止特征尺寸因向下取整产生失配",
+        "evidence": "nnUNetTrainer_SlimFormerPlusPlus.py:class AlignedMedNeXtUpBlock"
+      },
+      {
+        "name": "Trainer Installer",
+        "role": "将独立的单文件 Trainer 自动检索并安全复制至当前 Python 环境的 nnunetv2 内部目录",
+        "evidence": "install.py:def install"
+      },
+      {
+        "name": "Predict Helper",
+        "role": "校验环境变量、自动拉取指定数据集的最佳预训练权重 zip、校验 SHA256 并驱动 nnUNetv2_predict",
+        "evidence": "predict.sh"
+      }
+    ],
+    "dependencies": [
+      "Python 3.12, PyTorch 2.6.0+cu126, torchvision 0.21.0",
+      "CUDA Toolkit 12.6 (nvcc) 及兼容 C++ 编译器（编译 mamba-ssm, causal-conv1d）",
+      "nnunetv2 2.6.2, dynamic-network-architectures 0.4.1, monai 1.4.0, einops 0.8.0, nnunet_mednext",
+      "curl, unzip, sha256sum（用于 predict.sh 权重下载与校验）",
+      "NIfTI 格式数据集 (如 ACDC, AbdomenCT-1K, AMOS2022) 且符合 nnU-Net 通道命名规范 (*_0000.nii.gz)"
+    ],
+    "reproduction_readiness": "ready",
+    "reproduction_notes": "预测链路最短路径：按 README 安装 Linux/CUDA 12.6/PyTorch 2.6 环境，执行 python install.py 注入 trainer，设定 nnUNet_results 环境变量后直接调用 bash predict.sh <dataset> <input_dir> <output_dir>，脚本会自动拉取 Release 权重并进行哈希校验后预测。重训链路需准备 nnU-Net 标准格式数据并先执行 nnUNetv2_plan_and_preprocess。",
+    "issues": [
+      {
+        "severity": "medium",
+        "finding": "predict.sh 中若解压失败导致目录残缺，已有目录判断可能导致后续重试跳过解压并在文件检查时退出",
+        "evidence": [
+          "predict.sh:if [[ ! -e \"$model_dir\" ]]; then"
+        ],
+        "impact": "用户若初次下载或解压被中断，需手动介入清理 $nnUNet_results 目录方可重新运行",
+        "confidence": 0.85
+      },
+      {
+        "severity": "low",
+        "finding": "Mamba 模块及 causal-conv1d 强绑定特定的 CUDA 12.6 与 Python 3.12 环境源码编译，跨架构移植门槛较高",
+        "evidence": [
+          "check_environment.py:if sys.version_info[:2] != (3, 12):",
+          "check_environment.py:if torch.version.cuda != '12.6':"
+        ],
+        "impact": "非 Linux 或非目标 CUDA 版本的环境会被 check_environment.py 阻断，需退回使用 Attention 变体",
+        "confidence": 0.95
+      }
+    ],
+    "static_limitations": [
+      "未实际调用 GPU 执行 Mamba 的 CUDA 算子与反向传播，无法静态验证编译期生成的 kernel 是否与所有架构完全兼容",
+      "未下载 Release 归档权重，无法静态验证远程资产文件与 SHA256 校验和在运行时的即时可用性",
+      "论文宣称的效率图表与分割性能指标无法通过静态审阅直接证明复现性"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-10-21T09:33:11.361702"
+  },
+  "2610.24037": {
+    "summary": "PathProfiler 是一个用于计算病理切片（WSI）质量评估的静态工程实现，涵盖切片多格式读取、组织分割（UNet）、多进程瓦片裁剪与多任务图像质量评分（ResNet18）。代码库提供了组织分割、瓦片提取与质量打分的训练与推断脚本，但缺乏显式依赖声明文件和自动化单元测试，且权重与示例数据依赖外部下载链接。",
+    "repository_kind": "implementation",
+    "architecture": "流水线由四个核心阶段构成：1) WSI 统一下层读取（支持 OpenSlide、TiffFile、PixelEngine）；2) 组织分割：利用 UNet 将切片下采样缩略图分割为前景组织与背景掩码；3) 瓦片提取与预过滤：基于组织掩码占比门限进行滑动窗口切片提取并多进程并行落盘；4) 质量评估与切片打分：将 5X 瓦片归一化至 224x224 后输入多任务 ResNet18 输出 6 类质量相关预测值，生成质量热图并在推断阶段通过多模型拟合预测全切片维度的可用性、聚焦和染色评分。",
+    "call_chain": "quality-assessment/run.py (main) → common/wsi_reader.py (get_reader_impl / WSIReader.read_region_ds) → common/tile_processing_parallel.py (process_tiles) → quality-assessment/run.py (eval_quality / QA_model.embedding) → cv2.imwrite / np.save (质量热图与 .npy 矩阵落盘)；切片级打分入口为 quality-assessment/predict_slide_scores.py (main) → joblib/pickle 载入 sklearn 模型 → 输出各切片评分。",
+    "core_modules": [
+      {
+        "name": "WSI Reader",
+        "role": "多格式 WSI 统一下层封装，统一抽象各级金字塔尺寸、MPP 与区域下采样截取",
+        "evidence": "common/wsi_reader.py:WSIReader, OpenSlideReader, get_reader_impl"
+      },
+      {
+        "name": "Tile Parallel Processor",
+        "role": "基于组织掩码的多进程网格切片抓取与回调处理调度",
+        "evidence": "common/tile_processing_parallel.py:process_tiles, tile-extract/tiling.py:save_tile"
+      },
+      {
+        "name": "Tissue Segmentation",
+        "role": "基于 UNet 的切片背景过滤与组织轮廓提取",
+        "evidence": "tissue-segmentation/unet.py, tissue-segmentation/trainer.py, tissue-segmentation/run.py"
+      },
+      {
+        "name": "Quality Assessment Network",
+        "role": "基于 ResNet18 的 6 分支回归/多标签质量打分器",
+        "evidence": "common/models.py:ResNet18, common/models.py:modelIQA"
+      },
+      {
+        "name": "Slide Score Predictor",
+        "role": "基于预提取热图特征与预训练模型评估全切片维度的可用性、对焦与染色打分",
+        "evidence": "quality-assessment/predict_slide_scores.py:main"
+      }
+    ],
+    "dependencies": [
+      "Python 3",
+      "PyTorch",
+      "torchvision",
+      "OpenSlide (含底层 openslide C 库及 openslide-python)",
+      "tifffile",
+      "pixelengine (针对 Philips .isyntax 格式切片)",
+      "OpenCV (cv2)",
+      "imgaug",
+      "scikit-learn",
+      "numpy",
+      "pandas",
+      "zarr",
+      "imageio",
+      "matplotlib",
+      "预训练模型权重 (Google Drive 下载: UNet 组织分割模型, checkpoint_106.pth 质量评估模型, 及 quality-assessment 下的 .pkl 模型)"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "仓库未提供 requirements.txt 或 environment.yml，各依赖版本需手动推断配置；Philips isyntax 阅读器依赖专属 pixelengine SDK；组织分割训练代码中存在作者注释确认的 HSV 颜色空间增强缺陷；模型权重存放在 Google Drive，运行前需手动下载并配置指定路径。",
+    "issues": [
+      {
+        "severity": "high",
+        "finding": "组织分割数据增强中 CLAHE 误应用到 H 通道而非 V 通道",
+        "evidence": [
+          "tissue-segmentation/datasets.py:HSV[:, :, 0] = self.clahe.apply(HSV[:, :, 0]) # TODO: this is a mistake, its supposed to be the V channel but that means retraining."
+        ],
+        "impact": "可能导致色相严重失真，如果重新训练分割模型需修复该逻辑并重新训练。",
+        "confidence": 0.95
+      },
+      {
+        "severity": "medium",
+        "finding": "common/models.py 中 resume 恢复逻辑引用未定义的 args.gpu 变量",
+        "evidence": [
+          "common/models.py:loc = 'cuda:{}'.format(args.gpu) if torch.cuda.is_available() else 'cpu'"
+        ],
+        "impact": "quality-assessment/trainer/train.py 解析参数为 --gpu_id，若传入 --resume 触发断点恢复时会抛出 AttributeError: 'Namespace' object has no attribute 'gpu'。",
+        "confidence": 0.9
+      },
+      {
+        "severity": "low",
+        "finding": "LabelSampler 中使用已废弃的 numpy 数据类型 np.int",
+        "evidence": [
+          "common/datasets.py:self.sample_size = np.round(batch_size * weights).astype(np.int)"
+        ],
+        "impact": "在 NumPy >= 1.20 或 1.24+ 环境中执行会触发 DeprecationWarning 或 AttributeError。",
+        "confidence": 0.85
+      }
+    ],
+    "static_limitations": [
+      "仅基于静态代码审阅，未运行代码，无法直接核实多进程 WSI 切片抓取在不同 WSI 格式和并发环境下的性能与内存泄漏情况",
+      "预训练模型权重托管于外部网盘，无法离线确认其与当前模型架构定义的各层参数字典是否绝对匹配",
+      "无法验证全片打分线性/回归模型在不同批次染色差异切片上的泛化精度"
+    ],
+    "confidence": 0.88,
+    "version": 3,
+    "generated_at": "2026-10-21T09:33:12.999581"
+  },
+  "2610.26255": {
+    "summary": "XGLASS 提供了针对胸部 3D CT 进行切片优先排序（Slice Prioritization / Sequencing）的完整训练与评估管线。方法将 2D 冠状面 CT 投影（AIP/Beer-Lambert）与疾病特异性眼动凝视先验图融合，通过 ViT 等 2D 骨干回归 240 维轴状切片相关度向量，以减少下游 2D VLM 的切片级推理开销。仓库包含了数据预处理、模型架构、训练评测、排序导出及下游评测逻辑，属于 implementation 级别发布。",
+    "repository_kind": "implementation",
+    "architecture": "输入预处理好的 CT 冠状面投影图（256x256，如 aip_wide/aip_lung/aip_soft/bl_cxr），根据样本所属疾病类别对齐预计算的 REFLACX 凝视重要性图（npz），在 SliceDataset 中进行加权融合（blend_alpha）并进行水平翻转及 ImageNet 归一化。模型采用 timm 骨干（默认 ViT-Base）提取特征向量，接入 MLP 头输出 240 维连续相关度打分（Sigmoid），训练以弱监督切片面积（或高斯平滑/二值）为目标计算 MSELoss。推理时按打分降序重排轴状切片（Top-K），供下游 2D VLM（MedGemma/Lingshu/BioMedCLIP）进行疾病筛选评估。",
+    "call_chain": "train.py:main -> dataset.py:SliceDataModule -> dataset.py:SliceDataset.__getitem__ -> model.py:SlicePredictor.forward -> timm.create_model + model.py:SlicePredictor.head -> model.py:SlicePredictor.training_step (MSELoss) -> eval.py / export_orders.py:main -> predict_slices.py / evaluate_downstream.py",
+    "core_modules": [
+      {
+        "name": "SliceDataModule & SliceDataset",
+        "role": "管理投影图像、凝视热力图配准与动态融合，构建 240 维切片真实标签向量（支持 area、slice_binary、slice_gaussian 目标模式）",
+        "evidence": "src/xglass/dataset.py:SliceDataModule, SliceDataset"
+      },
+      {
+        "name": "SlicePredictor",
+        "role": "封装 timm 2D 视觉骨干与 MLP 回归头，支持骨干冻结与差分学习率优化，提供 Spearman、AUROC、Hit@K 等指标统计",
+        "evidence": "src/xglass/model.py:SlicePredictor"
+      },
+      {
+        "name": "Training & Evaluation CLI",
+        "role": "训练切片预测模型、基于 checkpoint 文件夹名自动解析超参并批量评估测试集指标",
+        "evidence": "src/xglass/train.py:main, src/xglass/eval.py:main"
+      },
+      {
+        "name": "Order Export & VLM Inference",
+        "role": "根据模型打分导出切片排序文本，使用 MedGemma 等 VLM 离线对切片进行病变问答打分并做指标分析",
+        "evidence": "src/xglass/export_orders.py:main, src/xglass/predict_slices.py:main, src/xglass/biomedclip_utils.py"
+      }
+    ],
+    "dependencies": [
+      "Python 3.11 及对应 CUDA 版本的 PyTorch/Torchvision",
+      "pytorch-lightning",
+      "timm",
+      "torchmetrics",
+      "pandas, numpy, opencv-python, Pillow, scipy",
+      "nibabel (CT 与 NIfTI 掩码读取)",
+      "open_clip_torch, transformers (BioMedCLIP 与下游 VLM 依赖)",
+      "TotalSegmentator (预处理阶段胸腔边界框提取需要)",
+      "外部医疗数据集：REFLACX (PhysioNet 受限协议), CT-RATE 与 ReXGroundingCT (Hugging Face 授权协议)"
+    ],
+    "reproduction_readiness": "ready",
+    "reproduction_notes": "代码管线结构完整，提供了 requirements.txt、requirements-download.txt、requirements-downstream.txt 以及 demo notebook。核心预计算凝视热力图（14种疾病）已随仓库发布在 data/processed/gaze_importance_maps/ 下。若从头重现训练需申请 PhysioNet 和 HF CT-RATE 权限下载原生 3D CT 并运行 TotalSegmentator 与 create_projection_dataset.py；若仅验证推理，需从 Hugging Face (MichaelGlo/XGLASS) 下载预训练权重至 checkpoints 目录后运行 demo 或 eval.py。",
+    "issues": [
+      {
+        "severity": "low",
+        "finding": "训练脚本强制将 W&B 设为离线模式，可能需要用户额外执行 wandb sync 或手动调整环境变量",
+        "evidence": [
+          "src/xglass/train.py:os.environ[\"WANDB_MODE\"] = \"offline\""
+        ],
+        "impact": "在习惯在线查看 W&B 看板的集群环境中，日志默认仅保存在本地离线目录",
+        "confidence": 0.95
+      },
+      {
+        "severity": "low",
+        "finding": "eval.py 依赖文件夹命名规范解析模型超参数（如 _aip_wide_、alpha0.75 等），自定义路径命名可能导致无法解析",
+        "evidence": [
+          "src/xglass/eval.py:parse_exp_name"
+        ],
+        "impact": "若用户改变模型保存目录命名规则，eval.py 会抛出 ValueError(\"Could not parse projection_type\")",
+        "confidence": 0.9
+      }
+    ],
+    "static_limitations": [
+      "未下载并解压外部私有/认证数据集（CT-RATE、ReXGroundingCT、REFLACX），无法在静态分析中确认数据预处理耗时和数值对齐精度",
+      "未实际加载 Hugging Face checkpoint 权重，无法静态验证论文声称的 Hit@10 指标数值复现情况",
+      "下游 MedGemma / Lingshu 的提示词解析及量化兼容性取决于运行时的 Hugging Face transformers/vllm 环境"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-10-21T09:33:12.621150"
+  },
+  "2603.01098": {
+    "summary": "该仓库实现了基于差分隐私（Opacus）与多模态预训练主干（ConvNeXt / DINOv3）的胸部X光（CXR）表征几何分析与多标签病灶分类。代码包含从配置解析、多中心医学影像数据加载、差分隐私训练循环到线性探针评估与引导重采样统计检验的核心管线，具备较完整的科研实验代码实现。",
+    "repository_kind": "implementation",
+    "architecture": "代码采用典型的科研实验分层架构：由 YAML 驱动超参数与实验输出路径管理；`data_provider.py` 提供针对 CheXpert、MIMIC、VinDr、PadChest 等 CXR 数据集的 2D 图像读取、尺寸适配与正样本权重平衡；`main_representationDP.py` 统筹模型初始化（通过 Hugging Face 加载 ConvNeXt-Small 预训练模型并挂载多标签分类头）、Opacus 差分隐私引擎注入（通过 ModuleValidator 与 PrivacyEngine）；`Train_Valid_representationDP.py` 实施 DP 训练与指标统计；`Prediction_representationDP.py` 则实现表征嵌入抽取（L2 正则化）、多标签 OneVsRest 逻辑回归探针评估以及基于预设随机种子的 Bootstrapping ROC-AUC 置信区间统计。",
+    "call_chain": "main_representationDP.py:main_train_central_2D (或表征几何探针评估逻辑) → data/data_provider.py:*_data_loader_2D (图像读取与标签抽取) → transformers.AutoModel + torch.nn.Linear (特征抽取与前向传播) → Train_Valid_representationDP.py:Training.setup_model / train_DP (Opacus 加噪裁剪反向传播) 或 Prediction_representationDP.py:Prediction.predict_embeddings → sklearn.multiclass.OneVsRestClassifier(LogisticRegression).fit → Prediction.bootstrapper → 输出 CSV / 统计日志与 TensorBoard 标量",
+    "core_modules": [
+      {
+        "name": "配置与实验环境管理",
+        "role": "解析 YAML 配置，维护实验隔离目录，持久化每次实验生效配置",
+        "evidence": "config/serde.py:create_experiment / open_experiment"
+      },
+      {
+        "name": "多数据源数据加载层",
+        "role": "封装 CheXpert、MIMIC、PadChest 等胸片数据集的路径映射、多标签构建及正负样本权重计算",
+        "evidence": "data/data_provider.py:chexpert_data_loader_2D / mimic_data_loader_2D"
+      },
+      {
+        "name": "差分隐私主干与表征训练循环",
+        "role": "整合 Hugging Face 主干网络与 Opacus PrivacyEngine，实现梯度裁剪、加噪训练及 TensorBoard 记录",
+        "evidence": "Train_Valid_representationDP.py:Training"
+      },
+      {
+        "name": "表征提取与统计评估",
+        "role": "抽取模型 pooler_output 嵌入特征并 L2 归一化，使用逻辑回归执行线性探针与 Bootstrap AUC 计算",
+        "evidence": "Prediction_representationDP.py:Prediction"
+      }
+    ],
+    "dependencies": [
+      "Python 3.10+",
+      "PyTorch",
+      "torchvision",
+      "opacus (>=1.5)",
+      "transformers",
+      "huggingface_hub",
+      "scikit-learn",
+      "opencv-python",
+      "pandas",
+      "numpy",
+      "tensorboardX",
+      "外部医学影像数据集（CheXpert、MIMIC、VinDr、PadChest 等）及其预生成的元数据/预处理目录",
+      "Hugging Face 访问 Token（配置项 hf_login）"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "运行前必须在 config/config.yaml 中修改硬编码路径（file_path, target_dir）并填入合法的 Hugging Face Token。另外，main_representationDP.py 的参数默认值中包含硬编码路径（例如 /PATH/dp_dinov3/config/config.yaml），且表征探针评估强依赖外部预存文件（如 rep_geometry/bootstrapping_seeds_padchest.npy），直接运行会因缺失路径或数据报错，需要手动配置数据环境。",
+    "issues": [
+      {
+        "severity": "high",
+        "finding": "配置与默认参数包含占位符和硬编码伪路径，开箱无法直接运行",
+        "evidence": [
+          "config/config.yaml:file_path: /path/",
+          "config/config.yaml:target_dir: /path/",
+          "config/config.yaml:hf_login: \"key\"",
+          "main_representationDP.py:global_config_path=\"/PATH/dp_dinov3/config/config.yaml\""
+        ],
+        "impact": "用户必须完整手动编辑配置文件和函数调用传参，否则在登录 Hugging Face 或创建输出目录时抛出异常",
+        "confidence": 1.0
+      },
+      {
+        "severity": "high",
+        "finding": "表征探针下游评估强依赖外部预设 Bootstrap 随机种子文件",
+        "evidence": [
+          "main_representationDP.py:index_list = np.load(os.path.join(params['target_dir'], params['stat_log_path'], 'rep_geometry/bootstrapping_seeds_padchest.npy'), allow_pickle=True)"
+        ],
+        "impact": "仓库内未提供 bootstrapping_seeds_padchest.npy 文件，若未前置运行种子生成脚本或未创建对应目录，下游线性探针评测流程直接触发 FileNotFoundError",
+        "confidence": 0.95
+      },
+      {
+        "severity": "medium",
+        "finding": "全局忽略所有警告（warnings.filterwarnings('ignore')）",
+        "evidence": [
+          "main_representationDP.py:warnings.filterwarnings('ignore')",
+          "Train_Valid_representationDP.py:warnings.filterwarnings('ignore')"
+        ],
+        "impact": "屏蔽了 Opacus 在不兼容网络层（如特定 Normalization/Attention）下的警告，可能掩盖差分隐私理论保证失效的潜在风险",
+        "confidence": 0.85
+      },
+      {
+        "severity": "low",
+        "finding": "仓库缺少自动化单元测试与依赖清单声明（如 requirements.txt 或 environment.yml）",
+        "evidence": [
+          "README.md:### Prerequisites",
+          "coverage:test_files: []"
+        ],
+        "impact": "依赖版本虽在 README 中有文字说明，但缺乏精确锁定的规范文件，易因三方库（如 Opacus 或 transformers）次版本 API 变动引发兼容性问题",
+        "confidence": 0.9
+      }
+    ],
+    "static_limitations": [
+      "未实际加载并运行 ConvNeXt / DINOv3 模型权重，无法静态验证 Hugging Face AutoModel 与 Opacus ModuleValidator 的运行时兼容性",
+      "无法核实私有医学数据集（PadChest/CheXpert/MIMIC）实际图像与标签格式是否与代码中的 DataFrame 解析字段完全匹配",
+      "无法动态检验差分隐私计算过程中 PrivacyEngine 跟踪的 epsilon/delta 隐私预算消耗数值与论文声称是否一致"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-10-21T09:33:13.788801"
+  },
+  "2610.28411v1": {
+    "summary": "Brain2Vec 是一个基于 PyTorch 和 timm 的 3D 掩积自监督学习实现，用于结构脑 MRI 的预训练、ViT 微调及下游 SVM 推理。仓库提供了完整的模型定义、训练循环、数据加载和推理脚本，实现完整度较高。但代码中存在硬编码设备、弃用 API、潜在反序列化漏洞及测试缺失等问题，需修复后方可安全稳定复现。",
+    "repository_kind": "implementation",
+    "architecture": "基于源码的架构包含三个主要路径：1) 预训练：通过 NiftiLoader 加载 3D NIfTI 图像，输入 Brain2Vec 模型（基于 3D Patch Embedding 和 timm Block 的 MAE 架构），执行随机掩码和重建，使用 MSE 计算损失；2) ViT 微调：继承 timm 的 VisionTransformer，替换为 3D Patch Embedding，支持 MixUp 和 Label Smoothing，执行分类或回归；3) 下游 SVM：加载 Brain2Vec 提取的 JSON 格式嵌入，使用 Optuna 进行超参搜索并训练 sklearn 的 SVC/SVR。数据流依赖 skull-stripped 且配准到通用空间的 T1 图像。",
+    "call_chain": "入口 __main__.py / inference.py / train_svm.py → NiftiLoader 加载 NIfTI → Brain2Vec/VisionTransformer 前向传播 → 损失计算/特征提取 → 模型保存或 JSON 嵌入输出 → SVM 训练",
+    "core_modules": [
+      {
+        "name": "Brain2Vec 模型",
+        "role": "3D MAE 自监督预训练模型",
+        "evidence": "Brain2Vec/models/brain2vec.py:class Brain2Vec"
+      },
+      {
+        "name": "VisionTransformer",
+        "role": "下游微调 3D ViT 模型",
+        "evidence": "Brain2Vec/models/vit.py:class VisionTransformer"
+      },
+      {
+        "name": "NiftiLoader",
+        "role": "加载和处理 3D 脑 MRI NIfTI 文件",
+        "evidence": "Brain2Vec/dataloader/loader.py:class NiftiLoader"
+      },
+      {
+        "name": "SVMModel",
+        "role": "封装 sklearn SVC/SVR 用于下游分类/回归",
+        "evidence": "Brain2Vec/models/svm.py:class SVMModel"
+      },
+      {
+        "name": "训练循环",
+        "role": "Brain2Vec 预训练和 ViT 微调逻辑",
+        "evidence": "Brain2Vec/trainer/brain2vec_pretrain.py:def train"
+      }
+    ],
+    "dependencies": [
+      "torch",
+      "timm",
+      "torchio",
+      "scikit-learn",
+      "huggingface-hub",
+      "safetensors",
+      "pandas",
+      "numpy",
+      "optuna (隐式，由 svm_trainer 引用)",
+      "NiChart_DLMUSE (外部工具，用于预处理)",
+      "flirt (FSL 工具，用于配准)"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "最短复现路径：安装依赖（pip install -e .），获取 HuggingFace 模型访问权限，预处理数据（skull-stripping 和配准），然后运行 inference.py 进行特征提取。阻碍：代码硬编码 CUDA 设备导致非 GPU 环境无法直接运行预训练；torch.cuda.amp.GradScaler 已弃用；SVM 加载使用 pickle 存在安全风险；无任何测试覆盖。",
+    "issues": [
+      {
+        "severity": "high",
+        "finding": "训练代码硬编码 CUDA 设备，导致无法在 CPU 或 MPS 上运行预训练和微调",
+        "evidence": [
+          "Brain2Vec/trainer/brain2vec_pretrain.py:with torch.autocast(device_type=\"cuda\", dtype=torch.bfloat16)",
+          "Brain2Vec/__main__.py:index = torch.randperm(batch_size).cuda()"
+        ],
+        "impact": "限制了非 CUDA 环境的可用性，与 README 声称支持的其他设备冲突",
+        "confidence": 0.95
+      },
+      {
+        "severity": "high",
+        "finding": "SVM 模型加载使用 pickle.load，存在任意代码执行风险",
+        "evidence": [
+          "Brain2Vec/models/svm.py:self.model = pickle.load(f)"
+        ],
+        "impact": "加载不受信任的 .pkl 文件可能导致系统被攻陷",
+        "confidence": 0.9
+      },
+      {
+        "severity": "medium",
+        "finding": "使用了已弃用的 torch.cuda.amp.GradScaler API",
+        "evidence": [
+          "Brain2Vec/trainer/utils.py:self._scaler = torch.cuda.amp.GradScaler()"
+        ],
+        "impact": "在较新的 PyTorch 版本中可能引发警告或未来失效",
+        "confidence": 0.9
+      },
+      {
+        "severity": "medium",
+        "finding": "ViT 模型在 __init__ 中重复设置 pos_embed 和 patch_embed，可能与父类初始化逻辑冲突",
+        "evidence": [
+          "Brain2Vec/models/vit.py:self.patch_embed = PatchEmbedding(...)",
+          "Brain2Vec/models/vit.py:self.pos_embed = nn.Parameter(...)"
+        ],
+        "impact": "可能导致权重加载异常或参数冗余",
+        "confidence": 0.8
+      },
+      {
+        "severity": "medium",
+        "finding": "inference.py 中 num_workers 设置为 os.cpu_count() // 2，在 cpu_count() 返回 None 时会抛出 TypeError",
+        "evidence": [
+          "inference.py:num_workers=os.cpu_count() // 2"
+        ],
+        "impact": "在某些容器环境或特殊系统配置下导致脚本崩溃",
+        "confidence": 0.85
+      },
+      {
+        "severity": "low",
+        "finding": "setup.py 中 entry_points 存在空格，可能导致 console_scripts 安装失败",
+        "evidence": [
+          "setup.py:\"Brain2Vec= Brain2Vec.__main__:main\""
+        ],
+        "impact": "pip install 后可能无法直接使用 Brain2Vec 命令",
+        "confidence": 0.9
+      }
+    ],
+    "static_limitations": [
+      "静态分析无法确认运行时内存占用和实际计算图",
+      "未执行代码，无法验证 HuggingFace 权重加载的兼容性",
+      "无法确认数据预处理步骤（skull-stripping 和配准）对最终结果的影响",
+      "未验证 distributed 训练逻辑在真实集群上的正确性"
+    ],
+    "confidence": 0.85,
+    "version": 3,
+    "generated_at": "2026-10-22T09:27:21.631154"
   }
 }

@@ -25,7 +25,11 @@ class CronEntrypointTests(unittest.TestCase):
             db.write_text(json.dumps({'database': []}))
             entry = {'arxiv_id': '2609.99999v1', 'base_id': '2609.99999', 'published': datetime.now(timezone.utc).isoformat(), 'title': 'Test paper', 'abstract': 'Test evidence'}
             fetch = Mock(return_value=[entry])
-            runner = Mock(side_effect=[subprocess.CompletedProcess([], 0, '', ''), subprocess.CompletedProcess([], 1, '', 'injected build error')])
+            runner = Mock(side_effect=[
+                subprocess.CompletedProcess([], 0, '', ''), # backfill_analysis.py
+                subprocess.CompletedProcess([], 0, '', ''), # jev_evaluator.py
+                subprocess.CompletedProcess([], 1, '', 'injected build error') # generate_index.py
+            ])
             with patch.multiple(verified_daily, PROJECT=root, DB_PATH=db, EVIDENCE_DIR=root,
                                 LOCK_PATH=root/'lock', fetch_recent_entries=fetch,
                                 relevant=Mock(return_value=(True, '')), sanitize_ignored_repositories=Mock(return_value=0),
@@ -34,7 +38,7 @@ class CronEntrypointTests(unittest.TestCase):
                                 make_record=Mock(return_value={'arxiv_id': entry['arxiv_id']}),
                                 render_report=Mock(return_value='report'), run=runner), contextlib.redirect_stdout(io.StringIO()):
                 self.assertEqual(verified_daily.main(), 1)
-                self.assertEqual(runner.call_count, 2, verified_daily.render_report.call_args.args[0]['errors'])
+                self.assertEqual(runner.call_count, 3, verified_daily.render_report.call_args.args[0]['errors'])
                 self.assertEqual(len(json.loads(db.read_text())['database']), 1)
                 self.assertTrue((root/'.site-update-pending.json').exists())
                 fetch.return_value = []
@@ -42,12 +46,12 @@ class CronEntrypointTests(unittest.TestCase):
                 runner.side_effect = None
                 runner.return_value = subprocess.CompletedProcess([], 0, '', '')
                 self.assertEqual(verified_daily.main(), 0)
-                self.assertEqual(runner.call_count, 3)
+                self.assertEqual(runner.call_count, 4)
                 self.assertEqual(runner.call_args_list[-1].args[0], ['bash', str(root/'publish_cf_pages.sh')])
                 self.assertFalse((root/'.site-update-pending.json').exists())
                 runner.reset_mock()
                 self.assertEqual(verified_daily.main(), 0)
-                self.assertEqual(runner.call_count, 1)
+                self.assertEqual(runner.call_count, 2)
 
     def test_successful_retry_is_reported_but_unchanged_day_stays_silent(self):
         evidence = {'errors': [], 'run_date': '2026-09-09', 'index_status': '复用上次已生成页面',

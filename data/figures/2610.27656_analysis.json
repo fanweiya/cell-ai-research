@@ -1,0 +1,7 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "不同医学影像模态下PACE-MoE与Vanilla-25的定性结果对比图，包含CT、MRI、X-ray等7种模态及IoU指标"
+  }
+}
