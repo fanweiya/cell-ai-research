@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "自然图像与冷冻电镜图像的功率谱密度对比图，展示不同空间频率下的能量分布及采样特性"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "NUViT核心架构与方法流程图：展示从Cryo-EM图像输入、二维傅里叶变换、极坐标网格分块（平衡空间频率）到Token编码及Transformer编码器的完整流程"
+  },
+  "2": {
+    "relevant": true,
+    "score": 10,
+    "caption": "论文核心实验结果图：对比NUViT与ViT、MLP在不同噪声水平（Clean/SNR 0.1/SNR 0.01）下的top-1分类准确率"
+  }
+}

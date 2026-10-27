@@ -11502,5 +11502,539 @@
     "confidence": 0.92,
     "version": 3,
     "generated_at": "2026-10-23T09:24:21.383916"
+  },
+  "2610.31538v1": {
+    "summary": "该仓库实现了基于无条件扩散模型后验采样与超像素条件典型度（Conditional Typicality of Superpixels）的局部异常检测方法 LACToS。仓库包含打分主程序 evaluate.py、核心算法包 ood/、后验采样脚本 sampling/、合成数据与理论验证实验 toy/ 以及基线评测逻辑，整体呈现出完整的算法实现形态。然而核心真实数据评测（CHAOS CT、DVXray、FFHQ）高度依赖体量约 7.5GB 的外部资产包（包含扩散模型与自编码器权重、测试集掩码和采样重构图）。",
+    "repository_kind": "implementation",
+    "architecture": "数据流分为三个阶段：1. 后验采样阶段（DPS）：利用无条件扩散模型对带有噪声假设的测试图像进行后验采样，生成多张扩散重构图（M draws）；2. 特征与超像素阶段：输入图像经过 SLIC 算法聚类为超像素块并递归细分至目标尺寸；同时图像与重构样本通过 ResNet-101 提取多尺度激活，并经轻量级 PixelAutoEncoder 降维至低维潜空间（支持直接编码与按层折叠卷积编码 folded encode 两种数值路径）；3. 典型度打分阶段：在每个超像素区域内，基于重构图构建 RGB/灰度强度直方图和潜变量特征直方图，计算测试图像素在该先验分布下的负对数似然与熵差（NLL - entropy），聚合生成像素级与区域级异常响应图（delta map），最终输出评价指标与热力图。",
+    "call_chain": "evaluate.py:main() → ood.data:load_reconstructions() & load_gt_mask() → ood.superpixels:recursive_subdivide() (基于 super_pixel_generation.py SLIC 结果) → evaluate.py:PixelAutoEncoder 与 ood.embeddings:ResNetPixelEmbedder (提取潜空间特征) → ood.scoring:compute_delta_map_gpu() (典型度直方图打分) → full_metric_table.py / scripts/make_table1.py (导出 npz 图及 AUROC/AP/AUPRO 指标)",
+    "core_modules": [
+      {
+        "name": "打分主调度器",
+        "role": "加载数据配置、初始化网络与自编码器、协调特征提取并执行超像素打分输出",
+        "evidence": "evaluate.py:main, PixelAutoEncoder, _fold_plan, _encode_folded"
+      },
+      {
+        "name": "扩散后验采样器 (DPS)",
+        "role": "针对无条件扩散模型应用测量引导进行图像后验生成",
+        "evidence": "DDAD_DPS/samplers.py:DPSPosteriorSampling, sampling/dps/sample_fast.py"
+      },
+      {
+        "name": "超像素分割与细分",
+        "role": "对输入图像执行 SLIC 聚类并根据方差和目标像素数递归细化超像素网格",
+        "evidence": "super_pixel_generation.py, ood/superpixels.py:recursive_subdivide"
+      },
+      {
+        "name": "典型度打分引擎",
+        "role": "利用直方图估计重构样本的分布，计算超像素区域内像素强度的典型度负对数似然与熵偏置",
+        "evidence": "ood/scoring.py:compute_delta_map_gpu"
+      },
+      {
+        "name": "特征嵌入与压缩",
+        "role": "ResNet-101 多层特征提取与 1x1 卷积多层感知自编码器降维",
+        "evidence": "ood/embeddings.py:ResNetPixelEmbedder, evaluate.py:PixelAutoEncoder"
+      },
+      {
+        "name": "Toy 验证与基准生成",
+        "role": "生成多象限受控人造几何图形集并训练验证扩散先验与 PatchCore 基线",
+        "evidence": "toy/gen_data.py, toy/shapes.py, toy/train_prior.py, toy/score_from_recons.py"
+      }
+    ],
+    "dependencies": [
+      "torch==2.0.1 (cu118)",
+      "torchvision==0.15.2",
+      "numpy==1.24.3",
+      "scipy==1.10.1",
+      "scikit-image==0.19.2",
+      "scikit-learn==1.2.2",
+      "kornia==0.6.12",
+      "omegaconf==2.1.2",
+      "torchmetrics==0.11.4",
+      "pandas==2.0.1",
+      "外部资产包: LACToS_assets.tar (7.5 GB，含 checkpoints/、data/、recons/、reference_results/)"
+    ],
+    "reproduction_readiness": "ready",
+    "reproduction_notes": "合成实验（toy/）完全自包含，可通过 python toy/gen_data.py 生成数据并通过 pytest toy/tests 运行单元测试；对于主实验（evaluate.py），由于依赖外部模型权重、预先采样的重构样本和评估数据集，必须先下载解压 LACToS_assets.tar 并软链接为 assets/ 目录后，执行 scripts/score_lactos.sh 与 scripts/make_table1.py 进行复现。",
+    "issues": [
+      {
+        "severity": "medium",
+        "finding": "数值精度对浮点计算路径敏感，不同硬件与编码实现可能导致指标出现小数点漂移",
+        "evidence": [
+          "evaluate.py:_encode_folded",
+          "configs/lactos_ct.yaml:ae_encode: folded",
+          "configs/lactos_ffhq_faces.yaml:ae_encode: direct",
+          "configs/lactos_ffhq_faces.yaml:batch_size: 4"
+        ],
+        "impact": "源码中明确指出 direct 与 folded 卷积路径存在 ~1e-6 的 float32 累积误差，且直方图 bin 边缘对临界值敏感，非原机 GPU 运行可能导致少量像素落入不同直方图统计区间，使评测数值在第三到第四位小数发生偏差。",
+        "confidence": 0.95
+      },
+      {
+        "severity": "low",
+        "finding": "主评测严重强耦合外部 Google Drive 资产包路径，缺乏缺失本地资产时的自动化回退与前置校验",
+        "evidence": [
+          "configs/lactos_ct.yaml:image_dir: assets/data/CT/test/cta",
+          "configs/lactos_ct.yaml:autoencoder_path: assets/checkpoints/lactos/ae_CT.pth",
+          "README.md:gdown 1KFtL_6QT1Yt32jjCPHJgTcOROGFWf61v"
+        ],
+        "impact": "若网络环境无法访问 Google Drive 或资产链接失效，全套主实验评估脚本均会因找不到 assets 目录而抛出 FileNotFoundError，无法脱机运行真实数据集。",
+        "confidence": 0.9
+      }
+    ],
+    "static_limitations": [
+      "未实际下载并解压 7.5GB 的外部资产包，无法验证 ae_CT.pth、ae_faces.pth 等模型权重结构与 PixelAutoEncoder 定义的精确参数匹配性。",
+      "未在 CUDA 11.8 环境中编译和运行，无法直接评估 compute_delta_map_gpu 的显存占用和实际推理速度。",
+      "合成实验的训练先验脚本（toy/train_prior.py）未执行，无法实测 DDAD 训练收敛性。"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-10-24T09:23:07.395483"
+  },
+  "2610.30672v1": {
+    "summary": "该仓库为论文 CVP-BAA 的代码占位符，仓库内目前仅包含一个声明文档。README 明确指出代码将在论文被录用后公开，目前未提供任何算法实现、模型定义或训练推理脚本。",
+    "repository_kind": "placeholder",
+    "architecture": "无法确认。仓库内无源码实现，未公开任何关于模型结构或数据处理流的证据。",
+    "call_chain": "无法确认",
+    "core_modules": [],
+    "dependencies": [
+      "无法确认（未提供 requirements.txt、setup.py 或 conda 等环境依赖配置）"
+    ],
+    "reproduction_readiness": "placeholder",
+    "reproduction_notes": "无法开展复现。仓库仅包含占位声明，需等待作者在论文接收后公开实际源码、权重及运行依赖。",
+    "issues": [
+      {
+        "severity": "blocker",
+        "finding": "仓库未公开任何核心实现代码",
+        "evidence": [
+          "README.md: The source code will be made publicly available upon acceptance of this paper."
+        ],
+        "impact": "无法进行代码审阅、环境构建、模型推理或复现实验。",
+        "confidence": 1.0
+      }
+    ],
+    "static_limitations": [
+      "因完全缺乏源码和配置，无法评估其算法架构设计、计算病理/细胞影像处理流程及工程质量",
+      "无法预估所需的计算硬件配置及具体第三方依赖版本",
+      "仅进行了 gread 静态分析，未执行代码，不能确认运行时兼容性或论文指标。"
+    ],
+    "confidence": 1.0,
+    "version": 3,
+    "generated_at": "2026-10-24T09:23:15.097475"
+  },
+  "2610.31566v1": {
+    "summary": "CellTrack-Bench 是用于评估视觉语言模型（VLM）在显微细胞追踪决策任务上性能的基准测试框架，覆盖细胞关联、轨迹修复和轨迹审查三类任务。仓库包含了从专门追踪器错误中挖掘难例的构建管线、多轮工具交互评测线架、8种视觉呈现条件、评分与汇总指标算法，以及论文中22个模型的离线预测输出；核心实现完备，但基准数据本身受限于显微数据集许可需本地生成。",
+    "repository_kind": "implementation",
+    "architecture": "代码库分为四层架构：1) 构建层（construction/）：基于 HOCT、Trackastra 和 Hungarian 算法在 CTC 及细菌数据集上的交叉验证错误，挖掘一致性难例并导出为规范化图和元数据；2) 渲染与条件层（render.py, conditions.py）：从原始 2D/3D TIFF 图像和标注中实时合成 768x768 双时序面板，支持 8 种实验线索呈现（c1~c8）及多尺度交互式局部放大（crop_and_zoom）；3) 评测执行层（runner.py）：封装针对 OpenAI/Anthropic/vLLM 兼容后端的推理循环，内置 Token 预算管理与非完成轮次自适应恢复机制；4) 评测与统计层（score.py, answer_scoring.py, subgraph_lnk.py, nn_residual.py, leaderboard.py, reproduce.py）：解析结构化 JSON 输出，计算严格语义连接 F1、子图编辑距离（LNKsub）、近邻残差收益（NN-res）及宏观统计检验。",
+    "call_chain": "基准构建：rebuild_benchmark.sh → analyze_three_tracker_errors.py → select_three_tracker_error_pool_by_split.py → build_hoct_graph_benchmarks.py → export_release.py 导出 items/ 与 references/；模型评估：runner.py:main → benchmark_data.load_items → conditions.build_condition (调用 render.py 从 raw_data 读取 TIFF/TRA 标注并切图) → runner.call_once/call_once_anthropic (多轮 Tool Call / 动态裁剪) → 写入 jsonl 预测文件；评测汇总：score.py:main / reproduce.py:main → benchmark_data.read_jsonl → output_schema.validate_output → answer_scoring.score_output / score.repaired_graph_metrics → score.dataset_macro / score.select_harness → 生成 summary.json 并打印排行榜。",
+    "core_modules": [
+      {
+        "name": "render",
+        "role": "显微图像与标注的标准化渲染引擎与局部交互切图工具",
+        "evidence": "celltrack_bench/render.py:Panel, celltrack_bench/render.py:crop_region"
+      },
+      {
+        "name": "runner",
+        "role": "支持 Tool Call、思维链预算分配与截断恢复的多后端评测执行器",
+        "evidence": "celltrack_bench/runner.py:call_once, celltrack_bench/runner.py:_turn_policy"
+      },
+      {
+        "name": "conditions",
+        "role": "管理 8 种证据输入与视觉线索形态的生成器",
+        "evidence": "celltrack_bench/conditions.py:build_condition, celltrack_bench/conditions.py:Built"
+      },
+      {
+        "name": "score & answer_scoring",
+        "role": "模型输出的结构化提取、多任务（连接/修复/检查）指标度量与自举统计检验",
+        "evidence": "celltrack_bench/score.py:repaired_graph_metrics, celltrack_bench/score.py:dataset_macro, celltrack_bench/answer_scoring.py:score_output"
+      },
+      {
+        "name": "benchmark_data",
+        "role": "数据集元数据校验、SHA-256 唯一身份标识生成与文件读写抽象",
+        "evidence": "celltrack_bench/benchmark_data.py:benchmark_identity, celltrack_bench/benchmark_data.py:validate_benchmark"
+      }
+    ],
+    "dependencies": [
+      "Python >= 3.10 (构建脚本建议 Python 3.11)",
+      "直接运行时依赖：numpy, opencv-python-headless, tifffile",
+      "评测运行依赖（可选）：openai >= 1.40, anthropic >= 0.40",
+      "测试依赖：pytest",
+      "外部数据依赖：Cell Tracking Challenge 10个公开数据集和 van Vliet et al. 2018 细菌追踪原始图像与 TRA 标注（总计 35 个序列）"
+    ],
+    "reproduction_readiness": "blocked",
+    "reproduction_notes": "1. 仓库内未附带 data/hard 与 data/full 基准文件，必须使用 construction/rebuild_benchmark.sh 依托外部原始显微影像及 GT 标注（Cell Tracking Challenge 与 van Vliet 2018 细菌数据集）本地构建；2. 若缺少原始数据，单测（tests/conftest.py:requires_benchmark）会自动跳过除纯单元逻辑之外的全部复现测试；3. 一旦通过校验生成合规的 data/hard 目录，即可直接利用 predictions/ 下保存的 22 个系统输出运行 python -m celltrack_bench.reproduce 复现论文全套表格与基线比对。",
+    "issues": [
+      {
+        "severity": "high",
+        "finding": "细菌追踪数据集的获取途径与 TRA 格式转换说明缺失",
+        "evidence": [
+          "README.md:<!-- TODO: say where to obtain the bacterial sequences with TRA-style ground truth, and how to convert them. -->"
+        ],
+        "impact": "研究人员即使拥有 CTC 数据，也难以直接补齐 5 组细菌序列并生成满足 CHECKSUMS.sha256 校验的基准文件，导致基准构建受阻。",
+        "confidence": 0.95
+      },
+      {
+        "severity": "medium",
+        "finding": "原始数据环境变量命名在构建脚本与运行时渲染器间存在不一致",
+        "evidence": [
+          "README.md:RAW_DATA=/path/to/raw_data construction/rebuild_benchmark.sh",
+          "celltrack_bench/render.py:SOURCE_DATA_ROOT = Path(os.environ.get(\"CELLTRACK_DATA_ROOT\", str(REPO_ROOT / \"raw_data\")))"
+        ],
+        "impact": "用户若仅按构建说明导出 RAW_DATA 环境变量，后续运行 runner.py 时 render.py 会由于回退使用 CELLTRACK_DATA_ROOT 默认的 ./raw_data 而导致 FileNotFoundError。",
+        "confidence": 0.85
+      },
+      {
+        "severity": "low",
+        "finding": "代码许可证缺失",
+        "evidence": [
+          "README.md:<!-- TODO: code license. The source datasets (Cell Tracking Challenge; van Vliet et al., 2018) and anything derived from their annotations remain subject to their own terms. -->"
+        ],
+        "impact": "未包含标准 LICENSE 文件，对学术下游采用和再分发存在法律合规风险。",
+        "confidence": 1.0
+      }
+    ],
+    "static_limitations": [
+      "未下载并解压 CTC 及细菌显微原图，无法在本地环境验证 rebuild_benchmark.sh 生成文件能否完全匹配 CHECKSUMS.sha256",
+      "未配置 API Key 和 vLLM 服务，无法验证 runner.py 与当前最新版大模型 API 或自建推理服务的实时端到端交互稳定性",
+      "仅进行了 gread 静态分析，未执行代码，不能确认运行时兼容性或论文指标。"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-10-24T09:23:31.662247"
+  },
+  "2610.32041v1": {
+    "summary": "torchkbnufft 是一个基于 PyTorch 的非均匀快速傅里叶变换（NUFFT）纯 Python 实现库，支持 Kaiser-Bessel 核网格化插值、稀疏矩阵插值以及 Toeplitz 嵌入式 FFT 加速算子。该仓库提供了完整的 PyTorch autograd 封装算子、多线圈 SENSE 灵敏度编码机制与测试套件，属于功能完整的算子层工程实现。",
+    "repository_kind": "implementation",
+    "architecture": "代码采用分层模块化设计：底层 _nufft/utils 与 _math 负责 Kaiser-Bessel 窗函数多项式系数计算、网格过采样尺寸计算及复数辅助运算；中层 functional/nufft.py 与 functional/interp.py 提供基于 PyTorch autograd 的函数式正向与伴随变换（包括 table 表查值插值、稀疏张量矩阵乘插值与基于 FFT 的 Toeplitz 滤波）；顶层 modules/kb*.py（KbNufft、KbNufftAdjoint、KbInterp、ToepNufft）继承 KbModule，统一将过采样网格、插值查表和补偿系数注册为 Buffer 并管理设备与精度转换。",
+    "call_chain": "调用入口 (torchkbnufft.KbNufft / ToepNufft / torchkbnufft.functional.kb_*_nufft) → 输入校验与复数/实数张量统一 (view_as_complex) → 图像域尺度补偿与 FFT/IFFT 滤波 (torchkbnufft._nufft.fft.fft_and_scale) → Kaiser-Bessel 查表/稀疏矩阵插值 (kb_table_interp / kb_spmat_interp) 或 Toeplitz 卷积核点乘 → 输出非均匀频域样本或重建图像 (view_as_real 回转)",
+    "core_modules": [
+      {
+        "name": "KbNufft & KbNufftAdjoint",
+        "role": "正向与伴随 NUFFT 的 PyTorch Module 封装，管理预计算核缓冲并支持 SENSE 灵敏度图加权",
+        "evidence": "torchkbnufft/modules/kbnufft.py:KbNufft, KbNufftAdjoint"
+      },
+      {
+        "name": "ToepNufft",
+        "role": "基于 Toeplitz 嵌入核的快速正反向联合变换算子，用于迭代算法中无需显式插值的频域前向-伴随组合运算",
+        "evidence": "torchkbnufft/modules/kbnufft.py:ToepNufft"
+      },
+      {
+        "name": "KbInterp & KbInterpAdjoint",
+        "role": "纯 Kaiser-Bessel 网格化插值与反向解插值模块，解耦了傅里叶变换步骤",
+        "evidence": "torchkbnufft/modules/kbinterp.py:KbInterp, KbInterpAdjoint"
+      },
+      {
+        "name": "KbModule",
+        "role": "NUFFT 算子基类，负责预计算查表系数并重写 to 方法以稳健适配 PyTorch 复杂数据类型转换",
+        "evidence": "torchkbnufft/modules/_kbmodule.py:KbModule"
+      },
+      {
+        "name": "functional.nufft",
+        "role": "底层函数式算子分发逻辑，调度 FFT 缩放与 Kaiser-Bessel 插值核心",
+        "evidence": "torchkbnufft/functional/nufft.py:kb_table_nufft, kb_spmat_nufft"
+      }
+    ],
+    "dependencies": [
+      "Python >= 3.10",
+      "torch >= 2.0",
+      "numpy >= 2.0.0",
+      "scipy >= 1.8.1",
+      "pytest == 8.3.3 (测试依赖)",
+      "scikit-image, pillow (profile_torchkbnufft.py 性能分析脚本额外依赖，未在 setup.cfg 的 install_requires 中)"
+    ],
+    "reproduction_readiness": "ready",
+    "reproduction_notes": "该仓库为无原生编译依赖的纯 Python/PyTorch 库。复现时通过 pip install -e . 安装，运行 pytest tests 即可执行数学正确性、伴随算子内积对齐及自动微分测试。如需运行 profile_torchkbnufft.py，需手动补装 scikit-image 与 Pillow。",
+    "issues": [
+      {
+        "severity": "low",
+        "finding": "性能评测脚本缺失依赖声明与 README 提示不一致",
+        "evidence": [
+          "profile_torchkbnufft.py:from skimage.data import camera",
+          "profile_torchkbnufft.py:from PIL import Image",
+          "README.md:pip install -r dev-requirements.txt",
+          "setup.cfg:options.extras_require"
+        ],
+        "impact": "README 指引安装 dev-requirements.txt，但仓库根目录中仅有 setup.cfg 中的 extras_require，且未包含 skimage/pillow，直接执行 profile_torchkbnufft.py 会抛出 ModuleNotFoundError",
+        "confidence": 0.95
+      },
+      {
+        "severity": "low",
+        "finding": "部分测试中临时重设全局默认浮点精度存在潜在副作用",
+        "evidence": [
+          "tests/test_toep.py:torch.set_default_dtype(torch.double)",
+          "tests/test_dcomp.py:default_dtype = torch.get_default_dtype()"
+        ],
+        "impact": "若测试用例发生异常中断在 assert 之前，可能导致全局 default_dtype 保持为 double，进而污染后续并发或顺序测试用例的状态",
+        "confidence": 0.85
+      }
+    ],
+    "static_limitations": [
+      "静态分析无法验证在最新 PyTorch 与 CUDA 驱动下的 GPU 显存分配及实际执行性能",
+      "静态分析无法验证 tests/data/*.pkl 数据文件与新版本 PyTorch 序列化机制的向下兼容性"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-10-26T09:23:41.659771"
+  },
+  "2610.32478v1": {
+    "summary": "PathJev 是面向病理图像的决策原生视觉语言模型（基于 MedGemma-1.5-4B + LoRA 与 Decision Head），通过在选项标志 token 处抽取隐状态实现单次前向输出动态候选概率分布。仓库包含了从原始病理数据集构建标准化决策状态（patch 与 mosaic）、数据去重排查、训练混合组装、指标评测以及 WSI 聚类与概率传播的完整代码实现与分析脚本。",
+    "repository_kind": "implementation",
+    "architecture": "数据流首先由 `pathjev.sources.*` 读取各病理数据集并经 `splits.py` 进行患者/切片级无泄漏划分，生成 records 与 manifests；`build.py` 与 `states.py` 根据模板组装成单图（patch）及混合镶嵌图（mosaic）决策状态 JSONL；`mix.py` 与 `evalsets.py` 进行分层采样生成训练与评测集；模型推理与训练调用上游 OmniMed-Jev 脚本或 `pathjev_infer.PathJev`；评测由 `evaluate.py` 计算多类别选择、二值选择与有序评分指标（含基于患者/切片分组的 Bootstrap 置信区间）；WSI 流程由 `wsi.py` 实现组织掩码提取、H-optimus-0 特征提取、GMM 软聚类、代表性 patch 决策及全片软概率传播。",
+    "call_chain": "评测入口 `python -m pathjev.evaluate` → `evaluate.collect` 读取 state.jsonl 与 decisions.jsonl，并由 `groups.state_group` 绑定分析分组（如 HiESD 的 slide→patient 映射） → `evaluate.score_entry` 计算准确率、ECE、Brier、TV 距离或有序 RPS/MAE，并调用 `stats.bootstrap_ci` → 输出评估 JSON 报告",
+    "core_modules": [
+      {
+        "name": "State Evaluator",
+        "role": "对模型预测概率分布与真值进行聚合评测，支持 hard/soft 标签、分类/有序问题及分组 Bootstrap 置信区间计算",
+        "evidence": "src/pathjev/evaluate.py:collect, src/pathjev/evaluate.py:score_entry"
+      },
+      {
+        "name": "Dataset Builder & Splitter",
+        "role": "实现病理数据集标准化、基于患者/切片分组的安全划分并输出校验 manifest 与 patch/mosaic 状态",
+        "evidence": "src/pathjev/build.py:build, src/pathjev/splits.py:assign"
+      },
+      {
+        "name": "Near-Duplicate Auditor",
+        "role": "使用 64 位 pHash + dHash 及 4-band 分桶哈希碰撞检测训练集与测试集间的近重复图像",
+        "evidence": "src/pathjev/dedup.py:near_duplicates, src/pathjev/dedup.py:cached_hashes"
+      },
+      {
+        "name": "WSI Pipeline",
+        "role": "全切片组织网格切分、H-optimus-0 特征抽取、BIC-GMM 软聚类、典型瓦片镶嵌图状态生成与软聚类概率反向传播",
+        "evidence": "src/pathjev/wsi.py:grid, src/pathjev/wsi.py:features, src/pathjev/wsi.py:cluster, src/pathjev/wsi.py:score"
+      },
+      {
+        "name": "Group Mapper & Exclusion",
+        "role": "解析样本元数据并加载外部患者映射表以确保统计检验（Bootstrap）按患者层级聚类，并过滤去重排除样本",
+        "evidence": "src/pathjev/groups.py:state_group, src/pathjev/groups.py:group_maps"
+      }
+    ],
+    "dependencies": [
+      "Python >= 3.10",
+      "torch",
+      "torchvision",
+      "transformers >= 4.50",
+      "peft",
+      "bitsandbytes",
+      "accelerate",
+      "imagehash",
+      "openslide-python",
+      "timm (需下载 bioptimus/H-optimus-0)",
+      "scikit-learn",
+      "numpy",
+      "Pillow",
+      "PyYAML",
+      "外部克隆与补丁：lytang63/OmniMed-Jev (需应用 external_patches/omnimedjev-py311-fstrings.patch)",
+      "基础模型权重：google/medgemma-1.5-4b-it 及 Cristiandieti/PathJev-P",
+      "原始病理公开数据集（BRACS, SICAPv2, HepatoBench, HiESD, SPIDER 等）需按 data/registry.csv 单独下载"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "单图轻量推理可直接通过 Hugging Face 权重与 `inference/pathjev_infer` 在配备单张 GPU 的环境中运行。全流程（数据构建、微调训练与评估）复现门槛较高：1) 需按 `NOTICE` 和 `data/registry.csv` 手动获取并挂载数个大型外部病理数据集；2) 训练和完整推理严重依赖外部项目 `external/OmniMed-Jev`，必须手动 clone 且打入 `external_patches/omnimedjev-py311-fstrings.patch`；3) WSI 流程依赖 OpenSlide 本地动态链接库及 HuggingFace 上的 H-optimus-0 编码器；4) Slurm 脚本中预设了特定集群环境变量（如 `$PATHJEV_WORK`）。",
+    "issues": [
+      {
+        "severity": "high",
+        "finding": "核心训练与主流评估流程强依赖未包含在仓库内的第三方子模块 OmniMed-Jev，需外部 clone 并手动打补丁",
+        "evidence": [
+          "NOTICE:7",
+          "README.md:104",
+          "external_patches/omnimedjev-py311-fstrings.patch"
+        ],
+        "impact": "若未配置外部依赖目录 `external/OmniMed-Jev`，训练及相关批处理脚本将无法执行",
+        "confidence": 0.95
+      },
+      {
+        "severity": "medium",
+        "finding": "WSI 切片读取对 OpenSlide 底层系统库存在隐式外部依赖，且动态调用 properties 时若缺少 MPP 字段可能回退为默认值",
+        "evidence": [
+          "src/pathjev/wsi.py:_slide",
+          "src/pathjev/wsi.py:tile_size_l0"
+        ],
+        "impact": "在未安装 libopenslide 的操作系统环境下会直接抛出 ImportError；若 WSI 缺少 openslide.mpp-x 元数据则可能使用默认 0.25 导致物理分辨率失真",
+        "confidence": 0.85
+      },
+      {
+        "severity": "low",
+        "finding": "分组映射文件 `hiesd_patient_slide_mapping.csv` 若存在未覆盖的 slide_id 会直接抛出 KeyError 导致中断",
+        "evidence": [
+          "src/pathjev/groups.py:state_group"
+        ],
+        "impact": "如果用户扩充了 HiESD 切片但未同步修改 mapping CSV，评测与统计分析阶段将直接崩溃",
+        "confidence": 0.9
+      }
+    ],
+    "static_limitations": [
+      "未能实际运行 PyTorch/Transformers 加载 MedGemma-1.5-4B 与 LoRA 权重，无法确认 4-bit 量化及 Decision Head 推理显存与兼容性",
+      "未下载原始 WSI 切片及外部病理图像集，无法验证各数据适配器（`pathjev.sources.*`）及 OpenSlide 实际解析正确性",
+      "未能实际测试外部打补丁后的 `OmniMed-Jev` 训练脚本能否在当前环境成功启动",
+      "部分单元测试依赖 `$PATHJEV_WORK` 下已构建的 jsonl 状态文件，在空数据环境下测试会被跳过",
+      "仅进行了 gread 静态分析，未执行代码，不能确认运行时兼容性或论文指标。"
+    ],
+    "confidence": 0.88,
+    "version": 3,
+    "generated_at": "2026-10-26T09:23:46.403614"
+  },
+  "2610.33256v1": {
+    "summary": "该仓库实现了基于粒子群优化（PSO, PySwarms）与归一化互相关（NCC/ECC）的三维多模态医学/生物影像（OCT 与光片显微镜 LSM/LSFM）刚体配准与重采样流程。核心算法包括 TIFF 序列堆叠读取、基于仿射/欧拉旋转变换的重采样网格映射以及利用多进程并行的 PSO 搜索。项目代码具备完整的核心逻辑实现，但存在导入命名错误及元数据配置不合理等问题，需修复后方可执行。",
+    "repository_kind": "implementation",
+    "architecture": "数据流以用户输入的文件夹路径为起点。输入目录下预期包含 'LS' 与 'OCT/images' 两个子目录的 2D TIFF 序列切片。Multimodal_registration.py 读取体数据并计算质心/初始变换，随后构建 ZYX 采样网格。优化阶段通过 pyswarms 驱动多进程（multiprocessing）并行评估粒子参数 [dx, dy, dz, roll, pitch, yaw]，调用基于 Numba JIT 的 calculate_similarity 计算归一化互相关。优化收敛后输出配准矩阵文件 'OCT_N.txt' 和 'LS_M.txt' 以及 alignment.log。后处理脚本 resample.py 加载矩阵重采样两组体数据，并通过 octls.py 调起 Napari 进行红绿双通道叠加可视化。",
+    "call_chain": "入口 octls.py / Multimodal_registration.py:__main__ → Multimodal_registration.run_registration → load_tiff_stack (读取 LS 和 OCT 切片) → grid_axes (构建物理网格) → pyswarms.single.GlobalBestPSO + _eval_particle/objective_function (Affine变换 + calculate_similarity 计算 ECC) → np.savetxt (输出 OCT_N.txt, LS_M.txt) → octls.py:resample (调用 resample.py:SampleImage/Transform) → napari.Viewer.add_image",
+    "core_modules": [
+      {
+        "name": "多模态配准优化器",
+        "role": "通过 PSO 优化 6 自由度刚体仿射参数，结合多进程与 Numba 加速 NCC 相似度评估",
+        "evidence": "Multimodal_registration.py:run_registration, calculate_similarity, _eval_particle"
+      },
+      {
+        "name": "仿射网格变换与重采样",
+        "role": "计算欧拉旋转矩阵并在规则网格上通过 scipy.ndimage 进行三维线性插值重采样",
+        "evidence": "Multimodal_registration.py:rotation_euler_zyx, resample_affine, grid_axes; resample.py:SampleImage"
+      },
+      {
+        "name": "可视化入口",
+        "role": "读取用户输入路径并调用重采样函数，在 Napari 中叠色显示配准结果",
+        "evidence": "octls.py:resample, napari.Viewer"
+      }
+    ],
+    "dependencies": [
+      "Python >= 3.10 (pyproject.toml 中声明 requires-python = '>=3.14' 过高，实际应匹配可用运行环境)",
+      "imageio >= 2.37.4",
+      "napari >= 0.9.1",
+      "numpy >= 2.0 (pyproject 声明 numpy>=2.5.3 存在虚高)",
+      "pyswarms >= 1.3.0",
+      "scikit-image >= 0.26.0",
+      "scipy",
+      "numba",
+      "输入数据需满足目录格式：<Input_path>/LS/*.tif(f) 以及 <Input_path>/OCT/images/*.tif(f)"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "1. octls.py 第 3 行存在直接导致 ImportError 的错误代码 `from sample import resample`，必须修改为 `from resample import resample`。2. pyproject.toml 中遗漏了核心依赖 `scipy` 和 `numba`，且 `requires-python = '>=3.14'` 与 `numpy>=2.5.3` 属于尚未发布的未来版本配置，需要将其降级至 Python 3.10-3.12 兼容规范。3. 仓库未提供测试用例或样例 TIFF 数据，复现必须自备匹配目录结构的 LSM 与 OCT 3D TIFF 切片数据。",
+    "issues": [
+      {
+        "severity": "blocker",
+        "finding": "octls.py 存在错误的模块导入路径，导致运行时抛出 ModuleNotFoundError",
+        "evidence": [
+          "octls.py:3:from sample import resample"
+        ],
+        "impact": "运行 octls.py 时直接报错崩溃，因为仓库中只有 resample.py，不存在 sample 模块",
+        "confidence": 1.0
+      },
+      {
+        "severity": "high",
+        "finding": "pyproject.toml 依赖配置不完整且 Python/NumPy 版本约束失真",
+        "evidence": [
+          "pyproject.toml:requires-python = \">=3.14\"",
+          "pyproject.toml:dependencies = [\"imageio>=2.37.4\", \"napari>=0.9.1\", \"numpy>=2.5.3\", ...]",
+          "Multimodal_registration.py:6:from scipy.ndimage import map_coordinates, affine_transform",
+          "Multimodal_registration.py:8:from numba import jit"
+        ],
+        "impact": "pyproject.toml 遗漏了 scipy 和 numba 声明；同时 requires-python >= 3.14 和 numpy >= 2.5.3 超出当前标准发布版本范围，导致常规 pip/uv 环境解析失败",
+        "confidence": 0.95
+      }
+    ],
+    "static_limitations": [
+      "静态分析无法验证 PSO 优化器在复杂真实显微组织多模态图像上的收敛精度及速度",
+      "静态分析无法验证 Numba JIT 对 calculate_similarity 的具体编译表现与并发竞争情况",
+      "由于缺少示例数据，未运行无法确认重采样坐标轴转换（ZYX 对齐与变换矩阵符号）在实际三维空间中的几何正确性"
+    ],
+    "confidence": 0.95,
+    "version": 3,
+    "generated_at": "2026-10-27T09:27:15.083052"
+  },
+  "2610.33691v1": {
+    "summary": "PathKGen 是一个结合知识图谱检索增强与多模态大语言模型（基于 Qwen2.5 架构）的病理整切片（WSI）报告生成系统。仓库包含了辅助组织学分类器、Neo4j 知识图谱构建与检索、VLM 两阶段训练（Stage 1 投影层对齐与 Stage 2 知识引导 QLoRA 微调）以及推断评估的完整 Python 源码实现。但由于缺少公开的预训练权重与特征数据集，目前处于代码完备但数据依赖阻塞的状态。",
+    "repository_kind": "implementation",
+    "architecture": "架构分为视觉特征流、知识检索流与多模态融合语言解码流。输入整切片先经外部 TRIDENT/CONCH/TITAN 提取 2D 空间视觉 token 特征（形状为 [B, num_tokens, 768]），进入 token-wise 投影层 ProjectionLayer（Linear-GELU-Dropout-Linear）映射至 LLM 隐层空间（3584 维）。知识分支利用基于切片全局特征与解剖部位预测的辅助分类器 ConceptHead，检索 UMLS 导出的 Neo4j 知识图谱生成结构化上下文提示（knowledge text）。融合数据通过 VLMDataCollator 拼接视觉占位符 <image_start><image_end> 与知识引导提示词，送入支持 QLoRA 4-bit 量化的 Qwen2.5 模型，利用标签平滑交叉熵损失（label_smoothing_loss）或 BLEU 惩罚进行两阶段训练及自回归生成报告。",
+    "call_chain": "推断入口 pipeline/inference.py (或 pipeline/inference.sh) → 数据加载 dataset.py:WSI_Report_Dataset (从 JSON 读取提示词/标签，H5 文件加载 tokens) 与 data_collator.py:VLMDataCollator → 模型前向与解码 model.py:VisionLanguageModel.generate (ProjectionLayer 投影视觉嵌入，替换 input_ids 中的特殊标记并驱动 LLM 生成) → 输出指标评测 metrics.py:compute_metrics 计算 BLEU/METEOR/ROUGE-L 并落盘 predictions.json 与 metrics.json",
+    "core_modules": [
+      {
+        "name": "视觉投影层",
+        "role": "实现整切片空间特征到语言模型维度的 token-wise MLP 投影映射",
+        "evidence": "pipeline/model.py:ProjectionLayer"
+      },
+      {
+        "name": "多模态大模型封装",
+        "role": "集成 Qwen2.5 基础 LLM、QLoRA 量化微调、特殊视觉 token 嵌入替换及生成逻辑",
+        "evidence": "pipeline/model.py:VisionLanguageModel"
+      },
+      {
+        "name": "数据加载与整理器",
+        "role": "解析 WSI-Bench/HistGen 数据集、对齐 H5 空间特征与知识文本，进行动态 padding 和标签遮罩",
+        "evidence": "pipeline/dataset.py:WSI_Report_Dataset, pipeline/data_collator.py:VLMDataCollator"
+      },
+      {
+        "name": "辅助组织学分类器",
+        "role": "融合整切片全局表征与解剖部位 embedding，预测组织学类型以锚定知识图谱检索",
+        "evidence": "auxiliary_classifier/head.py:ConceptHead, auxiliary_classifier/classifier.py:train"
+      },
+      {
+        "name": "知识图谱接口",
+        "role": "与 Neo4j 交互，执行概念约束构建、批量节点与关系导入及层次化子图抽取",
+        "evidence": "knowledge_path/graphs.py:Neo4jLoader"
+      },
+      {
+        "name": "评测度量",
+        "role": "计算生成的诊断报告与金标准之间的 NLP 文本相似度指标与 BLEU 惩罚项",
+        "evidence": "pipeline/metrics.py:compute_metrics, pipeline/losses.py:label_smoothing_loss"
+      }
+    ],
+    "dependencies": [
+      "Python 3.x, PyTorch, torchvision",
+      "Transformers, PEFT, bitsandbytes (QLoRA 4-bit 量化支持)",
+      "Neo4j 图数据库及其 Python 驱动 neo4j",
+      "h5py, numpy, pandas, scikit-learn",
+      "nltk (punkt_tab, wordnet, omw-1.4), rouge-score",
+      "外部预处理工具：TRIDENT (CONCH v1.5 + TITAN slide encoder)",
+      "外部模型/数据资源：Qwen2.5-7B/1.5B 权重、WSI-Bench 衍生 JSON 标签及切片 H5 特征"
+    ],
+    "reproduction_readiness": "blocked",
+    "reproduction_notes": "1. 理论最短路径为配置 paths_config.sh 后执行 bash pipeline/inference.sh 或 bash pipeline/train_stage1.sh。\n2. 阻塞因素：README 中的数据集、预训练模型权重（pathkgen_weights、SlideChat 检查点）及 Qwen 基础模型链接均为占位符（[here](#)），本地未提供下载脚本或公开外部存储库；并且缺少自动化单元测试与完整的小型 dummy 特征文件。",
+    "issues": [
+      {
+        "severity": "high",
+        "finding": "paths_config.py 与 paths_config.sh 中硬编码了开发者本地绝对路径",
+        "evidence": [
+          "paths_config.py:VLM_ROOT = \"/home/nadun/wd/PathKGen\"",
+          "pipeline/config.py:DEFAULT_SLIDECHAT_CHECKPOINT"
+        ],
+        "impact": "在未手动全面重写路径配置的情况下，任何脚本启动均会因找不到目录抛出 FileNotFoundError",
+        "confidence": 0.98
+      },
+      {
+        "severity": "high",
+        "finding": "权重与特征数据未开源，核心路径依赖外部资产",
+        "evidence": [
+          "README.md:Data and model weights will be available soon.",
+          "README.md:<a href=\"#\">🤗 Hugging Face Models</a>",
+          "pipeline/inference.sh:STAGE2_CHECKPOINT=\"$CHECKPOINTS_DIR/q7b_best/s2/checkpoint_epoch_1.pt\""
+        ],
+        "impact": "外部使用者目前无法直接复现训练或推断，属于数据资源缺失型阻塞",
+        "confidence": 0.95
+      },
+      {
+        "severity": "medium",
+        "finding": "README 评价脚本中调用的 compute_bert_score.py 在代码树中缺失",
+        "evidence": [
+          "README.md:python compute_bert_score.py",
+          "Directory Tree (pipeline 目录下未见 compute_bert_score.py)"
+        ],
+        "impact": "遵循 README 执行第 8 步评测会导致命令报错（No such file or directory）",
+        "confidence": 0.9
+      },
+      {
+        "severity": "low",
+        "finding": "辅助分类器推断阶段未校验嵌入维度与模型定义的动态匹配，硬编码第一个有效 sample",
+        "evidence": [
+          "auxiliary_classifier/inference.py:with h5py.File(...) as f: sample_emb = f['features'][:]",
+          "auxiliary_classifier/inference.py:model = ConceptHead(sample_emb.shape[0], ...)"
+        ],
+        "impact": "若第一个样本的特征维度与 checkpoint 权重（ckpt[\"fc.0.weight\"]）不一致或特征格式非 1D 数组，初始化将直接抛出异常",
+        "confidence": 0.8
+      }
+    ],
+    "static_limitations": [
+      "未实际连接 Neo4j 数据库，无法验证知识图谱查询语句在实际图谱拓扑下的执行效率及返回结果完整度",
+      "未加载 Qwen2.5 模型与真实切片特征，无法验证 QLoRA 4-bit 量化和梯度检查点在各 GPU 架构上的显存适配度与训练收敛性",
+      "静态分析无法验证 TITAN 空间特征的动态 token 长度在多 batch 混合时的真实性能与显存占用表现"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-10-27T09:27:18.029051"
   }
 }

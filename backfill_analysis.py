@@ -100,7 +100,8 @@ def main():
         jev = paper.get("jev_evaluation") or {}
         comp_score = jev.get("composite_priority")
         raw_score = float(comp_score) if comp_score is not None else 0.0
-        prio = paper.get("priority") if isinstance(paper.get("priority"), int) else int(round(raw_score))
+        p = paper.get("priority")
+        prio = p if isinstance(p, int) and not isinstance(p, bool) else int(round(raw_score))
         for stage in stages_order:
             if needs_analysis(paper, stage, existing) == "run" and status.get(stage) == "pending":
                 todo.append((pid, stage, prio, raw_score))

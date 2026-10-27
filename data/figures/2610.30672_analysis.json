@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "CVP-BAA方法架构图，对比四种不同模块设计"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "CVP-BAA模型的整体架构图，展示CNN分支与ViT分支结合及CVP模块的插入方式"
+  },
+  "2": {
+    "relevant": true,
+    "score": 10,
+    "caption": "CVP-BAA模型的架构图，展示了提示生成与提示注入模块。"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "论文核心图示：展示斑马鱼OCT+LS多模态成像系统的装置结构、LS与OCT像素尺寸对比、基于向量与角度的配准几何原理，以及配准前后的3D重建结果可视化"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "展示斑马鱼OCT和LSFM多模态图像中SIFT关键点检测、RANSAC配准结果及不同时间点自动配准与手动对齐的对比图，是论文核心方法验证与实验结果图。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "斑马鱼不同发育阶段（21-48 HPF）下多模态OCT+LS图像配准结果的定性对比图，展示Ground Truth与基于SSD、NMI、MIND、NCC四种相似性指标的配准效果及对应量化数值。"
+  }
+}

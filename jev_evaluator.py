@@ -13,6 +13,7 @@ import json
 import os
 import re
 import sys
+import tempfile
 import time
 import urllib.request
 from datetime import datetime, timezone
@@ -320,13 +321,15 @@ def evaluate_single_paper(paper: dict, api_key: str, retries: int = 3, evidence_
                         confidences[dim] = None
 
                 # Paradigm validation
-                paradigm_ans = answers.get("primary_paradigm", {})
+                paradigm_ans = answers.get("primary_paradigm")
+                if not isinstance(paradigm_ans, dict):
+                    raise ValueError(f"primary_paradigm 返回结构异常: {type(paradigm_ans).__name__}")
                 paradigm_choice = paradigm_ans.get("choice")
                 if not paradigm_choice or paradigm_choice not in PARADIGM_CRITERIA:
-                    paradigm_choice = "incremental_baseline"
+                    raise ValueError(f"primary_paradigm choice 缺失或不在合法范围内: {paradigm_choice!r}")
                 paradigm_conf = paradigm_ans.get("confidence")
                 if paradigm_conf is None or not isinstance(paradigm_conf, (int, float)):
-                    paradigm_conf = 0.0
+                    raise ValueError(f"primary_paradigm confidence 缺失或非数值: {paradigm_conf}")
 
                 raw_answers["primary_paradigm"] = paradigm_ans
 
@@ -434,9 +437,14 @@ def run_batch_evaluation(
         for future in concurrent.futures.as_completed(futures):
             item, ev, exc = future.result()
             if ev:
-                # Archive old evaluation if exists
-                if "jev_evaluation" in item and item["jev_evaluation"].get("rule_version") != RULE_VERSION:
-                    item["legacy_jev_evaluation"] = item["jev_evaluation"]
+                # Archive old evaluation if any relevant field changed
+                old_ev = item.get("jev_evaluation")
+                if old_ev and (
+                    old_ev.get("rule_version") != RULE_VERSION
+                    or old_ev.get("evidence_hash") != ev.get("evidence_hash")
+                    or old_ev.get("evidence_sufficiency") != ev.get("evidence_sufficiency")
+                ):
+                    item["legacy_jev_evaluation"] = old_ev
                 
                 item["jev_evaluation"] = ev
 
@@ -456,20 +464,33 @@ def run_batch_evaluation(
                 
                 # Periodic checkpoint save
                 if evaluated_count % save_batch_size == 0:
-                    with open(db_path, "w", encoding="utf-8") as out_f:
-                        json.dump(db, out_f, ensure_ascii=False, indent=2)
+                    _atomic_json(db_path, db)
             else:
                 failed_count += 1
                 print(f"[Failure] Item {item.get('arxiv_id')} failed: {exc}", file=sys.stderr)
 
     # Final writeback
-    with open(db_path, "w", encoding="utf-8") as out_f:
-        json.dump(db, out_f, ensure_ascii=False, indent=2)
+    _atomic_json(db_path, db)
 
     print(f"Successfully evaluated and updated {evaluated_count} papers (failed: {failed_count}).")
     if failed_count > 0:
         raise RuntimeError(f"Jev evaluation failed for {failed_count}/{total_candidates} papers")
     return evaluated_count
+
+
+def _atomic_json(path, data):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, temp_name = tempfile.mkstemp(prefix=path.name + ".", suffix=".tmp", dir=path.parent)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            json.dump(data, handle, ensure_ascii=False, indent=2)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temp_name, path)
+    finally:
+        if os.path.exists(temp_name):
+            os.unlink(temp_name)
 
 
 if __name__ == "__main__":

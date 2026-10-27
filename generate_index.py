@@ -1410,17 +1410,6 @@ def _render_gread_fallback(code_analysis):
     )
 
 
-def _get_grade(priority):
-    try:
-        priority = float(priority or 0)
-    except (TypeError, ValueError):
-        priority = 0
-    if priority >= 15: return "A"
-    elif priority >= 10: return "B"
-    elif priority >= 7: return "C"
-    return "D"
-
-
 def _normalize_status(value):
     if isinstance(value, dict):
         value = value.get("status", "")

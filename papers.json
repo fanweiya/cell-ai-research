@@ -137037,6 +137037,1569 @@
           }
         }
       }
+    },
+    {
+      "arxiv_id": "2610.31566v1",
+      "title": "CellTrack-Bench: Microscopic Cell Tracking Benchmark for Vision-Language Models",
+      "published_date": "2026-10-22",
+      "authors": [
+        "Ilan Theodoro",
+        "Jordão Bragantini",
+        "Loïc A. Royer"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "tracking"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/royerlab/celltrack-bench",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "entifying failures shared across distinct algorithmic trackers. With this proposed dataset, we: (i) evaluated different environment harnesses for VLMs; (ii) benchmarked 9 frontier closed-source models and 13 open-weight models; and (iii) provided a detailed analysis of their failure modes. Code, the stored model outputs, and a pipeline that regenerates the benchmark from the source datasets are available at https://github.com/royerlab/celltrack-bench . <d",
+          "relation_signal": "paper_title_match",
+          "provenance_source": "https://arxiv.org/html/2610.31566v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Large language models have shown outstanding performance on text-first tasks such as coding, math, and writing. Recent efforts are shifting models' training to include scientific problems that often live in highly specialized domains beyond text, such as protein structure and biological images. However, in these scenarios, their general-purpose accuracy compared with specialized algorithms remains in question. One such domain is cell tracking, which requires spatiotemporal awareness of cell dynamics. To evaluate this, we created a new benchmark, CellTrack-Bench, which assesses Vision-Language Models' (VLMs) cell-tracking-related performance against specialized trackers. The full benchmark draws from 15 standard cell-tracking datasets across four imaging modalities and comprises 1,537 problems corresponding to 9,041 cell-linking decisions. We selected a hard subset requiring greater reasoning effort by identifying failures shared across distinct algorithmic trackers. With this proposed dataset, we: (i) evaluated different environment harnesses for VLMs; (ii) benchmarked 9 frontier closed-source models and 13 open-weight models; and (iii) provided a detailed analysis of their failure modes. Code, the stored model outputs, and a pipeline that regenerates the benchmark from the source datasets are available at https://github.com/royerlab/celltrack-bench.",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "royerlab/celltrack-bench",
+        "repository_url": "https://github.com/royerlab/celltrack-bench",
+        "analyzed_at": "2026-10-24T01:20:33.654088+00:00",
+        "architecture": "# royerlab/celltrack-bench\n**Stars**: 1 | **Language**: Python\n**Description**: This repository provides the code, construction pipeline, and stored predictions for CellTrack-Bench, a benchmark designed to evaluate vision-language models (VLMs) on microscopic cell tracking tasks. It allows users to generate benchmark datasets locally from their own copies of the source datasets and includes an evaluation harness with various metrics and evidence conditions. The benchmark is derived from 15 cell-tracking datasets and poses three tasks: cell_linking, track_repair, and track_inspection.\n\n\n## Directory Tree\n```\n.gitignore\nREADME.md\ncelltrack_bench\ncelltrack_bench/__init__.py\ncelltrack_bench/answer_scoring.py\ncelltrack_bench/benchmark_data.py\ncelltrack_bench/conditions.py\ncelltrack_bench/leaderboard.py\ncelltrack_bench/merge_shards.py\ncelltrack_bench/nn_residual.py\ncelltrack_bench/output_schema.py\ncelltrack_bench/preflight.py\ncelltrack_bench/render.py\ncelltrack_bench/reproduce.py\ncelltrack_bench/runner.py\ncelltrack_bench/score.py\ncelltrack_bench/subgraph_lnk.py\nconstruction\nconstruction/README.md\nconstruction/export_release.py\nconstruction/make_tracker_outputs.py\nconstruction/rebuild_benchmark.sh\nconstruction/requirements.txt\nconstruction/scripts\nconstruction/scripts/analyze_three_tracker_errors.py\nconstruction/scripts/analyze_tracker_error_dependence.py\nconstruction/scripts/build_hoct_graph_benchmarks.py\nconstruction/scripts/select_three_tracker_error_pool.py\nconstruction/scripts/select_three_tracker_error_pool_by_split.py\nconstruction/scripts/validate_selected_hoct_graph_benchmarks.py\ndata\ndata/CHECKSUMS.sha256\ndata/README.md\ndata/sources\ndata/sources/bacteria_sequence_maps\npredictions\npredictions/hard\npredictions/hard/test\npredictions/hard/validation\npredictions/systems.json\npyproject.toml\nreproduction\nreproduction/paper_values.json\nscripts\nscripts/eval_openweights.sh\nscripts/internvl35_tool_chat_template.jinja\ntests\ntests/conftest.py\ntests/fixtures\ntests/fixtures/original_outputs.json\ntests/test_benchmark_data.py\ntests/test_merge_shards.py\ntests/test_reproduction.py\ntests/test_runner_budget.py\ntests/test_score_and_preflight.py\ntracker_outputs\ntracker_outputs/evaluation\ntracker_outputs/evaluation/errors_gt_linking\ntracker_outputs/evaluation/hoct_groupcv\ntracker_outputs/evaluation/trackastra_node_only_groupcv\n```",
+        "project_structure": "## Directory Tree\n```\n.gitignore\nREADME.md\ncelltrack_bench\ncelltrack_bench/__init__.py\ncelltrack_bench/answer_scoring.py\ncelltrack_bench/benchmark_data.py\ncelltrack_bench/conditions.py\ncelltrack_bench/leaderboard.py\ncelltrack_bench/merge_shards.py\ncelltrack_bench/nn_residual.py\ncelltrack_bench/output_schema.py\ncelltrack_bench/preflight.py\ncelltrack_bench/render.py\ncelltrack_bench/reproduce.py\ncelltrack_bench/runner.py\ncelltrack_bench/score.py\ncelltrack_bench/subgraph_lnk.py\nconstruction\nconstruction/README.md\nconstruction/export_release.py\nconstruction/make_tracker_outputs.py\nconstruction/rebuild_benchmark.sh\nconstruction/requirements.txt\nconstruction/scripts\nconstruction/scripts/analyze_three_tracker_errors.py\nconstruction/scripts/analyze_tracker_error_dependence.py\nconstruction/scripts/build_hoct_graph_benchmarks.py\nconstruction/scripts/select_three_tracker_error_pool.py\nconstruction/scripts/select_three_tracker_error_pool_by_split.py\nconstruction/scripts/validate_selected_hoct_graph_benchmarks.py\ndata\ndata/CHECKSUMS.sha256\ndata/README.md\ndata/sources\ndata/sources/bacteria_sequence_maps\ndata/sources/bacteria_sequence_maps/Bacteria-cib.json\ndata/sources/bacteria_sequence_maps/Bacteria-metA.json\ndata/sources/bacteria_sequence_maps/Bacteria-pheA.json\ndata/sources/bacteria_sequence_maps/Bacteria-rpsM.json\ndata/sources/bacteria_sequence_maps/Bacteria-trpL.json\npredictions\npredictions/hard\npredictions/hard/test\npredictions/hard/test/claude-fable-5.jsonl.config.json\npredictions/hard/test/claude-fable-5.jsonl.gz\npredictions/hard/test/claude-haiku-4.5.jsonl.config.json\npredictions/hard/test/claude-haiku-4.5.jsonl.gz\npredictions/hard/test/claude-opus-4.8.jsonl.config.json\npredictions/hard/test/claude-opus-4.8.jsonl.gz\npredictions/hard/test/claude-opus-5.jsonl.config.json\npredictions/hard/test/claude-opus-5.jsonl.gz\npredictions/hard/test/claude-sonnet-5.jsonl.config.json\npredictions/hard/test/claude-sonnet-5.jsonl.gz\npredictions/hard/test/gemma-4-31b.jsonl.config.json\npredictions/hard/test/gemma-4-31b.jsonl.gz\npredictions/hard/test/glm-4.6v.jsonl.config.json\npredictions/hard/test/glm-4.6v.jsonl.gz\npredictions/hard/test/gpt-5.5.jsonl.config.json\npredictions/hard/test/gpt-5.5.jsonl.gz\npredictions/hard/test/gpt-5.6-luna.jsonl.config.json\npredictions/hard/test/gpt-5.6-luna.jsonl.gz\npredictions/hard/test/gpt-5.6-sol.jsonl.config.json\npredictions/hard/test/gpt-5.6-sol.jsonl.gz\npredictions/hard/test/gpt-5.6-terra.jsonl.config.json\npredictions/hard/test/gpt-5.6-terra.jsonl.gz\npredictions/hard/test/inkling-small.jsonl.config.json\npredictions/hard/test/inkling-small.jsonl.gz\npredictions/hard/test/internvl3.5-38b.jsonl.config.json\npredictions/hard/test/internvl3.5-38b.jsonl.gz\npredictions/hard/test/kimi-k3.jsonl.config.json\npredictions/hard/test/kimi-k3.jsonl.gz\npredictions/hard/test/llama-4-scout.jsonl.config.json\npredictions/hard/test/llama-4-scout.jsonl.gz\npredictions/hard/test/minimax-m3.jsonl.config.json\npredictions/hard/test/minimax-m3.jsonl.gz\npredictions/hard/test/mistral-medium-3.5-128b.jsonl.config.json\npredictions/hard/test/mistral-medium-3.5-128b.jsonl.gz\npredictions/hard/test/molmo2-8b.jsonl.config.json\npredictions/hard/test/molmo2-8b.jsonl.gz\npredictions/hard/test/qwen3.5-122b-a10b.jsonl.config.json\npredictions/hard/test/qwen3.5-122b-a10b.jsonl.gz\npredictions/hard/test/qwen3.5-35b-a3b.jsonl.config.json\npredictions/hard/test/qwen3.5-35b-a3b.jsonl.gz\npredictions/hard/test/qwen3.5-397b-a17b.jsonl.config.json\npredictions/hard/test/qwen3.5-397b-a17b.jsonl.gz\npredictions/hard/test/qwen3.6-27b-rA.jsonl.config.json\npredictions/hard/test/qwen3.6-27b-rA.jsonl.gz\npredictions/hard/test/qwen3.6-27b-rB.jsonl.config.json\npredictions/hard/test/qwen3.6-27b-rB.jsonl.gz\npredictions/hard/validation\npredictions/hard/validation/claude-opus-4.8-c1-c4-c8.jsonl.config.json\npredictions/hard/validation/claude-opus-4.8-c1-c4-c8.jsonl.gz\npredictions/hard/validation/gpt-5.5-c1-c8.jsonl.config.json\npredictions/hard/validation/gpt-5.5-c1-c8.jsonl.gz\npredictions/hard/validation/gpt-5.6-terra.jsonl.config.json\npredictions/hard/validation/gpt-5.6-terra.jsonl.gz\npredictions/systems.json\npyproject.toml\nreproduction\nreproduction/paper_values.json\nscripts\nscripts/eval_openweights.sh\nscripts/internvl35_tool_chat_template.jinja\ntests\ntests/conftest.py\ntests/fixtures\ntests/fixtures/original_outputs.json\ntests/test_benchmark_data.py\ntests/test_merge_shards.py\ntests/test_reproduction.py\ntests/test_runner_budget.py\ntests/test_score_and_preflight.py\ntracker_outputs\ntracker_outputs/evaluation\ntracker_outputs/evaluation/errors_gt_linking\ntracker_outputs/evaluation/errors_gt_linking/hoct_groupcv\ntracker_outputs/evaluation/errors_gt_linking/hoct_groupcv/all_groups_link_errors.csv\ntracker_outputs/evaluation/errors_gt_linking/hungarian_distance\ntracker_outputs/evaluation/errors_gt_linking/hungarian_distance/all_groups_link_errors.csv\ntracker_outputs/evaluation/errors_gt_linking/trackastra_node_only_groupcv\ntracker_outputs/evaluation/errors_gt_linking/trackastra_node_only_groupcv/all_groups_link_errors.csv\ntracker_outputs/evaluation/hoct_groupcv\ntracker_outputs/evaluation/hoct_groupcv/full_graphs\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/BF-C2DL-HSC\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/BF-C2DL-HSC/01.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/BF-C2DL-HSC/01.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/BF-C2DL-HSC/01.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/BF-C2DL-HSC/01.geff/zarr.json\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/BF-C2DL-HSC/02.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/BF-C2DL-HSC/02.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/BF-C2DL-HSC/02.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/BF-C2DL-HSC/02.geff/zarr.json\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-cib\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-cib/01.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-cib/01.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-cib/01.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-cib/01.geff/zarr.json\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-cib/02.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-cib/02.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-cib/02.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-cib/02.geff/zarr.json\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/01.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/01.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/01.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/01.geff/zarr.json\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/02.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/02.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/02.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/02.geff/zarr.json\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/03.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/03.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/03.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/03.geff/zarr.json\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/04.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/04.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/04.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/04.geff/zarr.json\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/05.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/05.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/05.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-metA/05.geff/zarr.json\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-pheA\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-pheA/05.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-pheA/05.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-pheA/05.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/Bacteria-pheA/05.geff/zarr.json\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/DIC-C2DH-HeLa\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/DIC-C2DH-HeLa/01.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/DIC-C2DH-HeLa/01.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/DIC-C2DH-HeLa/01.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/DIC-C2DH-HeLa/01.geff/zarr.json\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/DIC-C2DH-HeLa/02.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/DIC-C2DH-HeLa/02.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/DIC-C2DH-HeLa/02.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_0/DIC-C2DH-HeLa/02.geff/zarr.json\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Bacteria-trpL\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Bacteria-trpL/03.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Bacteria-trpL/03.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Bacteria-trpL/03.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Bacteria-trpL/03.geff/zarr.json\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Bacteria-trpL/04.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Bacteria-trpL/04.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Bacteria-trpL/04.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Bacteria-trpL/04.geff/zarr.json\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Bacteria-trpL/05.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Bacteria-trpL/05.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Bacteria-trpL/05.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Bacteria-trpL/05.geff/zarr.json\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Bacteria-trpL/06.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Bacteria-trpL/06.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Bacteria-trpL/06.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Bacteria-trpL/06.geff/zarr.json\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Fluo-C2DL-MSC\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Fluo-C2DL-MSC/01.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Fluo-C2DL-MSC/01.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Fluo-C2DL-MSC/01.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Fluo-C2DL-MSC/01.geff/zarr.json\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Fluo-C2DL-MSC/02.geff\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Fluo-C2DL-MSC/02.geff/edges\ntracker_outputs/evaluation/hoct_groupcv/full_graphs/group_1/Fluo-C2DL-MSC/02.geff/nodes\ntracker_outputs/evaluation/hoct_groupcv/full_g",
+        "key_files": [
+          "README.md",
+          "data/README.md",
+          "construction/README.md",
+          "pyproject.toml",
+          "tests/conftest.py",
+          "tests/test_merge_shards.py",
+          "tests/test_reproduction.py",
+          "tests/test_runner_budget.py",
+          "tests/test_benchmark_data.py",
+          "tests/test_score_and_preflight.py",
+          "tests/fixtures/original_outputs.json",
+          "celltrack_bench/score.py",
+          "celltrack_bench/render.py",
+          "celltrack_bench/runner.py",
+          "scripts/eval_openweights.sh",
+          "celltrack_bench/preflight.py",
+          "celltrack_bench/reproduce.py",
+          "celltrack_bench/conditions.py",
+          "celltrack_bench/leaderboard.py",
+          "celltrack_bench/nn_residual.py",
+          "construction/export_release.py",
+          "celltrack_bench/merge_shards.py",
+          "celltrack_bench/subgraph_lnk.py",
+          "celltrack_bench/output_schema.py",
+          "celltrack_bench/answer_scoring.py",
+          "celltrack_bench/benchmark_data.py",
+          "construction/rebuild_benchmark.sh",
+          "construction/make_tracker_outputs.py"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 30,
+          "selected_file_count": 28,
+          "selected_code_file_count": 23,
+          "languages_by_extension": {
+            "py": 28,
+            "sh": 2
+          },
+          "tests_present": true,
+          "test_files": [
+            "tests/test_benchmark_data.py",
+            "tests/test_merge_shards.py",
+            "tests/conftest.py",
+            "tests/test_score_and_preflight.py",
+            "tests/test_reproduction.py",
+            "tests/test_runner_budget.py",
+            "tests/fixtures/original_outputs.json"
+          ],
+          "manifest_files": [
+            "README.md",
+            "data/README.md",
+            "construction/requirements.txt",
+            "pyproject.toml",
+            "construction/README.md"
+          ],
+          "read_errors": [],
+          "warnings": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2610.31566v1_gread.json"
+      },
+      "discovered_at": "2026-10-24T01:20:15.238484Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.31566",
+        "verified_at": "2026-10-24T01:20:15.238484Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.31538v1",
+      "title": "LACToS: Local Anomaly Detection via Conditional Typicality of Superpixels",
+      "published_date": "2026-10-22",
+      "authors": [
+        "Jihoon Hong",
+        "Alireza Kheirandish",
+        "Rohan Sanda",
+        "Sara Fridovich-Keil"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "task_type": [
+        "detection"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/voilalab/LACToS",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "d based on statistical typicality and made tractable through two innovations: (i) grouping pixels into superpixels and (ii) using a computationally efficient proxy to estimate typicality. We evaluate LACToS across three diverse applications spanning medical imaging, human faces, and X-ray security screening. LACToS performs more robustly than prior methods across these benchmarks. The code is released here: https://github.com/voilalab/LACToS .",
+          "relation_signal": "explicit_code_statement",
+          "provenance_source": "https://arxiv.org/html/2610.31538v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Local anomaly detection is the task of identifying spatially confined anomalous or out-of-distribution (OOD) regions within an otherwise in-distribution (ID) image. Most existing methods are designed for a specific context, with a strong focus on industrial defect detection, where they achieve excellent performance on well-established benchmarks. However, we observe that these methods can exhibit significant performance drops in other contexts, especially when the inlier distribution is multimodal. To account for this inlier complexity, we propose LACToS, a principled local OOD detection method based on statistical typicality and made tractable through two innovations: (i) grouping pixels into superpixels and (ii) using a computationally efficient proxy to estimate typicality. We evaluate LACToS across three diverse applications spanning medical imaging, human faces, and X-ray security screening. LACToS performs more robustly than prior methods across these benchmarks. The code is released here: https://github.com/voilalab/LACToS.",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "voilalab/LACToS",
+        "repository_url": "https://github.com/voilalab/LACToS",
+        "analyzed_at": "2026-10-24T01:20:51.251138+00:00",
+        "architecture": "# voilalab/LACToS\n**Stars**: 0 | **Language**: Python\n**Description**: This repository implements LACToS (Local Anomaly Detection via Conditional Typicality of Superpixels), a method for detecting spatially confined out-of-distribution regions within images using unconditional diffusion models. It includes code for the LACToS implementation, diffusion posterior samplers, baseline inference, evaluation scripts, and toy experiments. The repository also requires a separate asset bundle containing trained checkpoints, test data, reconstructions, and reference results.\n\n\n## Directory Tree\n```\n.gitignore\nDDAD_DPS\nDDAD_DPS/samplers.py\nREADME.md\nbaselines\nbaselines/compose.py\nbaselines/ddad_config.yaml\nbaselines/ddad_lib\nbaselines/ddad_lib/anomaly_map.py\nbaselines/ddad_lib/dataset.py\nbaselines/ddad_lib/feature_extractor.py\nbaselines/ddad_lib/loss.py\nbaselines/ddad_lib/reconstruction.py\nbaselines/ddad_lib/resnet.py\nbaselines/ddad_lib/unet.py\nbaselines/ddad_lib/visualize.py\nbaselines/infer_ddad.py\nbaselines/infer_feature.py\nbaselines/table1_common.py\nconfigs\nconfigs/lactos_ct.yaml\nconfigs/lactos_ffhq_faces.yaml\nconfigs/lactos_ffhq_faces_normal.yaml\nconfigs/lactos_ffhq_moreface.yaml\nconfigs/lactos_xray.yaml\nconfigs/recon\nconfigs/recon/adm_dps_ffhq_faces.yaml\nconfigs/recon/adm_dps_ffhq_faces_normal.yaml\nconfigs/recon/adm_dps_ffhq_moreface.yaml\nconfigs/template.yaml\ndocs\ndocs/BUNDLE.md\ndocs/HYPERPARAMETERS.md\ndocs/PROVENANCE.md\ndocs/REPRODUCIBILITY.md\ndocs/figures\ndocs/figures/examples.jpg\ndocs/figures/overview.png\ndocs/figures/quickstart_samples_1.png\ndocs/figures/teaser.jpg\ndocs/figures/toy1_fpr.png\ndocs/figures/toy2_auroc.png\nembedder\nembedder/evaluate_ddad_fe.py\nenvironment\nenvironment/lactos.txt\nenvironment/patchcore.txt\nenvironment/simplenet.txt\nenvironment/ssn_env.txt\nevaluate.py\nexpected\nexpected/table1.json\nfull_metric_table.py\nood\nood/__init__.py\nood/data.py\nood/embeddings.py\nood/samplers\nood/samplers/__init__.py\nood/samplers/additive_dps.py\nood/samplers/base.py\nood/samplers/io.py\nood/scoring.py\nood/superpixels.py\nrequirements.txt\nsampling\nsampling/README.md\nsampling/dps\nsampling/dps/configs\nsampling/dps/data\nsampling/dps/guided_diffusion\nsampling/dps/sample_fast.py\nsampling/dps/util\nsampling/generate_recons.py\nsampling/wire_recons.py\nscripts\nscripts/check_assets.sh\nscripts/common.sh\nscripts/fetch_third_party.sh\nscripts/make_table1.py\nscripts/plot_maps.py\nscripts/run_baselines.sh\nscripts/sample_ct.sh\nscripts/sample_ffhq.sh\nscripts/sample_xray.sh\nscripts/score_lactos.sh\nsuper_pixel_generation.py\nthird_party\nthird_party/README.md\ntools\ntools/check_bundle.py\ntools/seeded_run.py\ntoy\ntoy/README.md\ntoy/__init__.py\ntoy/analyze_toy1.py\ntoy/analyze_toy2.py\ntoy/common.sh\ntoy/config.yaml\ntoy/ddad_config.yaml\ntoy/gen_data.py\ntoy/prepare_superpixels.py\ntoy/run_patchcore.py\ntoy/run_toy1.sh\ntoy/run_toy2.sh\ntoy/score_from_recons.py\ntoy/shapes.py\ntoy/tests\ntoy/tests/__init__.py\ntoy/tests/test_gen_data.py\ntoy/tests/test_score_modes.py\ntoy/tests/test_shapes.py\ntoy/tests/test_shapes_star.py\ntoy/train_prior.py\ntoy/train_priors.sh\n```",
+        "project_structure": "## Directory Tree\n```\n.gitignore\nDDAD_DPS\nDDAD_DPS/samplers.py\nREADME.md\nbaselines\nbaselines/compose.py\nbaselines/ddad_config.yaml\nbaselines/ddad_lib\nbaselines/ddad_lib/anomaly_map.py\nbaselines/ddad_lib/dataset.py\nbaselines/ddad_lib/feature_extractor.py\nbaselines/ddad_lib/loss.py\nbaselines/ddad_lib/reconstruction.py\nbaselines/ddad_lib/resnet.py\nbaselines/ddad_lib/unet.py\nbaselines/ddad_lib/visualize.py\nbaselines/infer_ddad.py\nbaselines/infer_feature.py\nbaselines/table1_common.py\nconfigs\nconfigs/lactos_ct.yaml\nconfigs/lactos_ffhq_faces.yaml\nconfigs/lactos_ffhq_faces_normal.yaml\nconfigs/lactos_ffhq_moreface.yaml\nconfigs/lactos_xray.yaml\nconfigs/recon\nconfigs/recon/adm_dps_ffhq_faces.yaml\nconfigs/recon/adm_dps_ffhq_faces_normal.yaml\nconfigs/recon/adm_dps_ffhq_moreface.yaml\nconfigs/template.yaml\ndocs\ndocs/BUNDLE.md\ndocs/HYPERPARAMETERS.md\ndocs/PROVENANCE.md\ndocs/REPRODUCIBILITY.md\ndocs/figures\ndocs/figures/examples.jpg\ndocs/figures/overview.png\ndocs/figures/quickstart_samples_1.png\ndocs/figures/teaser.jpg\ndocs/figures/toy1_fpr.png\ndocs/figures/toy2_auroc.png\nembedder\nembedder/evaluate_ddad_fe.py\nenvironment\nenvironment/lactos.txt\nenvironment/patchcore.txt\nenvironment/simplenet.txt\nenvironment/ssn_env.txt\nevaluate.py\nexpected\nexpected/table1.json\nfull_metric_table.py\nood\nood/__init__.py\nood/data.py\nood/embeddings.py\nood/samplers\nood/samplers/__init__.py\nood/samplers/additive_dps.py\nood/samplers/base.py\nood/samplers/io.py\nood/scoring.py\nood/superpixels.py\nrequirements.txt\nsampling\nsampling/README.md\nsampling/dps\nsampling/dps/configs\nsampling/dps/configs/ct_model_config.yaml\nsampling/dps/configs/ctgrid\nsampling/dps/configs/ctgrid/sigma0.1.yaml\nsampling/dps/configs/diffusion_config.yaml\nsampling/dps/configs/xray_inpainting_sigma2.yaml\nsampling/dps/configs/xray_model_config.yaml\nsampling/dps/data\nsampling/dps/data/mask.png\nsampling/dps/guided_diffusion\nsampling/dps/guided_diffusion/__init__.py\nsampling/dps/guided_diffusion/condition_methods.py\nsampling/dps/guided_diffusion/fp16_util.py\nsampling/dps/guided_diffusion/gaussian_diffusion.py\nsampling/dps/guided_diffusion/measurements.py\nsampling/dps/guided_diffusion/nn.py\nsampling/dps/guided_diffusion/posterior_mean_variance.py\nsampling/dps/guided_diffusion/unet.py\nsampling/dps/sample_fast.py\nsampling/dps/util\nsampling/dps/util/fastmri_utils.py\nsampling/dps/util/img_utils.py\nsampling/dps/util/logger.py\nsampling/dps/util/resizer.py\nsampling/generate_recons.py\nsampling/wire_recons.py\nscripts\nscripts/check_assets.sh\nscripts/common.sh\nscripts/fetch_third_party.sh\nscripts/make_table1.py\nscripts/plot_maps.py\nscripts/run_baselines.sh\nscripts/sample_ct.sh\nscripts/sample_ffhq.sh\nscripts/sample_xray.sh\nscripts/score_lactos.sh\nsuper_pixel_generation.py\nthird_party\nthird_party/README.md\ntools\ntools/check_bundle.py\ntools/seeded_run.py\ntoy\ntoy/README.md\ntoy/__init__.py\ntoy/analyze_toy1.py\ntoy/analyze_toy2.py\ntoy/common.sh\ntoy/config.yaml\ntoy/ddad_config.yaml\ntoy/gen_data.py\ntoy/prepare_superpixels.py\ntoy/run_patchcore.py\ntoy/run_toy1.sh\ntoy/run_toy2.sh\ntoy/score_from_recons.py\ntoy/shapes.py\ntoy/tests\ntoy/tests/__init__.py\ntoy/tests/test_gen_data.py\ntoy/tests/test_score_modes.py\ntoy/tests/test_shapes.py\ntoy/tests/test_shapes_star.py\ntoy/train_prior.py\ntoy/train_priors.sh\n```",
+        "key_files": [
+          "evaluate.py",
+          "README.md",
+          "toy/README.md",
+          "sampling/README.md",
+          "configs/lactos_ct.yaml",
+          "configs/lactos_xray.yaml",
+          "configs/lactos_ffhq_faces.yaml",
+          "configs/lactos_ffhq_moreface.yaml",
+          "configs/lactos_ffhq_faces_normal.yaml",
+          "scripts/score_lactos.sh",
+          "requirements.txt",
+          "environment/lactos.txt",
+          "toy/tests/test_shapes.py",
+          "toy/tests/test_gen_data.py",
+          "toy/tests/test_score_modes.py",
+          "toy/tests/test_shapes_star.py",
+          "configs/template.yaml",
+          "configs/recon/adm_dps_ffhq_faces.yaml",
+          "configs/recon/adm_dps_ffhq_moreface.yaml",
+          "configs/recon/adm_dps_ffhq_faces_normal.yaml",
+          "full_metric_table.py",
+          "super_pixel_generation.py",
+          "ood/data.py",
+          "toy/common.sh",
+          "toy/shapes.py",
+          "ood/scoring.py",
+          "toy/gen_data.py",
+          "toy/run_toy1.sh"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 71,
+          "selected_file_count": 28,
+          "selected_code_file_count": 14,
+          "languages_by_extension": {
+            "py": 59,
+            "sh": 12
+          },
+          "tests_present": true,
+          "test_files": [
+            "toy/tests/__init__.py",
+            "toy/tests/test_gen_data.py",
+            "toy/tests/test_shapes_star.py",
+            "toy/tests/test_score_modes.py",
+            "toy/tests/test_shapes.py"
+          ],
+          "manifest_files": [
+            "toy/README.md",
+            "sampling/README.md",
+            "README.md",
+            "requirements.txt"
+          ],
+          "read_errors": [],
+          "warnings": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2610.31538v1_gread.json"
+      },
+      "discovered_at": "2026-10-24T01:20:15.238484Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.31538",
+        "verified_at": "2026-10-24T01:20:15.238484Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.30775v1",
+      "title": "GWDM: A Guided Wavelet Diffusion Model for Realistic Histopathology Image Generation",
+      "published_date": "2026-10-22",
+      "authors": [
+        "Abdullah",
+        "Tao Huang",
+        "Ickjai Lee",
+        "Lei Bi",
+        "Euijoon Ahn"
+      ],
+      "categories": [
+        "eess.IV"
+      ],
+      "task_type": [
+        "segmentation",
+        "histopathology"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Histopathology images are recognized as a reliable and comprehensive modality for Deep Learning (DL) based diagnosis. However, effectiveness is constrained by limited large-scale annotated datasets, as collecting expert-labeled medical data is costly and time-intensive. Recent advances in generative models, particularly diffusion models, demonstrate strong capabilities in synthesizing medically relevant content for dataset augmentation. Existing generative frameworks treat histopathology patches as generic natural images, failing to enforce biological constraints such as histomorphological structures and heterogeneous staining patterns essential for valid synthesis. We propose a guided wavelet diffusion model (GWDM) framework that captures image details at multiple scales using wavelets and leverages controllable conditioning based on domain-specific histopathological features (e.g., tissue patterns and color variations). We further formulate a histomorphological guidance loss applied to real and generated patches. A loss ramping strategy gradually introduces these constraints during training, ensuring stable optimization and robust modeling of tissue architecture. GWDM was evaluated on three benchmark datasets (BCSS, MoNuSeg, and PAIP2019), consistently outperforming state-of-the-art generative methods. Ablation studies confirmed that domain-guided conditioning, perceptual loss, and structural similarity loss each contribute meaningfully to synthesis quality. Downstream nuclei and tissue segmentation experiments further validated the clinical utility of GWDM-generated images, demonstrating consistent performance improvements when synthetic data augments real training sets. This work shows that domain-specific conditioning and dual-loss optimization generate realistic histopathology patches, reducing data scarcity and improving clinical downstream segmentation performance.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-24T01:20:15.238484Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.30775",
+        "verified_at": "2026-10-24T01:20:15.238484Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.30672v1",
+      "title": "CVP-BAA: Efficiently Adapting Segment Anything Model for Medical Image Segmentation",
+      "published_date": "2026-10-22",
+      "authors": [
+        "Mei Wang",
+        "Minghui Li",
+        "Libin Lan"
+      ],
+      "categories": [
+        "eess.IV"
+      ],
+      "task_type": [
+        "segmentation"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "https://github.com/WangMei-wm/CVP-BAA",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "ency components, the BAA enhances feature representations along tissue boundaries and fine-grained lesion structures. Extensive experiments on five benchmarks across three imaging modalities demonstrate that CVP-BAA achieves superior segmentation performance, surpassing existing task-specific models and PEFT-based SAM adaptations in both quantitative metrics and qualitative results. Our code is available at here . <h6 class=\"ltx_title ltx_title_ke",
+          "relation_signal": "explicit_code_statement",
+          "provenance_source": "https://arxiv.org/html/2610.30672v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "placeholder_or_docs_only"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Various task-specific medical segmentation models have demonstrated strong performance, their heavy reliance on extensive annotations and highly specialized architectures limits their versatility, scalability, and clinical applicability. Recently, adapting vision foundation models, particularly the segment anything model (SAM), has emerged as a promising alternative. However, prevalent parameter-efficient fine-tuning (PEFT) strategies, such as prompt tuning and adapter tuning, often lack an explicit mechanism to embed local structural priors into the long-range dependency modeling of vision transformers (ViT), rendering them insufficiently sensitive to fine-grained details. To address these limitations, we introduce CVP-BAA, a novel hybrid PEFT method that improves SAM's sensitivity to domain-specific textures and local details, leading to superior boundary delineation. The proposed CVP-BAA adopts two key ideas. First, it introduces a convolutional visual prompting (CVP) strategy that leverages convolutional features as structural priors, prepending them to the key and value projections within the multi-head self-attention layers of strategically selected ViT blocks. Through a dedicated prompt generation-and-injection module, this mechanism effectively bridges local spatial details with global context semantics. Second, a boundary-aware adapter (BAA) is designed as a parallel branch to the feed-forward network within the same selected blocks. By explicitly computing and amplifying high-frequency components, the BAA enhances feature representations along tissue boundaries and fine-grained lesion structures. Extensive experiments on five benchmarks across three imaging modalities demonstrate that CVP-BAA achieves superior segmentation performance, surpassing existing task-specific models and PEFT-based SAM adaptations in both quantitative metrics and qualitative results.",
+      "has_code": false,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "WangMei-wm/CVP-BAA",
+        "repository_url": "https://github.com/WangMei-wm/CVP-BAA",
+        "analyzed_at": "2026-10-24T01:21:01.743630+00:00",
+        "architecture": "# WangMei-wm/CVP-BAA\n**Stars**: 0 | **Language**: \n**Description**: This repository contains the source code for the CVP-BAA project. The code is intended to be made publicly available after the acceptance of a related paper.\n\n\n## Directory Tree\n```\nREADME.md\n```",
+        "project_structure": "## Directory Tree\n```\nREADME.md\n```",
+        "key_files": [
+          "README.md"
+        ],
+        "source_coverage": {
+          "repository_kind": "placeholder_or_docs_only",
+          "has_implementation": false,
+          "code_file_count_in_tree": 0,
+          "selected_file_count": 1,
+          "selected_code_file_count": 0,
+          "languages_by_extension": {},
+          "tests_present": false,
+          "test_files": [],
+          "manifest_files": [
+            "README.md"
+          ],
+          "read_errors": [],
+          "warnings": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": false,
+        "repository_kind": "placeholder_or_docs_only",
+        "result_file": "results/2610.30672v1_gread.json"
+      },
+      "discovered_at": "2026-10-24T01:20:15.238484Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.30672",
+        "verified_at": "2026-10-24T01:20:15.238484Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.30316v1",
+      "title": "A Contrastive Learning Framework for Label-Efficient Gastric Cancer Detection and Intra-Tumour Progression Analysis",
+      "published_date": "2026-10-21",
+      "authors": [
+        "Aleakhya Pandeti",
+        "Pranav M. Pawar",
+        "Mithun Mukherjee",
+        "Raja Muthalagu"
+      ],
+      "categories": [
+        "eess.IV"
+      ],
+      "task_type": [
+        "detection",
+        "classification",
+        "histopathology"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Gastric Cancer is among the leading causes of cancer-related mortality worldwide. The complexity and variability of histopathological images pose significant challenges for both pathologists and computer-based diagnostics, creating a growing need for machine learning approaches capable of capturing meaningful representations from limited labelled data. Selfsupervised Contrastive Learning (CL) has demonstrated promising results in natural image analysis; however, its application to gastric cancer histopathology remains underexplored. This paper proposes an integrated CL framework built on a ResNet50 encoder trained under the NT-Xent objective, without reliance on ImageNet pre-training, to learn discriminative and staining-invariant representations from H&E-stained tissue patches. The learned embeddings are transferred to a supervised downstream classifier for binary tumour/normal (TUM/NOR) detection, achieving a test accuracy of 83.13%, an AUC-ROC of 0.9087, and an Average Precision of 0.9063 - competitive with recent supervised and weakly-supervised approaches on comparable histopathology benchmarks. Beyond binary diagnosis, the framework applies K-Means clustering to tumour embeddings to identify four geometrically separable pseudo-stage clusters, confirmed by a Random Forest classifier achieving 97% accuracy and a mean Dice coefficient of 0.97, demonstrating the capacity of CL representations to encode progression-relevant morphological variation without stage-level annotations. Grad-CAM explainability is integrated throughout to ensure model transparency. The complete system is deployed via a Streamlit clinical interface. Compared to recent state-of-the-art methods the proposed framework operates with substantially fewer labelled samples while additionally providing unsupervised progression stratification and interpretable outputs, addressing a gap not covered by existing approaches.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-24T01:20:15.238484Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.30316",
+        "verified_at": "2026-10-24T01:20:15.238484Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.30313v1",
+      "title": "SciFusion: Physics-Guided Compositional Diffusion for Multimodal 3D Scientific Image Generation",
+      "published_date": "2026-10-21",
+      "authors": [
+        "Luoxi Wang",
+        "Alessio Quercia",
+        "Hanno Scharr",
+        "Arya Bangun"
+      ],
+      "categories": [
+        "eess.IV",
+        "cs.LG"
+      ],
+      "task_type": [
+        "cell_imaging"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Existing 3D generative approaches are typically developed for individual imaging modalities, requiring substantial modality-specific data and limiting their ability to exploit shared structure across scientific imaging domains. We present SciFusion, a multimodal framework for unified 3D scientific image generation built on a latent diffusion backbone, with two key contributions. First, we introduce a compositional conditioning scheme that factorizes each modality into domain, object, and contrast representations. Sharing these factors across related modalities enables knowledge transfer across heterogeneous imaging domains and allows the factors to be recombined at inference time to synthesize unseen domain-object-contrast compositions in a zero-shot manner. Second, we incorporate domain-specific physics-informed objectives: Fourier spectral consistency for MRI, Radon projection consistency for CT, and multislice diffraction consistency for electron microscopy, to encourage generated samples to respect modality-dependent image formation processes. Extensive experiments across 15 medical and scientific imaging modalities demonstrate that SciFusion improves generation fidelity and cross-domain generalization over modality-specific and flattened multimodal conditioning strategies, while enabling zero-shot synthesis of unseen compositions without training on those target compositions. These results demonstrate that compositional, physics-guided conditioning provides a scalable framework for unified 3D scientific image generation, particularly for emerging modalities where large-scale training data are difficult to obtain.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-24T01:20:15.238484Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.30313",
+        "verified_at": "2026-10-24T01:20:15.238484Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.32485v1",
+      "title": "PCFBench: How Far Can Large Vision-Language Models Go in Physics-aware Photonic Inverse Design?",
+      "published_date": "2026-10-23",
+      "authors": [
+        "Shengchao Chen",
+        "Ting Shu",
+        "Sufen Ren"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "cell_imaging"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Photonic crystal fibers (PCFs) underpin critical applications in telecommunications, sensing, and high-power laser delivery, yet their design remains a manual, expert-intensive process that couples geometric intuition with deep waveguide physics. Vision-language models (VLMs) offer a promising path toward automating PCF design, but can they truly reason about photonic physics from microscopy images, or do they merely recognize visual patterns? We introduce PCFBench, the first comprehensive benchmark for evaluating VLMs on the perception, reasoning, and decision steps of the photonic inverse-design loop. PCFBench spans 26 tasks organized into six categories of increasing cognitive demand (Geometry Perception, Physics Understanding, Text Generation, Multi-modal Reasoning, Inverse-Design Decision, and Code Generation), built from over 220K FDTD simulation samples across 18 structurally diverse fiber families. We evaluate both individual VLMs on isolated tasks and multi-agent systems (MAS) on the full sequential pipeline from perception to design. Our results reveal a striking perception-design gap: current models can identify fiber geometry with moderate success, yet consistently fail to translate that visual understanding into physics-aware design actions. Moreover, cascading agents through the pipeline exposes significant error propagation, where upstream perception mistakes compound into downstream design failures. These findings suggest that neither model scaling nor naive agent chaining suffices, and that closing the loop demands explicit physical grounding. PCFBench provides the community with a rigorous, multi-dimensional testbed to measure progress toward AI-assisted photonic engineering. The project is available at https://pcfbench.github.io/.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-26T01:20:45.686392Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.32485",
+        "verified_at": "2026-10-26T01:20:45.686392Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.32478v1",
+      "title": "PathJev: Decision-Native Vision-Language Modelling for Histopathology",
+      "published_date": "2026-10-23",
+      "authors": [
+        "Cristian Tommasino",
+        "Antonio M. Rinaldi"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "task_type": [
+        "histopathology"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/CosmoIknosLab/PathJev",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "l for decision-native models that compares them with a generative model trained on the same data under several read-outs of its probabilities, candidate orders and image-free inputs, on test sets without documented overlap with the backbone’s training data. Code, question templates, split manifests and the analysis plan are available at https://github.com/CosmoIknosLab/PathJev , and the model weigh",
+          "relation_signal": "paper_title_match",
+          "provenance_source": "https://arxiv.org/html/2610.32478v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Vision-language models used for decisions in histopathology rarely return calibrated probabilities over the candidates a user cares about. Decision-native models write a question and a candidate set chosen at run time into the input and return a normalised distribution from a small decision head in one forward pass. We build PathJev-P, a decision-native model for histopathology: MedGemma-1.5-4B with LoRA adapters and a decision head, trained on 40,000 patch states from three public collections whose expert labels are turned into typed questions with organ-specific candidate sets and a \"none of these\" option. In a comparison over 3 seeds with an analysis plan fixed before testing, on test sets without documented overlap with the training data of the backbone, PathJev-P is more accurate than a generative model trained with the same backbone, data and selection rule, the zero-shot pathology model CONCH and a general medical decision model (balanced accuracy 0.541 against 0.492, 0.345 and 0.213); its advantage over the generative model comes from two organs absent from training. The calibration advantage depends on how the generative model's probabilities are read out. With the summed candidate log-likelihood used in previous work, PathJev-P has the lower calibration error (ECE 0.204 against 0.279); with a length-normalised read-out of the same generative model, examined post hoc, the two have similar mean calibration error (0.201) and the generative model is better calibrated on the unseen organs, where PathJev-P remains over-confident. A supervised linear probe on a pathology foundation model is better calibrated in every setting. In a qualitative whole-slide demonstration, PathJev-P labels unsupervised tissue clusters with abstention and separates carcinoma from other tissue while running the model on a fraction of the tiles.",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "CosmoIknosLab/PathJev",
+        "repository_url": "https://github.com/CosmoIknosLab/PathJev",
+        "analyzed_at": "2026-10-26T01:21:05.458136+00:00",
+        "architecture": "# CosmoIknosLab/PathJev\n**Stars**: 1 | **Language**: Python\n**Description**: This repository hosts the code for PathJev, a decision-native vision-language model specifically designed for histopathology. It includes functionalities for data preparation (training and testing), model training (PathJev-P and a generative baseline), evaluation metrics, a whole-slide cluster-labeling pipeline, and code to reproduce all figures and tables from the associated paper. The model itself is based on MedGemma-1.5-4B with LoRA adapters and a decision head, capable of outputting probability distributions over runtime-chosen candidate answers in a single forward pass. It supports multiple question types: one-of-K choices, yes/no, and ordered levels.\n\n\n## Directory Tree\n```\n.gitignore\nLICENSE\nNOTICE\nREADME.md\nanalysis\nanalysis/.gitkeep\nanalysis/a3_checks.py\nanalysis/a3_hepato.py\nanalysis/a3_macros.py\nanalysis/audit_macros.py\nanalysis/audit_rerun.py\nanalysis/audit_selection.py\nanalysis/data_statement.py\nanalysis/dedup_audit.py\nanalysis/export_macros.py\nanalysis/figure_assets.py\nanalysis/noul_score.py\nanalysis/paper_tables.py\nanalysis/pilot_report.py\nanalysis/reliability.py\nanalysis/secondary_metrics.py\nanalysis/select_config.py\nanalysis/stage1_analysis.py\nanalysis/stage1_temperature_transfer.py\nanalysis/training_details.py\nassets\nassets/overview.png\nassets/wsi_demo.jpg\nassets/wsi_pipeline.png\nconfigs\nconfigs/build\nconfigs/build/bracs.yaml\nconfigs/build/hepatobench.yaml\nconfigs/build/hiesd.yaml\nconfigs/build/sicapv2.yaml\nconfigs/build/spider-breast.yaml\nconfigs/build/spider-colorectal.yaml\nconfigs/build/spider-skin.yaml\nconfigs/build/spider-thorax.yaml\nconfigs/eval\nconfigs/eval/pilot-stage1.yaml\nconfigs/eval/smoke.yaml\nconfigs/eval/stage1-test-full.yaml\nconfigs/eval/stage1-test.yaml\nconfigs/phase0_repro.yaml\nconfigs/questions\nconfigs/questions/.gitkeep\nconfigs/questions/bracs.yaml\nconfigs/questions/hepatobench.yaml\nconfigs/questions/hiesd.yaml\nconfigs/questions/organ_vocab.txt\nconfigs/questions/sicapv2.yaml\nconfigs/questions/spider-breast.yaml\nconfigs/questions/spider-colorectal.yaml\nconfigs/questions/spider-skin.yaml\nconfigs/questions/spider-thorax.yaml\nconfigs/train\nconfigs/train/pilot-m.yaml\nconfigs/train/pilot-p.yaml\nconfigs/train/smoke.yaml\nconfigs/train/stage1-p.yaml\nconfigs/wsi\nconfigs/wsi/demo-hiesd.yaml\ndata\ndata/manifests\ndata/manifests/.gitkeep\ndata/manifests/EXPECTED.sha256\ndata/manifests/README.md\ndata/manifests/bracs.csv\ndata/manifests/hepatobench.csv\ndata/manifests/hiesd.csv\ndata/manifests/hiesd_patient_slide_mapping.csv\ndata/manifests/sicapv2.csv\ndata/manifests/spider_breast.csv\ndata/manifests/spider_colorectal.csv\ndata/manifests/spider_skin.csv\ndata/manifests/spider_thorax.csv\ndata/manifests/stage1_test_exclusions.csv\ndata/registry.csv\ndocs\ndocs/stage1_analysis_plan.md\ndocs/stage1_plan_versions.md\nexternal_patches\nexternal_patches/omnimedjev-py311-fstrings.patch\ninference\ninference/PathJev_demo.ipynb\ninference/pathjev_infer\ninference/pathjev_infer/__init__.py\ninference/pathjev_infer/core.py\nrequirements.lock\nresults\nresults/runs\nresults/runs/stage1-a3-hepato\nresults/runs/stage1-a3\nresults/runs/stage1-analysis\nresults/runs/stage1-audits\nresults/runs/stage1-config\nresults/runs/stage1-dedup\nresults/runs/stage1-temperature\nslurm\nslurm/README.md\nslurm/campaigns\nslurm/campaigns/.gitkeep\nslurm/campaigns/a3_checks.sh\nslurm/campaigns/a3_eval.sbatch\nslurm/campaigns/a3_hepato.sh\nslurm/campaigns/a3_tasks.sh\nslurm/campaigns/baseline.sbatch\nslurm/campaigns/bench_gpu.sbatch\nslurm/campaigns/build_states.sbatch\nslurm/campaigns/cpu_task.sbatch\nslurm/campaigns/data_fetch.sbatch\nslurm/campaigns/dedup_audit.sh\nslurm/campaigns/eval_arm.sbatch\nslurm/campaigns/extract_spider.sbatch\nslurm/campaigns/gpu_probe.sbatch\nslurm/campaigns/infer_eval.sbatch\nslurm/campaigns/phase0_bench.sbatch\nslurm/campaigns/phase0_fetch.sbatch\nslurm/campaigns/phase0_repro.sbatch\nslurm/campaigns/post_train.sbatch\nslurm/campaigns/release_check.sbatch\nslurm/campaigns/stage1_chain.sh\nslurm/campaigns/stage1_phase4.sh\nslurm/campaigns/stage1_regroup.sh\nslurm/campaigns/train_jev.sbatch\nslurm/campaigns/train_sft.sbatch\nslurm/campaigns/wsi_demo.sbatch\nslurm/campaigns/wsi_reassemble.sh\nslurm/cluster.env.example\nslurm/templates\nslurm/templates/common.sh\nslurm/templates/gpu.sbatch\nsrc\nsrc/.gitkeep\nsrc/data\nsrc/data/__init__.py\nsrc/data/fetch_external.py\nsrc/data/spider_extract.py\nsrc/data/verify_fetch.py\nsrc/pathjev\nsrc/pathjev/__init__.py\nsrc/pathjev/a3_sets.py\nsrc/pathjev/baselines.py\nsrc/pathjev/build.py\nsrc/pathjev/check_readout.py\nsrc/pathjev/dedup.py\nsrc/pathjev/evalsets.py\nsrc/pathjev/evaluate.py\nsrc/pathjev/generative.py\nsrc/pathjev/groups.py\nsrc/pathjev/metrics.py\nsrc/pathjev/mix.py\nsrc/pathjev/paths.py\nsrc/pathjev/records.py\nsrc/pathjev/select_checkpoint.py\nsrc/pathjev/sources\nsrc/pathjev/splits.py\nsrc/pathjev/states.py\nsrc/pathjev/stats.py\nsrc/pathjev/templates.py\nsrc/pathjev/train_sft.py\nsrc/pathjev/variants.py\nsrc/pathjev/wsi.py\nsrc/pathjev/wsi_demo.py\nsrc/phase0\nsrc/phase0/__init__.py\nsrc/phase0/bench_states.py\nsrc/phase0/fetch_assets.py\nsrc/phase0/filter_states.py\nsrc/phase0/score_repro.py\nsrc/shims\nsrc/shims/erbium\ntests\ntests/.gitkeep\ntests/__init__.py\ntests/test_a3.py\ntests/test_baselines.py\ntests/test_dedup.py\ntests/test_evaluate_stats.py\ntests/test_groups.py\ntests/test_metrics.py\ntests/test_stage1.py\ntests/test_templates_splits_states.py\ntests/test_wsi.py\n```",
+        "project_structure": "## Directory Tree\n```\n.gitignore\nLICENSE\nNOTICE\nREADME.md\nanalysis\nanalysis/.gitkeep\nanalysis/a3_checks.py\nanalysis/a3_hepato.py\nanalysis/a3_macros.py\nanalysis/audit_macros.py\nanalysis/audit_rerun.py\nanalysis/audit_selection.py\nanalysis/data_statement.py\nanalysis/dedup_audit.py\nanalysis/export_macros.py\nanalysis/figure_assets.py\nanalysis/noul_score.py\nanalysis/paper_tables.py\nanalysis/pilot_report.py\nanalysis/reliability.py\nanalysis/secondary_metrics.py\nanalysis/select_config.py\nanalysis/stage1_analysis.py\nanalysis/stage1_temperature_transfer.py\nanalysis/training_details.py\nassets\nassets/overview.png\nassets/wsi_demo.jpg\nassets/wsi_pipeline.png\nconfigs\nconfigs/build\nconfigs/build/bracs.yaml\nconfigs/build/hepatobench.yaml\nconfigs/build/hiesd.yaml\nconfigs/build/sicapv2.yaml\nconfigs/build/spider-breast.yaml\nconfigs/build/spider-colorectal.yaml\nconfigs/build/spider-skin.yaml\nconfigs/build/spider-thorax.yaml\nconfigs/eval\nconfigs/eval/pilot-stage1.yaml\nconfigs/eval/smoke.yaml\nconfigs/eval/stage1-test-full.yaml\nconfigs/eval/stage1-test.yaml\nconfigs/phase0_repro.yaml\nconfigs/questions\nconfigs/questions/.gitkeep\nconfigs/questions/bracs.yaml\nconfigs/questions/hepatobench.yaml\nconfigs/questions/hiesd.yaml\nconfigs/questions/organ_vocab.txt\nconfigs/questions/sicapv2.yaml\nconfigs/questions/spider-breast.yaml\nconfigs/questions/spider-colorectal.yaml\nconfigs/questions/spider-skin.yaml\nconfigs/questions/spider-thorax.yaml\nconfigs/train\nconfigs/train/pilot-m.yaml\nconfigs/train/pilot-p.yaml\nconfigs/train/smoke.yaml\nconfigs/train/stage1-p.yaml\nconfigs/wsi\nconfigs/wsi/demo-hiesd.yaml\ndata\ndata/manifests\ndata/manifests/.gitkeep\ndata/manifests/EXPECTED.sha256\ndata/manifests/README.md\ndata/manifests/bracs.csv\ndata/manifests/hepatobench.csv\ndata/manifests/hiesd.csv\ndata/manifests/hiesd_patient_slide_mapping.csv\ndata/manifests/sicapv2.csv\ndata/manifests/spider_breast.csv\ndata/manifests/spider_colorectal.csv\ndata/manifests/spider_skin.csv\ndata/manifests/spider_thorax.csv\ndata/manifests/stage1_test_exclusions.csv\ndata/registry.csv\ndocs\ndocs/stage1_analysis_plan.md\ndocs/stage1_plan_versions.md\nexternal_patches\nexternal_patches/omnimedjev-py311-fstrings.patch\ninference\ninference/PathJev_demo.ipynb\ninference/pathjev_infer\ninference/pathjev_infer/__init__.py\ninference/pathjev_infer/core.py\nrequirements.lock\nresults\nresults/runs\nresults/runs/stage1-a3-hepato\nresults/runs/stage1-a3-hepato/summary.json\nresults/runs/stage1-a3\nresults/runs/stage1-a3/summary.json\nresults/runs/stage1-analysis\nresults/runs/stage1-analysis/summary.json\nresults/runs/stage1-audits\nresults/runs/stage1-audits/rerun.json\nresults/runs/stage1-audits/selection.json\nresults/runs/stage1-config\nresults/runs/stage1-config/jev.json\nresults/runs/stage1-config/sft.json\nresults/runs/stage1-dedup\nresults/runs/stage1-dedup/summary.json\nresults/runs/stage1-temperature\nresults/runs/stage1-temperature/summary.json\nslurm\nslurm/README.md\nslurm/campaigns\nslurm/campaigns/.gitkeep\nslurm/campaigns/a3_checks.sh\nslurm/campaigns/a3_eval.sbatch\nslurm/campaigns/a3_hepato.sh\nslurm/campaigns/a3_tasks.sh\nslurm/campaigns/baseline.sbatch\nslurm/campaigns/bench_gpu.sbatch\nslurm/campaigns/build_states.sbatch\nslurm/campaigns/cpu_task.sbatch\nslurm/campaigns/data_fetch.sbatch\nslurm/campaigns/dedup_audit.sh\nslurm/campaigns/eval_arm.sbatch\nslurm/campaigns/extract_spider.sbatch\nslurm/campaigns/gpu_probe.sbatch\nslurm/campaigns/infer_eval.sbatch\nslurm/campaigns/phase0_bench.sbatch\nslurm/campaigns/phase0_fetch.sbatch\nslurm/campaigns/phase0_repro.sbatch\nslurm/campaigns/post_train.sbatch\nslurm/campaigns/release_check.sbatch\nslurm/campaigns/stage1_chain.sh\nslurm/campaigns/stage1_phase4.sh\nslurm/campaigns/stage1_regroup.sh\nslurm/campaigns/train_jev.sbatch\nslurm/campaigns/train_sft.sbatch\nslurm/campaigns/wsi_demo.sbatch\nslurm/campaigns/wsi_reassemble.sh\nslurm/cluster.env.example\nslurm/templates\nslurm/templates/common.sh\nslurm/templates/gpu.sbatch\nsrc\nsrc/.gitkeep\nsrc/data\nsrc/data/__init__.py\nsrc/data/fetch_external.py\nsrc/data/spider_extract.py\nsrc/data/verify_fetch.py\nsrc/pathjev\nsrc/pathjev/__init__.py\nsrc/pathjev/a3_sets.py\nsrc/pathjev/baselines.py\nsrc/pathjev/build.py\nsrc/pathjev/check_readout.py\nsrc/pathjev/dedup.py\nsrc/pathjev/evalsets.py\nsrc/pathjev/evaluate.py\nsrc/pathjev/generative.py\nsrc/pathjev/groups.py\nsrc/pathjev/metrics.py\nsrc/pathjev/mix.py\nsrc/pathjev/paths.py\nsrc/pathjev/records.py\nsrc/pathjev/select_checkpoint.py\nsrc/pathjev/sources\nsrc/pathjev/sources/__init__.py\nsrc/pathjev/sources/bracs.py\nsrc/pathjev/sources/hepatobench.py\nsrc/pathjev/sources/hiesd.py\nsrc/pathjev/sources/sicapv2.py\nsrc/pathjev/sources/spider.py\nsrc/pathjev/sources/spider_breast.py\nsrc/pathjev/sources/spider_colorectal.py\nsrc/pathjev/sources/spider_skin.py\nsrc/pathjev/sources/spider_thorax.py\nsrc/pathjev/splits.py\nsrc/pathjev/states.py\nsrc/pathjev/stats.py\nsrc/pathjev/templates.py\nsrc/pathjev/train_sft.py\nsrc/pathjev/variants.py\nsrc/pathjev/wsi.py\nsrc/pathjev/wsi_demo.py\nsrc/phase0\nsrc/phase0/__init__.py\nsrc/phase0/bench_states.py\nsrc/phase0/fetch_assets.py\nsrc/phase0/filter_states.py\nsrc/phase0/score_repro.py\nsrc/shims\nsrc/shims/erbium\nsrc/shims/erbium/__init__.py\nsrc/shims/erbium/api.py\ntests\ntests/.gitkeep\ntests/__init__.py\ntests/test_a3.py\ntests/test_baselines.py\ntests/test_dedup.py\ntests/test_evaluate_stats.py\ntests/test_groups.py\ntests/test_metrics.py\ntests/test_stage1.py\ntests/test_templates_splits_states.py\ntests/test_wsi.py\n```",
+        "key_files": [
+          "src/pathjev/evaluate.py",
+          "README.md",
+          "data/manifests/README.md",
+          "inference/PathJev_demo.ipynb",
+          "LICENSE",
+          "src/pathjev/mix.py",
+          "src/pathjev/wsi.py",
+          "src/pathjev/build.py",
+          "src/pathjev/dedup.py",
+          "src/pathjev/groups.py",
+          "src/pathjev/splits.py",
+          "src/pathjev/a3_sets.py",
+          "src/pathjev/evalsets.py",
+          "src/pathjev/variants.py",
+          "src/pathjev/wsi_demo.py",
+          "src/data/verify_fetch.py",
+          "src/pathjev/baselines.py",
+          "src/pathjev/templates.py",
+          "src/pathjev/train_sft.py",
+          "src/pathjev/generative.py",
+          "src/phase0/score_repro.py",
+          "src/data/fetch_external.py",
+          "src/data/spider_extract.py",
+          "src/phase0/bench_states.py",
+          "src/phase0/fetch_assets.py",
+          "src/phase0/filter_states.py",
+          "src/pathjev/check_readout.py",
+          "configs/eval/stage1-test.yaml"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 85,
+          "selected_file_count": 28,
+          "selected_code_file_count": 24,
+          "languages_by_extension": {
+            "ipynb": 1,
+            "py": 75,
+            "sh": 9
+          },
+          "tests_present": true,
+          "test_files": [
+            "tests/test_metrics.py",
+            "tests/test_a3.py",
+            "tests/__init__.py",
+            "tests/test_dedup.py",
+            "tests/test_templates_splits_states.py",
+            "tests/test_wsi.py",
+            "tests/test_groups.py",
+            "configs/eval/stage1-test-full.yaml",
+            "tests/test_baselines.py",
+            "tests/test_evaluate_stats.py",
+            "tests/test_stage1.py",
+            "configs/eval/stage1-test.yaml"
+          ],
+          "manifest_files": [
+            "slurm/README.md",
+            "data/manifests/README.md",
+            "README.md",
+            "LICENSE"
+          ],
+          "read_errors": [],
+          "warnings": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2610.32478v1_gread.json"
+      },
+      "discovered_at": "2026-10-26T01:20:45.686392Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.32478",
+        "verified_at": "2026-10-26T01:20:45.686392Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.32041v1",
+      "title": "NUViT: Vision Transformers for Fourier Space Data",
+      "published_date": "2026-10-23",
+      "authors": [
+        "Jeffrey Gu",
+        "Robert C. Heeter",
+        "Ellen D. Zhong"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "task_type": [
+        "classification"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/mmuckley/torchkbnufft",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "d F. Knoll TorchKbNufft: a high-level, hardware-agnostic non-uniform fast Fourier transform . In ISMRM Workshop on Data Sampling & Image Reconstruction , Note: Source code available at https://github.com/mmuckley/torchkbnufft Cited by: <a href=\"#A1.SS1.p1.1\" title=\"A.1 Implementation Deta",
+          "relation_signal": "explicit_code_statement",
+          "provenance_source": "https://arxiv.org/html/2610.32041v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Vision Transformers (ViTs) have demonstrated strong performance in many computer vision tasks but do not naturally extend beyond the natural image domain. One important example is Fourier-space data, which is used to represent a rich and diverse set of modalities, including medical imaging and microscopy. Standard ViT tokenization partitions an image into square patches on a Cartesian grid, which poorly fit the frequency and phase structure of Fourier-space data. We introduce Non-Uniform ViT, a simple, general-purpose vision transformer that redesigns image tokenization, data representation, and positional encoding to respect this structure. Experiments on Fourier-domain image classification, 2D crystal lattice identification, MRI annotation, and cryo-EM protein heterogeneity analysis show that NUViT consistently captures the structure of Fourier data better than standard architectures.",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "mmuckley/torchkbnufft",
+        "repository_url": "https://github.com/mmuckley/torchkbnufft",
+        "analyzed_at": "2026-10-26T01:21:20.176465+00:00",
+        "architecture": "# mmuckley/torchkbnufft\n**Stars**: 258 | **Language**: Python\n**Description**: A PyTorch implementation of the non-uniform Fast Fourier Transform (NUFFT) using Kaiser-Bessel gridding. It allows for flexible deployment and backpropagation through NUFFT operators for neural network training. The library supports multiple operation modes, including table-based, sparse matrix-based, and Toeplitz-embedded FFTs, with varying performance characteristics. Sensitivity maps can also be incorporated.\n\n\n## Directory Tree\n```\n.gitattributes\n.github\n.github/workflows\n.github/workflows/python-app.yml\n.github/workflows/python-publish.yml\n.gitignore\n.readthedocs.yml\nCONTRIBUTING.md\nLICENSE\nREADME.md\ndocs\ndocs/Makefile\ndocs/make.bat\ndocs/requirements.txt\ndocs/source\ndocs/source/_templates\ndocs/source/basic.rst\ndocs/source/conf.py\ndocs/source/generated\ndocs/source/index.rst\ndocs/source/performance.rst\ndocs/source/torchkbnufft.functional.rst\ndocs/source/torchkbnufft.rst\ndocs/update_all.bash\nnotebooks\nnotebooks/Basic Example.ipynb\nnotebooks/README.md\nnotebooks/SENSE Example.ipynb\nnotebooks/Sparse Matrix Example.ipynb\nnotebooks/Toeplitz Example.ipynb\nnotebooks/mrisensesim.py\nprofile_torchkbnufft.py\npyproject.toml\nsetup.cfg\nsetup.py\ntests\ntests/__init__.py\ntests/conftest.py\ntests/data\ntests/data/create_old_data.py\ntests/data/interp_data.pkl\ntests/data/nufft_data.pkl\ntests/data/sense_nufft_data.pkl\ntests/test_dcomp.py\ntests/test_interp.py\ntests/test_math.py\ntests/test_nufft.py\ntests/test_sense_nufft.py\ntests/test_toep.py\ntorchkbnufft\ntorchkbnufft/__init__.py\ntorchkbnufft/_autograd\ntorchkbnufft/_autograd/__init__.py\ntorchkbnufft/_autograd/interp.py\ntorchkbnufft/_math.py\ntorchkbnufft/_nufft\ntorchkbnufft/_nufft/__init__.py\ntorchkbnufft/_nufft/dcomp.py\ntorchkbnufft/_nufft/fft.py\ntorchkbnufft/_nufft/interp.py\ntorchkbnufft/_nufft/spmat.py\ntorchkbnufft/_nufft/toep.py\ntorchkbnufft/_nufft/utils.py\ntorchkbnufft/functional\ntorchkbnufft/functional/__init__.py\ntorchkbnufft/functional/interp.py\ntorchkbnufft/functional/nufft.py\ntorchkbnufft/modules\ntorchkbnufft/modules/__init__.py\ntorchkbnufft/modules/_kbmodule.py\ntorchkbnufft/modules/kbinterp.py\ntorchkbnufft/modules/kbnufft.py\n```",
+        "project_structure": "## Directory Tree\n```\n.gitattributes\n.github\n.github/workflows\n.github/workflows/python-app.yml\n.github/workflows/python-publish.yml\n.gitignore\n.readthedocs.yml\nCONTRIBUTING.md\nLICENSE\nREADME.md\ndocs\ndocs/Makefile\ndocs/make.bat\ndocs/requirements.txt\ndocs/source\ndocs/source/_templates\ndocs/source/_templates/autosummary\ndocs/source/_templates/autosummary/class.rst\ndocs/source/_templates/classtemplate.rst\ndocs/source/_templates/functiontemplate.rst\ndocs/source/basic.rst\ndocs/source/conf.py\ndocs/source/generated\ndocs/source/generated/torchkbnufft.KbInterp.rst\ndocs/source/generated/torchkbnufft.KbInterpAdjoint.rst\ndocs/source/generated/torchkbnufft.KbNufft.rst\ndocs/source/generated/torchkbnufft.KbNufftAdjoint.rst\ndocs/source/generated/torchkbnufft.ToepNufft.rst\ndocs/source/generated/torchkbnufft.absolute.rst\ndocs/source/generated/torchkbnufft.calc_density_compensation_function.rst\ndocs/source/generated/torchkbnufft.calc_tensor_spmatrix.rst\ndocs/source/generated/torchkbnufft.calc_toeplitz_kernel.rst\ndocs/source/generated/torchkbnufft.complex_mult.rst\ndocs/source/generated/torchkbnufft.complex_sign.rst\ndocs/source/generated/torchkbnufft.conj_complex_mult.rst\ndocs/source/generated/torchkbnufft.imag_exp.rst\ndocs/source/generated/torchkbnufft.inner_product.rst\ndocs/source/index.rst\ndocs/source/performance.rst\ndocs/source/torchkbnufft.functional.rst\ndocs/source/torchkbnufft.rst\ndocs/update_all.bash\nnotebooks\nnotebooks/Basic Example.ipynb\nnotebooks/README.md\nnotebooks/SENSE Example.ipynb\nnotebooks/Sparse Matrix Example.ipynb\nnotebooks/Toeplitz Example.ipynb\nnotebooks/mrisensesim.py\nprofile_torchkbnufft.py\npyproject.toml\nsetup.cfg\nsetup.py\ntests\ntests/__init__.py\ntests/conftest.py\ntests/data\ntests/data/create_old_data.py\ntests/data/interp_data.pkl\ntests/data/nufft_data.pkl\ntests/data/sense_nufft_data.pkl\ntests/test_dcomp.py\ntests/test_interp.py\ntests/test_math.py\ntests/test_nufft.py\ntests/test_sense_nufft.py\ntests/test_toep.py\ntorchkbnufft\ntorchkbnufft/__init__.py\ntorchkbnufft/_autograd\ntorchkbnufft/_autograd/__init__.py\ntorchkbnufft/_autograd/interp.py\ntorchkbnufft/_math.py\ntorchkbnufft/_nufft\ntorchkbnufft/_nufft/__init__.py\ntorchkbnufft/_nufft/dcomp.py\ntorchkbnufft/_nufft/fft.py\ntorchkbnufft/_nufft/interp.py\ntorchkbnufft/_nufft/spmat.py\ntorchkbnufft/_nufft/toep.py\ntorchkbnufft/_nufft/utils.py\ntorchkbnufft/functional\ntorchkbnufft/functional/__init__.py\ntorchkbnufft/functional/interp.py\ntorchkbnufft/functional/nufft.py\ntorchkbnufft/modules\ntorchkbnufft/modules/__init__.py\ntorchkbnufft/modules/_kbmodule.py\ntorchkbnufft/modules/kbinterp.py\ntorchkbnufft/modules/kbnufft.py\n```",
+        "key_files": [
+          "torchkbnufft/modules/kbnufft.py",
+          "README.md",
+          "notebooks/README.md",
+          "setup.py",
+          "profile_torchkbnufft.py",
+          "torchkbnufft/functional/nufft.py",
+          "LICENSE",
+          "setup.cfg",
+          "docs/Makefile",
+          "docs/source/torchkbnufft.rst",
+          "torchkbnufft/modules/__init__.py",
+          "torchkbnufft/modules/kbinterp.py",
+          "torchkbnufft/modules/_kbmodule.py",
+          "docs/source/generated/torchkbnufft.KbNufft.rst",
+          "docs/source/generated/torchkbnufft.KbInterp.rst",
+          "docs/source/generated/torchkbnufft.ToepNufft.rst",
+          "docs/source/generated/torchkbnufft.KbNufftAdjoint.rst",
+          "docs/source/generated/torchkbnufft.KbInterpAdjoint.rst",
+          "docs/source/generated/torchkbnufft.calc_tensor_spmatrix.rst",
+          "docs/source/generated/torchkbnufft.calc_toeplitz_kernel.rst",
+          "docs/source/generated/torchkbnufft.calc_density_compensation_function.rst",
+          "tests/conftest.py",
+          "tests/test_math.py",
+          "tests/test_toep.py",
+          "tests/test_dcomp.py",
+          "tests/test_nufft.py",
+          "tests/test_interp.py",
+          "tests/test_sense_nufft.py"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 36,
+          "selected_file_count": 28,
+          "selected_code_file_count": 14,
+          "languages_by_extension": {
+            "bash": 1,
+            "ipynb": 4,
+            "py": 31
+          },
+          "tests_present": true,
+          "test_files": [
+            "tests/test_math.py",
+            "tests/conftest.py",
+            "tests/test_dcomp.py",
+            "tests/data/create_old_data.py",
+            "tests/test_sense_nufft.py",
+            "tests/test_interp.py",
+            "tests/__init__.py",
+            "tests/test_nufft.py",
+            "tests/test_toep.py"
+          ],
+          "manifest_files": [
+            "README.md",
+            "notebooks/README.md",
+            "pyproject.toml",
+            "setup.py",
+            "LICENSE",
+            "docs/Makefile",
+            "docs/requirements.txt",
+            "setup.cfg"
+          ],
+          "read_errors": [],
+          "warnings": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2610.32041v1_gread.json"
+      },
+      "discovered_at": "2026-10-26T01:20:45.686392Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.32041",
+        "verified_at": "2026-10-26T01:20:45.686392Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.33691v1",
+      "title": "PathKGen: Pathology Knowledge Assisted MLLM for Explainable Histopathology",
+      "published_date": "2026-10-24",
+      "authors": [
+        "Nadun Rajapaksha",
+        "Sandun Herath",
+        "Devnith Wijesinghe",
+        "Isiri Amani Withanawasam",
+        "Hasindri Watawana",
+        "Ranga Rodrigo"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "task_type": [
+        "histopathology"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/nadunnr/PathKGen",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "h. A comprehensive evaluation on WSI-Bench dataset shows that PathKGen surpasses previous SOTA methods while revealing diagnostic reasoning as visually intuitive graphs. Due to its modular design, the proposed knowledge path is complementary to vision-aligned MLLMs and can be extended to other applications by curating domain-specific knowledge graphs to generate knowledge tokens. Source code is available at https://github.com/nadunnr/PathKGen . <div class=\"ltx_pagination lt",
+          "relation_signal": "explicit_code_statement",
+          "provenance_source": "https://arxiv.org/html/2610.33691v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Whole Slide Image (WSI) analysis serves as the fundamental method for the clinical diagnosis of cancer in digital histopathology. Recent advances in Multimodal Large Language Models (MLLMs) have enabled state-of-the-art (SOTA) automated histopathology report generation. However, MLLMs reason purely through distributions encoded in their neural parameters, limiting the amount of knowledge and reasoning logic they can contain given the model scale. Their black-box reasoning poses another challenge to the human interpretation of intermediate reasoning. We address these issues by utilizing knowledge graphs to inject external structured knowledge for MLLMs to reason over, while making this reasoning component visible. Knowledge graphs are capable of partially externalizing the containment of medical knowledge, an area that remains underexplored in pathology report generation. We introduce PathKGen, a knowledge graph-assisted MLLM for histopathology report generation. PathKGen has two main branches: (1) a visual path that learns visual token inputs to the MLLM using pathology foundation models, and (2) a knowledge path that learns knowledge token inputs by extracting key morphological features of WSIs through querying a pathology-specific knowledge graph. A comprehensive evaluation on WSI-Bench dataset shows that PathKGen surpasses previous SOTA methods while revealing diagnostic reasoning as visually intuitive graphs. Due to its modular design, the proposed knowledge path is complementary to vision-aligned MLLMs and can be extended to other applications by curating domain-specific knowledge graphs to generate knowledge tokens.",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "nadunnr/PathKGen",
+        "repository_url": "https://github.com/nadunnr/PathKGen",
+        "analyzed_at": "2026-10-27T01:20:48.449748+00:00",
+        "architecture": "# nadunnr/PathKGen\n**Stars**: 0 | **Language**: Python\n**Description**: PathKGen is a knowledge graph-assisted Multimodal Large Language Model (MLLM) designed for explainable histopathology report generation. The repository contains code for the main VLM training and inference pipeline, an auxiliary histology classifier, components for constructing and querying a pathology-specific knowledge graph, and utilities for data pre-processing. It includes scripts for environment setup, training stages, and inference.\n\n\n## Directory Tree\n```\n.gitignore\nREADME.md\nassets\nassets/main.jpg\nauxiliary_classifier\nauxiliary_classifier/classifier.py\nauxiliary_classifier/dataset.py\nauxiliary_classifier/head.py\nauxiliary_classifier/inference.py\nauxiliary_classifier/utils.py\nenvironment.yml\nknowledge_path\nknowledge_path/ablation\nknowledge_path/ablation/prepare_ablation_datasets.py\nknowledge_path/graph_construct\nknowledge_path/graph_construct/create_knowledge_prompt.py\nknowledge_path/graph_construct/cui_selecter.py\nknowledge_path/graph_construct/enrich_with_knowledge.py\nknowledge_path/graphs.py\nknowledge_path/subgraph_visualization.py\npaths_config.py\npaths_config.sh\npipeline\npipeline/config.py\npipeline/data_collator.py\npipeline/dataset.py\npipeline/inference.py\npipeline/inference.sh\npipeline/losses.py\npipeline/metrics.py\npipeline/model.py\npipeline/plot_training.py\npipeline/train_stage1.py\npipeline/train_stage1.sh\npipeline/train_stage2.py\npipeline/train_stage2.sh\npre_processing\npre_processing/convert_wsi_bench.py\npre_processing/encode_wsis.sh\npre_processing/filter_wsi_bench.py\npre_processing/generate_mpp.py\npre_processing/lookup.py\npre_processing/make_manifest.py\npre_processing/retrieve_data_cherry.py\nrequirements.txt\nwebapp\nwebapp/generate_report.py\n```",
+        "project_structure": "## Directory Tree\n```\n.gitignore\nREADME.md\nassets\nassets/main.jpg\nauxiliary_classifier\nauxiliary_classifier/classifier.py\nauxiliary_classifier/dataset.py\nauxiliary_classifier/head.py\nauxiliary_classifier/inference.py\nauxiliary_classifier/utils.py\nenvironment.yml\nknowledge_path\nknowledge_path/ablation\nknowledge_path/ablation/prepare_ablation_datasets.py\nknowledge_path/graph_construct\nknowledge_path/graph_construct/create_knowledge_prompt.py\nknowledge_path/graph_construct/cui_selecter.py\nknowledge_path/graph_construct/enrich_with_knowledge.py\nknowledge_path/graphs.py\nknowledge_path/subgraph_visualization.py\npaths_config.py\npaths_config.sh\npipeline\npipeline/config.py\npipeline/data_collator.py\npipeline/dataset.py\npipeline/inference.py\npipeline/inference.sh\npipeline/losses.py\npipeline/metrics.py\npipeline/model.py\npipeline/plot_training.py\npipeline/train_stage1.py\npipeline/train_stage1.sh\npipeline/train_stage2.py\npipeline/train_stage2.sh\npre_processing\npre_processing/convert_wsi_bench.py\npre_processing/encode_wsis.sh\npre_processing/filter_wsi_bench.py\npre_processing/generate_mpp.py\npre_processing/lookup.py\npre_processing/make_manifest.py\npre_processing/retrieve_data_cherry.py\nrequirements.txt\nwebapp\nwebapp/generate_report.py\n```",
+        "key_files": [
+          "pipeline/inference.py",
+          "pipeline/inference.sh",
+          "auxiliary_classifier/inference.py",
+          "README.md",
+          "pipeline/model.py",
+          "paths_config.py",
+          "pipeline/config.py",
+          "pipeline/losses.py",
+          "pipeline/dataset.py",
+          "pipeline/metrics.py",
+          "knowledge_path/graphs.py",
+          "pipeline/train_stage1.py",
+          "pipeline/train_stage1.sh",
+          "pipeline/train_stage2.py",
+          "pipeline/train_stage2.sh",
+          "pre_processing/lookup.py",
+          "pipeline/data_collator.py",
+          "pipeline/plot_training.py",
+          "webapp/generate_report.py",
+          "auxiliary_classifier/head.py",
+          "auxiliary_classifier/utils.py",
+          "pre_processing/generate_mpp.py",
+          "auxiliary_classifier/dataset.py",
+          "pre_processing/make_manifest.py",
+          "auxiliary_classifier/classifier.py",
+          "pre_processing/filter_wsi_bench.py",
+          "pre_processing/convert_wsi_bench.py",
+          "pre_processing/retrieve_data_cherry.py"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 34,
+          "selected_file_count": 28,
+          "selected_code_file_count": 27,
+          "languages_by_extension": {
+            "py": 29,
+            "sh": 5
+          },
+          "tests_present": false,
+          "test_files": [],
+          "manifest_files": [
+            "README.md",
+            "requirements.txt",
+            "environment.yml"
+          ],
+          "read_errors": [],
+          "warnings": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2610.33691v1_gread.json"
+      },
+      "discovered_at": "2026-10-27T01:20:30.027412Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.33691",
+        "verified_at": "2026-10-27T01:20:30.027412Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.33580v1",
+      "title": "ZoomSEM: accelerating large-scale brain connectomics with intelligent SEM super-resolution",
+      "published_date": "2026-10-24",
+      "authors": [
+        "Jiateng Shou",
+        "Zhiwei Xiong",
+        "Ruikang Xu",
+        "Zhicheng Wang",
+        "Peiyao Shi",
+        "Te Shi",
+        "Haiqun Jin",
+        "Chunying Yin",
+        "Jun Guo",
+        "Manfred Auer",
+        "Hanchuan Peng",
+        "Ruobing Zhang",
+        "Feng Wu"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "reconstruction"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Serial electron microscopy (EM) is essential for large-volume biological imaging and connectomics, yet its throughput remains a major bottleneck, with cubic-millimeter-scale brain imaging requiring months or years. Existing deep learning-based EM super-resolution methods are limited to small upscaling factors or rely on synthetic data, offering modest acceleration and limited practical impact. We introduce ZoomSEM, a deep learning-based super-resolution method to dramatically accelerate SEM imaging. Trained on real low- and high-resolution scanning electron microscopy (SEM) pairs, ZoomSEM enables reliable recovery of 4$\\times$, 8$\\times$, and up to 16$\\times$ higher-resolution images from fast low-resolution scans while preserving fine neuronal structures critical for connectomic analysis, achieving up to 30-fold effective acceleration. Extensive experiments across datasets of diverse biological samples demonstrate robust generalization under realistic low-resolution acquisition. This advance enables high-resolution, large-volume serial EM imaging at unprecedented speed, poised to transform connectomics and related fields.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-27T01:20:30.027412Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.33580",
+        "verified_at": "2026-10-27T01:20:30.027412Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.33398v1",
+      "title": "Rethinking Microscopy Generation: Co-Designed Diffusion for Biologically Interpretable Single-Cell Synthesis",
+      "published_date": "2026-10-24",
+      "authors": [
+        "Shumpei Takezaki",
+        "Duway Nicolas Lesmes-Leon",
+        "Ryoma Bise",
+        "Gillian Lovell",
+        "Bianca Migliori",
+        "Andreas Dengel",
+        "Sheraz Ahmed"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "classification"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Generative models for microscopy can already produce realistic whole-image fields of view, but offer no principled way to control how each individual cell looks. We address this gap by recasting microscopy generation at the single-cell level and designing the input controls and the model's internal representation jointly, so that both are organized along the same biologically meaningful directions. On the input side, we aggregate a long list of standard cell measurements into a small set of semantic axes (size, elongation, brightness, texture, etc.) that are each named, measurable, and traversable. On the model side, we introduce BioVAE, an encoder-decoder whose latent space is explicitly aligned with the same set of measurements. A key finding is that the benefit of biologically structuring the latent emerges only when conditioning is also moved to the semantic axes, showing that the two ends must be designed jointly. Experiments on LIVECell show that semantic-axis conditioning substantially improves generative fidelity over high-dimensional conditioning, a blind study with biologists confirms the realism of generated cells, and per-axis traversals produce stable and interpretable phenotypic changes.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-27T01:20:30.027412Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.33398",
+        "verified_at": "2026-10-27T01:20:30.027412Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.33256v1",
+      "title": "Fully-Automated Multi-Modal Registration of Timelapse Zebrafish OCT+LS Images",
+      "published_date": "2026-10-23",
+      "authors": [
+        "Mahshid Babeli Nia",
+        "Leah A. Lewis",
+        "Mohammad Mobarak Karim",
+        "Manmohan Singh",
+        "Arne C. Lekven",
+        "Guoning Chen",
+        "Kirill V. Larin",
+        "David Mayerich"
+      ],
+      "categories": [
+        "eess.IV"
+      ],
+      "task_type": [
+        "segmentation"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/Mahshid-Babeli/octls-registration",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "tween tissue morphology and a broader range of molecular processes to be investigated throughout development. Future studies may also incorporate deformable registration to account for localized anatomical changes that cannot be fully represented by rigid transformations. The source code for the proposed implementation is available on GitHub (https://github.com/Mahshid-Babeli/octls-registration) with sample data sets available Zenodo [<a href=\"#bib.bib1\" title=\"\" class=\"",
+          "relation_signal": "explicit_code_statement",
+          "provenance_source": "https://arxiv.org/html/2610.33256v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Optical coherence tomography (OCT) and light sheet (LS) fluorescence microscopy provide complementary views of tissue morphology and molecular expression, offering a powerful approach for studying embryonic development. However, longitudinal integration of OCT+LS images is challenging because the modalities differ substantially in contrast, spatial resolution, field of view, and visible anatomical features, while embryo growth and movement introduce additional misalignment over time. These challenges stem from both the scale and multimodal nature of the OCT and LS image stacks. We present a fully automated three-dimensional rigid registration framework for aligning OCT and LS volumes of developing zebrafish embryos acquired from 21 to 48 hours post fertilization (HPF). The method does not require pre-existing segmentations or cross-modal feature correspondences, which are often unreliable because OCT and LS capture fundamentally different tissue properties. Registration performance was evaluated across developmental time points using mean target registration error (mTRE) and compared across multiple similarity metrics and optimization methods. Normalized cross-correlation combined with particle swarm optimization produced the most accurate and consistent registration, achieving the lowest mTRE at every evaluated time point compared with the alternative methods. The registration establishes spatial correspondence between OCT tissue morphology and LS fluorescence signals throughout development, enabling integrated longitudinal analysis of structural and molecular changes in living embryos.",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "Mahshid-Babeli/octls-registration",
+        "repository_url": "https://github.com/Mahshid-Babeli/octls-registration",
+        "analyzed_at": "2026-10-27T01:21:14.177505+00:00",
+        "architecture": "Repo not indexed and could not be fetched.",
+        "project_structure": "## Directory Tree\n```\n.gitignore\nMultimodal_registration.py\nREADME.md\noctls.py\npyproject.toml\nresample.py\nuv.lock\n```",
+        "key_files": [
+          "octls.py",
+          "resample.py",
+          "Multimodal_registration.py",
+          "README.md",
+          "pyproject.toml"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 3,
+          "selected_file_count": 5,
+          "selected_code_file_count": 3,
+          "languages_by_extension": {
+            "py": 3
+          },
+          "tests_present": false,
+          "test_files": [],
+          "manifest_files": [
+            "README.md",
+            "pyproject.toml"
+          ],
+          "read_errors": [],
+          "warnings": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2610.33256v1_gread.json"
+      },
+      "discovered_at": "2026-10-27T01:20:30.027412Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.33256",
+        "verified_at": "2026-10-27T01:20:30.027412Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.33243v1",
+      "title": "Automated identification of ivory carvings using machine learning: A proof-of-concept approach to detecting the illegal wildlife trade",
+      "published_date": "2026-10-23",
+      "authors": [
+        "Andrius Tamosiunas",
+        "Simone Mozzon",
+        "David Bacon",
+        "Caroline Cox",
+        "Alan Collins"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.CY",
+        "cs.LG"
+      ],
+      "task_type": [
+        "segmentation",
+        "detection",
+        "classification"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/AndriusT/AIvory",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "ssification for ivory and bone objects. The code use in our approach is made available on GitHub 2 2 2 The code is available at https://github.com/AndriusT/AIvory . . <div id=\"Sx",
+          "relation_signal": "explicit_code_statement",
+          "provenance_source": "https://arxiv.org/html/2610.33243v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Despite a ban on the international trading of recently poached ivory, elephants are still killed for their tusks. Ivory and its products are mainly sold in online marketplaces. However, due to the huge volume and variety of adverts and the similarity of ivory with other materials that can be legally sold, it is hard for enforcement officials to identify illicit trading and prosecute sellers. Existing techniques for identifying elephant ivory, such as Fourier-transform infrared spectroscopy and microscopy, can reliably distinguish ivory from other materials, but require physical access to the item and cannot be applied to photographs alone. As a result, these methods are unsuitable for screening the large volume of images posted in online marketplaces, leaving a gap for automated, image-based identification tools. In this proof of concept work, we investigate the potential of machine learning techniques for image analysis to automatically distinguish ivory objects from bone. We employ a semantic segmentation framework using a U-Net architecture with a ResNet34 backbone, leveraging transfer learning on an augmented dataset of 541 original images. Using a dataset of images of ivory and items resembling carved ivory, several models were trialled. On a distinct test set, the classifier achieved an Area Under the Curve (AUC) of 0.81 and an overall classification accuracy of 81% on confident samples. The paper presents the best-performing model as a proof of concept for developing a system that can effectively identify ivory and its products when indicative features of elephant ivory are present in an image. This work provides initial steps towards a machine learning-based framework designed to advise law-enforcement in detecting illegal elephant ivory trade.",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "AndriusT/AIvory",
+        "repository_url": "https://github.com/AndriusT/AIvory",
+        "analyzed_at": "2026-10-27T01:21:55.788252+00:00",
+        "architecture": "# AndriusT/AIvory\n**Stars**: 0 | **Language**: Python\n**Description**: The AIvory repository provides a set of machine learning and agentic AI tools for analyzing images to detect illegal wildlife trade, specifically focusing on distinguishing ivory from bone carving objects. It includes a U-Net image segmentation model for pixel-level ivory detection and agentic AI tools for image analysis assistance. The repository also contains example notebooks demonstrating LLM applications in image segmentation, training scripts, and model performance evaluation, along with API key setup instructions for LLM-based functionalities.\n\n\n## Directory Tree\n```\n.gitignore\nREADME.md\nassets\nassets/AIvory-logo.png\nassets/AIvory-logo2.png\nassets/Ivory.png\nexamples\nexamples/Ivory_training_with_ROC.py\nexamples/agentic_llm_workflows.ipynb\nexamples/ivory_gemini_comparison.ipynb\nexamples/ml_resnet34_inference.ipynb\npyproject.toml\nrequirements.txt\nsrc\nsrc/ivory_repo\nsrc/ivory_repo/__init__.py\nsrc/ivory_repo/llm.py\nsrc/ivory_repo/ml.py\n```",
+        "project_structure": "## Directory Tree\n```\n.gitignore\nREADME.md\nassets\nassets/AIvory-logo.png\nassets/AIvory-logo2.png\nassets/Ivory.png\nexamples\nexamples/Ivory_training_with_ROC.py\nexamples/agentic_llm_workflows.ipynb\nexamples/ivory_gemini_comparison.ipynb\nexamples/ml_resnet34_inference.ipynb\npyproject.toml\nrequirements.txt\nsrc\nsrc/ivory_repo\nsrc/ivory_repo/__init__.py\nsrc/ivory_repo/llm.py\nsrc/ivory_repo/ml.py\n```",
+        "key_files": [
+          "README.md",
+          "pyproject.toml",
+          "src/ivory_repo/ml.py",
+          "src/ivory_repo/llm.py",
+          "src/ivory_repo/__init__.py",
+          "examples/Ivory_training_with_ROC.py",
+          "requirements.txt",
+          "examples/agentic_llm_workflows.ipynb",
+          "examples/ml_resnet34_inference.ipynb",
+          "examples/ivory_gemini_comparison.ipynb"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 7,
+          "selected_file_count": 10,
+          "selected_code_file_count": 7,
+          "languages_by_extension": {
+            "ipynb": 3,
+            "py": 4
+          },
+          "tests_present": false,
+          "test_files": [],
+          "manifest_files": [
+            "requirements.txt",
+            "README.md",
+            "pyproject.toml"
+          ],
+          "read_errors": [],
+          "warnings": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2610.33243v1_gread.json"
+      },
+      "discovered_at": "2026-10-27T01:20:30.027412Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.33243",
+        "verified_at": "2026-10-27T01:20:30.027412Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.33136v1",
+      "title": "Matching Particle-Arrival Rates for Low-Count Image Denoising",
+      "published_date": "2026-10-23",
+      "authors": [
+        "Huazhen Liu",
+        "Zipei Yan",
+        "Jizhou Li"
+      ],
+      "categories": [
+        "eess.IV",
+        "cs.CV"
+      ],
+      "task_type": [
+        "detection"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Low-count imaging arises when limited illumination or dose yields only a few detected particles in microscopy, such as photons or electrons, causing measurements to be dominated by signal-dependent Poisson shot noise. Supervised denoisers typically require paired clean and noisy observations, whereas many self-supervised approaches exploit spatial or temporal redundancy without directly estimating the underlying particle-arrival process. We introduce PARM, a self-supervised denoising framework based on particle-arrival-rate matching. By modeling particle accumulation over exposure as a Poisson counting process, PARM identifies the conditional particle-arrival-rate field with the posterior mean of the latent clean rate. Poisson thinning then splits each observation into complementary lower-exposure views that provide self-supervised rate targets for one another. In implementation, the network estimates the normalized spatial allocation of the conditional rate, while the observed total count determines its global particle mass. Experiments on synthetic data, natural-video sequences corrupted with Poisson noise, and real low-dose electron microscopy demonstrate leading or competitive performance while effectively preserving fine structures. PARM therefore provides a statistically grounded approach to low-count image denoising when clean references are unavailable.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-27T01:20:30.027412Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.33136",
+        "verified_at": "2026-10-27T01:20:30.027412Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.32756v1",
+      "title": "Video-rate quantitative phase and polarimetric imaging (QP2I) for label-free imaging of contracting muscle cells",
+      "published_date": "2026-10-23",
+      "authors": [
+        "Lucas Kreiss Roohian",
+        "Nachiket Pathak",
+        "David Ripp",
+        "Mitchell Harling",
+        "Nils Kronenberg",
+        "Marcel Schubert",
+        "Malte C. Gather"
+      ],
+      "categories": [
+        "physics.optics",
+        "q-bio.QM"
+      ],
+      "task_type": [
+        "reconstruction"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Quantitative phase imaging (QPI) has become a standard approach for label-free microscopy of transparent specimens, mapping the optical path length. However, the isotropic phase is blind to the molecular order underlying optical anisotropy. Implementations that also add quantitative contrast to birefringence, rely on multi-frame illumination or polarization-state scanning, or on dedicated interferometric hardware, that trade away acquisition speed or the simplicity of a standard microscope. We present Quantitative Phase and Polarimetric Imaging (QP2I), a computational imaging framework that converts a standard differential interference contrast (DIC) microscope with a polarization camera into a single-shot, video-rate, dual-contrast imaging system. We developed a new globally regularized phase reconstruction that eliminates artifacts of prior DIC-to-QPI approaches, providing quantitative phase information and used per-pixel Stokes-based reconstruction to obtain quantitative anisotropic retardance. We validate the approach across simulations, static reference targets, fixed muscle tissue and living dynamically moving cells. Thereby, QP2I enables to study contractile dynamics in live cardiomyocytes all-optically and label-free. It provides both structural and functional readouts at frame rates that are sufficient to temporally resolve fast cardiomyocyte contractions. While conventional fluorescent labels bleach out over time, perturb physiology, and preclude long-term monitoring, QP2I provides similar established structural readouts, such as frame-by-frame sarcomere length, as well as previously inaccessible measurements, like quantitative analysis of retardance changes during muscle contraction, as a direct optical signature of muscle photoelasticity. QP2I thus enables long-term, label-free interrogation of dynamic cellular processes at quantitative contrast.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-27T01:20:30.027412Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.32756",
+        "verified_at": "2026-10-27T01:20:30.027412Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
     }
   ]
 }

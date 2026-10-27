@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "PathKGen核心方法示意图，展示病理切片图像经知识图谱关联后生成可解释诊断报告的过程。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "PathKGen 模型核心架构图：展示全切片图像（WSI）经冻结视觉编码器（CONCH/TITAN）提取视觉 token，同时通过辅助分类器获得组织学类别并从病理知识图谱检索相关子图，以提示词形式输入多模态大语言模型（Qwen 2.5）生成病理报告的完整流程。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 10,
+    "caption": "PathKGen核心架构图：展示从WSI到病理预测的整体流程、知识图谱查询与token化过程，以及病理特征类型统计"
+  }
+}
