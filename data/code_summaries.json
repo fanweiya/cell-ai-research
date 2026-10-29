@@ -12036,5 +12036,144 @@
     "confidence": 0.92,
     "version": 3,
     "generated_at": "2026-10-27T09:27:18.029051"
+  },
+  "2610.33243v1": {
+    "summary": "AIvory 是一个用于象牙/骨雕图像鉴别的研究型代码库：核心为基于 fastai 的 U-Net(ResNet34 backbone) 三类别分割模型及其训练/ROC 统计脚本，外加基于 Google Gemini/Anthropic 的 LLM 图像分类工具。仓库包含可读的 Python 实现（src/ivory_repo 包 + 训练脚本 + 3 个 notebook），属于 implementation，但带有明显的个人集群路径硬编码、未发布的数据与模型权重，README 与仓库实际文件存在不一致。",
+    "repository_kind": "implementation",
+    "architecture": "代码分两层：(1) src/ivory_repo/ml.py 提供 fastai 延迟加载的分割工具：DataBlock 加载 bones_and_ivory 图像与 binary_masks 掩码（像素值 0/38/75 重映射为类别 0/1/2），构建 unet_learner(resnet34, CrossEntropyLossFlat, DiceMulti, foreground_acc, self_attention, Mish, ranger)，并从像素级 softmax 导出图级 ivory/bone/uncertain 分类（excess 分数均值与阈值 0.3）；(2) src/ivory_repo/llm.py 提供 Gemini/Anthropic 客户端初始化与 gemini_classify_image（JPEG 内联字节 + JSON-only prompt，extract_json 容错解析）。examples/Ivory_training_with_ROC.py 是顶层训练与统计脚本，串联 EXIF 方向校正、四种增广配置训练、推理、ROC/AUC、Youden J 与多模型集成；compare_classic_vs_gemini 将 U-Net 分类与 Gemini 分类并排比较。",
+    "call_chain": "入口 examples/Ivory_training_with_ROC.py（或 notebooks）→ 硬编码路径下 get_image_files 收集图像 → get_msk 重映射掩码 → DataBlock/RandomSplitter(seed=42) 建 dataloader → unet_learner(resnet34) 训练 → learn.dls.test_dl + get_preds 推理 → new_show_predictions 计算 per-image excess/ivory_frac 分类 → sklearn roc_curve/auc/precision/recall/f1/混淆矩阵输出与 PNG 保存；LLM 链路：init_gemini_client → gemini_classify_image → extract_json → DataFrame 对比。",
+    "core_modules": [
+      {
+        "name": "ivory_repo.ml",
+        "role": "fastai 分割数据加载、U-Net 构建、权重加载、预测可视化与图级分类",
+        "evidence": "src/ivory_repo/ml.py:load_data/create_model/load_model/new_show_predictions/compare_classic_vs_gemini"
+      },
+      {
+        "name": "ivory_repo.llm",
+        "role": "Gemini/Anthropic 客户端初始化与图像 JSON 分类",
+        "evidence": "src/ivory_repo/llm.py:init_gemini_client/gemini_classify_image/extract_json"
+      },
+      {
+        "name": "训练与统计脚本",
+        "role": "复现论文训练、推理、ROC/AUC、Youden J 与集成评估",
+        "evidence": "examples/Ivory_training_with_ROC.py:get_msk/foreground_acc/load_pretrained_model/youden_j"
+      },
+      {
+        "name": "示例 notebooks",
+        "role": "agentic LLM 工作流、Gemini 对比、ResNet34 推理演示",
+        "evidence": "examples/agentic_llm_workflows.ipynb, ivory_gemini_comparison.ipynb, ml_resnet34_inference.ipynb"
+      }
+    ],
+    "dependencies": [
+      "fastai/fastbook（含 torch、torchvision resnet34）",
+      "numpy/pandas/matplotlib/Pillow",
+      "scikit-learn（roc_curve/auc/precision/recall/f1/混淆矩阵）",
+      "google-genai、anthropic（需 GOOGLE_API_KEY/ANTHROPIC_API_KEY）",
+      "exif、segment-anything（requirements.txt 列出）",
+      "私有训练数据目录 bones_and_ivory/binary_masks 与预训练权重 MODEL_NAMES（仓库未包含）"
+    ],
+    "reproduction_readiness": "blocked",
+    "reproduction_notes": "最短路径：pip install -r requirements.txt && pip install -e .，再用自有数据调用 ivory_repo.ml.load_data/create_model 训练。阻碍：训练脚本所有数据路径硬编码为 /mnt/vstor/CAS_PHY_GDS6/axt807/...（个人集群）；训练数据与四个预训练权重（MODEL_NAMES）未随仓库发布；notebook 中 sys.path 指向 /home/axt807/...；README 引用的 examples/ivory_agentic_comparison.ipynb 在树中不存在（实际为 ivory_gemini_comparison.ipynb）；requirements.txt 缺少 fastbook、scikit-learn、exif 等脚本实际导入的包。论文（Mozzon et al. 2026）结果在无数据无权重情况下无法复现。",
+    "issues": [
+      {
+        "severity": "blocker",
+        "finding": "训练/测试/输出路径全部硬编码为个人集群绝对路径，外部用户无法直接运行训练脚本",
+        "evidence": [
+          "examples/Ivory_training_with_ROC.py:path/test_path_ivory/outpath (/mnt/vstor/CAS_PHY_GDS6/axt807/...)",
+          "examples/agentic_llm_workflows.ipynb:sys.path.insert /home/axt807/..."
+        ],
+        "impact": "不修改路径则训练与推理脚本完全不可执行",
+        "confidence": 1.0
+      },
+      {
+        "severity": "blocker",
+        "finding": "训练数据（bones_and_ivory、binary_masks）与四个模型权重（MODEL_NAMES）未包含在仓库中，load_model 必然失败",
+        "evidence": [
+          "src/ivory_repo/ml.py:MODEL_NAMES/load_model(learn.load)",
+          "目录树无 data/weights 文件"
+        ],
+        "impact": "论文分割结果与 ROC 统计无法复现",
+        "confidence": 1.0
+      },
+      {
+        "severity": "high",
+        "finding": "README 引用 examples/ivory_agentic_comparison.ipynb，但仓库实际文件为 ivory_gemini_comparison.ipynb",
+        "evidence": [
+          "README.md:示例列表",
+          "Directory Tree:examples/"
+        ],
+        "impact": "文档与文件不符，误导使用者",
+        "confidence": 1.0
+      },
+      {
+        "severity": "high",
+        "finding": "requirements.txt 缺少脚本直接导入的 fastbook、scikit-learn、exif，却包含未见使用的 segment-anything；依赖未固定版本",
+        "evidence": [
+          "requirements.txt",
+          "examples/Ivory_training_with_ROC.py:import fastbook / from sklearn.metrics / from exif import Image"
+        ],
+        "impact": "按 README 安装后训练脚本仍会因 ImportError 失败",
+        "confidence": 1.0
+      },
+      {
+        "severity": "high",
+        "finding": "掩码重映射循环疑似无实际效果：msk[msk == vals[i]] = val 其中 val 即 vals[i]，自身赋值；正确逻辑应为 msk[msk == val] = i（像素 38→类别1、75→类别2）",
+        "evidence": [
+          "src/ivory_repo/ml.py:get_msk 循环",
+          "examples/Ivory_training_with_ROC.py:get_msk 同款写法"
+        ],
+        "impact": "疑似所有掩码像素保持 0/38/75 而非 0/1/2，MaskBlock(CODES) 类别索引可能错位，影响训练与指标；未执行无法最终确认",
+        "confidence": 0.7
+      },
+      {
+        "severity": "medium",
+        "finding": "EXIF 方向处理存在裸 except 且捕获后不处理，方向缺失的图像静默跳过校正",
+        "evidence": [
+          "examples/Ivory_training_with_ROC.py:try: orientation = my_image.orientation.value / except:"
+        ],
+        "impact": "部分测试图像可能方向错误地进入推理，影响分类一致性",
+        "confidence": 0.8
+      },
+      {
+        "severity": "medium",
+        "finding": "README 提到 OpenAI API key，但代码仅实现 Gemini 与 Anthropic 客户端；requirements.txt 亦无 openai",
+        "evidence": [
+          "README.md:Quick Start",
+          "src/ivory_repo/llm.py",
+          "requirements.txt"
+        ],
+        "impact": "文档夸大功能面",
+        "confidence": 1.0
+      },
+      {
+        "severity": "low",
+        "finding": "pyproject 未声明任何运行依赖（dependencies 为空），pip install -e . 不会拉取所需包，必须依赖 requirements.txt",
+        "evidence": [
+          "pyproject.toml:[project]"
+        ],
+        "impact": "打包元数据不完整",
+        "confidence": 1.0
+      },
+      {
+        "severity": "low",
+        "finding": "无任何测试文件，图级分类阈值 thr=0.3 与概率映射 (avg+1)/2 为启发式，无单元验证",
+        "evidence": [
+          "coverage.tests_present=false",
+          "src/ivory_repo/ml.py:new_show_predictions"
+        ],
+        "impact": "核心分类逻辑正确性只能靠人工核对",
+        "confidence": 1.0
+      }
+    ],
+    "static_limitations": [
+      "代码未执行，get_msk 重映射循环是否真导致类别错位需在运行时验证（若为自身赋值则无操作）",
+      "无法确认 fastai/PIL 版本下 PILMask 行为与 unet_learner 兼容性",
+      "Gemini/Anthropic API 调用与 extract_json 容错在实际响应格式下的表现未验证",
+      "notebook 中被省略的单元可能包含额外关键逻辑（如 Anthropic 分类函数），无法确认",
+      "Mozzon et al. 2026 论文数值与脚本输出是否一致无法核验"
+    ],
+    "confidence": 0.85,
+    "version": 3,
+    "generated_at": "2026-10-28T09:25:08.196282"
   }
 }

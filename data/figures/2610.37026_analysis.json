@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "DenseNet121模型在不同测试集上的性能指标对比图，展示准确率、精确率/召回率、特异性和AUC-ROC等实验结果。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "DenseNet-121在40X放大倍数下的乳腺癌分类混淆矩阵，显示良性和恶性分类结果"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "DenseNet-121模型在100X放大倍数下的混淆矩阵，显示良性和恶性肿瘤分类结果"
+  }
+}

@@ -68,6 +68,28 @@ def save_papers_atomic(data):
     temp_file.replace(PAPERS_FILE)
 
 
+def build_todo_tasks(papers_data, existing):
+    stages_order = ["task_analysis", "algorithm_analysis", "critic_analysis"]
+    todo = []
+    for paper in papers_data.get("database", []):
+        if paper.get("relevance") != "passed":
+            continue
+        pid = paper["arxiv_id"]
+        status = paper.setdefault("status", {})
+        jev = paper.get("jev_evaluation") or {}
+        comp_score = jev.get("composite_priority")
+        raw_score = float(comp_score) if comp_score is not None else 0.0
+        p = paper.get("priority")
+        prio = p if isinstance(p, int) and not isinstance(p, bool) else int(round(raw_score))
+        for stage in stages_order:
+            if needs_analysis(paper, stage, existing) == "run" and status.get(stage) == "pending":
+                todo.append((pid, stage, prio, raw_score))
+
+    # Sort primarily by raw composite score descending, then stage order, then paper id
+    todo.sort(key=lambda x: (-x[3], stages_order.index(x[1]), x[0]))
+    return todo
+
+
 def main():
     silent_only = "--silent-only" in sys.argv
     dry_run = "--dry-run" in sys.argv
@@ -90,24 +112,7 @@ def main():
         print(f"✅ 静默回填 {backfilled} 个已有结果的状态 (silent-only)")
         return
 
-    stages_order = ["task_analysis", "algorithm_analysis", "critic_analysis"]
-    todo = []
-    for paper in papers_data["database"]:
-        if paper.get("relevance") != "passed":
-            continue
-        pid = paper["arxiv_id"]
-        status = paper.setdefault("status", {})
-        jev = paper.get("jev_evaluation") or {}
-        comp_score = jev.get("composite_priority")
-        raw_score = float(comp_score) if comp_score is not None else 0.0
-        p = paper.get("priority")
-        prio = p if isinstance(p, int) and not isinstance(p, bool) else int(round(raw_score))
-        for stage in stages_order:
-            if needs_analysis(paper, stage, existing) == "run" and status.get(stage) == "pending":
-                todo.append((pid, stage, prio, raw_score))
-
-    # Sort primarily by raw composite score descending, then stage order
-    todo.sort(key=lambda x: (-x[3], stages_order.index(x[1]), pid))
+    todo = build_todo_tasks(papers_data, existing)
 
     if dry_run:
         print(f"[dry-run] 可静默回填: {backfilled}")

@@ -29,6 +29,42 @@ TYPESAFE_ENDPOINT = "https://api.typesafe.ai/v1/systemone"
 RULE_VERSION = "2026.10.v2"
 PINNED_MODEL = "jev-1.14.0"
 
+# 通道定义：按延迟与稳定性优先级排序 (TypeSafe Jev -> Codiv OpenJev -> SubQ -> Cloudflare Clef)
+EVAL_CHANNELS = [
+    {
+        "name": "typesafe",
+        "endpoint": "https://api.typesafe.ai/v1/systemone",
+        "default_model": "jev-preview",
+        "key_env": "TYPESAFE_API_KEY",
+        "default_key": "apikey_21828147e955f36c4569a49675fcd65a96c1_8e5777bf0651c068c5ae18be81aab810e9644989ba64c6890ae2856d5ea78ece",
+        "extra_headers": {"TypeSafe-Danger-Zone-Images": "true"},
+    },
+    {
+        "name": "codiv",
+        "endpoint": "https://api.codiv.ai/v1/systemone",
+        "default_model": "openjev-latest",
+        "key_env": "CODIV_API_KEY",
+        "default_key": "sk-codiv-e1NTClBQG5k45cfQQJ7p8HDH1QtS2PVMqI073v1e",
+        "extra_headers": {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"},
+    },
+    {
+        "name": "subq",
+        "endpoint": "https://api.subq.ai/v1/systemone",
+        "default_model": "subq-snap-1.1",
+        "key_env": "SUBQ_API_KEY",
+        "default_key": "sk-proj-6arEhYiPFnKMIEn8bAYAEDGMwRW12lzc",
+        "extra_headers": {},
+    },
+    {
+        "name": "cloudflare",
+        "endpoint": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run/@cf/cloudflare/clef-flash",
+        "default_model": "clef-flash",
+        "key_env": "CF_API_TOKEN",
+        "default_key": "cfut_Oct7nJgbYfIY7oBsq4VjWl8FwjFJbAP3AvLYXHlHfe4d226b",
+        "extra_headers": {},
+    },
+]
+
 # Dimensional Criteria - refined to eliminate arbitrary mathematical proofs / production requirements
 SCORE_CRITERIA_NOVELTY = [
     "1: Routine baseline application with standard tooling",
@@ -217,7 +253,7 @@ def extract_evidence(paper: dict, context_dir: Path = Path("/mnt/c/workspace/cel
     }
 
 
-def build_evaluation_payload(paper: dict, evidence_info: dict) -> tuple[dict, list[str]]:
+def build_evaluation_payload(paper: dict, evidence_info: dict, model: str = PINNED_MODEL) -> tuple[dict, list[str]]:
     questions = {}
     asked_dimensions = []
     sufficiency = evidence_info["evidence_sufficiency"]
@@ -262,138 +298,198 @@ def build_evaluation_payload(paper: dict, evidence_info: dict) -> tuple[dict, li
     }
 
     payload = {
-        "model": PINNED_MODEL,
+        "model": model,
         "state": evidence_info["evidence_text"],
         "questions": questions
     }
     return payload, asked_dimensions
 
 
-def evaluate_single_paper(paper: dict, api_key: str, retries: int = 3, evidence_info: dict | None = None) -> dict:
+def format_evaluation_result(answers: dict, asked_dims: list[str], evidence_info: dict, model_name: str = PINNED_MODEL) -> dict:
+    scores = {}
+    confidences = {}
+    raw_answers = {}
+
+    # Strict validation per asked dimension
+    for dim in asked_dims:
+        ans = answers.get(dim)
+        if not ans or not isinstance(ans, dict):
+            raise ValueError(f"Missing required response field for {dim}")
+        raw_score = ans.get("score")
+        conf = ans.get("confidence")
+        if raw_score is None or not isinstance(raw_score, (int, float)):
+            raise ValueError(f"Invalid or missing score for {dim}: {raw_score}")
+        if not (0.0 <= raw_score <= 9.0):
+            raise ValueError(f"Score for {dim} out of bounds [0, 9]: {raw_score}")
+        if conf is None or not isinstance(conf, (int, float)) or not (0.0 <= conf <= 1.0):
+            raise ValueError(f"Confidence for {dim} out of bounds [0, 1]: {conf}")
+
+        scores[dim] = round(raw_score + 1.0, 2)
+        confidences[dim] = round(conf, 3)
+        raw_answers[dim] = ans
+
+    # Unasked dimensions explicitly mapped to None
+    all_dims = ["methodological_novelty", "technical_soundness", "biological_utility", "reproducibility_readiness"]
+    for dim in all_dims:
+        if dim not in scores:
+            scores[dim] = None
+            confidences[dim] = None
+
+    # Paradigm validation
+    paradigm_ans = answers.get("primary_paradigm")
+    if not isinstance(paradigm_ans, dict):
+        raise ValueError(f"primary_paradigm 返回结构异常: {type(paradigm_ans).__name__}")
+    paradigm_choice = paradigm_ans.get("choice")
+    if not paradigm_choice or paradigm_choice not in PARADIGM_CRITERIA:
+        raise ValueError(f"primary_paradigm choice 缺失或不在合法范围内: {paradigm_choice!r}")
+    paradigm_conf = paradigm_ans.get("confidence")
+    if paradigm_conf is None or not isinstance(paradigm_conf, (int, float)) or not (0.0 <= paradigm_conf <= 1.0):
+        raise ValueError(f"primary_paradigm confidence 缺失或不在 [0, 1] 范围内: {paradigm_conf}")
+
+    raw_answers["primary_paradigm"] = paradigm_ans
+
+    # Compute formal composite score: requires all 4 dimensions
+    if all(scores[d] is not None for d in all_dims):
+        composite = round(
+            0.35 * scores["methodological_novelty"] +
+            0.25 * scores["technical_soundness"] +
+            0.25 * scores["biological_utility"] +
+            0.15 * scores["reproducibility_readiness"],
+            2
+        )
+    else:
+        composite = None
+
+    # Abstract preliminary score (based on novelty + utility when available)
+    abstract_preliminary_score = None
+    if scores["methodological_novelty"] is not None and scores["biological_utility"] is not None:
+        abstract_preliminary_score = round(0.55 * scores["methodological_novelty"] + 0.45 * scores["biological_utility"], 2)
+
+    return {
+        "rule_version": RULE_VERSION,
+        "evaluated_at": datetime.now(timezone.utc).isoformat(),
+        "model": model_name,
+        "evidence_hash": evidence_info.get("evidence_hash", ""),
+        "evidence_sources": evidence_info.get("evidence_sources", []),
+        "code_status": evidence_info.get("code_status", "none"),
+        "code_desc": evidence_info.get("code_desc", ""),
+        "evidence_sufficiency": evidence_info.get("evidence_sufficiency", "abstract_only"),
+        "scores": scores,
+        "confidences": confidences,
+        "primary_paradigm": paradigm_choice,
+        "paradigm_label_zh": PARADIGM_LABELS_ZH.get(paradigm_choice, "常规方法迁移"),
+        "paradigm_confidence": round(paradigm_conf, 3),
+        "composite_priority": composite,
+        "abstract_preliminary_score": abstract_preliminary_score,
+        "raw_answers": raw_answers
+    }
+
+
+def resolve_channel_config(channel: dict) -> tuple[str | None, str, str, dict]:
+    name = channel.get("name", "")
+    key = None
+    if name == "subq":
+        key = os.environ.get("SUBQ_API_KEY") or get_secret("SUBQ_API_KEY") or channel.get("default_key")
+        model = os.environ.get("SUBQ_MODEL") or channel.get("default_model", "subq-snap-1.1")
+        endpoint = channel.get("endpoint", "https://api.subq.ai/v1/systemone")
+    elif name == "typesafe":
+        key = os.environ.get("JEV_API_KEY") or os.environ.get("TYPESAFE_API_KEY") or get_secret("JEV_API_KEY") or get_secret("TYPESAFE_API_KEY") or channel.get("default_key")
+        model = os.environ.get("TYPESAFE_MODEL") or channel.get("default_model", "jev-preview")
+        endpoint = channel.get("endpoint", "https://api.typesafe.ai/v1/systemone")
+    elif name == "codiv":
+        key = os.environ.get("CODIV_API_KEY") or get_secret("CODIV_API_KEY") or channel.get("default_key")
+        model = os.environ.get("CODIV_MODEL") or channel.get("default_model", "openjev-latest")
+        endpoint = channel.get("endpoint", "https://api.codiv.ai/v1/systemone")
+    elif name == "cloudflare":
+        key = os.environ.get("CF_API_TOKEN") or get_secret("CF_API_TOKEN") or channel.get("default_key")
+        model = os.environ.get("CF_CLEF_MODEL") or channel.get("default_model", "clef-flash")
+        account_id = os.environ.get("CF_ACCOUNT_ID") or "b9b1998c78f49ed2e0db3ab8e868ff85"
+        endpoint = f"https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run/@cf/cloudflare/{model}"
+    else:
+        key_env = channel.get("key_env")
+        key = (os.environ.get(key_env) if key_env else None) or channel.get("default_key")
+        model = channel.get("default_model", PINNED_MODEL)
+        endpoint = channel.get("endpoint", TYPESAFE_ENDPOINT)
+
+    headers = {"Content-Type": "application/json"}
+    if key:
+        headers["Authorization"] = f"Bearer {key}"
+    headers.update(channel.get("extra_headers", {}))
+    return key, model, endpoint, headers
+
+
+def evaluate_single_paper(
+    paper: dict,
+    api_key: str | None = None,
+    retries: int = 2,
+    evidence_info: dict | None = None,
+    channels: list[dict] | None = None
+) -> dict:
     if evidence_info is None:
         evidence_info = extract_evidence(paper)
-    payload, asked_dims = build_evaluation_payload(paper, evidence_info)
 
-    body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
-    req = urllib.request.Request(
-        TYPESAFE_ENDPOINT,
-        data=body,
-        headers={
-            "Authorization": "Bearer " + api_key,
-            "Content-Type": "application/json"
-        }
-    )
+    active_channels = channels if channels is not None else EVAL_CHANNELS
+    channel_errors = []
 
-    last_exc = None
-    for attempt in range(retries):
-        try:
-            with urllib.request.urlopen(req, timeout=45) as resp:
-                data = json.loads(resp.read().decode("utf-8"))
-                answers = data.get("answers", {})
+    for channel in active_channels:
+        ch_name = channel.get("name", "unknown")
+        key, model, endpoint, headers = resolve_channel_config(channel)
+        if api_key and (ch_name == "typesafe" or len(active_channels) == 1):
+            key = api_key
+            headers["Authorization"] = f"Bearer {key}"
 
-                scores = {}
-                confidences = {}
-                raw_answers = {}
+        if not key:
+            continue
 
-                # Strict validation per asked dimension
-                for dim in asked_dims:
-                    ans = answers.get(dim)
-                    if not ans or not isinstance(ans, dict):
-                        raise ValueError(f"Missing required response field for {dim}")
-                    raw_score = ans.get("score")
-                    conf = ans.get("confidence")
-                    if raw_score is None or not isinstance(raw_score, (int, float)):
-                        raise ValueError(f"Invalid or missing score for {dim}: {raw_score}")
-                    if not (0.0 <= raw_score <= 9.0):
-                        raise ValueError(f"Score for {dim} out of bounds [0, 9]: {raw_score}")
-                    if conf is None or not isinstance(conf, (int, float)) or not (0.0 <= conf <= 1.0):
-                        raise ValueError(f"Confidence for {dim} out of bounds [0, 1]: {conf}")
-                    
-                    scores[dim] = round(raw_score + 1.0, 2)
-                    confidences[dim] = round(conf, 3)
-                    raw_answers[dim] = ans
+        payload, asked_dims = build_evaluation_payload(paper, evidence_info, model=model)
+        body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
 
-                # Unasked dimensions explicitly mapped to None
-                all_dims = ["methodological_novelty", "technical_soundness", "biological_utility", "reproducibility_readiness"]
-                for dim in all_dims:
-                    if dim not in scores:
-                        scores[dim] = None
-                        confidences[dim] = None
+        for attempt in range(retries):
+            try:
+                req = urllib.request.Request(
+                    endpoint,
+                    data=body,
+                    headers=headers
+                )
+                with urllib.request.urlopen(req, timeout=45) as resp:
+                    resp_data = json.loads(resp.read().decode("utf-8"))
+                    if ch_name == "cloudflare" and isinstance(resp_data, dict) and "result" in resp_data:
+                        eval_data = resp_data.get("result", {})
+                    else:
+                        eval_data = resp_data
 
-                # Paradigm validation
-                paradigm_ans = answers.get("primary_paradigm")
-                if not isinstance(paradigm_ans, dict):
-                    raise ValueError(f"primary_paradigm 返回结构异常: {type(paradigm_ans).__name__}")
-                paradigm_choice = paradigm_ans.get("choice")
-                if not paradigm_choice or paradigm_choice not in PARADIGM_CRITERIA:
-                    raise ValueError(f"primary_paradigm choice 缺失或不在合法范围内: {paradigm_choice!r}")
-                paradigm_conf = paradigm_ans.get("confidence")
-                if paradigm_conf is None or not isinstance(paradigm_conf, (int, float)):
-                    raise ValueError(f"primary_paradigm confidence 缺失或非数值: {paradigm_conf}")
+                    answers = eval_data.get("answers", {})
+                    model_name = eval_data.get("model", model)
+                    return format_evaluation_result(answers, asked_dims, evidence_info, model_name=model_name)
+            except Exception as exc:
+                channel_errors.append(f"[{ch_name} attempt {attempt+1}] {exc}")
+                if attempt == retries - 1:
+                    print(f"[Warning] Channel {ch_name} failed for {paper.get('arxiv_id')}: {exc}", file=sys.stderr)
+                time.sleep(1.0 * (attempt + 1))
 
-                raw_answers["primary_paradigm"] = paradigm_ans
-
-                # Compute formal composite score: requires all 4 dimensions
-                if all(scores[d] is not None for d in all_dims):
-                    composite = round(
-                        0.35 * scores["methodological_novelty"] +
-                        0.25 * scores["technical_soundness"] +
-                        0.25 * scores["biological_utility"] +
-                        0.15 * scores["reproducibility_readiness"],
-                        2
-                    )
-                else:
-                    composite = None
-
-                # Abstract preliminary score (based on novelty + utility when available)
-                abstract_preliminary_score = None
-                if scores["methodological_novelty"] is not None and scores["biological_utility"] is not None:
-                    abstract_preliminary_score = round(0.55 * scores["methodological_novelty"] + 0.45 * scores["biological_utility"], 2)
-
-                return {
-                    "rule_version": RULE_VERSION,
-                    "evaluated_at": datetime.now(timezone.utc).isoformat(),
-                    "model": data.get("model", PINNED_MODEL),
-                    "evidence_hash": evidence_info["evidence_hash"],
-                    "evidence_sources": evidence_info["evidence_sources"],
-                    "code_status": evidence_info["code_status"],
-                    "code_desc": evidence_info["code_desc"],
-                    "evidence_sufficiency": evidence_info["evidence_sufficiency"],
-                    "scores": scores,
-                    "confidences": confidences,
-                    "primary_paradigm": paradigm_choice,
-                    "paradigm_label_zh": PARADIGM_LABELS_ZH.get(paradigm_choice, "常规方法迁移"),
-                    "paradigm_confidence": round(paradigm_conf, 3),
-                    "composite_priority": composite,
-                    "abstract_preliminary_score": abstract_preliminary_score,
-                    "raw_answers": raw_answers
-                }
-        except Exception as exc:
-            last_exc = exc
-            if attempt == retries - 1:
-                print(f"[Error] Failed to evaluate {paper.get('arxiv_id')}: {exc}", file=sys.stderr)
-                raise exc
-            time.sleep(1.0 * (attempt + 1))
-    
-    raise last_exc or RuntimeError("Unknown evaluation failure")
+    raise RuntimeError(f"All evaluation channels failed for {paper.get('arxiv_id')}: {'; '.join(channel_errors)}")
 
 
 def run_batch_evaluation(
     db_path: str = "/mnt/c/workspace/cell-ai-research/papers.json",
     max_workers: int = 6,
     force: bool = False,
-    limit: int | None = None
+    limit: int | None = None,
+    channels: list[dict] | None = None
 ) -> int:
-    api_key = get_secret("TYPESAFE_API_KEY")
-    if not api_key:
-        print("[Error] TYPESAFE_API_KEY is not available.", file=sys.stderr)
-        raise RuntimeError("TYPESAFE_API_KEY is not available")
+    active_channels = channels if channels is not None else EVAL_CHANNELS
+    ready_channels = [str(ch.get("name", "unknown")) for ch in active_channels if resolve_channel_config(ch)[0]]
+    if not ready_channels:
+        print("[Error] No evaluation channels have available credentials.", file=sys.stderr)
+        raise RuntimeError("No evaluation channels have available credentials")
+
+    print(f"Available evaluation channels: {', '.join(ready_channels)}")
 
     with open(db_path, "r", encoding="utf-8") as f:
         db = json.load(f)
 
     papers = db.get("database", [])
-    
+
     # Filter candidates: check force, rule_version, and evidence_hash
     candidates = []
     for p in papers:
@@ -427,7 +523,7 @@ def run_batch_evaluation(
     def process_item(item_tuple):
         item, ev_info = item_tuple
         try:
-            ev = evaluate_single_paper(item, api_key, evidence_info=ev_info)
+            ev = evaluate_single_paper(item, evidence_info=ev_info, channels=active_channels)
             return item, ev, None
         except Exception as exc:
             return item, None, exc

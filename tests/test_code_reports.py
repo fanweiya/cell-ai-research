@@ -440,6 +440,154 @@ class CodeReportTests(unittest.TestCase):
             clean_id = re.sub(r"v\d+$", "", pid)
             self.assertEqual(clean_id, expected)
 
+    def test_backfill_analysis_tie_breaker_sorts_by_paper_id(self):
+        import backfill_analysis
+
+        papers_data = {
+            "database": [
+                {
+                    "arxiv_id": "2410.00003",
+                    "relevance": "passed",
+                    "status": {"task_analysis": "pending"},
+                    "jev_evaluation": {"composite_priority": 8.0},
+                },
+                {
+                    "arxiv_id": "2410.00001",
+                    "relevance": "passed",
+                    "status": {"task_analysis": "pending"},
+                    "jev_evaluation": {"composite_priority": 8.0},
+                },
+                {
+                    "arxiv_id": "2410.00002",
+                    "relevance": "passed",
+                    "status": {"task_analysis": "pending"},
+                    "jev_evaluation": {"composite_priority": 8.0},
+                },
+            ]
+        }
+        todo = backfill_analysis.build_todo_tasks(papers_data, {})
+        ordered_pids = [item[0] for item in todo]
+        self.assertEqual(ordered_pids, ["2410.00001", "2410.00002", "2410.00003"])
+
+    def test_jev_evaluator_paradigm_confidence_bounds_validation(self):
+        import jev_evaluator
+
+        base_answers = {
+            "methodological_novelty": {"score": 5.0, "confidence": 0.8},
+            "technical_soundness": {"score": 6.0, "confidence": 0.8},
+            "biological_utility": {"score": 7.0, "confidence": 0.8},
+            "reproducibility_readiness": {"score": 4.0, "confidence": 0.8},
+            "primary_paradigm": {"choice": "multimodal_foundation", "confidence": 0.9},
+        }
+        asked_dims = [
+            "methodological_novelty",
+            "technical_soundness",
+            "biological_utility",
+            "reproducibility_readiness",
+        ]
+        evidence_info = {"evidence_hash": "dummy_hash", "evidence_sources": []}
+
+        for valid_conf in (0.0, 1.0, 0.5):
+            answers = json.loads(json.dumps(base_answers))
+            answers["primary_paradigm"]["confidence"] = valid_conf
+            res = jev_evaluator.format_evaluation_result(answers, asked_dims, evidence_info)
+            self.assertEqual(res["paradigm_confidence"], valid_conf)
+
+        for invalid_conf in (-0.01, 1.01, -1.0, 2.0):
+            answers = json.loads(json.dumps(base_answers))
+            answers["primary_paradigm"]["confidence"] = invalid_conf
+            with self.assertRaises(ValueError):
+                jev_evaluator.format_evaluation_result(answers, asked_dims, evidence_info)
+
+    def test_jev_evaluator_channel_resolution(self):
+        import jev_evaluator
+
+        # 验证 4 个默认通道配置解析与优先级顺序 (typesafe -> codiv -> subq -> cloudflare)
+        channel_names = [ch["name"] for ch in jev_evaluator.EVAL_CHANNELS]
+        self.assertEqual(channel_names, ["typesafe", "codiv", "subq", "cloudflare"])
+
+        typesafe_key, typesafe_model, typesafe_url, typesafe_headers = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[0])
+        self.assertIsNotNone(typesafe_key)
+        self.assertTrue(str(typesafe_key).startswith("apikey_"))
+        self.assertEqual(typesafe_model, "jev-preview")
+        self.assertEqual(typesafe_headers.get("TypeSafe-Danger-Zone-Images"), "true")
+
+        codiv_key, codiv_model, codiv_url, codiv_headers = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[1])
+        self.assertIsNotNone(codiv_key)
+        self.assertTrue(str(codiv_key).startswith("sk-codiv-"))
+        self.assertEqual(codiv_model, "openjev-latest")
+        self.assertIn("User-Agent", codiv_headers)
+
+        subq_key, subq_model, subq_url, subq_headers = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[2])
+        self.assertIsNotNone(subq_key)
+        self.assertTrue(str(subq_key).startswith("sk-proj-"))
+        self.assertEqual(subq_model, "subq-snap-1.1")
+        self.assertEqual(subq_url, "https://api.subq.ai/v1/systemone")
+
+        cf_key, cf_model, cf_url, cf_headers = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[3])
+        self.assertIsNotNone(cf_key)
+        self.assertTrue(str(cf_key).startswith("cfut_"))
+        self.assertEqual(cf_model, "clef-flash")
+        self.assertIn("/ai/run/@cf/cloudflare/clef-flash", cf_url)
+
+    def test_jev_evaluator_channel_fallback_mechanism(self):
+        import urllib.error
+        import jev_evaluator
+
+        paper = {
+            "arxiv_id": "2410.99999",
+            "title": "Fallback test paper",
+            "abstract": "Testing multi-channel fallback",
+        }
+        evidence_info = {
+            "code_status": "none",
+            "code_desc": "",
+            "evidence_snippets": {},
+            "evidence_sources": [],
+            "evidence_sufficiency": {
+                "methodological_novelty": True,
+                "technical_soundness": True,
+                "biological_utility": True,
+                "reproducibility_readiness": True,
+            },
+            "evidence_text": "Sample text",
+            "evidence_hash": "testhash",
+        }
+
+        success_response = {
+            "model": "codiv-model",
+            "answers": {
+                "methodological_novelty": {"score": 6.0, "confidence": 0.8},
+                "technical_soundness": {"score": 7.0, "confidence": 0.8},
+                "biological_utility": {"score": 8.0, "confidence": 0.8},
+                "reproducibility_readiness": {"score": 5.0, "confidence": 0.8},
+                "primary_paradigm": {"choice": "multimodal_foundation", "confidence": 0.9},
+            },
+        }
+
+        call_records = []
+
+        class DummyResponse:
+            def __enter__(self):
+                return self
+            def __exit__(self, *args):
+                pass
+            def read(self):
+                return json.dumps(success_response).encode("utf-8")
+
+        def fake_urlopen(req, timeout=45):
+            call_records.append(req.full_url)
+            if "typesafe" in req.full_url:
+                raise urllib.error.URLError("Simulated connection timeout")
+            return DummyResponse()
+
+        with patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            res = jev_evaluator.evaluate_single_paper(paper, evidence_info=evidence_info, retries=1)
+            self.assertEqual(res["primary_paradigm"], "multimodal_foundation")
+            self.assertEqual(len(call_records), 2)
+            self.assertIn("api.typesafe.ai", call_records[0])
+            self.assertIn("api.codiv.ai", call_records[1])
+
 
 if __name__ == "__main__":
     unittest.main()

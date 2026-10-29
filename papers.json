@@ -138600,6 +138600,324 @@
         "verified_at": "2026-10-27T01:20:30.027412Z",
         "verification": "arxiv_atom_exact_id_and_title"
       }
+    },
+    {
+      "arxiv_id": "2610.36487v1",
+      "title": "Spatial-Frequency Learning for Scanning Transmission Electron Microscopy Image Enhancement",
+      "published_date": "2026-10-27",
+      "authors": [
+        "Hesong Li",
+        "Ying Fu",
+        "Ziqi Wu",
+        "Ruiwen Shao",
+        "Tao Zhang"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "segmentation",
+        "detection"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Scanning Transmission Electron Microscopy (STEM) enables the observation of atomic arrangements at sub-angstrom resolution and plays a key role in the discovery and characterization of advanced materials. Raw STEM images are often noisy and blurred due to multiple degradations. Although recent deep learning methods improve STEM images, their performance remains limited under severe degradations. In this work, we propose a spatial-frequency learning framework for STEM image enhancement. Specifically, we design a spatial-frequency fusion network that exploits periodic atomic arrangements in the frequency domain and restores local atomic details in the spatial domain. Spatial- and frequency-domain features are enhanced separately and then fused. We also present a STEM noise calibration method for synthesizing more realistic STEM images. The parameters of scan noise, pointwise noise, and background noise are estimated through statistical analysis and fitting of real STEM images. Using these calibrated parameters, we construct a diverse dataset containing a wider range of atomic arrangements, imaging modes, and degradations. Random masks combine different atomic arrangements to simulate interfaces between multiple materials. Experimental results demonstrate that our method achieves state-of-the-art enhancement performance on synthetic datasets and real images of advanced materials while improving atomic localization accuracy.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-28T01:20:57.846853Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.36487",
+        "verified_at": "2026-10-28T01:20:57.846853Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.36364v1",
+      "title": "When Slides Met Scans: Cross-Attention for Renal Cancer Prognosis",
+      "published_date": "2026-10-26",
+      "authors": [
+        "Anusha Krishnamoorthy",
+        "Basudha Pal"
+      ],
+      "categories": [
+        "eess.IV",
+        "cs.CV"
+      ],
+      "task_type": [
+        "histopathology"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Histopathology and computed tomography (CT) provide complementary views of renal cancer. We connect these modalities through bidirectional cross-attention between 16 histology prototypes and up to 32 kidney-centered CT tokens from frozen foundation models. In 210 TCGA-KIRC patients with 46 disease-specific survival (DSS) events, 5-fold evaluation yielded a C-index of $0.760\\pm0.081$ and 3-year AUROC of 0.773 (95\\% CI 0.678--0.860), the highest averages among evaluated unimodal and fusion baselines. External testing in 180 CPTAC-CCRCC patients yielded DSS C-index of 0.629 with CT withheld. Attribution analysis linked predictions to image regions while exposing acquisition artifacts. These findings support further study of cross-scale fusion and independent multimodal validation.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-28T01:20:57.846853Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.36364",
+        "verified_at": "2026-10-28T01:20:57.846853Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.34244v1",
+      "title": "Semantic-Aware Deformable Feature Alignment for Thyroid Nodule Segmentation in Ultrasound",
+      "published_date": "2026-10-25",
+      "authors": [
+        "Lei Zhang",
+        "Ruhuan Zhou",
+        "Busheng Tong",
+        "Dan Lv",
+        "Bingyu Liang",
+        "Taibao Wang",
+        "Xinyu Shi",
+        "Yifan Gao",
+        "Ming Zhang",
+        "Qin Wang"
+      ],
+      "categories": [
+        "eess.IV"
+      ],
+      "task_type": [
+        "segmentation"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Accurate segmentation of thyroid nodules in ultrasound images is essential for clinical diagnosis yet remains challenging due to boundary ambiguity, speckle noise, and complex geometric variability. Existing methods often fail to reconcile global semantic understanding with precise local boundary delineation, leading to errors in irregular cases. To address this, we propose SDFA-Net, a framework built on semantic-aware deformable feature alignment that explicitly decouples the learning of robust global semantics and detailed local geometry. Our approach integrates three main components: a clustered linear context aggregation module for efficient long-range dependency modeling, an affinity-driven token modulation mechanism using dynamic prototypes to suppress background interference, and a cascaded spatially-aligned feature fusion strategy that achieves sub-pixel geometric alignment across multiple resolution stages. By filtering and aligning multi-scale features, SDFA-Net ensures robust fusion that is both semantically meaningful and geometrically accurate. We validate our method through extensive experiments on three public thyroid ultrasound datasets, TN3K, TUCC, and DDTI, where it demonstrates superior performance over state-of-the-art methods. The proposed framework offers a generalizable solution for precise medical image segmentation in boundary-ambiguous scenarios.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-28T01:20:57.846853Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.34244",
+        "verified_at": "2026-10-28T01:20:57.846853Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.37576v1",
+      "title": "The Noise Plane: A Diffusion Bridge Across Exponent and Dispersion",
+      "published_date": "2026-10-27",
+      "authors": [
+        "Xuran Hu",
+        "Yuru Jia",
+        "Tengxi Wang",
+        "Miloš Daković",
+        "Ljubiša Stanković",
+        "Wufan Zhao"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "reconstruction"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Diffusion-based denoising commonly uses Gaussian perturbations, whereas sensor noise follows diverse signal-dependent statistical laws. In this paper, we propose $p$-Bridge, a unified measurement-indexed diffusion framework for Tweedie noise. The noise exponent $p$ describes the variance--intensity relation, while accumulated measurement $ν$ controls the noise level. Together, they define a noise plane that includes Gaussian, Poisson, and Gamma models. The stochastic bridge connects measurement distributions through independent increments, giving denoising a physical interpretation as progressive measurement accumulation. Both the starting and stopping indices can be specified, allowing restoration from an observed measurement level to a prescribed higher level. Measurement superposition yields a shared reverse-mean update, paired with a deviance-based objective for learning the required conditional mean. A latent compound Poisson--Gamma construction enables sampling at intermediate exponents. A single exponent-conditioned network adapts to different Tweedie noise models without separate training for each exponent. Experiments show that exponent conditioning improves cross-exponent robustness over fixed-exponent models. Using estimated exponents, the shared network achieves robustness comparable to an oracle-selected set of five specialist models. Experiments on synthetic images, FMD fluorescence microscopy, and multi-sensor SAR images further demonstrate its effectiveness across different signal-dependent noise regimes.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-29T01:20:28.283828Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.37576",
+        "verified_at": "2026-10-29T01:20:28.283828Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.37026v1",
+      "title": "Interpretable Deep Learning Models for Breast Cancer Diagnosis Using Medical Imaging",
+      "published_date": "2026-10-27",
+      "authors": [
+        "Sami Alnawali",
+        "Muhammad Atif Saeed",
+        "Abdul Hadi",
+        "Azka Atiq",
+        "Akhtar Jamil",
+        "Ahmad Din"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "task_type": [
+        "classification",
+        "histopathology"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Deep learning shows promise for breast cancer diagnosis, but limited interpretability hinders clinical adoption. We benchmark ten ImageNet-pretrained models (ResNet50, VGG19, InceptionV3, DenseNet121, Xception, MobileNetV2, EfficientNet, ConvNeXt, ViT, and Swin Transformer) for benign-versus-malignant classification on the BreakHis histopathology dataset using a patient-level split, and explain their predictions with Grad-CAM, LIME, Integrated Gradients, and LRP. DenseNet121 performed best, with 99.4% test accuracy and an AUC-ROC of 0.999, and significantly outperformed all other models (p < 0.001). Transformer-based models trailed the CNNs. The explanations consistently highlighted nuclei-rich and glandular regions of diagnostic relevance. Combining transfer learning with explainable AI can thus yield accurate, interpretable tools for breast cancer diagnosis.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-29T01:20:28.283828Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.37026",
+        "verified_at": "2026-10-29T01:20:28.283828Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
     }
   ]
 }
