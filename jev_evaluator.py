@@ -18,12 +18,6 @@ import time
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
-# Ensure hermes_switchyard and agent imports work
-for path in ["/home/fanweiya/.hermes/hermes-agent", "/home/fanweiya/.hermes/plugins/hermes-switchyard"]:
-    if path not in sys.path:
-        sys.path.insert(0, path)
-
-from agent.secret_scope import get_secret
 
 TYPESAFE_ENDPOINT = "https://api.typesafe.ai/v1/systemone"
 RULE_VERSION = "2026.10.v2"
@@ -386,6 +380,11 @@ def format_evaluation_result(answers: dict, asked_dims: list[str], evidence_info
 
 
 def resolve_channel_config(channel: dict) -> tuple[str | None, str, str, dict]:
+    for path in ["/home/fanweiya/.hermes/hermes-agent", "/home/fanweiya/.hermes/plugins/hermes-switchyard"]:
+        if path not in sys.path:
+            sys.path.insert(0, path)
+    from agent.secret_scope import get_secret
+
     name = channel.get("name", "")
     key = None
     if name == "subq":
@@ -574,7 +573,8 @@ def run_batch_evaluation(
     return evaluated_count
 
 
-def _atomic_json(path, data):
+def _atomic_json(path: str | Path, data) -> None:
+    path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     fd, temp_name = tempfile.mkstemp(prefix=path.name + ".", suffix=".tmp", dir=path.parent)
     try:
