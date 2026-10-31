@@ -433,11 +433,12 @@ def evaluate_single_paper(
     for channel in active_channels:
         ch_name = channel.get("name", "unknown")
         key, model, endpoint, headers = resolve_channel_config(channel)
-        if api_key and (ch_name == "typesafe" or len(active_channels) == 1):
+        if api_key and ch_name == "typesafe":
             key = api_key
             headers["Authorization"] = f"Bearer {key}"
 
         if not key:
+            channel_errors.append(f"[{ch_name}] missing credentials")
             continue
 
         payload, asked_dims = build_evaluation_payload(paper, evidence_info, model=model)
@@ -452,19 +453,21 @@ def evaluate_single_paper(
                 )
                 with urllib.request.urlopen(req, timeout=45) as resp:
                     resp_data = json.loads(resp.read().decode("utf-8"))
-                    if ch_name == "cloudflare" and isinstance(resp_data, dict) and "result" in resp_data:
-                        eval_data = resp_data.get("result", {})
-                    else:
-                        eval_data = resp_data
-
-                    answers = eval_data.get("answers", {})
-                    model_name = eval_data.get("model", model)
-                    return format_evaluation_result(answers, asked_dims, evidence_info, model_name=model_name)
             except Exception as exc:
                 channel_errors.append(f"[{ch_name} attempt {attempt+1}] {exc}")
                 if attempt == retries - 1:
                     print(f"[Warning] Channel {ch_name} failed for {paper.get('arxiv_id')}: {exc}", file=sys.stderr)
                 time.sleep(1.0 * (attempt + 1))
+                continue
+
+            if ch_name == "cloudflare" and isinstance(resp_data, dict) and "result" in resp_data:
+                eval_data = resp_data.get("result", {})
+            else:
+                eval_data = resp_data
+
+            answers = eval_data.get("answers", {})
+            model_name = eval_data.get("model", model)
+            return format_evaluation_result(answers, asked_dims, evidence_info, model_name=model_name)
 
     raise RuntimeError(f"All evaluation channels failed for {paper.get('arxiv_id')}: {'; '.join(channel_errors)}")
 

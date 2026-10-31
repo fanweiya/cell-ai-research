@@ -138918,6 +138918,391 @@
         "verified_at": "2026-10-29T01:20:28.283828Z",
         "verification": "arxiv_atom_exact_id_and_title"
       }
+    },
+    {
+      "arxiv_id": "2610.37802v1",
+      "title": "Flow Matching for Fluctuation-Based Fluorescence Super-Resolution",
+      "published_date": "2026-10-27",
+      "authors": [
+        "Alberto Cozzani",
+        "Giacomo Meanti",
+        "Laure Blanc-Féraud",
+        "Luca Calatroni"
+      ],
+      "categories": [
+        "eess.IV",
+        "math.OC"
+      ],
+      "task_type": [
+        "reconstruction"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Fluctuation-based super-resolution techniques are an appealing alternative to single-molecule and structured-illumination microscopy, as they adapt to standard acquisition settings and exploit the independent stochastic fluctuations of fluorophores across a sequence of frames. However, most existing approaches lack an explicit model of the acquisition process and provide only relative intensity estimates, limiting quantitative analyses. In this work, we combine model-based and generative approaches to exploit the full stochastic information in the sequence, proposing a reconstruction framework built on flow matching and a double-Poisson forward model accounting for blinking, blur, under-sampling and noise. The method alternates two steps: a flow matching model first learns the distribution of the acquired data; then, the sample and the background are jointly estimated by minimising a Kullback-Leibler divergence between observed and simulated distributions via regularised proximal gradient steps. On simulated and real Argolight data, the method resolves lines separated by 120 nm, outperforming SACD and eSRRF.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-30T01:20:27.127245Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.37802",
+        "verified_at": "2026-10-30T01:20:27.127245Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.40088v1",
+      "title": "Neural Blind Deconvolution for Image Scanning Microscopy",
+      "published_date": "2026-10-29",
+      "authors": [
+        "Eliot Guez",
+        "Nathan Buskulic",
+        "Lisa Cuneo",
+        "Luca Calatroni",
+        "Giuseppe Vicidomini"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "detection"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Image scanning microscopy (ISM) acquires one scanned image per detector element, which are then fused into a single image by multi-image deconvolution to obtain a super-resolved image. Its accuracy, however, depends on point spread function (PSF) models that sample- and system-induced aberrations often invalidate. Since differences between the scanned images encode aberration information, we propose a training-free blind Deep Image Prior (DIP) framework that jointly estimates the specimen and the detector-dependent PSFs. The PSFs are parametrised through the detector geometry and shared excitation and emission PSFs, reducing the unknowns while preserving the physical ISM model, and a Gaussian pre-initialisation stabilises the blind optimisation. On experimental tubulin data, blind DIP recovers finer filamentous structures than multi-image deconvolution and DIP with fixed theoretical PSFs, while adapting the PSFs to the measurements.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-31T01:20:38.926317Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.40088",
+        "verified_at": "2026-10-31T01:20:38.926317Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.40085v1",
+      "title": "Morphology-Aware Channel-Decoupled Mamba Network for Medical Image Segmentation",
+      "published_date": "2026-10-29",
+      "authors": [
+        "Chenchen Wang",
+        "You Zhou"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "segmentation"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Accurate multi-organ segmentation in computed tomography (CT) is essential for computer-aided diagnosis, treatment planning, and disease monitoring. However, substantial variations in organ shape and size, together with low tissue contrast and ambiguous boundaries, complicate the modeling of heterogeneous anatomical structures. To address these challenges, we propose a Morphology-Aware Channel-Decoupled Mamba Network (MCDNet), which integrates adaptive local structural enhancement with channel-decoupled long-range modeling. Specifically, we introduce a Morphology-Aware Channel-Decoupled State-Space (MCSS) block that divides feature channels into separate processing groups, allowing differentiated structural representations to be learned within an efficient state-space framework. Within each group, a Morphology-Aware Enhancement Module (MAEM) combines deformable convolutions with channel attention to adapt local feature extraction to anatomical shape variations. Group-wise state-space modeling then captures long-range spatial dependencies, and channel gating adaptively integrates the resulting features. Experiments on the Synapse abdominal CT dataset demonstrate the effectiveness of MCDNet, achieving an average Dice Similarity Coefficient of 81.61% for multi-organ segmentation.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-31T01:20:38.926317Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.40085",
+        "verified_at": "2026-10-31T01:20:38.926317Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.39151v1",
+      "title": "STRATA: Reinforcement-driven Active Sampling with Tri-paradigm Adaptation for Efficient 3D Spatial Transcriptomics",
+      "published_date": "2026-10-29",
+      "authors": [
+        "Junchao Zhu",
+        "Ruining Deng",
+        "Chongyu Qu",
+        "Zhengyi Lu",
+        "Yanfan Zhu",
+        "Yuechen Yang",
+        "Yu Wang",
+        "Shilin Zhao",
+        "Haichun Yang",
+        "Yuankai Huo"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "reconstruction",
+        "spatial_transcriptomics"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/Junchao-Zhu/STRATA",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "formativeness, enabling budget-aware selection of informative spots. Given these sparse measurements, an adaptive tri-paradigm predictor combines retrieval, regression, and cross-layer imputation through lightweight fusion, dynamically weighting their contributions. Experiments across datasets demonstrate improved sampling efficiency and accuracy, particularly under low-budget settings. Code is available at STRATA . <h6 class=\"ltx_title ltx_title_",
+          "relation_signal": "explicit_code_statement",
+          "provenance_source": "https://arxiv.org/html/2610.39151v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Spatial transcriptomics (ST) enables joint characterization of tissue morphology and gene expression. However, 3D volumetric ST acquisition remains expensive. AI-driven methods offer a low-cost alternative but remain limited in accuracy, while recent 2D section-wise ST acquisition still rely on dense grid sampling, resulting in redundant measurements and undersampling of biologically informative regions. To bridge the gap, we propose STRATA, a reinforcement-driven active sampling framework with tri-paradigm adaptation for reconstructing dense 3D transcriptomic maps from sparse voxel-wise ST acquisition. STRATA constructs a 3D graph integrating H&E morphology with single-cell priors and employs a reinforcement learning agent to estimate morphological sparsity and transcriptomic informativeness, enabling budget-aware selection of informative spots. Given these sparse measurements, an adaptive tri-paradigm predictor combines retrieval, regression, and cross-layer imputation through lightweight fusion, dynamically weighting their contributions. Experiments across datasets demonstrate improved sampling efficiency and accuracy, particularly under low-budget settings. Code is available at https://github.com/Junchao-Zhu/STRATA.",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "Junchao-Zhu/STRATA",
+        "repository_url": "https://github.com/Junchao-Zhu/STRATA",
+        "analyzed_at": "2026-10-31T01:20:57.180419+00:00",
+        "architecture": "# Junchao-Zhu/STRATA\n**Stars**: 0 | **Language**: Python\n**Description**: STRATA is a framework for reconstructing dense 3D spatial transcriptomic maps from limited voxel-wise samples. It employs a reinforcement-driven active sampling strategy with tri-paradigm adaptation. The repository is organized into three main components: Registration_and_3D_graph for slide registration and 3D graph construction, STRATA_Tri_network for a triple-branch predictor (retrieval, regression, 3D interpolation), and STRATA_Sampler for the active-sampling pipeline using online reinforcement learning. It also includes a requirements.txt file for dependencies.\n\n\n## Directory Tree\n```\nREADME.md\nRegistration_and_3D_graph\nRegistration_and_3D_graph/build_spot_graph.py\nRegistration_and_3D_graph/compute_feature_sim.py\nRegistration_and_3D_graph/compute_spot_iou.py\nRegistration_and_3D_graph/extract_conch_features.py\nRegistration_and_3D_graph/extract_spot_coords.py\nRegistration_and_3D_graph/registration\nRegistration_and_3D_graph/registration/Step0_contour_generation.py\nRegistration_and_3D_graph/registration/Step1_affine_registration_xfeat.py\nRegistration_and_3D_graph/registration/Step2_superglue_ANTs.py\nRegistration_and_3D_graph/registration/Step2_xFeat_matrix_nptomat.py\nRegistration_and_3D_graph/registration/Step3_register_to_middle_ANTs.py\nRegistration_and_3D_graph/registration/superglue_ants_registration_onpair_new_RGB.py\nSTRATA_Sampler\nSTRATA_Sampler/build_sc_prototypes.py\nSTRATA_Sampler/cell_head.py\nSTRATA_Sampler/data_pool.py\nSTRATA_Sampler/env.py\nSTRATA_Sampler/extract_conch.py\nSTRATA_Sampler/policy.py\nSTRATA_Sampler/predictor.py\nSTRATA_Sampler/reward_model.py\nSTRATA_Sampler/run_st.sh\nSTRATA_Sampler/sc_bank.py\nSTRATA_Sampler/sc_prototypes\nSTRATA_Sampler/sc_prototypes/HER2.npz\nSTRATA_Sampler/state_builder.py\nSTRATA_Sampler/train_online.py\nSTRATA_Tri_network\nSTRATA_Tri_network/config.py\nSTRATA_Tri_network/cross_fold.py\nSTRATA_Tri_network/data_loader.py\nSTRATA_Tri_network/eval_metric.py\nSTRATA_Tri_network/models\nSTRATA_Tri_network/models/__init__.py\nSTRATA_Tri_network/models/backbones.py\nSTRATA_Tri_network/models/fusion_variants.py\nSTRATA_Tri_network/models/heads.py\nSTRATA_Tri_network/models/model.py\nSTRATA_Tri_network/predictor.py\nSTRATA_Tri_network/run_train.sh\nSTRATA_Tri_network/train.py\nrequirements.txt\n```",
+        "project_structure": "## Directory Tree\n```\nREADME.md\nRegistration_and_3D_graph\nRegistration_and_3D_graph/build_spot_graph.py\nRegistration_and_3D_graph/compute_feature_sim.py\nRegistration_and_3D_graph/compute_spot_iou.py\nRegistration_and_3D_graph/extract_conch_features.py\nRegistration_and_3D_graph/extract_spot_coords.py\nRegistration_and_3D_graph/registration\nRegistration_and_3D_graph/registration/Step0_contour_generation.py\nRegistration_and_3D_graph/registration/Step1_affine_registration_xfeat.py\nRegistration_and_3D_graph/registration/Step2_superglue_ANTs.py\nRegistration_and_3D_graph/registration/Step2_xFeat_matrix_nptomat.py\nRegistration_and_3D_graph/registration/Step3_register_to_middle_ANTs.py\nRegistration_and_3D_graph/registration/superglue_ants_registration_onpair_new_RGB.py\nSTRATA_Sampler\nSTRATA_Sampler/build_sc_prototypes.py\nSTRATA_Sampler/cell_head.py\nSTRATA_Sampler/data_pool.py\nSTRATA_Sampler/env.py\nSTRATA_Sampler/extract_conch.py\nSTRATA_Sampler/policy.py\nSTRATA_Sampler/predictor.py\nSTRATA_Sampler/reward_model.py\nSTRATA_Sampler/run_st.sh\nSTRATA_Sampler/sc_bank.py\nSTRATA_Sampler/sc_prototypes\nSTRATA_Sampler/sc_prototypes/HER2.npz\nSTRATA_Sampler/state_builder.py\nSTRATA_Sampler/train_online.py\nSTRATA_Tri_network\nSTRATA_Tri_network/config.py\nSTRATA_Tri_network/cross_fold.py\nSTRATA_Tri_network/data_loader.py\nSTRATA_Tri_network/eval_metric.py\nSTRATA_Tri_network/models\nSTRATA_Tri_network/models/__init__.py\nSTRATA_Tri_network/models/backbones.py\nSTRATA_Tri_network/models/fusion_variants.py\nSTRATA_Tri_network/models/heads.py\nSTRATA_Tri_network/models/model.py\nSTRATA_Tri_network/predictor.py\nSTRATA_Tri_network/run_train.sh\nSTRATA_Tri_network/train.py\nrequirements.txt\n```",
+        "key_files": [
+          "STRATA_Tri_network/models/model.py",
+          "STRATA_Tri_network/train.py",
+          "README.md",
+          "STRATA_Sampler/reward_model.py",
+          "requirements.txt",
+          "STRATA_Tri_network/models/heads.py",
+          "STRATA_Tri_network/models/__init__.py",
+          "STRATA_Tri_network/models/backbones.py",
+          "STRATA_Tri_network/models/fusion_variants.py",
+          "STRATA_Sampler/env.py",
+          "STRATA_Sampler/policy.py",
+          "STRATA_Sampler/sc_bank.py",
+          "STRATA_Sampler/cell_head.py",
+          "STRATA_Sampler/data_pool.py",
+          "STRATA_Sampler/predictor.py",
+          "STRATA_Tri_network/config.py",
+          "STRATA_Sampler/train_online.py",
+          "STRATA_Sampler/extract_conch.py",
+          "STRATA_Sampler/state_builder.py",
+          "STRATA_Tri_network/predictor.py",
+          "STRATA_Tri_network/cross_fold.py",
+          "STRATA_Tri_network/data_loader.py",
+          "STRATA_Tri_network/eval_metric.py",
+          "STRATA_Sampler/build_sc_prototypes.py",
+          "Registration_and_3D_graph/build_spot_graph.py",
+          "Registration_and_3D_graph/compute_spot_iou.py",
+          "Registration_and_3D_graph/compute_feature_sim.py",
+          "Registration_and_3D_graph/extract_spot_coords.py"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 35,
+          "selected_file_count": 28,
+          "selected_code_file_count": 26,
+          "languages_by_extension": {
+            "py": 33,
+            "sh": 2
+          },
+          "tests_present": false,
+          "test_files": [],
+          "manifest_files": [
+            "requirements.txt",
+            "README.md"
+          ],
+          "read_errors": [],
+          "warnings": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2610.39151v1_gread.json"
+      },
+      "discovered_at": "2026-10-31T01:20:38.926317Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.39151",
+        "verified_at": "2026-10-31T01:20:38.926317Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2610.38694v1",
+      "title": "Geometry Matters in Packed 3D Attention",
+      "published_date": "2026-10-28",
+      "authors": [
+        "Amil Khan",
+        "Anantajit Subrahmanya",
+        "B. S. Manjunath"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "task_type": [
+        "cell_imaging"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Packing a 3D volume into a token sequence is not merely long-sequence modeling. Once the volume is packed, sequence order no longer encodes the geometry of the sample---so a positional mechanism indexed by sequence position can learn the memory layout rather than the object. This is a general failure mode for attention over packed geometric data. We introduce PACK3D, a local-global attention operator that separates memory layout from attention geometry. PACK3D keeps local neighborhood attention exact, compresses only distant context into contiguous 3D block summaries, and indexes every query-key interaction with axial RoPE on true token-grid coordinates rather than packed positions. Because the rotation is applied before a block is summarized, the query-to-summary logit remains a weighted sum of query-relative 3D displacements; compressed global context therefore stays spatially interpretable after packing, instead of collapsing to anonymous pooled content. We measure the failure mode directly. On a controlled synthetic task---train on one packing, change only the memory order of the tokens, hold the physical labeling rule fixed---learned positional embeddings and packed-sequence RoPE solve the training layout perfectly yet collapse under Morton, block-contiguous, and random repacking, while axial grid-coordinate RoPE stays exact throughout. The same coordinate system carries to real data: on Allen WTC-11 hiPSC microscopy, PACK3D improves over a parameter-matched 3D U-Net on the 15-structure joint task and over a matched learned-position local-global baseline, with controls isolating the coordinate system, not encoder capacity, as the source of the gain. A fused Triton implementation matches windowed-attention latency at 65k tokens while supplying the long-range context windowing cannot---so the operator is not only correct but trainable at scale.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-10-31T01:20:38.926317Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2610.38694",
+        "verified_at": "2026-10-31T01:20:38.926317Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
     }
   ]
 }

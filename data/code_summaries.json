@@ -12175,5 +12175,97 @@
     "confidence": 0.85,
     "version": 3,
     "generated_at": "2026-10-28T09:25:08.196282"
+  },
+  "2610.39151v1": {
+    "summary": "STRATA 是面向 3D 空间转录组学（Spatial Transcriptomics）的重建与主动采样框架，旨在从稀疏切片和局部采样中恢复稠密的三维基因表达谱。代码库实现了图像配准与 3D 邻域图构建、融合检索/回归/3D无参插值的多模态预测网络（TripleBranchModel），以及基于强化学习的主动采样器（STRATA_Sampler）。整体核心业务逻辑与算法结构基本完整，属于 implementation 级别，但严重依赖特定未公开/外部预训练权重与非 PyPI 基础模型。",
+    "repository_kind": "implementation",
+    "architecture": "系统分为三大模块：1. Registration_and_3D_graph：利用 xFeat、ANTs 及 SuperGlue 进行连续切片仿射与非刚性配准，提取组织点（spots）的 CONCH 视觉特征并计算层内/跨层 IoU 与相似度，生成患者级 3D 邻接图；2. STRATA_Tri_network：三分支模型，包括基于 DenseNet-121 与 GeneEncoder 的 BLEEP 风格对比检索分支、基于 CONCH 初始化的 ViT-B 回归分支、以及基于 3D 空间邻接与视觉余弦权重的无参插值教师分支，并通过两参数（或逐基因/MLP）门控头进行预测融合；3. STRATA_Sampler：构建候选点池（CandidatePool），使用带有轨迹记忆的指针解码策略网络（PointerDecoderPolicy）、细胞先验预测头（CellHead）和密集奖励模型（RewardModel）进行在线策略采样迭代。",
+    "call_chain": "训练与评估流程分为两条主线：1. 离线三分支网络训练：STRATA_Tri_network/train.py:main() -> run_fold() -> TripleBranchPredictor (加载 HER2 数据集与 cross_fold 划分) -> DataLoader -> predictor.train_step() -> model.forward_joint() (计算 MSE 回归损失、对比损失与 3D 一致性损失) -> CosineAnnealingLR 迭代 -> train_fusion_all_variants() -> eval_per_slide_all_variants() 输出评估 CSV 与预测结果；2. 主动采样在线训练：STRATA_Sampler/train_online.py -> build_candidate_pool() -> ActiveSamplingEnv 初始化 -> PointerDecoderPolicy.score() & sample_action() -> env.step() 触发 predictor.fit_short() 并更新 RewardModel -> 产出采样轨迹与下游重建表达。",
+    "core_modules": [
+      {
+        "name": "TripleBranchModel",
+        "role": "空间基因表达联合预测模型，集成对比检索、ViT 回归与基于邻居加权的 3D 空间插值教师",
+        "evidence": "STRATA_Tri_network/models/model.py:TripleBranchModel"
+      },
+      {
+        "name": "FusionVariants",
+        "role": "动态融合多分支预测，提供置信度门控的全局标量加权（V1）、逐基因加权（V3）与 MLP 加权（V4）",
+        "evidence": "STRATA_Tri_network/models/fusion_variants.py:FusionV1_2Param, FusionV3_PerGeneGate, FusionV4_GateMLP"
+      },
+      {
+        "name": "ActiveSamplingEnv",
+        "role": "强化学习主动采样仿真环境，维护候选池状态、计算空间冗余惩罚、单细胞多样性收益并周期性触发模型微调",
+        "evidence": "STRATA_Sampler/env.py:ActiveSamplingEnv"
+      },
+      {
+        "name": "PointerDecoderPolicy",
+        "role": "基于静态投影、细胞先验、动态特征与上下文向量打分候选采样点的策略解码器",
+        "evidence": "STRATA_Sampler/policy.py:PointerDecoderPolicy"
+      },
+      {
+        "name": "RewardModelTrainer",
+        "role": "密集奖励估计器，将多步累积的预测器验证集损失改善标量拟合到逐步特征上",
+        "evidence": "STRATA_Sampler/reward_model.py:RewardModelTrainer"
+      },
+      {
+        "name": "CandidatePool",
+        "role": "整合图像特征、3D 邻接图拓扑、空间坐标与单细胞聚类中心的核心特征数据结构",
+        "evidence": "STRATA_Sampler/data_pool.py:build_candidate_pool"
+      }
+    ],
+    "dependencies": [
+      "torch==2.1.0",
+      "torchvision==0.16.0",
+      "timm==1.0.22",
+      "SimpleITK==2.5.3",
+      "nibabel==5.3.3",
+      "scanpy==1.10.3",
+      "anndata==0.10.8",
+      "opencv-python==4.11.0.86",
+      "外部非 PyPI 基础模型与工具：CONCH (pathology ViT-B/16 预训练权重), scGPT (单细胞基础模型), xFeat (特征匹配器), ANTs (医学图像配准工具)",
+      "数据依赖：DATA_ROOT (切片 npy 特征及标签), IMAGE_ROOT (病理图像切片), GRAPH_ROOT (3D 邻接图 npz), SC_BANK (单细胞参考嵌入)"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "运行需首先配置复杂的多阶段外部依赖：1. 需在非 PyPI 来源手动安装配置 CONCH、scGPT 和 xFeat 源码包，并从外部系统安装 ANTs 工具包；2. 需从私有/特定存储下载 CONCH ViT 权重文件 (checkpoints/conch_vit_b_16.bin) 以及单细胞参考图谱；3. 运行前必须设置环境变量 (DATA_ROOT, GRAPH_ROOT, CONCH_CKPT 等)；4. 仓库中未包含单元测试用例，重现时缺乏开箱即用的测试 mock 数据或微型示例数据集。",
+    "issues": [
+      {
+        "severity": "high",
+        "finding": "ViTBBackbone 强依赖未在 requirements.txt 中自动安装的私有/第三方包 conch",
+        "evidence": [
+          "STRATA_Tri_network/models/backbones.py:from conch.open_clip_custom import create_model_from_pretrained",
+          "README.md:# (also install CONCH, scGPT, and xFeat from their own sources)"
+        ],
+        "impact": "若未在外部手动配置安装 conch 源码并下载对应 checkpoint 权重，直接运行训练主入口将触发 ModuleNotFoundError 或 FileNotFoundError。",
+        "confidence": 0.95
+      },
+      {
+        "severity": "medium",
+        "finding": "数据加载及切片划分硬编码仅支持 HER2 数据集",
+        "evidence": [
+          "STRATA_Tri_network/train.py:p.add_argument(\"--dataset\", choices=[\"HER2\"], default=\"HER2\")",
+          "STRATA_Tri_network/cross_fold.py:raise ValueError(f'Unsupported dataset: {dataset_name}')"
+        ],
+        "impact": "无法直接迁移应用至其他空间转录组数据集（如 10x Visium 肠癌、脑组织等），需要开发者自行仿照 cross_fold.py 实现数据切分与样本组织结构。",
+        "confidence": 0.9
+      },
+      {
+        "severity": "low",
+        "finding": "STRATA_Tri_network/predictor.py 中 TripleBranchPredictor 明确不支持 fit_short 和 fit_full 接口",
+        "evidence": [
+          "STRATA_Tri_network/predictor.py:def fit_short(self, *args, **kwargs): raise RuntimeError(\"fit_short is not used by TripleBranchPredictor - \")",
+          "STRATA_Sampler/env.py:self.predictor.fit_short(self.S, epochs=self.cfg.fit_short_epochs)"
+        ],
+        "impact": "STRATA_Sampler 的 ActiveSamplingEnv 中调用了 predictor.fit_short，如果传入 TripleBranchPredictor 会直接抛出 RuntimeError；采样器实际配套使用的应为 STRATA_Sampler/predictor.py 中的 STNetPredictor，使用时若混淆两者会导致流程崩溃。",
+        "confidence": 0.85
+      }
+    ],
+    "static_limitations": [
+      "因仅进行静态代码分析，未在真实硬件上分配显存与载入模型，无法评估 ViT-B 配合 DenseNet-121 联合训练及大矩阵乘法时的显存占用与吞吐量",
+      "未下载包含病理切片和转录组表达的真实数据集，无法确认配准管线（ANTs + xFeat）在异构切片变形下的数值收敛性及实际预测指标",
+      "无法动态验证强化学习采样器在线微调阶段对密集奖励模型的拟合稳定性与训练时长"
+    ],
+    "confidence": 0.88,
+    "version": 3,
+    "generated_at": "2026-10-31T09:22:55.300603"
   }
 }

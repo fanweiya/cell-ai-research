@@ -588,6 +588,155 @@ class CodeReportTests(unittest.TestCase):
             self.assertIn("api.typesafe.ai", call_records[0])
             self.assertIn("api.codiv.ai", call_records[1])
 
+    def test_jev_evaluator_single_channel_does_not_override_non_typesafe_key(self):
+        import jev_evaluator
+
+        paper = {"arxiv_id": "2410.99991", "title": "Single channel key test"}
+        evidence_info = {
+            "code_status": "none",
+            "code_desc": "",
+            "evidence_snippets": {},
+            "evidence_sources": [],
+            "evidence_sufficiency": {
+                "methodological_novelty": True,
+                "technical_soundness": True,
+                "biological_utility": True,
+                "reproducibility_readiness": True,
+            },
+            "evidence_text": "Sample text",
+            "evidence_hash": "testhash",
+        }
+        captured_auth = []
+
+        class DummyResponse:
+            def __enter__(self):
+                return self
+            def __exit__(self, *args):
+                pass
+            def read(self):
+                return json.dumps({
+                    "model": "codiv-model",
+                    "answers": {
+                        "methodological_novelty": {"score": 6.0, "confidence": 0.8},
+                        "technical_soundness": {"score": 7.0, "confidence": 0.8},
+                        "biological_utility": {"score": 8.0, "confidence": 0.8},
+                        "reproducibility_readiness": {"score": 5.0, "confidence": 0.8},
+                        "primary_paradigm": {"choice": "multimodal_foundation", "confidence": 0.9},
+                    },
+                }).encode("utf-8")
+
+        def fake_urlopen(req, timeout=45):
+            captured_auth.append(req.headers.get("Authorization"))
+            return DummyResponse()
+
+        single_channel = [{
+            "name": "codiv",
+            "endpoint": "https://api.codiv.ai/v1/systemone",
+            "default_model": "openjev-latest",
+            "default_key": "channel-native-key",
+            "extra_headers": {},
+        }]
+
+        with patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            jev_evaluator.evaluate_single_paper(
+                paper,
+                api_key="caller-custom-key",
+                evidence_info=evidence_info,
+                channels=single_channel,
+                retries=1
+            )
+            self.assertEqual(len(captured_auth), 1)
+            self.assertEqual(captured_auth[0], "Bearer channel-native-key")
+
+    def test_jev_evaluator_validation_failure_fast_fails_without_fallback(self):
+        import jev_evaluator
+
+        paper = {"arxiv_id": "2410.99992", "title": "Validation fail-fast test"}
+        evidence_info = {
+            "code_status": "none",
+            "code_desc": "",
+            "evidence_snippets": {},
+            "evidence_sources": [],
+            "evidence_sufficiency": {
+                "methodological_novelty": True,
+                "technical_soundness": True,
+                "biological_utility": True,
+                "reproducibility_readiness": True,
+            },
+            "evidence_text": "Sample text",
+            "evidence_hash": "testhash",
+        }
+
+        class InvalidResponse:
+            def __enter__(self):
+                return self
+            def __exit__(self, *args):
+                pass
+            def read(self):
+                return json.dumps({
+                    "model": "model-1",
+                    "answers": {
+                        "methodological_novelty": {"score": 6.0, "confidence": 0.8},
+                    },
+                }).encode("utf-8")
+
+        call_count = 0
+        def fake_urlopen(req, timeout=45):
+            nonlocal call_count
+            call_count += 1
+            return InvalidResponse()
+
+        two_channels = [
+            {"name": "typesafe", "endpoint": "https://api.typesafe.ai/v1/systemone", "default_key": "k1", "default_model": "m1", "extra_headers": {}},
+            {"name": "codiv", "endpoint": "https://api.codiv.ai/v1/systemone", "default_key": "k2", "default_model": "m2", "extra_headers": {}},
+        ]
+
+        with patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            with self.assertRaises(ValueError) as ctx:
+                jev_evaluator.evaluate_single_paper(
+                    paper,
+                    evidence_info=evidence_info,
+                    channels=two_channels,
+                    retries=2
+                )
+            self.assertIn("Missing required response field", str(ctx.exception))
+            self.assertEqual(call_count, 1)
+
+    def test_jev_evaluator_all_channels_without_credentials_reports_detail(self):
+        import jev_evaluator
+
+        paper = {"arxiv_id": "2410.99993", "title": "No credentials test"}
+        evidence_info = {
+            "code_status": "none",
+            "code_desc": "",
+            "evidence_snippets": {},
+            "evidence_sources": [],
+            "evidence_sufficiency": {
+                "methodological_novelty": True,
+                "technical_soundness": True,
+                "biological_utility": True,
+                "reproducibility_readiness": True,
+            },
+            "evidence_text": "Sample text",
+            "evidence_hash": "testhash",
+        }
+
+        channels_without_keys = [
+            {"name": "custom_ch_1", "endpoint": "https://api.example.com", "extra_headers": {}},
+            {"name": "custom_ch_2", "endpoint": "https://api.example.com", "extra_headers": {}},
+        ]
+
+        with self.assertRaises(RuntimeError) as ctx:
+            jev_evaluator.evaluate_single_paper(
+                paper,
+                evidence_info=evidence_info,
+                channels=channels_without_keys,
+                retries=1
+            )
+        err_msg = str(ctx.exception)
+        self.assertIn("[custom_ch_1] missing credentials", err_msg)
+        self.assertIn("[custom_ch_2] missing credentials", err_msg)
+
 
 if __name__ == "__main__":
     unittest.main()

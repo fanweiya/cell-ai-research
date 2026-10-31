@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "STRATA 方法核心架构图：单细胞图谱蒸馏、细胞 aware 强化采样代理、三范式自适应（检索/回归/跨层融合）与 STRATA 预测的完整流程"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "STRATA 方法在不同采样预算下的性能对比曲线图（HER2、BLEEP、ST-Net、STRATA 四个模型，展示 PCC 与 cSCC 指标）"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "STRATA 与 ST-Net 在 cSCC 数据集上，不同标注比例下 PCC 指标对比折线图"
+  }
+}
