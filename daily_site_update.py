@@ -24,6 +24,11 @@ def update_site(evidence, changed, project, pending_path, run, build_command):
             result = run(build_command, timeout=900)
             if result.returncode:
                 raise RuntimeError((result.stderr or result.stdout or '非零退出码')[-500:])
+            index_path = project / 'index.html'
+            if index_path.exists():
+                generated_html = index_path.read_text(encoding='utf-8')
+                if '100dvh' not in generated_html:
+                    raise AssertionError('生成产物缺少 100dvh 视口高度定义')
         except Exception as exc:
             evidence['index_status'] = '失败'
             evidence['publish_status'] = '未执行（生成失败）'

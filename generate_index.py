@@ -1739,7 +1739,7 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
 <div class="card" tabindex="-1" id="paper-{_esc(pid)}" data-paper-id="{_esc(pid)}" data-code="{'1' if has_code_flag else '0'}" data-jev="{card_jev_attr}" data-date="{_esc(date)}">
   <div class="ch">
     <div class="ct">
-      <div class="tzh">{title_zh}</div>
+      <h2 class="tzh">{title_zh}</h2>
       <div class="ten">{title}</div>
 
     </div>
@@ -1832,7 +1832,7 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
   --border-h: #cbd5e1;
   --text: #0f172a;
   --text2: #475569;
-  --text3: #94a3b8;
+  --text3: #64748b;
   --accent: #4f46e5;
   --accent-l: #e0e7ff;
   --accent-d: #3730a3;
@@ -1869,6 +1869,18 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
   box-sizing: border-box;
 }}
 
+.sr-only {{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}}
+
 body {{
   font-family: var(--font);
   background: var(--bg);
@@ -1896,6 +1908,7 @@ body {{
   position: sticky;
   top: 0;
   height: 100vh;
+  height: 100dvh;
   overflow-y: auto;
   flex-shrink: 0;
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
@@ -1967,17 +1980,17 @@ body {{
 }}
 
 .month-select {{
-  width: 100%;
   padding: 8px 12px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   background: var(--surface);
-  color: var(--text2);
+  color: var(--text);
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   outline: none;
-  transition: all 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  width: 100%;
 }}
 
 .month-select:hover,
@@ -1997,7 +2010,7 @@ body {{
   font-weight: 500;
   text-align: left;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2133,6 +2146,7 @@ body {{
   flex: 1;
   padding: 24px;
   height: 100vh;
+  height: 100dvh;
   overflow-y: auto;
   background: var(--bg);
 }}
@@ -2182,7 +2196,7 @@ body {{
   width: 32px;
   height: 32px;
   border-radius: var(--radius-sm);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 14px;
   color: #fff;
   flex-shrink: 0;
@@ -2397,7 +2411,7 @@ body {{
 
 .kp-label {{
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--green-d);
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -2830,6 +2844,7 @@ body {{
   top: 0;
   width: 400px;
   height: 100vh;
+  height: 100dvh;
   background: var(--surface);
   box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
   z-index: 1002;
@@ -3031,6 +3046,15 @@ body {{
     right: -100%;
   }}
 }}
+
+@media (prefers-reduced-motion: reduce) {{
+  *, *::before, *::after {{
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }}
+}}
 {copilot_css}
 {paper_list_css}
 {theme_css}
@@ -3046,7 +3070,8 @@ body {{
     </div>
     
     <div class="search-box">
-      <input class="search-input" id="searchInput" type="text" placeholder="🔍 搜索标题 / 摘要 / 标签 / 作者..." oninput="doSearch(this.value)">
+      <label class="sr-only" for="searchInput">搜索论文</label>
+      <input class="search-input" id="searchInput" type="text" placeholder="🔍 搜索标题 / 摘要 / 标签 / 作者..." aria-label="搜索论文" oninput="doSearch(this.value)">
     </div>
     
     <button id="mobileFilterButton" type="button" onclick="openMobileFilters()" aria-haspopup="dialog">筛选论文</button>
@@ -3106,7 +3131,7 @@ body {{
 <div class="modal" id="modal">
   <button class="modal-btn modal-prev" id="modal-prev" type="button" aria-label="上一张">◀</button>
   <div class="modal-content" onclick="event.stopPropagation()">
-    <img id="modal-img" src="" alt="论文关键图示" />
+    <img id="modal-img" alt="论文关键图示" />
     <div class="modal-caption" id="modal-caption"></div>
     <div class="modal-counter" id="modal-counter"></div>
   </div>
@@ -3475,7 +3500,7 @@ def wrap_wiki_page(title, repo_name, body_html, sidebar_html, back_link):
   --border-h: #cbd5e1;
   --text: #0f172a;
   --text2: #475569;
-  --text3: #94a3b8;
+  --text3: #64748b;
   --accent: #4f46e5;
   --accent-l: #e0e7ff;
   --accent-d: #3730a3;
@@ -3501,6 +3526,7 @@ body {{
   display: flex;
   flex-direction: column;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }}
 
@@ -3670,6 +3696,15 @@ body {{
   border-radius: 4px;
   font-size: 12px;
   color: var(--accent-d);
+}}
+
+@media (prefers-reduced-motion: reduce) {{
+  *, *::before, *::after {{
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }}
 }}
 </style>
 </head>

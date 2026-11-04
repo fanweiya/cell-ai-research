@@ -58,6 +58,16 @@ class SiteUpdateTests(unittest.TestCase):
             self.assertEqual(runner.call_count, 2)
             self.assertEqual(evidence['publish_status'], '已发布')
 
+    def test_build_assertion_failure_stops_publish(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / 'index.html').write_text('<html><body>No dvh here</body></html>', encoding='utf-8')
+            runner = Mock(return_value=subprocess.CompletedProcess([], 0, '', ''))
+            evidence = self.exercise(True, runner, root)
+            self.assertEqual(runner.call_count, 1)
+            self.assertTrue(any('100dvh' in str(e) for e in evidence['errors']))
+            self.assertEqual(evidence['index_status'], '失败')
+
     def test_timeout_is_recorded_and_pending_is_retained(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
