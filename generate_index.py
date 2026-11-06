@@ -656,6 +656,31 @@ def _load_gread_result(code_analysis):
         return {}
 
 
+def _canonical_repo_url(value):
+    url = str(value or "").strip().rstrip("/").lower()
+    return url[:-4] if url.endswith(".git") else url
+
+
+def code_report_binding(entry, current_repo_url, analyzed_repo_url):
+    """代码报告与远端分析仓库的身份绑定：缓存必须对应论文当前已验证链接。"""
+    if not isinstance(entry, dict) or not entry.get("summary"):
+        return False, "no_report"
+    if entry.get("version", 0) < CODE_REPORT_VERSION:
+        return False, "report_version_outdated"
+    current = _canonical_repo_url(current_repo_url)
+    analyzed = _canonical_repo_url(analyzed_repo_url)
+    recorded = _canonical_repo_url(entry.get("repository_url"))
+    if not current:
+        return False, "no_repository_link"
+    if not analyzed and not recorded:
+        return False, "no_source_evidence"
+    if analyzed and analyzed != current:
+        return False, "source_evidence_other_repository"
+    if recorded and recorded != current:
+        return False, "report_other_repository"
+    return True, "bound"
+
+
 def _bounded_source_excerpt(source, max_chars=60_000, per_file=7_500):
     """Keep evidence from several files instead of truncating one giant dump."""
     blocks = re.split(r"(?=^##\s+[^\n]+\n```)", source or "", flags=re.M)
@@ -809,7 +834,12 @@ def summarize_code_repositories(papers, summaries, force=False):
         if not gread_data:
             continue
         existing = summaries.get(pid, {})
-        if not force and existing.get("summary") and existing.get("version", 0) >= CODE_REPORT_VERSION:
+        bound, reason = code_report_binding(existing, url, gread_data.get("repository_url"))
+        if not force and bound:
+            continue
+        # 仓库链接已修改、旧 gread 证据的来源与当前链接不一致时，
+        # 不基于旧仓库证据重新总结，等远程分析刷新后再生成，避免沿用旧仓库结论。
+        if not force and reason in ("source_evidence_other_repository", "report_other_repository"):
             continue
         tasks.append((pid, url, ca, gread_data))
 
@@ -974,6 +1004,71 @@ def _safe_figure_extension(rel_path, image_format):
     return format_suffix.get((image_format or "").upper(), ".img")
 
 
+def _figure_cache_problem(cache_file):
+    """检查图片缓存是否可用，返回需要重建的原因（可用时为空字符串）。"""
+    if not cache_file.exists():
+        return "missing"
+    try:
+        figures = json.loads(cache_file.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return "unreadable"
+    if not isinstance(figures, list):
+        return "invalid_format"
+    if not figures:
+        return "empty"
+    for fig in figures:
+        if not isinstance(fig, dict):
+            return "invalid_entry"
+        src = fig.get("src")
+        if src and not (WORKSPACE / src).is_file():
+            return "originals_missing"
+    return ""
+
+
+def _restore_figure_originals(cache_file):
+    """原图丢失时按缓存记录的 source_url 重新下载，避免整篇重新提取。"""
+    try:
+        figures = json.loads(cache_file.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return 0, 0
+    restored = 0
+    failed = 0
+    for fig in figures:
+        src = fig.get("src") if isinstance(fig, dict) else None
+        if not src or (WORKSPACE / src).is_file():
+            continue
+        source_url = fig.get("source_url")
+        if not source_url:
+            failed += 1
+            continue
+        try:
+            result = subprocess.run(
+                ["curl", "-sL", source_url], capture_output=True, timeout=30
+            )
+        except (OSError, subprocess.TimeoutExpired):
+            failed += 1
+            continue
+        if result.returncode != 0 or len(result.stdout or b"") < 2000:
+            failed += 1
+            continue
+        original_path = WORKSPACE / src
+        original_path.parent.mkdir(parents=True, exist_ok=True)
+        original_path.write_bytes(result.stdout)
+        restored += 1
+    return restored, failed
+
+
+def _figure_analysis_missing(analysis_file):
+    """判断相关性分析结果是否缺失或为空，空分析同样需要重建。"""
+    if not analysis_file.exists():
+        return True
+    try:
+        analysis = json.loads(analysis_file.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return True
+    return not isinstance(analysis, dict) or not analysis
+
+
 def _extract_figures_for_paper(pid, papers_map, force=False):
     """从 arXiv HTML 页面提取论文原图，并保留分析用缩略图。"""
     clean_id = re.sub(r"v\d+$", "", pid)
@@ -982,17 +1077,8 @@ def _extract_figures_for_paper(pid, papers_map, force=False):
 
     # 检查缓存
     cache_file = FIGURES_DIR / f"{clean_id}.json"
-    if cache_file.exists() and not force:
-        try:
-            with open(cache_file, "r") as f:
-                cached = json.load(f)
-            if all(
-                fig.get("src") and (WORKSPACE / fig["src"]).is_file()
-                for fig in cached
-            ):
-                return cached
-        except:
-            pass
+    if cache_file.exists() and not force and not _figure_cache_problem(cache_file):
+        return json.loads(cache_file.read_text(encoding="utf-8"))
 
     # 从 arXiv HTML 页面获取图片
     html_url = f"https://arxiv.org/html/{pid}"
@@ -1114,17 +1200,24 @@ def extract_all_figures(papers, force=False):
         cache_file = FIGURES_DIR / f"{clean_id}.json"
         analysis_file = FIGURES_DIR / f"{clean_id}_analysis.json"
 
-        # 强制刷新时必须穿透旧的 base64 缓存，重新下载原始文件。
-        if force or not cache_file.exists():
-            print(f"  [{i+1}/{total}] Extracting figures: {clean_id}...")
-            figs = _extract_figures_for_paper(pid, papers_map, force=force)
+        problem = _figure_cache_problem(cache_file)
+        if problem == "originals_missing":
+            # 原图丢失优先按 source_url 找回原文件，避免整篇重新抓取和重新分析。
+            restored, failed = _restore_figure_originals(cache_file)
+            print(f"  [{i+1}/{total}] Restored figure originals: {clean_id} (restored {restored}, failed {failed})")
+            problem = _figure_cache_problem(cache_file)
+
+        # 空缓存、损坏缓存、无法恢复的原图都必须重新提取；强制刷新时穿透旧的 base64 缓存。
+        if force or problem:
+            print(f"  [{i+1}/{total}] Extracting figures: {clean_id} ({problem or 'force'})...")
+            figs = _extract_figures_for_paper(pid, papers_map, force=True)
             if figs:
                 extracted += 1
         else:
             figs = []
 
         # Analyze if not cached
-        if not analysis_file.exists() and cache_file.exists():
+        if _figure_analysis_missing(analysis_file) and cache_file.exists():
             if not figs:
                 try:
                     with open(cache_file) as f:
@@ -1197,7 +1290,7 @@ def _filter_figures_by_relevance(figures, paper_title, pid):
 
     # Check analysis cache
     analysis_file = FIGURES_DIR / f"{clean_id}_analysis.json"
-    if analysis_file.exists():
+    if not _figure_analysis_missing(analysis_file):
         # extract 阶段已将过滤结果写回缓存文件并调用了本函数，
         # 再次调用时传入的 figures 已是过滤后的子集，
         # 直接返回，保底至少保留 1 张。
@@ -1666,6 +1759,9 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
                 caption = fig.get("caption", "")
                 caption_html = f'<div class="fig-cap">{_esc(caption)}</div>' if caption else ""
                 image_src = fig.get("src")
+                if image_src and not (WORKSPACE / image_src).is_file():
+                    # 原图文件丢失时退回缓存里的 base64 预览，避免页面出现坏图。
+                    image_src = None
                 if image_src:
                     image_src = _esc(image_src)
                 else:
@@ -1694,11 +1790,24 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
                 parts.append('<div class="ri"><span class="rl">🌐 分析来源:</span> gread 远程仓库分析</div>')
             # 结构化中文静态报告优先；旧缓存仍兼容 summary 字段。
             cs_entry = code_summaries.get(pid, {})
-            if isinstance(cs_entry, dict):
+            report_bound, report_binding_reason = code_report_binding(
+                cs_entry, github_url, ca.get("repository_url")
+            )
+            if isinstance(cs_entry, dict) and report_bound:
                 code_summary = cs_entry.get("summary", "")
                 code_report_html = _render_code_report(cs_entry)
             if code_report_html:
                 parts.append(code_report_html)
+            elif report_binding_reason in (
+                "no_source_evidence",
+                "source_evidence_other_repository",
+                "report_other_repository",
+            ):
+                # 论文仓库链接被更正后，旧仓库的分析结论不能继续显示在新链接下面。
+                parts.append(
+                    '<div class="ri"><span class="rl">📝 静态审阅:</span> '
+                    "仓库链接已更正，旧仓库的分析结论已停用，等待按当前仓库重新分析。</div>"
+                )
             elif is_gread_analysis:
                 parts.append(_render_gread_fallback(ca))
             elif framework:

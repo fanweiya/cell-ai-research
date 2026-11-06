@@ -74,11 +74,36 @@ test('entities remain safe, nested lists retain hierarchy, and code pipes stay i
 test('citation labels follow known paper URLs and unknown chunks are flagged',()=>{
   const x=setup();
   const p={id:'2509.12596',arxiv_url:'https://arxiv.org/html/2509.12596'};
-  const snapshot={papers:[p],evidence:[{paper:p,chunks:[{id:'C009',text:'evidence'}]}]};
-  const result=x.w.validateEvidenceCitations('[2509.25096 · C009](https://arxiv.org/html/2509.12596) [2509.12596 · C099](https://arxiv.org/html/2509.12596)',snapshot);
-  assert.ok(result.includes('[2509.12596 · C009]'));
+  const q={id:'2411.1788',arxiv_url:'https://arxiv.org/html/2411.1788'};
+  const b={id:'biorxiv:10.1101/2024.05.01.591234',arxiv_url:'https://doi.org/10.1101/2024.05.01.591234'};
+  const snapshot={papers:[p,q,b],evidence:[
+    {paper:p,chunks:[{id:'C009',text:'evidence'}]},
+    {paper:q,chunks:[{id:'C012',text:'four digit evidence'}]},
+    {paper:b,chunks:[{id:'C003',text:'preprint evidence'}]},
+  ]};
+  const result=x.w.validateEvidenceCitations(
+    '[2509.25096 · C009](https://arxiv.org/html/2509.12596)'
+    + ' [2509.12596 · C099](https://arxiv.org/html/2509.12596)'
+    + ' [2411.1788 · C012](https://arxiv.org/html/2411.1788)'
+    + ' [biorxiv:10.1101/2024.05.01.591234 · C003](https://doi.org/10.1101/2024.05.01.591234)'
+    + ' [10.1101/2024.05.01.591234](https://doi.org/10.1101/2024.05.01.591234)'
+    + ' [4 位论文 2411.1788](https://arxiv.org/html/2411.1788)'
+    + ' [2411.1788 · C012](https://arxiv.org/html/9999.99999)'
+    + ' [教程](https://example.com/guide)',snapshot);
+  // 文字与链接指向不同论文：保留原文并标注，不能静默换成链接论文。
+  assert.ok(result.includes('2509.25096 · C009（引用文字与链接不一致）'));
+  assert.ok(!result.includes('[2509.12596 · C009]'));
+  assert.ok(result.includes('引用文字与链接指向不同论文'));
   assert.ok(result.includes('C099（引用未匹配）'));
-  assert.ok(!result.includes('[2509.12596 · C099]')); x.close();
+  assert.ok(!result.includes('[2509.12596 · C099]'));
+  // 四位 arXiv 编号与 bioRxiv DOI 都是引用标识，不是普通文字链接。
+  assert.ok(result.includes('[2411.1788 · C012](https://arxiv.org/html/2411.1788)'));
+  assert.ok(result.includes('[biorxiv:10.1101/2024.05.01.591234 · C003](https://doi.org/10.1101/2024.05.01.591234)'));
+  assert.ok(result.includes('[10.1101/2024.05.01.591234](https://doi.org/10.1101/2024.05.01.591234)'));
+  assert.ok(result.includes('[4 位论文 2411.1788](https://arxiv.org/html/2411.1788)'));
+  assert.ok(result.includes('2411.1788 · C012（引用未匹配）'));
+  // 不含论文标识的普通链接仍按内容保留。
+  assert.ok(result.includes('[教程](https://example.com/guide)')); x.close();
 });
 test('single-paper request reads real cached mesh evidence and reuses it on follow-up',async()=>{
   const index=fs.readFileSync(path.join(root,'index.html'),'utf8');

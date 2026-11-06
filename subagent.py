@@ -16,19 +16,46 @@ A1_KEY = os.environ.get('A1_API_KEY', 'cell-ai')
 A1_MODEL = os.environ.get('A1_MODEL', "stable")
 FALLBACK_A1_API = os.environ.get('FALLBACK_A1_API_URL', A1_API)
 FALLBACK_A1_MODEL = os.environ.get('FALLBACK_A1_MODEL', "fast")
+ARXIV_HTML_BASE = os.environ.get("CELL_AI_ARXIV_HTML_BASE", "https://arxiv.org/html")
+ARXIV_ABS_BASE = os.environ.get("CELL_AI_ARXIV_ABS_BASE", "https://arxiv.org/abs")
+BIORXIV_CONTENT_BASE = os.environ.get("CELL_AI_BIORXIV_BASE", "https://www.biorxiv.org/content")
 WORKDIR = Path(os.environ.get("CELL_AI_WORKDIR", str(Path(__file__).resolve().parent)))
+
+ARXIV_ID_RE = re.compile(r"^\d{4}\.\d{4,5}(?:v\d+)?$")
+BIORXIV_ID_RE = re.compile(r"^biorxiv:(10\.1101/[0-9.]+)$", re.I)
+GITHUB_URL_RE = re.compile(r"^https?://github\.com/")
+
+
+def classify_input_source(path: str) -> tuple[str, str]:
+    """区分 GitHub 地址、arXiv 编号、bioRxiv 编号与普通文本内容。"""
+    value = path.strip()
+    if GITHUB_URL_RE.match(value):
+        return "github", value
+    if ARXIV_ID_RE.fullmatch(value):
+        return "arxiv", value
+    biorxiv = BIORXIV_ID_RE.fullmatch(value)
+    if biorxiv:
+        return "biorxiv", biorxiv.group(1)
+    return "content", value
+
+
+def _fetch_remote_text(url: str) -> str:
+    req = urllib.request.Request(url, headers={"User-Agent": "cell-ai-research/2.0"})
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        return resp.read().decode("utf-8", errors="replace")
 
 
 def load_input(path: str) -> str:
     """Load input content; GitHub repositories are inspected via gread only."""
-    if re.match(r'^https?://github\.com/', path):
+    kind, identifier = classify_input_source(path)
+    if kind == "github":
         try:
             from gread_remote import as_analysis_context, collect_repository
-            return as_analysis_context(collect_repository(path))[:200000]
+            return as_analysis_context(collect_repository(identifier))[:200000]
         except Exception as exc:
             return json.dumps({
                 "source": "gread",
-                "repository_url": path,
+                "repository_url": identifier,
                 "error": str(exc),
                 "instruction": "Do not fall back to a local clone.",
             }, ensure_ascii=False)
@@ -56,28 +83,18 @@ def load_input(path: str) -> str:
             if len(level) > 3:
                 dirs.clear()
         return "\n".join(lines[:50])
-    elif re.match(r'^\d{4}\.\d{5}', path):
-        arxiv_id = path.strip()
+    elif kind == "arxiv":
+        arxiv_id = identifier
         html = ""
         fetch_err = None
         try:
-            req = urllib.request.Request(
-                f"https://arxiv.org/html/{arxiv_id}",
-                headers={"User-Agent": "cell-ai-research/2.0"},
-            )
-            with urllib.request.urlopen(req, timeout=30) as resp:
-                html = resp.read().decode("utf-8", errors="replace")
+            html = _fetch_remote_text(f"{ARXIV_HTML_BASE}/{arxiv_id}")
         except Exception as exc:
             fetch_err = exc
 
         if not html or "No HTML for" in html or "HTML is not available" in html:
             try:
-                abs_req = urllib.request.Request(
-                    f"https://arxiv.org/abs/{arxiv_id}",
-                    headers={"User-Agent": "cell-ai-research/2.0"},
-                )
-                with urllib.request.urlopen(abs_req, timeout=30) as resp:
-                    abs_html = resp.read().decode("utf-8", errors="replace")
+                abs_html = _fetch_remote_text(f"{ARXIV_ABS_BASE}/{arxiv_id}")
                 abs_text = _extract_abs_text(abs_html)
                 if abs_text:
                     return abs_text
@@ -91,6 +108,13 @@ def load_input(path: str) -> str:
         if html:
             return html[:50000]
         raise RuntimeError(f"Failed to extract paper text for arXiv ID {arxiv_id}")
+
+    elif kind == "biorxiv":
+        html = _fetch_remote_text(f"{BIORXIV_CONTENT_BASE}/{identifier}.full")
+        text = _extract_article_text(html)
+        if len(text) <= 10:
+            raise RuntimeError(f"Failed to extract article text for bioRxiv paper {identifier}")
+        return text
 
     else:
         return path[:3000]

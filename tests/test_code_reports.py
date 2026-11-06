@@ -738,5 +738,274 @@ class CodeReportTests(unittest.TestCase):
         self.assertIn("[custom_ch_2] missing credentials", err_msg)
 
 
+class CodeReportBindingTests(unittest.TestCase):
+    """论文仓库链接修正后，旧仓库的分析结论必须停用，不能混挂在新链接下。"""
+
+    def _entry(self, **kw):
+        base = {"summary": "结构化中文静态审阅结论。",
+                "version": generate_index.CODE_REPORT_VERSION}
+        base.update(kw)
+        return base
+
+    def test_binding_rejects_missing_summary(self):
+        bound, reason = generate_index.code_report_binding({}, "https://github.com/o/r", None)
+        self.assertFalse(bound)
+        self.assertEqual(reason, "no_report")
+
+    def test_binding_rejects_outdated_version(self):
+        bound, reason = generate_index.code_report_binding(
+            self._entry(version=0), "https://github.com/o/r", None)
+        self.assertFalse(bound)
+        self.assertEqual(reason, "report_version_outdated")
+
+    def test_binding_rejects_missing_current_repo(self):
+        bound, reason = generate_index.code_report_binding(self._entry(), "", None)
+        self.assertFalse(bound)
+        self.assertEqual(reason, "no_repository_link")
+
+    def test_binding_rejects_when_no_source_evidence(self):
+        bound, reason = generate_index.code_report_binding(
+            self._entry(), "https://github.com/o/r", None)
+        self.assertFalse(bound)
+        self.assertEqual(reason, "no_source_evidence")
+
+    def test_binding_rejects_other_analyzed_repository(self):
+        bound, reason = generate_index.code_report_binding(
+            self._entry(), "https://github.com/o/r", "https://github.com/other/x")
+        self.assertFalse(bound)
+        self.assertEqual(reason, "source_evidence_other_repository")
+
+    def test_binding_rejects_other_recorded_repository(self):
+        bound, reason = generate_index.code_report_binding(
+            self._entry(repository_url="https://github.com/old/y"),
+            "https://github.com/o/r", None)
+        self.assertFalse(bound)
+        self.assertEqual(reason, "report_other_repository")
+
+    def test_binding_accepts_matching_analyzed_repo(self):
+        bound, reason = generate_index.code_report_binding(
+            self._entry(), "https://github.com/o/r", "https://github.com/o/r")
+        self.assertTrue(bound)
+        self.assertEqual(reason, "bound")
+
+    def test_binding_accepts_normalized_recorded_repo(self):
+        # .git 后缀、末尾斜杠与大小写差异不能破坏绑定
+        bound, reason = generate_index.code_report_binding(
+            self._entry(repository_url="https://github.com/O/R.git/"),
+            "https://github.com/o/r", None)
+        self.assertTrue(bound)
+        self.assertEqual(reason, "bound")
+
+    def test_binding_accepts_case_insensitive_analyzed_repo(self):
+        bound, reason = generate_index.code_report_binding(
+            self._entry(), "HTTPS://GITHUB.COM/O/R", "https://github.com/o/r")
+        self.assertTrue(bound)
+        self.assertEqual(reason, "bound")
+
+    def test_page_does_not_mix_old_repo_report_under_new_link(self):
+        legacy = self._entry(summary="旧仓库 OLD-REPO 的静态审阅结论")
+        paper = {
+            "arxiv_id": "2608.00001v1",
+            "title": "Synthetic paper for link repair",
+            "published_date": "2026-08-08",
+            "authors": ["A. Author"],
+            "abstract": "cell imaging",
+            "task_type": ["segmentation"],
+            "priority": 1,
+            "status": {
+                "html": "done",
+                "code_analysis": "pending",
+                "github": {
+                    "url": "https://github.com/new-owner/NEW-REPO",
+                    "has_code": True,
+                    "provenance": "paper_code_statement",
+                    "provenance_status": "verified",
+                },
+            },
+            "code_analysis": {},
+            "has_code": True,
+        }
+        page = generate_index.generate_html(
+            [paper], {}, "2026-11-06 10:00",
+            code_summaries={"2608.00001v1": legacy})
+        self.assertIn("github.com/new-owner/NEW-REPO", page)
+        self.assertNotIn("OLD-REPO", page)
+
+
+class FigureCacheRecoveryTests(unittest.TestCase):
+    """图片空缓存与原图丢失必须可重新抽取/下载恢复，整条写入/读取链路打通。"""
+
+    def test_figure_cache_problem_covers_every_branch(self):
+        import json
+        import shutil
+        import tempfile
+        from pathlib import Path
+
+        d = Path(tempfile.mkdtemp(prefix="cell_figcache_"))
+        try:
+            self.assertEqual(
+                generate_index._figure_cache_problem(d / "missing.json"), "missing")
+
+            bad = d / "bad.json"
+            bad.write_text("{not json", encoding="utf-8")
+            self.assertEqual(generate_index._figure_cache_problem(bad), "unreadable")
+
+            notlist = d / "notlist.json"
+            notlist.write_text(json.dumps({"a": 1}), encoding="utf-8")
+            self.assertEqual(generate_index._figure_cache_problem(notlist), "invalid_format")
+
+            empty = d / "empty.json"
+            empty.write_text(json.dumps([]), encoding="utf-8")
+            self.assertEqual(generate_index._figure_cache_problem(empty), "empty")
+
+            badentry = d / "badentry.json"
+            badentry.write_text(json.dumps(["notdict"]), encoding="utf-8")
+            self.assertEqual(generate_index._figure_cache_problem(badentry), "invalid_entry")
+
+            (d / "originals").mkdir()
+            miss = d / "miss.json"
+            miss.write_text(
+                json.dumps([{"src": "data/figures/originals/does_not_exist.png"}]),
+                encoding="utf-8")
+            self.assertEqual(generate_index._figure_cache_problem(miss), "originals_missing")
+
+            real = d / "originals" / "real.png"
+            real.write_bytes(b"x" * 100)
+            ok = d / "ok.json"
+            ok.write_text(json.dumps([{"src": str(real)}]), encoding="utf-8")
+            self.assertEqual(generate_index._figure_cache_problem(ok), "")
+        finally:
+            shutil.rmtree(d, ignore_errors=True)
+
+    def test_figure_analysis_missing_branches(self):
+        import json
+        import shutil
+        import tempfile
+        from pathlib import Path
+
+        d = Path(tempfile.mkdtemp(prefix="cell_figan_"))
+        try:
+            self.assertTrue(generate_index._figure_analysis_missing(d / "nope.json"))
+            bad = d / "bad.json"
+            bad.write_text("{bad", encoding="utf-8")
+            self.assertTrue(generate_index._figure_analysis_missing(bad))
+            empty = d / "empty.json"
+            empty.write_text(json.dumps({}), encoding="utf-8")
+            self.assertTrue(generate_index._figure_analysis_missing(empty))
+            ok = d / "ok.json"
+            ok.write_text(json.dumps({"kept": [{"src": "a"}]}), encoding="utf-8")
+            self.assertFalse(generate_index._figure_analysis_missing(ok))
+        finally:
+            shutil.rmtree(d, ignore_errors=True)
+
+    def test_figure_originals_restored_from_source_url(self):
+        # 真实下载：本地服务 + curl 取回原图，不 mock。
+        import json
+        import shutil
+        import tempfile
+        import threading
+        from pathlib import Path
+
+        import http.server
+        payload = b"x" * 3000
+
+        class Handler(http.server.BaseHTTPRequestHandler):
+            def do_GET(self):
+                self.send_response(200)
+                self.send_header("Content-Length", str(len(payload)))
+                self.end_headers()
+                self.wfile.write(payload)
+
+            def log_message(self, format, *args):
+                pass
+
+        server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        base = f"http://127.0.0.1:{server.server_address[1]}"
+        d = Path(tempfile.mkdtemp(prefix="cell_figrestore_"))
+        try:
+            cache = d / "pid.json"
+            cache.write_text(
+                json.dumps([{"src": "restored.png",
+                             "source_url": base + "/img.png"}]),
+                encoding="utf-8")
+            saved_ws = generate_index.WORKSPACE
+            generate_index.WORKSPACE = d
+            try:
+                restored, failed = generate_index._restore_figure_originals(cache)
+            finally:
+                generate_index.WORKSPACE = saved_ws
+            self.assertEqual(restored, 1)
+            self.assertEqual(failed, 0)
+            self.assertTrue((d / "restored.png").is_file())
+            self.assertEqual((d / "restored.png").read_bytes(), payload)
+        finally:
+            server.shutdown()
+            server.server_close()
+            shutil.rmtree(d, ignore_errors=True)
+
+    def test_figure_originals_restore_reports_failure_on_unreachable(self):
+        import json
+        import shutil
+        import tempfile
+        from pathlib import Path
+
+        d = Path(tempfile.mkdtemp(prefix="cell_figrestorefail_"))
+        try:
+            cache = d / "pid.json"
+            cache.write_text(
+                json.dumps([{"src": "lost.png",
+                             "source_url": "http://127.0.0.1:1/unreachable"}]),
+                encoding="utf-8")
+            saved_ws = generate_index.WORKSPACE
+            generate_index.WORKSPACE = d
+            try:
+                restored, failed = generate_index._restore_figure_originals(cache)
+            finally:
+                generate_index.WORKSPACE = saved_ws
+            self.assertEqual(restored, 0)
+            self.assertEqual(failed, 1)
+            self.assertFalse((d / "lost.png").is_file())
+        finally:
+            shutil.rmtree(d, ignore_errors=True)
+
+    def test_page_falls_back_to_base64_when_originals_missing(self):
+        import json
+        import shutil
+        import tempfile
+        from pathlib import Path
+
+        d = Path(tempfile.mkdtemp(prefix="cell_fightml_"))
+        try:
+            pid = "2608.99901v1"
+            clean = "2608.99901"
+            (d / f"{clean}.json").write_text(
+                json.dumps([{"src": "data/figures/originals/missing.png",
+                             "data": "BASE64FOO"}]), encoding="utf-8")
+            (d / f"{clean}_analysis.json").write_text(
+                json.dumps({"0": {"relevant": True}}), encoding="utf-8")
+            saved = generate_index.FIGURES_DIR
+            generate_index.FIGURES_DIR = d
+            try:
+                page = generate_index.generate_html(
+                    [{
+                        "arxiv_id": pid,
+                        "title": "Demo figure fallback",
+                        "published_date": "2026-08-08",
+                        "authors": ["A. Author"],
+                        "abstract": "cell imaging",
+                        "task_type": ["segmentation"],
+                        "priority": None,
+                        "status": {"html": "done"},
+                    }], {}, "2026-08-12 10:00")
+            finally:
+                generate_index.FIGURES_DIR = saved
+            self.assertIn("data:image/jpeg;base64,BASE64FOO", page)
+            self.assertNotIn("missing.png", page)
+        finally:
+            shutil.rmtree(d, ignore_errors=True)
+
+
 if __name__ == "__main__":
     unittest.main()

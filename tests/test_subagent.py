@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+import http.server
 import io
 import json
 import sys
+import threading
 import unittest
 from pathlib import Path
 from unittest.mock import MagicMock, patch
@@ -11,6 +13,37 @@ PROJECT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT))
 
 import subagent
+
+
+class _LocalPaperServer:
+    """真实本地 HTTP 服务：任何 GET 都返回固定正文，供 load_input 走抓取链路。"""
+
+    def __init__(self, body: str):
+        payload = body.encode("utf-8")
+
+        class Handler(http.server.BaseHTTPRequestHandler):
+            def do_GET(self):
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(payload)))
+                self.end_headers()
+                self.wfile.write(payload)
+
+            def log_message(self, format, *args):
+                pass
+
+        self._server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        self._thread = threading.Thread(target=self._server.serve_forever, daemon=True)
+
+    def __enter__(self):
+        self._thread.start()
+        host, port = self._server.server_address[:2]
+        return f"http://{host}:{port}"
+
+    def __exit__(self, *exc):
+        self._server.shutdown()
+        self._server.server_close()
+
 
 
 class SubagentTests(unittest.TestCase):
@@ -67,6 +100,57 @@ class SubagentTests(unittest.TestCase):
         finally:
             if output_file.exists():
                 output_file.unlink()
+
+
+class SubagentInputSourceTests(unittest.TestCase):
+    """四位 arXiv 编号与 bioRxiv 编号都是数据源，不能当成普通文本内容分析。"""
+
+    def test_classify_routes_github_arxiv_biorxiv_and_content(self):
+        self.assertEqual(
+            subagent.classify_input_source("https://github.com/org/repo"),
+            ("github", "https://github.com/org/repo"),
+        )
+        # 五位序号 arXiv
+        self.assertEqual(subagent.classify_input_source("2509.12596"), ("arxiv", "2509.12596"))
+        self.assertEqual(subagent.classify_input_source("2509.12596v3"), ("arxiv", "2509.12596v3"))
+        # 合法的四位序号 arXiv 仍要识别为论文，而非内容
+        self.assertEqual(subagent.classify_input_source("2411.1788"), ("arxiv", "2411.1788"))
+        self.assertEqual(subagent.classify_input_source("2411.1788v2"), ("arxiv", "2411.1788v2"))
+        self.assertEqual(
+            subagent.classify_input_source("biorxiv:10.1101/2024.05.01.591234"),
+            ("biorxiv", "10.1101/2024.05.01.591234"),
+        )
+        # 普通文本保持内容分类，且不会被误判为 arXiv 或 bioRxiv
+        self.assertEqual(
+            subagent.classify_input_source("一段关于细胞图像分割的中文描述"),
+            ("content", "一段关于细胞图像分割的中文描述"),
+        )
+
+    def test_four_digit_arxiv_fetches_remote_not_content(self):
+        body = "<article><p>" + ("细胞图像分割模型用于单细胞分辨率的空间转录组分析。 " * 60) + "</p></article>"
+        saved = subagent.ARXIV_HTML_BASE
+        try:
+            with _LocalPaperServer(body) as base:
+                subagent.ARXIV_HTML_BASE = base
+                result = subagent.load_input("2411.1788")
+        finally:
+            subagent.ARXIV_HTML_BASE = saved
+        self.assertNotEqual(result, "2411.1788")
+        self.assertIn("细胞图像分割", result)
+        self.assertGreater(len(result), 1000)
+
+    def test_biorxiv_fetches_remote_not_content(self):
+        body = "<article><p>" + ("bioRxiv 预印本全文抓取链路验证正文段落内容。 " * 60) + "</p></article>"
+        saved = subagent.BIORXIV_CONTENT_BASE
+        try:
+            with _LocalPaperServer(body) as base:
+                subagent.BIORXIV_CONTENT_BASE = base
+                result = subagent.load_input("biorxiv:10.1101/2024.05.01.591234")
+        finally:
+            subagent.BIORXIV_CONTENT_BASE = saved
+        self.assertNotEqual(result, "biorxiv:10.1101/2024.05.01.591234"[:3000])
+        self.assertIn("预印本", result)
+        self.assertGreater(len(result), 10)
 
 
 if __name__ == "__main__":
