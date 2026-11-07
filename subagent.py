@@ -110,7 +110,10 @@ def load_input(path: str) -> str:
         raise RuntimeError(f"Failed to extract paper text for arXiv ID {arxiv_id}")
 
     elif kind == "biorxiv":
-        html = _fetch_remote_text(f"{BIORXIV_CONTENT_BASE}/{identifier}.full")
+        try:
+            html = _fetch_remote_text(f"{BIORXIV_CONTENT_BASE}/{identifier}.full")
+        except Exception:
+            raise RuntimeError(f"Failed to extract article text for bioRxiv paper {identifier}")
         text = _extract_article_text(html)
         if len(text) <= 10:
             raise RuntimeError(f"Failed to extract article text for bioRxiv paper {identifier}")

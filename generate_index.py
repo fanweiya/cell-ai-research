@@ -26,6 +26,7 @@ import base64
 import io
 import re
 import difflib
+from PIL import Image
 from evidence_export import export_evidence
 from text_render import render_prose
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -1043,12 +1044,18 @@ def _restore_figure_originals(cache_file):
             continue
         try:
             result = subprocess.run(
-                ["curl", "-sL", source_url], capture_output=True, timeout=30
+                ["curl", "-sfL", source_url], capture_output=True, timeout=30
             )
         except (OSError, subprocess.TimeoutExpired):
             failed += 1
             continue
         if result.returncode != 0 or len(result.stdout or b"") < 2000:
+            failed += 1
+            continue
+        try:
+            with Image.open(io.BytesIO(result.stdout)) as img:
+                img.load()
+        except Exception:
             failed += 1
             continue
         original_path = WORKSPACE / src

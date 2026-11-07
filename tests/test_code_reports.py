@@ -900,14 +900,18 @@ class FigureCacheRecoveryTests(unittest.TestCase):
 
     def test_figure_originals_restored_from_source_url(self):
         # 真实下载：本地服务 + curl 取回原图，不 mock。
+        import io
         import json
         import shutil
         import tempfile
         import threading
         from pathlib import Path
+        from PIL import Image
 
         import http.server
-        payload = b"x" * 3000
+        buf = io.BytesIO()
+        Image.new("RGB", (50, 50), color="blue").save(buf, format="BMP")
+        payload = buf.getvalue()
 
         class Handler(http.server.BaseHTTPRequestHandler):
             def do_GET(self):
@@ -968,6 +972,95 @@ class FigureCacheRecoveryTests(unittest.TestCase):
             self.assertEqual(failed, 1)
             self.assertFalse((d / "lost.png").is_file())
         finally:
+            shutil.rmtree(d, ignore_errors=True)
+
+    def test_figure_originals_restore_fails_on_html_error_page(self):
+        import json
+        import shutil
+        import tempfile
+        import threading
+        from pathlib import Path
+        import http.server
+
+        html_err = (b"<html><body>404 Not Found</body></html>" + b" " * 3000)
+
+        class Handler(http.server.BaseHTTPRequestHandler):
+            def do_GET(self):
+                self.send_response(404)
+                self.send_header("Content-Type", "text/html")
+                self.send_header("Content-Length", str(len(html_err)))
+                self.end_headers()
+                self.wfile.write(html_err)
+
+            def log_message(self, format, *args):
+                pass
+
+        server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        base = f"http://127.0.0.1:{server.server_address[1]}"
+        d = Path(tempfile.mkdtemp(prefix="cell_figrestore404_"))
+        try:
+            cache = d / "pid.json"
+            cache.write_text(
+                json.dumps([{"src": "err404.png", "source_url": base + "/img404.png"}]),
+                encoding="utf-8")
+            saved_ws = generate_index.WORKSPACE
+            generate_index.WORKSPACE = d
+            try:
+                restored, failed = generate_index._restore_figure_originals(cache)
+            finally:
+                generate_index.WORKSPACE = saved_ws
+            self.assertEqual(restored, 0)
+            self.assertEqual(failed, 1)
+            self.assertFalse((d / "err404.png").is_file())
+        finally:
+            server.shutdown()
+            server.server_close()
+            shutil.rmtree(d, ignore_errors=True)
+
+    def test_figure_originals_restore_fails_on_fake_image_html(self):
+        import json
+        import shutil
+        import tempfile
+        import threading
+        from pathlib import Path
+        import http.server
+
+        fake_img_html = b"<html><body>Not an image but status 200</body></html>" + b" " * 3000
+
+        class Handler(http.server.BaseHTTPRequestHandler):
+            def do_GET(self):
+                self.send_response(200)
+                self.send_header("Content-Length", str(len(fake_img_html)))
+                self.end_headers()
+                self.wfile.write(fake_img_html)
+
+            def log_message(self, format, *args):
+                pass
+
+        server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        base = f"http://127.0.0.1:{server.server_address[1]}"
+        d = Path(tempfile.mkdtemp(prefix="cell_figrestorefake_"))
+        try:
+            cache = d / "pid.json"
+            cache.write_text(
+                json.dumps([{"src": "fake.png", "source_url": base + "/fake.png"}]),
+                encoding="utf-8")
+            saved_ws = generate_index.WORKSPACE
+            generate_index.WORKSPACE = d
+            try:
+                restored, failed = generate_index._restore_figure_originals(cache)
+            finally:
+                generate_index.WORKSPACE = saved_ws
+            self.assertEqual(restored, 0)
+            self.assertEqual(failed, 1)
+            self.assertFalse((d / "fake.png").is_file())
+        finally:
+            server.shutdown()
+            server.server_close()
             shutil.rmtree(d, ignore_errors=True)
 
     def test_page_falls_back_to_base64_when_originals_missing(self):

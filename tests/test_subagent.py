@@ -85,6 +85,12 @@ class SubagentTests(unittest.TestCase):
             with self.assertRaises(RuntimeError):
                 subagent.load_input("2607.04353")
 
+    def test_biorxiv_failure_raises_runtime_error(self):
+        with patch("urllib.request.urlopen", side_effect=RuntimeError("connection refused")):
+            with self.assertRaises(RuntimeError) as ctx:
+                subagent.load_input("biorxiv:10.1101/2024.05.01.591234")
+            self.assertIn("Failed to extract article text for bioRxiv paper", str(ctx.exception))
+
     def test_subagent_error_does_not_write_output_and_exits_nonzero(self):
         output_file = PROJECT / "tests" / "_temp_result_should_not_exist.json"
         if output_file.exists():
