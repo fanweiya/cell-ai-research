@@ -177,3 +177,29 @@ test('permanent evidence errors retain HTTP reason without retry',async()=>{
   assert.equal(calls,1);assert.ok(snapshot.evidenceFailureDetails.alpha.includes('HTTP 404'));
   x.close();
 });
+
+
+test('over-budget all-library prompt falls back to short cards plus selected abstracts',()=>{
+  const many = Array.from({length: 600}, (_, i) => ({
+    id: 'p' + i,
+    title_en: 'Paper ' + i,
+    title_zh: '论文' + i,
+    abstract: 'A'.repeat(400),
+    task_types: ['segmentation'],
+    published_date: '2026-01-01',
+    arxiv_url: 'https://arxiv.org/abs/p' + i,
+    github_url: i % 2 ? 'https://github.com/x/y' : '',
+  }));
+  const fixture = many.map(p => '<div class="card" data-paper-id="' + p.id + '"><button class="ai-read-btn" onclick="readPaper(this)">AI 解读</button><label class="paper-select"><input type="checkbox" onchange="togglePaperSelection(this)"></label></div>').join('');
+  const dom = new JSDOM(fixture + ui, {url: 'https://example.test/', runScripts: 'outside-only'});
+  const w = dom.window;
+  w.eval('const PAPERS_DB = ' + JSON.stringify(many) + "; const LLM_BASE='https://example.test/v1'; const LLM_MODEL='test';" + '\n' + script);
+  w.setCopilotScope('all');
+  const snapshot = w.requestSnapshot('对比不同论文的分割方法');
+  const prompt = w.buildResearchPrompt(snapshot, '对比不同论文的分割方法');
+  assert.ok(prompt.length < 220000, 'prompt must stay bounded, got ' + prompt.length);
+  assert.ok(prompt.includes('短卡片'), 'over-budget path uses brief cards');
+  assert.ok(prompt.includes('按问题选读的完整摘要'), 'selected abstracts section present');
+  assert.ok(prompt.includes('Paper 599'), 'every paper still appears at least as a brief');
+  w.close();
+});
