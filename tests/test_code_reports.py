@@ -1112,3 +1112,103 @@ class FigureCacheRecoveryTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PipelineFailureTests(unittest.TestCase):
+    """翻译、图片分析与仓库判定在失败时必须显式失败或按证据降级。"""
+
+    def test_translation_failure_ratio_aborts_build(self):
+        papers = [{"arxiv_id": f"2601.9000{i}", "title": f"Paper {i}", "abstract": "abstract text"} for i in range(4)]
+        translated = [
+            {"pid": f"2601.9000{i}", "title_zh": f"论文{i}", "abstract_zh": "摘要",
+             "key_points_zh": "要点", "key_points_version": generate_index.KEY_POINTS_VERSION,
+             "translation_version": generate_index.TRANSLATION_VERSION, "translated_at": "t"}
+            for i in range(4)
+        ]
+
+        def fake_process(pid, title, abstract, task_types, existing, force):
+            if pid.endswith("3"):
+                raise RuntimeError("model down")
+            return translated[int(pid[-1])]
+
+        with patch.object(generate_index, "_process_paper_llm", side_effect=fake_process):
+            with self.assertRaises(RuntimeError):
+                generate_index.translate_and_summarize(papers, {}, force=True)
+
+    def test_single_translation_failure_still_saves_rest(self):
+        papers = [{"arxiv_id": f"2601.9100{i}", "title": f"Paper {i}", "abstract": "abstract text"} for i in range(20)]
+        saved = {}
+
+        def fake_process(pid, title, abstract, task_types, existing, force):
+            if pid == "2601.91007":
+                raise RuntimeError("model down")
+            return {"pid": pid, "title_zh": "标题", "abstract_zh": "摘要",
+                    "key_points_zh": "要点", "key_points_version": generate_index.KEY_POINTS_VERSION,
+                    "translation_version": generate_index.TRANSLATION_VERSION, "translated_at": "t"}
+
+        with patch.object(generate_index, "_process_paper_llm", side_effect=fake_process), \
+                patch.object(generate_index, "_save_translations", side_effect=lambda t: saved.update(t)):
+            result = generate_index.translate_and_summarize(papers, {}, force=True)
+        self.assertEqual(len(result), 19)
+        self.assertNotIn("2601.91007", result)
+
+    def test_code_report_kind_follows_coverage_not_model(self):
+        raw = json.dumps({
+            "summary": "该仓库提供完整实现，包含训练与推理脚本。",
+            "repository_kind": "implementation",
+            "reproduction_readiness": "ready",
+            "confidence": 0.9,
+            "issues": [],
+        })
+        empty_coverage = {"has_implementation": False, "code_file_count_in_tree": 0,
+                          "selected_code_file_count": 0, "tests_present": False}
+        report = generate_index._parse_code_report(raw, coverage=empty_coverage)
+        self.assertEqual(report["repository_kind"], "placeholder")
+        self.assertEqual(report["reproduction_readiness"], "placeholder")
+
+        # 有源码但 README 想抬高判定时，实现型仍需覆盖率证据支撑。
+        thin = {"has_implementation": True, "code_file_count_in_tree": 1,
+                "selected_code_file_count": 1, "tests_present": False}
+        report = generate_index._parse_code_report(raw, coverage=thin)
+        # 单个源码文件不足以支撑"完整实现/可直接运行"的展示结论。
+        self.assertEqual(report["repository_kind"], "partial")
+        self.assertEqual(report["reproduction_readiness"], "needs_fixes")
+
+    def test_figure_analysis_failure_writes_no_cache(self):
+        import shutil
+        import tempfile
+
+        d = Path(tempfile.mkdtemp(prefix="cell_figfail_"))
+        try:
+            figures = [{"data": "AAA", "src": f"{d}/a.png"}, {"data": "BBB", "src": f"{d}/b.png"}]
+            with patch.object(generate_index, "FIGURES_DIR", d), \
+                    patch.object(generate_index, "_analyze_image", side_effect=RuntimeError("vision down")):
+                with self.assertRaises(RuntimeError):
+                    generate_index._filter_figures_by_relevance(figures, "title", "2601.92001")
+            self.assertFalse((d / "2601.92001_analysis.json").exists())
+        finally:
+            shutil.rmtree(d, ignore_errors=True)
+
+    def test_figure_analysis_partial_failure_keeps_success_and_writes_cache(self):
+        import shutil
+        import tempfile
+
+        d = Path(tempfile.mkdtemp(prefix="cell_figpartial_"))
+        try:
+            figures = [{"data": "AAA", "src": f"{d}/a.png"}, {"data": "BBB", "src": f"{d}/b.png"}]
+            answers = iter([(True, 8, "架构图"), RuntimeError("vision down")])
+
+            def fake_analyze(data, title):
+                value = next(answers)
+                if isinstance(value, RuntimeError):
+                    raise value
+                return value
+
+            with patch.object(generate_index, "FIGURES_DIR", d), \
+                    patch.object(generate_index, "_analyze_image", side_effect=fake_analyze):
+                filtered = generate_index._filter_figures_by_relevance(figures, "title", "2601.92002")
+            self.assertEqual(len(filtered), 1)
+            cache = json.loads((d / "2601.92002_analysis.json").read_text(encoding="utf-8"))
+            self.assertEqual(list(cache), ["0"])
+        finally:
+            shutil.rmtree(d, ignore_errors=True)

@@ -482,7 +482,10 @@ def _process_paper_llm(pid, title, abstract, task_types, existing, force):
         or not _has_meaningful_chinese(existing.get("title_zh", ""))
     ):
         t = _translate_academic(title, title, task_types, "标题")
-        result["title_zh"] = t or ""
+        if not t:
+            # 模型失败或质量不合格时返回 None；计入失败样本，由上层阈值决定是否终止构建。
+            raise RuntimeError(f"title translation failed for {pid}")
+        result["title_zh"] = t
     else:
         result["title_zh"] = existing["title_zh"]
 
@@ -496,7 +499,9 @@ def _process_paper_llm(pid, title, abstract, task_types, existing, force):
         or existing.get("abstract_zh", "").strip() == abstract.strip()
     ):
         t = _translate_academic(abstract, title, task_types, "摘要")
-        result["abstract_zh"] = t or ""
+        if not t:
+            raise RuntimeError(f"abstract translation failed for {pid}")
+        result["abstract_zh"] = t
     else:
         result["abstract_zh"] = existing["abstract_zh"]
 
@@ -826,10 +831,14 @@ def _parse_code_report(raw_result, coverage=None):
     if coverage.get("has_implementation") is False or not code_file_count:
         report["repository_kind"] = "placeholder"
         report["reproduction_readiness"] = "placeholder"
-    elif coverage.get("tests_present") and code_file_count >= 5:
-        if report["repository_kind"] in ("unknown", "placeholder"):
-            report["repository_kind"] = "implementation"
-        if report["reproduction_readiness"] == "unknown":
+    else:
+        # 模型给出乐观判定时，用源码统计作为下限：
+        # 代码文件不足 3 个不得展示为完整实现，未检出测试不得展示为"可直接运行"。
+        if report["repository_kind"] == "implementation" and code_file_count < 3:
+            report["repository_kind"] = "partial"
+        if report["reproduction_readiness"] == "ready" and (
+            not coverage.get("tests_present") or code_file_count < 3
+        ):
             report["reproduction_readiness"] = "needs_fixes"
     if not coverage:
         # 缺少静态覆盖率证据时，禁止展示乐观判定。
@@ -4140,80 +4149,7 @@ def analyze_cloned_repos(papers, force=False):
     """Deprecated: local repository analysis is permanently disabled."""
     print("⏭  Local repository analysis is disabled; use gread_remote.py instead.")
     return
-    cloned_targets = []
-    
-    # 查找所有已经克隆代码的项目
-    for p in papers:
-        gh = p.get("status", {}).get("github", {})
-        if not isinstance(gh, dict):
-            continue
-        repo_path = gh.get("repo_path")
-        if repo_path:
-            repo_dir = WORKSPACE / "code" / repo_path
-            if repo_dir.exists():
-                url = gh.get("url", "")
-                cloned_targets.append((repo_path, url))
-                
-    if not cloned_targets:
-        return
-        
-    print(f"🔍 Found {len(cloned_targets)} cloned repositories to check.")
-    
-    # 同步 CodeGraph
-    cg_sync()
-    
-    reports_dir = WORKSPACE / "reports"
-    reports_dir.mkdir(parents=True, exist_ok=True)
-    
-    for repo_name, gh_url in sorted(cloned_targets):
-        wiki_dir = reports_dir / f"{repo_name}_wiki"
-        wiki_dir.mkdir(parents=True, exist_ok=True)
-        
-        combined_report_path = wiki_dir / "combined_report.md"
-        wiki_index_path = wiki_dir / "index.md"
-        
-        # 增量分析，避免重复分析已有的报告
-        if not force and combined_report_path.exists() and wiki_index_path.exists():
-            continue
-            
-        print(f"▶ Analyzing codebase: {repo_name}...")
-        
-        # 1. CodeGraph 分析
-        cg_data = cg_query(repo_name)
-        
-        # 2. RepoWiki 文档化
-        repo_path = WORKSPACE / "code" / repo_name
-        rw_data = rw_scan(repo_name, repo_path)
-        
-        # 3. 读取并重组已有的子代理报告 (大小写不敏感)
-        old_report = ""
-        old_report_path = None
-        for f in reports_dir.iterdir():
-            if f.is_file() and f.suffix == ".md" and f.stem.lower() == repo_name.lower() and not f.name.endswith("_combined.md"):
-                old_report_path = f
-                break
-                
-        if old_report_path and old_report_path.exists():
-            try:
-                old_report = old_report_path.read_text(encoding="utf-8")
-                # 将子代理报告移入 wiki 目录下，清理根目录的杂乱文件
-                subagent_report_dest = wiki_dir / "subagent_report.md"
-                subagent_report_dest.write_text(old_report, encoding="utf-8")
-                old_report_path.unlink() # 删除根目录的冗余文件
-                print(f"   ✓ Moved raw report to {subagent_report_dest.relative_to(WORKSPACE)}")
-            except Exception as e:
-                print(f"   [WARN] Failed to organize subagent report: {e}")
-                
-        # 4. 生成合并报告
-        combined_content = generate_combined_report(repo_name, gh_url, cg_data, rw_data, old_report)
-        try:
-            combined_report_path.write_text(combined_content, encoding="utf-8")
-            print(f"   ✓ Unified report generated: {combined_report_path.relative_to(WORKSPACE)}")
-        except Exception as e:
-            print(f"   [WARN] Failed to write unified report: {e}")
-            
-        # 5. 编译所有 wiki 页面为本地静态 HTML (实现无 CORS 离线阅读)
-        compile_wiki_to_html(wiki_dir, repo_name)
+    # 本地克隆分析已永久停用；远程静态分析走 gread_remote.py。
 
 
 # ============================================================
