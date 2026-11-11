@@ -1876,18 +1876,23 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
             for fig in figures:
                 caption = fig.get("caption", "")
                 caption_html = f'<div class="fig-cap">{_esc(caption)}</div>' if caption else ""
-                image_src = _ensure_preview(fig)
-                if image_src and not (WORKSPACE / image_src).is_file():
-                    image_src = None
-                if not image_src and fig.get("src") and (WORKSPACE / fig["src"]).is_file():
-                    # 旧缓存没有预览文件时退回原图，保证老条目不坏图。
-                    image_src = fig["src"]
-                if image_src:
-                    image_src = _esc(image_src)
+                preview_src = _ensure_preview(fig)
+                full_src = fig.get("src")
+                if full_src and not (WORKSPACE / full_src).is_file():
+                    full_src = None
+                if preview_src and not (WORKSPACE / preview_src).is_file():
+                    preview_src = None
+                if not preview_src and full_src:
+                    # 预览生成失败时退回原图，保证老条目不坏图。
+                    preview_src = full_src
+                if preview_src:
+                    image_src = _esc(preview_src)
                 else:
                     # 原图与预览都丢失时退回缓存里的 base64 预览。
                     image_src = f'data:image/jpeg;base64,{fig["data"]}'
-                imgs += f'<div class="fig-item"><img src="{image_src}" class="fig-img" loading="lazy" decoding="async" onclick="openModal(this)" />{caption_html}</div>'
+                    full_src = None
+                full_attr = f' data-full="{_esc(full_src)}"' if full_src else ''
+                imgs += f'<div class="fig-item"><img src="{image_src}"{full_attr} class="fig-img" loading="lazy" decoding="async" onclick="openModal(this)" />{caption_html}</div>'
             figs_html = f'''<details class="sec fig-sec">
   <summary class="sec-h">📊 论文关键图示 ({len(figures)} 张)</summary>
   <div class="fig-grid">{imgs}</div>
@@ -3427,10 +3432,14 @@ function openModal(target) {{
     const grid = imgElem.closest('.fig-grid');
     if (grid) {{
       const items = Array.from(grid.querySelectorAll('.fig-item'));
-      modalGallery.items = items.map(item => ({{
-        src: item.querySelector('.fig-img')?.getAttribute('src') || '',
-        caption: item.querySelector('.fig-cap')?.textContent.trim() || ''
-      }}));
+      modalGallery.items = items.map(item => {{
+        const el = item.querySelector('.fig-img');
+        return {{
+          // 灯箱用原图；列表用预览图。
+          src: el?.getAttribute('data-full') || el?.getAttribute('src') || '',
+          caption: item.querySelector('.fig-cap')?.textContent.trim() || ''
+        }};
+      }});
       const foundIdx = items.findIndex(item => item.querySelector('.fig-img') === imgElem);
       modalGallery.index = foundIdx >= 0 ? foundIdx : 0;
     }} else {{
