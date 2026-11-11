@@ -29,6 +29,13 @@ def update_site(evidence, changed, project, pending_path, run, build_command):
                 generated_html = index_path.read_text(encoding='utf-8')
                 if '100dvh' not in generated_html:
                     raise AssertionError('生成产物缺少 100dvh 视口高度定义')
+                # 截断检测：完整页面必然以 </html> 结尾且包含大量论文卡片；
+                # 仅检查头部标记查不出写一半被终止的情况。
+                if not generated_html.rstrip().endswith('</html>'):
+                    raise AssertionError('生成产物不完整：缺少结尾 </html> 标记')
+                card_count = generated_html.count('class="card"')
+                if card_count < 100:
+                    raise AssertionError(f'生成产物论文卡片数量异常：{card_count}')
         except Exception as exc:
             evidence['index_status'] = '失败'
             evidence['publish_status'] = '未执行（生成失败）'

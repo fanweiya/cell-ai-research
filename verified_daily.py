@@ -89,6 +89,25 @@ def run(command: list[str], timeout: int = 90) -> subprocess.CompletedProcess[st
     return subprocess.run(command, capture_output=True, text=True, timeout=timeout)
 
 
+EVIDENCE_KEEP = 30
+
+
+def prune_evidence_snapshots() -> None:
+    """运行证据快照按时间保留最近 EVIDENCE_KEEP 份，防止工作区无限增长。"""
+    if not EVIDENCE_DIR.is_dir():
+        return
+    for prefix in ("papers-before-", "run-"):
+        snapshots = sorted(
+            (p for p in EVIDENCE_DIR.glob(f"{prefix}*.json") if p.is_file()),
+            key=lambda p: p.stat().st_mtime,
+        )
+        for stale in snapshots[:-EVIDENCE_KEEP]:
+            try:
+                stale.unlink()
+            except OSError:
+                pass
+
+
 def index_build_command(python_executable: str) -> list[str]:
     """Build the public index and incrementally fill all page-facing caches."""
     return [
@@ -713,6 +732,7 @@ def render_report(evidence: dict, added: list[dict]) -> str:
 def main() -> int:
     now = datetime.now(timezone.utc)
     EVIDENCE_DIR.mkdir(parents=True, exist_ok=True)
+    prune_evidence_snapshots()
     with LOCK_PATH.open("a+", encoding="utf-8") as lock:
         if sys.platform != "win32":
             try:

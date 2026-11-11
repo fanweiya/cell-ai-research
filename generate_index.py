@@ -561,6 +561,7 @@ def translate_and_summarize(papers, translations, force=False):
 
     print(f"  Processing {len(tasks)} papers with {MAX_WORKERS} workers...")
     done = 0
+    failed_pids = []
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
         futures = {
             pool.submit(
@@ -589,6 +590,7 @@ def translate_and_summarize(papers, translations, force=False):
                 done += 1
                 print(f"  [{done}/{len(tasks)}] ✓ {pid}")
             except Exception as e:
+                failed_pids.append(pid)
                 print(f"  [WARN] Failed {pid}: {e}")
 
             # 增量保存
@@ -597,6 +599,13 @@ def translate_and_summarize(papers, translations, force=False):
 
     _save_translations(translations)
     print(f"  Done: {done} papers processed.")
+    # 翻译大面积失败时让构建失败，避免把空标题/空摘要发布到公开页面。
+    failure_ratio = len(failed_pids) / len(tasks) if tasks else 0.0
+    if failure_ratio > 0.05:
+        raise RuntimeError(
+            f"translation pipeline failed for {len(failed_pids)}/{len(tasks)} papers "
+            f"({failure_ratio:.0%}); refusing to publish partially translated index"
+        )
     return translations
 
 
@@ -811,9 +820,23 @@ def _parse_code_report(raw_result, coverage=None):
         report["confidence"] = 0.5
 
     coverage = coverage if isinstance(coverage, dict) else {}
-    if coverage.get("has_implementation") is False:
+    # 判定字段以静态证据规则为准，模型输出只保留文字说明；
+    # 仓库 README 无法通过提示词抬高这两个公开展示字段。
+    code_file_count = coverage.get("code_file_count_in_tree") or 0
+    if coverage.get("has_implementation") is False or not code_file_count:
         report["repository_kind"] = "placeholder"
         report["reproduction_readiness"] = "placeholder"
+    elif coverage.get("tests_present") and code_file_count >= 5:
+        if report["repository_kind"] in ("unknown", "placeholder"):
+            report["repository_kind"] = "implementation"
+        if report["reproduction_readiness"] == "unknown":
+            report["reproduction_readiness"] = "needs_fixes"
+    if not coverage:
+        # 缺少静态覆盖率证据时，禁止展示乐观判定。
+        if report["repository_kind"] == "implementation":
+            report["repository_kind"] = "unknown"
+        if report["reproduction_readiness"] == "ready":
+            report["reproduction_readiness"] = "unknown"
     report["version"] = CODE_REPORT_VERSION
     return report
 
@@ -1005,6 +1028,21 @@ def _safe_figure_extension(rel_path, image_format):
     return format_suffix.get((image_format or "").upper(), ".img")
 
 
+FIGURE_NEGATIVE_CACHE_TTL = 7 * 24 * 3600
+
+
+def _figure_negative_cache_fresh(cache_file):
+    """无图论文的负缓存是否仍在有效期内（文件存在且内容为 []）。"""
+    if not cache_file.exists():
+        return False
+    try:
+        if cache_file.stat().st_mtime < time.time() - FIGURE_NEGATIVE_CACHE_TTL:
+            return False
+        return json.loads(cache_file.read_text(encoding="utf-8")) == []
+    except (OSError, json.JSONDecodeError, ValueError):
+        return False
+
+
 def _figure_cache_problem(cache_file):
     """检查图片缓存是否可用，返回需要重建的原因（可用时为空字符串）。"""
     if not cache_file.exists():
@@ -1016,7 +1054,8 @@ def _figure_cache_problem(cache_file):
     if not isinstance(figures, list):
         return "invalid_format"
     if not figures:
-        return "empty"
+        # 无图论文：负缓存有效期内不重复抓取 arXiv，过期后再试。
+        return "" if _figure_negative_cache_fresh(cache_file) else "empty"
     for fig in figures:
         if not isinstance(fig, dict):
             return "invalid_entry"
@@ -1089,21 +1128,32 @@ def _extract_figures_for_paper(pid, papers_map, force=False):
 
     # 从 arXiv HTML 页面获取图片
     html_url = f"https://arxiv.org/html/{pid}"
+    fetch_failed = False
     try:
         result = subprocess.run(
             ["curl", "-sL", html_url],
             capture_output=True, text=True, timeout=30
         )
         if result.returncode != 0:
-            return []
+            fetch_failed = True
         html = result.stdout
 
         # 检查是否为 arXiv "No HTML" 错误页面
         # 这些论文源文件不是纯 LaTeX/HTML 或转换失败，无法获取全文
-        if "No HTML for" in html or "HTML is not available" in html:
+        if not fetch_failed and ("No HTML for" in html or "HTML is not available" in html):
             print(f"  [WARN] No HTML available for {pid}")
-            return []
-    except:
+            fetch_failed = True
+    except Exception as exc:
+        print(f"  [WARN] figure fetch error for {pid}: {type(exc).__name__}: {exc}")
+        fetch_failed = True
+
+    if fetch_failed:
+        # 抓取失败写入带时间戳的空缓存（负缓存），
+        # 7 天内不再重复请求 arXiv，过期后自动重试。
+        FIGURES_DIR.mkdir(parents=True, exist_ok=True)
+        temp_marker = cache_file.with_suffix(".tmp")
+        temp_marker.write_text("[]", encoding="utf-8")
+        temp_marker.replace(cache_file)
         return []
 
     from PIL import Image
@@ -1173,20 +1223,27 @@ def _extract_figures_for_paper(pid, papers_map, force=False):
             buf = io.BytesIO()
             preview.save(buf, format="JPEG", quality=75, optimize=True)
             b64 = base64.b64encode(buf.getvalue()).decode("ascii")
+            # 页面展示用的小尺寸预览文件：避免 10MB 级原图直接进入列表页。
+            preview_path = FIGURES_DIR / "previews" / f"{clean_id}_{idx + 1}.jpg"
+            preview_path.parent.mkdir(parents=True, exist_ok=True)
+            preview_path.write_bytes(buf.getvalue())
             figures.append({
                 "data": b64,
                 "src": original_path.relative_to(WORKSPACE).as_posix(),
+                "preview_src": preview_path.relative_to(WORKSPACE).as_posix(),
                 "source_url": url,
                 "page": idx + 1,
                 "width": width,
                 "height": height,
             })
-        except:
+        except Exception as exc:
+            print(f"  [WARN] figure download failed for {pid} #{idx + 1}: {type(exc).__name__}: {exc}")
             continue
 
     FIGURES_DIR.mkdir(parents=True, exist_ok=True)
-    with open(cache_file, "w") as f:
-        json.dump(figures, f)
+    temp_cache = cache_file.with_suffix(".tmp")
+    temp_cache.write_text(json.dumps(figures, ensure_ascii=False), encoding="utf-8")
+    temp_cache.replace(cache_file)
 
     return figures
 
@@ -1227,17 +1284,22 @@ def extract_all_figures(papers, force=False):
         if _figure_analysis_missing(analysis_file) and cache_file.exists():
             if not figs:
                 try:
-                    with open(cache_file) as f:
-                        figs = json.load(f)
-                except:
+                    figs = json.loads(cache_file.read_text(encoding="utf-8"))
+                except (OSError, json.JSONDecodeError):
                     continue
             if figs:
                 title = p.get("title", "")
                 print(f"  [{i+1}/{total}] Analyzing figures: {clean_id} ({len(figs)} images)...")
-                filtered = _filter_figures_by_relevance(figs, title, pid)
-                # Save filtered figures back
-                with open(cache_file, "w") as f:
-                    json.dump(filtered, f)
+                try:
+                    filtered = _filter_figures_by_relevance(figs, title, pid)
+                except Exception as exc:
+                    # 分析失败：不写任何缓存，保留原缓存文件，下次构建重试。
+                    print(f"  [WARN] figure analysis skipped for {clean_id}: {exc}")
+                    continue
+                # Save filtered figures back (atomic + explicit encoding)
+                temp_cache = cache_file.with_suffix(".tmp")
+                temp_cache.write_text(json.dumps(filtered, ensure_ascii=False), encoding="utf-8")
+                temp_cache.replace(cache_file)
                 analyzed += 1
 
     print(f"  Extracted: {extracted}, Analyzed: {analyzed} papers")
@@ -1282,8 +1344,9 @@ def _analyze_image(b64_data, paper_title):
         # Fallback: if LLM says relevant in text
         return "relevant" in text.lower() or "true" in text.lower(), 5, text[:50]
     except Exception as e:
-        # If analysis fails, keep the image (safe default)
-        return True, 5, ""
+        # 分析失败必须显式上抛，由调用方决定是否重试；
+        # 绝不允许把失败默认成"相关"并写入缓存。
+        raise RuntimeError(f"image analysis failed: {type(e).__name__}: {e}") from e
 
 
 def _filter_figures_by_relevance(figures, paper_title, pid):
@@ -1306,18 +1369,34 @@ def _filter_figures_by_relevance(figures, paper_title, pid):
     # Analyze each image
     analysis = {}
     filtered = []
+    failures = 0
     for i, fig in enumerate(figures):
-        is_rel, score, caption = _analyze_image(fig["data"], paper_title)
+        try:
+            is_rel, score, caption = _analyze_image(fig["data"], paper_title)
+        except Exception as exc:
+            # 单图失败：跳过该图并计入失败；超过半数失败时放弃整篇，
+            # 不写任何缓存，下次构建重试。
+            print(f"  [WARN] figure {i} analysis failed: {exc}")
+            failures += 1
+            continue
         analysis[str(i)] = {"relevant": is_rel, "score": score, "caption": caption}
         if is_rel:
             fig["caption"] = caption
             fig["score"] = score
             filtered.append(fig)
 
-    # Cache analysis
+    if failures * 2 > len(figures):
+        raise RuntimeError(
+            f"figure relevance analysis failed for {failures}/{len(figures)} images; "
+            "no cache written so the next build can retry"
+        )
+
+    # 只有整篇分析成功才写缓存；失败结果不允许固化。
     FIGURES_DIR.mkdir(parents=True, exist_ok=True)
-    with open(analysis_file, "w") as f:
-        json.dump(analysis, f, ensure_ascii=False, indent=2)
+    analysis_payload = json.dumps(analysis, ensure_ascii=False, indent=2)
+    temp_analysis = analysis_file.with_suffix(".tmp")
+    temp_analysis.write_text(analysis_payload, encoding="utf-8")
+    temp_analysis.replace(analysis_file)
 
     # Always keep at least 1 image
     if not filtered and figures:
@@ -1340,9 +1419,8 @@ def _load_figures_filtered(pid):
     figures = []
     if cache_file.exists():
         try:
-            with open(cache_file) as f:
-                figures = json.load(f)
-        except:
+            figures = json.loads(cache_file.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
             return []
 
     if analysis_file.exists():
@@ -1361,9 +1439,8 @@ def _load_figures(pid):
     cache_file = FIGURES_DIR / f"{clean_id}.json"
     if cache_file.exists():
         try:
-            with open(cache_file, "r") as f:
-                return json.load(f)
-        except:
+            return json.loads(cache_file.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
             pass
     return []
 
@@ -1586,9 +1663,10 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
 
         title = _esc(p.get("title", "Untitled"))
         trans = translations.get(pid, {})
-        title_zh = _esc(trans.get("title_zh", title))
+        # 翻译失败会写入空串，此时必须回退英文原文，不得发布空标题/空摘要。
+        title_zh = _esc(trans.get("title_zh") or p.get("title", "Untitled"))
         abstract = p.get("abstract") or p.get("abstract_summary") or ""
-        abstract_zh = render_prose(trans.get("abstract_zh", abstract))
+        abstract_zh = render_prose(trans.get("abstract_zh") or abstract)
         abstract_en = render_prose(abstract)
         key_points = trans.get("key_points_zh", "")
         key_points_html = _esc(key_points).replace("\n", "<br>") if key_points else ""
@@ -1765,13 +1843,16 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
             for fig in figures:
                 caption = fig.get("caption", "")
                 caption_html = f'<div class="fig-cap">{_esc(caption)}</div>' if caption else ""
-                image_src = fig.get("src")
+                image_src = fig.get("preview_src")
                 if image_src and not (WORKSPACE / image_src).is_file():
-                    # 原图文件丢失时退回缓存里的 base64 预览，避免页面出现坏图。
                     image_src = None
+                if not image_src and fig.get("src") and (WORKSPACE / fig["src"]).is_file():
+                    # 旧缓存没有预览文件时退回原图，保证老条目不坏图。
+                    image_src = fig["src"]
                 if image_src:
                     image_src = _esc(image_src)
                 else:
+                    # 原图与预览都丢失时退回缓存里的 base64 预览。
                     image_src = f'data:image/jpeg;base64,{fig["data"]}'
                 imgs += f'<div class="fig-item"><img src="{image_src}" class="fig-img" loading="lazy" decoding="async" onclick="openModal(this)" />{caption_html}</div>'
             figs_html = f'''<details class="sec fig-sec">
@@ -4164,8 +4245,10 @@ def main():
         evidence_manifest=export_evidence(papers, PAPER_CONTEXT_DIR, WORKSPACE / "data" / "evidence"),
     )
 
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        f.write(html_content)
+    # 原子写入：先写临时文件再替换，写一半被终止不会破坏现有页面。
+    temp_output = OUTPUT_FILE.with_suffix(".html.tmp")
+    temp_output.write_text(html_content, encoding="utf-8")
+    temp_output.replace(OUTPUT_FILE)
     size_kb = len(html_content) / 1024
     print(f"✅ Output: {OUTPUT_FILE} ({size_kb:.0f} KB)")
     print("Done!")

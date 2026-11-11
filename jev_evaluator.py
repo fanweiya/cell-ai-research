@@ -23,6 +23,10 @@ TYPESAFE_ENDPOINT = "https://api.typesafe.ai/v1/systemone"
 RULE_VERSION = "2026.10.v2"
 PINNED_MODEL = "jev-1.14.0"
 
+# 项目根目录从脚本位置推导，可用 CELL_AI_PROJECT 覆盖；
+# 不再把 /mnt/c 绝对路径写进代码，换机器或换目录时自动跟随。
+PROJECT_DIR = Path(os.environ.get("CELL_AI_PROJECT", Path(__file__).resolve().parent))
+
 # 通道定义：按延迟与稳定性优先级排序 (TypeSafe Jev -> Codiv OpenJev -> SubQ -> Cloudflare Clef)
 EVAL_CHANNELS = [
     {
@@ -168,7 +172,7 @@ def verify_code_status(paper: dict) -> tuple[str, str, dict]:
         return "未提供代码", "论文未提供或未检索到开源代码仓库", details
 
 
-def extract_evidence(paper: dict, context_dir: Path = Path("/mnt/c/workspace/cell-ai-research/data/paper_context")) -> dict:
+def extract_evidence(paper: dict, context_dir: Path = PROJECT_DIR / "data" / "paper_context") -> dict:
     aid = paper.get("arxiv_id", "")
     base_id = aid.split("v")[0]
     txt_path = context_dir / f"{base_id}.txt"
@@ -381,9 +385,16 @@ def format_evaluation_result(answers: dict, asked_dims: list[str], evidence_info
 
 def resolve_channel_config(channel: dict) -> tuple[str | None, str, str, dict]:
     for path in ["/home/fanweiya/.hermes/hermes-agent", "/home/fanweiya/.hermes/plugins/hermes-switchyard"]:
-        if path not in sys.path:
+        if os.path.isdir(path) and path not in sys.path:
             sys.path.insert(0, path)
-    from agent.secret_scope import get_secret
+    try:
+        from agent.secret_scope import get_secret
+    except ImportError as exc:
+        # 依赖的外部模块缺失时显式失败并说明原因，禁止静默降级后固化残缺评分。
+        raise RuntimeError(
+            "agent.secret_scope is unavailable (hermes-agent not found); "
+            f"evaluation cannot proceed without credentials: {exc}"
+        ) from exc
 
     name = channel.get("name", "")
     key = None
@@ -473,7 +484,7 @@ def evaluate_single_paper(
 
 
 def run_batch_evaluation(
-    db_path: str = "/mnt/c/workspace/cell-ai-research/papers.json",
+    db_path: str = str(PROJECT_DIR / "papers.json"),
     max_workers: int = 6,
     force: bool = False,
     limit: int | None = None,

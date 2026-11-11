@@ -11,6 +11,13 @@ if [[ -f "$HOME/.hermes/.env" ]]; then
   source "$HOME/.hermes/.env"
   set +a
 fi
+# CLOUDFLARE_DEPLOY.md 记录的独立凭据文件；存在时补充加载（不覆盖已设置变量）。
+if [[ -f "$HOME/.config/hermes/cf-pages.env" ]]; then
+  set -a
+  # shellcheck disable=SC1091
+  source "$HOME/.config/hermes/cf-pages.env"
+  set +a
+fi
 
 if [[ -z "${CLOUDFLARE_API_TOKEN:-}" ]]; then
   echo "CLOUDFLARE_API_TOKEN is not set; refusing to publish." >&2

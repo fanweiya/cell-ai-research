@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
+import time
 import unittest
 from datetime import datetime, timezone
 from pathlib import Path
@@ -856,7 +858,15 @@ class FigureCacheRecoveryTests(unittest.TestCase):
 
             empty = d / "empty.json"
             empty.write_text(json.dumps([]), encoding="utf-8")
-            self.assertEqual(generate_index._figure_cache_problem(empty), "empty")
+            # 负缓存语义：空缓存文件在 TTL 视为有效的"无图论文"记录；
+            # 刚写入的文件必然新鲜，因此返回 ""。
+            self.assertEqual(generate_index._figure_cache_problem(empty), "")
+            # 过期的空缓存视为需要重建。
+            stale = d / "stale-empty.json"
+            stale.write_text(json.dumps([]), encoding="utf-8")
+            old = time.time() - generate_index.FIGURE_NEGATIVE_CACHE_TTL - 60
+            os.utime(stale, (old, old))
+            self.assertEqual(generate_index._figure_cache_problem(stale), "empty")
 
             badentry = d / "badentry.json"
             badentry.write_text(json.dumps(["notdict"]), encoding="utf-8")
