@@ -1431,6 +1431,39 @@ def _load_figures_filtered(pid):
     return figures
 
 
+def _ensure_preview(fig):
+    """确保图片有页面展示用的小尺寸预览文件；旧缓存首次渲染时按需生成。"""
+    src = fig.get("src")
+    if not src:
+        return None
+    preview_rel = fig.get("preview_src")
+    if preview_rel and (WORKSPACE / preview_rel).is_file():
+        return preview_rel
+    original = WORKSPACE / src
+    if not original.is_file():
+        return None
+    name = Path(src).stem + ".jpg"
+    preview_path = FIGURES_DIR / "previews" / name
+    if not preview_path.is_file():
+        try:
+            with Image.open(original) as img:
+                preview = img.convert("RGB")
+                if preview.width > MAX_FIGURE_WIDTH:
+                    ratio = MAX_FIGURE_WIDTH / preview.width
+                    preview = preview.resize(
+                        (MAX_FIGURE_WIDTH, max(1, int(preview.height * ratio))), Image.LANCZOS
+                    )
+                preview_path.parent.mkdir(parents=True, exist_ok=True)
+                temp_preview = preview_path.with_suffix(".tmp")
+                preview.save(temp_preview, format="JPEG", quality=75, optimize=True)
+                temp_preview.replace(preview_path)
+        except Exception as exc:
+            print(f"  [WARN] preview generation failed for {src}: {type(exc).__name__}: {exc}")
+            return None
+    fig["preview_src"] = preview_path.relative_to(WORKSPACE).as_posix()
+    return fig["preview_src"]
+
+
 def _load_figures(pid):
     """加载已缓存的图片"""
     clean_id = re.sub(r"v\d+$", "", pid)
@@ -1843,7 +1876,7 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
             for fig in figures:
                 caption = fig.get("caption", "")
                 caption_html = f'<div class="fig-cap">{_esc(caption)}</div>' if caption else ""
-                image_src = fig.get("preview_src")
+                image_src = _ensure_preview(fig)
                 if image_src and not (WORKSPACE / image_src).is_file():
                     image_src = None
                 if not image_src and fig.get("src") and (WORKSPACE / fig["src"]).is_file():

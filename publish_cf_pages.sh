@@ -38,6 +38,10 @@ cp "$ROOT_DIR/web/paper-math.js" "$SITE_DIR/web/paper-math.js"
 if [[ -d "$ROOT_DIR/data/evidence" ]]; then
   cp -R "$ROOT_DIR/data/evidence" "$SITE_DIR/data/evidence"
 fi
+if [[ -d "$ROOT_DIR/data/figures/previews" ]]; then
+  # 页面列表只加载这些小尺寸预览，原图仍随站点发布供灯箱查看。
+  cp -R "$ROOT_DIR/data/figures/previews" "$SITE_DIR/data/figures/previews"
+fi
 if [[ -d "$ROOT_DIR/data/figures/originals" ]]; then
   cp -R "$ROOT_DIR/data/figures/originals" "$SITE_DIR/data/figures/originals"
 fi
