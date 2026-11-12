@@ -43,6 +43,8 @@
 .msg { min-width: 0; }
 .msg-bubble { overflow-wrap: anywhere; }
 .msg-bubble pre { overflow-x: auto; }
+.msg-bubble a.rlink { text-decoration: none; border-bottom: 1px dotted var(--accent); }
+.msg-note { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; color: var(--text3); font-size: 12px; }
 .md-table-wrap { overflow-x: auto; max-width: 100%; margin: 8px 0; }
 .md-table-wrap table { border-collapse: collapse; font-size: 12px; min-width: 320px; }
 .md-table-wrap td,.md-table-wrap th { border: 1px solid var(--border); padding: 7px 9px; vertical-align: top; text-align: left; }
