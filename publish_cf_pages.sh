@@ -5,18 +5,22 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SITE_DIR="$ROOT_DIR/.cf-pages-site"
 PROJECT_NAME="${CF_PAGES_PROJECT:-cell-ai-research}"
 
-if [[ -f "$HOME/.hermes/.env" ]]; then
-  set -a
-  # Reuse Hermes' existing Cloudflare credentials without copying secrets.
-  source "$HOME/.hermes/.env"
-  set +a
-fi
-# CLOUDFLARE_DEPLOY.md 记录的独立凭据文件；存在时补充加载（不覆盖已设置变量）。
+# CLOUDFLARE_DEPLOY.md 记录的 Pages 专用凭据文件优先加载；
+# 缺失的变量随后从 Hermes 的环境文件补齐，已有值保持不变。
 if [[ -f "$HOME/.config/hermes/cf-pages.env" ]]; then
   set -a
   # shellcheck disable=SC1091
   source "$HOME/.config/hermes/cf-pages.env"
   set +a
+fi
+if [[ -f "$HOME/.hermes/.env" ]]; then
+  # 逐个变量读取，跳过已经存在的名称，避免覆盖专用凭据。
+  while IFS='=' read -r key value; do
+    [[ "$key" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]] || continue
+    if [[ -z "$(printenv "$key" || true)" ]]; then
+      export "$key=$value"
+    fi
+  done < <(grep -E '^[A-Za-z_][A-Za-z0-9_]*=' "$HOME/.hermes/.env")
 fi
 
 if [[ -z "${CLOUDFLARE_API_TOKEN:-}" ]]; then

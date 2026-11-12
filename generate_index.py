@@ -1137,32 +1137,40 @@ def _extract_figures_for_paper(pid, papers_map, force=False):
 
     # 从 arXiv HTML 页面获取图片
     html_url = f"https://arxiv.org/html/{pid}"
+    # 区分两类失败：arXiv 确认该论文没有 HTML 转换结果（负缓存有效），
+    # 与网络瞬时失败（不写负缓存，下次构建重新抓取）。
+    no_html = False
     fetch_failed = False
     try:
         result = subprocess.run(
-            ["curl", "-sL", html_url],
+            ["curl", "-sfL", html_url],
             capture_output=True, text=True, timeout=30
         )
         if result.returncode != 0:
+            # 非零退出同时覆盖网络异常与 HTTP 错误状态码；
+            # 用 stderr 里的状态码痕迹判断是否为 404（确认无 HTML）。
             fetch_failed = True
+            if result.stderr and result.stderr.strip().endswith(": 404") or " 404 " in (result.stderr or ""):
+                no_html = True
         html = result.stdout
 
-        # 检查是否为 arXiv "No HTML" 错误页面
-        # 这些论文源文件不是纯 LaTeX/HTML 或转换失败，无法获取全文
+        # arXiv 明确返回"没有 HTML 转换"的错误页面
         if not fetch_failed and ("No HTML for" in html or "HTML is not available" in html):
             print(f"  [WARN] No HTML available for {pid}")
             fetch_failed = True
+            no_html = True
     except Exception as exc:
         print(f"  [WARN] figure fetch error for {pid}: {type(exc).__name__}: {exc}")
         fetch_failed = True
 
     if fetch_failed:
-        # 抓取失败写入带时间戳的空缓存（负缓存），
-        # 7 天内不再重复请求 arXiv，过期后自动重试。
-        FIGURES_DIR.mkdir(parents=True, exist_ok=True)
-        temp_marker = cache_file.with_suffix(".tmp")
-        temp_marker.write_text("[]", encoding="utf-8")
-        temp_marker.replace(cache_file)
+        if no_html:
+            # 确认无 HTML：写负缓存，7 天内不再重复请求。
+            FIGURES_DIR.mkdir(parents=True, exist_ok=True)
+            temp_marker = cache_file.with_suffix(".tmp")
+            temp_marker.write_text("[]", encoding="utf-8")
+            temp_marker.replace(cache_file)
+        # 瞬时失败不落缓存，下次构建会重新抓取。
         return []
 
     from PIL import Image

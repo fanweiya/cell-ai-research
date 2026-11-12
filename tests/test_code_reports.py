@@ -1118,39 +1118,64 @@ class PipelineFailureTests(unittest.TestCase):
     """翻译、图片分析与仓库判定在失败时必须显式失败或按证据降级。"""
 
     def test_translation_failure_ratio_aborts_build(self):
-        papers = [{"arxiv_id": f"2601.9000{i}", "title": f"Paper {i}", "abstract": "abstract text"} for i in range(4)]
-        translated = [
-            {"pid": f"2601.9000{i}", "title_zh": f"论文{i}", "abstract_zh": "摘要",
-             "key_points_zh": "要点", "key_points_version": generate_index.KEY_POINTS_VERSION,
-             "translation_version": generate_index.TRANSLATION_VERSION, "translated_at": "t"}
-            for i in range(4)
-        ]
+        import shutil
+        import tempfile
 
-        def fake_process(pid, title, abstract, task_types, existing, force):
-            if pid.endswith("3"):
-                raise RuntimeError("model down")
-            return translated[int(pid[-1])]
+        d = Path(tempfile.mkdtemp(prefix="cell_trans_"))
+        try:
+            papers = [{"arxiv_id": f"2601.9000{i}", "title": f"Paper {i}", "abstract": "abstract text"} for i in range(4)]
+            translated = [
+                {"pid": f"2601.9000{i}", "title_zh": f"论文{i}", "abstract_zh": "摘要",
+                 "key_points_zh": "要点", "key_points_version": generate_index.KEY_POINTS_VERSION,
+                 "translation_version": generate_index.TRANSLATION_VERSION, "translated_at": "t"}
+                for i in range(4)
+            ]
 
-        with patch.object(generate_index, "_process_paper_llm", side_effect=fake_process):
-            with self.assertRaises(RuntimeError):
-                generate_index.translate_and_summarize(papers, {}, force=True)
+            def fake_process(pid, title, abstract, task_types, existing, force):
+                if pid.endswith("3"):
+                    raise RuntimeError("model down")
+                return translated[int(pid[-1])]
+
+            # 缓存路径改到临时目录，避免套件覆盖真实 data/translations.json。
+            temp_cache = d / "translations.json"
+            with patch.object(generate_index, "TRANSLATIONS_CACHE", temp_cache), \
+                    patch.object(generate_index, "_save_translations", side_effect=lambda translations: temp_cache.write_text(json.dumps(translations), encoding="utf-8")), \
+                    patch.object(generate_index, "_process_paper_llm", side_effect=fake_process):
+                with self.assertRaises(RuntimeError):
+                    generate_index.translate_and_summarize(papers, {}, force=True)
+            self.assertTrue(temp_cache.exists())
+            persisted = json.loads(temp_cache.read_text(encoding="utf-8"))
+            self.assertEqual(len(persisted), 3)
+            self.assertNotIn("2601.90003", persisted)
+        finally:
+            shutil.rmtree(d, ignore_errors=True)
 
     def test_single_translation_failure_still_saves_rest(self):
-        papers = [{"arxiv_id": f"2601.9100{i}", "title": f"Paper {i}", "abstract": "abstract text"} for i in range(20)]
-        saved = {}
+        import shutil
+        import tempfile
 
-        def fake_process(pid, title, abstract, task_types, existing, force):
-            if pid == "2601.91007":
-                raise RuntimeError("model down")
-            return {"pid": pid, "title_zh": "标题", "abstract_zh": "摘要",
-                    "key_points_zh": "要点", "key_points_version": generate_index.KEY_POINTS_VERSION,
-                    "translation_version": generate_index.TRANSLATION_VERSION, "translated_at": "t"}
+        d = Path(tempfile.mkdtemp(prefix="cell_trans2_"))
+        try:
+            papers = [{"arxiv_id": f"2601.9100{i}", "title": f"Paper {i}", "abstract": "abstract text"} for i in range(20)]
+            saved = {}
 
-        with patch.object(generate_index, "_process_paper_llm", side_effect=fake_process), \
-                patch.object(generate_index, "_save_translations", side_effect=lambda t: saved.update(t)):
-            result = generate_index.translate_and_summarize(papers, {}, force=True)
-        self.assertEqual(len(result), 19)
-        self.assertNotIn("2601.91007", result)
+            def fake_process(pid, title, abstract, task_types, existing, force):
+                if pid == "2601.91007":
+                    raise RuntimeError("model down")
+                return {"pid": pid, "title_zh": "标题", "abstract_zh": "摘要",
+                        "key_points_zh": "要点", "key_points_version": generate_index.KEY_POINTS_VERSION,
+                        "translation_version": generate_index.TRANSLATION_VERSION, "translated_at": "t"}
+
+            temp_cache = d / "translations.json"
+            with patch.object(generate_index, "TRANSLATIONS_CACHE", temp_cache), \
+                    patch.object(generate_index, "_save_translations", side_effect=lambda translations: (saved.update(translations), temp_cache.write_text(json.dumps(translations), encoding="utf-8"))), \
+                    patch.object(generate_index, "_process_paper_llm", side_effect=fake_process):
+                result = generate_index.translate_and_summarize(papers, {}, force=True)
+            self.assertEqual(len(result), 19)
+            self.assertNotIn("2601.91007", result)
+            self.assertEqual(len(saved), 19)
+        finally:
+            shutil.rmtree(d, ignore_errors=True)
 
     def test_code_report_kind_follows_coverage_not_model(self):
         raw = json.dumps({
@@ -1210,5 +1235,46 @@ class PipelineFailureTests(unittest.TestCase):
             self.assertEqual(len(filtered), 1)
             cache = json.loads((d / "2601.92002_analysis.json").read_text(encoding="utf-8"))
             self.assertEqual(list(cache), ["0"])
+        finally:
+            shutil.rmtree(d, ignore_errors=True)
+
+
+    def test_transient_figure_fetch_failure_does_not_write_negative_cache(self):
+        import shutil
+        import tempfile
+
+        d = Path(tempfile.mkdtemp(prefix="cell_figtransient_"))
+        try:
+            original_run = generate_index.subprocess.run
+
+            class FailedRun:
+                returncode = 6  # DNS 解析失败：瞬时问题
+                stdout = ""
+                stderr = "curl: (6) Could not resolve host"
+
+            def fake_run(args, **kwargs):
+                return FailedRun()
+
+            with patch.object(generate_index, "FIGURES_DIR", d), \
+                    patch.object(generate_index.subprocess, "run", side_effect=fake_run):
+                result = generate_index._extract_figures_for_paper("2601.93001", {})
+            self.assertEqual(result, [])
+            self.assertFalse((d / "2601.93001.json").exists())
+
+            # arXiv 确认无 HTML 时才写负缓存
+            class NoHtmlRun:
+                returncode = 22  # curl -f: HTTP 错误
+                stdout = ""
+                stderr = "curl: (22) The requested URL returned error: 404"
+
+            def fake_run_404(args, **kwargs):
+                return NoHtmlRun()
+
+            with patch.object(generate_index, "FIGURES_DIR", d), \
+                    patch.object(generate_index.subprocess, "run", side_effect=fake_run_404):
+                result = generate_index._extract_figures_for_paper("2601.93002", {})
+            self.assertEqual(result, [])
+            self.assertTrue((d / "2601.93002.json").exists())
+            self.assertEqual(json.loads((d / "2601.93002.json").read_text(encoding="utf-8")), [])
         finally:
             shutil.rmtree(d, ignore_errors=True)
