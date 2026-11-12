@@ -1,0 +1,12 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法架构流程图：展示输入预处理、可微分'胶囊在流'力学模型及自监督训练目标（轮廓、流动、物理一致性损失）三大模块"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "实验结果四联图：RBC定性分割对比、物理有效性指标柱状图（FlowMorph vs 基线）、TT vs FL的ROC曲线、以及FlowMorph标量k随TT十分位的箱线图分布"
+  }
+}

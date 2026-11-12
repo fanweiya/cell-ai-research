@@ -12267,5 +12267,751 @@
     "confidence": 0.88,
     "version": 3,
     "generated_at": "2026-10-31T09:22:55.300603"
+  },
+  "2610.41841v1": {
+    "summary": "该仓库命名指向开源权重多模态大语言模型（MLLMs）在对比与命名能力方面的评估与分析，但当前仓库仅包含一个只有单行标题的 README.md 文件。仓库内完全没有包含任何模型调用、评估脚本、测试用例或数据说明，处于纯占位状态。",
+    "repository_kind": "placeholder",
+    "architecture": "无法确认。仓库内没有任何代码文件、配置文件或模型定义，不存在可分析的系统架构或数据流图。",
+    "call_chain": "无法确认（仓库内无可执行脚本或代码文件）",
+    "core_modules": [],
+    "dependencies": [
+      "无法确认（未包含 pyproject.toml、requirements.txt、environment.yml 等任何依赖管理清单）"
+    ],
+    "reproduction_readiness": "placeholder",
+    "reproduction_notes": "无法进行任何复现。仓库目前仅含空白 README 占位，缺少实验代码、测试数据、依赖环境定义和论文评测脚本。",
+    "issues": [
+      {
+        "severity": "blocker",
+        "finding": "仓库缺少全部代码实现、依赖配置与复现说明，为纯占位仓库",
+        "evidence": [
+          "README.md:1"
+        ],
+        "impact": "用户与研究人员无法获取任何可运行或可参考的评测代码及实验管线。",
+        "confidence": 1.0
+      }
+    ],
+    "static_limitations": [
+      "由于仓库未提交任何源码与数据资产，静态分析无法评估其多模态评测方案、细胞/医学影像相关任务细节或论文主张的真实性。"
+    ],
+    "confidence": 1.0,
+    "version": 3,
+    "generated_at": "2026-11-03T09:26:32.244541"
+  },
+  "2610.41362v1": {
+    "summary": "该仓库为基于 SwinUNETR 的多教师知识蒸馏（Task-Performance Routing, TPR）在 3D CT 胰腺分割任务上的 PyTorch/MONAI 实现。仓库包含了完整的训练流程、网络结构定义、路由机制、损失函数以及验证评估指标模块，代码整体结构完整，属于具有可执行骨架的研究型实现。",
+    "repository_kind": "implementation",
+    "architecture": "架构由单一 StudentModel 和两个冻结的 TeacherFullModel（均基于 MONAI SwinUNETR 骨干网络）组成。在训练前向传播中，输入 3D CT 块通过两个 Teacher 提取各阶段编码器特征及解码器 Logits，同时 Student 提取自身特征与 Logits。TaskPerformanceRouter 计算 Student 与 Teachers 在多尺度网格划分下的 Cross-Entropy 预测误差与相对优势值（advantages）；若区域误差超过 hard_region_threshold，使用 Softmax 优势分配权重，否则采用均匀权重。TPR 模块将区域权重按最近邻插值映射到特征图空间并与教师特征混合，最终通过 TPRLoss 综合监督分割损失（DiceCELoss）、特征对齐损失、Logits 蒸馏与负载均衡损失来更新 Student 模型。",
+    "call_chain": "train_tpr.py:main → dataset_pancreas.py:get_pancreas_dataloaders → train_tpr.py:train_one_epoch → model/teachers.py:TeacherFullModel.forward → model/student.py:StudentModel.forward → model/tpr_routing.py:TPR.forward (TaskPerformanceRouter.prediction_error) → loss/tpr_loss.py:TPRLoss.forward → train_tpr.py (optimizer.step & EMAModel.update) → eval_metrics.py:evaluate_batch (sliding_window_inference 验证)",
+    "core_modules": [
+      {
+        "name": "StudentModel",
+        "role": "学生模型封装，包含 SwinUNETR 骨干，并通过 forward hook 抽取 swinViT 4 个 stage 的编码器特征",
+        "evidence": "model/student.py:StudentModel"
+      },
+      {
+        "name": "TeacherFullModel",
+        "role": "教师模型加载与推理封装，处理不同预训练权重（如 SuPreM 或 VoCo）的前缀并冻结参数",
+        "evidence": "model/teachers.py:TeacherFullModel"
+      },
+      {
+        "name": "TaskPerformanceRouter / TPR",
+        "role": "根据真实标签与预测误差动态计算区域级教师路由权重，并在多尺度空间对教师特征进行加权混合",
+        "evidence": "model/tpr_routing.py:TaskPerformanceRouter, model/tpr_routing.py:TPR"
+      },
+      {
+        "name": "TPRLoss",
+        "role": "计算分割损失、特征区域对齐损失、Logits 蒸馏损失及负载均衡熵损失的总损失函数",
+        "evidence": "loss/tpr_loss.py:TPRLoss"
+      },
+      {
+        "name": "PancreasDataset",
+        "role": "基于 MONAI Transforms 处理 3D CT 体数据并支持 Cache/Augmentation 的数据集加载器",
+        "evidence": "dataset_pancreas.py:PancreasDataset, dataset_pancreas.py:get_pancreas_dataloaders"
+      }
+    ],
+    "dependencies": [
+      "Python 3.8+",
+      "PyTorch (with CUDA & torch.amp)",
+      "MONAI",
+      "numpy",
+      "scipy",
+      "tqdm",
+      "MSD Pancreas 或符合 dataset.json 结构的 3D CT 数据集",
+      "两个兼容 SwinUNETR (feature_size=48) 的预训练教师模型权重文件 (.pth)"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "仓库未提供 requirements.txt 或 environment.yml，需手动配置 PyTorch 与 MONAI 环境；运行依赖本地存在两个外部预训练教师权重（如 SuPreM/VoCo）以及 MSD 格式数据集；utils.py 中 adjust_lr 存在缩进返回错误；单元测试缺失，需直接执行 train_tpr.py 或 train_tpr.sh 进行端到端复现验证。",
+    "issues": [
+      {
+        "severity": "high",
+        "finding": "utils.py 中 adjust_lr 函数的 return 语句置于 for 循环内部，导致多参数组优化器仅遍历第一个 param_group 即退出",
+        "evidence": [
+          "utils.py:adjust_lr"
+        ],
+        "impact": "如果使用 adjust_lr 进行学习率调度且优化器包含多个 param_group，后续 param_group 将无法被更新，且函数提前返回",
+        "confidence": 0.95
+      },
+      {
+        "severity": "medium",
+        "finding": "缺少官方依赖声明文件（如 requirements.txt 或 pyproject.toml），且仓库无自动化测试用例",
+        "evidence": [
+          "README.md",
+          "tests_present: false"
+        ],
+        "impact": "复现者必须根据 import 手动推断并安装第三方库；缺乏测试用例验证各组件在特定 MONAI/PyTorch 版本下的兼容性",
+        "confidence": 0.95
+      },
+      {
+        "severity": "low",
+        "finding": "eval_metrics.py 中使用 scipy.ndimage.binary_erosion 提取边界时如果未显式提供 3D connectivity 结构元素，可能导致 3D 体积边界判断精度与预期不一致",
+        "evidence": [
+          "eval_metrics.py:compute_boundary_f1"
+        ],
+        "impact": "可能导致 3D 边界 F1 指标的评估与标准基准计算出现轻微偏差",
+        "confidence": 0.7
+      }
+    ],
+    "static_limitations": [
+      "无法在无真实 GPU、无预训练教师权重和无胰腺数据集环境下验证滑动窗口推理与显存消耗情况",
+      "无法确认动态注册的前向钩子（_register_hooks）在所有 MONAI SwinUNETR 版本中的属性兼容性",
+      "无法评估混合精度及 DDP 分布式训练的实际数值稳定性与论文精度复现效果",
+      "仅进行了 gread 静态分析，未执行代码，不能确认运行时兼容性或论文指标。"
+    ],
+    "confidence": 0.88,
+    "version": 3,
+    "generated_at": "2026-11-03T09:29:27.397836"
+  },
+  "2611.02671v1": {
+    "summary": "该仓库标称为面向细胞核实例分割与分类任务的 TME-ContextNet 算法主页，但目前仓库中仅存在一份说明性质的 README.md 文件。仓库未开源任何模型构建、训练、推理、数据处理或评估代码，完全处于预发布占位阶段。",
+    "repository_kind": "placeholder",
+    "architecture": "无法确认。代码库中没有任何源码文件，无法获取实际的网络拓扑、特征提取主干或预测解码流程。",
+    "call_chain": "无法确认（无代码入口或执行脚本）",
+    "core_modules": [],
+    "dependencies": [
+      "无法确认（未提供 requirements.txt、setup.py、pyproject.toml 或 conda 配置文件）"
+    ],
+    "reproduction_readiness": "placeholder",
+    "reproduction_notes": "目前仓库不存在任何可运行代码、配置或权重。README 明确指出配套工具与代码需等待 arXiv 预印本公布后才计划发布，当前阶段无法进行复现。",
+    "issues": [
+      {
+        "severity": "blocker",
+        "finding": "仓库缺失全部模型与算法源码，仅包含占位文档",
+        "evidence": [
+          "README.md:Release plan"
+        ],
+        "impact": "研究人员无法检查实现逻辑，也无法进行任何本地测试、推理验证或实验复现",
+        "confidence": 1.0
+      }
+    ],
+    "static_limitations": [
+      "仓库内无源代码文件，静态分析无法评估模型设计合理性、病理图像前/后处理逻辑及计算效率",
+      "无法验证 README 中所声明的类别条件空间监督与分组解码等具体算法实现"
+    ],
+    "confidence": 1.0,
+    "version": 3,
+    "generated_at": "2026-11-04T09:31:53.210307"
+  },
+  "2611.02931v1": {
+    "summary": "该仓库实现了计算病理中无染色与H&E染色组织切片间的双向图像转换生成模型（基于U-Net##与PatchGAN），支持虚拟脱色（训练时迁移）与虚拟染色（推理时基线）。项目提供了模型训练（virtual_staining_unstaining.py）与WSI TFRecord瓦片推理生成（inference.py）的完整实现，但论文中评估诊断性能的下游多示例学习（MIL）分类模型并未包含在本项目中。",
+    "repository_kind": "implementation",
+    "architecture": "架构由基于 PyTorch Lightning 构建的条件生成对抗网络（Pix2Pix 风格）和基于 TFRecord 的整张切片图像（WSI）瓦片推理流水线组成。生成器采用 Korkmaz 提出的带有深层监督机制的 U-Net## 结构（UNetSharpSharp2D），判别器采用 PatchGAN 结构；优化目标包含对抗损失、L1 重构损失和皮尔逊相关系数（PCC）损失。训练阶段支持 slide-level 划分的双模态已对齐瓦片输入，推理阶段则批量读取 WSI 的 TFRecord 瓦片（1024x1024），经模型转换后切分为 2x2 网格（512x512）并缩放至 256x256，写回新的 TFRecord。",
+    "call_chain": "训练入口：virtual_staining_unstaining.py:main → VirtualStainDataModule.setup（按 slide_id 进行 80/20 划分） → PairedDataset.__getitem__（加载配对图像并执行 BasicAugmentations/Normalize） → Pix2Pix.training_step（UNetSharpSharp2D 前向生成，联合对抗损失、L1 损失和 PCC 损失反向传播） → ModelCheckpoint 逐 epoch 保存权重及可视化。\n推理入口：inference.py:main → load_generator（加载 checkpoint 提取生成器权重） → read_tiles（从 WSI TFRecord 解析瓦片） → make_stain_augmenter（可选 HED 染色增强） → process_wsi/write_batch（批量前向生成） → 2x2 网格裁剪并 resize 至 256x256 → 编码 JPEG 并写回输出 TFRecord。",
+    "core_modules": [
+      {
+        "name": "UNetSharpSharp2D",
+        "role": "图像转换生成器主干，通过多层级 conv_block、down_conv、up_conv 与 inter_conv 稠密连接和深层监督输出合成图像",
+        "evidence": "inference.py:UNetSharpSharp2D"
+      },
+      {
+        "name": "Pix2Pix",
+        "role": "PyTorch Lightning 系统模块，封装生成器与判别器的交替优化步，集成 GAN、L1 和 PCC 损失计算及验证集指标记录",
+        "evidence": "virtual_staining_unstaining.py:Pix2Pix"
+      },
+      {
+        "name": "VirtualStainDataModule",
+        "role": "数据流管理，执行 slide-level 数据切分与 CSV 读写校验，提供 PairedDataset 的 DataLoader 封装",
+        "evidence": "virtual_staining_unstaining.py:VirtualStainDataModule"
+      },
+      {
+        "name": "PairedDataset",
+        "role": "配对瓦片读取与数据增强管道，执行 16 种严格对齐的翻转/旋转基础几何变换及像素归一化",
+        "evidence": "virtual_staining_unstaining.py:PairedDataset"
+      },
+      {
+        "name": "process_wsi",
+        "role": "WSI 推理流水线核心，执行 TFRecord 瓦片批处理推理、网格裁切（1024 分割为 4 个 512 再缩至 256）与输出原子写入",
+        "evidence": "inference.py:process_wsi"
+      }
+    ],
+    "dependencies": [
+      "Python 依赖：torch>=2.0, torchvision>=0.15, pytorch-lightning>=2.0, torchmetrics>=1.0, albumentations>=1.3,<2.0, numpy, pillow, wandb",
+      "推理特定依赖：tensorflow, dareblopy, stainlib (从 GitHub 源码仓库安装)",
+      "硬件与系统要求：训练脚本默认配置为 4 块 GPU（DDPStrategy）与 medium 精度矩阵乘法",
+      "数据依赖：训练需要配对切片瓦片及包含 slide_id, unstained, stained 的 CSV 文件；推理需要符合 <wsi_id>_<y1>_<y2>_<x1>_<x2> 坐标命名格式的 TFRecord"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "最短复现路径：1. 安装 requirements.txt；2. 若在单卡/CPU测试训练，必须显式附加参数 --devices 1 覆盖默认的 4 卡 DDP 配置；3. 准备对齐的组织配对图像及 pairs.csv 运行 virtual_staining_unstaining.py；4. 运行 inference.py 进行 TFRecord 瓦片转换。复现阻碍：仓库未提供权重与示例数据；论文的核心诊断结果（Cohen's κ / Gwet's AC1）依托于未开源的下游 EfficientNet-V2-S + Gated Attention MIL 分类模型，外部研究者仅凭本仓库无法直接复现论文最终结论。",
+    "issues": [
+      {
+        "severity": "high",
+        "finding": "论文核心临床评估所必需的下游前列腺癌诊断分类模型（MIL）未在仓库中开源",
+        "evidence": [
+          "README.md:The diagnostic model is not part of this repository."
+        ],
+        "impact": "研究人员仅能得到生成的虚拟组织瓦片，无法在本地端到端验证论文主打的临床级诊断一致性与无生成器推理效能",
+        "confidence": 1.0
+      },
+      {
+        "severity": "medium",
+        "finding": "训练脚本默认设备参数硬编码为 4 GPU 并绑定 DDPStrategy，单卡运行未指定参数时直接异常",
+        "evidence": [
+          "virtual_staining_unstaining.py:parser.add_argument('--devices', type=int, default=4)",
+          "virtual_staining_unstaining.py:trainer = Trainer(devices=args.devices, strategy=DDPStrategy(find_unused_parameters=True), ...)"
+        ],
+        "impact": "单卡或非多卡节点默认执行 `python virtual_staining_unstaining.py ...` 将触发分布式配置初始化失败",
+        "confidence": 0.95
+      },
+      {
+        "severity": "low",
+        "finding": "推理环境依赖存在非标准 wheel 外部包（dareblopy）和 git 直链依赖（stainlib）",
+        "evidence": [
+          "requirements.txt:dareblopy",
+          "requirements.txt:stainlib @ git+https://github.com/sebastianffx/stainlib.git"
+        ],
+        "impact": "在 Windows 或某些没有预编译 C++ 扩展环境/无法访问外部 GitHub 源的环境下，pip 安装可能失败",
+        "confidence": 0.85
+      }
+    ],
+    "static_limitations": [
+      "静态分析无法在无真实 WSI TFRecord 数据的情况下验证 dareblopy 在高版本 Python 或特定操作系统上的运行时读写兼容性与性能。",
+      "无法通过静态代码确认 UNetSharpSharp2D 在 1024x1024 输入下的实际显存占用与批处理吞吐量。",
+      "无法在未执行模型的情况下验证对抗损失、L1 损失和 PCC 损失的平衡权重（lambda_l1=100, lambda_pcc=10）在其他染色批次数据上的收敛稳定性与虚拟伪影生成情况。",
+      "静态检查无法确认 1024 瓦片拆分为 2x2 512 瓦片降采样至 256 这一过程是否会导致边界拼接处的不连续伪影。"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-11-04T09:32:31.725161"
+  },
+  "2611.01141v1": {
+    "summary": "Gestalt 是用于由空间基因表达数据条件生成病理切片图像（256px 单切片与 1024px 复合大视野）的官方开源实现。代码完整覆盖了基因编码器、细胞局部 k-NN 图注意力骨干、Tile/Grid 向量池化，以及向病理基础模型（UNI2-h 等）表征映射和扩散生成器 LoRA 适配的核心链路；仓库实现结构完整，但缺少测试套件与自动化验证脚本。",
+    "repository_kind": "implementation",
+    "architecture": "架构分为空间表征映射网络（Mapper）与扩散解码生成（Diffusion Decoder）两阶段：\n1. 细胞与基因图编码：输入单细胞空间转录组矩阵，GeneTokenEncoder 将基因 ID 与表达数值映射后经 GeneSelfAttn 产生细胞特征并与位置编码相加；由 build_knn 根据欧氏距离动态构建细胞间 k-NN 图，送入多层 GATLayer 结合 RelPosBias 相对几何偏置聚合邻域微环境特征。\n2. 区域表征池化（Readout）：256px 图像使用 QueryReadout 池化为单个特征向量；1024px 图像使用基于 4x4 空间网格坐标 QPOS 的 GridReadout（支持距离平方软惩罚 decay）池化出 16 个子区域特征；均经 _DeStd 去标准化头映射到冻结的病理基础模型（如 UNI2-h 1536 维）特征空间，以 MSE、余弦相似度及范数差联合损失直接拟合真实图像嵌入。\n3. 条件图像生成：使用预训练扩散模型（PixCell / PixCell-1024）接收上述预测的表征向量，配合通过真实切片微调的 LoRA 适配器，解码还原出 256px/1024px 高分辨率 H&E 切片图像。",
+    "call_chain": "数据预处理：gestalt.data.download / gestalt.data.tiles / preprocess_hest（多源数据下载、图像-坐标仿射标定配准、切块与提取基础模型特征缓存至 HDF5） → 映射网络训练：gestalt.region1024.train（load_vocab 构建基因表 → load_or_build_1024 准备滑动窗口 DataLoader → GeneTokenCells1024 前向推理获得 16 区域向量 → 计算加权多目标损失反向传播 → 评估验证集余弦相似度并保存最优权重） → 解码适配与合成：gestalt.tile256.lora / gestalt.region1024.viz（载入 Mapper 权重输出特征向量 → 加载 PixCell-1024 扩散管线与 LoRA 权重 → autocast 条件采样生成图像并通过 nuc_dia 统计细胞核形态）。",
+    "core_modules": [
+      {
+        "name": "gestalt.core.backbone",
+        "role": "实现基因级自注意力 GeneTokenEncoder、动态 k-NN 图构建 build_knn、相对坐标偏置 RelPosBias 及多头图注意力层 GATLayer",
+        "evidence": "gestalt/core/backbone.py:GeneTokenEncoder, GATLayer, build_knn, RelPosBias"
+      },
+      {
+        "name": "gestalt.core.readout",
+        "role": "实现将细胞点云聚合并输出到单个 256px 视场向量的 QueryReadout 以及 16 个网格位置的 GridReadout",
+        "evidence": "gestalt/core/readout.py:QueryReadout, GridReadout"
+      },
+      {
+        "name": "gestalt.models.mapper.model",
+        "role": "组装基因图网络骨干与池化头，通过 _DeStd 映射预测基础模型的 Tile Embedding",
+        "evidence": "gestalt/models/mapper/model.py:GeneTokenCells256, GeneTokenCells1024, _DeStd"
+      },
+      {
+        "name": "gestalt.region1024.train",
+        "role": "执行 1024px 复合视场映射器的 DDP 分布式训练循环、余弦相似度验证与权重持久化",
+        "evidence": "gestalt/region1024/train.py:main"
+      },
+      {
+        "name": "gestalt.data.tiles",
+        "role": "空间转录组与 WSI 切片图像的模板匹配标定、网格切分以及离线特征提取",
+        "evidence": "gestalt/data/tiles.py:build, calibrate, match_crops"
+      },
+      {
+        "name": "gestalt.region1024.viz",
+        "role": "加载训练权重与 PixCell 扩散模型，执行端到端条件采样并比对真实切片形态学指标",
+        "evidence": "gestalt/region1024/viz.py:main, gen1024"
+      }
+    ],
+    "dependencies": [
+      "Python 依赖库：torch, timm, diffusers, peft, anndata, h5py, opencv-python (cv2), tifffile, scikit-image, pandas, numpy, matplotlib, tqdm, huggingface_hub",
+      "外部命令行工具：wget（用于数据下载）",
+      "门禁与模型权限：Hugging Face 授权 Token（HF_TOKEN，用于下载 MahmoodLab/hest、MahmoodLab/UNI2-h、PixCell-1024 等模型与数据集）",
+      "外部数据源：Zenodo（Record 17429142 Xenium 切片压缩包）与 10x Genomics 官方细胞位置 parquet 文件"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "最短复现路径：1. 安装 requirements.txt 并配置具备 wget 的 Linux/CUDA 环境；2. 设置 HF_TOKEN 环境变量并通过 gestalt.data.download 获取对应数据集；3. 运行 gestalt.data.tiles 或 preprocess_hest 进行切块和 UNI2-h 特征缓存；4. 使用 gestalt.region1024.train 训练 Mapper 模型；5. 结合预训练 PixCell-1024 权重运行 viz 或 benchmark 生成切片。\n阻碍：需向 Hugging Face 申请多个门禁模型权限；切片数据集体积达数百 GB；缺少单元测试验证环境算子兼容性；_DeStd 在特定配置下存在多切片偏差广播缺陷。",
+    "issues": [
+      {
+        "severity": "high",
+        "finding": "疑似缺陷：_DeStd 中的 slide_bias 广播机制在 1024 复合视场下存在张量维度不匹配隐患。",
+        "evidence": [
+          "gestalt/models/mapper/model.py:_DeStd.forward",
+          "gestalt/models/mapper/model.py:GeneTokenCells1024.forward"
+        ],
+        "impact": "在 GeneTokenCells1024 中，传入 _DeStd 的池化特征维度为 (B, 16, H)，若配置 cfg.NUM_SLIDES 启用切片偏差，slide_bias(slide_id) 的返回形状为 (B, UNI_DIM)。在 PyTorch 中两者直接相加会导致倒数第二维度 (16 与 B) 无法右对齐广播（除非 B==16），将触发 RuntimeError 导致训练或推理崩溃。需将 slide_bias(slide_id) 改为 unsqueeze(1)。",
+        "confidence": 0.9
+      },
+      {
+        "severity": "medium",
+        "finding": "下载脚本硬编码调用系统 wget 子进程，缺乏跨平台与工具缺失容错。",
+        "evidence": [
+          "gestalt/data/download.py:fetch_xenium"
+        ],
+        "impact": "脚本直接调用 subprocess.run(['wget', ...]) 下载数十 GB 数据。在未预装 wget 的环境（如 Windows 或精简版 Docker 容器）中会直接抛出 FileNotFoundError 中断，未利用 Python 标准库或 requests/urllib 回退。",
+        "confidence": 0.95
+      },
+      {
+        "severity": "low",
+        "finding": "包级文档字符串指引与仓库实际目录结构不一致。",
+        "evidence": [
+          "gestalt/__init__.py:__doc__"
+        ],
+        "impact": "文档声称入口在 scripts/ 目录下，但仓库根目录并无 scripts/，所有入口均组织在 gestalt/data、gestalt/region1024 等包路径下，易对初次使用者造成混淆。",
+        "confidence": 0.98
+      }
+    ],
+    "static_limitations": [
+      "未在 CUDA 设备上实际启动训练与推理，无法确认 PixCell-1024 与 UNI2-h 结合运行时的实际 GPU 显存占用与 OOM 边界。",
+      "静态分析无法断定 Zenodo 与 10x Genomics 的外链当前是否永久有效或是否存在带宽限流。",
+      "无法在脱离实际 H&E 切片图像的情况下验证 cv2.matchTemplate 仿射标定算法对不同染色质量切片的配准通过率。",
+      "无法静态验证生成切片在生物学组织学意义下的真实度及论文中报告的定量评估指标（核直径等）。"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-11-04T09:33:17.939840"
+  },
+  "2611.04087v1": {
+    "summary": "ScienceVision (暨 BabyVision-v2) 是一个针对科学 3D 数据（生物大分子、计算化学、医学体积成像、机械 CAD、建筑）的多模态 Agent 观测与空间推理基准。仓库实现了基于 MCP 协议与三维浏览器 Viewer 的交互工具集、离线确定性打分器、以及基于规则和模板的多阶段 QA 生成与评审流水线。代码整体处于工程实现（implementation）阶段，但核心 3D 资产需外部下载，且候选题目集仍处于质检和专家标注迭代状态。",
+    "repository_kind": "implementation",
+    "architecture": "基准分为三个主要子系统：1. 数据与生成端 (QA-Gen)：包含 ScienceVisionTaskGenerator（Catalog->Planner->Builder->Challenger->Refiner 确定性流水线）与受控审查管道 qa_gen_pipeline，提取 3D 资产几何/拓扑特征并生成打分契约；2. 环境与交互端 (Viewer & MCP)：通过 35 个专用浏览器页面（Three.js/Mol*/NiiVue/OpenCASCADE）以及暴露 58 个观察、测量、切片工具的 MCP Server（sci3d_agent.mcp.server），为 Agent（如 Codex / Claude Code）提供主动交互观测能力；3. 评测与判定端 (Scorer)：基于 Docker 容器隔离环境，使用封闭比较器集合（如 voxel_member_of_set, canonical_set_equal, 浮点容差）对 Agent 输出的结构化 JSON 进行确定性逐字段判分。",
+    "call_chain": "qagen CLI / 生成脚本 (harness/QA-Gen/qa_gen_pipeline/src/qagen/cli.py) → 资产元数据与特征提取 (sciencevision_taskgen.asset_facts:lookup_facts) → 题目规划与提示词装配 (输出 instruction 与 answer_schema) → Harbor 评测调度与 MCP 服务 (scripts.harbor.run_end2end + sci3d_agent.mcp.server) → Agent 交互并提交结构化 JSON → 确定性评分器 (sci3d-scorer 镜像与比较器集) → 计算指标 (mean@3, pass@3)",
+    "core_modules": [
+      {
+        "name": "qagen_cli",
+        "role": "QA-Gen vNext 本地控制平面入口，负责种子同步、批次准备、人类审核批准与发布导出",
+        "evidence": "harness/QA-Gen/qa_gen_pipeline/src/qagen/cli.py:main"
+      },
+      {
+        "name": "reviewer_bundle_server",
+        "role": "构建并提供离线专家评审数据包和本地 HTTP 静态资源预览环境",
+        "evidence": "harness/QA-Gen/qa_gen_pipeline/src/qagen/reviewer_bundle/cli.py:main"
+      },
+      {
+        "name": "asset_facts",
+        "role": "3D 科学资产事实查询、槽位填充与提示词文本装配",
+        "evidence": "harness/QA-Gen/ScienceVisionTaskGenerator/sciencevision_taskgen/asset_facts.py:lookup_facts"
+      },
+      {
+        "name": "groundtruth_filler",
+        "role": "确定性 Ground Truth 结果填充与未知/待标注任务的降级处理",
+        "evidence": "harness/QA-Gen/ScienceVisionTaskGenerator/sciencevision_taskgen/groundtruth/_not_implemented.py:_NotImplementedFiller"
+      },
+      {
+        "name": "mcp_server",
+        "role": "提供 3D 场景操作协议（视点变换、测量、网格剖切等 58 个工具）的 Agent 交互接口",
+        "evidence": "README.md:python -m sci3d_agent.mcp.server"
+      },
+      {
+        "name": "harbor_eval_driver",
+        "role": "驱动 Codex/Claude 等基线模型在 Docker 容器及不同模态路由下的端到端评测执行",
+        "evidence": "docs/evaluation.md:scripts.harbor.run_end2end"
+      }
+    ],
+    "dependencies": [
+      "Python >= 3.12 (Harbor 依赖强约束)",
+      "Docker (执行 Agent 沙箱、MCP Worker 及离线网络断开的 Scorer 容器)",
+      "科学计算库：NumPy, SciPy (用于 3D 拓扑和连通分量分析), NiBabel (用于医学 NIfTI 体积处理), RDKit/Open Babel (分子文件解析)",
+      "三维前端：Three.js, Mol*, NiiVue, OpenCASCADE.js (集成于 35 个 HTML 静态 Viewer 页面)",
+      "外部数据包：大文件 3D 资产（ModelScope: tianyi3unipat/BabyVision-v2-Datasets 或 HuggingFace 仓库）"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "直接克隆仓库无法运行完整评测。最短体验路径为本地启动测试 Viewer (`python3 _dev_serve.py`) 观察 3D 资产，或运行确定性生成管道 (`./scripts/run_pipeline.sh --config configs/walking_skeleton.json`)。若要复现论文基线，必须：1. 从 ModelScope/HF 拉取几百 MB 到数 GB 的 3D 资产；2. 安装 Harbor 0.20.0 (必须源码安装，未发 PyPI)；3. 从 ghcr.io 拉取特定哈希的 Docker 镜像 (如 sciencevision-codex-mcp, sciencevision-scorer)；4. 解决工具集版本漂移与 scale-v2 数据集未全部正式放行的问题。",
+    "issues": [
+      {
+        "severity": "high",
+        "finding": "视觉证据契约与评分器实现脱节（仅校验 JSON，未实际评分视觉截图）",
+        "evidence": [
+          "harness/QA-Gen/tasks/scale-v2.3/README.md:All 854 asset questions declare screenshot in required_evidence (131 also declare annotation, 65 also variant_screenshots), but 0 of the 5624 rubric items reference a screenshot. Scoring is JSON-only; the visual evidence is declared and not checked."
+        ],
+        "impact": "任务声明需要提供 screenshot 或 annotation 证据，但评分器只判定最终 JSON 输出，Agent 理论上可通过先验文本猜测或未实际观察三维场景作答而获得满分。",
+        "confidence": 1.0
+      },
+      {
+        "severity": "high",
+        "finding": "发布版 MCP 工具集规模与论文评测存在版本漂移",
+        "evidence": [
+          "harness/docs/docker-image-release/README.md:One open decision gates any ccmcp comparison: the release-line worker ships 58 MCP tools while the v9/250 runs used a 73-tool surface carrying the platform vocabulary (sv3d_select, sv3d_measure_*, …)."
+        ],
+        "impact": "发布版 MCP 镜像仅包含 58 个工具，缺少原评测使用的平台测量类工具（73 工具版本），直接调用可能导致部分历史任务因缺少工具调用权限而评测失败或无法复现论文得分。",
+        "confidence": 1.0
+      },
+      {
+        "severity": "medium",
+        "finding": "候选生成数据集中存在大量几何物化与目标掩码绑定阻断 (QC Blockers)",
+        "evidence": [
+          "harness/QA-Gen/tasks/scale-v2/README.md:Round2 materialization QC: 260 pass, 126 review, 600 block. Required six-baseline coverage: 0 / 986 candidates. Formal release: not granted."
+        ],
+        "impact": "scale-v2 等候选生成数据包中超过 60% 的题目被物化质检阻断，尚未达到正式基准评测发布标准，研究者不能直接将任务 drop 当作黄金标准使用。",
+        "confidence": 1.0
+      },
+      {
+        "severity": "medium",
+        "finding": "大部分自动生成题目的 Ground Truth 处于未完工状态",
+        "evidence": [
+          "harness/QA-Gen/ScienceVisionTaskGenerator/README.md:Most ground-truth values intentionally have: {\"status\": \"needs_expert_annotation\"}",
+          "harness/QA-Gen/ScienceVisionTaskGenerator/sciencevision_taskgen/groundtruth/_not_implemented.py:_NotImplementedFiller"
+        ],
+        "impact": "TaskGenerator 生成的大量任务并非即开即用，仍依赖大量人工专家标注阶段填充真实值，直接运行生成脚本无法产出闭环测试集。",
+        "confidence": 0.95
+      },
+      {
+        "severity": "low",
+        "finding": "提示词存储在 instruction 而非标准 question 字段",
+        "evidence": [
+          "harness/QA-Gen/tasks/scale-v2.3/README.md:instruction. There is no question key in either layer."
+        ],
+        "impact": "常规评测脚本若直接读取 `question` 字段将获取到 None 或报错，需特别处理字段映射。",
+        "confidence": 1.0
+      }
+    ],
+    "static_limitations": [
+      "未拉取并挂载远程 ModelScope 资产库，无法静态验证所有 35 种三维资产格式在各前端 Viewer 中的渲染兼容性与无损加载情况",
+      "未下载并启动 Docker 隔离环境中的封闭评分器镜像与 Agent 容器，无法静态校验网络隔离模式下 MCP 握手的真实通信开销和稳定性",
+      "无法通过静态代码确认各外部 LLM/VLM（如 GPT-6 Astra, Claude 等）在 250 道正式测试题目上的实际推理准确率"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-11-07T09:26:17.677422"
+  },
+  "2611.05974v1": {
+    "summary": "PathoS2VD 是一个基于 Stable Video Diffusion（SVD-XT）的计算病理学 pseudo z-stack 生成工具库，旨在从单张 2D 组织病理切片图像合成三维焦深切片（共 33 层，划分为上层延展、中心层、下层延展）。仓库包含了数据预处理、Stage-1 源域先验学习、Stage-2 目标域适应训练、推理生成以及结构张量（Structure Tensor）等多维度评估的完整 Python 源码实现。",
+    "repository_kind": "implementation",
+    "architecture": "项目采用两阶段扩散生成架构配合领域自适应机制：首先通过 SourceVaeDataset 读取多层 z-stack 切片，在 Stage-1 中微调 AutoencoderKLTemporalDecoder 及 UNetSpatioTemporalConditionModel 学习 11 层焦平面扩散先验；在 Stage-2 中，利用 PriorPreservingMixedDataset 将无焦深的 2D 目标域图像与源域数据混合，进行保真与自适应微调；在推理阶段，PathoS2VDPipeline（继承自 Diffusers 的 DiffusionPipeline）加载训练好的 UNet 与 VAE，结合 EulerDiscreteScheduler 进行 EDM 扩散反向去噪采样，扩展生成 33 层图像（[B, 33, C, H, W]），最终导出切片栈。",
+    "call_chain": "scripts/generate.py (或 pipeline:generate_33_planes) → pathos2vd.pipelines.pathos2vd_pipeline.PathoS2VDPipeline.__call__ → UNetSpatioTemporalConditionModel 去噪迭代 (pathos2vd.pipelines.scheduler.EulerDiscreteScheduler) → decode_video_latents (pathos2vd.models.vae) → save_plane_stack (保存为 z00.png-z32.png)",
+    "core_modules": [
+      {
+        "name": "Pipeline & Scheduler",
+        "role": "管理 SVD 条件生成流水线、EDM 调度器步进及 33 层焦平面合成控制",
+        "evidence": "pathos2vd/pipelines/pathos2vd_pipeline.py:PathoS2VDPipeline"
+      },
+      {
+        "name": "Model Wrappers",
+        "role": "封装时空 U-Net 及 AutoencoderKLTemporalDecoder 的权重加载、显存优化与潜在空间编解码",
+        "evidence": "pathos2vd/models/unet_spatiotemporal.py:load_unet, pathos2vd/models/vae.py:load_vae, encode_video_latents, decode_video_latents"
+      },
+      {
+        "name": "Dataset & Sampling",
+        "role": "管理 11 层金标准 z-stack 读取及 Stage-2 目标域与源域先验保留混合采样",
+        "evidence": "pathos2vd/datasets/mixed_dataset.py:PriorPreservingMixedDataset, pathos2vd/datasets/zstack_dataset.py:ZStackDataset"
+      },
+      {
+        "name": "Training Engines",
+        "role": "实现 EDM 扩散损失、VAE 解码器微调以及两阶段分布式训练循环",
+        "evidence": "pathos2vd/trainers/edm.py, pathos2vd/trainers/stage1_trainer.py, pathos2vd/trainers/stage2_trainer.py"
+      },
+      {
+        "name": "Evaluation & Structure Tensor",
+        "role": "针对生成的 33 层切片计算分布距离及局部 3D 结构张量指标",
+        "evidence": "pathos2vd/evaluation/structure_tensor.py, pathos2vd/evaluation/distribution_metrics.py"
+      }
+    ],
+    "dependencies": [
+      "Python >=3.10",
+      "PyTorch >=2.1",
+      "diffusers >=0.29, <0.31",
+      "transformers >=4.40, <4.46",
+      "accelerate >=0.28, <1.0",
+      "huggingface-hub >=0.23",
+      "safetensors >=0.4",
+      "scipy >=1.10",
+      "scikit-image >=0.21",
+      "pytorch-fid >=0.3",
+      "lpips >=0.1.4",
+      "预训练底模权重：stabilityai/stable-video-diffusion-img2vid-xt",
+      "用户私有数据和环境变量配置（如 PATHOS2VD_INPUT, PATHOS2VD_GT_ROOT 等）"
+    ],
+    "reproduction_readiness": "ready",
+    "reproduction_notes": "源码结构完整，提供了清晰的 scripts 脚本与 configs 配置文件。复现推理的最短路径为准备好 SVD-XT 底模及 Stage-2 检查点后，配置环境变量 PATHOS2VD_INPUT、PATHOS2VD_STAGE2_UNET_CHECKPOINT 等，运行 python scripts/generate.py --config configs/inference/default.yaml。训练复现则强依赖外部全切片金标准 z-stack 数据集与预先通过 build_blur_motion_annotation.py 生成的模糊运动标注 CSV。",
+    "issues": [
+      {
+        "severity": "medium",
+        "finding": "自动化测试套件缺失，缺乏针对核心 pipeline 及自定义时空模块的单元回归验证",
+        "evidence": [
+          "requirements.txt:pytest>=7.4",
+          ".gitignore:.pytest_cache/"
+        ],
+        "impact": "虽然依赖中声明了 pytest，但在源码树中未检索到 test/ 目录或测试用例文件，若变更 diffusers 版本或修改核心 U-Net 结构难以保证数值逻辑一致性。",
+        "confidence": 0.95
+      },
+      {
+        "severity": "low",
+        "finding": "配置强依赖多项环境变量注入，缺失时可能导致脚本因键值未解析报错",
+        "evidence": [
+          "configs/inference/default.yaml:vae_checkpoint: ${PATHOS2VD_TARGET_VAE_CHECKPOINT}",
+          "configs/evaluation/st_distribution.yaml:gt_csv: ${PATHOS2VD_GT_VIDEO_SAMPLED}"
+        ],
+        "impact": "初次运行需要严格对照 README 与各 YAML 手动配置全量 PATHOS2VD_* 环境变量，否则配置解析器抛出未匹配或空路径异常。",
+        "confidence": 0.85
+      }
+    ],
+    "static_limitations": [
+      "未实际加载并执行模型，无法评估 33 层推理时 GPU 显存峰值（尤其在没有启用 xFormers 或 CPU offload 时的显存开销）。",
+      "无法静态验证生成伪切片的焦平面连续性与生物结构真实性是否达到论文指标。",
+      "无法验证 diffusers 0.29-0.30 与 SVD-XT 及自定义 UNetSpatioTemporalConditionModel 之间的隐式 API 兼容性。"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-11-07T09:26:31.902720"
+  },
+  "2611.06701v1": {
+    "summary": "该仓库是论文《Agent-Driven Generative Priors for Pathology Image Synthesis and Segmentation》的官方实现代码，涵盖基于 Flow-Matching Diffusion Transformer（MFDiT）的病理图像生成与下游细胞语义分割任务。工程结构完整，包含完整的 DiT 主干、双版本分割解码器（DecoderV1/V2）、训练/评估/推理脚本以及后台运行生命周期管理。但仓库未附带原始 PanNuke 实例标注到语义掩码的预处理脚本，且预训练权重需从外部 Hugging Face 仓库手动下载。",
+    "repository_kind": "implementation",
+    "architecture": "项目包含两条主要算法管线：1) 图像生成管线：基于 Flow-Matching 的 MFDiT 模型，在推理时采用常微分方程（ODE）一阶欧拉法（Euler step），从标准正态分布噪声出发沿预测速度场反向积分生成病理切片图像；2) 语义分割管线：将病理图像归一化至 [-1, 1] 并输入 MFDiT 骨干网络，在固定的噪声时间步率（rate=0.3）下提取中间层（如层 2, 5, 8, 11）的 token 特征序列，经 tokens_to_2d 还原为多尺度/空间特征图后送入 DecoderV1 或轻量级 DecoderV2，输出各类别 logits，使用交叉熵与多类别 Dice 组合损失进行三折交叉验证训练。",
+    "call_chain": "分割训练：segmentation/train.py:main() → train() → build_loader() [segmentation/dataset.py:CellDataset 读取 fold .npy] → build_model() [segmentation/model.py:DiTForSegmentation 载入预训练 MFDiT] → predict() → 计算 F.cross_entropy + dice_loss → accelerate 反向传播与优化 → evaluate_model() [segmentation/evaluate.py] 验证 mIoU → 保存最佳模型 best_mIoU.pth；图像生成：generation/sample.py:main() → euler_sample() [从 N(0, I) 循环进行 model(x, t, r) 速度场递推] → torchvision.utils.save_image 保存 PNG 样本。",
+    "core_modules": [
+      {
+        "name": "MFDiT",
+        "role": "Flow-Matching 扩散 Transformer 骨干网络，支持基于 adaLN 的时间步与辅助步调制、RMSNorm 以及多层特征截取",
+        "evidence": "models/dit.py:MFDiT"
+      },
+      {
+        "name": "DiTForSegmentation",
+        "role": "下游分割适配模型，将 MFDiT 一维序列特征重塑为二维空间张量并挂载分割解码头",
+        "evidence": "segmentation/model.py:DiTForSegmentation"
+      },
+      {
+        "name": "DecoderV1 / DecoderV2",
+        "role": "多尺度特征融合解码模块，用于将 DiT 提取的表征上采样还原为像素级类别分割 logits",
+        "evidence": "segmentation/decoders/decoder_v1.py:DecoderV1, segmentation/decoders/decoder_v2.py:DecoderV2"
+      },
+      {
+        "name": "CellDataset",
+        "role": "单样本 .npy 格式图像与语义掩码加载器，执行数值范围校验与双线性/最近邻重采样归一化",
+        "evidence": "segmentation/dataset.py:CellDataset"
+      },
+      {
+        "name": "euler_sample",
+        "role": "欧拉数值积分器，通过固定步长沿速度场迭代生成合成病理图像",
+        "evidence": "generation/sample.py:euler_sample"
+      },
+      {
+        "name": "launch & runtime",
+        "role": "后台任务隔离、基于 UUID token 的防竞态启动校验及多进程生命周期管理",
+        "evidence": "common/launch.py:launch_background, common/runtime.py:start_run"
+      }
+    ],
+    "dependencies": [
+      "Python 3.10+",
+      "PyTorch >= 2.4.1",
+      "torchvision",
+      "timm (models/dit.py 依赖 PatchEmbed, Mlp, Attention)",
+      "accelerate (common/runtime.py 与 segmentation/train.py 依赖多卡与混合精度支持)",
+      "numpy",
+      "Pillow",
+      "tqdm",
+      "外部预训练权重：Hugging Face (yscript/agent-genpath) 提供的 dit.pth，需置于 pretrained_checkpoints/dit.pth",
+      "数据要求：预处理后的 PanNuke 数据集，划分为 fold1/fold2/fold3，以 (H,W,3) 的 image.npy 和 (H,W) 且取值在 0~5 的 mask.npy 存放"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "最短复现路径：1. 安装 requirements.txt 并在环境下安装 timm 与 accelerate；2. 从 Hugging Face 下载 dit.pth 至 pretrained_checkpoints/；3. 运行 generation.sample 验证图像生成。阻碍因素：PanNuke 官方公开数据集通常以 6 通道实例分割数组形式提供，仓库内部没有提供将原始 PanNuke 数据集转换为 CellDataset 所需的按 fold 划分的单张 (H,W,3) 和 (H,W) 语义分割 .npy 文件的预处理代码，使用者必须自行编写数据格式转换与语义映射脚本才能启动训练。",
+    "issues": [
+      {
+        "severity": "medium",
+        "finding": "缺少 PanNuke 原始数据到单张语义掩码的预处理脚本",
+        "evidence": [
+          "segmentation/dataset.py:CellDataset.__getitem__",
+          "README.md:Dataset Structure"
+        ],
+        "impact": "PanNuke 官方发布包多为 instance-level 堆叠数组，CellDataset 严格要求预处理为单样本语义整数标签 (0..5) 的 .npy 文件，缺失转换脚本导致用户无法直接载入开源数据集。",
+        "confidence": 0.95
+      },
+      {
+        "severity": "low",
+        "finding": "严格依赖 nvidia-smi 二进制命令进行物理 GPU 解析",
+        "evidence": [
+          "common/launch.py:select_gpu"
+        ],
+        "impact": "在没有将 nvidia-smi 纳入 PATH 的系统、部分容器环境或 CPU/非 NVIDIA 设备上使用 --gpu 参数时，会抛出 CalledProcessError 或 FileNotFoundError。",
+        "confidence": 0.9
+      }
+    ],
+    "static_limitations": [
+      "无法在未执行环境下确认 Hugging Face 远程权重键名与 MFDiT 骨干网络在 strict=True 下的精确匹配程度",
+      "无法通过静态代码确认 timm 最新版本中 Attention 类对于 fused_attn 属性赋值的向下兼容性",
+      "无法验证在多卡分布式（DDP）环境下 accelerate 包装 model 与 unwrap_model 在验证集主进程单卡评估时是否存在显存滞留"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-11-07T09:29:20.888358"
+  },
+  "2611.10093v1": {
+    "summary": "SPECTRA 是针对病理基础模型（如 Phikon-v2、Virchow2、Midnight 等）的鲁棒性对比微调与评估框架，通过在共配准 PLISM 瓦片（registered-pair）上结合遮蔽式 InfoNCE 损失训练全模块 LoRA 适配器。代码库包含数据打包、多骨干网络适配、对比学习训练以及对接 PathoROB、HEST、THUNDER 等计算病理基准的评估封装，整体属于完整实现（implementation）。",
+    "repository_kind": "implementation",
+    "architecture": "数据流以共配准病理切片数据（PLISM，含不同染色和扫描仪条件）为核心：通过 SpectraEncoder（基于 HuggingFace AutoModel 或 timm，结合 PEFT LoRA）提取特征；编码器输出分为 CLS 视图与基于 patch tokens 的广义均值池化（GeM）视图，并通过多层感知机（MLP）投影头计算 L2 正则化嵌入；训练阶段采用带有同组织核心遮蔽（same-core negative masking）与伪组织重加权的双头网格 InfoNCE 损失；推理与评估阶段 LoRA 权重可合并回主干模型，直接兼容下游基准（如 THUNDER、PathoROB、HEST）原生的特征提取接口。",
+    "call_chain": "scripts/train_lora.py (或 SLURM sbatch 脚本) → spectra.data.pairs / repack (加载重排 PLISM 配对瓦片) → spectra.models.encoder.SpectraEncoder (骨干提取与 LoRA 适配) → spectra.train.contrastive (双头 CLS/GeM 投影与带 mask 的 InfoNCE 损失) → 检查点保存与 1-SE 准则选择 → spectra.eval (对接 PathoROB / THUNDER / HEST 进行鲁棒性与下游任务评估)",
+    "core_modules": [
+      {
+        "name": "spectra.models.encoder",
+        "role": "模型骨干加载与统一封装，处理 HF 与 timm 模型架构差异（如 Virchow2 前缀 register tokens），注入全块 LoRA 与池化投影视图",
+        "evidence": "src/spectra/models/encoder.py:SpectraEncoder"
+      },
+      {
+        "name": "spectra.models.backbones",
+        "role": "中心化骨干模型注册表，维护各模型的预处理归一化参数、池化策略与本地权重路径映射",
+        "evidence": "src/spectra/models/backbones.py:BACKBONES"
+      },
+      {
+        "name": "spectra.train.contrastive",
+        "role": "实现多视图掩蔽对比微调算法与采样损失计算",
+        "evidence": "src/spectra/train/contrastive.py"
+      },
+      {
+        "name": "spectra.eval.thunder_model",
+        "role": "适配 THUNDER 基准模型的外部接口，处理分割与线性探测对 cls/clsmean 维度及 patch token 前缀切片的要求",
+        "evidence": "snapshots/falseneg-gated/src/waivphaet/eval/thunder_model.py:WaivPhikonEncoder"
+      },
+      {
+        "name": "spectra.paths",
+        "role": "环境与文件系统根路径管理，支持 .env 自动加载与历史 WAIV_* / SPECTRA_* 环境变量兼容",
+        "evidence": "src/spectra/paths.py:load_dotenv"
+      }
+    ],
+    "dependencies": [
+      "Python >= 3.12",
+      "PyTorch == 2.8.0 及 torchvision == 0.23.0 (代码注明针对 cu128)",
+      "peft >= 0.14, transformers >= 4.49, timm >= 1.0.20, huggingface_hub >= 0.28, safetensors >= 0.4",
+      "h5py >= 3.12, numpy >= 2.0, einops >= 0.8, tqdm >= 4.66",
+      "可选依赖: owkin-plismbench (PLISM 检索), pandas >= 2.2, scikit-learn >= 1.5 (PathoROB)",
+      "外部数据与权重: PLISM H5 原始/打包数据，各骨干预训练模型权重（部分受限模型如 UNI2-h / Virchow 需本地存放）"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "跑通主微调流程最短路径为配置 .env 指向 PLISM 数据及模型存储目录，安装 pyproject.toml 依赖后运行 `scripts/smoke_test.py` 进行前置验证，随后执行 `scripts/train_lora.py`；但由于代码库经历过重构（旧包名 waivphaet 与新包名 spectra 并存，snapshots 内保留了历史分支），部分脚本和配置存在硬编码路径与非标准 JSON 风险，且门控模型（Gated models）受限于商业许可或下载权限，无法即开即用全部 7 个骨干模型。",
+    "issues": [
+      {
+        "severity": "medium",
+        "finding": "THUNDER 基准评测中特定骨干模型维度不匹配与 token 切片历史陷阱",
+        "evidence": [
+          "snapshots/falseneg-gated/src/waivphaet/eval/thunder_model.py:THUNDER_CLSMEAN_BACKBONES",
+          "docs/archive/FINDINGS_2026-08-16.md:241:Midnight THUNDER segmentation crash"
+        ],
+        "impact": "若将 clsmean 池化错误用于分割任务，由于宣传维度为 2*hidden 而分割仅消费 hidden 维度的 patch tokens，会导致矩阵乘法崩溃；需依赖 thunder_model 中的 resolve_pooling 与 num_prefix_tokens 补偿",
+        "confidence": 0.9
+      },
+      {
+        "severity": "low",
+        "finding": "pyproject.toml 声明许可证为 MIT，而顶层 LICENSE 文件为 Apache License 2.0",
+        "evidence": [
+          "pyproject.toml:license = { text = \"MIT\" }",
+          "LICENSE:Apache License Version 2.0"
+        ],
+        "impact": "开源合规性标识冲突，可能对下游衍生开发引入法律许可认定疑问",
+        "confidence": 1.0
+      },
+      {
+        "severity": "low",
+        "finding": "项目演进产生的包名残留与环境变量双重维护",
+        "evidence": [
+          "src/spectra/paths.py:alias_legacy_env",
+          "snapshots/falseneg-gated/pyproject.toml:name = \"waivphaet\""
+        ],
+        "impact": "存在 waivphaet 到 spectra 迁移的历史包袱，snapshots 仍依赖历史包名和 WAIV_* 环境变量映射，维护与调用易混淆",
+        "confidence": 0.95
+      }
+    ],
+    "static_limitations": [
+      "未实际下载 HuggingFace 或 timm 骨干模型及 PLISM 瓦片数据，无法验证真实的数值梯度更新与显存消耗情况",
+      "未运行 pytest 测试套件，无法静态断言当前 HEAD 下所有单元测试均能无错误通过",
+      "无法脱离集群验证 SLURM 批处理脚本与依赖的第三方评估库（PathoROB、plismbench）的实际运行兼容性"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-11-11T09:29:07.101180"
+  },
+  "2611.12228v1": {
+    "summary": "stMIND 是一个面向时间序列空间转录组学（ST）数据的连续时间神经随机微分方程（Neural SDE）生成框架。源码实现了细胞状态在表达与二维空间坐标系下的漂移速度解耦（细胞内在程序、局部图注意力差异算子和非局部平均场注意力）、细胞增殖/凋亡质量演化，以及基于 Sinkhorn 最优传输和流形正则化的轨迹推断。仓库提供了从 h5ad 预处理、模型训练、轨迹推断到细胞类型特异性相互作用读出的完整实现，但整体实现与论文预设的固定实验参数和 seed 0 存在强耦合。",
+    "repository_kind": "implementation",
+    "architecture": "数据输入为单细胞表达谱（经 PCA 降维至 10 维）、2D 空间物理坐标和连续观测时间。模型将细胞粒子状态扩增为 16 维向量：10 维基因表达、2 维空间位置、1 维对数质量（log mass）、1 维动作能量累加项、1 维相对增殖方差累加项和 1 维局部漂移惩罚累加项。漂移函数分解为：1) intrinsic：5 层感知机计算内在表达速度；2) interaction：FullAttention 模块结合网格划分搜索（build_graph）将相互作用解耦为局部空间距离/表达差异注意力与全局均场注意力；3) position：PositionMLP 计算时间条件下的空间物理迁移速度；4) growth：CellMassTurnoverDrift 预测细胞净增殖与凋亡速率以驱动质量演化。积分过程采用 torchsde.BrownianInterval 进行 SDE 连续演化，支持 activation checkpointing。目标函数结合了 GeomLoss Sinkhorn 联合表达-空间最优传输损失、多尺度空间核密度（KDE）形状匹配损失、基于空间 kNN 图的增殖率 Dirichlet 平滑损失以及内在与相互作用漂移的正交性惩罚。",
+    "call_chain": "训练与评估调用链：data/{axolotl,zebrafish}/prepare.py:main (读取 AnnData counts/spatial 并导出 training.npz) → train.py:main → load_Data.py:load_data (载入并校验表达/坐标维度与时间点) → utils.py:construct (实例化 model.py:STMind 并校验超参约束) → losses.py:_make_spatial_grid (生成背景网格) → model.py:STMind.rollout (结合 latentsde_layers.py:FullAttention.build_graph 与 torchsde 积分) → losses.py:endpoint_loss + path_energy + relative_growth_path + local_drift_path + endpoint_orthogonality (计算总损失) → torch.nn.utils.clip_grad_norm_ → 导出 checkpoint (*.pt) 与 metrics.jsonl → prediction.py:main / Eval/readout.py:main (加载 checkpoint 输出推断动力学向量场和局部细胞类型注意力分解)。",
+    "core_modules": [
+      {
+        "name": "STMind",
+        "role": "核心 SDE 动力学模型，封装状态拼接、各组件漂移计算、单步更新与连续轨迹积分 rollout",
+        "evidence": "model.py:STMind"
+      },
+      {
+        "name": "FullAttention",
+        "role": "多尺度相互作用注意力和空间图构建模块，实现基于二维网格排序的局部物理半径图检索与非局部全局均场注意力",
+        "evidence": "latentsde_layers.py:FullAttention"
+      },
+      {
+        "name": "PositionMLP & CellMassTurnoverDrift",
+        "role": "分别预测空间二维迁移漂移速度与带符号的增殖/凋亡净速率",
+        "evidence": "latentsde_layers.py:PositionMLP, latentsde_layers.py:CellMassTurnoverDrift"
+      },
+      {
+        "name": "losses",
+        "role": "实现端点加权 Sinkhorn 最优传输、多尺度核密度形状匹配、kNN 图平滑以及正交性约束损失",
+        "evidence": "losses.py:endpoint_loss, losses.py:endpoint_orthogonality, losses.py:calc_multiscale_shape_loss"
+      },
+      {
+        "name": "load_data",
+        "role": "加载预处理后的 npz 数据并执行严格的维度、单调时间、细胞数量与源文件 SHA256 防篡改校验",
+        "evidence": "load_Data.py:load_data"
+      },
+      {
+        "name": "readout",
+        "role": "针对观测细胞分解局部相互作用在不同配体-受体细胞类型间的贡献，导出注意力权重矩阵",
+        "evidence": "Eval/readout.py:main"
+      }
+    ],
+    "dependencies": [
+      "Python >= 3.12",
+      "PyTorch",
+      "torchsde (SDE 连续时间积分支持)",
+      "geomloss (基于 Sinkhorn 算法的最优传输损失计算)",
+      "scanpy, anndata (用于原始单细胞转录组 h5ad 读取与质控)",
+      "scipy, scikit-learn (用于 cKDTree 距离搜索、稀疏矩阵处理与 PCA 降维)",
+      "外部数据：需 STOmicsDB 平台 ARTISTA (CNP0002068/STDS0000056) 或 ZESTA (CNP0002220/STDS0000057) 原始 h5ad 文件"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "最短复现路径需先运行 prepare.py 处理官方原始 h5ad 数据，再使用带有 --allow-reprocessed-input 标志的 train.py。主要阻碍：1) 仓库未提供轻量级 toy/mock 测试数据集，所有执行直接依赖下载数 GB 的真实单细胞数据集；2) 代码内部针对 seed 0、特定系数 (alpha=1, beta=1) 以及特定阶段细胞数有硬编码强断言拦截，自定义数据集或修改超参时会主动抛出 ValueError，需修改源码断言逻辑才能扩展应用。",
+    "issues": [
+      {
+        "severity": "medium",
+        "finding": "输入数据哈希与阶段细胞数量强校验导致复现容错率低",
+        "evidence": [
+          "load_Data.py:load_data",
+          "config.py:SETTINGS['source_input_sha256']"
+        ],
+        "impact": "若用户通过 prepare.py 重新生成输入数据，因不同操作系统或库版本（如 PCA/cKDTree 浮点精度）产生的微小差异将改变 npz 的 SHA256 哈希或细胞筛选计数。如果不显式传入 --allow-reprocessed-input，脚本将抛出 ValueError 中断训练。",
+        "confidence": 0.95
+      },
+      {
+        "severity": "medium",
+        "finding": "模型与评估模块内存在针对特定实验和权重的硬编码断言拦截",
+        "evidence": [
+          "utils.py:construct",
+          "prediction.py:main",
+          "Eval/readout.py:main"
+        ],
+        "impact": "construct 中硬编码校验 model.interaction.alpha 和 beta 必须精确等于 1.0；prediction.py 和 readout.py 强制要求 checkpoint['args']['seed'] == 0 且 fit_times 必须严格等于 manuscript 配置。这限制了代码在消融实验或新数据集上的开箱可用性。",
+        "confidence": 0.95
+      },
+      {
+        "severity": "low",
+        "finding": "缺少工程自动化测试套件",
+        "evidence": [
+          "tests_present: false",
+          "train.py:--smoke"
+        ],
+        "impact": "仓库内未配置 pytest/unittest 自动化测试，仅在 train.py 中提供了 4 个 epoch 的 --smoke 冒烟模式，各关键数学层（如 FullAttention 的 segment_normalize 与 build_graph）缺乏边界条件和数值溢出测试。",
+        "confidence": 0.9
+      }
+    ],
+    "static_limitations": [
+      "无法在未编译环境下验证 geomloss (及其依赖的 KeOps/PyTorch CUDA 扩展) 在特定 CUDA 驱动与 Python 3.12 组合下的底层 C++ 编译与执行稳定性",
+      "无法通过静态代码确认包含大量细胞的半径图构建 (FullAttention.build_graph) 在大规模真实样本运行时的 GPU 显存峰值消耗",
+      "无法验证外部 STOmicsDB 下载的原始 h5ad 文件的元数据字段与 prepare.py 中的硬编码字段名（如 obs['Batch']、obs['Annotation']、layers['counts']）是否随官方数据版本更新发生破坏性变化"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-11-11T09:30:17.802185"
   }
 }

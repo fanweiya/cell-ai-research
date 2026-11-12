@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "方法流程图：展示CAPTOR的离线准备阶段（从caption语料构建视觉词签名表）和逐图推理阶段（词分配、查表生成描述）"
+  },
+  "1": {
+    "relevant": true,
+    "score": 8,
+    "caption": "CAPTOR与Talk2DINO、ProxyCLIP、SCLIP在驾驶场景分割上的对比可视化结果图，含各类别图例及IoU分数"
+  },
+  "2": {
+    "relevant": true,
+    "score": 7,
+    "caption": "多类别图像定位/注意力可视化结果图，展示模型对Cat、Dog、Bicycle等10类物体的激活热图"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "source": "gread",
+  "analysis_depth": "multi_pass_static",
+  "repository": "kreshuklab/Open-Weight-MLLMs-Cannot-Compare-What-They-Cannot-Name",
+  "repository_url": "https://github.com/kreshuklab/Open-Weight-MLLMs-Cannot-Compare-What-They-Cannot-Name",
+  "collected_at": "2026-11-03T01:21:20.449208+00:00",
+  "coverage": {
+    "repository_kind": "placeholder_or_docs_only",
+    "has_implementation": false,
+    "code_file_count_in_tree": 0,
+    "selected_file_count": 1,
+    "selected_code_file_count": 0,
+    "languages_by_extension": {},
+    "tests_present": false,
+    "test_files": [],
+    "manifest_files": [
+      "README.md"
+    ],
+    "read_errors": [],
+    "warnings": [],
+    "limitations": [
+      "Static remote inspection only; files were not executed.",
+      "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+    ],
+    "search_errors": []
+  },
+  "overview": "# kreshuklab/Open-Weight-MLLMs-Cannot-Compare-What-They-Cannot-Name\n**Stars**: 0 | **Language**: \n**Description**: The repository&#x27;s name, &quot;Open-Weight-MLLMs-Cannot-Compare-What-They-Cannot-Name,&quot; suggests a focus on the limitations of open-weight Large Language Models (LLMs) in comparison tasks, potentially due to their inability to name or categorize certain concepts. Without a README excerpt or further context, a more detailed description cannot be provided.\n\n\n## Directory Tree\n```\nREADME.md\n```",
+  "tree": "## Directory Tree\n```\nREADME.md\n```",
+  "key_files": [
+    "README.md"
+  ],
+  "source_files": "## README.md\n```\n# Open-Weight-MLLMs-Cannot-Compare-What-They-Cannot-Name\n```",
+  "search_queries": [
+    "class |def |function |interface |struct |fn |func ",
+    "main\\(|train\\(|forward\\(|fit\\(|predict\\(|infer|generate",
+    "TODO|FIXME|NotImplemented|raise |throw ",
+    "pytest|unittest|test_|describe\\(|@Test",
+    "import |from |require\\(|use |#include"
+  ],
+  "search_results": [
+    "## Search inside kreshuklab/Open-Weight-MLLMs-Cannot-Compare-What-They-Cannot-Name for \"class |def |function |interface |struct |fn |func \"\n```\nNo matches found.\n```",
+    "## Search inside kreshuklab/Open-Weight-MLLMs-Cannot-Compare-What-They-Cannot-Name for \"main\\(|train\\(|forward\\(|fit\\(|predict\\(|infer|generate\"\n```\nNo matches found.\n```",
+    "## Search inside kreshuklab/Open-Weight-MLLMs-Cannot-Compare-What-They-Cannot-Name for \"TODO|FIXME|NotImplemented|raise |throw \"\n```\nNo matches found.\n```",
+    "## Search inside kreshuklab/Open-Weight-MLLMs-Cannot-Compare-What-They-Cannot-Name for \"pytest|unittest|test_|describe\\(|@Test\"\n```\nNo matches found.\n```",
+    "## Search inside kreshuklab/Open-Weight-MLLMs-Cannot-Compare-What-They-Cannot-Name for \"import |from |require\\(|use |#include\"\n```\nNo matches found.\n```"
+  ]
+}

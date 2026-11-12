@@ -118,7 +118,7 @@
 
 ### Data Sources
 - Primary: arXiv abstract pages, PDFs, GitHub repositories
-- Secondary: papers.json database, agent_output summaries
+- Secondary: papers.json database, data/figures summaries
 
 ---
 
@@ -146,9 +146,9 @@
 ## Output Files Generated
 
 ### sumday, July 12, 2026, 11:57 PM
-- `/mnt/c/workspace/cell-ai-research/agent_output/2607.04353.json` - Initial discovery summary
-- `/mnt/c/workspace/cell-ai-research/agent_output/2607.07467.json` - Initial discovery summary  
-- `/mnt/c/workspace/cell-ai-research/agent_output/2607.08297.json` - Initial discovery summary
+- `/mnt/c/workspace/cell-ai-research/data/figures/2607.04353.json` - Initial discovery summary
+- `/mnt/c/workspace/cell-ai-research/agent_output/2607.07467.json` - Initial discovery summary（该文件已不在工作区）  
+- `/mnt/c/workspace/cell-ai-research/data/figures/2607.08297.json` - Initial discovery summary
 
 ### Ongoing Databases
 - `/mnt/c/workspace/cell-ai-research/papers.json` - Main state database

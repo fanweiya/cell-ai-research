@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "标注流程图：展示利用LPA、SAM及人工校正将语义标签数据集（BetaSeg、Private Data、OpenOrganelle）转换为实例标注数据集的方法流程"
+  },
+  "1": {
+    "relevant": true,
+    "score": 7,
+    "caption": "数据集中细胞器实例分布的环形统计图，展示mito、endo、er、golgi、nucleus各类别实例数量"
+  },
+  "2": {
+    "relevant": true,
+    "score": 6,
+    "caption": "按目标体积大小分布的实例数量统计柱状图，展示数据集中细胞器实例的尺寸分布"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "实验结果对比图：展示ground truth、SAM 3与SnapHead方法在细胞分割/分类上的可视化对比及定量指标（细胞计数与IoU），含细胞系图例。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "两个混淆矩阵对比图，展示SAM 3与SnapHead方法在多种细胞系（A172、BT474、Huh7、MCF7等）分类任务上的性能，含准确率与Kappa系数及行归一化分类占比。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "实验结果对比图：展示 production AMG、learned proposer (N=5) 与 ground truth 的分割提案可视化及 recall@0.5 等定量指标。"
+  }
+}

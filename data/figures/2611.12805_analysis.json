@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "2D Gum-Net方法整体架构图，包含特征提取、孪生匹配与无监督非线性对齐三大模块的流程图"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "对比图：展示Max Pooling、Average Pooling与DCT Spectral Pooling在不同下采样因子下对指纹图像的降采样效果及裁剪频率可视化，用于说明谱池化方法的优势。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "指纹图像弹性配准的实验结果对比图，展示合成源图、变形图、模糊变形图及初始形变、估计形变、最终对齐的彩色形变场可视化。"
+  }
+}

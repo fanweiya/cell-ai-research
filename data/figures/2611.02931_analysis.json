@@ -1,0 +1,7 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心方法示意图：对比标准方法、推理时生成与训练时域迁移（Training-Time Domain Transfer）三种范式的训练与部署流程，并列出各方案的局限性与新方法的优势"
+  }
+}

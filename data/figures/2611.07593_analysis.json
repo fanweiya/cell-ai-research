@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 7,
+    "caption": "展示3D医学扫描中intra-slice/inter-slice token相似性及频率能量集中于低频bin的示意图，用于说明TACT-KV压缩原理的核心方法图示"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "TACT-KV方法流程图：展示冻结ViT/MLP投影与解码器结构，以及三轴体积KV布局、3D DCT-II变换、Reverse Water-Filling系数分配和码本编码的压缩管线"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "散点对比图：不同医学VLM模型（Hulu-Med、MedGemma系列）在1/γ阈值线上的优势分布"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 8,
+    "caption": "方法概念示意图：组织病理图像patch映射到潜在原型空间，相似patch聚类为绿色伪影原型和红色原型"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心方法流程图：展示APL框架的四个阶段——提取patch特征、候选选择、学习伪迹原型、伪标签生成与逻辑回归"
+  },
+  "2": {
+    "relevant": true,
+    "score": 8,
+    "caption": "病理切片伪影检测对比图：原始图像、人工标注与GrandQC、HistoART、APL三种方法的伪影概率热图可视化对比"
+  }
+}

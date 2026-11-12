@@ -53,7 +53,7 @@ node --test tests/*.test.cjs
 ```bash
 python3 generate_index.py --no-translate --no-code-analysis
 ```
-执行后将在项目根目录下更新 `index.html`。
+执行后将在项目根目录下更新 `index.html`。这两项只用于本地快速预览页面：每日发布用的重建必须完整执行，不要传 `--no-images` 或 `--no-code-analysis`，让缺失或无效的翻译、图示与代码分析缓存自动重试。
 
 ### 3. 发布至 Cloudflare Pages
 
