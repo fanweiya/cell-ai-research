@@ -221,12 +221,18 @@ function requestSnapshot(query) {
   return {mode: copilotState.mode, primary, related, papers: [...primary,...related]};
 }
 function scopeDescription(snapshot) { return `${snapshot.mode === 'all' ? '全库' : '指定'} ${snapshot.primary.length} 篇${snapshot.related.length ? ` ＋ 关联 ${snapshot.related.length} 篇` : ''} · ${snapshot.evidenceReady ? `摘要＋原文 ${snapshot.evidence.length} 篇` : '摘要证据'}`; }
+// 模型常把显示公式写成带空行的 \[ ... \]，Markdown 会切成多个段落，KaTeX 就匹配不到；先把块内换行压平。
+function normalizeDisplayMath(value) {
+  return String(value)
+    .replace(/\\\[([\s\S]*?)\\\]/g, (m, body) => `\\[${body.replace(/\s*\n+\s*/g, ' ').trim()}\\]`)
+    .replace(/\$\$([\s\S]*?)\$\$/g, (m, body) => `$$${body.replace(/\s*\n+\s*/g, ' ').trim()}$$`);
+}
 function appendMessage(sender, text, actions = [], snapshot = null) {
   const msg = document.createElement('div'); msg.className = 'msg ' + sender;
   const body = document.createElement('div');
   if (snapshot) { const scope = document.createElement('span'); scope.className = 'message-scope'; scope.textContent = scopeDescription(snapshot); body.append(scope); }
   const bubble = document.createElement('div'); bubble.className = 'msg-bubble';
-  if (sender === 'ai') { bubble.innerHTML = parseMarkdown(text); if (window.renderPaperMath) window.renderPaperMath(bubble); } else bubble.textContent = text;
+  if (sender === 'ai') { bubble.innerHTML = parseMarkdown(normalizeDisplayMath(text)); if (window.renderPaperMath) window.renderPaperMath(bubble); } else bubble.textContent = text;
   body.append(bubble);
   if (snapshot) {
     const details = document.createElement('details'); details.className = 'evidence-details';
@@ -540,7 +546,7 @@ async function sendUserMessage() {
       : error.message || '网络请求失败，请稍后重试。';
     const msg = appendMessage('ai', message);
     const retry = document.createElement('button'); retry.type = 'button'; retry.className = 'chip'; retry.textContent = '恢复问题与论文范围';
-    retry.onclick = () => { copilotState.mode = snapshot.mode; copilotState.ids = new Set(snapshot.primary.map(p=>p.id)); el('includeRelated').checked = snapshot.related.length > 0; el('chatInput').value = text; updateCopilotScope(); el('chatInput').focus(); };
+    retry.onclick = () => { copilotState.mode = snapshot.mode; copilotState.ids = new Set(snapshot.mode === 'selected' ? snapshot.primary.map(p=>p.id) : []); el('includeRelated').checked = snapshot.related.length > 0; el('chatInput').value = text; updateCopilotScope(); el('chatInput').focus(); };
     msg.lastElementChild.append(retry); el('chatStatus').textContent = '问题已保留，可恢复后重新发送';
   } finally {
     clearTimeout(timeout); copilotState.controller = null; el('chatSendBtn').hidden = false; el('chatStopBtn').hidden = true; updateCopilotScope();
