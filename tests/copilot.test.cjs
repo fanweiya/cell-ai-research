@@ -7,13 +7,13 @@ const {JSDOM} = require('jsdom');
 const root = path.resolve(__dirname, '..');
 const ui = fs.readFileSync(path.join(root,'web/copilot.html'),'utf8');
 const script = fs.readFileSync(path.join(root,'web/copilot.js'),'utf8');
-function setup(extra = {}) {
+function setup(extra = {}, extraPapers = []) {
   const fixture = ['alpha','beta','gamma'].map(id => `<div class="card" data-paper-id="${id}"><button class="ai-read-btn" onclick="readPaper(this)">AI 解读</button><label class="paper-select"><input type="checkbox" onchange="togglePaperSelection(this)"></label></div>`).join('');
   const dom = new JSDOM(fixture+ui,{url:'https://example.test/',runScripts:'outside-only'});
   const w = dom.window;
   w.HTMLDialogElement.prototype.showModal = function(){this.open=true;};
   w.HTMLDialogElement.prototype.close = function(){this.open=false;};
-  const papers = ['alpha','beta','gamma'].map(id => ({id,title_en:id,title_zh:'论文'+id,abstract:'Evidence '+id,task_types:['segmentation'],arxiv_url:'https://arxiv.org/abs/'+id, ...(extra[id] || {})}));
+  const papers = ['alpha','beta','gamma'].map(id => ({id,title_en:id,title_zh:'论文'+id,abstract:'Evidence '+id,task_types:['segmentation'],arxiv_url:'https://arxiv.org/abs/'+id, ...(extra[id] || {})})).concat(extraPapers);
   w.eval(`const PAPERS_DB = ${JSON.stringify(papers)}; const LLM_BASE='https://example.test/v1'; const LLM_MODEL='test';`+'\n'+script);
   return {w, d:w.document, close:()=>w.close()};
 }
@@ -35,7 +35,7 @@ test('selected scope stays independent from page filters and outgoing snapshot i
   x.d.querySelector('.card').style.display='none';
   assert.deepEqual(Array.from(x.w.requestSnapshot('test').papers,p=>p.id),['alpha']);
   let body, release;
-  x.w.fetch=async (url,opts)=>{body=JSON.parse(opts.body);return new Promise(resolve=>release=()=>resolve({ok:true,json:async()=>({choices:[{message:{content:'|方法|条件|\n|---|---|\n|A|少标注|'}}]})}));};
+  x.w.fetch=async (url,opts)=>{body=JSON.parse(opts.body);return new Promise(resolve=>release=()=>resolve({ok:true,headers:{get:()=>'application/json'},json:async()=>({choices:[{message:{content:'|方法|条件|\n|---|---|\n|A|少标注|'},finish_reason:'stop'}]})}));};
   x.d.getElementById('chatInput').value='compare'; const request=x.w.sendUserMessage();
   x.w.setCopilotScope('all'); await x.w.sendUserMessage();
   assert.ok(body.messages[1].content.includes('Evidence alpha')); assert.ok(!body.messages[1].content.includes('Evidence beta'));
@@ -97,10 +97,10 @@ test('citation labels follow known paper URLs and unknown chunks are flagged',()
   assert.ok(result.includes('C099（引用未匹配）'));
   assert.ok(!result.includes('[2509.12596 · C099]'));
   // 四位 arXiv 编号与 bioRxiv DOI 都是引用标识，不是普通文字链接。
-  assert.ok(result.includes('[2411.1788 · C012](https://arxiv.org/html/2411.1788)'));
-  assert.ok(result.includes('[biorxiv:10.1101/2024.05.01.591234 · C003](https://doi.org/10.1101/2024.05.01.591234)'));
-  assert.ok(result.includes('[10.1101/2024.05.01.591234](https://doi.org/10.1101/2024.05.01.591234)'));
-  assert.ok(result.includes('[4 位论文 2411.1788](https://arxiv.org/html/2411.1788)'));
+  assert.ok(result.includes('[C012](https://arxiv.org/html/2411.1788 "2411.1788")'));
+  assert.ok(result.includes('[C003](https://doi.org/10.1101/2024.05.01.591234 "biorxiv:10.1101/2024.05.01.591234")'));
+  assert.ok(result.includes('[摘要](https://doi.org/10.1101/2024.05.01.591234 "biorxiv:10.1101/2024.05.01.591234")'));
+  assert.ok(result.includes('[摘要](https://arxiv.org/html/2411.1788 "2411.1788")'));
   assert.ok(result.includes('2411.1788 · C012（引用未匹配）'));
   // 不含论文标识的普通链接仍按内容保留。
   assert.ok(result.includes('[教程](https://example.com/guide)')); x.close();
@@ -202,4 +202,17 @@ test('over-budget all-library prompt falls back to short cards plus selected abs
   assert.ok(prompt.includes('按问题选读的完整摘要'), 'selected abstracts section present');
   assert.ok(prompt.includes('Paper 599'), 'every paper still appears at least as a brief');
   w.close();
+});
+
+test('table cells turn chunk ids and paper ids into links',()=>{
+  const x=setup({}, [{id:'2411.1788v2',title_en:'target',title_zh:'目标',abstract:'a',task_types:[],arxiv_url:'https://arxiv.org/html/2411.1788'}]);
+  const host=x.d.createElement('div');
+  host.innerHTML=x.w.parseMarkdown('| 论文 | 证据 | 结论 |\n|---|---|---|\n| 2411.1788v2 | C003、C004 | 有效 |\n| 其他 | 摘要 | 无 |');
+  const links=host.querySelectorAll('td a');
+  assert.equal(links.length,3);
+  assert.equal(links[0].getAttribute('href'),'https://arxiv.org/html/2411.1788');
+  assert.equal(links[0].title,'2411.1788v2');
+  assert.equal(links[1].textContent,'C003');
+  assert.equal(links[2].textContent,'C004');
+  x.close();
 });

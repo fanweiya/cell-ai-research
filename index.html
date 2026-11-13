@@ -1329,6 +1329,7 @@ body {
 .md-table-wrap table { border-collapse: collapse; font-size: 12px; min-width: 320px; }
 .md-table-wrap td,.md-table-wrap th { border: 1px solid var(--border); padding: 7px 9px; vertical-align: top; text-align: left; }
 .md-table-wrap th { background: var(--surface-alt); }
+.md-table-wrap td a { white-space: nowrap; }
 .evidence-details { margin-top: 10px; font-size: 11px; color: var(--text3); }
 .evidence-details a { display: block; margin-top: 6px; color: #315b43; }
 .paper-selection-bar { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); z-index: 1001; display: flex; align-items: center; gap: 15px; padding: 11px 14px; border: 1px solid #bfd2c5; border-radius: 12px; background: var(--surface); box-shadow: 0 6px 30px #0002; font-size: 13px; white-space: nowrap; }
@@ -1644,7 +1645,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
     </details>
 
     <div class="sidebar-footer">
-      <div class="update-time">更新于: 2026-11-13 10:21</div>
+      <div class="update-time">更新于: 2026-11-13 10:40</div>
     </div>
   </aside>
   
@@ -47760,6 +47761,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
     <div class="chat-title"><h3>Cell AI Copilot</h3><span class="chat-subtitle">从论文出发，让研究彼此连接</span></div>
     <div class="copilot-tools">
       <button type="button" id="chatExpand" onclick="expandCopilot()" aria-label="展开对话" aria-pressed="false">展开</button>
+      <button type="button" id="exportCsv" onclick="exportCatalogCsv()" title="按当前讨论范围导出题录 CSV">导出题录</button>
       <button type="button" onclick="toggleChat()" aria-label="关闭 Copilot">✕</button>
     </div>
   </div>
@@ -48168,6 +48170,25 @@ function tableCells(line) {
 }
 function tableLine(line) { return /^\s*\\?\|/.test(line) || /(?<!\\)\|/.test(line); }
 function tableDivider(line) { return tableLine(line) && tableCells(line).every(c => /^:?-{3,}:?$/.test(c)); }
+const PAPER_INDEX = new Map();
+function paperForRow(cells) {
+  if (!PAPER_INDEX.size) PAPERS_DB.forEach(p => PAPER_INDEX.set(String(p.id).replace(/v\d+$/, ''), p));
+  for (const cell of cells) {
+    const match = String(cell).match(/\b(\d{4}\.\d{4,5})(?:v\d+)?\b/);
+    if (match && PAPER_INDEX.has(match[1])) return PAPER_INDEX.get(match[1]);
+  }
+  return null;
+}
+function linkTableCell(value, paper) {
+  const cell = String(value || '').trim();
+  if (!paper || !cell || cell.includes('](')) return value;
+  const url = paper.arxiv_url || `https://arxiv.org/abs/${paper.id}`;
+  const chunks = cell.match(/^C\d+(?:\s*[、,，]\s*C\d+)*$/);
+  if (chunks) return cell.split(/\s*[、,，]\s*/).map(id => `[${id}](${url} "${paper.id}")`).join('、');
+  const bare = cell.match(/^(\d{4}\.\d{4,5}(?:v\d+)?)$/);
+  if (bare) return `[${bare[1]}](${url} "${paper.id}")`;
+  return value;
+}
 function parseMarkdown(value) {
   const lines = String(value).replace(/\r\n/g, '\n').split('\n');
   const out = [];
@@ -48189,8 +48210,8 @@ function parseMarkdown(value) {
       while (i < lines.length) {
         if (!lines[i].trim()) { i++; continue; }
         if (!tableLine(lines[i])) break;
-        const cells = tableCells(lines[i++]);
-        rows.push(`<tr>${headers.map((_, n) => `<td>${inlineMarkdown(cells[n] || '')}</td>`).join('')}</tr>`);
+        const cells = tableCells(lines[i++]), rowPaper = paperForRow(cells);
+        rows.push(`<tr>${headers.map((_, n) => `<td>${inlineMarkdown(linkTableCell(cells[n] || '', rowPaper))}</td>`).join('')}</tr>`);
       }
       out.push(`<div class="md-table-wrap" tabindex="0" role="region" aria-label="比较表，可横向滚动"><table><thead><tr>${headers.map(h => `<th scope="col">${inlineMarkdown(h)}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div>`); continue;
     }
@@ -48276,6 +48297,26 @@ function clearPaperSelection() { paperSelection.clear(); updateSelectionUI(); }
 function discussSelection() {
   if (!paperSelection.size) return;
   copilotState.ids = new Set(paperSelection); copilotState.mode = 'selected'; el('includeRelated').checked = false; showCopilot();
+}
+function csvCell(value) {
+  const text = String(value == null ? '' : value);
+  return /[",\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+}
+function exportCatalogCsv() {
+  const rows = copilotState.mode === 'selected' ? selectedPapers() : [...PAPERS_DB];
+  if (!rows.length) return;
+  const header = ['arXiv ID', '英文标题', '中文标题', '发表日期', '任务类型', '代码', 'GitHub', '论文链接'];
+  const lines = [header.map(csvCell).join(',')];
+  rows.forEach(p => lines.push([p.id, p.title_en, p.title_zh, p.published_date, (p.task_types || []).join(' / '), p.has_code ? '有' : '无', p.github_url || '', p.arxiv_url || ''].map(csvCell).join(',')));
+  const blob = new Blob(['\ufeff' + lines.join('\r\n') + '\r\n'], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  const scope = copilotState.mode === 'selected' ? `指定${rows.length}篇` : `全库${rows.length}篇`;
+  link.href = url;
+  link.download = `cell-ai-题录-${scope}-${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.append(link); link.click(); link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  el('chatStatus').textContent = `已导出 ${rows.length} 篇题录`;
 }
 function setCopilotScope(mode) { copilotState.mode = mode; updateCopilotScope(); }
 function updateCopilotScope() {

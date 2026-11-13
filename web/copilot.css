@@ -49,6 +49,7 @@
 .md-table-wrap table { border-collapse: collapse; font-size: 12px; min-width: 320px; }
 .md-table-wrap td,.md-table-wrap th { border: 1px solid var(--border); padding: 7px 9px; vertical-align: top; text-align: left; }
 .md-table-wrap th { background: var(--surface-alt); }
+.md-table-wrap td a { white-space: nowrap; }
 .evidence-details { margin-top: 10px; font-size: 11px; color: var(--text3); }
 .evidence-details a { display: block; margin-top: 6px; color: #315b43; }
 .paper-selection-bar { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); z-index: 1001; display: flex; align-items: center; gap: 15px; padding: 11px 14px; border: 1px solid #bfd2c5; border-radius: 12px; background: var(--surface); box-shadow: 0 6px 30px #0002; font-size: 13px; white-space: nowrap; }
