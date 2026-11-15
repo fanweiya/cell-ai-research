@@ -4282,6 +4282,18 @@ def main():
     temp_output.replace(OUTPUT_FILE)
     size_kb = len(html_content) / 1024
     print(f"✅ Output: {OUTPUT_FILE} ({size_kb:.0f} KB)")
+
+    # 图解目录与页面同源，放在同一构建步骤里，避免新增论文有页无目录。
+    tools_dir = str(WORKSPACE / "tools")
+    if tools_dir not in sys.path:
+        sys.path.insert(0, tools_dir)
+    try:
+        import build_explainer_index
+
+        build_explainer_index.build()
+    except Exception as error:  # 目录失败不该拦住整站构建
+        print(f"⚠️ 图解目录未生成：{type(error).__name__}: {error}")
+
     print("Done!")
 
 
