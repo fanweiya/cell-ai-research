@@ -24,6 +24,8 @@ STYLE = (
 
 SANITIZE = {"对齐": "对应", "闭环": "循环", "落地": "实现", "钉死": "固定", "技术栈": "技术组合"}
 
+NAV = '<a href="#figures">原图</a>'
+
 SECTION = """<section id="figures">
 <h2>原文关键图</h2>
 <p>下面两张图取自论文原页，配注由站点自动摘写，可对照上面的机制与数字一起看。</p>
@@ -89,7 +91,10 @@ def insert_for(pid: str) -> bool:
         return False
     source = src.read_text(encoding="utf-8")
     if 'id="figures"' in source:
-        return False
+        if NAV in source or '<a href="#limits"' not in source:
+            return False
+        updated = source.replace('<a href="#limits"', NAV + '<a href="#limits"', 1)
+        return render(pid, src, source, updated)
     rows = pick(pid)
     if not rows:
         return False
@@ -106,6 +111,12 @@ def insert_for(pid: str) -> bool:
     updated = source[:anchor] + SECTION.format(figures=blocks) + "\n" + source[anchor:]
     if "</style>" in updated:
         updated = updated.replace("</style>", STYLE + "\n</style>", 1)
+    if '<a href="#limits"' in updated:
+        updated = updated.replace('<a href="#limits"', NAV + '<a href="#limits"', 1)
+    return render(pid, src, source, updated)
+
+
+def render(pid: str, src: Path, original: str, updated: str) -> bool:
     out = EXPLAINERS / f"{pid}.html"
     backup = out.read_bytes() if out.exists() else b""
     src.write_text(updated, encoding="utf-8")
@@ -114,7 +125,7 @@ def insert_for(pid: str) -> bool:
         cwd=ROOT, capture_output=True, text=True, encoding="utf-8",
     )
     if result.returncode != 0:
-        src.write_text(source, encoding="utf-8")
+        src.write_text(original, encoding="utf-8")
         if backup:
             out.write_bytes(backup)
         return False
