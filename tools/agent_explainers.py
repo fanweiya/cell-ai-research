@@ -21,6 +21,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
+import add_paper_figures as F
 import build_explainers as B
 
 ROOT = B.ROOT
@@ -251,6 +252,10 @@ def main() -> int:
                 "repairs": fixes,
                 "bytes": (B.EXPLAINERS / f"{pid}.html").stat().st_size,
             }, None)
+            try:
+                F.insert_for(pid)
+            except Exception as figure_error:
+                print(f"    {pid} 原文图未插入：{figure_error}", flush=True)
             shutil.rmtree(work / "repo", ignore_errors=True)
             print(f"    {pid} 完成 {time.time() - began:.0f}s  {words} 字", flush=True)
             return True
