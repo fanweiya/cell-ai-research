@@ -51,6 +51,7 @@ function applyPaperFilters() {
     let filter = true;
     if (activeFilter === 'code') filter = card.dataset.code === '1';
     else if (activeFilter === 'jev') filter = parseFloat(card.dataset.jev || '0') >= 5.5;
+    else if (activeFilter === 'explainer') filter = card.dataset.explainer === '1';
     return (!query || card.searchText.includes(query)) && filter
       && (activeMonth === 'all' || card.dataset.date.slice(0,7) === activeMonth);
   });

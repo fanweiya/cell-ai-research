@@ -24,6 +24,8 @@
 :root[data-theme="dark"] .card a.al:hover { color:#bfdbfe; }
 :root[data-theme="dark"] .ai-read-btn { color:#a5e7bd; background:#203c30; border-color:#416a52; }
 :root[data-theme="dark"] .ai-read-btn:hover { background:#2c4d3c; }
+:root[data-theme="dark"] .explainer-link { color:#b4bcff; background:#242b52; border-color:#3f4a86; }
+:root[data-theme="dark"] .explainer-link:hover { background:#2d3566; }
 :root[data-theme="dark"] .scope-tabs button[aria-pressed="true"],
 :root[data-theme="dark"] .evidence-details a,
 :root[data-theme="dark"] .welcome-kicker { color:#a5e7bd; }

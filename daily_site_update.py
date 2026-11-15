@@ -1,4 +1,5 @@
 import json
+import subprocess
 
 
 def mark_site_pending(pending_path, needs_build=True):
@@ -8,7 +9,7 @@ def mark_site_pending(pending_path, needs_build=True):
     temporary.replace(pending_path)
 
 
-def update_site(evidence, changed, project, pending_path, run, build_command):
+def update_site(evidence, changed, project, pending_path, run, build_command, explainer_command=None):
     evidence['publish_status'] = '未执行（页面无变化）'
     if changed:
         mark_site_pending(pending_path)
@@ -20,6 +21,20 @@ def update_site(evidence, changed, project, pending_path, run, build_command):
     except (json.JSONDecodeError, OSError, ValueError):
         state = {'needs_build': True}
     if state.get('needs_build', True):
+        if explainer_command is not None:
+            try:
+                generated = run(explainer_command, timeout=3600)
+                if generated.returncode:
+                    raise RuntimeError(
+                        (generated.stderr or generated.stdout or '非零退出码')[-500:]
+                    )
+                evidence['explainer_status'] = '已补齐'
+            except subprocess.TimeoutExpired:
+                evidence['explainer_status'] = '超时'
+                evidence['errors'].append('解读页生成超时（3600s），本次先构建已有页面')
+            except Exception as exc:
+                evidence['explainer_status'] = '失败'
+                evidence['errors'].append(f'解读页生成失败，本次先构建已有页面：{exc}')
         try:
             result = run(build_command, timeout=900)
             if result.returncode:

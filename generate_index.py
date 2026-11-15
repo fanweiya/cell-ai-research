@@ -227,7 +227,7 @@ def _academic_translation_prompt(text, title, task_types, text_type, retry_note=
 
 
 def _numeric_tokens(text):
-    """把英文数量单位与中文万/亿归一化，比较数值语义而非表面格式。"""
+    """把数量单位与中文万/亿归一化，比较数值语义而非表面格式。"""
     from decimal import Decimal, InvalidOperation
 
     text = (text or "").replace(r"\%", "%").replace("％", "%")
@@ -251,32 +251,55 @@ def _numeric_tokens(text):
         "万": Decimal("10000"),
         "亿": Decimal("100000000"),
     }
-    pattern = re.compile(
-        r"(?<![A-Za-z0-9.])"
-        r"(\d+(?:\.\d+)?)"
-        r"\s*([%kmbt]|thousand|million|billion|万|亿)?"
-        r"(?![A-Za-z0-9])",
-        re.IGNORECASE,
+    number_pattern = re.compile(r"(?<![A-Za-z0-9.])(\d+(?:\.\d+)?)")
+    unit_pattern = re.compile(
+        r"\s*(%|thousand|million|billion|[kmbtKM](?![A-Za-z])|[万亿])"
     )
-    values = set()
-    for match in pattern.finditer(text):
-        raw_number, raw_unit = match.groups()
+    # 范围写法（60 to 80%、60–80%、60~80%）的百分号作用于两端。
+    range_pattern = re.compile(
+        r"(?<![A-Za-z0-9.])(\d+(?:\.\d+)?)\s*~?\s*(?:to|[–—~-]|至|～)\s*~?\s*"
+        r"(\d+(?:\.\d+)?)\s*%"
+    )
+
+    def _normalize(raw_number, multiplier):
         try:
             number = Decimal(raw_number)
         except InvalidOperation:
-            continue
-        unit = (raw_unit or "").lower()
-        if unit in multipliers:
-            number *= multipliers[unit]
+            return None
+        if multiplier is not None:
+            number *= multiplier
         normalized = format(number.normalize(), "f")
         if "." in normalized:
             normalized = normalized.rstrip("0").rstrip(".")
-        prefix = "percent:" if unit == "%" else "number:"
-        values.add(prefix + normalized)
+        return normalized
+
+    percent_range_values = set()
+    for match in range_pattern.finditer(text):
+        for raw_number in match.groups():
+            normalized = _normalize(raw_number, None)
+            if normalized is not None:
+                percent_range_values.add(normalized)
+
+    values = set()
+    for match in number_pattern.finditer(text):
+        raw_number = match.group(1)
+        raw_unit = ""
+        unit_match = unit_pattern.match(text, match.end())
+        if unit_match:
+            raw_unit = unit_match.group(1)
+        unit = raw_unit.lower()
+        normalized = _normalize(raw_number, multipliers.get(unit))
+        if normalized is None:
+            continue
+        normalized_bare = _normalize(raw_number, None)
+        is_percent = unit == "%" or normalized_bare in percent_range_values
+        values.add(("percent:" if is_percent else "number:") + normalized)
     return values
 
 
 def _translation_quality(source, translated, text_type="摘要"):
+    if not (source or "").strip():
+        return False, "原文为空，没有可核对的内容"
     min_chinese = 2 if text_type == "标题" else 10
     if len(re.findall(r"[\u4e00-\u9fff]", translated or "")) < min_chinese:
         return False, "没有生成有效中文"
@@ -1677,6 +1700,10 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
     theme_css = (assets / "theme.css").read_text(encoding="utf-8")
     arxiv_html_status = arxiv_html_status or {}
     code_summaries = code_summaries or {}
+    explainer_entries = {}
+    explainer_manifest_path = WORKSPACE / "data" / "explainers" / "manifest.json"
+    if explainer_manifest_path.exists():
+        explainer_entries = json.loads(explainer_manifest_path.read_text(encoding="utf-8")).get("entries", {})
     papers_sorted = sorted(papers, key=lambda p: p.get("published_date", ""), reverse=True)
 
     total = len(papers)
@@ -1684,6 +1711,7 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
     has_html = 0
     has_figs = 0
     has_jev_high = 0
+    has_explainer = 0
 
     for p in papers:
         if _is_code_ready(p):
@@ -1692,6 +1720,8 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
             has_html += 1
         if float(p.get("jev_evaluation", {}).get("composite_priority") or 0) >= 5.5:
             has_jev_high += 1
+        if str(p.get("arxiv_id", "")) in explainer_entries:
+            has_explainer += 1
 
     # 按年月统计（用于侧栏年月筛选下拉）
     month_counts = {}
@@ -1987,8 +2017,17 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
   </div>
 </details>'''
 
+        explainer_entry = explainer_entries.get(str(pid)) or {}
+        explainer_attr = "1" if explainer_entry else "0"
+        explainer_link = ""
+        if explainer_entry:
+            explainer_link = (
+                f'<a class="explainer-link" href="explainers/{_esc(pid)}.html" '
+                f'title="图解：机制、数字与边界">◫ 图解</a>'
+            )
+
         card = f"""
-<div class="card" tabindex="-1" id="paper-{_esc(pid)}" data-paper-id="{_esc(pid)}" data-code="{'1' if has_code_flag else '0'}" data-jev="{card_jev_attr}" data-date="{_esc(date)}">
+<div class="card" tabindex="-1" id="paper-{_esc(pid)}" data-paper-id="{_esc(pid)}" data-code="{'1' if has_code_flag else '0'}" data-jev="{card_jev_attr}" data-date="{_esc(date)}" data-explainer="{explainer_attr}">
   <div class="ch">
     <div class="ct">
       <h2 class="tzh">{title_zh}</h2>
@@ -2006,6 +2045,7 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
   </div>
       <div class="paper-ai-actions">
         <button class="ai-read-btn" type="button" onclick="readPaper(this)" aria-label="AI 解读：{_esc(p.get('title', pid))}">✦ AI 解读</button>
+        {explainer_link}
         <label class="paper-select"><input type="checkbox" onchange="togglePaperSelection(this)" aria-label="选择论文：{_esc(p.get('title', pid))}">加入对比</label>
         {code_html}
         <a href="{link}" target="_blank" class="al" title="打开论文原文（{link_kind}）">📎 {_esc(pid)}</a>
@@ -2059,7 +2099,6 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
         })
 
     cards_html = "\n".join(cards)
-    import json
     js_papers_json = json.dumps(js_papers, ensure_ascii=False).replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
 
     return f"""<!DOCTYPE html>
@@ -3333,6 +3372,7 @@ body {{
         <button class="fbtn active" onclick="doFilter('all', this)">全部 ({total})</button>
         <button class="fbtn" onclick="doFilter('code', this)">💻 有代码 ({has_code})</button>
         <button class="fbtn" onclick="doFilter('jev', this)">⚡ 综合分 ≥ 5.5 ({has_jev_high})</button>
+        <button class="fbtn" onclick="doFilter('explainer', this)">📐 图解 ({has_explainer})</button>
       </div>
       <div class="month-filter">
         <select class="month-select" id="monthSelect" onchange="doMonthFilter(this.value)">
@@ -3354,6 +3394,10 @@ body {{
       <div class="stat-item">
         <div class="stat-label">已核验代码链接 <span class="stat-val">{has_code} / {total}</span></div>
         <div class="progress-bar"><div class="progress-fill" style="width: {has_code/total*100 if total else 0:.0f}%;"></div></div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">图解 <span class="stat-val">{has_explainer} / {total}</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width: {has_explainer/total*100 if total else 0:.0f}%;"></div></div>
       </div>
     </details>
 

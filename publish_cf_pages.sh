@@ -36,6 +36,10 @@ rm -rf "$SITE_DIR"
 mkdir -p "$SITE_DIR/data/figures"
 cp "$ROOT_DIR/index.html" "$SITE_DIR/index.html"
 cp "$ROOT_DIR/_headers" "$SITE_DIR/_headers"
+if [[ -d "$ROOT_DIR/explainers" ]]; then
+  # 每篇论文一张自包含的图解页，样式已内联。
+  cp -R "$ROOT_DIR/explainers" "$SITE_DIR/explainers"
+fi
 cp -R "$ROOT_DIR/vendor" "$SITE_DIR/vendor"
 mkdir -p "$SITE_DIR/web"
 cp "$ROOT_DIR/web/paper-math.js" "$SITE_DIR/web/paper-math.js"

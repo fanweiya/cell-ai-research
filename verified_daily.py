@@ -116,6 +116,19 @@ def index_build_command(python_executable: str) -> list[str]:
     ]
 
 
+def explainer_command(python_executable: str) -> list[str]:
+    """补齐缺少图解页的论文，--missing 只处理 manifest 里没有的编号。"""
+    return [
+        python_executable,
+        str(PROJECT / "tools" / "build_explainers.py"),
+        "--missing",
+        "--concurrency",
+        "4",
+        "--limit",
+        "60",
+    ]
+
+
 def fetch_candidates(url: str) -> list[str]:
     """Return equivalent arXiv API endpoints without changing non-API URLs."""
     if url.startswith("https://export.arxiv.org/api/query?"):
@@ -872,6 +885,7 @@ def main() -> int:
                 evidence, bool(added or evidence["sanitized_github_links"] or backfill_changed or jev_changed),
                 PROJECT, EVIDENCE_DIR / ".site-update-pending.json", run,
                 index_build_command(sys.executable),
+                explainer_command=explainer_command(sys.executable),
             )
         except Exception as exc:
             evidence["errors"].append(f"{type(exc).__name__}: {str(exc)[:500]}")

@@ -28,6 +28,7 @@ class CronEntrypointTests(unittest.TestCase):
             runner = Mock(side_effect=[
                 subprocess.CompletedProcess([], 0, '', ''), # backfill_analysis.py
                 subprocess.CompletedProcess([], 0, '', ''), # jev_evaluator.py
+                subprocess.CompletedProcess([], 0, '', ''), # build_explainers.py
                 subprocess.CompletedProcess([], 1, '', 'injected build error') # generate_index.py
             ])
             with patch.multiple(verified_daily, PROJECT=root, DB_PATH=db, EVIDENCE_DIR=root,
@@ -38,7 +39,7 @@ class CronEntrypointTests(unittest.TestCase):
                                 make_record=Mock(return_value={'arxiv_id': entry['arxiv_id']}),
                                 render_report=Mock(return_value='report'), run=runner), contextlib.redirect_stdout(io.StringIO()):
                 self.assertEqual(verified_daily.main(), 1)
-                self.assertEqual(runner.call_count, 3, verified_daily.render_report.call_args.args[0]['errors'])
+                self.assertEqual(runner.call_count, 4, verified_daily.render_report.call_args.args[0]['errors'])
                 self.assertEqual(len(json.loads(db.read_text())['database']), 1)
                 self.assertTrue((root/'.site-update-pending.json').exists())
                 fetch.return_value = []
@@ -46,7 +47,7 @@ class CronEntrypointTests(unittest.TestCase):
                 runner.side_effect = None
                 runner.return_value = subprocess.CompletedProcess([], 0, '', '')
                 self.assertEqual(verified_daily.main(), 0)
-                self.assertEqual(runner.call_count, 4)
+                self.assertEqual(runner.call_count, 5)
                 self.assertEqual(runner.call_args_list[-1].args[0], ['bash', str(root/'publish_cf_pages.sh')])
                 self.assertFalse((root/'.site-update-pending.json').exists())
                 runner.reset_mock()
