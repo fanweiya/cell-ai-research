@@ -3373,6 +3373,7 @@ body {{
         <button class="fbtn" onclick="doFilter('code', this)">💻 有代码 ({has_code})</button>
         <button class="fbtn" onclick="doFilter('jev', this)">⚡ 综合分 ≥ 5.5 ({has_jev_high})</button>
         <button class="fbtn" onclick="doFilter('explainer', this)">📐 图解 ({has_explainer})</button>
+        <a class="fbtn" href="explainers/index.html" style="text-decoration:none;display:inline-flex;align-items:center">📚 图解目录</a>
       </div>
       <div class="month-filter">
         <select class="month-select" id="monthSelect" onchange="doMonthFilter(this.value)">
