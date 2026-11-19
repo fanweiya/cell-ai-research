@@ -204,6 +204,30 @@ test('over-budget all-library prompt falls back to short cards plus selected abs
   w.close();
 });
 
+test('copilot llm settings override defaults, send bearer key, and reset',async()=>{
+  const x=setup();
+  const plainConfig=()=>{const c=x.w.getLlmConfig();return {base:c.base,model:c.model,key:c.key};};
+  assert.deepEqual(plainConfig(),{base:'https://example.test/v1',model:'test',key:''});
+  x.d.getElementById('llmBaseInput').value='https://my.llm.example/v1/';
+  x.d.getElementById('llmModelInput').value='my-model';
+  x.d.getElementById('llmKeyInput').value='my-secret';
+  x.w.saveLlmSettings();
+  const saved=JSON.parse(x.w.localStorage.getItem('cell-ai-copilot-llm'));
+  assert.deepEqual(saved,{base:'https://my.llm.example/v1',model:'my-model',key:'my-secret'});
+  assert.deepEqual(plainConfig(),saved);
+  assert.equal(x.w.llmHeaders(x.w.getLlmConfig()).Authorization,'Bearer my-secret');
+  x.d.getElementById('chatInput').value='compare';
+  let url, headers;
+  x.w.fetch=async(u,opts)=>{url=u;headers=opts.headers;return {ok:true,headers:{get:()=>'application/json'},json:async()=>({choices:[{message:{content:'ok'},finish_reason:'stop'}]})};};
+  await x.w.sendUserMessage();
+  assert.equal(url,'https://my.llm.example/v1/chat/completions');
+  assert.equal(headers.Authorization,'Bearer my-secret');
+  x.w.resetLlmSettings();
+  assert.equal(x.w.localStorage.getItem('cell-ai-copilot-llm'),null);
+  assert.deepEqual(plainConfig(),{base:'https://example.test/v1',model:'test',key:''});
+  x.close();
+});
+
 test('table cells turn chunk ids and paper ids into links',()=>{
   const x=setup({}, [{id:'2411.1788v2',title_en:'target',title_zh:'目标',abstract:'a',task_types:[],arxiv_url:'https://arxiv.org/html/2411.1788'}]);
   const host=x.d.createElement('div');

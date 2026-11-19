@@ -4,6 +4,7 @@
     <div class="copilot-tools">
       <button type="button" id="chatExpand" onclick="expandCopilot()" aria-label="展开对话" aria-pressed="false">展开</button>
       <button type="button" id="exportCsv" onclick="exportCatalogCsv()" title="按当前讨论范围导出题录 CSV">导出题录</button>
+      <button type="button" id="llmSettingsBtn" onclick="openLlmSettings()" title="设置 Copilot 使用的模型接口、密钥与模型">接口设置</button>
       <button type="button" onclick="toggleChat()" aria-label="关闭 Copilot">✕</button>
     </div>
   </div>
@@ -48,4 +49,12 @@
   <div class="picker-toolbar"><label>范围 <select id="pickerFilter" onchange="renderPaperPicker()"><option value="all">全部论文</option><option value="visible">当前筛选</option></select></label><span id="pickerCount"></span></div>
   <div id="pickerResults" class="picker-results"></div>
   <div class="picker-footer"><span id="pickerSelected"></span><button type="button" onclick="closePaperPicker()">取消</button><button type="button" class="selection-primary" onclick="applyPaperPicker()">应用选择</button></div>
+</dialog>
+<dialog id="llmSettings" class="paper-picker llm-settings" aria-labelledby="llmSettingsTitle">
+  <div class="picker-header"><h3 id="llmSettingsTitle">Copilot 接口设置</h3><button type="button" onclick="closeLlmSettings()" aria-label="关闭接口设置">✕</button></div>
+  <p class="picker-toolbar">配置只保存在当前浏览器（localStorage），不会写入网站服务器或仓库。留空则使用站点默认接口。</p>
+  <label class="sr-only" for="llmBaseInput">接口地址</label><input id="llmBaseInput" type="url" placeholder="接口地址，如 https://api.example.com/v1" spellcheck="false" autocomplete="off">
+  <label class="sr-only" for="llmModelInput">模型名称</label><input id="llmModelInput" type="text" placeholder="模型名称，如 gpt-4o-mini" spellcheck="false" autocomplete="off">
+  <label class="sr-only" for="llmKeyInput">API Key</label><input id="llmKeyInput" type="password" placeholder="API Key（仅保存在本机）" spellcheck="false" autocomplete="off">
+  <div class="picker-footer"><button type="button" id="llmResetBtn" onclick="resetLlmSettings()">恢复默认</button><button type="button" class="selection-primary" onclick="saveLlmSettings()">保存设置</button></div>
 </dialog>

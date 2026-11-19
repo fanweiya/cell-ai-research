@@ -108,9 +108,22 @@ cp .env.example .env
 | `SUBQ_API_KEY` | SubQ (System One Snap 快速通道) | `subq-snap-1.1` | [SubQ API](https://api.subq.ai/) |
 | `CF_API_TOKEN` | Cloudflare Workers AI Clef 边缘模型凭据 | `clef-flash` | [Cloudflare Dashboard](https://dash.cloudflare.com/) |
 | `CF_ACCOUNT_ID` | Cloudflare 账号编号 (用于 Workers AI 调用) | - | [Cloudflare Dashboard](https://dash.cloudflare.com/) |
-| `CELL_AI_LLM_BASE` | 本地或局域网 OpenAI-compatible 基础模型网关 | `stable` | 自建本地服务 / vLLM / SGLang |
-| `CELL_AI_LLM_API_KEY` | 本地或局域网基础模型网关鉴权密钥 | - | 自建本地服务 |
+| `CELL_AI_LLM_BASE` | 本地或局域网 OpenAI-compatible 基础模型网关（后端任务） | `stable` | 自建本地服务 / vLLM / SGLang |
+| `CELL_AI_LLM_API_KEY` | 本地或局域网基础模型网关鉴权密钥（后端任务） | - | 自建本地服务 |
+| `CELL_AI_BROWSER_LLM_BASE` | 站点 Copilot 的默认模型接口地址，会写入静态页面 | `fast` | 任意 OpenAI-compatible 服务 |
+| `CELL_AI_BROWSER_LLM_MODEL` | 站点 Copilot 的默认模型名称，会写入静态页面 | - | 任意 OpenAI-compatible 服务 |
 | `CLOUDFLARE_API_TOKEN` | 用于执行自动化边缘部署至 Cloudflare Pages | - | [Cloudflare API Tokens](https://dash.cloudflare.com/profile/api-tokens) |
+
+### 3. 访客自定义 Copilot 模型接口
+
+公开站点不会在页面里嵌入任何密钥。站点只预置 `CELL_AI_BROWSER_LLM_BASE` 与 `CELL_AI_BROWSER_LLM_MODEL` 两个默认值（来自构建时的 `.env`）。任何访客都可以点击 Copilot 面板顶部的「接口设置」，填写自己的接口地址、模型名称和 API Key：
+
+- 配置保存在当前浏览器的 `localStorage`（键名 `cell-ai-copilot-llm`），只对该访客生效。
+- 请求头按需附带 `Authorization: Bearer <API Key>`，密钥从浏览器直连所填接口，不经过本站服务器。
+- 「恢复默认」会删除本机配置，回到站点预置的接口。
+- 留空任一字段即回退到站点默认；构建静态页面时不要把密钥写进 `.env` 或代码。
+
+后端流水线（索引翻译、摘要、subagent、Jev 评测）只使用 `CELL_AI_LLM_*` 与各评测通道密钥，与访客的 Copilot 配置完全隔离。
 
 ---
 

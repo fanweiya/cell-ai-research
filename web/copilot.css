@@ -59,6 +59,9 @@
 .selection-primary { background: #315b43 !important; border-color: #315b43 !important; color: white !important; }
 .paper-picker { width: min(620px,calc(100vw - 32px)); max-height: 80dvh; padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); color: var(--text); box-shadow: 0 15px 70px #0003; margin: auto; }
 .paper-picker::backdrop { background: #12201966; }
+.llm-settings input { width: 100%; box-sizing: border-box; margin: 8px 0; padding: 11px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface); color: var(--text); font: inherit; }
+.llm-settings input:focus-visible { outline: 2px solid #315b43; outline-offset: 1px; }
+.llm-settings .picker-footer { margin-top: 14px; }
 .picker-header,.picker-footer,.picker-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .picker-header h3 { font-size: 17px; margin: 0; }
 #pickerSearch { width: 100%; padding: 11px; box-sizing: border-box; margin: 15px 0 10px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface); color: var(--text); }
