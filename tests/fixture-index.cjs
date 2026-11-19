@@ -1,6 +1,4 @@
 const {execFileSync} = require('node:child_process');
-const fs = require('node:fs');
-const os = require('node:os');
 const path = require('node:path');
 
 // 测试夹具：用 generate_index.generate_html 现场渲染索引页，不依赖本地生成物。
@@ -54,7 +52,9 @@ print(g.generate_html(papers, {}, '2026-11-19 00:00'))
 for path in created:
     path.unlink(missing_ok=True)
 `;
-  return execFileSync('/usr/bin/python3', ['-c', script], {
+  // CI 里 setup-python 已把装好依赖的 python 放入 PATH；本地用 venv 的 python3。
+  const python = process.env.PYTHON || 'python3';
+  return execFileSync(python, ['-c', script], {
     cwd: ROOT,
     encoding: 'utf-8',
     env: {...process.env, PYTHONPATH: ''},
