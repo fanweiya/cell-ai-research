@@ -70,6 +70,8 @@ if [[ ! -x "$WRANGLER_BIN" ]]; then
   echo "WSL Wrangler not found at $WRANGLER_BIN." >&2
   exit 3
 fi
+# wrangler 的 fetch 走 Clash 代理时会报 fetch failed；Cloudflare API 可直连，部署前清除代理变量。
+unset HTTP_PROXY HTTPS_PROXY http_proxy https_proxy ALL_PROXY all_proxy
 "$WRANGLER_BIN" pages deploy "$SITE_DIR" \
   --project-name "$PROJECT_NAME" \
   --branch main \

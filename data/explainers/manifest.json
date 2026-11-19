@@ -6621,8 +6621,96 @@
    "cjk": 2794,
    "repairs": 0,
    "bytes": 72365
+  },
+  "2611.22953v1": {
+   "title_zh": "Fiberpose：基于距离变换神经网络的最先进纤维形态计量与实例分割",
+   "one_line": "Fiberpose: state-of-the-art fiber morpho",
+   "structure": "agent",
+   "generated_at": "2026-11-19T12:04:46+08:00",
+   "model": "claude-code",
+   "generator": "agent",
+   "cjk": 2683,
+   "repairs": 0,
+   "bytes": 70765
+  },
+  "2611.22482v1": {
+   "title_zh": "LeViT-UNet++：面向高效医学图像分割的细粒度细节与上下文平衡",
+   "one_line": "LeViT-UNet++: Towards Balanced Fine-Grai",
+   "structure": "agent",
+   "generated_at": "2026-11-19T12:18:37+08:00",
+   "model": "claude-code",
+   "generator": "agent",
+   "cjk": 1774,
+   "repairs": 0,
+   "bytes": 68555
+  },
+  "2611.22189v1": {
+   "title_zh": "SRED：全切片成像中跨放大倍率的稀疏区域证据蒸馏",
+   "one_line": "SRED: Sparse Regional Evidence Distillat",
+   "structure": "agent",
+   "generated_at": "2026-11-19T12:19:33+08:00",
+   "model": "claude-code",
+   "generator": "agent",
+   "cjk": 2777,
+   "repairs": 0,
+   "bytes": 72159
+  },
+  "2611.22152v1": {
+   "title_zh": "基于可逆翻译的无监督多模态医学图像配准",
+   "one_line": "Unsupervised Multi-modal Medical Image R",
+   "structure": "agent",
+   "generated_at": "2026-11-19T12:29:15+08:00",
+   "model": "claude-code",
+   "generator": "agent",
+   "cjk": 2761,
+   "repairs": 0,
+   "bytes": 72155
+  },
+  "2611.21137v1": {
+   "title_zh": "涂鸦一次，分割整个序列：超声心动图序列弱监督分割的双向时间一致性",
+   "one_line": "Scribble Once, Segment the Sequence: Bid",
+   "structure": "agent",
+   "generated_at": "2026-11-19T12:33:39+08:00",
+   "model": "claude-code",
+   "generator": "agent",
+   "cjk": 2330,
+   "repairs": 0,
+   "bytes": 71563
+  },
+  "2611.20942v1": {
+   "title_zh": "vividRGB：基于强制聚焦注意力的RGB照片多种视觉线索检测",
+   "one_line": "vividRGB: Various visual cue detection i",
+   "structure": "agent",
+   "generated_at": "2026-11-19T12:44:27+08:00",
+   "model": "claude-code",
+   "generator": "agent",
+   "cjk": 1730,
+   "repairs": 0,
+   "bytes": 69143
+  },
+  "2611.19325v1": {
+   "title_zh": "基于软内部-边缘密集网格池化释放病理基础模型中的细粒度细胞表征",
+   "one_line": "Unlocking Fine-Grained Cell Representati",
+   "structure": "agent",
+   "generated_at": "2026-11-19T12:45:18+08:00",
+   "model": "claude-code",
+   "generator": "agent",
+   "cjk": 2275,
+   "repairs": 0,
+   "bytes": 70173
+  },
+  "2611.18849v1": {
+   "title_zh": "扩展通道自适应自监督学习",
+   "one_line": "Scaling Channel-Adaptive Self-Supervised",
+   "structure": "agent",
+   "generated_at": "2026-11-19T12:50:51+08:00",
+   "model": "claude-code",
+   "generator": "agent",
+   "cjk": 2043,
+   "repairs": 0,
+   "bytes": 67216
   }
  },
  "failures": {},
- "updated_at": "2026-11-19T12:03:28+08:00"
+ "updated_at": "2026-11-19T12:50:51+08:00"
 }
