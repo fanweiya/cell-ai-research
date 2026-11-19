@@ -106,10 +106,8 @@ test('citation labels follow known paper URLs and unknown chunks are flagged',()
   assert.ok(result.includes('[教程](https://example.com/guide)')); x.close();
 });
 test('single-paper request reads real cached mesh evidence and reuses it on follow-up',async()=>{
-  const index=fs.readFileSync(path.join(root,'index.html'),'utf8');
-  const papers=JSON.parse(index.match(/const PAPERS_DB = (.*);/)[1]);
-  const paper=papers.find(p=>p.id==='2509.12596');
-  const evidence=JSON.parse(fs.readFileSync(path.join(root,paper.evidence_url),'utf8'));
+  const evidence={version:1,paper_id:'2509.12596',source:'local_paper_text_cache',characters:1000,
+    chunks:[{id:'C001',text:'Retrospective study of 147 patients treated with hexahedral meshing. Results reported no self-intersections in the final meshes, but manual refinement was still required for boundary layers.'}]};
   const x=setup({alpha:{evidence_url:'data/evidence/test.json'}}); let loads=0, prompts=[];
   x.w.fetch=async(url,options)=>{
     if(url.includes('/data/evidence/')) { loads++; return {ok:true,json:async()=>({...evidence,paper_id:'alpha'})}; }

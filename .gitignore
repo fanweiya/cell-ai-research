@@ -32,6 +32,8 @@ tmp/
 
 # 运行证据快照（papers-before-*.json / run-*.json），体积随每次运行增长，不入库
 data/evidence/
+# 每日运行的证据目录（备份、运行快照、待重试标记）
+/evidence/
 
 # 论文上下文、图解中间产物与运行分析结果（均由采集与分析脚本生成，体积大）
 data/paper_context/

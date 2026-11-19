@@ -1,9 +1,8 @@
 const {test} = require('node:test');
 const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
 const {JSDOM, VirtualConsole} = require('jsdom');
-const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+const {fixtureHtml} = require('./fixture-index.cjs');
+const html = fixtureHtml();
 function setup(hash='') {
   const errors = [], console = new VirtualConsole();
   console.on('jsdomError', e => errors.push(e.message));
