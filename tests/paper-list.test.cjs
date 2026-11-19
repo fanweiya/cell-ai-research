@@ -48,7 +48,7 @@ test('search reaches later batches and pending debounce cannot use stale Copilot
   assert.equal(x.d.getElementById('emptyResults').hidden,false);
   assert.equal(x.d.getElementById('loadMorePapers').hidden,true);
   x.w.resetPaperFilters(); assert.equal(x.shown().length,30);
-  assert.equal(x.d.querySelectorAll('.fbtn').length,3);
+  assert.equal(x.d.querySelectorAll('.fbtn').length,5);
   x.close();
 });
 test('code and month filters combine and deep links reveal deferred papers',()=>{

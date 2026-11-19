@@ -508,29 +508,37 @@ class CodeReportTests(unittest.TestCase):
         channel_names = [ch["name"] for ch in jev_evaluator.EVAL_CHANNELS]
         self.assertEqual(channel_names, ["typesafe", "codiv", "subq", "cloudflare"])
 
-        typesafe_key, typesafe_model, typesafe_url, typesafe_headers = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[0])
-        self.assertIsNotNone(typesafe_key)
-        self.assertTrue(str(typesafe_key).startswith("apikey_"))
-        self.assertEqual(typesafe_model, "jev-preview")
-        self.assertEqual(typesafe_headers.get("TypeSafe-Danger-Zone-Images"), "true")
+        mock_env = {
+            "TYPESAFE_API_KEY": "apikey_mock_typesafe",
+            "CODIV_API_KEY": "sk-codiv-mock_codiv",
+            "SUBQ_API_KEY": "sk-proj-mock_subq",
+            "CF_API_TOKEN": "cfut_mock_cf",
+            "CF_ACCOUNT_ID": "b9b1998c78f49ed2e0db3ab8e868ff85",
+        }
+        with patch.dict(os.environ, mock_env):
+            typesafe_key, typesafe_model, typesafe_url, typesafe_headers = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[0])
+            self.assertIsNotNone(typesafe_key)
+            self.assertTrue(str(typesafe_key).startswith("apikey_"))
+            self.assertEqual(typesafe_model, "jev-preview")
+            self.assertEqual(typesafe_headers.get("TypeSafe-Danger-Zone-Images"), "true")
 
-        codiv_key, codiv_model, codiv_url, codiv_headers = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[1])
-        self.assertIsNotNone(codiv_key)
-        self.assertTrue(str(codiv_key).startswith("sk-codiv-"))
-        self.assertEqual(codiv_model, "openjev-latest")
-        self.assertIn("User-Agent", codiv_headers)
+            codiv_key, codiv_model, codiv_url, codiv_headers = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[1])
+            self.assertIsNotNone(codiv_key)
+            self.assertTrue(str(codiv_key).startswith("sk-codiv-"))
+            self.assertEqual(codiv_model, "openjev-latest")
+            self.assertIn("User-Agent", codiv_headers)
 
-        subq_key, subq_model, subq_url, subq_headers = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[2])
-        self.assertIsNotNone(subq_key)
-        self.assertTrue(str(subq_key).startswith("sk-proj-"))
-        self.assertEqual(subq_model, "subq-snap-1.1")
-        self.assertEqual(subq_url, "https://api.subq.ai/v1/systemone")
+            subq_key, subq_model, subq_url, subq_headers = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[2])
+            self.assertIsNotNone(subq_key)
+            self.assertTrue(str(subq_key).startswith("sk-proj-"))
+            self.assertEqual(subq_model, "subq-snap-1.1")
+            self.assertEqual(subq_url, "https://api.subq.ai/v1/systemone")
 
-        cf_key, cf_model, cf_url, cf_headers = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[3])
-        self.assertIsNotNone(cf_key)
-        self.assertTrue(str(cf_key).startswith("cfut_"))
-        self.assertEqual(cf_model, "clef-flash")
-        self.assertIn("/ai/run/@cf/cloudflare/clef-flash", cf_url)
+            cf_key, cf_model, cf_url, cf_headers = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[3])
+            self.assertIsNotNone(cf_key)
+            self.assertTrue(str(cf_key).startswith("cfut_"))
+            self.assertEqual(cf_model, "clef-flash")
+            self.assertIn("/ai/run/@cf/cloudflare/clef-flash", cf_url)
 
     def test_jev_evaluator_channel_fallback_mechanism(self):
         import urllib.error
@@ -583,7 +591,11 @@ class CodeReportTests(unittest.TestCase):
                 raise urllib.error.URLError("Simulated connection timeout")
             return DummyResponse()
 
-        with patch("urllib.request.urlopen", side_effect=fake_urlopen):
+        mock_env = {
+            "TYPESAFE_API_KEY": "apikey_mock_typesafe",
+            "CODIV_API_KEY": "sk-codiv-mock_codiv",
+        }
+        with patch.dict(os.environ, mock_env), patch("urllib.request.urlopen", side_effect=fake_urlopen):
             res = jev_evaluator.evaluate_single_paper(paper, evidence_info=evidence_info, retries=1)
             self.assertEqual(res["primary_paradigm"], "multimodal_foundation")
             self.assertEqual(len(call_records), 2)
