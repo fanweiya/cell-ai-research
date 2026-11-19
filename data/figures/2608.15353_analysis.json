@@ -1,7 +1,0 @@
-{
-  "0": {
-    "relevant": true,
-    "score": 9,
-    "caption": "论文核心方法流程图：展示从WSI切片、tile过滤、Virchow2编码、MIL分类器到Qwen报告生成的Graph-Constrained MIL工作流"
-  }
-}

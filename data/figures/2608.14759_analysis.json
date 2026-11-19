@@ -1,7 +1,0 @@
-{
-  "0": {
-    "relevant": true,
-    "score": 9,
-    "caption": "方法流程架构图：展示WSI patch特征提取、两阶段实例选择（Centroid/Attention/Class-guided三种策略）及MIL聚合集成的整体框架，含最远点采样细节"
-  }
-}

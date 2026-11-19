@@ -1,9 +1,0 @@
-{
-  "error": "curl failed: ",
-  "task": "algorithm_analysis",
-  "paper_id": "2606.28465",
-  "task_id": "2606.28465-algorithm_analysis-v1",
-  "run_at": "2026-07-18T09:36:15.153375",
-  "priority": 10,
-  "agent": "Agents-A1"
-}

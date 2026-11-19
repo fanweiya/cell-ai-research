@@ -1,7 +1,0 @@
-{
-  "0": {
-    "relevant": true,
-    "score": 10,
-    "caption": "GAD-MambaUNet网络架构图，展示了编码器-解码器结构、GS-DDS模块细节以及Direction-Group Mamba机制"
-  }
-}

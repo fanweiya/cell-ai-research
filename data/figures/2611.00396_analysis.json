@@ -1,7 +1,0 @@
-{
-  "0": {
-    "relevant": true,
-    "score": 9,
-    "caption": "核心实验结果图：展示DRIVE、HRF、FIVES、VessMap四个数据集上细血管分割中漏检/部分检出/全部检出的中心线像素可视化对比及定量统计柱状图"
-  }
-}

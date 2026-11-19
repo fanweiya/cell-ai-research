@@ -1,9 +1,0 @@
-{
-  "error": "curl failed: ",
-  "task": "code_analysis",
-  "paper_id": "2605.19692v1",
-  "task_id": "2605.19692v1-code_analysis-v1",
-  "run_at": "2026-07-18T09:58:27.456268",
-  "priority": 5,
-  "agent": "Agents-A1"
-}

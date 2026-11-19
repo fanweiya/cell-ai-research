@@ -1,7 +1,0 @@
-{
-  "0": {
-    "relevant": true,
-    "score": 10,
-    "caption": "方法架构图：展示 MCDNet 输入图像经多尺度 MCCA 模块处理至分割输出的整体流程，以及 MCSS block 与 MAEM 模块细节"
-  }
-}

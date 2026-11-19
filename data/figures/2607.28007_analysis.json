@@ -1,7 +1,0 @@
-{
-  "0": {
-    "relevant": true,
-    "score": 9,
-    "caption": "论文核心架构图：展示了以病理基础模型作为特征提取器，结合特征金字塔和不同检测头（RetinaNet、Faster R-CNN、DETR）进行有丝分裂相检测的完整方法流程"
-  }
-}
