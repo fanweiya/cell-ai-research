@@ -6599,8 +6599,19 @@
    "cjk": 2011,
    "repairs": 0,
    "bytes": 71081
+  },
+  "2611.17899v1": {
+   "title_zh": "更多基因，更快推理：基于组织学的高效大面板空间转录组学预测",
+   "one_line": "More Genes, Faster Inference: Efficient ",
+   "structure": "agent",
+   "generated_at": "2026-11-19T11:09:54+08:00",
+   "model": "claude-code",
+   "generator": "agent",
+   "cjk": 2545,
+   "repairs": 0,
+   "bytes": 71927
   }
  },
  "failures": {},
- "updated_at": "2026-11-15T07:59:27+08:00"
+ "updated_at": "2026-11-19T11:09:54+08:00"
 }

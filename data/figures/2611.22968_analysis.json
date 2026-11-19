@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "MI-Zero相似度预测与所提出的MI-Hyper超网络权重生成预测的方法架构对比图"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "MI-Hyper整体框架流程图，包含任务与数据库构建、混合任务预训练与微调，以及零样本部署流程与MIL注意力模块计算细节"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "不同任务/条件下的查询相似度分析、注意力分布散点图以及结直肠癌组织病理学WSI的相对注意力热图可视化"
+  }
+}

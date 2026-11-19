@@ -74,3 +74,6 @@ fi
   --project-name "$PROJECT_NAME" \
   --branch main \
   --commit-dirty=true
+
+# 部署完成后立即清理本地打包临时目录，避免占用磁盘空间。
+rm -rf "$SITE_DIR"

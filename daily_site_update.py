@@ -23,7 +23,7 @@ def update_site(evidence, changed, project, pending_path, run, build_command, ex
     if state.get('needs_build', True):
         if explainer_command is not None:
             try:
-                generated = run(explainer_command, timeout=3600)
+                generated = run(explainer_command, timeout=7200)
                 if generated.returncode:
                     raise RuntimeError(
                         (generated.stderr or generated.stdout or '非零退出码')[-500:]

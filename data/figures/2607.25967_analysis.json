@@ -1,0 +1,7 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "不同矩阵分解与实时重构方法（如rSVD、E2E+RNN、UNN+RNN、Lie+RNN与Exact SVD）在图像去噪重构质量及推理耗时上的对比实验结果"
+  }
+}

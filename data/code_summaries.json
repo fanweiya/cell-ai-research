@@ -13013,5 +13013,834 @@
     "confidence": 0.92,
     "version": 3,
     "generated_at": "2026-11-11T09:30:17.802185"
+  },
+  "2611.13883v1": {
+    "summary": "该仓库目前是 BRIDGE 数据集的项目主页/说明仓库，只包含 README.md 和三张示意图（bridge_logo.webp、data_collection.jpeg、dataset_overview.jpeg），没有任何 Python/配置/清单/测试代码。README 描述了前列腺穿刺活检配对全切片图像数据集（169 例患者、869 张切片、2,607 张 WSI，每个切片 3 个成像阶段）及其潜在用途（虚拟染色、去染色、配准、分割、Gleason 分级、颜色归一化）。从可审阅源码的角度看，没有任何可执行的实现、数据加载器、元数据 schema 或评估脚本，因此不能据此评估其方法学正确性或可复现性。",
+    "repository_kind": "placeholder",
+    "architecture": "无软件架构可分析。仓库内容为文档层：README.md 负责描述数据来源（波兰 Bydgoszcz 肿瘤中心，FFPE 前列腺穿刺活检）、采集流程（同一 VENTANA DP 600 扫描仪 40×、0.25 µm/pixel，分别于切片后带蜡、二甲苯脱蜡后、自动 H&E 染色后扫描）、标注（切片级 Gleason 评分并映射到 ISUP Grade Group、每张扫描的质量标签、raw 扫描的染料强度标签）以及引用与许可。三张图片仅为排版用图。不存在包结构、模块划分、配置文件或数据访问层。",
+    "call_chain": "无法确认。仓库中没有入口脚本、数据加载代码、核心算法或输出生成逻辑；README 中出现的 generate/import 等词均为自然语言描述或 HTML/CSS 片段，不构成调用链。唯一可确认的链条是“读者 → README 中的 BioImage Archive 链接（尚未提供）→ 外部数据”，且该链接在文档中仍为空。",
+    "core_modules": [
+      {
+        "name": "README.md（文档）",
+        "role": "数据集说明、采集协议、用途表、引用与 CC BY 4.0 许可声明；含一段被注释掉的未来工作 TODO，用于描述目录结构和文件命名",
+        "evidence": "README.md:44（摘要）、README.md:65-72（用途表）、README.md:91-100（TODO 目录结构占位）、README.md:104-120（引用）"
+      }
+    ],
+    "dependencies": [
+      "无代码依赖清单（无 requirements.txt / pyproject.toml / environment.yml / Dockerfile）",
+      "文档层面隐含的外部依赖：BioImage Archive（数据托管，链接待补）、VENTANA DP 600 原生 TIFF 格式读取能力（如 openslide/tiffslide 之类工具未在仓库中声明）",
+      "数据要求：需要读者自行从 BioImage Archive 获取 2,607 张 WSI 及配套 Gleason 标注；仓库未提供元数据 CSV 或字段说明"
+    ],
+    "reproduction_readiness": "placeholder",
+    "reproduction_notes": "最短路径不存在：没有代码、没有环境定义、没有数据获取链接。即便只做数据分析层面的复现，也缺少（1）BioImage Archive 的实际访问地址与 DOI，（2）metadata 文件及其字段定义（slide ID / patient ID / Gleason / ISUP / 质量标签 / 染料强度标签），（3）raw/deparaffinized/H&E 三阶段的目录与命名约定——README 中以 HTML 注释形式的 TODO 明确说明这些尚未撰写。因此当前仓库只能作为论文配套的介绍页使用，无法作为可运行基线。",
+    "issues": [
+      {
+        "severity": "blocker",
+        "finding": "数据访问被显式推迟到论文接收之后，README 中未给出 BioImage Archive 链接或 DOI",
+        "evidence": [
+          "README.md:88-90（NOTE: will be made publicly available … upon acceptance … link will be provided here）"
+        ],
+        "impact": "外部研究者当前无法取得图像与标注，任何复现路径在第一步即中断",
+        "confidence": 0.95
+      },
+      {
+        "severity": "high",
+        "finding": "缺少元数据 schema：README 声称每张切片附带 Gleason 评分、质量标签和染料强度标签，但未定义字段名、取值域（如 ISUP 分组映射规则）或文件格式",
+        "evidence": [
+          "README.md:44",
+          "README.md:65-72",
+          "README.md:91-100（TODO 中的 metadata.csv 仅为示例占位）"
+        ],
+        "impact": "无法确认标签粒度是切片级还是患者级、缺失值如何编码，进而影响分级任务的实验设计与一致性比较",
+        "confidence": 0.9
+      },
+      {
+        "severity": "high",
+        "finding": "目录结构与文件命名未定义，仅有被注释掉的 TODO 示例目录树",
+        "evidence": [
+          "README.md:91-100（<!-- TODO: describe the folder structure and file naming ... raw/ deparaffinized/ he/ -->）"
+        ],
+        "impact": "raw/deparaffinized/H&E 三阶段配对关系无法从文档推断，配对建模（同一蜡块、同一序列的三次扫描）与配准评测的数据组织方式不可知",
+        "confidence": 0.92
+      },
+      {
+        "severity": "medium",
+        "finding": "未提供任何环境或依赖声明文件，也未说明原生扫描仪 TIFF 的读取/转换工具",
+        "evidence": [
+          "coverage.manifest_files: [README.md]",
+          "README.md:60（Image format: TIFF-based）"
+        ],
+        "impact": "即便数据公开，使用者仍需自行摸索读取 VENTANA DP 600 原生格式的方式（如金字塔层级、mpp 元数据），增加不一致的预处理风险",
+        "confidence": 0.85
+      }
+    ],
+    "static_limitations": [
+      "仅做远程静态检查，未 clone、未执行任何文件，无法确认任何运行时行为",
+      "仓库不含代码，因此无法评估算法正确性、训练细节、评价指标实现或数值结果",
+      "无法确认 README 描述的 2,607 张 WSI、169 例患者、质量与染料强度标签是否真实存在于 BioImage Archive 分发包中",
+      "无法确认三阶段扫描的配准精度、切片级 Gleason 与 ISUP 映射的具体规则",
+      "未运行测试（仓库亦无测试），不对可复现性或论文结论作任何断言"
+    ],
+    "confidence": 0.93,
+    "version": 3,
+    "generated_at": "2026-11-13T09:50:31.417153"
+  },
+  "2611.13581v1": {
+    "summary": "AstroSeg-vEM 是一个面向体电子显微镜（vEM）星形胶质细胞分割与 3D 重建的完整实现仓库。代码涵盖了从切片 Patch 采样、基于 MiT 骨干/U-Net 解码器的 2D 分割网络训练与滑窗推理，到胞体引导组件过滤（HDBSCAN）、3D 连通域巩固与 Marching Cubes 网格重建的完整流水线。各阶段代码、配置文件、运行脚本及轻量化合成数据单元测试均已就绪，但真实数据与预训练权重需外部准备。",
+    "repository_kind": "implementation",
+    "architecture": "流水线分为四阶段：(1) 数据准备：从 2D vEM 大图切片中进行前景感知随机切块，生成含二值标签或 z-score 标准化的图像 patch；(2) 2D 分割：使用 SMP 库构建 MiT-B2 编码器 + scSE 注意力 U-Net（或 native-unet 回退）模型，采用交叉熵与 Dice 组合损失进行训练，评估期使用带重叠率加权融合的滑窗切块推理；(3) 2D/3D 后处理：对切片预测执行连通域提取，利用 HDBSCAN 聚类定位主胞体并执行空间距与尺寸联合过滤，随后堆叠为 3D 体积执行 26 邻域连通域分析和单层伪影消除与平面孔洞填充；(4) 3D 重建与可视化：基于 downsample_xy 与 z_scale 几何拉伸参数进行 Marching Cubes 提取 PLY/NPZ 网格并使用 PyVista 渲染展示。",
+    "call_chain": "scripts/run_train.sh (或 run_eval_unet_mit_b2_single.sh / run_postprocess_single.sh) → src/segmentation/train.py:main() (Hydra 解析 configs/train_unet_mit_b2.yaml) → PatchDataset.__getitem__() → build_model() (SMP Unet / NativeUNet) → CE+Dice 优化器迭代并输出权重 → src/segmentation/evaluation.py:inference_sliding_window() → src/reconstruction/postprocess.py (collect_topk_dataframe → run_hdbscan → 3D 体积连通域过滤) → src/reconstruction/reconstruct_3d.py (Marching Cubes) → 输出 .ply/.npz 网格",
+    "core_modules": [
+      {
+        "name": "Patch 数据提取模块",
+        "role": "从 2D EM 切片提取前景导向与背景过滤的 patch，记录元数据",
+        "evidence": "src/datasets/patch_generation.py:process_one_slice, generate_patches_tif"
+      },
+      {
+        "name": "2D 分割训练与模型模块",
+        "role": "封装 MiT+U-Net 及 NativeUNet 架构，结合 CE 与 Dice 损失执行训练循环及早停",
+        "evidence": "src/segmentation/train.py:train, PatchDataset; src/segmentation/models/native_unet.py:NativeUNet"
+      },
+      {
+        "name": "大图滑窗推理与评估模块",
+        "role": "计算带权切块坐标与权重聚合图，实现大分辨率 EM 切片的切块推理与指标评估",
+        "evidence": "src/segmentation/evaluation.py:inference_sliding_window, build_patch_coords, build_weight_map"
+      },
+      {
+        "name": "分割指标度量模块",
+        "role": "提供常规 Dice、IoU 以及结合距离变换加权的 distance_weighted_dice",
+        "evidence": "src/segmentation/metrics.py:compute_binary_metrics, distance_weighted_dice_full"
+      },
+      {
+        "name": "胞体引导与 3D 拓扑后处理模块",
+        "role": "跨切片收集 Top-K 连通域，经 HDBSCAN 聚类过滤离散分支与非胞体结构，并对 3D 堆叠体积进行连通域清理和孔洞修补",
+        "evidence": "src/reconstruction/postprocess.py:collect_topk_dataframe, run_hdbscan, downsample_binary_mask"
+      },
+      {
+        "name": "3D 网格重建与可视化模块",
+        "role": "根据物理比例拉伸后生成表面网格，并用 PyVista 进行离屏或交互式渲染",
+        "evidence": "src/reconstruction/plot_3d.py:visualize_mesh, load_mesh, parse_scale_factors"
+      }
+    ],
+    "dependencies": [
+      "Python >= 3.11",
+      "PyTorch (推荐配 CUDA 支持)",
+      "segmentation-models-pytorch (SMP)",
+      "albumentations",
+      "hdbscan",
+      "pyvista",
+      "scipy",
+      "scikit-image",
+      "tifffile",
+      "opencv-python",
+      "hydra-core",
+      "wandb",
+      "真实 vEM 序列 TIFF 图像及标注数据（需外部提供）"
+    ],
+    "reproduction_readiness": "ready",
+    "reproduction_notes": "单元测试已全部配置小型模拟数据，可直接通过 `pip install -r requirements-dev.txt && pytest` 执行完备性测试。复现完整训练和重建流水线需准备符合结构的单通道 TIFF 格式切片目录，并在 `configs/train_unet_mit_b2.yaml` 或启动脚本中配置 patch/image 路径与各向异性尺度参数（z_scale、downsample_xy 等）。注意若需运行 swin-unet 骨干，则需要外部提供 SWIN_UNET_REPO。",
+    "issues": [
+      {
+        "severity": "medium",
+        "finding": "模型架构中存在外部未包含代码的隐式依赖路径（Swin-Unet）",
+        "evidence": [
+          "src/segmentation/evaluation.py:build_model"
+        ],
+        "impact": "当通过配置或参数指定 arch_type='swin-unet' 时，代码直接依赖环境变量 SWIN_UNET_REPO 指向外部代码库，若未克隆将抛出 FileNotFoundError；默认使用的 unet 与 native-unet 不受影响。",
+        "confidence": 0.95
+      },
+      {
+        "severity": "low",
+        "finding": "evaluation.py 中的 metrics 异常回退导入使用了可能引发作用域覆盖的同名内部函数",
+        "evidence": [
+          "src/segmentation/evaluation.py:try ... except ImportError"
+        ],
+        "impact": "当 segmentation.metrics 导入失败触发回退时，就地定义的 compute_binary_metrics 仅返回固定的 weighted_dice=0.0，且依赖外部 sklearn 库；但同目录下该模块真实存在，常规环境下不会触发回退。",
+        "confidence": 0.9
+      },
+      {
+        "severity": "low",
+        "finding": "后处理计算指标时通过 sys.executable 子进程调用外部脚本",
+        "evidence": [
+          "src/reconstruction/postprocess.py:compute_metrics_csv"
+        ],
+        "impact": "以 subprocess 执行 segmentation/compute_metrics.py 时，如果运行环境配置了自定义 Python 路径或参数解析发生变化，排错追踪相对直接函数调用更加晦涩。",
+        "confidence": 0.85
+      }
+    ],
+    "static_limitations": [
+      "未实际执行 GPU 训练，无法静态确认 MiT-B2 骨干预训练权重自动下载逻辑在无外网环境下是否顺畅",
+      "无法静态验证三维后处理中 HDBSCAN 对真实细胞形态特征参数（min_cluster_size, max_replication 等）的聚类收敛质量及显存/内存消耗",
+      "无法静态验证 PyVista/VTK 在无显示器（Headless/CI）环境下的 OSMesa 离屏渲染行为"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-11-13T09:56:08.507274"
+  },
+  "2611.12805v1": {
+    "summary": "该仓库为CVPR Biometrics Workshop论文《2D Gum-Net: Unsupervised Dense Deformation Grid Prediction for Elastic Fingerprint Alignment》的官方 PyTorch 实现代码。仓库完整实现了基于双分支批归一化特征提取（结合离散余弦变换 DCT 谱池化）、双向 2D 特征相关匹配以及基于控制点回归与双三次插值的无监督非线性形变场网格预测与对齐管线。代码包含完整的网络模型定义、多套池化消融分支、专用损失函数以及单元测试套件，整体实现较为完整。",
+    "repository_kind": "implementation",
+    "architecture": "端到端非线性弹性指纹配准流程。输入为模板指纹图像 Sa 与变形指纹图像 Sb（形状 (B, 1, 192, 192)）。首先通过共享卷积与分支隔离 BatchNorm（bn_sa / bn_sb）以及 DCTSpectralPooling 提取二者特征，经 L2 范数归一化得到两组 (B, 512, 14, 14) 特征图；随后通过 FeatureCorrelation2D 计算双向稠密特征相关张量，并经两组独立权重的卷积回归网络降维并展平为 (B, 4096) 向量；接着由 GumNetNonLinearAlignment 的 MLP 回归 (B, 2 * grid_size * grid_size) 的位移矢量，reshape 为 (B, 2, grid_size, grid_size) 控制点网格后通过双三次插值（bicubic interpolation）上采样至 (B, 2, 192, 192) 稠密位移场并叠加基准归一化网格，最后借助 F.grid_sample 执行双线性插值变换生成形变后的 Sb'。训练使用 NonLinearAlignmentLoss（由 SoftDiceLoss 衡量重合度，加权位移平滑度正则项）。",
+    "call_chain": "train.py:main() → datasets/fingerprint_dataset.py:get_dataloaders() → model/gumnet.py:GumNet.forward() → model/gumnet_feature_extraction.py:GumNetFeatureExtraction.forward(Sa, branch='Sa') & forward(Sb, branch='Sb') → model/gumnet_siamese_matching.py:GumNetSiameseMatching.forward() → model/gumnet_non_linear_alignment.py:GumNetNonLinearAlignment.forward() → model/losses/non_linear_alignment_loss.py:NonLinearAlignmentLoss.forward() → warped_impression, control_points, loss",
+    "core_modules": [
+      {
+        "name": "GumNet",
+        "role": "顶层指纹非线性对齐流水线，整合特征提取、孪生匹配与空间形变对齐",
+        "evidence": "model/gumnet.py:GumNet"
+      },
+      {
+        "name": "GumNetFeatureExtraction",
+        "role": "双分支参数共享卷积与独立批归一化特征提取网络，嵌入 DCT 谱池化与通道 L2 正则化",
+        "evidence": "model/gumnet_feature_extraction.py:GumNetFeatureExtraction"
+      },
+      {
+        "name": "FeatureCorrelation2D",
+        "role": "矩阵乘法计算特征图点对点 2D 双向相关张量",
+        "evidence": "model/layers/feature_correlation_2d.py:FeatureCorrelation2D"
+      },
+      {
+        "name": "GumNetSiameseMatching",
+        "role": "对双向相关张量进行 L2 归一化与逐层有效卷积降维回归，输出低维匹配向量",
+        "evidence": "model/gumnet_siamese_matching.py:GumNetSiameseMatching"
+      },
+      {
+        "name": "GumNetNonLinearAlignment",
+        "role": "基于 MLP 预测低维控制点位移向量，经双三次插值生成稠密变形场并通过 grid_sample 实现可微重采样",
+        "evidence": "model/gumnet_non_linear_alignment.py:GumNetNonLinearAlignment"
+      },
+      {
+        "name": "NonLinearAlignmentLoss / SoftDiceLoss",
+        "role": "无监督对齐目标函数，结合连续平滑的 Soft Dice 重合度损失与形变正则项",
+        "evidence": "model/losses/non_linear_alignment_loss.py:NonLinearAlignmentLoss, model/losses/soft_dice_loss.py:SoftDiceLoss"
+      }
+    ],
+    "dependencies": [
+      "Python >= 3.10",
+      "torch",
+      "torchvision",
+      "tqdm",
+      "pillow",
+      "torchinfo (用于 utils/model_summarizer.py)",
+      "nbis (下游评测下游匹配 downstream_matching.ipynb 涉及外部 NBIS 评测工具库)",
+      "训练与评测数据集：Anguli 合成指纹数据、Tsinghua Distorted 数据集或 FVC2004 数据集"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "最短训练路径为运行 `python train.py --data_root <DATA_DIR> --save_dir ./checkpoints`。但存在环境与依赖阻碍：1. 仓库根目录下未提供 `requirements.txt` 或 `setup.py`，依赖仅散落在 README 命令说明中；2. 仓库内未内置或公开指纹数据集文件，必须先行配置外部 Anguli 或 FVC 格式数据目录才能运行训练与数据加载器；3. 下游评测 notebook（如 downstream_matching.ipynb）依赖未在 README 说明的外部工具 `nbis`。",
+    "issues": [
+      {
+        "severity": "medium",
+        "finding": "缺少标准化依赖清单文件 requirements.txt 或 environment.yml",
+        "evidence": [
+          "README.md:pip install -r requirements.txt  # if present"
+        ],
+        "impact": "开发者克隆仓库后无法一键锁定精确依赖版本，需手动根据源码逐个安装 torch、torchvision、tqdm、pillow、torchinfo 等依赖。",
+        "confidence": 0.95
+      },
+      {
+        "severity": "low",
+        "finding": "GumNetSiameseMatching 类文档中关于输出维度的描述与实际代码不一致",
+        "evidence": [
+          "model/gumnet_siamese_matching.py:GumNetSiameseMatching (docstring: 'Output: A tuple of two tensors (out_ab, out_ba), each of shape (B, 102400)', code: 'Flatten: (B, 1024, 2, 2) -> (B, 4096)')"
+        ],
+        "impact": "文档注释与实际 forward 返回张量尺寸 (B, 4096) 矛盾，可能会对二次开发或接口对接造成理解误导。",
+        "confidence": 0.95
+      }
+    ],
+    "static_limitations": [
+      "本报告基于静态分析，未执行代码，不能保证模型在 GPU/CPU 上真实反向传播与数值收敛性；",
+      "无法离线验证基于 Anguli 或 FVC2004 指纹数据训练后的实际配准精度及论文声称的 Bozorth3 分数提升效果；",
+      "无法验证 spectral/_dct_type_ii_suite.py 中手写的 DCT-II 算法与硬件算子库在极端尺度输入下的数值稳定性与加速比。"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-11-13T09:56:11.309518"
+  },
+  "2611.15325v1": {
+    "summary": "CaseScope 是针对病理切片多放大倍数视野（multi-field）诊断评估的多模态大模型（MLLM）基准评测框架源码。代码库提供了完整的数据解析、模型推理（支持 vLLM 与 OpenAI 兼容接口）、LLM 判定与自动化打分统计流水线，但缺少自动化测试套件。",
+    "repository_kind": "implementation",
+    "architecture": "评测框架采用三阶段离线批处理架构：1) 推理阶段（casescope.infer）加载 JSONL 任务元数据，通过 prompts.build_messages 组织多图交织 Prompt，交由 VLLMBackend 或 OpenAIBackend 采样生成预测，支持思维链推理截断保护；2) 仲裁阶段（casescope.judge）对确定性解析器无法映射的单选答案进行 LLM 提取，并对 A1 开放式诊断任务使用病理评定 Prompt 进行结构化打分；3) 统计阶段（casescope.score）基于规则匹配（本体词表）与 LLM 评分计算 HDS、CircularEval、QWK、精确率及基于 Case 的 Bootstrap 95% 置信区间，输出 summary.csv 和 summary.json。",
+    "call_chain": "casescope.infer:main (CLI入口) → casescope.data:CaseScope.items / image_path (数据加载) → casescope.prompts:apply_variant & build_messages (多图Prompt拼装) → casescope.backends:VLLMBackend.chat / OpenAIBackend.chat (模型推理) → results/<run>/<source>/<task>.jsonl (中间保存) → casescope.judge:main (LLM答案抽取/A1评分) → casescope.score:main (CircularEval/HDS/Bootstrap统计) → summary.csv/json",
+    "core_modules": [
+      {
+        "name": "casescope.infer",
+        "role": "CLI 推理调度器，支持断点续跑、推理模型截断强制续答机制与多配置变体管理",
+        "evidence": "casescope/infer.py:main"
+      },
+      {
+        "name": "casescope.backends",
+        "role": "模型执行后端抽象，包含基于 vLLM 内部渲染器猴子补丁的强制续答（continue_chat）及基于线程池的 OpenAI 兼容客户端",
+        "evidence": "casescope/backends.py:VLLMBackend, casescope/backends.py:OpenAIBackend"
+      },
+      {
+        "name": "casescope.data",
+        "role": "数据集目录与 Hugging Face Hub snapshot 解析、病理本体/病例加载",
+        "evidence": "casescope/data.py:CaseScope"
+      },
+      {
+        "name": "casescope.prompts",
+        "role": "单病例多视野图像 base64 编码、多语言指令构建及 single_best/nosite/noimage 变体处理",
+        "evidence": "casescope/prompts.py:build_messages, casescope/prompts.py:apply_variant"
+      },
+      {
+        "name": "casescope.parsing",
+        "role": "自由文本解析器，处理 <think> 标签剥离、选项解析、True/False 提取以及 JSON 开放式诊断提取",
+        "evidence": "casescope/parsing.py:parse_choice, casescope/parsing.py:strip_reasoning, casescope/parsing.py:parse_open"
+      },
+      {
+        "name": "casescope.judge",
+        "role": "LLM 裁判模块，负责未能规则解析的多选题答案提取和 A1 开放诊断层级评分（规则驱动 Prompt）",
+        "evidence": "casescope/judge.py:main"
+      },
+      {
+        "name": "casescope.score",
+        "role": "指标评测引擎，支持 CircularEval、二次加权 Kappa (QWK)、Critical Miss 率、本体词表匹配及 Case 级 Bootstrap 统计",
+        "evidence": "casescope/score.py:main, casescope/score.py:bootstrap_ci, casescope/score.py:rule_score"
+      }
+    ],
+    "dependencies": [
+      "numpy>=1.24",
+      "openai>=1.40",
+      "huggingface_hub>=0.23",
+      "vllm==0.19.1 (可选，用于本地 GPU 离线推理及 LLM 裁判)",
+      "Hugging Face 或本地 CaseScope 数据集（包含 images, metadata, teaching, atlas 目录结构）"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "运行不需要模型训练，但评测复现需要先获取 CaseScope 数据集并配置可用模型：1) 本地 GPU 推理需要安装兼容的 vLLM 并提供多模态权重；2) 或配置商业 API / 本地 vLLM/SGLang 服务的 OPENAI_API_KEY 与 base-url；3) 评测需依次执行 infer -> judge -> score 三条命令。阻碍主要在于多图图像资源体量以及评估所需的计算显存/API 调用成本。",
+    "issues": [
+      {
+        "severity": "medium",
+        "finding": "VLLMBackend.continue_chat 依赖对 vLLM 私有内部成员 renderer.render_messages 的猴子补丁",
+        "evidence": [
+          "casescope/backends.py:VLLMBackend._install",
+          "casescope/backends.py:VLLMBackend.continue_chat"
+        ],
+        "impact": "该实现强耦合于特定版本 vLLM（代码明确提示 >= 0.19），若 vLLM 内部私有 API 或 renderer 行为变更，--reasoning 强制提前终止并生成答案的功能将抛出 RuntimeError 或 AssertionFailure",
+        "confidence": 0.85
+      },
+      {
+        "severity": "low",
+        "finding": "缺少自动化单元测试与集成测试套件",
+        "evidence": [
+          "requirements.txt",
+          "coverage.tests_present: false"
+        ],
+        "impact": "解析正则边界分支较多（如 parse_choice、parse_open、unfinished 等），缺乏自动化测试可能导致回归隐患，需要依赖实际推理输出验证解析鲁棒性",
+        "confidence": 0.95
+      },
+      {
+        "severity": "low",
+        "finding": "OpenAI 后端遇 4xx 错误（APIStatusError）直接静默返回空响应",
+        "evidence": [
+          "casescope/backends.py:OpenAIBackend._one"
+        ],
+        "impact": "当遭遇鉴权失效、格式非法或内容审核拦截（HTTP 4xx）时，请求仅记录 finish_reason 为 http_code 并返回空字符串，若大批量发生可能被视作模型回答为空并判定为错误，而不会在控制台直接抛错中断",
+        "confidence": 0.8
+      }
+    ],
+    "static_limitations": [
+      "静态分析无法验证 vLLM 0.19.1 对多图 base64 data URLs 的实际吞吐与显存开销",
+      "无法在不运行的情况下验证 Qwen2.5-32B-Instruct-AWQ 作为 judge 时 JSON 提取的实际成功率",
+      "无法确认 Hugging Face 对应数据集仓储中切片图像和标注文件的完整性与下载可达性"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-11-14T22:02:19.331683"
+  },
+  "2611.17899v1": {
+    "summary": "GeneFlow 是基于 Flow Matching 与 DiT（Diffusion Transformer）架构构建的从病理切片图像推断空间转录组（1000维特征基因表达谱）的生成模型代码库。仓库包含完整的数据加载封装、基于条件的连续流匹配与欧拉采样器、基于 PyTorch DDP 的训练逻辑以及评估 Notebook，属于公开的功能实现仓库；但其严重依赖外部未开源/未附带的 UNI 与 CONCH 图像嵌入提取脚本及预处理文件。",
+    "repository_kind": "implementation",
+    "architecture": "数据流以预先提取的 H&E 染色病理 spot 级多模态视觉特征（UNI + CONCH 拼接，由 load_image_embeddings 加载）与已选择的空间转录组 log2 表达矩阵为输入。模型 GeneFlowModel 首先通过 GeneJointEmbedding 将表达量投影并与可学习 gene_name_ebd 相加得到 token 序列，时间步 t 经 TimestepEmbedder 编码后与图像特征标签投影相加作为 adaLN 条件注入 28 层（默认配置）DiTBlock，最终经 FinalLayer 映射回表达量维度。训练阶段使用 Interpolant.flow_matching_loss 结合先验分布（默认 ZINB）与线性插值对模型进行监督；推断阶段在 geneflow_sample.py 中通过 Interpolant.euler_step 迭代从先验步进积分至最终预测表达量。",
+    "call_chain": "训练入口 geneflow_train.py:main → 数据加载 GeneFlow/data.py:assemble_dataset/prepare_dataloader → 批处理与插值损失 geneflow_train.py:Trainer.run_batch → GeneFlow/flow/interpolant.py:Interpolant.flow_matching_loss → GeneFlow/models.py:GeneFlowModel.forward → 反向传播与 EMA 更新 GeneFlow/train_helper.py:update_ema → 导出 checkpoint；采样入口 geneflow_sample.py:main → GeneFlow/data.py:load_image_embeddings → GeneFlow/flow/interpolant.py:Interpolant.sample → GeneFlow/flow/interpolant.py:Interpolant.euler_step → 输出 .pt 表达量张量 → eval.ipynb 计算相关性指标与可视化",
+    "core_modules": [
+      {
+        "name": "GeneFlowModel",
+        "role": "图像条件引导的 DiT 基因表达生成骨干模型",
+        "evidence": "GeneFlow/models.py:GeneFlowModel"
+      },
+      {
+        "name": "GeneJointEmbedding",
+        "role": "将标量表达量向量投影到 token 空间并融合可学习基因标识嵌入",
+        "evidence": "GeneFlow/models.py:GeneJointEmbedding"
+      },
+      {
+        "name": "Interpolant",
+        "role": "实现流匹配插值构造、加噪损失计算与欧拉积分推断采样",
+        "evidence": "GeneFlow/flow/interpolant.py:Interpolant"
+      },
+      {
+        "name": "PriorSampler",
+        "role": "提供流匹配起点的采样先验（支持高斯分布、全零或零膨胀负二项分布 ZINB）",
+        "evidence": "GeneFlow/flow/noise.py:PriorSampler"
+      },
+      {
+        "name": "assemble_dataset",
+        "role": "读取 HEST 标注切片 h5ad 表达量及离线 UNI/CONCH 原始与增广嵌入并拼接有效 spot",
+        "evidence": "GeneFlow/data.py:assemble_dataset"
+      },
+      {
+        "name": "Trainer",
+        "role": "封装多进程分布式 DDP 训练循环、EMA 同步及多卡损失 Reduce",
+        "evidence": "geneflow_train.py:Trainer"
+      }
+    ],
+    "dependencies": [
+      "Python >= 3.10",
+      "PyTorch >= 2.1 (支持 CUDA 与 TF32)",
+      "timm >= 0.9",
+      "anndata >= 0.10",
+      "pandas >= 2.0",
+      "numpy >= 1.24",
+      "scvi-tools (源码 PriorSampler 中动态导入 scvi.distributions.ZeroInflatedNegativeBinomial，但 environment.yml 依赖项被截断，需额外确认安装)",
+      "swanlab (可选，--use_swanlab 依赖)",
+      "外部数据依赖：需已计算好的 UNI 与 CONCH 预提 spot 嵌入文件（1spot_uni_ebd, 1spot_conch_ebd 等）及 selected_gene_list_1k.txt"
+    ],
+    "reproduction_readiness": "blocked",
+    "reproduction_notes": "最短复现路径依赖外部前置步骤：虽可通过 dataset_download.py 从 Hugging Face 下载 HEST 原切片数据与 h5ad，但代码库并未提供由 WSI/Patch 提取 UNI 与 CONCH 嵌入的特征抽取脚本。缺少 processed_data 下的特征嵌入目录（1spot_uni_ebd 等）及 selected_gene_list_1k.txt 时，无论训练还是采样都会立即抛出 FileNotFoundError；且默认先验 zinb 需要 scvi-tools 支持。",
+    "issues": [
+      {
+        "severity": "high",
+        "finding": "数据流水线缺失特征提取环节，无法仅凭本仓库脚本完成数据准备",
+        "evidence": [
+          "GeneFlow/data.py:load_image_embeddings",
+          "dataset_download.py:download_dataset",
+          "README.md:## Dataset Preparation"
+        ],
+        "impact": "dataset_download.py 仅拉取 HEST 原始文件，代码库无 patch 切割与基础模型推理代码，缺失预处理产物导致无法直接运行训练与采样",
+        "confidence": 1.0
+      },
+      {
+        "severity": "medium",
+        "finding": "Interpolant 中设备绑定写死为全局 cuda，可能引发多卡 DDP 设备不匹配异常",
+        "evidence": [
+          "GeneFlow/flow/interpolant.py:Interpolant.__init__",
+          "GeneFlow/flow/interpolant.py:Interpolant.corrupt_exp_x0",
+          "geneflow_train.py:Trainer.run_batch"
+        ],
+        "impact": "Interpolant.__init__ 硬编码 self.device = 'cuda' if torch.cuda.is_available() else 'cpu'，corrupt_exp_x0 中生成 timestep 和 prior 时直接使用 self.device 而非传入 exp 的具体卡号（如 cuda:1）。在未显式 set_device 的多卡进程下极易触发 Expected all tensors to be on the same device 崩溃",
+        "confidence": 0.9
+      },
+      {
+        "severity": "medium",
+        "finding": "默认先验依赖外部库 scvi-tools，但未显式在文档或依赖核心位置确保声明",
+        "evidence": [
+          "geneflow_train.py:build_parser",
+          "geneflow_sample.py:build_parser",
+          "GeneFlow/flow/noise.py:PriorSampler.__init__"
+        ],
+        "impact": "命令行 --prior_sampler 默认值为 zinb，代码在调用时执行局部动态导入 from scvi.distributions import ZeroInflatedNegativeBinomial，若用户仅按基础环境安装，运行时将直接抛出 ModuleNotFoundError",
+        "confidence": 0.85
+      },
+      {
+        "severity": "low",
+        "finding": "流匹配损失计算公式存在代数冗余计算",
+        "evidence": [
+          "GeneFlow/flow/interpolant.py:Interpolant.flow_matching_loss"
+        ],
+        "impact": "当 key == 'xv' 时计算 F.mse_loss((out - exp_0)[valid_mask], (exp - exp_0)[valid_mask])，两边同时减去 exp_0 使得该项在均方误差差值中相互抵消，代数上等价于 F.mse_loss(out[valid_mask], exp[valid_mask])，增加了不必要的显存操作",
+        "confidence": 0.95
+      },
+      {
+        "severity": "low",
+        "finding": "每个训练 Epoch 起始处存在无谓的数据迭代开销",
+        "evidence": [
+          "geneflow_train.py:Trainer.run_epoch"
+        ],
+        "impact": "Trainer.run_epoch 使用 len(next(iter(self.train_data))[0]) 获取当前 batch 大小，这会在遍历前额外触发一次数据加载并直接丢弃首个 batch，导致 DataLoader 开销冗余",
+        "confidence": 1.0
+      }
+    ],
+    "static_limitations": [
+      "未经实际硬件运行，无法确认模型收敛性及在特定 GPU 拓扑下的 PyTorch DDP 实际性能",
+      "无法动态核对提供的 Google Drive 预训练权重 checkpoint 是否与仓库当前的 DiT 参数规格（层数/头数/通道数）严格一致",
+      "无法通过静态代码验证推断得到的转录组表达指标（PCC、MAE、MSE、RVD）是否能达到学术论文所声称的精度"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-11-17T09:28:54.159804"
+  },
+  "2611.18849v1": {
+    "summary": "该仓库是 facebookresearch/dinov2 的 PyTorch 实现，核心为 DINOv2 自监督视觉 Transformer、训练/评估入口以及 Cell-DINO、深度估计、分割和文本对齐等扩展模块；源码中确认存在较完整的模型、数据加载、损失和评测代码，但仓库未检出任何测试文件。静态证据支持其为主要功能已落地的 implementation，不过 Cell-DINO、DinoTxt、segmentation_m2f 等新增模块只展示了部分文件，无法确认整体端到端可运行性。",
+    "repository_kind": "implementation",
+    "architecture": "核心架构以 dinov2/models/vision_transformer.py 中的 DinoVisionTransformer 为中心：输入图像经 PatchEmbed 切 patch，加入 class token 和可选 register tokens，通过 BlockChunk/NestedTensorBlock 堆叠 Transformer 层，再由 dinov2/layers 下的 Mlp、MemEffAttention、SwiGLUFFNFused 等组成 block；训练入口 dinov2/train/train.py 使用 SSLMetaArch 组织 student/teacher，结合 DINO cls-token loss、iBOT patch loss 和 KoLeo loss，并用 AdamW、CosineScheduler、FSDPCheckpointer、分布式与 AMP scaler 完成优化和 checkpoint。评估侧有 kNN、线性分类、逻辑回归、深度估计和语义分割；扩展侧包含 Cell-DINO hub/backbones/数据集、dinov2/hub/text 的 DinoTxt 视觉-文本塔，以及 segmentation_m2f 的点生成、box sampler、mask2former 解码头等模块。DinoTxt 使用 VisionTower + TextTower 双塔，将图像与文本编码到同一 embed_dim，并通过 logit_scale 计算 image-text logits；其 get_logits 返回 image_logits 和转置的 text_logits。",
+    "call_chain": "训练路径：dinov2/run/train/train.py Trainer.__call__ → dinov2.train.main → setup(args) 加载 YAML 配置 → SSLMetaArch(cfg) 构建 student/teacher → do_train 内 build_optimizer/build_schedulers → dinov2.data.make_data_loader 读取图像并经 DataAugmentationDINO/MaskingGenerator/collate_data_and_cast 处理 → SSLMetaArch 计算 DINO/iBOT/KoLeo 损失并反向传播、EMA 更新 teacher → FSDPCheckpointer 保存权重，周期调用 do_test 导出 teacher checkpoint。推理/评估路径示例：torch.hub.load(repo, 'dinov2_vits14') 或 notebooks/cell_dino/inference.ipynb 中 torch.hub.load(REPO_DIR, 'cell_dino_cp_vits8'/'cell_dino_hpa_vitl16') → torchvision.io.read_image 读取图像 → self_normalize 做逐样本通道均值方差标准化 → 模型 forward/get_intermediate_layers 输出全局或 patch/register 特征。Cell-DINO 具体推理 notebook 还展示 ModelWithIntermediateLayers(cell_dino_model, 4, autocast_ctx) 取中间层特征。",
+    "core_modules": [
+      {
+        "name": "DinoVisionTransformer",
+        "role": "ViT 主干，负责 patch embedding、class/register token、多层 Transformer block、归一化和中间层输出。",
+        "evidence": "dinov2/models/vision_transformer.py:DinoVisionTransformer; dinov2/layers/patch_embed.py; dinov2/layers/block.py"
+      },
+      {
+        "name": "SSLMetaArch",
+        "role": "训练元架构，组合 student/teacher、损失函数、参数组和 EMA 更新。",
+        "evidence": "dinov2/train/train.py:do_train; dinov2/train/ssl_meta_arch.py:SSLMetaArch; dinov2/train/train.py:model.update_teacher"
+      },
+      {
+        "name": "损失函数族",
+        "role": "实现 DINO 聚类 token 损失、iBOT patch 损失和 KoLeo 正则。",
+        "evidence": "dinov2/loss/dino_clstoken_loss.py; dinov2/loss/ibot_patch_loss.py; dinov2/loss/koleo_loss.py"
+      },
+      {
+        "name": "训练调度与检查点",
+        "role": "构造 AdamW、余弦学习率/权重衰减/动量/teacher temperature 调度，并保存训练状态。",
+        "evidence": "dinov2/train/train.py:build_optimizer; dinov2/train/train.py:build_schedulers; dinov2/train/train.py:apply_optim_scheduler; dinov2/fsdp/FSDPCheckpointer"
+      },
+      {
+        "name": "数据管线",
+        "role": "数据集构建、采样、增强、遮蔽生成与跨设备 collate。",
+        "evidence": "dinov2/data/loaders.py:make_data_loader; dinov2/data/collate.py:collate_data_and_cast; dinov2/data/masking.py:MaskingGenerator; dinov2/data/augmentations.py:DataAugmentationDINO"
+      },
+      {
+        "name": "DinoTxt 双塔模型",
+        "role": "把视觉 backbone 与文本 backbone 映射到共享嵌入空间并计算图文相似度。",
+        "evidence": "dinov2/hub/text/dinotxt_model.py:DinoTxt; dinov2/hub/text/dinotxt_model.py:get_logits; dinov2/hub/text/dinov2_wrapper.py:DINOv2Wrapper"
+      },
+      {
+        "name": "Cell-DINO hub 与数据",
+        "role": "提供 Cell Painting/HPA 多通道细胞图像 backbone 入口、数据适配与归一化。",
+        "evidence": "dinov2/hub/cell_dino/backbones.py; notebooks/cell_dino/inference.ipynb:cell_dino_hpa_vitl16; dinov2/data/cell_dino/transforms.py:SelfNormalizeNoDiv; dinov2/data/datasets/cell_dino/chammi_cp.py"
+      },
+      {
+        "name": "分割/检测相关模块",
+        "role": "提供语义分割 backbone/linear head 以及从 MMDetection/Mask2Former 风格移植的点生成、anchor、box sampler、decode head。",
+        "evidence": "dinov2/eval/segmentation_m2f/core/anchor/point_generator.py:MlvlPointGenerator; dinov2/eval/segmentation_m2f/models/segmentors/encoder_decoder_mask2former.py; dinov2/eval/depth/models/decode_heads/dpt_head.py"
+      }
+    ],
+    "dependencies": [
+      "PyTorch（torch、torch.distributed、torch.utils.checkpoint、AMP/autocast 相关 API）",
+      "torchvision（notebook 中使用 torchvision.io.read_image、torchvision transforms）",
+      "numpy（point_generator.py 等模块导入）",
+      "fvcore（PeriodicCheckpointer）",
+      "submitit（dinov2/run/train/train.py 启动器使用）",
+      "omegaconf/yacs 风格配置（dinov2/configs/__init__.py 合并默认配置与 train/eval YAML）",
+      "CLIP tokenizer/third-party 组件（dinov2/thirdparty/CLIP/clip/simple_tokenizer.py，README 与 dinotxt 路径引用）",
+      "xFormers 或类似高效注意力后端（模型层中使用 MemEffAttention；requirements/MODEL_CARD 提及软件栈，实际依赖清单未在本次证据中完整展开）",
+      "CUDA GPU（train.py 固定 torch.device(\"cuda\")，point_generator 默认 device=\"cuda\"；无法确认 CPU 可用性）",
+      "外部预训练权重（README 提供 fbaipublicfiles 下载链接；Cell-DINO 需申请表单获取 URL；未提供权重本身）",
+      "ImageNet、HPA、Cell Painting、Chammi、NYU-Depth、ADE20k 等外部数据集及其目录结构（由 loaders/configs/README 指示，数据本体不在仓库）"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "最短推理路径是按 README/MODEL_CARD 用 torch.hub.load('facebookresearch/dinov2', 'dinov2_vits14') 或本地 REPO_DIR 加载 backbone，再对 ImageNet 风格 RGB 图像做预处理；基础 DINOv2 主干代码链较完整。训练复现需要准备 ImageNet/LVD-142M 级数据、分布式 GPU 环境、FSDP/submitit 配置和匹配的 xFormers/PyTorch 版本，并从 YAML 覆盖超参；Cell-DINO 需要先申请权重并按 notebook 对 4/5 通道图像做逐样本归一化，且 notebook 中变量名与 hub 入口存在不一致迹象。仓库没有测试文件，也未验证 segmation_m2f/深度/文本模块依赖闭包是否满足 setup.py，因此不能仅凭源码认定开箱即跑。",
+    "issues": [
+      {
+        "severity": "high",
+        "finding": "Cell-DINO notebook 中 HPA-FoV 示例将 torchvision.io.read_image 的结果直接 unsqueeze 后送入模型，示例注释称输入为 4 通道，而同一 notebook 的 self_normalize 对任意通道数按最后两维统计，若 read_image 返回 RGBA 4 通道则与代码预期可能一致，但 notebook 前一个 cell 又把 CP 图像处理成显式 5 通道并假设原图为拼接长图；示例文件名/通道语义缺少校验，容易静默喂入错误通道布局。",
+        "evidence": [
+          "notebooks/cell_dino/inference.ipynb:self_normalize",
+          "notebooks/cell_dino/inference.ipynb:img5_channels = torch.zeros([1, 5, 160, 160])",
+          "notebooks/cell_dino/inference.ipynb:img_hpa_fov = img.unsqueeze(0)"
+        ],
+        "impact": "细胞影像推理可能因通道错位产生看似合法但语义错误的特征，影响 Cell-DINO 特征可信度和下游 kNN/linear 评估。",
+        "confidence": 0.72
+      },
+      {
+        "severity": "medium",
+        "finding": "notebook 中示例模型变量名为 cell_dino_vitl16_sc / cell_dino_vitl16_fov，但加载时使用的是 torch.hub.load(REPO_DIR, 'cell_dino_hpa_vitl16', ...) 两次；README 片段又出现 cell_dino_vitl16_hpa_sc 这一不同命名。hub 入口、脚本示例与 README 文档之间缺少一致的符号对应。",
+        "evidence": [
+          "notebooks/cell_dino/inference.ipynb:cell_dino_vitl16_sc",
+          "notebooks/cell_dino/inference.ipynb:torch.hub.load(REPO_DIR, 'cell_dino_hpa_vitl16'",
+          "README.md:cell_dino_vitl16_hpa_sc = torch.hub.load(REPO_DIR, 'cell_dino_hpa_vitl16'"
+        ],
+        "impact": "用户按文档或 notebook 换模型名时可能遇到 hub 入口不存在或加载错权重的风险；需要以 hub/backbones.py 实际注册名为准。",
+        "confidence": 0.66
+      },
+      {
+        "severity": "medium",
+        "finding": "训练主程序在 main 中无条件 model.to(torch.device(\"cuda\"))，point_generator 等多个算法方法也默认 device='cuda'；虽然这可能是面向 Meta GPU 训练的刻意选择，但没有看到 CPU fallback 或设备参数透传。",
+        "evidence": [
+          "dinov2/train/train.py:main",
+          "dinov2/eval/segmentation_m2f/core/anchor/point_generator.py:grid_priors",
+          "dinov2/eval/segmentation_m2f/core/anchor/point_generator.py:single_level_grid_priors"
+        ],
+        "impact": "无 CUDA 环境下训练和 m2f 点生成相关代码大概率不可直接运行；静态分析无法确认是否上游封装会替换默认设备。",
+        "confidence": 0.8
+      },
+      {
+        "severity": "low",
+        "finding": "point_generator.py 的 sparse_priors 文档字符串写 featmap_size arrange as (w, h)，同文件 grid_priors/single_level_grid_priors 的文档均定义 featmap_sizes 为 (h, w)，函数体使用 height, width = featmap_size。",
+        "evidence": [
+          "dinov2/eval/segmentation_m2f/core/anchor/point_generator.py:sparse_priors",
+          "dinov2/eval/segmentation_m2f/core/anchor/point_generator.py:grid_priors",
+          "dinov2/eval/segmentation_m2f/core/anchor/point_generator.py:single_level_grid_priors"
+        ],
+        "impact": "若调用者按 sparse_priors 的 docstring 传入 (w,h)，prior 坐标计算会与网格语义错位；实现体更支持 (h,w) 约定。",
+        "confidence": 0.88
+      }
+    ],
+    "static_limitations": [
+      "未执行任何代码，所有调用链描述基于静态入口、函数名和导入关系，不代表运行时成功。",
+      "未验证外部权重 URL 是否有效、权重文件是否与当前 hub 键完全匹配，也未下载任何模型。",
+      "未核对 requirements.txt、requirements-extras.txt、requirements-dev.txt 的完整内容，setup.py 只显示其读取方式；无法给出精确依赖版本矩阵。",
+      "未验证 DDP/FSDP/submitit 在真实集群上的行为、显存占用、吞吐量或断点续训正确性。",
+      "未验证 ImageNet、HPA、Cell Painting、Chammi、NYU-Depth、ADE20k 等数据加载与 README 命令的一致性。",
+      "未审查全部 157 个 py 文件；source_files 为预算内摘录，省略其他 key_file 不构成仓库缺陷。",
+      "无法确认 README 中论文指标、碳排、训练时长等声明的可复现性，本报告未将其作为实现事实。",
+      "无法确认 segmentation_m2f 是否为完整可用的第三方移植、是否存在缺失注册器或隐式依赖 MMDetection 风格全局 registry。"
+    ],
+    "confidence": 0.82,
+    "version": 3,
+    "generated_at": "2026-11-18T09:33:57.577301"
+  },
+  "2611.22953v1": {
+    "summary": "Fiberpose 是一个用于显微纤维网络实例分割与形态学量化测量的 Python 工具库，核心思想是通过神经网络预测连续距离变换（Distance Transform）场，并在此几何场上进行脊线提取、中心线追踪、分水岭/径向扩展分割及局部孔隙与直径统计。仓库包含无状态图像处理函数、ONNX Runtime 推理适配、管线与状态缓存管理，以及 CLI、PyQt6 桌面 GUI 与 Gradio Web 界面，且目录树中自带预训练模型与示例图像，代码实现完整。",
+    "repository_kind": "implementation",
+    "architecture": "架构遵循分层解耦与无状态计算设计：输入层支持单图、目录与 2D/3D Tiff 堆栈；领域模型层（domain.py）使用 Frame/BatchResult/AppConfig 作为切片状态与参数容器，并通过特征签名（signature）进行缓存失效判定；算法核心层（analysis.py、ridge_detector.py、raster.py）提供无状态预测、脊线检测与形态测量函数，数值密集型的采样与法向量优化由 Numba njit 加速（utils.py）；调度层（pipeline.py）由 PipelineController 管理 ONNX 模型会话，驱动预测、分割、测量阶段流转；表现层分别提供 CLI 批处理、PyQt 交互窗口和 Gradio Web 应用。",
+    "call_chain": "fiberpose.cli:main -> _launch_cli -> CliRunner.run -> ImageBatch.from_source -> BatchService.run_batch -> PipelineController.ensure_segmentation/ensure_measurements -> analysis.predict（OnnxFiberposeModel.predict 推理）-> analysis.segment（RidgeDetector 脊线提取、合并与分水岭/径向扩展）-> analysis.sample_centerlines（沿脊线采样法向梯度、直径与切线角度）-> analysis.void_mask_and_pore_dt（孔隙分析）-> BatchResult.save_all（导出 CSV 测量表与结果图像）",
+    "core_modules": [
+      {
+        "name": "PipelineController",
+        "role": "管线控制器与模型生命周期管理，基于输入签名调度预测、分割与测量三阶段并进行缓存管理",
+        "evidence": "src/fiberpose/pipeline.py:PipelineController"
+      },
+      {
+        "name": "OnnxFiberposeModel",
+        "role": "ONNX Runtime 推理封装，支持 CPU/CUDA 执行提供者切换、动态 stride 填充及通道归一化适配",
+        "evidence": "src/fiberpose/ml.py:OnnxFiberposeModel"
+      },
+      {
+        "name": "analysis",
+        "role": "无状态几何与图像分析函数集合，实现 DT 场后处理、脊线分割过滤与纤维中心线测量采样",
+        "evidence": "src/fiberpose/analysis.py:predict/segment/sample_centerlines"
+      },
+      {
+        "name": "utils",
+        "role": "几何计算与 Numba 加速工具库，实现双线性采样、弧长重采样及基于 DT 梯度的法向平滑估计",
+        "evidence": "src/fiberpose/utils.py:normals_from_dt_2d/_bilinear"
+      },
+      {
+        "name": "models",
+        "role": "预训练权重解析与 pooch 缓存下载管理器，支持本地路径与远程发布资产校验",
+        "evidence": "src/fiberpose/models.py:resolve_model_path/fetch_model"
+      },
+      {
+        "name": "Frame & ImageBatch",
+        "role": "图像切片与批处理数据容器，承载原始图像、缩放缓存、中间场张量和测量结果",
+        "evidence": "src/fiberpose/domain.py:Frame/ImageBatch"
+      }
+    ],
+    "dependencies": [
+      "Python >= 3.10",
+      "直接依赖：numpy>=1.26, scipy>=1.11, scikit-image>=0.22, numba>=0.59, onnxruntime>=1.17, opencv-python-headless>=4.8, imageio>=2.31, tifffile>=2023.7.10, imagecodecs>=2023.7.10, tqdm>=4.64, platformdirs>=3, pooch>=1.8",
+      "可选依赖（GUI）：PyQt6>=6.5, pyqtgraph>=0.13",
+      "可选依赖（Web）：gradio>=6, matplotlib>=3.7",
+      "外部模型文件：checkpoints/R108_dt_fg.onnx（仓库内已包含）"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "仓库源码 checkout 目录自带预训练权重（checkpoints/R108_dt_fg.onnx）与示例图片（src/fiberpose/resources/test.png）。最短复现路径为安装环境 pip install -e . 后执行 CLI 命令 `fiberpose --cli --input src/fiberpose/resources/test.png --measurements`，即可在无需图形界面的纯 CPU 环境下跑通端到端推断与测量导出。若需 GUI 则需安装 PyQt6 可选依赖。主要阻碍是缺乏自动化测试脚本供一键回归测试。",
+    "issues": [
+      {
+        "severity": "medium",
+        "finding": "脱离源码 checkout 构建发布包时，远程模型下载依赖可能尚未发布的 Release 资产",
+        "evidence": [
+          "src/fiberpose/models.py:_BASE_URL",
+          "src/fiberpose/models.py:fetch_model"
+        ],
+        "impact": "代码中存在 TODO 注释指明发布前需上传资产；若用户通过独立 wheel 安装且未克隆包含 checkpoints 的仓库源码，在首次运行触发 pooch 下载时可能因远程 GitHub release 不存在而抛出下载异常。",
+        "confidence": 0.85
+      },
+      {
+        "severity": "low",
+        "finding": "CLI 参数解析中 --invert 参数默认值配置为 None",
+        "evidence": [
+          "src/fiberpose/cli.py:parser.add_argument('--invert', action='store_true', default=None)"
+        ],
+        "impact": "argparse 中 action='store_true' 搭配 default=None 易导致未传参时得到 None 而非 False，虽然下游使用 bool() 容错，但破坏了 CLI 选项的标准类型预期。",
+        "confidence": 0.75
+      }
+    ],
+    "static_limitations": [
+      "未实际加载并执行 ONNX 运行时，无法验证预训练模型 R108_dt_fg.onnx 对不同分辨率与对比度显微图像的泛化分割精度与论文指标复现度。",
+      "无法实测 ONNX Runtime 与本机 CUDA/cuDNN 环境的兼容性及 GPU 显存占用表现。",
+      "静态分析无法评估 Numba njit 内核在不同平台架构首次 JIT 编译的耗时开销，以及 PyQt6 GUI 界面在不同操作系统显示服务下的渲染兼容性。"
+    ],
+    "confidence": 0.92,
+    "version": 3,
+    "generated_at": "2026-11-19T09:31:09.401424"
+  },
+  "2611.22152v1": {
+    "summary": "该仓库为基于可逆神经网络（INN）和局部注意力机制的无监督多模态医学图像配准（INNReg）实现，涵盖 MRI T1-T2 及 MR-CT 配准任务。代码结构基于 CycleGAN/CUT 与 VoxelMorph 框架改写，具备完整的模型构建、损失函数和训练测试入口，属于完整实现级别代码库，但存在实现与论文设计描述不完全对齐及未定义变量的隐患。",
+    "repository_kind": "implementation",
+    "architecture": "架构由图像模态转换网络（基于可逆神经网络 InvISPNet，内含密集块 DenseBlock 与可选的 DynamicDWConv）和形变配准网络（基于 2D VoxelMorph 的 VxmDense 及 SpatialTransformer）级联构成。数据流经单通道复制拼接（如 real_A 复制为 2 通道 realAA）进入可逆网络正反向变换生成 fake_B 与 fake_A，并计算自重构可逆损失；配准网络预测位移矢量场（DVF），通过空间变换器对翻译图像实施重采样，并结合归一化互信息（NMI）障碍损失与平滑损失驱动网络优化。",
+    "call_chain": "train.py:train() → data:create_dataset() → models:create_model() → models/registration_model.py:REGISTRATIONModel.set_input() → REGISTRATIONModel.forward() [调用 netG 生成 fake_B/fake_A 及重构图] → REGISTRATIONModel.optimize_parameters() [调用 netR 预测 DVF，调用 spatialTransformer 重采样并反传综合损失] → 导出 checkpoints 及配准结果",
+    "core_modules": [
+      {
+        "name": "REGISTRATIONModel",
+        "role": "配准主模型控制器，编排模态翻译、形变场预测、空间形变重采样及多目标损失反传",
+        "evidence": "models/registration_model.py:REGISTRATIONModel"
+      },
+      {
+        "name": "InvISPNet",
+        "role": "基于可逆块（InvBlock）堆叠的双向模态映射网络，利用可逆卷积与可逆仿射耦合保障几何一致性",
+        "evidence": "models/INN_model.py:InvISPNet"
+      },
+      {
+        "name": "DynamicDWConv",
+        "role": "动态深度可分离卷积模块，利用全局自适应池化生成卷积核动态权重以实现局部注意力",
+        "evidence": "models/DW_model.py:DynamicDWConv"
+      },
+      {
+        "name": "VxmDense",
+        "role": "基于 UNet 架构与积分平滑的密集形变场预测网络（引自 VoxelMorph）",
+        "evidence": "models/voxelmorph/torchvoxelmorph/networks.py:VxmDense"
+      },
+      {
+        "name": "NMI_Loss",
+        "role": "归一化互信息损失，配合对数屏障函数构成 MMR 损失以约束配准精度",
+        "evidence": "util/losses.py:NMI_Loss"
+      }
+    ],
+    "dependencies": [
+      "Python >= 3.8",
+      "PyTorch (torch, torch.nn, torch.nn.functional)",
+      "torchvision",
+      "NumPy",
+      "Pillow (PIL)",
+      "tqdm",
+      "matplotlib",
+      "tensorboard / torch.utils.tensorboard",
+      "BraTS 2023 / Harvard MR-CT 数据集"
+    ],
+    "reproduction_readiness": "needs_fixes",
+    "reproduction_notes": "最短复现路径为配置包含 PyTorch 与 torchvision 的 Python 环境，准备配准图像对目录并运行 train.py。但复现受阻于：缺少 requirements.txt 明确依赖版本；模型训练代码中直接使用了未定义的属性 self.idt_B，且硬编码了 .cuda() 设备调用，必须修复代码后才能顺利训练与评估。",
+    "issues": [
+      {
+        "severity": "high",
+        "finding": "训练步骤中疑似直接访问未定义属性 self.idt_B 导致崩溃",
+        "evidence": [
+          "models/registration_model.py:mask2 = (self.idt_B>-0.95) + (y_pred[0] >-0.95)"
+        ],
+        "impact": "在执行 optimize_parameters() 时，self.idt_B 未在 set_input() 或 forward() 中初始化赋值，会抛出 AttributeError，导致训练无法正常迭代运行。",
+        "confidence": 0.88
+      },
+      {
+        "severity": "medium",
+        "finding": "配准网络输入与宣传的设计逻辑不一致",
+        "evidence": [
+          "models/registration_model.py:y_output = self.netR(self.real_A, self.real_B)",
+          "README.md:a registration network that uses the translated mono-modal images to align the multi-modal images"
+        ],
+        "impact": "README 表明配准网络应基于翻译后的单模态图像进行配准，但代码中 netR 实际直接接收未经翻译的原始多模态对 (real_A, real_B)，翻译图 fake_B 仅用于重采样与后续 L1 约束，算法数据流与论文宣称设计存在出入。",
+        "confidence": 0.92
+      },
+      {
+        "severity": "medium",
+        "finding": "设备绑定硬编码 .cuda() 绕过多卡与 CPU 调度",
+        "evidence": [
+          "models/registration_model.py:self.netR = vxm.networks.VxmDense(...).cuda()",
+          "models/registration_model.py:self.spatialTransformer = SpatialTransformer(...).cuda()"
+        ],
+        "impact": "绕过了 BaseModel 中根据 gpu_ids 解析出的 self.device，在无 CUDA 环境调试或指定特定非 0 号 GPU 卡时可能报错或发生设备不一致异常。",
+        "confidence": 0.95
+      },
+      {
+        "severity": "medium",
+        "finding": "DWBlock.forward 维度解析与输入通道定义存在矛盾",
+        "evidence": [
+          "models/DW_model.py:B, H, W, C = x.shape",
+          "models/DW_model.py:self.conv0 = nn.Conv2d(1, dim, 1, bias=False)",
+          "models/DW_model.py:# x = x.permute(0, 3, 1, 2).contiguous()"
+        ],
+        "impact": "DWBlock 代码中注释了 permute 变换，假设输入最后一维是通道且解包为 B, H, W, C，但 conv0 却将输入维度第 1 维视作单通道，若启用该模块作为子网时易引发张量形状不匹配或计算语义错误。",
+        "confidence": 0.85
+      }
+    ],
+    "static_limitations": [
+      "静态分析无法验证 NMI_Loss 中特定采样 bin 设置和对数屏障损失在数值上的稳定性和收敛性",
+      "未实际执行代码，无法验证针对 BraTS 2023 或 Harvard 真实数据集的数据预处理与加载兼容性",
+      "无法测定配准形变场的折叠率（雅可比行列式负值比例）及配准 Dice 评估精度"
+    ],
+    "confidence": 0.9,
+    "version": 3,
+    "generated_at": "2026-11-19T09:31:45.997534"
+  },
+  "2611.20942v1": {
+    "summary": "vividRGB 是一套用于生态摄影图像密集视觉线索挖掘的完整工程与研究实现，核心方法为强制聚焦注意力（Forced Focused Attention, FFA）。代码提供标准 Python API 与命令行工具（vividrgb），实现了局部切片提取、四向翻转逆变换特征融合、多尺度 PCA 降维、Varimax 正交旋转以及正则化 K-Means/全协方差 GMM 聚类。仓库包含经过验证的单元测试和脱机复现数据，判定为 implementation。",
+    "repository_kind": "implementation",
+    "architecture": "架构解耦了核心几何图像处理与后端视觉编码器。数据流首先通过 open_rgb 规范化图像格式；features.calibrate 在 5% 至 40% 多尺度切片与整图反射上采样 token，拟合居中未白化 PCA（PCAProjection）；extract_features 依据设定的聚焦比例生成重叠网格切片（crop_geometry），送入冻结编码器（如 DINOv3Encoder）经 fourflip_encode 逆对齐平均提取特征并映射至 PCA 空间，再通过双线性插值与 2D Hann 加权窗（hann_weights）在像素空间融合；得到的特征场通过 sample_grid 规则下采样后，送入带有空间块交叉验证的 cluster_kmeans 或带参数惩罚 BIC 准则的 cluster_gmm 进行无监督语义组群发现；最后由 metrics 模块基于边缘容差评估轮廓与边缘对齐质量，并由 visualization 输出伪彩色图像。",
+    "call_chain": "命令行入口 (src/vividRGB/cli.py:main) → 图像读取与 EXIF 矫正 (src/vividRGB/features.py:open_rgb) → 多尺度采样与 PCA 基底校准 (src/vividRGB/features.py:calibrate) → 切片生成/四翻转推理/Hann窗重构 (src/vividRGB/features.py:extract_features) → 规则网格采样 (src/vividRGB/geometry.py:sample_grid) → Varimax 因子旋转与正则化聚类 (src/vividRGB/projection.py:varimax + src/vividRGB/clustering.py:cluster_gmm) → 轮廓对齐评估与多模态图谱导出 (src/vividRGB/metrics.py:rgb_edge_f1 + src/vividRGB/visualization.py:pca_rgb)",
+    "core_modules": [
+      {
+        "name": "vividRGB.cli",
+        "role": "命令行接口，解析参数并调度特征提取、PCA/Varimax 导出与聚类可视化全流程",
+        "evidence": "src/vividRGB/cli.py:main"
+      },
+      {
+        "name": "vividRGB.features",
+        "role": "局部注意力特征提取、四视角反射对齐平均融合与跨尺度 PCA 校准流程调度",
+        "evidence": "src/vividRGB/features.py:extract_features,calibrate,fourflip_encode"
+      },
+      {
+        "name": "vividRGB.encoders",
+        "role": "冻结视觉模型适配层，封装 DINOv3 与 SAM3 的图像标准化与推理接口",
+        "evidence": "src/vividRGB/encoders.py:DINOv3Encoder,SAM3Automatic"
+      },
+      {
+        "name": "vividRGB.geometry",
+        "role": "窗口滑动坐标计算、2D Hann 平滑加权窗、双线性半像素插值与等距网格采样",
+        "evidence": "src/vividRGB/geometry.py:crop_geometry,hann_weights,resize_bilinear,sample_grid"
+      },
+      {
+        "name": "vividRGB.projection",
+        "role": "居中 PCA 特征子空间降维与基于 Kaiser 归一化的正交 Varimax 旋转",
+        "evidence": "src/vividRGB/projection.py:PCAProjection,fit_pca,varimax"
+      },
+      {
+        "name": "vividRGB.clustering",
+        "role": "基于 8x8 空间折叠交叉验证选 K 的 K-Means，以及全协方差惩罚 BIC 高斯混合聚类",
+        "evidence": "src/vividRGB/clustering.py:cluster_kmeans,cluster_gmm"
+      },
+      {
+        "name": "vividRGB.metrics",
+        "role": "计算带容差二值膨胀的边界 F1 分数与基于 Sobel 梯度的图像边缘对齐评估",
+        "evidence": "src/vividRGB/metrics.py:boundary_f1,rgb_edges,rgb_edge_f1"
+      },
+      {
+        "name": "vividRGB.visualization",
+        "role": "主成分色彩空间映射与聚类类别伪彩色渲染",
+        "evidence": "src/vividRGB/visualization.py:pca_rgb,labels_rgb"
+      }
+    ],
+    "dependencies": [
+      "Python >=3.10",
+      "numpy>=1.26,<3",
+      "scipy>=1.11,<2",
+      "scikit-learn>=1.4,<2",
+      "pillow>=10,<13",
+      "threadpoolctl>=3.1,<4",
+      "可选依赖 [dino]: torch>=2.5,<3, torchvision>=0.20,<1, transformers>=4.56,<6, huggingface-hub>=0.34,<2",
+      "可选依赖 [sam3]: transformers>=5.18,<6",
+      "可选依赖 [plots/dev]: matplotlib>=3.8,<4, pytest>=8,<10, build>=1.2,<2, twine>=6,<8, ruff>=0.12,<1",
+      "外部模型权限: Meta DINOv3 (facebook/dinov3-vitb16-pretrain-lvd1689m) 与 SAM3 需上游 Hugging Face 许可准入"
+    ],
+    "reproduction_readiness": "ready",
+    "reproduction_notes": "最短复现路径无需 GPU 或下载大模型权重，安装基础依赖与 plots extra 后直接执行 `python research/scripts/ffa_recompute_statistics.py --data research/data` 即可对 200 项基准 F1 与统计数据完成校验；执行 `python research/scripts/ffa_cost_tradeoff.py` 可直接基于静态数据重现开销对比图。若需执行完整的端到端神经网络推理，需配置 CUDA 环境，通过 `pip install 'vividRGB[dino]'` 安装扩展，并使用具备 DINOv3 访问权限的 Hugging Face 凭据登录，同时输入图像各边长必须为 16 的整数倍。",
+    "issues": [
+      {
+        "severity": "medium",
+        "finding": "DINOv3 编码器与 CLI 缺乏自动对齐填充处理，直接传入非 16 整数倍尺寸图像将报错中断",
+        "evidence": [
+          "src/vividRGB/encoders.py:DINOv3Encoder.encode",
+          "src/vividRGB/cli.py:main"
+        ],
+        "impact": "用户使用命令行 vividrgb analyze 分析任意原始图像时，若宽高不能被 16 整除，程序抛出 ValueError 异常终止，未做自动补齐或软截断容错",
+        "confidence": 0.95
+      },
+      {
+        "severity": "low",
+        "finding": "SAM3 可选依赖锁定了极高的上游 transformers 版本约束",
+        "evidence": [
+          "pyproject.toml:project.optional-dependencies.sam3"
+        ],
+        "impact": "要求 transformers>=5.18,<6，可能导致常规包管理器环境下解析冲突或安装失败，限制了 SAM3 扩展在当前标准环境下的可用性",
+        "confidence": 0.85
+      }
+    ],
+    "static_limitations": [
+      "未下载 upstream DINOv3/SAM3 权重，无法动态验证真实模型在特定 GPU 架构下的显存占用与推理延迟",
+      "未执行 pytest 测试集，无法动态检验跨平台（如 Windows vs Linux）数值舍入与 BLAS 多线程限制对聚类重现性的细微影响",
+      "未直接拉取外部原始生态图库（如 NeonTreeEvaluation、PMID2019 等），无法确认各源站原始图片的网络获取稳定性"
+    ],
+    "confidence": 0.95,
+    "version": 3,
+    "generated_at": "2026-11-19T09:31:54.063462"
   }
 }

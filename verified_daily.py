@@ -117,16 +117,31 @@ def index_build_command(python_executable: str) -> list[str]:
 
 
 def explainer_command(python_executable: str) -> list[str]:
-    """补齐缺少图解页的论文，--missing 只处理 manifest 里没有的编号。"""
+    """调用 claude 编码代理补齐缺少图解页的论文，--missing 只处理尚未生成的编号。"""
     return [
         python_executable,
-        str(PROJECT / "tools" / "build_explainers.py"),
+        str(PROJECT / "tools" / "agent_explainers.py"),
         "--missing",
         "--concurrency",
-        "4",
-        "--limit",
-        "60",
+        "2",
     ]
+
+
+def has_missing_explainers(project: Path) -> bool:
+    """检查数据库中是否有已通过相关性过滤但尚未生成图解页的论文。"""
+    try:
+        db_path = project / "papers.json"
+        manifest_path = project / "data" / "explainers" / "manifest.json"
+        if not db_path.exists() or not manifest_path.exists():
+            return False
+        papers = json.loads(db_path.read_text(encoding="utf-8")).get("database", [])
+        entries = json.loads(manifest_path.read_text(encoding="utf-8")).get("entries", {})
+        for paper in papers:
+            if paper.get("relevance") == "passed" and paper.get("arxiv_id") not in entries:
+                return True
+    except Exception:
+        pass
+    return False
 
 
 def fetch_candidates(url: str) -> list[str]:
@@ -881,8 +896,9 @@ def main() -> int:
                 if jev_changed:
                     mark_site_pending(EVIDENCE_DIR / ".site-update-pending.json")
 
+            missing_explainers = has_missing_explainers(PROJECT)
             update_site(
-                evidence, bool(added or evidence["sanitized_github_links"] or backfill_changed or jev_changed),
+                evidence, bool(added or evidence["sanitized_github_links"] or backfill_changed or jev_changed or missing_explainers),
                 PROJECT, EVIDENCE_DIR / ".site-update-pending.json", run,
                 index_build_command(sys.executable),
                 explainer_command=explainer_command(sys.executable),

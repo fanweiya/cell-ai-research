@@ -142731,6 +142731,1206 @@
         "verified_at": "2026-11-12T01:20:18.999171Z",
         "verification": "arxiv_atom_exact_id_and_title"
       }
+    },
+    {
+      "arxiv_id": "2611.16907v1",
+      "title": "Automated PD-L1 Tumor Proportion Scoring with Uncertainty-Guided Triage in Non-Small Cell Lung Cancer",
+      "published_date": "2026-11-12",
+      "authors": [
+        "Kesi Xu",
+        "Ayesha Azam",
+        "Tanvier Kaur",
+        "Monika Kondratowicz",
+        "Kinza Asim",
+        "Brinder Chohan",
+        "Paapa Appiah-Odame",
+        "Zhao Chen",
+        "David Snead",
+        "Nasir Rajpoot"
+      ],
+      "categories": [
+        "cs.CV",
+        "eess.IV"
+      ],
+      "task_type": [
+        "cell_imaging"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Programmed death-ligand 1 (PD-L1) tumor proportion score (TPS) informs immunotherapy selection in non-small cell lung cancer. Near the 1% and 50% cutoffs, the score should also indicate when closer review is warranted. We designed a three-stage framework to follow the sequence of TPS assessment. Stage 1 identifies tumor regions and excludes macrophage-rich patches. Stage 2, a dual-branch cell counting network (D2Count-Net), counts PD-L1-positive and PD-L1-negative tumor cells in these regions to calculate TPS. Stage 3, TPS-Guard, an uncertainty-guided triage mechanism, reports model uncertainty as the disagreement among independently trained models, refers the most uncertain slides, and flags scores near the 1% or 50% cutoff when model estimates disagree across that cutoff. Flags state the reason for referral or alert the pathologist to possible scoring errors on auto-reported slides. In a retrospective, single-center study, 154 whole-slide images were scored by three pathologists, and the model and each pathologist were compared in turn with the mean of the other two. On the 114 slides unseen in training, model mean absolute error (MAE) was 6.96 percentage points, within the range of the three pathologists (4.24 to 8.29), and model uncertainty correlated with absolute TPS error (Spearman rho = 0.77) and inter-pathologist disagreement (rho = 0.71). After referral of the 15% most uncertain slides, model and pathologist MAE both decreased. Applied without retraining to an external, publicly available dataset, TPS-Guard still directed review to higher-error cases, and referring more uncertain cases raised sensitivity at the 50% cutoff. TPS-Guard provides reasons for reviewing individual automated scores and identifies slides that also produce greater disagreement among pathologists. Prospective reader studies should assess TPS-Guard's effect on TPS reporting.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-11-14T01:20:17.384574Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2611.16907",
+        "verified_at": "2026-11-14T01:20:17.384574Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2611.15325v1",
+      "title": "CaseScope: A Multi-Field Benchmark for Case-Level Pathology Diagnosis with Multimodal LLMs",
+      "published_date": "2026-11-11",
+      "authors": [
+        "Wenchuan Zhang",
+        "Chengyang Zhang",
+        "Fengling Li",
+        "Ting Yin",
+        "Chen Shu",
+        "Jie Chen",
+        "Shuwan Zhang",
+        "Xiaoyan Wu",
+        "Zhang Zhang",
+        "Yuhao Yi",
+        "Jiancheng Lv",
+        "Hong Bu"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "reconstruction",
+        "histopathology"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/Wenchuan-Zhang/CaseScope",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "aching cases, where the one-line specimen site matters more, although on atlas cases with three or more fields the fields count about as much as the site; and most open models verify findings barely above chance (median 62.0% vs. 50%, best 81.5%), gaining a median +3.4 points from images; proprietary models reach 83.2–93.2%. Rankings broadly replicate between the sources. The evaluation code is available at https://github.com/ Wenchuan-Zhang/CaseScope .",
+          "relation_signal": "explicit_code_statement",
+          "provenance_source": "https://arxiv.org/html/2611.15325v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Pathologists rarely diagnose from a single image: they scan a section at low power for architecture, zoom into selected fields for cytology, and integrate the evidence across views and scales. Pathology benchmarks for multimodal large language models (MLLMs), however, mostly ask about one image or require whole-slide pipelines, and the few that show several fields draw nested regions from cancer slides of one public cohort. We introduce CaseScope, a benchmark of diagnosis from several curated fields of one lesion: CaseScope-Teaching, 436 cases from a residency-training image library, reconstructed, de-identified, harmonised against a WHO-based ontology and re-examined by a pathologist wherever an automated pre-review raised a doubt, and CaseScope-Atlas, 800 cases from 88 published atlases (387 of them figure series of one disease), labelled from the captions by two LLMs that must agree. They cover 843 entities across 18 organ systems and pose 4,679 items in six tasks, from open-ended and ten-way diagnosis with ontology-guided hard negatives under circular evaluation to the verification and location of morphological findings. Across twenty-eight open and four proprietary MLLMs, diagnoses are unstable -- the best open and proprietary models are correct under all ten option rotations on 17.9% and 61.7% of the teaching cases -- and wrong answers favour the classic look-alike; open models make little use of the additional fields on teaching cases, where the one-line specimen site matters more, although on atlas cases with three or more fields the fields count about as much as the site; and most open models verify findings barely above chance (median 62.0% vs. 50%, best 81.5%), gaining a median +3.4 points from images; proprietary models reach 83.2-93.2%. Rankings broadly replicate between the sources. The evaluation code is available at https://github.com/Wenchuan-Zhang/CaseScope.",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "Wenchuan-Zhang/CaseScope",
+        "repository_url": "https://github.com/Wenchuan-Zhang/CaseScope",
+        "analyzed_at": "2026-11-14T01:20:39.267259+00:00",
+        "architecture": "# Wenchuan-Zhang/CaseScope\n**Stars**: 1 | **Language**: Python\n**Description**: This repository contains the evaluation code for the CaseScope pathology benchmark. CaseScope is designed to evaluate multimodal large language models (MLLMs) on diagnosing pathology cases using a series of H&amp;E fields ordered by magnification. It includes a large dataset of 1,236 cases, 4,941 fields, and 843 diagnostic entities across 18 organ systems, with tasks focusing on open-ended diagnosis, multiple-choice diagnosis, behavior triage, ordinal grading, finding verification, and finding location.\n\n\n## Directory Tree\n```\n.gitignore\nLICENSE\nREADME.md\nassets\nassets/overview.png\ncasescope\ncasescope/__init__.py\ncasescope/backends.py\ncasescope/data.py\ncasescope/infer.py\ncasescope/judge.py\ncasescope/parsing.py\ncasescope/prompts.py\ncasescope/score.py\nrequirements.txt\n```",
+        "project_structure": "## Directory Tree\n```\n.gitignore\nLICENSE\nREADME.md\nassets\nassets/overview.png\ncasescope\ncasescope/__init__.py\ncasescope/backends.py\ncasescope/data.py\ncasescope/infer.py\ncasescope/judge.py\ncasescope/parsing.py\ncasescope/prompts.py\ncasescope/score.py\nrequirements.txt\n```",
+        "key_files": [
+          "casescope/infer.py",
+          "README.md",
+          "LICENSE",
+          "casescope/data.py",
+          "casescope/judge.py",
+          "casescope/score.py",
+          "casescope/parsing.py",
+          "casescope/prompts.py",
+          "casescope/backends.py",
+          "requirements.txt",
+          "casescope/__init__.py"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 8,
+          "selected_file_count": 11,
+          "selected_code_file_count": 8,
+          "languages_by_extension": {
+            "py": 8
+          },
+          "tests_present": false,
+          "test_files": [],
+          "manifest_files": [
+            "requirements.txt",
+            "README.md",
+            "LICENSE"
+          ],
+          "read_errors": [],
+          "warnings": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2611.15325v1_gread.json"
+      },
+      "discovered_at": "2026-11-14T01:20:17.384574Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2611.15325",
+        "verified_at": "2026-11-14T01:20:17.384574Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2611.17899v1",
+      "title": "More Genes, Faster Inference: Efficient Large-Panel Spatial Transcriptomics Prediction from Histology",
+      "published_date": "2026-11-13",
+      "authors": [
+        "Songming Zhang",
+        "Yuxiao Luo",
+        "Shifu Luo",
+        "Siran Chen",
+        "Shuquan Su",
+        "Jinyan Li"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "q-bio.QM"
+      ],
+      "task_type": [
+        "spatial_transcriptomics"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/ZZhangsm/GeneFlow",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "1,000-gene prediction. Extensive experiments further show that GeneFlow produces biologically meaningful spot profiles while reducing computational cost by orders of magnitude, thereby improving efficiency and scalability, particularly in clinical settings. We believe GeneFlow provides an opportunity for leveraging widely available histology images for downstream biological discovery. Code is available at: https://github.com/ZZhangsm/GeneFlow <div class",
+          "relation_signal": "explicit_code_statement",
+          "provenance_source": "https://arxiv.org/html/2611.17899v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Spatial transcriptomics (ST) prediction from histology aims to infer spatially resolved gene expression profiles directly from tissue images. This is a challenging problem that is currently often addressed with complicated model architectures, additional inputs, and complicated training procedures, while remaining limited to fixed, small gene panels. This raises a natural question: Is there an efficient method for large-panel ST prediction? Here, we present GeneFlow, a simpler yet effective framework for large-scale spatial gene expression prediction that unifies flow-matching generative modeling with structured multimodal fusion. Specifically, GeneFlow first encodes both histological morphology and cross-gene interactions in spatial spots through histology and gene tokenizers. The model directly predicts spatial gene expression, rather than an intermediate velocity field, while being trained with a velocity-based flow-matching objective. We show that, even without relying on heavy generative pipelines, GeneFlow achieves state-of-the-art performance across multiple ST benchmarks, with up to 56.8% gains in 1,000-gene prediction. Extensive experiments further show that GeneFlow produces biologically meaningful spot profiles while reducing computational cost by orders of magnitude, thereby improving efficiency and scalability, particularly in clinical settings. We believe GeneFlow provides an opportunity for leveraging widely available histology images for downstream biological discovery. Code is available at: https://github.com/ZZhangsm/GeneFlow",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "ZZhangsm/GeneFlow",
+        "repository_url": "https://github.com/ZZhangsm/GeneFlow",
+        "analyzed_at": "2026-11-17T01:21:18.505068+00:00",
+        "architecture": "# ZZhangsm/GeneFlow\n**Stars**: 0 | **Language**: Python\n**Description**: GeneFlow is a flow-matching framework designed to infer spatially resolved gene expression from histology images. It integrates histology embeddings with a gene tokenizer and a DiT-style backbone to generate virtual gene expression profiles. The repository provides instructions for installation, dataset preparation following the HEST dataset conventions, and details on training and sampling gene expression profiles. It expects precomputed UNI and CONCH patch embeddings and utilizes PyTorch Distributed Data Parallel for training.\n\n\n## Directory Tree\n```\n.gitignore\nGeneFlow\nGeneFlow/__init__.py\nGeneFlow/data.py\nGeneFlow/flow\nGeneFlow/flow/__init__.py\nGeneFlow/flow/interpolant.py\nGeneFlow/flow/noise.py\nGeneFlow/models.py\nGeneFlow/train_helper.py\nLICENSE\nNOTICE\nREADME.md\nassets\nassets/overview.png\ndataset_download.py\nenvironment.yml\neval.ipynb\ngeneflow_sample.py\ngeneflow_train.py\n```",
+        "project_structure": "## Directory Tree\n```\n.gitignore\nGeneFlow\nGeneFlow/__init__.py\nGeneFlow/data.py\nGeneFlow/flow\nGeneFlow/flow/__init__.py\nGeneFlow/flow/interpolant.py\nGeneFlow/flow/noise.py\nGeneFlow/models.py\nGeneFlow/train_helper.py\nLICENSE\nNOTICE\nREADME.md\nassets\nassets/overview.png\ndataset_download.py\nenvironment.yml\neval.ipynb\ngeneflow_sample.py\ngeneflow_train.py\n```",
+        "key_files": [
+          "README.md",
+          "GeneFlow/models.py",
+          "geneflow_train.py",
+          "geneflow_sample.py",
+          "LICENSE",
+          "eval.ipynb",
+          "dataset_download.py",
+          "GeneFlow/data.py",
+          "GeneFlow/__init__.py",
+          "GeneFlow/train_helper.py",
+          "GeneFlow/flow/noise.py",
+          "GeneFlow/flow/__init__.py",
+          "GeneFlow/flow/interpolant.py",
+          "environment.yml"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 11,
+          "selected_file_count": 14,
+          "selected_code_file_count": 11,
+          "languages_by_extension": {
+            "ipynb": 1,
+            "py": 10
+          },
+          "tests_present": false,
+          "test_files": [],
+          "manifest_files": [
+            "README.md",
+            "environment.yml",
+            "LICENSE"
+          ],
+          "read_errors": [],
+          "warnings": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2611.17899v1_gread.json"
+      },
+      "discovered_at": "2026-11-17T01:20:28.707280Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2611.17899",
+        "verified_at": "2026-11-17T01:20:28.707280Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2611.21137v1",
+      "title": "Scribble Once, Segment the Sequence: Bidirectional Temporal Consistency for Weakly Supervised Segmentation in Echocardiography Sequences",
+      "published_date": "2026-11-16",
+      "authors": [
+        "Vincent Li Weixin",
+        "Chen Jingkun",
+        "Vicente Grau"
+      ],
+      "categories": [
+        "eess.IV",
+        "cs.CV"
+      ],
+      "task_type": [
+        "segmentation"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Temporal medical image segmentation relies on pixel-wise annotations, which are prohibitively expensive for long image sequences. Existing weakly-supervised methods reduce the annotation burden per frame but still require repeated annotations across the sequence. Furthermore, sparse supervision can result in temporally unstable representations. Addressing both challenges requires a model that can leverage strong spatial priors from large-scale pretraining while minimizing reliance on dense annotations. Frozen 2D vision foundation models provide a promising basis for this by offering transferable spatial representations with low trainable parameters. However, their lack of explicit temporal modeling limits their ability to propagate reliable information across anatomical sequences. To address this, we present a weakly-supervised framework for temporal segmentation from a single scribble-annotated frame, with all remaining frames left unlabeled. The framework combines parameter-efficient adaptation of DINOv3 encoders present in the mean-teacher architecture. Furthermore, a set of complementary losses, including a temporal loss helps generate reliable segmentation priors for the unlabeled frames. This formulation decouples annotation costs from sequence length while retaining the transferable spatial knowledge of the pretrained encoder. Extensive experiments on the publicly available CAMUS and CardiacNet datasets demonstrate that our approach outperforms other scribble-supervised methods. These results show that accurate and temporally consistent segmentation can be achieved from extremely sparse supervision, substantially reducing annotation requirements for temporal echocardiographic segmentation and providing a practical framework for scalable clinical deployment.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-11-18T01:20:18.245312Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2611.21137",
+        "verified_at": "2026-11-18T01:20:18.245312Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2611.20942v1",
+      "title": "vividRGB: Various visual cue detection in RGB photographs with forced focused attention",
+      "published_date": "2026-11-16",
+      "authors": [
+        "Masahiro Ryo"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "task_type": [
+        "segmentation",
+        "detection",
+        "reconstruction"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/masahiroryo-1988/vividRGB",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "id=\"Sx1\" class=\"ltx_section\"> Data and code availability The Python library vividRGB version 0.1.0 is an alpha release available on PyPI and at the versioned GitHub release . Install with <span id=\"Sx1.p1.",
+          "relation_signal": "paper_title_match",
+          "provenance_source": "https://arxiv.org/html/2611.20942v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Natural photographs contain dense, overlapping structures that can be weakly expressed in feature maps from whole-image vision encoders. We introduce forced focused attention (FFA) and its Python implementation, vividRGB. FFA is an encoder-agnostic inference-time procedure that applies a frozen encoder to enlarged, overlapping local crops, averages inverse-aligned reflections, and reconstructs a feature field in source coordinates. We evaluate 50 high-resolution photographs from grassland vegetation, fungal networks, airborne forests, coral reefs, and phytoplankton microscopy, using DINOv3 ViT-B/16. Across the five domains, FFA at 5% or 10% focus produces higher mean RGB-edge boundary F1 than direct DINOv3 encoding and automatic SAM3 masks. Domain means range from 0.244 to 0.596 for FFA, versus 0.028-0.076 for direct DINOv3 and 0.020-0.090 for SAM3. Qualitative feature maps also show finer appearance structure. These results concern RGB-edge preservation rather than verified species, traits, or biological segmentation. Narrower focus generally improves boundary preservation, while extraction time and GPU energy use increase sharply and gains diminish at finer settings. FFA may be useful for relatively small, high-resolution ecological image collections where dense visual cues matter. The alpha release vividRGB 0.1.0 and versioned research resources support reproducible cue inspection.",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "masahiroryo-1988/vividRGB",
+        "repository_url": "https://github.com/masahiroryo-1988/vividRGB",
+        "analyzed_at": "2026-11-18T01:20:36.561187+00:00",
+        "architecture": "# masahiroryo-1988/vividRGB\n**Stars**: 0 | **Language**: Python\n**Description**: This repository, vividRGB, provides a Python API and CLI for discovering dense ecological visual cues in photographs using forced focused attention. It re-presents local crops to a frozen vision encoder, averages inverse-aligned reflections, and reconstructs an overlapping feature field. Techniques like PCA/varimax and regularized clustering (K-means and Gaussian mixtures) are used to make appearance contrasts visible and summarize them into visual groups. The implementation is model-agnostic but was tested with DINOv3. It does not alter the vision transformer&#x27;s attention architecture or weights. The project includes an installable package on PyPI, a demonstrator, and detailed reports on its methodology and evaluation.\n\n\n## Directory Tree\n```\n.gitattributes\n.github\n.github/workflows\n.github/workflows/ci.yml\n.github/workflows/publish.yml\n.gitignore\nCHANGELOG.md\nCITATION.cff\nLICENSE\nREADME.md\ndocs\ndocs/data-licenses.md\ndocs/methods.md\ndocs/releasing.md\ndocs/reproducibility.md\ndocs/third-party\ndocs/third-party/Apache-2.0.txt\ndocs/third-party/CC-BY-4.0.txt\ndocs/third-party/NOTICE.md\ndocs/third-party/coralscapes-dataset-card.md\ndocs/third-party/license-receipts.json\ndocs/usage.md\nexamples\nexamples/custom_encoder.py\npyproject.toml\nresearch\nresearch/asset-manifest.json\nresearch/calibration-equivalence-validation.json\nresearch/data\nresearch/data/cost_tradeoff_points.csv\nresearch/data/cost_tradeoff_summary.json\nresearch/data/dino_protocol.json\nresearch/data/ecology-collection75_results.json\nresearch/data/evidence.json\nresearch/data/fourflip-benchmark_results.json\nresearch/data/gmm-final50_distributions.json\nresearch/data/gmm-final50_implementation_tests.json\nresearch/data/gmm-final50_results.json\nresearch/data/gmm-final50_software.json\nresearch/data/gmm-final50_stability_summary.json\nresearch/data/gmm_protocol.json\nresearch/data/independent_numeric_validation.json\nresearch/data/multiscale-pilot_results.json\nresearch/data/per_image_scores.csv\nresearch/data/phase1-benchmark_results.json\nresearch/data/reference_metadata.json\nresearch/data/sam3_hf_protocol.json\nresearch/data/selection_manifest.json\nresearch/data/validation.json\nresearch/figures\nresearch/figures/coral_reference.pdf\nresearch/figures/coral_reference.png\nresearch/figures/cost_tradeoff.pdf\nresearch/figures/cost_tradeoff.png\nresearch/figures/f1_five_domains.pdf\nresearch/figures/f1_five_domains.png\nresearch/figures/gmm_penalty.pdf\nresearch/figures/gmm_penalty.png\nresearch/gpu-equivalence-validation.json\nresearch/original-scripts\nresearch/original-scripts/acquire_cross_domain.py\nresearch/original-scripts/audit_auto_clusters50_features.py\nresearch/original-scripts/audit_ecology75_results.py\nresearch/original-scripts/auto_clusters50.py\nresearch/original-scripts/auto_clusters50_bic.py\nresearch/original-scripts/auto_clusters50_extract.py\nresearch/original-scripts/build_auto_clusters50.py\nresearch/original-scripts/build_ffa_preprint_evidence.py\nresearch/original-scripts/build_gmm_final50.py\nresearch/original-scripts/build_multiscale_report.py\nresearch/original-scripts/build_phase1_dashboard.py\nresearch/original-scripts/clustering_methods10.py\nresearch/original-scripts/collect_ecology_examples.py\nresearch/original-scripts/cross_domain_benchmark.py\nresearch/original-scripts/ecology75_benchmark.py\nresearch/original-scripts/ecology75_sam3_hf.py\nresearch/original-scripts/ffa_cost_tradeoff.py\nresearch/original-scripts/ffa_manuscript_tables.py\nresearch/original-scripts/ffa_recompute_statistics.py\nresearch/original-scripts/ffa_reference_metadata.py\nresearch/original-scripts/ffa_workflow_figure.py\nresearch/original-scripts/finalize_gmm_final50.py\nresearch/original-scripts/finalize_multiscale_pilot.py\nresearch/original-scripts/gmm_final50.py\nresearch/original-scripts/gmm_final50_stability.py\nresearch/original-scripts/inspect_multiscale_pilot.py\nresearch/original-scripts/multiscale_benchmark.py\nresearch/original-scripts/pca_whitening10.py\nresearch/original-scripts/phase1_benchmark.py\nresearch/original-scripts/phase1_fourflip_benchmark.py\nresearch/original-scripts/prepare_ecology75_moin.py\nresearch/original-scripts/prepare_multiscale_pilot.py\nresearch/original-scripts/score_leaf_references.py\nresearch/original-scripts/test_auto_clusters50.py\nresearch/original-scripts/test_gmm_final50.py\nresearch/release-validation.json\nresearch/requirements-acquisition.txt\nresearch/requirements-cpu.txt\nresearch/requirements-inference.txt\nresearch/requirements-sam3.txt\nresearch/sam3-equivalence-validation.json\nresearch/script-provenance.json\nresearch/scripts\nresearch/scripts/acquire_cross_domain.py\nresearch/scripts/audit_auto_clusters50_features.py\nresearch/scripts/audit_ecology75_results.py\nresearch/scripts/auto_clusters50.py\nresearch/scripts/auto_clusters50_bic.py\nresearch/scripts/auto_clusters50_extract.py\nresearch/scripts/auto_clusters50_template.html\nresearch/scripts/build_auto_clusters50.py\nresearch/scripts/build_ffa_preprint_evidence.py\nresearch/scripts/build_gmm_final50.py\nresearch/scripts/build_multiscale_report.py\nresearch/scripts/build_phase1_dashboard.py\nresearch/scripts/clustering_methods10.py\nresearch/scripts/collect_ecology_examples.py\nresearch/scripts/cross_domain_benchmark.py\nresearch/scripts/ecology75_benchmark.py\nresearch/scripts/ecology75_sam3_hf.py\nresearch/scripts/ffa_cost_tradeoff.py\nresearch/scripts/ffa_manuscript_tables.py\nresearch/scripts/ffa_recompute_statistics.py\nresearch/scripts/ffa_reference_metadata.py\nresearch/scripts/ffa_workflow_figure.py\nresearch/scripts/finalize_gmm_final50.py\nresearch/scripts/finalize_multiscale_pilot.py\nresearch/scripts/gmm_final50.py\nresearch/scripts/gmm_final50_protocol.json\nresearch/scripts/gmm_final50_stability.py\nresearch/scripts/gmm_final50_template.html\nresearch/scripts/inspect_multiscale_pilot.py\nresearch/scripts/multiscale_benchmark.py\nresearch/scripts/pca_whitening10.py\nresearch/scripts/phase1_benchmark.py\nresearch/scripts/pha",
+        "project_structure": "## Directory Tree\n```\n.gitattributes\n.github\n.github/workflows\n.github/workflows/ci.yml\n.github/workflows/publish.yml\n.gitignore\nCHANGELOG.md\nCITATION.cff\nLICENSE\nREADME.md\ndocs\ndocs/data-licenses.md\ndocs/methods.md\ndocs/releasing.md\ndocs/reproducibility.md\ndocs/third-party\ndocs/third-party/Apache-2.0.txt\ndocs/third-party/CC-BY-4.0.txt\ndocs/third-party/NOTICE.md\ndocs/third-party/coralscapes-dataset-card.md\ndocs/third-party/license-receipts.json\ndocs/usage.md\nexamples\nexamples/custom_encoder.py\npyproject.toml\nresearch\nresearch/asset-manifest.json\nresearch/calibration-equivalence-validation.json\nresearch/data\nresearch/data/cost_tradeoff_points.csv\nresearch/data/cost_tradeoff_summary.json\nresearch/data/dino_protocol.json\nresearch/data/ecology-collection75_results.json\nresearch/data/evidence.json\nresearch/data/fourflip-benchmark_results.json\nresearch/data/gmm-final50_distributions.json\nresearch/data/gmm-final50_implementation_tests.json\nresearch/data/gmm-final50_results.json\nresearch/data/gmm-final50_software.json\nresearch/data/gmm-final50_stability_summary.json\nresearch/data/gmm_protocol.json\nresearch/data/independent_numeric_validation.json\nresearch/data/multiscale-pilot_results.json\nresearch/data/per_image_scores.csv\nresearch/data/phase1-benchmark_results.json\nresearch/data/reference_metadata.json\nresearch/data/sam3_hf_protocol.json\nresearch/data/selection_manifest.json\nresearch/data/validation.json\nresearch/figures\nresearch/figures/coral_reference.pdf\nresearch/figures/coral_reference.png\nresearch/figures/cost_tradeoff.pdf\nresearch/figures/cost_tradeoff.png\nresearch/figures/f1_five_domains.pdf\nresearch/figures/f1_five_domains.png\nresearch/figures/gmm_penalty.pdf\nresearch/figures/gmm_penalty.png\nresearch/gpu-equivalence-validation.json\nresearch/original-scripts\nresearch/original-scripts/acquire_cross_domain.py\nresearch/original-scripts/audit_auto_clusters50_features.py\nresearch/original-scripts/audit_ecology75_results.py\nresearch/original-scripts/auto_clusters50.py\nresearch/original-scripts/auto_clusters50_bic.py\nresearch/original-scripts/auto_clusters50_extract.py\nresearch/original-scripts/build_auto_clusters50.py\nresearch/original-scripts/build_ffa_preprint_evidence.py\nresearch/original-scripts/build_gmm_final50.py\nresearch/original-scripts/build_multiscale_report.py\nresearch/original-scripts/build_phase1_dashboard.py\nresearch/original-scripts/clustering_methods10.py\nresearch/original-scripts/collect_ecology_examples.py\nresearch/original-scripts/cross_domain_benchmark.py\nresearch/original-scripts/ecology75_benchmark.py\nresearch/original-scripts/ecology75_sam3_hf.py\nresearch/original-scripts/ffa_cost_tradeoff.py\nresearch/original-scripts/ffa_manuscript_tables.py\nresearch/original-scripts/ffa_recompute_statistics.py\nresearch/original-scripts/ffa_reference_metadata.py\nresearch/original-scripts/ffa_workflow_figure.py\nresearch/original-scripts/finalize_gmm_final50.py\nresearch/original-scripts/finalize_multiscale_pilot.py\nresearch/original-scripts/gmm_final50.py\nresearch/original-scripts/gmm_final50_stability.py\nresearch/original-scripts/inspect_multiscale_pilot.py\nresearch/original-scripts/multiscale_benchmark.py\nresearch/original-scripts/pca_whitening10.py\nresearch/original-scripts/phase1_benchmark.py\nresearch/original-scripts/phase1_fourflip_benchmark.py\nresearch/original-scripts/prepare_ecology75_moin.py\nresearch/original-scripts/prepare_multiscale_pilot.py\nresearch/original-scripts/score_leaf_references.py\nresearch/original-scripts/test_auto_clusters50.py\nresearch/original-scripts/test_gmm_final50.py\nresearch/release-validation.json\nresearch/requirements-acquisition.txt\nresearch/requirements-cpu.txt\nresearch/requirements-inference.txt\nresearch/requirements-sam3.txt\nresearch/sam3-equivalence-validation.json\nresearch/script-provenance.json\nresearch/scripts\nresearch/scripts/acquire_cross_domain.py\nresearch/scripts/audit_auto_clusters50_features.py\nresearch/scripts/audit_ecology75_results.py\nresearch/scripts/auto_clusters50.py\nresearch/scripts/auto_clusters50_bic.py\nresearch/scripts/auto_clusters50_extract.py\nresearch/scripts/auto_clusters50_template.html\nresearch/scripts/build_auto_clusters50.py\nresearch/scripts/build_ffa_preprint_evidence.py\nresearch/scripts/build_gmm_final50.py\nresearch/scripts/build_multiscale_report.py\nresearch/scripts/build_phase1_dashboard.py\nresearch/scripts/clustering_methods10.py\nresearch/scripts/collect_ecology_examples.py\nresearch/scripts/cross_domain_benchmark.py\nresearch/scripts/ecology75_benchmark.py\nresearch/scripts/ecology75_sam3_hf.py\nresearch/scripts/ffa_cost_tradeoff.py\nresearch/scripts/ffa_manuscript_tables.py\nresearch/scripts/ffa_recompute_statistics.py\nresearch/scripts/ffa_reference_metadata.py\nresearch/scripts/ffa_workflow_figure.py\nresearch/scripts/finalize_gmm_final50.py\nresearch/scripts/finalize_multiscale_pilot.py\nresearch/scripts/gmm_final50.py\nresearch/scripts/gmm_final50_protocol.json\nresearch/scripts/gmm_final50_stability.py\nresearch/scripts/gmm_final50_template.html\nresearch/scripts/inspect_multiscale_pilot.py\nresearch/scripts/multiscale_benchmark.py\nresearch/scripts/pca_whitening10.py\nresearch/scripts/phase1_benchmark.py\nresearch/scripts/phase1_fourflip_benchmark.py\nresearch/scripts/prepare_ecology75_moin.py\nresearch/scripts/prepare_multiscale_pilot.py\nresearch/scripts/research_paths.py\nresearch/scripts/score_leaf_references.py\nresearch/scripts/test_auto_clusters50.py\nresearch/scripts/test_gmm_final50.py\nsrc\nsrc/vividRGB\nsrc/vividRGB/__init__.py\nsrc/vividRGB/cli.py\nsrc/vividRGB/clustering.py\nsrc/vividRGB/encoders.py\nsrc/vividRGB/features.py\nsrc/vividRGB/geometry.py\nsrc/vividRGB/metrics.py\nsrc/vividRGB/projection.py\nsrc/vividRGB/visualization.py\ntests\ntests/test_clustering_metrics.py\ntests/test_geometry_features.py\ntests/test_release_tools.py\ntools\ntools/audit_release.py\ntools/distribution_info.py\ntools/download_assets.py\ntools/fetch_pmid.py\ntools/restore_previews.py\ntools/validate_calibration_equivalence.py\ntools/validate_gpu_equivalence.py\ntools/validate_sam3_equivalence.py\ntools/verify_testpypi.py\n```",
+        "key_files": [
+          "src/vividRGB/cli.py",
+          "README.md",
+          "LICENSE",
+          "pyproject.toml",
+          "src/vividRGB/metrics.py",
+          "src/vividRGB/encoders.py",
+          "src/vividRGB/features.py",
+          "src/vividRGB/geometry.py",
+          "src/vividRGB/clustering.py",
+          "src/vividRGB/projection.py",
+          "src/vividRGB/visualization.py",
+          "tools/verify_testpypi.py",
+          "tests/test_release_tools.py",
+          "tests/test_geometry_features.py",
+          "tests/test_clustering_metrics.py",
+          "research/scripts/test_gmm_final50.py",
+          "research/scripts/test_auto_clusters50.py",
+          "research/original-scripts/test_gmm_final50.py",
+          "research/original-scripts/test_auto_clusters50.py",
+          "tools/fetch_pmid.py",
+          "tools/audit_release.py",
+          "tools/download_assets.py",
+          "tools/restore_previews.py",
+          "examples/custom_encoder.py",
+          "tools/distribution_info.py",
+          "tools/validate_gpu_equivalence.py",
+          "tools/validate_sam3_equivalence.py",
+          "tools/validate_calibration_equivalence.py"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 93,
+          "selected_file_count": 28,
+          "selected_code_file_count": 25,
+          "languages_by_extension": {
+            "py": 93
+          },
+          "tests_present": true,
+          "test_files": [
+            "tools/verify_testpypi.py",
+            "research/data/gmm-final50_implementation_tests.json",
+            "research/original-scripts/test_auto_clusters50.py",
+            "tests/test_clustering_metrics.py",
+            "research/scripts/test_gmm_final50.py",
+            "tests/test_release_tools.py",
+            "tests/test_geometry_features.py",
+            "research/original-scripts/test_gmm_final50.py",
+            "research/scripts/test_auto_clusters50.py"
+          ],
+          "manifest_files": [
+            "LICENSE",
+            "pyproject.toml",
+            "README.md"
+          ],
+          "read_errors": [],
+          "warnings": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2611.20942v1_gread.json"
+      },
+      "discovered_at": "2026-11-18T01:20:18.245312Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2611.20942",
+        "verified_at": "2026-11-18T01:20:18.245312Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2611.19325v1",
+      "title": "Unlocking Fine-Grained Cell Representations via Soft-Interior Rim Dense-Grid Pooling in Pathology Foundation Models",
+      "published_date": "2026-11-14",
+      "authors": [
+        "Wenwen Lou",
+        "Mingyi He",
+        "Xinyi Guo",
+        "Yining Li",
+        "Weiming Chen",
+        "Jiawen Li",
+        "Lianghui Zhu",
+        "Zhiwei Yang",
+        "Xitong Ling"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "segmentation",
+        "detection",
+        "histopathology"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Fine-grained cell representations are essential for characterizing cellular heterogeneity and tissue organization in computational pathology. Pathology foundation models (PFMs) provide powerful pretrained features for transferable tissue analysis. HoVer-Net uses task-trained segmentation and typing, whereas CellViT++ averages native-grid tokens assigned to detected nuclei. However, the former requires cell-specific training; the latter ignores fractional nuclear coverage and can mix nuclear content with neighbouring tissue. Therefore, we propose SRDP, short for Soft-interior Rim Dense-grid Pooling, a training-free geometry-aware readout. We apply the frozen patch projection at half stride, interleave four offset lattices, map the cell mask to fractional coverage weights, and concatenate whole-cell pooling with two inner boundary pools. Across four datasets and six frozen encoders, SRDP improves mean balanced accuracy by 5.68 percentage points over native token averaging across 24 settings, including 11.22 points on average for CoNIC and Lizard. SRDP converts a coarse frozen PFM lattice into a mask-aligned, fine-grained cell representation without updating the encoder.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-11-18T01:20:18.245312Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2611.19325",
+        "verified_at": "2026-11-18T01:20:18.245312Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2611.18849v1",
+      "title": "Scaling Channel-Adaptive Self-Supervised Learning",
+      "published_date": "2026-11-13",
+      "authors": [
+        "Alice V. De Lorenci",
+        "Seungeun Yi",
+        "Theo Moutakanni",
+        "Piotr Bojanowski",
+        "Camille Couprie",
+        "Juan C. Caicedo",
+        "Wolfgang M. Pernice"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "cell_imaging"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/facebookresearch/dinov2",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "ially outperforms Channel-ViT in generalization to unseen channel combinations, and OOD tasks at test time. More broadly, our results call the utility of joint-channel-encoding as a prior for SSL pretraining into question. Indeed, we find that the DINO BoC approach achieves performance on par with state-of-the-art results for geospatial images, as well as RGB images, out-of-the-box. The code is available at https://github.com",
+          "relation_signal": "explicit_code_statement",
+          "provenance_source": "https://arxiv.org/html/2611.18849v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Recent advances in self-supervised pre-training of foundation models for natural images have made them a popular choice for various visual systems and applications. Self-supervised strategies are also promising in non-RGB scientific imaging domains such as in biology, medical and satellite imagery, but their broader application is hampered by heterogeneity in channel composition and semantics between relevant datasets: two datasets may contain different numbers of channels, and these may reveal distinct aspects of an object or scene. Recent works on channel adaptive strategies report substantial advantages for those that account for variable channel compositions without sacrificing the ability to jointly encode channels; yet, how these strategies behave at scale remains unclear. We here show that, surprisingly, trained across large-scale datasets, independent-encoding of channels outperforms joint-encoding methods by a substantial margin. We validate this result along an extensive set of experiments on various datasets from cell microscopy to geospatial imagery. Our DINO BoC approach sets a new state-of-the-art across challenging benchmarks, including generalization to out-of-distribution tasks and unseen channel combinations. We open-source code and model weights for a new general-purpose feature extractor for fluorescent microscopy.",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "facebookresearch/dinov2",
+        "repository_url": "https://github.com/facebookresearch/dinov2",
+        "analyzed_at": "2026-11-18T01:20:53.986562+00:00",
+        "architecture": "# facebookresearch/dinov2\n**Stars**: 13551 | **Language**: Jupyter Notebook\n**Description**: This repository contains the PyTorch implementation and pretrained models for DINOv2, a self-supervised learning method for robust visual feature extraction. It was trained on 142 million images without labels and produces features that perform well across various computer vision tasks without fine-tuning. The project also includes implementations for related research, such as DINOv3, Channel-Adaptive DINO, Cell-DINO, and DINOv2 with registers.\n\n\n## Directory Tree\n```\n.github\n.github/workflows\n.github/workflows/lint.yaml\n.gitignore\nCODE_OF_CONDUCT.md\nCONTRIBUTING.md\nLICENSE\nLICENSE_CELL_DINO_CODE\nLICENSE_CELL_DINO_MODELS\nLICENSE_XRAY_DINO_MODEL\nMODEL_CARD.md\nREADME.md\nconda-extras.yaml\nconda.yaml\ndinov2\ndinov2/__init__.py\ndinov2/configs\ndinov2/configs/__init__.py\ndinov2/configs/eval\ndinov2/configs/ssl_default_config.yaml\ndinov2/configs/train\ndinov2/data\ndinov2/data/__init__.py\ndinov2/data/accumulators.py\ndinov2/data/adapters.py\ndinov2/data/augmentations.py\ndinov2/data/cell_dino\ndinov2/data/collate.py\ndinov2/data/datasets\ndinov2/data/loaders.py\ndinov2/data/masking.py\ndinov2/data/samplers.py\ndinov2/data/transforms.py\ndinov2/distributed\ndinov2/distributed/__init__.py\ndinov2/eval\ndinov2/eval/__init__.py\ndinov2/eval/cell_dino\ndinov2/eval/depth\ndinov2/eval/knn.py\ndinov2/eval/linear.py\ndinov2/eval/log_regression.py\ndinov2/eval/metrics.py\ndinov2/eval/segmentation\ndinov2/eval/segmentation_m2f\ndinov2/eval/setup.py\ndinov2/eval/utils.py\ndinov2/fsdp\ndinov2/fsdp/__init__.py\ndinov2/hub\ndinov2/hub/__init__.py\ndinov2/hub/backbones.py\ndinov2/hub/cell_dino\ndinov2/hub/classifiers.py\ndinov2/hub/depth\ndinov2/hub/depthers.py\ndinov2/hub/dinotxt.py\ndinov2/hub/text\ndinov2/hub/utils.py\ndinov2/hub/xray_dino\ndinov2/layers\ndinov2/layers/__init__.py\ndinov2/layers/attention.py\ndinov2/layers/block.py\ndinov2/layers/dino_head.py\ndinov2/layers/drop_path.py\ndinov2/layers/layer_scale.py\ndinov2/layers/mlp.py\ndinov2/layers/patch_embed.py\ndinov2/layers/swiglu_ffn.py\ndinov2/logging\ndinov2/logging/__init__.py\ndinov2/logging/helpers.py\ndinov2/loss\ndinov2/loss/__init__.py\ndinov2/loss/dino_clstoken_loss.py\ndinov2/loss/ibot_patch_loss.py\ndinov2/loss/koleo_loss.py\ndinov2/models\ndinov2/models/__init__.py\ndinov2/models/vision_transformer.py\ndinov2/run\ndinov2/run/__init__.py\ndinov2/run/eval\ndinov2/run/submit.py\ndinov2/run/train\ndinov2/thirdparty\ndinov2/thirdparty/CLIP\ndinov2/train\ndinov2/train/__init__.py\ndinov2/train/ssl_meta_arch.py\ndinov2/train/train.py\ndinov2/utils\ndinov2/utils/__init__.py\ndinov2/utils/checkpoint.py\ndinov2/utils/cluster.py\ndinov2/utils/config.py\ndinov2/utils/dtype.py\ndinov2/utils/param_groups.py\ndinov2/utils/utils.py\ndocs\ndocs/Cell-DINO.png\ndocs/ChannelAdaptiveDINO.png\ndocs/README_CELL_DINO.md\ndocs/README_CHANNEL_ADAPTIVE_DINO.md\nhubconf.py\nnotebooks\nnotebooks/cell_dino\nnotebooks/cell_dino/inference.ipynb\nnotebooks/depth_estimation.ipynb\nnotebooks/dinotxt.ipynb\nnotebooks/semantic_segmentation.ipynb\npyproject.toml\nrequirements-dev.txt\nrequirements-extras.txt\nrequirements.txt\nscripts\nscripts/cell_dino\nscripts/cell_dino/launcher_knn_eval_on_chammi.sh\nscripts/cell_dino/launcher_linear_eval_on_chammi.sh\nscripts/lint.sh\nsetup.cfg\nsetup.py\n```",
+        "project_structure": "## Directory Tree\n```\n.github\n.github/workflows\n.github/workflows/lint.yaml\n.gitignore\nCODE_OF_CONDUCT.md\nCONTRIBUTING.md\nLICENSE\nLICENSE_CELL_DINO_CODE\nLICENSE_CELL_DINO_MODELS\nLICENSE_XRAY_DINO_MODEL\nMODEL_CARD.md\nREADME.md\nconda-extras.yaml\nconda.yaml\ndinov2\ndinov2/__init__.py\ndinov2/configs\ndinov2/configs/__init__.py\ndinov2/configs/eval\ndinov2/configs/eval/cell_dino\ndinov2/configs/eval/cell_dino/vitl16_channel_adaptive_pretrain.yaml\ndinov2/configs/eval/cell_dino/vitl16_pretrain.yaml\ndinov2/configs/eval/vitb14_pretrain.yaml\ndinov2/configs/eval/vitb14_reg4_pretrain.yaml\ndinov2/configs/eval/vitg14_pretrain.yaml\ndinov2/configs/eval/vitg14_reg4_pretrain.yaml\ndinov2/configs/eval/vitl14_pretrain.yaml\ndinov2/configs/eval/vitl14_reg4_pretrain.yaml\ndinov2/configs/eval/vits14_pretrain.yaml\ndinov2/configs/eval/vits14_reg4_pretrain.yaml\ndinov2/configs/ssl_default_config.yaml\ndinov2/configs/train\ndinov2/configs/train/cell_dino\ndinov2/configs/train/cell_dino/vitl16_boc_hpafov.yaml\ndinov2/configs/train/cell_dino/vitl16_hpafov.yaml\ndinov2/configs/train/cell_dino/vitl16_hpaone.yaml\ndinov2/configs/train/vitg14.yaml\ndinov2/configs/train/vitl14.yaml\ndinov2/configs/train/vitl16_short.yaml\ndinov2/data\ndinov2/data/__init__.py\ndinov2/data/accumulators.py\ndinov2/data/adapters.py\ndinov2/data/augmentations.py\ndinov2/data/cell_dino\ndinov2/data/cell_dino/augmentations.py\ndinov2/data/cell_dino/transforms.py\ndinov2/data/collate.py\ndinov2/data/datasets\ndinov2/data/datasets/__init__.py\ndinov2/data/datasets/cell_dino\ndinov2/data/datasets/cell_dino/chammi_cp.py\ndinov2/data/datasets/cell_dino/chammi_hpa.py\ndinov2/data/datasets/cell_dino/chammi_wtc.py\ndinov2/data/datasets/cell_dino/hpafov.py\ndinov2/data/datasets/cell_dino/hpaone.py\ndinov2/data/datasets/decoders.py\ndinov2/data/datasets/extended.py\ndinov2/data/datasets/image_net.py\ndinov2/data/datasets/image_net_22k.py\ndinov2/data/loaders.py\ndinov2/data/masking.py\ndinov2/data/samplers.py\ndinov2/data/transforms.py\ndinov2/distributed\ndinov2/distributed/__init__.py\ndinov2/eval\ndinov2/eval/__init__.py\ndinov2/eval/cell_dino\ndinov2/eval/cell_dino/knn.py\ndinov2/eval/cell_dino/linear.py\ndinov2/eval/cell_dino/utils.py\ndinov2/eval/depth\ndinov2/eval/depth/__init__.py\ndinov2/eval/depth/models\ndinov2/eval/depth/models/__init__.py\ndinov2/eval/depth/models/backbones\ndinov2/eval/depth/models/backbones/__init__.py\ndinov2/eval/depth/models/backbones/vision_transformer.py\ndinov2/eval/depth/models/builder.py\ndinov2/eval/depth/models/decode_heads\ndinov2/eval/depth/models/decode_heads/__init__.py\ndinov2/eval/depth/models/decode_heads/decode_head.py\ndinov2/eval/depth/models/decode_heads/dpt_head.py\ndinov2/eval/depth/models/decode_heads/linear_head.py\ndinov2/eval/depth/models/depther\ndinov2/eval/depth/models/depther/__init__.py\ndinov2/eval/depth/models/depther/base.py\ndinov2/eval/depth/models/depther/encoder_decoder.py\ndinov2/eval/depth/models/losses\ndinov2/eval/depth/models/losses/__init__.py\ndinov2/eval/depth/models/losses/gradientloss.py\ndinov2/eval/depth/models/losses/sigloss.py\ndinov2/eval/depth/ops\ndinov2/eval/depth/ops/__init__.py\ndinov2/eval/depth/ops/wrappers.py\ndinov2/eval/knn.py\ndinov2/eval/linear.py\ndinov2/eval/log_regression.py\ndinov2/eval/metrics.py\ndinov2/eval/segmentation\ndinov2/eval/segmentation/__init__.py\ndinov2/eval/segmentation/hooks\ndinov2/eval/segmentation/hooks/__init__.py\ndinov2/eval/segmentation/hooks/optimizer.py\ndinov2/eval/segmentation/models\ndinov2/eval/segmentation/models/__init__.py\ndinov2/eval/segmentation/models/backbones\ndinov2/eval/segmentation/models/backbones/__init__.py\ndinov2/eval/segmentation/models/backbones/vision_transformer.py\ndinov2/eval/segmentation/models/decode_heads\ndinov2/eval/segmentation/models/decode_heads/__init__.py\ndinov2/eval/segmentation/models/decode_heads/linear_head.py\ndinov2/eval/segmentation/utils\ndinov2/eval/segmentation/utils/__init__.py\ndinov2/eval/segmentation/utils/colormaps.py\ndinov2/eval/segmentation_m2f\ndinov2/eval/segmentation_m2f/__init__.py\ndinov2/eval/segmentation_m2f/core\ndinov2/eval/segmentation_m2f/core/__init__.py\ndinov2/eval/segmentation_m2f/core/anchor\ndinov2/eval/segmentation_m2f/core/anchor/__init__.py\ndinov2/eval/segmentation_m2f/core/anchor/builder.py\ndinov2/eval/segmentation_m2f/core/anchor/point_generator.py\ndinov2/eval/segmentation_m2f/core/box\ndinov2/eval/segmentation_m2f/core/box/__init__.py\ndinov2/eval/segmentation_m2f/core/box/builder.py\ndinov2/eval/segmentation_m2f/core/box/samplers\ndinov2/eval/segmentation_m2f/core/box/samplers/__init__.py\ndinov2/eval/segmentation_m2f/core/box/samplers/base_sampler.py\ndinov2/eval/segmentation_m2f/core/box/samplers/mask_pseudo_sampler.py\ndinov2/eval/segmentation_m2f/core/box/samplers/mask_sampling_result.py\ndinov2/eval/segmentation_m2f/core/box/samplers/sampling_result.py\ndinov2/eval/segmentation_m2f/core/utils\ndinov2/eval/segmentation_m2f/core/utils/__init__.py\ndinov2/eval/segmentation_m2f/core/utils/dist_utils.py\ndinov2/eval/segmentation_m2f/core/utils/misc.py\ndinov2/eval/segmentation_m2f/models\ndinov2/eval/segmentation_m2f/models/__init__.py\ndinov2/eval/segmentation_m2f/models/backbones\ndinov2/eval/segmentation_m2f/models/backbones/__init__.py\ndinov2/eval/segmentation_m2f/models/backbones/adapter_modules.py\ndinov2/eval/segmentation_m2f/models/backbones/drop_path.py\ndinov2/eval/segmentation_m2f/models/backbones/vit.py\ndinov2/eval/segmentation_m2f/models/backbones/vit_adapter.py\ndinov2/eval/segmentation_m2f/models/builder.py\ndinov2/eval/segmentation_m2f/models/decode_heads\ndinov2/eval/segmentation_m2f/models/decode_heads/__init__.py\ndinov2/eval/segmentation_m2f/models/decode_heads/mask2former_head.py\ndinov2/eval/segmentation_m2f/models/losses\ndinov2/eval/segmentation_m2f/models/losses/__init__.py\ndinov2/eval/segmentation_m2f/models/losses/cross_entropy_loss.py\ndinov2/eval/segmentation_m2f/models/losses/dice_loss.py\ndinov2/eval/segmentation_m2f/models/losses/match_costs.py\ndinov2/eval/segmentation_m2f/models/plugins\ndinov2/eval/segmentation_m2f/models/plugins/__init__.py\ndinov2/eval/segmentation_m2f/models/plugins/msdeformattn_pixel_decoder.py\ndinov2/eval/segmentation_m2f/models/segmentors\ndinov2/eval/segmentation_m2f/models/segmentors/__init__.py\ndinov2/eval/segmentation_m2f/models/segmentors/encoder_decoder_mask2former.py\ndinov2/eval/segmentation_m2f/models/utils\ndinov2/eval/segmentation_m2f/models/utils/__init__.py\ndinov2/eval/segmentation_m2f/models/utils/assigner.py\ndinov2/eval/segmentation_m2f/models/utils/point_sample.py\ndinov2/eval/segmentation_m2f/models/utils/positional_encoding.py\ndinov2/eval/segmentation_m2f/models/utils/transformer.py\ndinov2/eval/segmentation_m2f/ops\ndinov2/eval/segmentation_m2f/ops/modules\ndinov2/eval/segmentation_m2f/ops/modules/__init__.py\ndinov2/eval/segmentation_m2f/ops/modules/ms_deform_attn.py\ndinov2/eval/setup.py\ndinov2/eval/utils.py\ndinov2/fsdp\ndinov2/fsdp/__init__.py\ndinov2/hub\ndinov2/hub/__init__.py\ndinov2/hub/backbones.py\ndinov2/hub/cell_dino\ndinov2/hub/cell_dino/backbones.py\ndinov2/hub/classifiers.py\ndinov2/hub/depth\ndinov2/hub/depth/__init__.py\ndinov2/hub/depth/decode_heads.py\ndinov2/hub/depth/encoder_decoder.py\ndinov2/hub/depth/ops.py\ndinov2/hub/depthers.py\ndinov2/hub/dinotxt.py\ndinov2/hub/text\ndinov2/hub/text/dinotxt_model.py\ndinov2/hub/text/dinov2_wrapper.py\ndinov2/hub/text/text_tower.py\ndinov2/hub/text/text_transformer.py\ndinov2/hub/text/tokenizer.py\ndinov2/hub/text/vision_tower.py\ndinov2/hub/utils.py\ndinov2/hub/xray_dino\ndinov2/hub/xray_dino/backbones.py\ndinov2/layers\ndinov2/layers/__init__.py\ndinov2/layers/attention.py\ndinov2/layers/block.py\ndinov2/layers/dino_head.py\ndinov2/layers/drop_path.py\ndinov2/layers/layer_scale.py\ndinov2/layers/mlp.py\ndinov2/layers/patch_embed.py\ndinov2/layers/swiglu_ffn.py\ndinov2/logging\ndinov2/logging/__init__.py\ndinov2/logging/helpers.py\ndinov2/loss\ndinov2/loss/__init__.py\ndinov2/loss/dino_clstoken_loss.py\ndinov2/loss/ibot_patch_loss.py\ndinov2/loss/koleo_loss.py\ndinov2/models\ndinov2/models/__init__.py\ndinov2/models/vision_transformer.py\ndinov2/run\ndinov2/run/__init__.py\ndinov2/run/eval\ndinov2/run/eval/cell_dino\ndinov2/run/eval/cell_dino/knn.py\ndinov2/run/eval/cell_dino/linear.py\ndinov2/run/eval/knn.py\ndinov2/run/eval/linear.py\ndinov2/run/eval/log_regression.py\ndinov2/run/submit.py\ndinov2/run/train\ndinov2/run/train/train.py\ndinov2/thirdparty\ndinov2/thirdparty/CLIP\ndinov2/thirdparty/CLIP/LICENSE\ndinov2/thirdparty/CLIP/clip\ndinov2/thirdparty/CLIP/clip/simple_tokenizer.py\ndinov2/train\ndinov2/train/__init__.py\ndinov2/train/ssl_meta_arch.py\ndinov2/train/train.py\ndinov2/utils\ndinov2/utils/__init__.py\ndinov2/utils/checkpoint.py\ndinov2/utils/cluster.py\ndinov2/utils/config.py\ndinov2/utils/dtype.py\ndinov2/utils/param_groups.py\ndinov2/utils/utils.py\ndocs\ndocs/Cell-DINO.png\ndocs/ChannelAdaptiveDINO.png\ndocs/README_CELL_DINO.md\ndocs/README_CHANNEL_ADAPTIVE_DINO.md\nhubconf.py\nnotebooks\nnotebooks/cell_dino\nnotebooks/cell_dino/inference.ipynb\nnotebooks/depth_estimation.ipynb\nnotebooks/dinotxt.ipynb\nnotebooks/semantic_segmentation.ipynb\npyproject.toml\nrequirements-dev.txt\nrequirements-extras.txt\nrequirements.txt\nscripts\nscripts/cell_dino\nscripts/cell_dino/launcher_knn_eval_on_chammi.sh\nscripts/cell_dino/launcher_linear_eval_on_chammi.sh\nscripts/lint.sh\nsetup.cfg\nsetup.py\n```",
+        "key_files": [
+          "dinov2/eval/segmentation_m2f/core/anchor/point_generator.py",
+          "dinov2/train/train.py",
+          "notebooks/cell_dino/inference.ipynb",
+          "dinov2/run/train/train.py",
+          "README.md",
+          "setup.py",
+          "dinov2/hub/text/dinotxt_model.py",
+          "dinov2/hub/text/dinov2_wrapper.py",
+          "LICENSE",
+          "pyproject.toml",
+          "MODEL_CARD.md",
+          "dinov2/models/vision_transformer.py",
+          "dinov2/eval/depth/models/builder.py",
+          "dinov2/eval/depth/models/__init__.py",
+          "dinov2/eval/segmentation/models/__init__.py",
+          "dinov2/eval/segmentation_m2f/core/__init__.py",
+          "dinov2/eval/segmentation_m2f/models/builder.py",
+          "dinov2/eval/segmentation_m2f/models/__init__.py",
+          "dinov2/eval/depth/models/depther/base.py",
+          "dinov2/eval/depth/models/losses/sigloss.py",
+          "dinov2/eval/depth/models/losses/__init__.py",
+          "dinov2/eval/depth/models/depther/__init__.py",
+          "dinov2/eval/depth/models/backbones/__init__.py",
+          "dinov2/eval/depth/models/losses/gradientloss.py",
+          "dinov2/eval/segmentation_m2f/core/utils/misc.py",
+          "dinov2/eval/segmentation_m2f/core/box/builder.py",
+          "dinov2/eval/depth/models/decode_heads/__init__.py",
+          "dinov2/eval/depth/models/decode_heads/dpt_head.py"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 164,
+          "selected_file_count": 28,
+          "selected_code_file_count": 24,
+          "languages_by_extension": {
+            "ipynb": 4,
+            "py": 157,
+            "sh": 3
+          },
+          "tests_present": false,
+          "test_files": [],
+          "manifest_files": [
+            "LICENSE",
+            "setup.cfg",
+            "setup.py",
+            "pyproject.toml",
+            "dinov2/thirdparty/CLIP/LICENSE",
+            "README.md",
+            "dinov2/eval/setup.py",
+            "requirements.txt"
+          ],
+          "read_errors": [],
+          "warnings": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2611.18849v1_gread.json"
+      },
+      "discovered_at": "2026-11-18T01:20:18.245312Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2611.18849",
+        "verified_at": "2026-11-18T01:20:18.245312Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2611.22968v1",
+      "title": "MI-Hyper: Generating Multiple Instance Models for Weight Space Transfer Learning in Histopathology via Mixed Tasks Pretrained HyperNetwork",
+      "published_date": "2026-11-17",
+      "authors": [
+        "Xitong Ling",
+        "Yousef Kotp",
+        "Weiming Chen",
+        "Yining Li",
+        "Jiawen Li",
+        "Minxi Ouyang",
+        "Xinyi Guo",
+        "Mingxi Fu",
+        "Yizhi Wang",
+        "Tian Guan",
+        "Lianghui Zhu",
+        "Yonghong He"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "classification",
+        "histopathology"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Zero-shot whole-slide image (WSI) prediction aims to generalize to new pathology tasks without parameter updates at deployment. MI-Zero makes these predictions by pooling patch-text similarities. Conditional weight generation, combined with supervision from diverse pathology tasks, offers an alternative: learning to construct predictive rules from task descriptions. We introduce MI-Hyper, a hypernetwork pretrained across mixed tasks to generate the aggregation and classification weights of multiple instance learning (MIL) models. We first train the generator and a shared MIL basis jointly using source labels. We then freeze the basis and refine the generator. The generated task weights are reused across cases. Across 308 tasks from 52 pathology datasets, MI-Hyper improves mean AUC, balanced accuracy and macro-F1 over MI-Zero by 1.85, 1.17 and 0.57 percentage points, respectively. On some molecular prediction tasks, both AUC and balanced accuracy improve by more than 20 points. These results support task-conditioned weight generation as a promising approach to weight-space transfer for long-sequence modeling.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-11-19T01:20:51.277361Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2611.22968",
+        "verified_at": "2026-11-19T01:20:51.277361Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2611.22953v1",
+      "title": "Fiberpose: state-of-the-art fiber morphometry and instance segmentation with a distance-transform neural network",
+      "published_date": "2026-11-17",
+      "authors": [
+        "Viktor A. Balashov",
+        "Daniil S. Antonenko"
+      ],
+      "categories": [
+        "cs.CV",
+        "q-bio.QM"
+      ],
+      "task_type": [
+        "segmentation",
+        "reconstruction"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/vikba/fiberpose",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "/div> Web tool: https://fiberpose.org Code availability: https://github.com/vikba/fiberpose <div id=\"p3\" cl",
+          "relation_signal": "paper_title_match",
+          "provenance_source": "https://arxiv.org/html/2611.22953v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Analysis of fibrous structures in SEM images is a routine task in biomedical engineering and materials science. However, most available methods for fiber quantification still rely on classical image binarization followed by simple post-processing. These approaches often produce unreliable results in images with weak boundaries, heterogeneous contrast, and densely packed fibers. Here, we introduce Fiberpose, a framework that reformulates fiber analysis as direct regression of a smooth distance-transform (DT) field, together with a novel set of geometry-based algorithms specifically adapted to this representation. The predicted field directly encodes fiber geometry, while the accompanying algorithms enable instance reconstruction and measurement of diameter and orientation within a unified workflow. The framework is implemented as a standalone Python desktop application and a web tool https://fiberpose.org. On an independent dataset of fibrous SEM images, Fiberpose achieved state-of-the-art instance-segmentation accuracy in comparison with SAM2 and Cellpose-SAM, and more accurate diameter measurements than DiameterJ, Fibar and GIFT. The method remains effective in dense and weakly contrasted regions and shows qualitative generalization across microscopy modalities not represented in the training data. Fiberpose therefore provides an interpretable geometric representation and an automated pipeline for reproducible quantitative characterization of fibrous materials.",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "vikba/fiberpose",
+        "repository_url": "https://github.com/vikba/fiberpose",
+        "analyzed_at": "2026-11-19T01:22:37.361117+00:00",
+        "architecture": "Repo not indexed and could not be fetched.",
+        "project_structure": "## Directory Tree\n```\n.dockerignore\n.github\n.github/workflows\n.github/workflows/deploy.yml\n.gitignore\nDockerfile\nLICENSE\nPIPELINE.md\nREADME.md\napp.py\ncheckpoints\ncheckpoints/R108_dt_fg.onnx\ndeploy\ndeploy/hf_header.md\ndocs\ndocs/gui.png\npyproject.toml\nrequirements.txt\nsrc\nsrc/fiberpose\nsrc/fiberpose/__init__.py\nsrc/fiberpose/__main__.py\nsrc/fiberpose/analysis.py\nsrc/fiberpose/api.py\nsrc/fiberpose/cli.py\nsrc/fiberpose/cli_runner.py\nsrc/fiberpose/domain.py\nsrc/fiberpose/gui\nsrc/fiberpose/gui/__init__.py\nsrc/fiberpose/gui/main_window.py\nsrc/fiberpose/gui/support.py\nsrc/fiberpose/io_export.py\nsrc/fiberpose/ml.py\nsrc/fiberpose/models.py\nsrc/fiberpose/paths.py\nsrc/fiberpose/pipeline.py\nsrc/fiberpose/raster.py\nsrc/fiberpose/render.py\nsrc/fiberpose/resources\nsrc/fiberpose/resources/config.json\nsrc/fiberpose/resources/dark_theme.qss\nsrc/fiberpose/resources/example_fibers.png\nsrc/fiberpose/resources/example_ribbons.png\nsrc/fiberpose/resources/fiber_tool.ui\nsrc/fiberpose/resources/fiberpose.png\nsrc/fiberpose/resources/test.png\nsrc/fiberpose/ridge_detector.py\nsrc/fiberpose/utils.py\nsrc/fiberpose/web\nsrc/fiberpose/web/__init__.py\nsrc/fiberpose/web/callbacks.py\nsrc/fiberpose/web/demo.py\nsrc/fiberpose/web/usage.py\n```",
+        "key_files": [
+          "src/fiberpose/cli.py",
+          "src/fiberpose/models.py",
+          "src/fiberpose/pipeline.py",
+          "app.py",
+          "README.md",
+          "LICENSE",
+          "Dockerfile",
+          "pyproject.toml",
+          "requirements.txt",
+          "PIPELINE.md",
+          "src/fiberpose/ml.py",
+          "src/fiberpose/api.py",
+          "src/fiberpose/paths.py",
+          "src/fiberpose/utils.py",
+          "src/fiberpose/domain.py",
+          "src/fiberpose/raster.py",
+          "src/fiberpose/render.py",
+          "src/fiberpose/__init__.py",
+          "src/fiberpose/__main__.py",
+          "src/fiberpose/analysis.py",
+          "src/fiberpose/io_export.py",
+          "src/fiberpose/cli_runner.py",
+          "src/fiberpose/ridge_detector.py",
+          "src/fiberpose/web/demo.py",
+          "src/fiberpose/web/usage.py",
+          "src/fiberpose/gui/support.py",
+          "src/fiberpose/gui/__init__.py",
+          "src/fiberpose/web/__init__.py"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 24,
+          "selected_file_count": 28,
+          "selected_code_file_count": 22,
+          "languages_by_extension": {
+            "py": 24
+          },
+          "tests_present": false,
+          "test_files": [],
+          "manifest_files": [
+            "pyproject.toml",
+            "requirements.txt",
+            "Dockerfile",
+            "LICENSE",
+            "README.md"
+          ],
+          "read_errors": [],
+          "warnings": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": [
+            "TODO|FIXME|NotImplemented|raise |throw : <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>"
+          ]
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2611.22953v1_gread.json"
+      },
+      "discovered_at": "2026-11-19T01:20:51.277361Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2611.22953",
+        "verified_at": "2026-11-19T01:20:51.277361Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2611.22482v1",
+      "title": "LeViT-UNet++: Towards Balanced Fine-Grained Details and Context for Efficient Medical Image Segmentation",
+      "published_date": "2026-11-17",
+      "authors": [
+        "Guoping Xu",
+        "Jinling Zhu",
+        "Liuyue Li"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.MM"
+      ],
+      "task_type": [
+        "segmentation"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "repository_unavailable",
+          "provenance_context": "with a compact parameter footprint and fast inference. On Synapse, for instance, it attains a DSC of 76.57% with only 8.025M parameters and 241.72 FPS, confirming a favorable accuracy-efficiency balance. These results demonstrate the effectiveness of combining wavelet-based multi-scale feature extraction with lightweight local-global feature fusion for efficient medical segmentation. The source code is available at https://github.com/apple1986/levit_unet_pp.\"/> <meta name=\"twitter:title",
+          "relation_signal": "explicit_code_statement",
+          "provenance_source": "https://arxiv.org/abs/2611.22482v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "Efficient medical image segmentation is essential for clinical applications requiring fast and accurate delineation, such as surgical navigation, radiation therapy, and real-time image-guided intervention. Despite substantial advances in convolutional neural networks and Transformers, attaining high accuracy under limited computational resources remains difficult, because reducing model complexity often sacrifices fine-grained structural details and global context modeling, yielding an unfavorable accuracy-efficiency trade-off. To address this, we propose LeViT-UNet++, an efficient encoder-decoder architecture that better balances local detail preservation and global context modeling. Specifically, we introduce a Haar Wavelet Multi-Scale Downsampling (HWMD) module that decomposes feature representations into low- and high-frequency components to extract multi-scale structural information, thereby mitigating detail loss during downsampling. We further develop a depthwise convolution-based decoder that integrates multi-scale global representations from Transformer blocks with local spatial features, enabling progressive feature refinement while reducing computational overhead. Evaluated on four benchmarks (Synapse, ACDC, LA2018, and MSD Heart) under both 2D and 3D settings, LeViT-UNet++ achieves competitive accuracy with a compact parameter footprint and fast inference. On Synapse, for instance, it attains a DSC of 76.57% with only 8.025M parameters and 241.72 FPS, confirming a favorable accuracy-efficiency balance. These results demonstrate the effectiveness of combining wavelet-based multi-scale feature extraction with lightweight local-global feature fusion for efficient medical segmentation. The source code is available at https://github.com/apple1986/levit_unet_pp.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-11-19T01:20:51.277361Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2611.22482",
+        "verified_at": "2026-11-19T01:20:51.277361Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2611.22189v1",
+      "title": "SRED: Sparse Regional Evidence Distillation Across Magnifications in Whole-Slide Imaging",
+      "published_date": "2026-11-17",
+      "authors": [
+        "Zhiyuan Yang",
+        "Jiahao Cheng",
+        "Vincent Quoc-Huy Trinh",
+        "Mahdi S. Hosseini"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "detection",
+        "classification",
+        "histopathology"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": false,
+          "url": "",
+          "analysis_source": "gread",
+          "provenance_status": "no_paper_code_statement",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": ""
+        },
+        "task_analysis": "pending",
+        "code_analysis": "skipped",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "In computational pathology, high-magnification whole-slide image analysis preserves tissue detail but requires encoding many patches, whereas lower magnification reduces computation by covering a higher field of view per patch while sacrificing detail. Existing cross-magnification distillation matches features that often encode detail unreachable by low-magnification input, sometimes requiring slide-level labels that limit scalability. To address those issues, we introduce Sparse Regional Evidence Distillation (SRED), which transfers regional event occurrences that encode reachable high-level interactions between details without slide-level labels. We use a sparse autoencoder (SAE) to learn an event dictionary from 20x teacher features. Logical OR pooling records whether each event is detected in any spatially aligned patch, retaining both localized and shared evidence within the corresponding 5x region. A pretrained 5x encoder is fine-tuned to predict these regional targets without slide-level labels. Visual analysis identifies dictionary components responsive to recognizable histological patterns, supporting target interpretation. Compared with native 5x features, SRED improves average macro-F1 by 1.1 points across seven classification and grading cohorts and average C-index by 1.7 points across five survival cohorts. Runtime matches native 5x, with an average 11.58x speedup over 20x.",
+      "has_code": false,
+      "code_analysis": {},
+      "discovered_at": "2026-11-19T01:20:51.277361Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2611.22189",
+        "verified_at": "2026-11-19T01:20:51.277361Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
+    },
+    {
+      "arxiv_id": "2611.22152v1",
+      "title": "Unsupervised Multi-modal Medical Image Registration via Invertible Translation",
+      "published_date": "2026-11-17",
+      "authors": [
+        "Mengjie Guo",
+        "Jinming Duan"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "task_type": [
+        "cell_imaging"
+      ],
+      "relevance": "passed",
+      "research_score": null,
+      "engineering_score": null,
+      "priority": null,
+      "bonus": [],
+      "status": {
+        "discovery": "done",
+        "relevance_analysis": "done",
+        "github": {
+          "status": "done",
+          "has_code": true,
+          "url": "https://github.com/MeggieGuo/INNReg",
+          "analysis_source": "gread",
+          "provenance": "paper_code_statement",
+          "provenance_status": "verified",
+          "provenance_context": "olution-based local attention mechanism. Additionally, we design a novel barrier loss function based on Normalized Mutual Information to impose constraints on the registration network, which enhances the registration accuracy. The superior performance of INNReg is demonstrated through experiments on two public multi-modal medical image datasets, including MRI T1/T2 and MRI/CT pairs. The code is available at https://github.com/MeggieGuo/INNReg . <div class",
+          "relation_signal": "explicit_code_statement",
+          "provenance_source": "https://arxiv.org/html/2611.22152v1",
+          "stars": 0,
+          "framework": "",
+          "commit_hash": "",
+          "repository_found": true,
+          "repository_kind": "implementation"
+        },
+        "task_analysis": "pending",
+        "code_analysis": "done",
+        "algorithm_analysis": "pending",
+        "critic_analysis": "pending",
+        "reproduction": {
+          "level": "not_started",
+          "blocker": null,
+          "estimated_effort_days": null,
+          "hardware": "",
+          "started_at": null,
+          "elapsed_seconds": null
+        },
+        "github_search": "done",
+        "html": "done"
+      },
+      "abstract_summary": "In medical imaging, the alignment of multi-modal images plays a critical role in providing comprehensive information for image-guided therapies. Despite its importance, multi-modal image registration poses significant challenges due to the complex and often unknown spatial relationships between different image modalities. To address this, we introduce a novel unsupervised translation-based multi-modal registration method, termed Invertible Neural Network-based Registration (INNReg). INNReg consists of an image-to-image translation network that converts multi-modal images into mono-modal counterparts and a registration network that uses the translated mono-modal images to align the multi-modal images. Specifically, to ensure the preservation of geometric consistency after image translation, we introduce an Invertible Neural Network (INN) that leverages a dynamic depthwise convolution-based local attention mechanism. Additionally, we design a novel barrier loss function based on Normalized Mutual Information to impose constraints on the registration network, which enhances the registration accuracy. The superior performance of INNReg is demonstrated through experiments on two public multi-modal medical image datasets, including MRI T1/T2 and MRI/CT pairs. The code is available at https://github.com/MeggieGuo/INNReg",
+      "has_code": true,
+      "code_analysis": {
+        "status": "done",
+        "source": "gread",
+        "analysis_depth": "multi_pass_static",
+        "repository": "MeggieGuo/INNReg",
+        "repository_url": "https://github.com/MeggieGuo/INNReg",
+        "analyzed_at": "2026-11-19T01:23:07.774217+00:00",
+        "architecture": "# MeggieGuo/INNReg\n**Stars**: 12 | **Language**: Python\n**Description**: This repository, INNReg, contains the code for an unsupervised multi-modal medical image registration method that utilizes invertible translation. The approach involves an image-to-image translation network to convert multi-modal images into mono-modal ones, followed by a registration network to align these translated images. Key components include an Invertible Neural Network (INN) with a dynamic depthwise convolution-based local attention mechanism for geometric consistency and a barrier loss function based on Normalized Mutual Information to improve registration accuracy. The code supports training and testing on MRI T1-T2 and MR-CT datasets.\n\n\n## Directory Tree\n```\nREADME.md\ndata\ndata/__init__.py\ndata/__pycache__\ndata/__pycache__/BraTS_dataset.cpython-39.pyc\ndata/__pycache__/DPDN_dataset.cpython-39.pyc\ndata/__pycache__/__init__.cpython-39.pyc\ndata/__pycache__/base_dataset.cpython-39.pyc\ndata/__pycache__/image_folder.cpython-39.pyc\ndata/__pycache__/unaligned_dataset.cpython-39.pyc\ndata/base_dataset.py\ndata/image_folder.py\ndata/unaligned_dataset.py\nmodels\nmodels/DW_model.py\nmodels/INN_model.py\nmodels/__init__.py\nmodels/__pycache__\nmodels/__pycache__/DW_model.cpython-39.pyc\nmodels/__pycache__/HTransform_model.cpython-39.pyc\nmodels/__pycache__/INN_model.cpython-39.pyc\nmodels/__pycache__/InMIRNet.cpython-39.pyc\nmodels/__pycache__/__init__.cpython-39.pyc\nmodels/__pycache__/base_model.cpython-39.pyc\nmodels/__pycache__/modules.cpython-39.pyc\nmodels/__pycache__/networks.cpython-39.pyc\nmodels/__pycache__/patchnce.cpython-39.pyc\nmodels/__pycache__/registration_cyclegan_model.cpython-39.pyc\nmodels/__pycache__/registration_model.cpython-39.pyc\nmodels/__pycache__/stylegan_networks.cpython-39.pyc\nmodels/__pycache__/utils.cpython-39.pyc\nmodels/base_model.py\nmodels/modules.py\nmodels/networks.py\nmodels/patchnce.py\nmodels/registration_model.py\nmodels/utils.py\nmodels/voxelmorph\nmodels/voxelmorph/__init__.py\nmodels/voxelmorph/__pycache__\nmodels/voxelmorph/config.py\nmodels/voxelmorph/dataset.py\nmodels/voxelmorph/torchvoxelmorph\noptions\noptions/__init__.py\noptions/__pycache__\noptions/__pycache__/__init__.cpython-39.pyc\noptions/__pycache__/base_options.cpython-39.pyc\noptions/__pycache__/test_options.cpython-39.pyc\noptions/__pycache__/train_options.cpython-39.pyc\noptions/base_options.py\noptions/test_options.py\noptions/train_options.py\ntest.py\ntrain.py\nutil\nutil/__init__.py\nutil/__pycache__\nutil/__pycache__/__init__.cpython-39.pyc\nutil/__pycache__/html.cpython-39.pyc\nutil/__pycache__/image_pool.cpython-39.pyc\nutil/__pycache__/losses.cpython-39.pyc\nutil/__pycache__/metric.cpython-39.pyc\nutil/__pycache__/trans_model.cpython-39.pyc\nutil/__pycache__/util.cpython-39.pyc\nutil/__pycache__/visualizer.cpython-39.pyc\nutil/get_data.py\nutil/html.py\nutil/image_pool.py\nutil/image_transforms.py\nutil/image_utils.py\nutil/jac_vis.py\nutil/layers.py\nutil/loss_metrics.py\nutil/losses.py\nutil/metric.py\nutil/networks_contrastive_learning.py\nutil/pynd\nutil/pynd/__init__.py\nutil/pynd/__pycache__\nutil/pynd/imutils.py\nutil/pynd/ndutils.py\nutil/pynd/patchlib.py\nutil/pynd/segutils.py\nutil/tensor_utils.py\nutil/trans_model.py\nutil/util.py\nutil/visualizer.py\n```",
+        "project_structure": "## Directory Tree\n```\nREADME.md\ndata\ndata/__init__.py\ndata/__pycache__\ndata/__pycache__/BraTS_dataset.cpython-39.pyc\ndata/__pycache__/DPDN_dataset.cpython-39.pyc\ndata/__pycache__/__init__.cpython-39.pyc\ndata/__pycache__/base_dataset.cpython-39.pyc\ndata/__pycache__/image_folder.cpython-39.pyc\ndata/__pycache__/unaligned_dataset.cpython-39.pyc\ndata/base_dataset.py\ndata/image_folder.py\ndata/unaligned_dataset.py\nmodels\nmodels/DW_model.py\nmodels/INN_model.py\nmodels/__init__.py\nmodels/__pycache__\nmodels/__pycache__/DW_model.cpython-39.pyc\nmodels/__pycache__/HTransform_model.cpython-39.pyc\nmodels/__pycache__/INN_model.cpython-39.pyc\nmodels/__pycache__/InMIRNet.cpython-39.pyc\nmodels/__pycache__/__init__.cpython-39.pyc\nmodels/__pycache__/base_model.cpython-39.pyc\nmodels/__pycache__/modules.cpython-39.pyc\nmodels/__pycache__/networks.cpython-39.pyc\nmodels/__pycache__/patchnce.cpython-39.pyc\nmodels/__pycache__/registration_cyclegan_model.cpython-39.pyc\nmodels/__pycache__/registration_model.cpython-39.pyc\nmodels/__pycache__/stylegan_networks.cpython-39.pyc\nmodels/__pycache__/utils.cpython-39.pyc\nmodels/base_model.py\nmodels/modules.py\nmodels/networks.py\nmodels/patchnce.py\nmodels/registration_model.py\nmodels/utils.py\nmodels/voxelmorph\nmodels/voxelmorph/__init__.py\nmodels/voxelmorph/__pycache__\nmodels/voxelmorph/__pycache__/__init__.cpython-39.pyc\nmodels/voxelmorph/config.py\nmodels/voxelmorph/dataset.py\nmodels/voxelmorph/torchvoxelmorph\nmodels/voxelmorph/torchvoxelmorph/__init__.py\nmodels/voxelmorph/torchvoxelmorph/__pycache__\nmodels/voxelmorph/torchvoxelmorph/__pycache__/__init__.cpython-39.pyc\nmodels/voxelmorph/torchvoxelmorph/__pycache__/layers.cpython-39.pyc\nmodels/voxelmorph/torchvoxelmorph/__pycache__/losses.cpython-39.pyc\nmodels/voxelmorph/torchvoxelmorph/__pycache__/modelio.cpython-39.pyc\nmodels/voxelmorph/torchvoxelmorph/__pycache__/networks.cpython-39.pyc\nmodels/voxelmorph/torchvoxelmorph/__pycache__/utils.cpython-39.pyc\nmodels/voxelmorph/torchvoxelmorph/layers.py\nmodels/voxelmorph/torchvoxelmorph/losses.py\nmodels/voxelmorph/torchvoxelmorph/modelio.py\nmodels/voxelmorph/torchvoxelmorph/networks.py\nmodels/voxelmorph/torchvoxelmorph/utils.py\noptions\noptions/__init__.py\noptions/__pycache__\noptions/__pycache__/__init__.cpython-39.pyc\noptions/__pycache__/base_options.cpython-39.pyc\noptions/__pycache__/test_options.cpython-39.pyc\noptions/__pycache__/train_options.cpython-39.pyc\noptions/base_options.py\noptions/test_options.py\noptions/train_options.py\ntest.py\ntrain.py\nutil\nutil/__init__.py\nutil/__pycache__\nutil/__pycache__/__init__.cpython-39.pyc\nutil/__pycache__/html.cpython-39.pyc\nutil/__pycache__/image_pool.cpython-39.pyc\nutil/__pycache__/losses.cpython-39.pyc\nutil/__pycache__/metric.cpython-39.pyc\nutil/__pycache__/trans_model.cpython-39.pyc\nutil/__pycache__/util.cpython-39.pyc\nutil/__pycache__/visualizer.cpython-39.pyc\nutil/get_data.py\nutil/html.py\nutil/image_pool.py\nutil/image_transforms.py\nutil/image_utils.py\nutil/jac_vis.py\nutil/layers.py\nutil/loss_metrics.py\nutil/losses.py\nutil/metric.py\nutil/networks_contrastive_learning.py\nutil/pynd\nutil/pynd/__init__.py\nutil/pynd/__pycache__\nutil/pynd/__pycache__/__init__.cpython-38.pyc\nutil/pynd/__pycache__/ndutils.cpython-38.pyc\nutil/pynd/__pycache__/patchlib.cpython-38.pyc\nutil/pynd/__pycache__/segutils.cpython-38.pyc\nutil/pynd/imutils.py\nutil/pynd/ndutils.py\nutil/pynd/patchlib.py\nutil/pynd/segutils.py\nutil/tensor_utils.py\nutil/trans_model.py\nutil/util.py\nutil/visualizer.py\n```",
+        "key_files": [
+          "models/DW_model.py",
+          "models/networks.py",
+          "models/INN_model.py",
+          "models/base_model.py",
+          "models/registration_model.py",
+          "models/voxelmorph/torchvoxelmorph/modelio.py",
+          "models/voxelmorph/torchvoxelmorph/networks.py",
+          "train.py",
+          "README.md",
+          "util/trans_model.py",
+          "util/networks_contrastive_learning.py",
+          "models/utils.py",
+          "models/modules.py",
+          "models/__init__.py",
+          "models/patchnce.py",
+          "models/voxelmorph/config.py",
+          "models/voxelmorph/dataset.py",
+          "models/voxelmorph/torchvoxelmorph/utils.py",
+          "models/voxelmorph/torchvoxelmorph/layers.py",
+          "models/voxelmorph/torchvoxelmorph/losses.py",
+          "models/voxelmorph/torchvoxelmorph/__init__.py",
+          "test.py",
+          "options/test_options.py",
+          "util/html.py",
+          "util/util.py",
+          "util/layers.py",
+          "util/losses.py",
+          "util/metric.py"
+        ],
+        "source_coverage": {
+          "repository_kind": "implementation",
+          "has_implementation": true,
+          "code_file_count_in_tree": 49,
+          "selected_file_count": 28,
+          "selected_code_file_count": 27,
+          "languages_by_extension": {
+            "py": 49
+          },
+          "tests_present": true,
+          "test_files": [
+            "test.py",
+            "options/test_options.py"
+          ],
+          "manifest_files": [
+            "README.md"
+          ],
+          "read_errors": [],
+          "warnings": [],
+          "limitations": [
+            "Static remote inspection only; files were not executed.",
+            "gread responses describe HEAD and do not prove runtime compatibility or paper-result reproduction."
+          ],
+          "search_errors": []
+        },
+        "has_implementation": true,
+        "repository_kind": "implementation",
+        "result_file": "results/2611.22152v1_gread.json"
+      },
+      "discovered_at": "2026-11-19T01:20:51.277361Z",
+      "analyzed_at": null,
+      "error_reason": null,
+      "provenance": {
+        "source": "https://export.arxiv.org/api/query?id_list=2611.22152",
+        "verified_at": "2026-11-19T01:20:51.277361Z",
+        "verification": "arxiv_atom_exact_id_and_title"
+      }
     }
   ]
 }

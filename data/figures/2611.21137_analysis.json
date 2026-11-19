@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 9,
+    "caption": "论文核心方法架构图：基于教师-学生DINO v3与FPN的多尺度特征提取及双向时间一致性弱监督分割流程，包含 connectivity cleaning 模块与多种损失监督"
+  },
+  "1": {
+    "relevant": true,
+    "score": 9,
+    "caption": "超声心动图序列分割定性对比图：展示原图、真实标注、涂鸦标注及多种基线方法与本文方法的分割结果，并标注Dice分数"
+  },
+  "2": {
+    "relevant": true,
+    "score": 10,
+    "caption": "超声心动图序列弱监督分割的定性对比图，展示本文方法与其他方法的分割结果及Dice分数"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "0": {
+    "relevant": true,
+    "score": 10,
+    "caption": "方法对比与总体架构图：展示 HoVer-Net、CellViT++ 与本文提出的 SRDP 三种细胞表征/检索框架的流程，其中 SRDP 包含 PFM 裁剪、token 划分与几何细网格掩码对齐池化。"
+  },
+  "1": {
+    "relevant": true,
+    "score": 10,
+    "caption": "论文核心方法架构图：展示细胞输入与对齐掩膜、重叠token采样（半步长支持相位与冻结patch投影）、几何感知软内缘池化（SoftPool与D向量特征融合）以及下游线性探针/少样本细胞分型和相似细胞检索任务的完整流程。"
+  },
+  "2": {
+    "relevant": true,
+    "score": 9,
+    "caption": "CoNIC真实锚定细胞相似性热图与AP对比，展示SRDP相比Token mean、Slide pooling及多种病理基础模型的提升"
+  }
+}

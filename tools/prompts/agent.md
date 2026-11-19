@@ -34,7 +34,7 @@
 
 1. 先读 `SKILL.md` 与 `references/kit.md`、`references/diagrams.md`，看清类名与图的画法，再读 `examples/` 里的完整示例与一篇已完成页面，照它的骨架写。
 2. 读 `paper.md`，用三五句话在 `data/explainers/agent/<编号>/notes.md` 里写清：这篇论文解决什么问题、核心机制是什么、凭什么说自己有效、边界在哪。
-3. `repo.txt` 有地址时，`git clone --depth 1 <地址> data/explainers/agent/<编号>/repo`，读模型定义、损失、训练循环这几处关键文件，把张量走向对应到 Fig. 1 的节点上。克隆失败就跳过，在 `notes.md` 记一句原因。
+3. `repo.txt` 有地址时，`git clone --depth 1 <地址> data/explainers/agent/<编号>/repo`，读模型定义、损失、训练循环这几处关键文件，把张量走向对应到 Fig. 1 的节点上。克隆失败就跳过，在 `notes.md` 记一句原因。分析完成后，必须主动删除 `data/explainers/agent/<编号>/repo` 目录，不保留代码仓库。
 4. 写页面，渲染，按 `✗` 逐条改到通过。
 5. 收尾自检：六个版块是否齐、三个 figure 是否有图注、每个数字能否在 `paper.md` 找到、有没有出现下面这些词。
 

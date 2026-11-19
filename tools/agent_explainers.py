@@ -10,7 +10,9 @@ from __future__ import annotations
 import argparse
 import itertools
 import json
+import os
 import shutil
+import stat
 import subprocess
 import sys
 import threading
@@ -29,13 +31,41 @@ PROMPTS = HERE / "prompts"
 AGENT_DIR = ROOT / "data" / "explainers" / "agent"
 LOG_DIR = ROOT / "logs"
 LOCK_PATH = ROOT / "data" / "explainers" / ".agent.lock"
-CLAUDE = shutil.which("claude") or "claude"
+CLAUDE = (
+    shutil.which("claude")
+    or ("/home/fanweiya/.nvm/versions/node/v24.15.0/bin/claude" if Path("/home/fanweiya/.nvm/versions/node/v24.15.0/bin/claude").exists() else "claude")
+)
 AGENT_TIMEOUT = 3000
 TOOLS = "Bash,Read,Write,Edit,Glob,Grep,WebFetch"
 
 
 def now() -> str:
     return datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
+
+
+def remove_dir_force(path: Path) -> None:
+    """强制彻底删除目录，包括 Windows 下只读属性的文件。"""
+    if not path.exists():
+        return
+    def on_err(func, p, exc_info):
+        try:
+            os.chmod(p, stat.S_IWRITE)
+            func(p)
+        except Exception:
+            pass
+    shutil.rmtree(path, onerror=on_err)
+
+
+def cleanup_dangling_repos() -> int:
+    """清理历史遗留或中断残存的仓库克隆目录。"""
+    cleaned = 0
+    if not AGENT_DIR.exists():
+        return 0
+    for repo_path in AGENT_DIR.glob("*/repo"):
+        if repo_path.is_dir():
+            remove_dir_force(repo_path)
+            cleaned += 1
+    return cleaned
 
 
 def write_manifest(pid: str, entry: dict | None, error: str | None) -> None:
@@ -90,11 +120,16 @@ def run_agent(work: Path, prompt: str, log_path: Path) -> tuple[int, str]:
         "text",
         "--permission-mode",
         "bypassPermissions",
+        "--dangerously-skip-permissions",
         "--allowedTools",
         TOOLS,
     ]
     deadline = time.time() + AGENT_TIMEOUT
     tail: list[str] = []
+    agent_env = dict(os.environ)
+    nvm_bin = "/home/fanweiya/.nvm/versions/node/v24.15.0/bin"
+    if nvm_bin not in agent_env.get("PATH", ""):
+        agent_env["PATH"] = f"{nvm_bin}:{agent_env.get('PATH', '')}"
     with log_path.open("w", encoding="utf-8", errors="replace") as log:
         process = subprocess.Popen(
             command,
@@ -106,6 +141,7 @@ def run_agent(work: Path, prompt: str, log_path: Path) -> tuple[int, str]:
             encoding="utf-8",
             errors="replace",
             bufsize=1,
+            env=agent_env,
         )
         assert process.stdout is not None
         assert process.stdin is not None
@@ -204,6 +240,10 @@ def main() -> int:
     if args.limit:
         tasks = tasks[:args.limit]
 
+    cleaned_repos = cleanup_dangling_repos()
+    if cleaned_repos:
+        print(f"已清理 {cleaned_repos} 个历史遗留的克隆代码仓库", flush=True)
+
     print(f"待生成 {len(tasks)} 篇，引擎 claude（会调工具）", flush=True)
     failures = 0
     lock_manifest = threading.Lock()
@@ -215,6 +255,7 @@ def main() -> int:
         number = next(counter)
         began = time.time()
         print(f"[{number}/{len(tasks)} {time.strftime('%H:%M:%S')}] {pid} {paper.get('title', '')[:40]}", flush=True)
+        work = None
         try:
             work, prompt = prepare(pid, paper, translations.get(pid, {}), code_summaries.get(pid, {}), index)
             code, output = run_agent(work, prompt, LOG_DIR / f"agent-{pid}.log")
@@ -256,7 +297,6 @@ def main() -> int:
                 F.insert_for(pid)
             except Exception as figure_error:
                 print(f"    {pid} 原文图未插入：{figure_error}", flush=True)
-            shutil.rmtree(work / "repo", ignore_errors=True)
             print(f"    {pid} 完成 {time.time() - began:.0f}s  {words} 字", flush=True)
             return True
         except Exception as error:
@@ -265,6 +305,9 @@ def main() -> int:
                 write_manifest(pid, None, f"{type(error).__name__}: {error}"[:800])
             print(f"    {pid} 失败：{type(error).__name__}: {error}", file=sys.stderr, flush=True)
             return False
+        finally:
+            if work:
+                remove_dir_force(work / "repo")
 
     from concurrent.futures import ThreadPoolExecutor
 
