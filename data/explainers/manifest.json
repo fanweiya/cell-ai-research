@@ -6610,8 +6610,19 @@
    "cjk": 2545,
    "repairs": 0,
    "bytes": 71927
+  },
+  "2611.22968v1": {
+   "title_zh": "MI-Hyper：基于混合任务预训练超网络生成用于组织病理学权重空间迁移学习的多示例模型",
+   "one_line": "MI-Hyper: Generating Multiple Instance M",
+   "structure": "agent",
+   "generated_at": "2026-11-19T12:03:28+08:00",
+   "model": "claude-code",
+   "generator": "agent",
+   "cjk": 2794,
+   "repairs": 0,
+   "bytes": 72365
   }
  },
  "failures": {},
- "updated_at": "2026-11-19T11:09:54+08:00"
+ "updated_at": "2026-11-19T12:03:28+08:00"
 }

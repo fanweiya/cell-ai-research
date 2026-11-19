@@ -32,9 +32,11 @@ from text_render import render_prose
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
+from dotenv import load_dotenv
 
 # === Config ===
 WORKSPACE = Path(__file__).parent
+load_dotenv(WORKSPACE / ".env")
 PAPERS_FILE = WORKSPACE / "papers.json"
 TRANSLATIONS_CACHE = WORKSPACE / "data" / "translations.json"
 ARXIV_LINK_CACHE = WORKSPACE / "data" / "arxiv_link_status.json"

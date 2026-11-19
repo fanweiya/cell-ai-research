@@ -84,6 +84,36 @@
 
 ---
 
+## 🔑 环境变量与密钥配置 (.env)
+
+为了保障数据安全与密钥隔离，项目所有 API 密钥与服务凭据均通过项目根目录下的 `.env` 文件或系统环境变量进行加载，代码中不包含任何明文硬编码密钥。
+
+> [!IMPORTANT]
+> 项目根目录的 `.env` 文件已被 `.gitignore` 规则屏蔽，**严禁提交至 Git 仓库**。
+
+### 1. 快速初始化配置文件
+
+克隆项目后，从模版文件复制生成本地 `.env` 文件：
+
+```bash
+cp .env.example .env
+```
+
+### 2. 支持与需要配置的密钥清单
+
+| 环境变量名称 | 用途说明 | 推荐模型 | 官方密钥申请入口 |
+| :--- | :--- | :--- | :--- |
+| `TYPESAFE_API_KEY` / `JEV_API_KEY` | TypeSafe Jev (System One 官方高精度评测通道) | `jev-preview` / `jev-1.14.0` | [TypeSafe Console](https://console.typesafe.ai/) |
+| `CODIV_API_KEY` | Codiv OpenJev (开源模型权重评测通道) | `openjev-latest` | [Codiv Console](https://console.codiv.ai/) |
+| `SUBQ_API_KEY` | SubQ (System One Snap 快速通道) | `subq-snap-1.1` | [SubQ API](https://api.subq.ai/) |
+| `CF_API_TOKEN` | Cloudflare Workers AI Clef 边缘模型凭据 | `clef-flash` | [Cloudflare Dashboard](https://dash.cloudflare.com/) |
+| `CF_ACCOUNT_ID` | Cloudflare 账号编号 (用于 Workers AI 调用) | - | [Cloudflare Dashboard](https://dash.cloudflare.com/) |
+| `CELL_AI_LLM_BASE` | 本地或局域网 OpenAI-compatible 基础模型网关 | `stable` | 自建本地服务 / vLLM / SGLang |
+| `CELL_AI_LLM_API_KEY` | 本地或局域网基础模型网关鉴权密钥 | - | 自建本地服务 |
+| `CLOUDFLARE_API_TOKEN` | 用于执行自动化边缘部署至 Cloudflare Pages | - | [Cloudflare API Tokens](https://dash.cloudflare.com/profile/api-tokens) |
+
+---
+
 ## 🚀 本地运行与测试
 
 ### 环境依赖

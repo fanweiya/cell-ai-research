@@ -9,7 +9,10 @@ import urllib.error
 import urllib.request
 from datetime import datetime
 from pathlib import Path
+from dotenv import load_dotenv
 from pypdf import PdfReader
+
+load_dotenv(Path(__file__).resolve().parent / ".env")
 
 A1_API = os.environ.get('A1_API_URL', "http://10.0.0.240:8080/v1/chat/completions")
 A1_KEY = os.environ.get('A1_API_KEY', 'cell-ai')

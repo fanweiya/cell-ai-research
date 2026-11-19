@@ -33,6 +33,8 @@ data/explainers/src/
 # Environment variables and secrets
 .env
 .env.*
+!.env.example
+*.lock
 
 # Node dependencies
 node_modules/

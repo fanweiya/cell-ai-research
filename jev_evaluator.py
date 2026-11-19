@@ -18,6 +18,7 @@ import time
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+from dotenv import load_dotenv
 
 TYPESAFE_ENDPOINT = "https://api.typesafe.ai/v1/systemone"
 RULE_VERSION = "2026.10.v2"
@@ -26,6 +27,7 @@ PINNED_MODEL = "jev-1.14.0"
 # 项目根目录从脚本位置推导，可用 CELL_AI_PROJECT 覆盖；
 # 不再把 /mnt/c 绝对路径写进代码，换机器或换目录时自动跟随。
 PROJECT_DIR = Path(os.environ.get("CELL_AI_PROJECT", Path(__file__).resolve().parent))
+load_dotenv(PROJECT_DIR / ".env")
 
 # 通道定义：按延迟与稳定性优先级排序 (TypeSafe Jev -> Codiv OpenJev -> SubQ -> Cloudflare Clef)
 EVAL_CHANNELS = [
@@ -34,7 +36,6 @@ EVAL_CHANNELS = [
         "endpoint": "https://api.typesafe.ai/v1/systemone",
         "default_model": "jev-preview",
         "key_env": "TYPESAFE_API_KEY",
-        "default_key": "apikey_21828147e955f36c4569a49675fcd65a96c1_8e5777bf0651c068c5ae18be81aab810e9644989ba64c6890ae2856d5ea78ece",
         "extra_headers": {"TypeSafe-Danger-Zone-Images": "true"},
     },
     {
@@ -42,7 +43,6 @@ EVAL_CHANNELS = [
         "endpoint": "https://api.codiv.ai/v1/systemone",
         "default_model": "openjev-latest",
         "key_env": "CODIV_API_KEY",
-        "default_key": "sk-codiv-e1NTClBQG5k45cfQQJ7p8HDH1QtS2PVMqI073v1e",
         "extra_headers": {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"},
     },
     {
@@ -50,7 +50,6 @@ EVAL_CHANNELS = [
         "endpoint": "https://api.subq.ai/v1/systemone",
         "default_model": "subq-snap-1.1",
         "key_env": "SUBQ_API_KEY",
-        "default_key": "sk-proj-6arEhYiPFnKMIEn8bAYAEDGMwRW12lzc",
         "extra_headers": {},
     },
     {
@@ -58,7 +57,6 @@ EVAL_CHANNELS = [
         "endpoint": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run/@cf/cloudflare/clef-flash",
         "default_model": "clef-flash",
         "key_env": "CF_API_TOKEN",
-        "default_key": "cfut_Oct7nJgbYfIY7oBsq4VjWl8FwjFJbAP3AvLYXHlHfe4d226b",
         "extra_headers": {},
     },
 ]
@@ -384,40 +382,28 @@ def format_evaluation_result(answers: dict, asked_dims: list[str], evidence_info
 
 
 def resolve_channel_config(channel: dict) -> tuple[str | None, str, str, dict]:
-    for path in ["/home/fanweiya/.hermes/hermes-agent", "/home/fanweiya/.hermes/plugins/hermes-switchyard"]:
-        if os.path.isdir(path) and path not in sys.path:
-            sys.path.insert(0, path)
-    try:
-        from agent.secret_scope import get_secret
-    except ImportError as exc:
-        # 依赖的外部模块缺失时显式失败并说明原因，禁止静默降级后固化残缺评分。
-        raise RuntimeError(
-            "agent.secret_scope is unavailable (hermes-agent not found); "
-            f"evaluation cannot proceed without credentials: {exc}"
-        ) from exc
-
     name = channel.get("name", "")
-    key = None
+    key = channel.get("default_key")
     if name == "subq":
-        key = os.environ.get("SUBQ_API_KEY") or get_secret("SUBQ_API_KEY") or channel.get("default_key")
-        model = os.environ.get("SUBQ_MODEL") or channel.get("default_model", "subq-snap-1.1")
+        key = key or os.environ.get("SUBQ_API_KEY")
+        model = channel.get("default_model") or os.environ.get("SUBQ_MODEL", "subq-snap-1.1")
         endpoint = channel.get("endpoint", "https://api.subq.ai/v1/systemone")
     elif name == "typesafe":
-        key = os.environ.get("JEV_API_KEY") or os.environ.get("TYPESAFE_API_KEY") or get_secret("JEV_API_KEY") or get_secret("TYPESAFE_API_KEY") or channel.get("default_key")
-        model = os.environ.get("TYPESAFE_MODEL") or channel.get("default_model", "jev-preview")
+        key = key or os.environ.get("JEV_API_KEY") or os.environ.get("TYPESAFE_API_KEY")
+        model = channel.get("default_model") or os.environ.get("TYPESAFE_MODEL", "jev-preview")
         endpoint = channel.get("endpoint", "https://api.typesafe.ai/v1/systemone")
     elif name == "codiv":
-        key = os.environ.get("CODIV_API_KEY") or get_secret("CODIV_API_KEY") or channel.get("default_key")
-        model = os.environ.get("CODIV_MODEL") or channel.get("default_model", "openjev-latest")
+        key = key or os.environ.get("CODIV_API_KEY")
+        model = channel.get("default_model") or os.environ.get("CODIV_MODEL", "openjev-latest")
         endpoint = channel.get("endpoint", "https://api.codiv.ai/v1/systemone")
     elif name == "cloudflare":
-        key = os.environ.get("CF_API_TOKEN") or get_secret("CF_API_TOKEN") or channel.get("default_key")
-        model = os.environ.get("CF_CLEF_MODEL") or channel.get("default_model", "clef-flash")
-        account_id = os.environ.get("CF_ACCOUNT_ID") or "b9b1998c78f49ed2e0db3ab8e868ff85"
+        key = key or os.environ.get("CF_API_TOKEN")
+        model = channel.get("default_model") or os.environ.get("CF_CLEF_MODEL", "clef-flash")
+        account_id = os.environ.get("CF_ACCOUNT_ID") or channel.get("account_id", "b9b1998c78f49ed2e0db3ab8e868ff85")
         endpoint = f"https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run/@cf/cloudflare/{model}"
     else:
         key_env = channel.get("key_env")
-        key = (os.environ.get(key_env) if key_env else None) or channel.get("default_key")
+        key = key or (os.environ.get(key_env) if key_env else None)
         model = channel.get("default_model", PINNED_MODEL)
         endpoint = channel.get("endpoint", TYPESAFE_ENDPOINT)
 
