@@ -48,7 +48,7 @@ EVAL_CHANNELS = [
     {
         "name": "subq",
         "endpoint": "https://api.subq.ai/v1/systemone",
-        "default_model": "subq-snap-1.1",
+        "default_model": "subq-snap-1.2",
         "key_env": "SUBQ_API_KEY",
         "extra_headers": {},
     },
@@ -386,7 +386,7 @@ def resolve_channel_config(channel: dict) -> tuple[str | None, str, str, dict]:
     key = channel.get("default_key")
     if name == "subq":
         key = key or os.environ.get("SUBQ_API_KEY")
-        model = channel.get("default_model") or os.environ.get("SUBQ_MODEL", "subq-snap-1.1")
+        model = channel.get("default_model") or os.environ.get("SUBQ_MODEL", "subq-snap-1.2")
         endpoint = channel.get("endpoint", "https://api.subq.ai/v1/systemone")
     elif name == "typesafe":
         key = key or os.environ.get("JEV_API_KEY") or os.environ.get("TYPESAFE_API_KEY")

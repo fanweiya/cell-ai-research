@@ -531,7 +531,7 @@ class CodeReportTests(unittest.TestCase):
             subq_key, subq_model, subq_url, subq_headers = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[2])
             self.assertIsNotNone(subq_key)
             self.assertTrue(str(subq_key).startswith("sk-proj-"))
-            self.assertEqual(subq_model, "subq-snap-1.1")
+            self.assertEqual(subq_model, "subq-snap-1.2")
             self.assertEqual(subq_url, "https://api.subq.ai/v1/systemone")
 
             cf_key, cf_model, cf_url, cf_headers = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[3])

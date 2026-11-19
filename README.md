@@ -102,7 +102,7 @@ cp .env.example .env
 | :--- | :--- | :--- | :--- |
 | `TYPESAFE_API_KEY` / `JEV_API_KEY` | TypeSafe Jev (System One 官方高精度评测通道) | `jev-preview` / `jev-1.14.0` | [TypeSafe Console](https://console.typesafe.ai/) |
 | `CODIV_API_KEY` | Codiv OpenJev (开源模型权重评测通道) | `openjev-latest` | [Codiv Console](https://console.codiv.ai/) |
-| `SUBQ_API_KEY` | SubQ (System One Snap 快速通道) | `subq-snap-1.1` | [SubQ API](https://api.subq.ai/) |
+| `SUBQ_API_KEY` | SubQ (System One Snap 快速通道) | `subq-snap-1.2` | [SubQ API](https://api.subq.ai/) |
 | `CF_API_TOKEN` | Cloudflare Workers AI Clef 边缘模型凭据 | `clef-flash` | [Cloudflare Dashboard](https://dash.cloudflare.com/) |
 | `CF_ACCOUNT_ID` | Cloudflare 账号编号 (用于 Workers AI 调用) | - | [Cloudflare Dashboard](https://dash.cloudflare.com/) |
 | `CELL_AI_LLM_BASE` | 本地或局域网 OpenAI-compatible 基础模型网关（后端任务） | `stable` | 自建本地服务 / vLLM / SGLang |
