@@ -2,18 +2,16 @@ from __future__ import annotations
 
 import json
 import os
-import sys
 import time
 import unittest
 from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import patch
 
-PROJECT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(PROJECT))
-
 import generate_index
 import verified_daily
+
+PROJECT = Path(__file__).resolve().parents[1]
 
 
 class CodeReportTests(unittest.TestCase):
@@ -411,7 +409,6 @@ class CodeReportTests(unittest.TestCase):
              patch.object(verified_daily, "update_site", side_effect=mock_update_site), \
              patch.object(verified_daily, "mark_site_pending"):
             # Execute the core block under simulated timeout
-            before_backfill = "hash"
             backfill_timeout = False
             backfill = None
             try:
@@ -1257,7 +1254,6 @@ class PipelineFailureTests(unittest.TestCase):
 
         d = Path(tempfile.mkdtemp(prefix="cell_figtransient_"))
         try:
-            original_run = generate_index.subprocess.run
 
             class FailedRun:
                 returncode = 6  # DNS 解析失败：瞬时问题

@@ -439,7 +439,8 @@ def gate_page(source: str, pid: str, brief: dict) -> list[str]:
         if "<figcaption" not in figure:
             problems.append(f"第 {i + 1} 张图缺少 figcaption")
     if stages and source.count('class="stage-badge"') != len(stages):
-        problems.append(f"Fig. 1 的编号徽章数量必须等于阶段数 {len(stages)}，现在 {source.count('class=\"stage-badge\"')}")
+        badge_count = source.count('class="stage-badge"')
+        problems.append(f"Fig. 1 的编号徽章数量必须等于阶段数 {len(stages)}，现在 {badge_count}")
     if stages and source.count('class="stage-num"') != len(stages):
         problems.append(f"正文阶段编号数量必须等于 {len(stages)}")
     for sid in ("problem", "mechanism", "results", "limits", "remember"):

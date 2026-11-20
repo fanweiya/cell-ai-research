@@ -540,7 +540,7 @@ def run_batch_evaluation(
                     or old_ev.get("evidence_sufficiency") != ev.get("evidence_sufficiency")
                 ):
                     item["legacy_jev_evaluation"] = old_ev
-                
+
                 item["jev_evaluation"] = ev
 
                 # Formal composite score
@@ -556,7 +556,7 @@ def run_batch_evaluation(
                 evaluated_count += 1
                 if evaluated_count % 5 == 0 or evaluated_count == total_candidates:
                     print(f"[{evaluated_count}/{total_candidates}] Evaluated {item.get('arxiv_id')} -> {comp or 'N/A'}/10 ({ev['code_status']} | {ev['paradigm_label_zh']})")
-                
+
                 # Periodic checkpoint save
                 if evaluated_count % save_batch_size == 0:
                     _atomic_json(db_path, db)

@@ -227,7 +227,7 @@ def call_a1(prompt: str, max_tokens: int = 8192, timeout: int = 180, retries: in
 
 def build_prompt(task: str, paper_id: str, input_content: str) -> str:
     """构造子Agent提示词，要求输出严格JSON"""
-    
+
     if task == "code_analysis":
         return f"""你是一个资深静态代码审阅子Agent。分析论文 {paper_id} 的远程代码仓库。输入只来自 gread API，禁止声称读取、执行或测试了本地仓库。
 

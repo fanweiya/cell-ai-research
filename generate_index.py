@@ -145,7 +145,7 @@ def _ollama_translate(text):
         resp.raise_for_status()
         result = resp.json().get("response", "").strip()
         return result if result else None
-    except Exception as e:
+    except Exception:
         return None
 
 
@@ -884,7 +884,6 @@ def summarize_code_repositories(papers, summaries, force=False):
         if not isinstance(ca, dict):
             ca = {}
         gh = p.get("status", {}).get("github", {}) or {}
-        has_code = bool(gh.get("has_code", p.get("has_code", False)))
         url = gh.get("url", "") or ca.get("repository_url", "")
         if not url:
             continue
@@ -1666,11 +1665,16 @@ def _normalize_status(value):
     if isinstance(value, dict):
         value = value.get("status", "")
     value = str(value or "").lower().strip()
-    if value in {"done", "completed", "passed"}: return "done"
-    if value in {"doing", "in_progress", "running", "processing"}: return "running"
-    if value in {"error", "failed"}: return "failed"
-    if value == "blocked": return "blocked"
-    if value in {"skipped", "not_applicable"}: return "skipped"
+    if value in {"done", "completed", "passed"}:
+        return "done"
+    if value in {"doing", "in_progress", "running", "processing"}:
+        return "running"
+    if value in {"error", "failed"}:
+        return "failed"
+    if value == "blocked":
+        return "blocked"
+    if value in {"skipped", "not_applicable"}:
+        return "skipped"
     return "pending"
 
 
@@ -1771,7 +1775,6 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
         repository_verified = _is_verified_repository(gh)
         has_code_flag = _is_code_ready(p)
         github_url = gh.get("url", "") if repository_verified else ""
-        stars = gh.get("stars", 0)
         framework = gh.get("framework", "")
 
         # code_analysis info
@@ -1832,7 +1835,7 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
             sou = scores.get("technical_soundness")
             uti = scores.get("biological_utility")
             rep = scores.get("reproducibility_readiness")
-            
+
             comp_score = jev.get("composite_priority")
             prelim_score = jev.get("abstract_preliminary_score")
             paradigm_zh = _esc(jev.get("paradigm_label_zh") or "")
@@ -1913,9 +1916,6 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
             code_html = f'<a href="{_esc(github_url)}" target="_blank" class="cb" onclick="event.stopPropagation()">💻 GitHub</a>'
         elif has_code_flag:
             code_html = '<span class="cb">💻 Code</span>'
-        # HTML link (replaces old PDF link)
-        html_link = ""
-
         # Figures (filtered by multimodal LLM) — collapsible
         figures = _load_figures_filtered(pid)
         figs_html = ""
@@ -2141,12 +2141,12 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
   --purple: #8b5cf6;
   --purple-l: #ede9fe;
   --purple-d: #5b21b6;
-  
+
   --ga: #10b981;
   --gb: #3b82f6;
   --gc: #f59e0b;
   --gd: #64748b;
-  
+
   --radius: 12px;
   --radius-sm: 8px;
   --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
@@ -2204,9 +2204,9 @@ body {{
   height: 100dvh;
   overflow-y: auto;
   flex-shrink: 0;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
-              padding 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
-              opacity 0.2s ease, 
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              padding 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.2s ease,
               min-width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }}
 
@@ -3361,12 +3361,12 @@ body {{
       <h1>🔬 Cell AI Console</h1>
       <p>自动追踪细胞生物学 × AI 前沿</p>
     </div>
-    
+
     <div class="search-box">
       <label class="sr-only" for="searchInput">搜索论文</label>
       <input class="search-input" id="searchInput" type="text" placeholder="🔍 搜索标题 / 摘要 / 标签 / 作者..." aria-label="搜索论文" oninput="doSearch(this.value)">
     </div>
-    
+
     <button id="mobileFilterButton" type="button" onclick="openMobileFilters()" aria-haspopup="dialog">筛选论文</button>
     <div id="desktopFilterSlot"><div class="filter-group" id="paperFilters">
       <h3>筛选</h3>
@@ -3383,7 +3383,7 @@ body {{
         </select>
       </div>
     </div>
-    
+
     </div>
     <details class="stats-panel"><summary>数据概况 · {total} 篇</summary>
       <div class="stat-item">
@@ -3408,9 +3408,9 @@ body {{
       <div class="update-time">更新于: {generated_at}</div>
     </div>
   </aside>
-  
+
   <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" title="收起/展开侧边栏">◀</button>
-  
+
   <main class="main-content">
     <div class="list-toolbar"><span id="resultCount" role="status" aria-live="polite"></span><div class="list-actions"><button id="expandBtn" type="button" onclick="toggleAll()">展开已显示论文</button><button type="button" onclick="resetPaperFilters()">重置筛选</button><button id="themeToggle" type="button" aria-label="切换到暗色模式">🌙 暗色</button></div></div>
     <div id="emptyResults" hidden>没有找到匹配的论文。试试其他关键词，或重置筛选。</div>
@@ -3607,7 +3607,7 @@ def cg_query(repo_name: str) -> dict:
                 cwd=str(repo_dir)
             )
             if r.returncode == 0 and r.stdout.strip():
-                lines = [l for l in r.stdout.strip().split("\n") if l.strip()][:8]
+                lines = [line for line in r.stdout.strip().split("\n") if line.strip()][:8]
                 result["key_symbols"].extend(lines)
         except Exception:
             pass
@@ -3620,7 +3620,7 @@ def cg_query(repo_name: str) -> dict:
             cwd=str(repo_dir)
         )
         if r.returncode == 0:
-            result["files"] = [l.strip() for l in r.stdout.strip().split("\n") if l.strip()][:20]
+            result["files"] = [line.strip() for line in r.stdout.strip().split("\n") if line.strip()][:20]
     except Exception:
         pass
 
@@ -3725,7 +3725,7 @@ def render_markdown(md_content, is_sidebar=False):
 
     for line in lines:
         stripped = line.strip()
-        
+
         # Code blocks
         if stripped.startswith("```"):
             if in_code_block:
@@ -3781,7 +3781,7 @@ def render_markdown(md_content, is_sidebar=False):
 
     if in_list:
         html_lines.append("</ul>")
-        
+
     return "\n".join(html_lines)
 
 
@@ -3807,7 +3807,7 @@ def wrap_wiki_page(title, repo_name, body_html, sidebar_html, back_link):
   --accent: #4f46e5;
   --accent-l: #e0e7ff;
   --accent-d: #3730a3;
-  
+
   --radius: 12px;
   --radius-sm: 8px;
   --font: 'Inter', system-ui, -apple-system, sans-serif;
@@ -4022,7 +4022,7 @@ body {{
   <aside class="sidebar">
     {sidebar_html}
   </aside>
-  
+
   <main class="content-area">
     <article class="markdown-body">
       {body_html}
@@ -4050,7 +4050,7 @@ def compile_wiki_to_html(wiki_dir: Path, repo_name: str):
     """将 wiki 目录下的所有 markdown 文件转化为本地静态 HTML，实现完全的无CORS离线导航"""
     import re
     import requests
-    
+
     # 1. 查找并生成 Sidebar
     sidebar_file = wiki_dir / "_sidebar.md"
     sidebar_html = ""
@@ -4061,7 +4061,7 @@ def compile_wiki_to_html(wiki_dir: Path, repo_name: str):
             sidebar_html = render_markdown(sidebar_md, is_sidebar=True)
         except Exception as e:
             print(f"   [WARN] Failed to parse _sidebar.md: {e}")
-            
+
     # 2. 递归遍历编译所有的 md 文件
     for f in list(wiki_dir.rglob("*.md")):
         # 排除 _sidebar.md 和系统冗余模块
@@ -4073,10 +4073,10 @@ def compile_wiki_to_html(wiki_dir: Path, repo_name: str):
             except Exception:
                 pass
             continue
-            
+
         try:
             md_content = f.read_text(encoding="utf-8")
-            
+
             # 检测是否为纯英文，如果是则调用本地 LLM 自动翻译成中文
             has_chinese = any('\u4e00' <= c <= '\u9fff' for c in md_content[:600])
             if len(md_content.strip()) > 30 and not has_chinese:
@@ -4102,17 +4102,17 @@ def compile_wiki_to_html(wiki_dir: Path, repo_name: str):
                         if translated_text and len(translated_text) > 10:
                             md_content = translated_text
                             f.write_text(md_content, encoding="utf-8")
-                            print(f"     ✓ Translated and cached.")
+                            print("     ✓ Translated and cached.")
                 except Exception as e:
                     print(f"     [WARN] Translation failed for {f.name}: {e}")
 
             body_html = render_markdown(md_content, is_sidebar=False)
-            
+
             # 计算返回主页的相对路径
             rel_path = f.relative_to(wiki_dir)
             depth = len(rel_path.parts) - 1
             back_link = "../" * depth + "../../index.html"
-            
+
             # 对 sidebar 中的超链接做路径修正
             adjusted_sidebar_html = sidebar_html
             if depth > 0:
@@ -4127,7 +4127,7 @@ def compile_wiki_to_html(wiki_dir: Path, repo_name: str):
             # 包装成 HTML
             page_title = f"{repo_name} Wiki — {f.stem}"
             html_content = wrap_wiki_page(page_title, repo_name, body_html, adjusted_sidebar_html, back_link)
-            
+
             # 输出到同名 .html 文件
             out_file = f.with_suffix(".html")
             out_file.write_text(html_content, encoding="utf-8")
@@ -4140,62 +4140,62 @@ def generate_combined_report(repo_name: str, gh_repo: str, cg_data: dict,
     """合并 CodeGraph + RepoWiki + 原有分析报告"""
     lines = []
     lines.append(f"# {repo_name} — 综合分析报告")
-    lines.append(f"")
+    lines.append("")
     lines.append(f"- **GitHub**: {gh_repo}")
     lines.append(f"- **分析时间**: {datetime.now().isoformat()}")
-    lines.append(f"")
-    lines.append(f"---")
-    lines.append(f"")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
 
     # CodeGraph 部分
-    lines.append(f"## CodeGraph 知识图谱分析")
-    lines.append(f"")
+    lines.append("## CodeGraph 知识图谱分析")
+    lines.append("")
     if cg_data.get("error"):
         lines.append(f"> CodeGraph: {cg_data['error']}")
     else:
         if cg_data.get("key_symbols"):
-            lines.append(f"### 关键符号")
+            lines.append("### 关键符号")
             for s in cg_data["key_symbols"][:10]:
                 lines.append(f"- `{s}`")
         if cg_data.get("files"):
-            lines.append(f"### 文件结构")
+            lines.append("### 文件结构")
             for f in cg_data["files"][:15]:
                 lines.append(f"- {f}")
         if cg_data.get("status"):
-            lines.append(f"### 索引状态")
-            lines.append(f"```")
+            lines.append("### 索引状态")
+            lines.append("```")
             lines.append(cg_data["status"])
-            lines.append(f"```")
-    lines.append(f"")
+            lines.append("```")
+    lines.append("")
 
     # RepoWiki 部分
-    lines.append(f"## RepoWiki 文档生成")
-    lines.append(f"")
+    lines.append("## RepoWiki 文档生成")
+    lines.append("")
     if rw_data.get("error"):
         lines.append(f"> RepoWiki: {rw_data['error']}")
     elif rw_data.get("scan_ok"):
-        lines.append(f"- ✅ 扫描成功")
+        lines.append("- ✅ 扫描成功")
         lines.append(f"- 📁 Wiki 目录: `{rw_data.get('wiki_dir', '')}`")
         if rw_data.get("generated_files"):
-            lines.append(f"- 📄 生成文件:")
+            lines.append("- 📄 生成文件:")
             for f in rw_data["generated_files"]:
                 lines.append(f"  - {f}")
         if rw_data.get("stdout"):
             lines.append(f"- 输出: {rw_data['stdout']}")
     else:
         lines.append(f"- ❌ 扫描失败: {rw_data.get('stderr', 'unknown')}")
-    lines.append(f"")
+    lines.append("")
 
-    lines.append(f"## 原有子代理分析报告")
-    lines.append(f"")
+    lines.append("## 原有子代理分析报告")
+    lines.append("")
     if old_report:
-        lines.append(f"```")
+        lines.append("```")
         lines.append(old_report[:3000])
-        lines.append(f"```")
-        lines.append(f"")
-        lines.append(f"> 完整报告: [subagent_report.md](subagent_report.md)")
+        lines.append("```")
+        lines.append("")
+        lines.append("> 完整报告: [subagent_report.md](subagent_report.md)")
     else:
-        lines.append(f"暂无原有分析报告")
+        lines.append("暂无原有分析报告")
 
     return "\n".join(lines)
 

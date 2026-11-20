@@ -1,13 +1,11 @@
 from __future__ import annotations
 
-import sys
 import unittest
 from pathlib import Path
 
-PROJECT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(PROJECT))
-
 import generate_index
+
+PROJECT = Path(__file__).resolve().parents[1]
 
 
 class NumericTokenTests(unittest.TestCase):

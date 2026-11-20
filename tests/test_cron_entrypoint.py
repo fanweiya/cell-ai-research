@@ -4,17 +4,15 @@ import contextlib
 import io
 import json
 import subprocess
-import sys
 import tempfile
 import unittest
 from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import Mock, patch
 
-PROJECT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(PROJECT))
-
 import verified_daily
+
+PROJECT = Path(__file__).resolve().parents[1]
 
 
 class CronEntrypointTests(unittest.TestCase):

@@ -83,4 +83,4 @@ jobs:
         run: pip install ruff
 
       - name: Check code formatting and syntax
-        run: ruff check --ignore E402,F841 tests/
+        run: ruff check .

@@ -25,8 +25,8 @@ DB_PATH = PROJECT / "papers.json"
 EVIDENCE_DIR = Path(os.environ.get("CELL_AI_EVIDENCE_DIR", str(PROJECT / "evidence")))
 LOCK_PATH = EVIDENCE_DIR / ".daily.lock"
 sys.path.insert(0, str(PROJECT))
-from gread_remote import collect_repository
-from daily_site_update import update_site, mark_site_pending
+from gread_remote import collect_repository  # noqa: E402
+from daily_site_update import update_site, mark_site_pending  # noqa: E402
 ARXIV_QUERY = (
     "(cat:cs.CV OR cat:cs.AI OR cat:q-bio.QM OR cat:eess.IV) AND "
     "(all:cell OR all:microscopy OR all:histopathology OR all:cytology OR "

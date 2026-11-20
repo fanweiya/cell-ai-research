@@ -4,7 +4,6 @@ import re
 import subprocess
 import sys
 import time
-from datetime import datetime
 from pathlib import Path
 
 WORKDIR = Path(os.environ.get("CELL_AI_WORKDIR", str(Path(__file__).resolve().parent)))

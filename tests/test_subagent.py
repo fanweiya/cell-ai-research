@@ -3,16 +3,14 @@ from __future__ import annotations
 import http.server
 import io
 import json
-import sys
 import threading
 import unittest
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-PROJECT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(PROJECT))
-
 import subagent
+
+PROJECT = Path(__file__).resolve().parents[1]
 
 
 class _LocalPaperServer:

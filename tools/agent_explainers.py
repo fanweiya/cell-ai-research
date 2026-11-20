@@ -23,8 +23,8 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
-import add_paper_figures as F
-import build_explainers as B
+import add_paper_figures as F  # noqa: E402
+import build_explainers as B  # noqa: E402
 
 ROOT = B.ROOT
 PROMPTS = HERE / "prompts"

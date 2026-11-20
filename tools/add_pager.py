@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from add_paper_figures import EXPLAINERS, ROOT, RENDER, clean, source_path  # noqa: E402
+from add_paper_figures import EXPLAINERS, ROOT, RENDER, source_path  # noqa: E402
 
 DB = ROOT / "papers.json"
 H1 = re.compile(r"<h1>(.*?)</h1>", re.S)
