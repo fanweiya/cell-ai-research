@@ -5,6 +5,7 @@
 
 from __future__ import annotations
 
+import html
 import json
 import subprocess
 import sys
@@ -105,7 +106,11 @@ def insert_for(pid: str) -> bool:
     if anchor == -1:
         return False
     blocks = "\n".join(
-        FIGURE.format(name=name, caption=clean(caption), alt=clean(caption)[:40])
+        FIGURE.format(
+            name=name,
+            caption=html.escape(clean(caption), quote=True),
+            alt=html.escape(clean(caption)[:40], quote=True),
+        )
         for _, caption, name in rows
     )
     updated = source[:anchor] + SECTION.format(figures=blocks) + "\n" + source[anchor:]

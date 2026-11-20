@@ -257,9 +257,12 @@ def _numeric_tokens(text):
     unit_pattern = re.compile(
         r"\s*(%|thousand|million|billion|[kmbtKM](?![A-Za-z])|[万亿])"
     )
-    # 范围写法（60 to 80%、60–80%、60~80%）的百分号作用于两端。
+    # 范围写法（60 to 80%、60–80%、60~80%、60%～80%）的百分号作用于两端。
+    # 范围两端使用独立的 percent_range 标签：同一文本里出现的裸数字
+    # （如 "60 GPUs"）不得被范围端点吸收成百分比。
     range_pattern = re.compile(
-        r"(?<![A-Za-z0-9.])(\d+(?:\.\d+)?)\s*~?\s*(?:to|[–—~-]|至|～)\s*~?\s*"
+        r"(?<![A-Za-z0-9.])(\d+(?:\.\d+)?)\s*%?\s*~?\s*"
+        r"(?:to|[–—~-]|至|到|～)\s*~?\s*"
         r"(\d+(?:\.\d+)?)\s*%"
     )
 
@@ -275,15 +278,22 @@ def _numeric_tokens(text):
             normalized = normalized.rstrip("0").rstrip(".")
         return normalized
 
-    percent_range_values = set()
+    range_tokens = set()
+    range_spans = []
     for match in range_pattern.finditer(text):
+        range_spans.append((match.start(), match.end()))
         for raw_number in match.groups():
             normalized = _normalize(raw_number, None)
             if normalized is not None:
-                percent_range_values.add(normalized)
+                range_tokens.add("percent_range:" + normalized)
 
-    values = set()
+    def _in_range_span(position):
+        return any(start <= position < end for start, end in range_spans)
+
+    values = set(range_tokens)
     for match in number_pattern.finditer(text):
+        if _in_range_span(match.start()):
+            continue
         raw_number = match.group(1)
         raw_unit = ""
         unit_match = unit_pattern.match(text, match.end())
@@ -293,9 +303,7 @@ def _numeric_tokens(text):
         normalized = _normalize(raw_number, multipliers.get(unit))
         if normalized is None:
             continue
-        normalized_bare = _normalize(raw_number, None)
-        is_percent = unit == "%" or normalized_bare in percent_range_values
-        values.add(("percent:" if is_percent else "number:") + normalized)
+        values.add(("percent:" if unit == "%" else "number:") + normalized)
     return values
 
 
@@ -1710,6 +1718,7 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
     explainer_manifest_path = WORKSPACE / "data" / "explainers" / "manifest.json"
     if explainer_manifest_path.exists():
         explainer_entries = json.loads(explainer_manifest_path.read_text(encoding="utf-8")).get("entries", {})
+    explainer_pages_dir = WORKSPACE / "explainers"
     papers_sorted = sorted(papers, key=lambda p: p.get("published_date", ""), reverse=True)
 
     total = len(papers)
@@ -1726,7 +1735,8 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
             has_html += 1
         if float(p.get("jev_evaluation", {}).get("composite_priority") or 0) >= 5.5:
             has_jev_high += 1
-        if str(p.get("arxiv_id", "")) in explainer_entries:
+        pid_str = str(p.get("arxiv_id", ""))
+        if pid_str in explainer_entries or (explainer_pages_dir / f"{pid_str}.html").is_file():
             has_explainer += 1
 
     # 按年月统计（用于侧栏年月筛选下拉）
@@ -2020,9 +2030,12 @@ def generate_html(papers, translations, generated_at, arxiv_html_status=None, co
 </details>'''
 
         explainer_entry = explainer_entries.get(str(pid)) or {}
-        explainer_attr = "1" if explainer_entry else "0"
+        # manifest 未入库时以 explainers/<pid>.html 实际存在为准，
+        # 避免 manifest 丢失导致全部已生成图解页入口消失。
+        explainer_page_exists = (explainer_pages_dir / f"{pid}.html").is_file()
+        explainer_attr = "1" if (explainer_entry or explainer_page_exists) else "0"
         explainer_link = ""
-        if explainer_entry:
+        if explainer_entry or explainer_page_exists:
             explainer_link = (
                 f'<a class="explainer-link" href="explainers/{_esc(pid)}.html" '
                 f'title="图解：机制、数字与边界">◫ 图解</a>'

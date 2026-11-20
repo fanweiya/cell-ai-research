@@ -11,6 +11,7 @@ import argparse
 import itertools
 import json
 import os
+import queue
 import shutil
 import stat
 import subprocess
@@ -44,26 +45,31 @@ def now() -> str:
 
 
 def remove_dir_force(path: Path) -> None:
-    """强制彻底删除目录，包括 Windows 下只读属性的文件。"""
+    """强制彻底删除目录，包括 Windows 下只读属性的文件；删不掉就报错。"""
     if not path.exists():
         return
     def on_err(func, p, exc_info):
-        try:
-            os.chmod(p, stat.S_IWRITE)
-            func(p)
-        except Exception:
-            pass
+        os.chmod(p, stat.S_IWRITE)
+        func(p)
     shutil.rmtree(path, onerror=on_err)
 
 
+def remove_path_force(path: Path) -> None:
+    """删除 repo 路径，目录走 rmtree，普通文件直接 unlink。"""
+    if path.is_dir() and not path.is_symlink():
+        remove_dir_force(path)
+    elif path.exists() or path.is_symlink():
+        path.unlink()
+
+
 def cleanup_dangling_repos() -> int:
-    """清理历史遗留或中断残存的仓库克隆目录。"""
+    """清理历史遗留或中断残存的仓库克隆路径，目录与普通文件都处理。"""
     cleaned = 0
     if not AGENT_DIR.exists():
         return 0
     for repo_path in AGENT_DIR.glob("*/repo"):
-        if repo_path.is_dir():
-            remove_dir_force(repo_path)
+        if repo_path.exists() or repo_path.is_symlink():
+            remove_path_force(repo_path)
             cleaned += 1
     return cleaned
 
@@ -80,7 +86,10 @@ def write_manifest(pid: str, entry: dict | None, error: str | None) -> None:
     else:
         fresh["failures"].pop(pid, None)
     fresh["updated_at"] = now()
-    B.MANIFEST.write_text(json.dumps(fresh, ensure_ascii=False, indent=1), encoding="utf-8")
+    # 先写临时文件再原子替换，避免两个并发线程各自读旧版本互相覆盖丢条目
+    tmp_path = B.MANIFEST.with_name(B.MANIFEST.name + ".tmp")
+    tmp_path.write_text(json.dumps(fresh, ensure_ascii=False, indent=1), encoding="utf-8")
+    os.replace(tmp_path, B.MANIFEST)
 
 
 def acquire_lock():
@@ -104,11 +113,19 @@ def prepare(pid: str, paper: dict, trans: dict, code_sum: dict, index: dict) -> 
     """把材料摆到工作目录，代理在它自己的目录里干活。"""
     work = AGENT_DIR / pid
     (work / "out").mkdir(parents=True, exist_ok=True)
+    # 代理要 git clone 到 work/repo，先清掉同名残留（目录或普通文件），
+    # 否则 clone 因路径已存在且非空失败，代理会静默失去代码上下文
+    remove_path_force(work / "repo")
     pack = B.build_pack(pid, paper, trans, code_sum, index)
     repo = ((paper.get("status") or {}).get("github") or {}).get("url") or ""
     (work / "paper.md").write_text(pack, encoding="utf-8")
     (work / "repo.txt").write_text(repo or "（无公开仓库）", encoding="utf-8")
-    prompt = (PROMPTS / "agent.md").read_text(encoding="utf-8").replace("<编号>", pid)
+    prompt = (
+        (PROMPTS / "agent.md")
+        .read_text(encoding="utf-8")
+        .replace("<编号>", pid)
+        .replace("{{ROOT}}", str(ROOT))
+    )
     return work, prompt
 
 
@@ -147,20 +164,39 @@ def run_agent(work: Path, prompt: str, log_path: Path) -> tuple[int, str]:
         assert process.stdin is not None
         process.stdin.write(prompt)
         process.stdin.close()
+        # stdout 改由独立线程读进队列，主循环每 0.5s 醒一次检查超时；
+        # 直接 readline() 会在代理静默输出时永久阻塞，超时永远不生效
+        output_queue: queue.Queue[str | None] = queue.Queue()
+
+        def reader() -> None:
+            assert process.stdout is not None
+            for line in process.stdout:
+                output_queue.put(line)
+            output_queue.put(None)
+
+        threading.Thread(target=reader, daemon=True).start()
         while True:
-            line = process.stdout.readline()
-            if line:
-                tail.append(line)
-                del tail[:-400]
-                log.write(line)
-                log.flush()
-                continue
-            if process.poll() is not None:
-                break
             if time.time() > deadline:
                 process.kill()
+                process.wait()
                 log.write(f"\n超时 {AGENT_TIMEOUT}s，已终止\n")
+                log.flush()
                 return 124, "".join(tail)
+            try:
+                line = output_queue.get(timeout=0.5)
+            except queue.Empty:
+                if process.poll() is not None:
+                    break
+                continue
+            if line is None:
+                if process.poll() is not None:
+                    break
+                continue
+            tail.append(line)
+            del tail[:-400]
+            log.write(line)
+            log.flush()
+        process.wait()
     return process.returncode or 0, "".join(tail)
 
 
@@ -282,17 +318,18 @@ def main() -> int:
                 print(f"    {pid} 修补第 {fixes} 轮：{problems[0][:90]}", flush=True)
                 repair(work, pid, problems)
             words = B.cjk_count(source)
-            write_manifest(pid, {
-                "title_zh": translations.get(pid, {}).get("title_zh", ""),
-                "one_line": paper.get("title", "")[:40],
-                "structure": "agent",
-                "generated_at": now(),
-                "model": "claude-code",
-                "generator": "agent",
-                "cjk": words,
-                "repairs": fixes,
-                "bytes": (B.EXPLAINERS / f"{pid}.html").stat().st_size,
-            }, None)
+            with lock_manifest:
+                write_manifest(pid, {
+                    "title_zh": translations.get(pid, {}).get("title_zh", ""),
+                    "one_line": paper.get("title", "")[:40],
+                    "structure": "agent",
+                    "generated_at": now(),
+                    "model": "claude-code",
+                    "generator": "agent",
+                    "cjk": words,
+                    "repairs": fixes,
+                    "bytes": (B.EXPLAINERS / f"{pid}.html").stat().st_size,
+                }, None)
             try:
                 F.insert_for(pid)
             except Exception as figure_error:
@@ -307,7 +344,7 @@ def main() -> int:
             return False
         finally:
             if work:
-                remove_dir_force(work / "repo")
+                remove_path_force(work / "repo")
 
     from concurrent.futures import ThreadPoolExecutor
 

@@ -5,6 +5,9 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SITE_DIR="$ROOT_DIR/.cf-pages-site"
 PROJECT_NAME="${CF_PAGES_PROJECT:-cell-ai-research}"
 
+# 打包目录在脚本任何阶段退出时都清理，避免 set -e 提前退出留下半成品占磁盘
+trap 'rm -rf "$SITE_DIR"' EXIT
+
 # CLOUDFLARE_DEPLOY.md 记录的 Pages 专用凭据文件优先加载；
 # 缺失的变量随后从 Hermes 的环境文件补齐，已有值保持不变。
 if [[ -f "$HOME/.config/hermes/cf-pages.env" ]]; then
@@ -76,6 +79,4 @@ unset HTTP_PROXY HTTPS_PROXY http_proxy https_proxy ALL_PROXY all_proxy
   --project-name "$PROJECT_NAME" \
   --branch main \
   --commit-dirty=true
-
-# 部署完成后立即清理本地打包临时目录，避免占用磁盘空间。
-rm -rf "$SITE_DIR"
+# 退出时由上面的 trap 统一清理 .cf-pages-site

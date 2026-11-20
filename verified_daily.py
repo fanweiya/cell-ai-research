@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import hashlib
-import html
+import html as html_mod
 import json
 import os
 import re
@@ -116,32 +116,54 @@ def index_build_command(python_executable: str) -> list[str]:
     ]
 
 
-def explainer_command(python_executable: str) -> list[str]:
-    """调用 claude 编码代理补齐缺少图解页的论文，--missing 只处理尚未生成的编号。"""
+EXPLAINER_BATCH_SIZE = 30
+
+
+def explainer_command(python_executable: str, limit: int | None = None) -> list[str]:
+    """调用 claude 编码代理补齐缺少图解页的论文，--missing 只处理尚未生成的编号。
+
+    每批最多 EXPLAINER_BATCH_SIZE 篇，避免 daily_site_update 的单次超时
+    把全部缺页工作量一次性杀掉。
+    """
+    batch = EXPLAINER_BATCH_SIZE if limit is None else min(limit, EXPLAINER_BATCH_SIZE)
     return [
         python_executable,
         str(PROJECT / "tools" / "agent_explainers.py"),
         "--missing",
         "--concurrency",
         "2",
+        "--limit",
+        str(batch),
+    ]
+
+
+def missing_explainer_ids(project: Path) -> list[str]:
+    """返回数据库中已通过相关性过滤但尚未生成图解页的论文编号。
+
+    判缺口径与 tools/agent_explainers.py --missing 一致：
+    只看 explainers/<arxiv_id>.html 是否存在，不依赖
+    data/explainers/manifest.json（该文件不入库，丢失时按全部缺页处理）。
+    papers.json 缺失或损坏时抛出异常，由调用方处理。
+    """
+    db_path = project / "papers.json"
+    explainers_dir = project / "explainers"
+    papers = json.loads(db_path.read_text(encoding="utf-8")).get("database", [])
+    return [
+        paper["arxiv_id"]
+        for paper in papers
+        if paper.get("relevance") == "passed"
+        and paper.get("arxiv_id")
+        and not (explainers_dir / f"{paper['arxiv_id']}.html").is_file()
     ]
 
 
 def has_missing_explainers(project: Path) -> bool:
-    """检查数据库中是否有已通过相关性过滤但尚未生成图解页的论文。"""
-    try:
-        db_path = project / "papers.json"
-        manifest_path = project / "data" / "explainers" / "manifest.json"
-        if not db_path.exists() or not manifest_path.exists():
-            return False
-        papers = json.loads(db_path.read_text(encoding="utf-8")).get("database", [])
-        entries = json.loads(manifest_path.read_text(encoding="utf-8")).get("entries", {})
-        for paper in papers:
-            if paper.get("relevance") == "passed" and paper.get("arxiv_id") not in entries:
-                return True
-    except Exception:
-        pass
-    return False
+    """检查数据库中是否有已通过相关性过滤但尚未生成图解页的论文。
+
+    papers.json 缺失或损坏时异常上抛，由 main 记入 evidence errors，
+    不再静默跳过图解页补齐。
+    """
+    return bool(missing_explainer_ids(project))
 
 
 def fetch_candidates(url: str) -> list[str]:
@@ -173,7 +195,7 @@ def fetch(url: str, timeout: int = 45) -> str:
 
 
 def clean_text(value: str | None) -> str:
-    return re.sub(r"\s+", " ", html.unescape(value or "")).strip()
+    return re.sub(r"\s+", " ", html_mod.unescape(value or "")).strip()
 
 
 def _repository_matches_title(repo: str, paper_title: str) -> bool:
@@ -199,7 +221,7 @@ def official_github_candidates(body: str, paper_title: str = "") -> list[dict]:
     that it implements the paper.  We therefore fail closed unless the nearby
     paper text contains an explicit code/implementation availability statement.
     """
-    decoded = html.unescape(body or "")
+    decoded = html_mod.unescape(body or "")
     # PDF-to-text and some arXiv HTML conversions insert whitespace directly
     # after the GitHub host slash ("github.com/ owner/repo").
     decoded = re.sub(r"(https?://github\.com/)\s+", r"\1", decoded, flags=re.I)
@@ -299,7 +321,7 @@ def parse_rss(xml_text: str) -> list[dict]:
         match = ID_RE.fullmatch(raw_id)
         if not match:
             continue
-        raw_description = html.unescape(node.findtext("description", default=""))
+        raw_description = html_mod.unescape(node.findtext("description", default=""))
         description = clean_text(re.sub(r"<[^>]+>", " ", raw_description))
         description = re.sub(r"^arXiv:\S+\s+(?:Announce Type:\s*\S+\s+)?Abstract:\s*", "", description, flags=re.I)
         raw_date = clean_text(node.findtext("pubDate", default=""))
@@ -896,12 +918,12 @@ def main() -> int:
                 if jev_changed:
                     mark_site_pending(EVIDENCE_DIR / ".site-update-pending.json")
 
-            missing_explainers = has_missing_explainers(PROJECT)
+            missing_explainer_ids_now = missing_explainer_ids(PROJECT)
             update_site(
-                evidence, bool(added or evidence["sanitized_github_links"] or backfill_changed or jev_changed or missing_explainers),
+                evidence, bool(added or evidence["sanitized_github_links"] or backfill_changed or jev_changed or missing_explainer_ids_now),
                 PROJECT, EVIDENCE_DIR / ".site-update-pending.json", run,
                 index_build_command(sys.executable),
-                explainer_command=explainer_command(sys.executable),
+                explainer_command=explainer_command(sys.executable, limit=len(missing_explainer_ids_now)),
             )
         except Exception as exc:
             evidence["errors"].append(f"{type(exc).__name__}: {str(exc)[:500]}")

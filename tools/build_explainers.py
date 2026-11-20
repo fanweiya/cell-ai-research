@@ -91,6 +91,8 @@ def clip(text: str, limit: int) -> str:
 
 def result_index() -> dict[str, dict[str, Path]]:
     index: dict[str, dict[str, Path]] = {}
+    if not RESULTS.exists():
+        return index
     for path in RESULTS.iterdir():
         if not path.name.endswith(".json"):
             continue
@@ -613,6 +615,10 @@ def main() -> int:
     failures = 0
 
     if args.dry_run:
+        if not tasks:
+            print("没有待生成的任务：--missing 时全部已生成，或 --pid 没有匹配到论文", flush=True)
+            process_lock.close()
+            return 0
         paper = tasks[0]
         pid = paper["arxiv_id"]
         pack = build_pack(pid, paper, translations.get(pid, {}), code_summaries.get(pid, {}), index)

@@ -386,20 +386,23 @@ def resolve_channel_config(channel: dict) -> tuple[str | None, str, str, dict]:
     key = channel.get("default_key")
     if name == "subq":
         key = key or os.environ.get("SUBQ_API_KEY")
-        model = channel.get("default_model") or os.environ.get("SUBQ_MODEL", "subq-snap-1.2")
+        model = os.environ.get("SUBQ_MODEL") or channel.get("default_model", "subq-snap-1.2")
         endpoint = channel.get("endpoint", "https://api.subq.ai/v1/systemone")
     elif name == "typesafe":
         key = key or os.environ.get("JEV_API_KEY") or os.environ.get("TYPESAFE_API_KEY")
-        model = channel.get("default_model") or os.environ.get("TYPESAFE_MODEL", "jev-preview")
+        model = os.environ.get("TYPESAFE_MODEL") or channel.get("default_model", "jev-preview")
         endpoint = channel.get("endpoint", "https://api.typesafe.ai/v1/systemone")
     elif name == "codiv":
         key = key or os.environ.get("CODIV_API_KEY")
-        model = channel.get("default_model") or os.environ.get("CODIV_MODEL", "openjev-latest")
+        model = os.environ.get("CODIV_MODEL") or channel.get("default_model", "openjev-latest")
         endpoint = channel.get("endpoint", "https://api.codiv.ai/v1/systemone")
     elif name == "cloudflare":
         key = key or os.environ.get("CF_API_TOKEN")
-        model = channel.get("default_model") or os.environ.get("CF_CLEF_MODEL", "clef-flash")
-        account_id = os.environ.get("CF_ACCOUNT_ID") or channel.get("account_id", "b9b1998c78f49ed2e0db3ab8e868ff85")
+        model = os.environ.get("CF_CLEF_MODEL") or channel.get("default_model", "clef-flash")
+        account_id = os.environ.get("CF_ACCOUNT_ID") or channel.get("account_id")
+        if not account_id:
+            # 缺少 account_id 时该通道不可用，按无凭据处理，不影响其他通道。
+            return None, model, "", {}
         endpoint = f"https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run/@cf/cloudflare/{model}"
     else:
         key_env = channel.get("key_env")

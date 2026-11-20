@@ -1,6 +1,8 @@
 import json
 import subprocess
 
+EXPLAINER_TIMEOUT = 7200
+
 
 def mark_site_pending(pending_path, needs_build=True):
     pending_path.parent.mkdir(parents=True, exist_ok=True)
@@ -23,7 +25,7 @@ def update_site(evidence, changed, project, pending_path, run, build_command, ex
     if state.get('needs_build', True):
         if explainer_command is not None:
             try:
-                generated = run(explainer_command, timeout=7200)
+                generated = run(explainer_command, timeout=EXPLAINER_TIMEOUT)
                 if generated.returncode:
                     raise RuntimeError(
                         (generated.stderr or generated.stdout or '非零退出码')[-500:]
@@ -31,7 +33,7 @@ def update_site(evidence, changed, project, pending_path, run, build_command, ex
                 evidence['explainer_status'] = '已补齐'
             except subprocess.TimeoutExpired:
                 evidence['explainer_status'] = '超时'
-                evidence['errors'].append('解读页生成超时（3600s），本次先构建已有页面')
+                evidence['errors'].append(f'解读页生成超时（{EXPLAINER_TIMEOUT}s），本次先构建已有页面')
             except Exception as exc:
                 evidence['explainer_status'] = '失败'
                 evidence['errors'].append(f'解读页生成失败，本次先构建已有页面：{exc}')

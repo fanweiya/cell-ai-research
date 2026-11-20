@@ -537,6 +537,33 @@ class CodeReportTests(unittest.TestCase):
             self.assertEqual(cf_model, "clef-flash")
             self.assertIn("/ai/run/@cf/cloudflare/clef-flash", cf_url)
 
+        # 环境变量 *_MODEL 必须覆盖通道 default_model（.env.example 承诺的覆盖能力）。
+        override_env = dict(mock_env)
+        override_env.update({
+            "TYPESAFE_MODEL": "jev-env-override",
+            "CODIV_MODEL": "openjev-env-override",
+            "SUBQ_MODEL": "subq-env-override",
+            "CF_CLEF_MODEL": "clef-env-override",
+        })
+        with patch.dict(os.environ, override_env):
+            _, typesafe_model, _, _ = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[0])
+            self.assertEqual(typesafe_model, "jev-env-override")
+            _, codiv_model, _, _ = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[1])
+            self.assertEqual(codiv_model, "openjev-env-override")
+            _, subq_model, _, _ = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[2])
+            self.assertEqual(subq_model, "subq-env-override")
+            _, cf_model, cf_url, _ = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[3])
+            self.assertEqual(cf_model, "clef-env-override")
+            self.assertIn("/ai/run/@cf/cloudflare/clef-env-override", cf_url)
+
+        # cloudflare 通道缺少 CF_ACCOUNT_ID 时按无凭据处理，不使用硬编码 account。
+        no_account_env = {k: v for k, v in mock_env.items() if k != "CF_ACCOUNT_ID"}
+        with patch.dict(os.environ, no_account_env, clear=False):
+            os.environ.pop("CF_ACCOUNT_ID", None)
+            cf_key, _, cf_url, _ = jev_evaluator.resolve_channel_config(jev_evaluator.EVAL_CHANNELS[3])
+            self.assertIsNone(cf_key)
+            self.assertEqual(cf_url, "")
+
     def test_jev_evaluator_channel_fallback_mechanism(self):
         import urllib.error
         import jev_evaluator

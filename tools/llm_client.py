@@ -88,10 +88,10 @@ def chat(
             else:
                 body = response.json()
                 choices = body.get("choices") or []
+                content = choices[0].get("message", {}).get("content") or "" if choices else ""
                 if not choices:
-                    raise RuntimeError(f"接口没有返回 choices：{json.dumps(body, ensure_ascii=False)[:500]}")
-                content = choices[0].get("message", {}).get("content") or ""
-                if not content.strip():
+                    last_error = f"空 choices 响应：{json.dumps(body, ensure_ascii=False)[:300]}"
+                elif not content.strip():
                     last_error = "空响应"
                 else:
                     elapsed = time.time() - started

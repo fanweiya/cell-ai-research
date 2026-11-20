@@ -13,8 +13,23 @@ class NumericTokenTests(unittest.TestCase):
         source = "region-based methods retained ~60 to ~80% of faithfulness"
         self.assertEqual(
             generate_index._numeric_tokens(source),
-            {"percent:60", "percent:80"},
+            {"percent_range:60", "percent_range:80"},
         )
+
+    def test_percent_range_does_not_absorb_bare_number(self):
+        # 源文同时含 "60 to 80%" 与裸数字 "60 GPUs"：
+        # 范围端点记为 percent_range，裸 60 必须保持 number 语义。
+        source = "trained on 60 GPUs, accuracy rose 60 to 80%"
+        self.assertEqual(
+            generate_index._numeric_tokens(source),
+            {"number:60", "percent_range:60", "percent_range:80"},
+        )
+
+    def test_translated_percent_range_matches_source_range(self):
+        source = "accuracy rose 60 to 80% on 60 GPUs"
+        translated = "在 60 块 GPU 上，准确率从 60% 到 80% 不等"
+        valid, reason = generate_index._translation_quality(source, translated)
+        self.assertTrue(valid, reason)
 
     def test_percent_symbol_glued_to_following_word(self):
         source = "a melanoma AUC of 97.84%on PH2, and a DSC of 88.92% on ISIC 2018"
