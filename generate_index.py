@@ -315,7 +315,19 @@ def _translation_quality(source, translated, text_type="摘要"):
         return False, "没有生成有效中文"
     source_numbers = _numeric_tokens(source)
     translated_numbers = _numeric_tokens(translated)
-    missing = sorted(source_numbers - translated_numbers)
+    # 范围端点 percent_range:N 与单值 percent:N 按数值等价：
+    # 源文 "from 60% to 80%" 译作 "从 60% 提升到 80%" 时，
+    # "提升到" 隔断了范围写法，译文只能产出 percent:60/80，
+    # 不应判为遗漏数字。number:N 保持独立，不参与等价。
+    def _canonical(tokens):
+        return {
+            ("percent:" + token[len("percent_range:"):])
+            if token.startswith("percent_range:")
+            else token
+            for token in tokens
+        }
+
+    missing = sorted(_canonical(source_numbers) - _canonical(translated_numbers))
     if missing:
         return False, f"遗漏或改动数字：{', '.join(missing[:8])}"
     if len(translated.strip()) < max(4, len(source.strip()) * 0.18):

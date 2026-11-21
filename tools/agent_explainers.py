@@ -69,7 +69,13 @@ def cleanup_dangling_repos() -> int:
         return 0
     for repo_path in AGENT_DIR.glob("*/repo"):
         if repo_path.exists() or repo_path.is_symlink():
-            remove_path_force(repo_path)
+            try:
+                remove_path_force(repo_path)
+            except Exception as error:
+                # 单个残留删不掉只影响该仓库，不应中止整批生成。
+                print(f"    清理残留仓库失败 {repo_path}：{type(error).__name__}: {error}",
+                      file=sys.stderr, flush=True)
+                continue
             cleaned += 1
     return cleaned
 
@@ -262,7 +268,7 @@ def main() -> int:
     if args.upgrade:
         chosen = [
             paper for paper in chosen
-            if (B.EXPLAINERS / f"{paper['arxiv_id']}.html").exists()
+            if (B.EXPLAINERS / f"{paper['arxiv_id']}.html").is_file()
             and (manifest["entries"].get(paper["arxiv_id"]) or {}).get("generator") != "agent"
         ]
         print(f"旧版页面 {len(chosen)} 篇待重做", flush=True)
@@ -270,7 +276,7 @@ def main() -> int:
     tasks = []
     for paper in chosen:
         pid = paper["arxiv_id"]
-        if args.missing and (B.EXPLAINERS / f"{pid}.html").exists() and not args.force:
+        if args.missing and (B.EXPLAINERS / f"{pid}.html").is_file() and not args.force:
             continue
         tasks.append(paper)
     if args.limit:
@@ -344,7 +350,12 @@ def main() -> int:
             return False
         finally:
             if work:
-                remove_path_force(work / "repo")
+                try:
+                    remove_path_force(work / "repo")
+                except Exception as error:
+                    # 单篇工作目录删不掉只影响该篇残留，不应中止整批生成。
+                    print(f"    {pid} 清理工作目录失败：{type(error).__name__}: {error}",
+                          file=sys.stderr, flush=True)
 
     from concurrent.futures import ThreadPoolExecutor
 

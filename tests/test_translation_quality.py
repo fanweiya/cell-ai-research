@@ -77,6 +77,15 @@ class TranslationQualityTests(unittest.TestCase):
         valid, _ = generate_index._translation_quality(source, translated)
         self.assertFalse(valid)
 
+    def test_percent_range_verb_breaks_range_still_passes(self):
+        # 回归 #5：源文 "from 60% to 80%" 译作 "从 60% 提升到 80%"，
+        # "提升到" 隔断范围写法，译文只产出 percent:60/80，
+        # 与源文 percent_range:60/80 按数值等价，不应判遗漏数字。
+        source = "accuracy improved from 60% to 80% with the new method"
+        translated = "新方法将准确率从 60% 提升到 80%，效果显著提升"
+        valid, reason = generate_index._translation_quality(source, translated)
+        self.assertTrue(valid, reason)
+
     def test_empty_source_is_rejected(self):
         valid, reason = generate_index._translation_quality(
             "", "输入内容为空。请提供需要翻译的英文摘要文本。"
