@@ -121,7 +121,13 @@ def prepare(pid: str, paper: dict, trans: dict, code_sum: dict, index: dict) -> 
     (work / "out").mkdir(parents=True, exist_ok=True)
     # 代理要 git clone 到 work/repo，先清掉同名残留（目录或普通文件），
     # 否则 clone 因路径已存在且非空失败，代理会静默失去代码上下文
-    remove_path_force(work / "repo")
+    try:
+        remove_path_force(work / "repo")
+    except Exception as error:
+        # 删不掉只影响该篇的 clone 前清理，不应直接让整篇在 prepare 处失败：
+        # 继续走后续流程，让 clone/渲染按正常失败路径处理（并在 manifest 留痕）。
+        print(f"    清理工作目录失败 {work / 'repo'}：{type(error).__name__}: {error}",
+              file=sys.stderr, flush=True)
     pack = B.build_pack(pid, paper, trans, code_sum, index)
     repo = ((paper.get("status") or {}).get("github") or {}).get("url") or ""
     (work / "paper.md").write_text(pack, encoding="utf-8")
