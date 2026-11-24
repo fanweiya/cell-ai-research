@@ -26,6 +26,7 @@ import base64
 import io
 import re
 import difflib
+from collections import Counter
 from PIL import Image
 from evidence_export import export_evidence
 from text_render import render_prose
@@ -113,6 +114,10 @@ def _llm_call(prompt, temperature=0.3, max_tokens=8192, json_mode=False, model_o
             if any(marker in result for marker in _LEAK_MARKERS):
                 print(f"  [WARN] Prompt leak detected on {model}, trying fallback...")
                 continue
+            # 检测供应商错误提示（如额度耗尽/订阅推销）：不是翻译，换模型重试
+            if _looks_like_provider_error(result):
+                print(f"  [WARN] Provider error text detected on {model}, trying fallback...")
+                continue
             return result
         except Exception:
             continue
@@ -152,6 +157,46 @@ def _ollama_translate(text):
 def _has_meaningful_chinese(text):
     """避免把英文原文或翻译失败提示写入中文缓存。"""
     return len(re.findall(r"[\u4e00-\u9fff]", text or "")) >= 10
+
+
+# 供应商错误提示特征：额度耗尽/订阅推销/服务不可用等非翻译文本。
+# 命中即视为翻译失败，绝不能写入缓存或展示（见 #399/#403）。
+_PROVIDER_ERROR_MARKERS = [
+    "额度已用完", "额度耗尽", "免费额度", "开通订阅", "订阅畅享",
+    "开通豆包", "豆包订阅", "豆包", "doubao",
+    "余额不足", "请充值", "会员", "quota", "rate limit",
+    "too many requests", "service unavailable", "insufficient",
+    "subscription", "upgrade your plan",
+]
+# 译文里允许出现项目链接（GitHub、HuggingFace、项目主页等），只有订阅/付费/
+# 额度类链接才是供应商错误文本的特征（如 #399 的豆包订阅链接，含追踪参数）。
+_SUSPICIOUS_URL_MARKERS = [
+    "doubao", "member/subscription", "/subscribe", "/pricing", "/pay",
+    "com_quota_cost", "custom_tracing", "subs_purchase", "trigger_scene",
+    "quota_limit", "quota_cost",
+]
+_URL_RE = re.compile(r"https?://\S+")
+
+
+def _looks_like_provider_error(text):
+    """识别供应商额度/订阅/服务异常提示文本，而非正常翻译。"""
+    if not text:
+        return False
+    lowered = text.lower()
+    if any(marker.lower() in lowered for marker in _PROVIDER_ERROR_MARKERS):
+        return True
+    for url in _URL_RE.findall(text):
+        if any(marker in url.lower() for marker in _SUSPICIOUS_URL_MARKERS):
+            return True
+    return False
+
+
+def _is_usable_translation(text, min_chinese=10):
+    """缓存复用/入库前的可用性判定：有足量中文且不是供应商错误文本。"""
+    return (
+        len(re.findall(r"[\u4e00-\u9fff]", text or "")) >= min_chinese
+        and not _looks_like_provider_error(text)
+    )
 
 
 def _translate_text(text):
@@ -229,7 +274,12 @@ def _academic_translation_prompt(text, title, task_types, text_type, retry_note=
 
 
 def _numeric_tokens(text):
-    """把数量单位与中文万/亿归一化，比较数值语义而非表面格式。"""
+    """把数量单位与中文万/亿归一化，比较数值语义而非表面格式。
+
+    返回 Counter（多重集）：同一数值出现多次时计数保留，
+    译文丢掉其中一次即判遗漏（见 #405）。
+    """
+    from collections import Counter
     from decimal import Decimal, InvalidOperation
 
     text = (text or "").replace(r"\%", "%").replace("％", "%")
@@ -278,19 +328,19 @@ def _numeric_tokens(text):
             normalized = normalized.rstrip("0").rstrip(".")
         return normalized
 
-    range_tokens = set()
+    range_tokens = Counter()
     range_spans = []
     for match in range_pattern.finditer(text):
         range_spans.append((match.start(), match.end()))
         for raw_number in match.groups():
             normalized = _normalize(raw_number, None)
             if normalized is not None:
-                range_tokens.add("percent_range:" + normalized)
+                range_tokens["percent_range:" + normalized] += 1
 
     def _in_range_span(position):
         return any(start <= position < end for start, end in range_spans)
 
-    values = set(range_tokens)
+    values = Counter(range_tokens)
     for match in number_pattern.finditer(text):
         if _in_range_span(match.start()):
             continue
@@ -303,13 +353,15 @@ def _numeric_tokens(text):
         normalized = _normalize(raw_number, multipliers.get(unit))
         if normalized is None:
             continue
-        values.add(("percent:" if unit == "%" else "number:") + normalized)
+        values[("percent:" if unit == "%" else "number:") + normalized] += 1
     return values
 
 
 def _translation_quality(source, translated, text_type="摘要"):
     if not (source or "").strip():
         return False, "原文为空，没有可核对的内容"
+    if _looks_like_provider_error(translated):
+        return False, "疑似供应商错误提示（额度/订阅/服务异常），不是翻译"
     min_chinese = 2 if text_type == "标题" else 10
     if len(re.findall(r"[\u4e00-\u9fff]", translated or "")) < min_chinese:
         return False, "没有生成有效中文"
@@ -319,15 +371,20 @@ def _translation_quality(source, translated, text_type="摘要"):
     # 源文 "from 60% to 80%" 译作 "从 60% 提升到 80%" 时，
     # "提升到" 隔断了范围写法，译文只能产出 percent:60/80，
     # 不应判为遗漏数字。number:N 保持独立，不参与等价。
+    # 等价折叠保留计数：同一数值在源文出现多次时，译文少一次即判遗漏（#405）。
     def _canonical(tokens):
-        return {
-            ("percent:" + token[len("percent_range:"):])
-            if token.startswith("percent_range:")
-            else token
-            for token in tokens
-        }
+        canonical = Counter()
+        for token, count in tokens.items():
+            if token.startswith("percent_range:"):
+                token = "percent:" + token[len("percent_range:"):]
+            canonical[token] += count
+        return canonical
 
-    missing = sorted(_canonical(source_numbers) - _canonical(translated_numbers))
+    missing = sorted(
+        token
+        for token, count in (_canonical(source_numbers) - _canonical(translated_numbers)).items()
+        for _ in range(count)
+    )
     if missing:
         return False, f"遗漏或改动数字：{', '.join(missing[:8])}"
     if len(translated.strip()) < max(4, len(source.strip()) * 0.18):
@@ -524,7 +581,7 @@ def _process_paper_llm(pid, title, abstract, task_types, existing, force):
     if (
         force
         or existing.get("translation_version") != TRANSLATION_VERSION
-        or not _has_meaningful_chinese(existing.get("title_zh", ""))
+        or not _is_usable_translation(existing.get("title_zh", ""), min_chinese=2)
     ):
         t = _translate_academic(title, title, task_types, "标题")
         if not t:
@@ -540,7 +597,7 @@ def _process_paper_llm(pid, title, abstract, task_types, existing, force):
     elif (
         force
         or existing.get("translation_version") != TRANSLATION_VERSION
-        or not _has_meaningful_chinese(existing.get("abstract_zh", ""))
+        or not _is_usable_translation(existing.get("abstract_zh", ""))
         or existing.get("abstract_zh", "").strip() == abstract.strip()
     ):
         t = _translate_academic(abstract, title, task_types, "摘要")
@@ -589,11 +646,13 @@ def translate_and_summarize(papers, translations, force=False):
             existing.get("title_zh")
             and existing.get("title_zh") != title
             and existing.get("translation_version") == TRANSLATION_VERSION
+            and _is_usable_translation(existing.get("title_zh"), min_chinese=2)
         )
         has_abstract_zh = (
             (bool(existing.get("abstract_zh")) if abstract else True)
             and (existing.get("abstract_zh") != abstract if abstract else True)
             and existing.get("translation_version") == TRANSLATION_VERSION
+            and (_is_usable_translation(existing.get("abstract_zh")) if abstract else True)
         )
         has_kp_zh = (
             existing.get("key_points_zh") is not None
@@ -663,12 +722,28 @@ def translate_and_summarize(papers, translations, force=False):
 # Cache I/O
 # ============================================================
 def _load_translations():
+    """读缓存。供应商错误文本（如额度耗尽提示）不可能是有效翻译：
+    读入时直接清空该字段并告警，调用方会按正常流程重译该篇（见 #399/#403）。"""
     if TRANSLATIONS_CACHE.exists():
         try:
             with open(TRANSLATIONS_CACHE, "r", encoding="utf-8") as f:
-                return json.load(f)
+                data = json.load(f)
         except (OSError, json.JSONDecodeError):
             return {}
+        if not isinstance(data, dict):
+            return {}
+        cleared = []
+        for pid, entry in data.items():
+            if not isinstance(entry, dict):
+                continue
+            for field in ("title_zh", "abstract_zh"):
+                if _looks_like_provider_error(entry.get(field, "")):
+                    entry[field] = ""
+                    cleared.append(f"{pid}:{field}")
+        if cleared:
+            print(f"  [WARN] 缓存中有 {len(cleared)} 条供应商错误文本，已清空待重译："
+                  f"{', '.join(cleared[:10])}")
+        return data
     return {}
 
 

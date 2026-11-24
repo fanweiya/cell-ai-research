@@ -123,5 +123,66 @@ class WriteManifestTests(unittest.TestCase):
             self.assertIn(PID, data["failures"])
 
 
+class PrepareTests(unittest.TestCase):
+    def _setup_dirs(self, tmp):
+        prompts = Path(tmp) / "prompts"
+        prompts.mkdir()
+        (prompts / "agent.md").write_text("<编号> {{ROOT}}", encoding="utf-8")
+        agent_dir = Path(tmp) / "agent"
+        patches = [
+            patch.object(agent_explainers, "AGENT_DIR", agent_dir),
+            patch.object(agent_explainers, "PROMPTS", prompts),
+            patch.object(agent_explainers.B, "build_pack", return_value="pack"),
+        ]
+        for p in patches:
+            p.start()
+        self.addCleanup(lambda: [p.stop() for p in patches])
+        return agent_dir
+
+    def test_prepare_clean_returns_no_warning(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self._setup_dirs(tmp)
+            work, prompt, warning = agent_explainers.prepare(PID, {}, {}, {}, {})
+            self.assertTrue(prompt.startswith(PID))
+            self.assertIsNone(warning)
+            self.assertFalse((work / "repo").exists())
+
+    def test_prepare_cleanup_failure_moves_residual_aside(self):
+        # 回归 #406：清理失败留下半删残留时，改名移 aside 再 clone，
+        # 并把经过返回给调用方写进 manifest，而不是只打印 stderr 就继续。
+        with tempfile.TemporaryDirectory() as tmp:
+            agent_dir = self._setup_dirs(tmp)
+            repo = agent_dir / PID / "repo"
+            repo.mkdir(parents=True)
+            (repo / "keep.txt").write_text("stale", encoding="utf-8")
+            with patch.object(
+                agent_explainers, "remove_path_force",
+                side_effect=OSError("permission denied"),
+            ):
+                work, _prompt, warning = agent_explainers.prepare(PID, {}, {}, {}, {})
+            self.assertIsNotNone(warning)
+            self.assertIn("清理", warning)
+            self.assertFalse(repo.exists())
+            stale = sorted((agent_dir / PID).glob("repo.stale-*"))
+            self.assertEqual(len(stale), 1)
+            self.assertEqual((stale[0] / "keep.txt").read_text(encoding="utf-8"), "stale")
+
+    def test_prepare_cleanup_and_rename_failure_raises(self):
+        # 回归 #406：残留移 aside 也失败时抛错，由调用方记进 manifest 的 failures。
+        with tempfile.TemporaryDirectory() as tmp:
+            self._setup_dirs(tmp)
+            repo = Path(tmp) / "agent" / PID / "repo"
+            repo.mkdir(parents=True)
+            with (
+                patch.object(
+                    agent_explainers, "remove_path_force",
+                    side_effect=OSError("permission denied"),
+                ),
+                patch("os.rename", side_effect=OSError("busy")),
+            ):
+                with self.assertRaises(RuntimeError):
+                    agent_explainers.prepare(PID, {}, {}, {}, {})
+
+
 if __name__ == "__main__":
     unittest.main()

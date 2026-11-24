@@ -115,19 +115,40 @@ def acquire_lock():
     return handle
 
 
-def prepare(pid: str, paper: dict, trans: dict, code_sum: dict, index: dict) -> tuple[Path, str]:
-    """把材料摆到工作目录，代理在它自己的目录里干活。"""
+def prepare(pid: str, paper: dict, trans: dict, code_sum: dict, index: dict) -> tuple[Path, str, str | None]:
+    """把材料摆到工作目录，代理在它自己的目录里干活。
+
+    返回 (work, prompt, cleanup_warning)：清理旧仓库失败时不静默带病跑——
+    残留仍在就改名移 aside 再 clone，移不走则抛错（由调用方记进 manifest 的
+    failures）；移 aside 成功也把经过写进 cleanup_warning，由调用方写进该篇
+    manifest 条目（见 #406）。
+    """
     work = AGENT_DIR / pid
     (work / "out").mkdir(parents=True, exist_ok=True)
     # 代理要 git clone 到 work/repo，先清掉同名残留（目录或普通文件），
     # 否则 clone 因路径已存在且非空失败，代理会静默失去代码上下文
+    cleanup_warning = None
+    repo_path = work / "repo"
     try:
-        remove_path_force(work / "repo")
+        remove_path_force(repo_path)
     except Exception as error:
-        # 删不掉只影响该篇的 clone 前清理，不应直接让整篇在 prepare 处失败：
-        # 继续走后续流程，让 clone/渲染按正常失败路径处理（并在 manifest 留痕）。
-        print(f"    清理工作目录失败 {work / 'repo'}：{type(error).__name__}: {error}",
+        # 只打印不处理会让半删残留目录留给 clone，代理静默失去代码上下文
+        # （且成功后 write_manifest(pid, entry, None) 会清除该篇旧 failures，
+        # 清理失败在 manifest 里无任何记录）。下面按残留是否存在分流处理。
+        print(f"    清理工作目录失败 {repo_path}：{type(error).__name__}: {error}",
               file=sys.stderr, flush=True)
+        cleanup_warning = f"清理旧仓库失败：{type(error).__name__}: {error}"
+    if repo_path.exists() or repo_path.is_symlink():
+        stale = work / f"repo.stale-{time.strftime('%Y%m%d%H%M%S')}"
+        try:
+            os.rename(repo_path, stale)
+        except Exception as error:
+            raise RuntimeError(
+                f"清理工作目录失败且残留无法移走 {repo_path}：{type(error).__name__}: {error}"
+            ) from error
+        note = f"清理失败残留已移至 {stale.name}，重新 clone"
+        cleanup_warning = f"{cleanup_warning}；{note}" if cleanup_warning else note
+        print(f"    {pid} {note}", flush=True)
     pack = B.build_pack(pid, paper, trans, code_sum, index)
     repo = ((paper.get("status") or {}).get("github") or {}).get("url") or ""
     (work / "paper.md").write_text(pack, encoding="utf-8")
@@ -138,7 +159,7 @@ def prepare(pid: str, paper: dict, trans: dict, code_sum: dict, index: dict) -> 
         .replace("<编号>", pid)
         .replace("{{ROOT}}", str(ROOT))
     )
-    return work, prompt
+    return work, prompt, cleanup_warning
 
 
 def run_agent(work: Path, prompt: str, log_path: Path) -> tuple[int, str]:
@@ -305,7 +326,7 @@ def main() -> int:
         print(f"[{number}/{len(tasks)} {time.strftime('%H:%M:%S')}] {pid} {paper.get('title', '')[:40]}", flush=True)
         work = None
         try:
-            work, prompt = prepare(pid, paper, translations.get(pid, {}), code_summaries.get(pid, {}), index)
+            work, prompt, cleanup_warning = prepare(pid, paper, translations.get(pid, {}), code_summaries.get(pid, {}), index)
             code, output = run_agent(work, prompt, LOG_DIR / f"agent-{pid}.log")
             if code != 0:
                 raise RuntimeError(f"代理退出码 {code}，日志 logs/agent-{pid}.log")
@@ -330,18 +351,21 @@ def main() -> int:
                 print(f"    {pid} 修补第 {fixes} 轮：{problems[0][:90]}", flush=True)
                 repair(work, pid, problems)
             words = B.cjk_count(source)
+            entry = {
+                "title_zh": translations.get(pid, {}).get("title_zh", ""),
+                "one_line": paper.get("title", "")[:40],
+                "structure": "agent",
+                "generated_at": now(),
+                "model": "claude-code",
+                "generator": "agent",
+                "cjk": words,
+                "repairs": fixes,
+                "bytes": (B.EXPLAINERS / f"{pid}.html").stat().st_size,
+            }
+            if cleanup_warning:
+                entry["cleanup_warning"] = cleanup_warning
             with lock_manifest:
-                write_manifest(pid, {
-                    "title_zh": translations.get(pid, {}).get("title_zh", ""),
-                    "one_line": paper.get("title", "")[:40],
-                    "structure": "agent",
-                    "generated_at": now(),
-                    "model": "claude-code",
-                    "generator": "agent",
-                    "cjk": words,
-                    "repairs": fixes,
-                    "bytes": (B.EXPLAINERS / f"{pid}.html").stat().st_size,
-                }, None)
+                write_manifest(pid, entry, None)
             try:
                 F.insert_for(pid)
             except Exception as figure_error:

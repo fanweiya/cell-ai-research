@@ -66,6 +66,19 @@ pytest tests/
 - `test`: 测试用例增补与调整
 - `refactor`: 重构且不改变外部行为
 
+### 提交 data/translations.json 前必做（见 #402）
+
+翻译缓存是直接展示的数据，入库前必须校验，提交信息必须如实写范围：
+
+```bash
+python3 tools/validate_translations.py --since HEAD
+```
+
+- 校验不通过（任一条目无有效中文或疑似供应商错误文本，如额度耗尽提示）
+  时不得提交，先清空/重译该条目。
+- 提交信息须列出本次新增的全部论文编号（用 `--since` 输出的清单，不要
+  只写其中两条）；改动旧条目时另注明改动条数。
+
 ## Pull Request 流程
 
 1. 基于 `main` 分支创建功能分支：
