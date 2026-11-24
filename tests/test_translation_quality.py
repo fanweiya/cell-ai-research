@@ -169,6 +169,37 @@ class ProviderErrorTextTests(unittest.TestCase):
         self.assertEqual(data["2611.25525v1"]["title_zh"], "基于去噪图像矩的从头 cryo-EM 重建")
         self.assertTrue(data["2611.23765v1"]["abstract_zh"].startswith("这是一段正常"))
 
+    def test_non_string_fields_do_not_crash(self):
+        # DSH 复核发现：缓存字段为非字符串时旧 _looks_like_provider_error 会崩溃。
+        self.assertFalse(generate_index._looks_like_provider_error(123))
+        self.assertFalse(generate_index._looks_like_provider_error(None))
+        self.assertFalse(generate_index._is_usable_translation(["不是字符串"]))
+        with tempfile.TemporaryDirectory() as tmp:
+            cache = Path(tmp) / "translations.json"
+            cache.write_text(json.dumps({
+                "2601.00001": {"title_zh": 123, "abstract_zh": ["x"], "translation_version": 2},
+            }), encoding="utf-8")
+            with patch.object(generate_index, "TRANSLATIONS_CACHE", cache):
+                data = generate_index._load_translations()
+        self.assertEqual(data["2601.00001"]["title_zh"], 123)
+
+    def test_load_translations_clears_bad_key_points(self):
+        # DSH 复核发现：key_points_zh 也要纳入缓存清理，否则脏要点永久缓存。
+        with tempfile.TemporaryDirectory() as tmp:
+            cache = Path(tmp) / "translations.json"
+            cache.write_text(json.dumps({
+                "2611.25525v1": {
+                    "title_zh": "正常标题翻译内容测试",
+                    "abstract_zh": "这是一段正常的中文摘要翻译内容，用于测试缓存加载逻辑是否正常工作。",
+                    "key_points_zh": self.QUOTA_TEXT,
+                    "translation_version": 2,
+                },
+            }, ensure_ascii=False), encoding="utf-8")
+            with patch.object(generate_index, "TRANSLATIONS_CACHE", cache):
+                data = generate_index._load_translations()
+        self.assertEqual(data["2611.25525v1"]["key_points_zh"], "")
+        self.assertTrue(data["2611.25525v1"]["abstract_zh"].startswith("这是一段正常"))
+
 
 if __name__ == "__main__":
     unittest.main()

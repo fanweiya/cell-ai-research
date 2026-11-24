@@ -180,7 +180,7 @@ _URL_RE = re.compile(r"https?://\S+")
 
 def _looks_like_provider_error(text):
     """识别供应商额度/订阅/服务异常提示文本，而非正常翻译。"""
-    if not text:
+    if not isinstance(text, str) or not text:
         return False
     lowered = text.lower()
     if any(marker.lower() in lowered for marker in _PROVIDER_ERROR_MARKERS):
@@ -193,6 +193,8 @@ def _looks_like_provider_error(text):
 
 def _is_usable_translation(text, min_chinese=10):
     """缓存复用/入库前的可用性判定：有足量中文且不是供应商错误文本。"""
+    if not isinstance(text, str):
+        return False
     return (
         len(re.findall(r"[\u4e00-\u9fff]", text or "")) >= min_chinese
         and not _looks_like_provider_error(text)
@@ -614,6 +616,7 @@ def _process_paper_llm(pid, title, abstract, task_types, existing, force):
         force
         or not existing.get("key_points_zh")
         or existing.get("key_points_version") != KEY_POINTS_VERSION
+        or _looks_like_provider_error(existing.get("key_points_zh", ""))
     ):
         result["key_points_zh"] = _generate_key_points(
             pid,
@@ -658,6 +661,7 @@ def translate_and_summarize(papers, translations, force=False):
             existing.get("key_points_zh") is not None
             and (bool(existing.get("key_points_zh")) if abstract else True)
             and existing.get("key_points_version") == KEY_POINTS_VERSION
+            and not _looks_like_provider_error(existing.get("key_points_zh", ""))
         )
 
         if not force and has_title_zh and has_abstract_zh and has_kp_zh:
@@ -736,7 +740,7 @@ def _load_translations():
         for pid, entry in data.items():
             if not isinstance(entry, dict):
                 continue
-            for field in ("title_zh", "abstract_zh"):
+            for field in ("title_zh", "abstract_zh", "key_points_zh"):
                 if _looks_like_provider_error(entry.get(field, "")):
                     entry[field] = ""
                     cleared.append(f"{pid}:{field}")
