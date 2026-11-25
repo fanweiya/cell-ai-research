@@ -149,10 +149,14 @@ node --test tests/*.test.cjs
 
 ### 2. 本地构建生成门户页面
 
-执行以下命令快速生成前端门户页面：
+首次构建时，在包含完整 Git 历史的检出目录执行以下命令。初始化脚本从仓库历史读取 2026 年 11 月 19 日的论文数据库快照。已有 `papers.json` 时，可直接执行第二条命令。
+
 ```bash
-python generate_index.py --no-translate --no-code-analysis
+python tools/init_papers.py
+python generate_index.py --offline
 ```
+
+浅克隆可以用 `git fetch --unshallow` 补齐 Git 历史。离线构建使用本地论文数据库和已保存的翻译等资料。
 命令完成后会在项目根目录生成单页文件 `index.html`，可直接通过浏览器打开查看，或使用轻量 HTTP 服务预览：
 ```bash
 npx serve .

@@ -4258,6 +4258,8 @@ def main():
         USE_OLLAMA_TRANSLATE = False
 
     # Load
+    if not PAPERS_FILE.is_file():
+        raise SystemExit("缺少 papers.json。首次在 Git 检出目录构建时，请运行 python tools/init_papers.py")
     print("📚 Loading papers.json...")
     with open(PAPERS_FILE, "r", encoding="utf-8") as f:
         data = json.load(f)
